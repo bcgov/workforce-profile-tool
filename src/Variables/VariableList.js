@@ -9,7 +9,7 @@ class VariableList extends Component {
         <div className='col'>
           <h3>Employees</h3>
           <ul>
-            <li>All</li>
+            <li className='active'>All</li>
             <li>Regular</li>
             <li>Auxiliary</li>
           </ul>
