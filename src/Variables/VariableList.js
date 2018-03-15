@@ -13,6 +13,14 @@ class VariableList extends Component {
             <li>Regular</li>
             <li>Auxiliary</li>
           </ul>
+          <h3>Target Groups</h3>
+          <ul>
+            <li>All</li>
+            <li>Women</li>
+            <li className='active'>Visible Minorities</li>
+            <li>Indigenous Peoples</li>
+            <li>People with Disabilities</li>
+          </ul>
         </div>
       </div>
     )

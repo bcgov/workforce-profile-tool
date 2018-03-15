@@ -8,9 +8,9 @@ class App extends Component {
   render () {
     return (
       <div className='App container-fluid'>
-        <Header />
         <div className='row'>
-          <div className='col-3'>
+          <div className='LeftColumn col-3'>
+            <Header />
             <VariableList />
           </div>
           <div className='col-9'>

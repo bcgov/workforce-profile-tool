@@ -3,9 +3,9 @@
 .VariableList {
   background-color: $brand-color-blue;
   color: $white;
-  font-weight: 100;
 
-  min-height: calc(100vh - 78px);
+
+  font-weight: 100;
 
   h2 {
     color: $white;
@@ -30,6 +30,7 @@
 
   ul {
     margin-top: 0.5rem;
+    margin-bottom: 2rem;
     list-style: none;
     margin-left: 0;
     padding-left: 0;

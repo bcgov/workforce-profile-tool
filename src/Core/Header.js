@@ -6,7 +6,7 @@ class Header extends Component {
     return (
       <div className='Header row'>
         <div className='col'>
-          <h1>Workforce Profiles</h1>
+          <h1>Workforce Profiles &ndash; 2018</h1>
         </div>
       </div>
     )

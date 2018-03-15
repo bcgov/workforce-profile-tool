@@ -3,9 +3,12 @@
 .Header {
     background-color: $brand-color-blue;
     color: $white;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    height: 102px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     h1 {
         margin-bottom: 0;
+        font-size: 1.5rem;
     }
 }

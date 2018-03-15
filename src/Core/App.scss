@@ -1,0 +1,8 @@
+@import '../bootstrap/_colors';
+
+.App {
+    .LeftColumn {
+        height: 100vh;
+        background-color: $brand-color-blue;
+    }
+}
