@@ -1,0 +1,35 @@
+@import '../bootstrap/_colors';
+
+.VariableList {
+  color: $white;
+  font-weight: 100;
+
+  h2 {
+    color: $white;
+  }
+
+  h3 {
+    border: solid 1px $white;
+    border-left: 0px;
+    border-right: 0px;
+    text-transform: uppercase;
+    line-height: 100%;
+    margin: 0px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.25rem;
+    font-size: 0.9rem;
+    margin-left: -15px;
+    padding-left: 15px;
+  }
+
+  ul {
+    margin-top: 0.5rem;
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+    li {
+      margin-left: 0;
+      padding-left: 0;
+    }
+  }
+}
