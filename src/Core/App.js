@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import '../bootstrap/bootstrap.css'
 import './App.css'
 import Header from './Header'
+import Main from './Main'
 import VariableList from '../Variables/VariableList'
 
 class App extends Component {
@@ -14,7 +14,7 @@ class App extends Component {
             <VariableList />
           </div>
           <div className='col-9'>
-            {/* <Main /> */}
+            <Main />
           </div>
         </div>
       </div>

@@ -1,0 +1,60 @@
+@import '../bootstrap/_colors';
+
+.TabInterface {
+    .TabButtons {
+        margin: 0px;
+    }
+    .TabButton {
+        display: inline-block;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+        a {
+            cursor: pointer;
+            display: block;
+            padding: 10px 15px;
+            width: 100%;
+            i {
+                margin-right: 0.5rem;
+            }
+            &::after {
+                display: block;
+                content: attr(title);
+                font-weight: bold;
+                height: 0;
+                overflow: hidden;
+                visibility: hidden;
+            }
+        }
+    }
+    .TabButton.active {
+        a {
+            font-weight: bold;
+        }
+    }
+    .TabButton:first-child {
+        margin-left: -15px;
+    }
+}
+
+.Secondary {
+    .TabInterface {
+        .TabButtons {
+            margin-left: -45px;
+            margin-right: -15px;
+            padding-left: 45px;
+            padding-right: 15px;
+            border: solid 1px $brand-color-blue;
+            border-left: 0;
+            border-right: 0;
+        }
+        .TabButton {
+            a {
+                padding: 5px 15px 3px;
+            }
+        }
+    }
+    .Tab {
+        margin-top: 15px;
+    }
+}

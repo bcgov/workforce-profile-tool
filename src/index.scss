@@ -1,9 +1,10 @@
 @import 'bootstrap/_colors';
 
-body {
-  background-color: $brand-color-blue;
+body, html {
+  height: 100%;
+  color: $brand-color-blue;
 }
 
-.container-fluid {
-  background-color: $brand-color-blue;
+a {
+  text-decoration: none !important;
 }

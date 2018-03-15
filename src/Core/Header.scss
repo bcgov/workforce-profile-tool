@@ -1,7 +1,11 @@
 @import '../bootstrap/_colors';
 
 .Header {
+  background-color: $brand-color-blue;
   color: $white;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  h1 {
+    margin-bottom: 0;
+  }
 }
