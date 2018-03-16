@@ -2,6 +2,7 @@
   "name": "wes-workforce-profiles",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://plotandscatter.com/wes-workforce-profiles/",
   "dependencies": {
     "@plot-and-scatter/reactor-table": "^0.4.0",
     "concurrently": "^3.5.1",
