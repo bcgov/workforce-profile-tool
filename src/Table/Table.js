@@ -20,8 +20,7 @@ class Table extends Component {
     {
       id: 'name',
       name: 'Name',
-      accessor: d => d.name,
-      filterable: true
+      accessor: d => d.name
     }]
 
     const rowFilter = (r) => true
