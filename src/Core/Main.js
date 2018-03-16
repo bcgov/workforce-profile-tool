@@ -27,7 +27,6 @@ class Main extends Component {
             </Tab>
             <Tab key={2} name='Comparison'>
               <h1>Comparison</h1>
-              <Table />
             </Tab>
             <Tab key={3} name='Leadership'>
               <h1>Leadership</h1>
