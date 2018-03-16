@@ -8,26 +8,39 @@ class TabInterface extends React.Component {
     this.state = {
       activeTabIndex: 0
     }
+
+    this.setActiveTab = this.setActiveTab.bind(this)
   }
 
-  tabClick (index) {
-    this.setState({ activeTabIndex: index })
+  setActiveTab (index) {
+    if (Number.isInteger(+index)) {
+      this.setState({ activeTabIndex: index })
+    }
   }
 
-  componentDidUpdate () {
+  componentDidMount () {
+    this.setActiveTab(this.props.activeTabIndex)
+  }
+
+  componentDidUpdate (prevProps, prevState) {
     // Fire a global event for any components that need to
     // know when they are visible (e.g. MapViz)
     window.dispatchEvent(new window.Event('shown'))
+    if (prevProps !== this.props && this.props.activeTabIndex !== this.state.activeTabIndex) {
+      console.log('in here')
+      this.setActiveTab(this.props.activeTabIndex)
+    }
   }
 
   render () {
+    console.log('-->', this.state.activeTabIndex)
     // Build the tab buttons at the top of the interface
     const tabButtons = this.props.children.map((child, index) => {
       const isActiveClass = (index === this.state.activeTabIndex) ? ' active' : ''
       return (
         <div key={child.props.name} className={`TabButton ${isActiveClass}`}>
           <a
-            onClick={() => this.tabClick(index)}
+            onClick={() => this.setActiveTab(index)}
             role={'button'}
             tabIndex={'0'}
             title={child.props.name}

@@ -2,17 +2,19 @@ import React, { Component } from 'react'
 import TabInterface from '../Tabs/TabInterface'
 import Tab from '../Tabs/Tab'
 import './Main.css'
-import Table from '../Table/Table'
 
 class Main extends Component {
   render () {
+    const outerTabIndex = this.props.outerTabIndex || 0
+    const innerTabIndex = this.props.innerTabIndex || 0
+
     return (
       <div className='Main row'>
         <div className='col'>
-          <TabInterface>
+          <TabInterface activeTabIndex={outerTabIndex}>
             <Tab key={1} name='Indicators of Success'>
               <div className='Secondary'>
-                <TabInterface>
+                <TabInterface activeTabIndex={innerTabIndex}>
                   <Tab key={11} name='By Occupation'>
                     <h1>By Occupation</h1>
                   </Tab>
