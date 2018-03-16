@@ -25,6 +25,10 @@
                 overflow: hidden;
                 visibility: hidden;
             }
+            &:hover {
+                font-weight: bold;
+                color: $brand-color-gold;
+            }
         }
     }
     .TabButton.active {

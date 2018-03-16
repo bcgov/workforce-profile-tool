@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './TabInterface.css'
 
 class TabInterface extends React.Component {
@@ -27,29 +28,27 @@ class TabInterface extends React.Component {
     // know when they are visible (e.g. MapViz)
     window.dispatchEvent(new window.Event('shown'))
     if (prevProps !== this.props && this.props.activeTabIndex !== this.state.activeTabIndex) {
-      console.log('in here')
       this.setActiveTab(this.props.activeTabIndex)
     }
   }
 
   render () {
-    console.log('-->', this.state.activeTabIndex)
     // Build the tab buttons at the top of the interface
     const tabButtons = this.props.children.map((child, index) => {
       const isActiveClass = (index === this.state.activeTabIndex) ? ' active' : ''
+      const linkTo = this.props.baseURL ? `${this.props.baseURL}/${index}` : `/${index}`
       return (
         <div key={child.props.name} className={`TabButton ${isActiveClass}`}>
-          <a
-            onClick={() => this.setActiveTab(index)}
+          <Link
+            to={linkTo}
             role={'button'}
-            tabIndex={'0'}
             title={child.props.name}
           >
             {child.props.icon && <i className={'fa fa-lg ' + child.props.icon} />}
             <span className={this.props.hideTextWhenSmall && 'hidden-xs'}>
               {child.props.name}
             </span>
-          </a>
+          </Link>
         </div>
       )
     })

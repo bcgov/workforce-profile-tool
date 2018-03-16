@@ -5,16 +5,16 @@ import './Main.css'
 
 class Main extends Component {
   render () {
-    const outerTabIndex = this.props.outerTabIndex || 0
-    const innerTabIndex = this.props.innerTabIndex || 0
+    const outerTabIndex = +this.props.match.params.highLevelNav || 0
+    const innerTabIndex = +this.props.match.params.lowLevelNav || 0
 
     return (
       <div className='Main row'>
         <div className='col'>
-          <TabInterface activeTabIndex={outerTabIndex}>
+          <TabInterface activeTabIndex={outerTabIndex} matchURL={this.props.match.url}>
             <Tab key={1} name='Indicators of Success'>
               <div className='Secondary'>
-                <TabInterface activeTabIndex={innerTabIndex}>
+                <TabInterface activeTabIndex={innerTabIndex} baseURL={`/${outerTabIndex}`}>
                   <Tab key={11} name='By Occupation'>
                     <h1>By Occupation</h1>
                   </Tab>
