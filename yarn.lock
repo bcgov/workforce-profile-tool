@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@plot-and-scatter/reactor-table@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@plot-and-scatter/reactor-table/-/reactor-table-0.2.0.tgz#686038162b47ca502807c1034b1d71fc358745b3"
+"@plot-and-scatter/reactor-table@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@plot-and-scatter/reactor-table/-/reactor-table-0.4.0.tgz#ea297593c2bb20b672da4eedeca454e7c4feb572"
   dependencies:
     react "^15.6.1"
     react-dom "^15.6.1"

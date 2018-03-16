@@ -8,7 +8,8 @@ class Table extends Component {
       { 'key': 1, 'name': 'First' },
       { 'key': 2, 'name': 'Second' },
       { 'key': 3, 'name': 'Third' },
-      { 'key': 10, 'name': 'Tenth' }
+      { 'key': 10, 'name': 'Tenth' },
+      { 'key': 11, 'name': 'Eleventh' }
     ]
 
     const columns = [{

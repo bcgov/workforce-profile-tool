@@ -1,8 +1,8 @@
 @import '../bootstrap/bootstrap.scss';
 
 .ReactorTable {
-    @extend .table;
-    
+    @extend .table, .table-striped;
+
     th span {
         cursor: pointer;
         &:after {
