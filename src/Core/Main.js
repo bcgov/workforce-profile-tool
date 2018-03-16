@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import TabInterface from '../Tabs/TabInterface'
 import Tab from '../Tabs/Tab'
 import './Main.css'
+import Table from '../Table/Table'
 
 class Main extends Component {
   render () {
@@ -26,6 +27,7 @@ class Main extends Component {
             </Tab>
             <Tab key={2} name='Comparison'>
               <h1>Comparison</h1>
+              <Table />
             </Tab>
             <Tab key={3} name='Leadership'>
               <h1>Leadership</h1>

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@plot-and-scatter/reactor-table": "^0.2.0",
     "concurrently": "^3.5.1",
     "node-sass-chokidar": "^1.1.0",
     "react": "^16.2.0",
