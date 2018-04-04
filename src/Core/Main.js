@@ -5,38 +5,38 @@ import './Main.css'
 
 class Main extends Component {
   render () {
-    const outerTabIndex = +this.props.match.params.highLevelNav || 0
-    const innerTabIndex = +this.props.match.params.lowLevelNav || 0
+    const activeOuterTab = this.props.match.params.highLevelNav || 'indicators-of-success'
+    const activeInnerTab = this.props.match.params.lowLevelNav || 'by-occupation'
 
     return (
       <div className='Main row'>
         <div className='col'>
-          <TabInterface activeTabIndex={outerTabIndex} matchURL={this.props.match.url}>
-            <Tab key={1} name='Indicators of Success'>
+          <TabInterface activeTabKey={activeOuterTab} matchURL={this.props.match.url}>
+            <Tab key={'indicators-of-success'} name='Indicators of Success'>
               <div className='Secondary'>
-                <TabInterface activeTabIndex={innerTabIndex} baseURL={`/${outerTabIndex}`}>
-                  <Tab key={11} name='By Occupation'>
+                <TabInterface activeTabKey={activeInnerTab} baseURL={`/${activeOuterTab}`}>
+                  <Tab key={'by-occupation'} name='By Occupation'>
                     <h1>By Occupation</h1>
                   </Tab>
-                  <Tab key={12} name='By Region'>
+                  <Tab key={'by-region'} name='By Region'>
                     <h1>By Region</h1>
                   </Tab>
-                  <Tab key={13} name='Flow Report'>
+                  <Tab key={'flow-report'} name='Flow Report'>
                     <h1>Flow Report</h1>
                   </Tab>
                 </TabInterface>
               </div>
             </Tab>
-            <Tab key={2} name='Comparison'>
+            <Tab key={'comparison'} name='Comparison'>
               <h1>Comparison</h1>
             </Tab>
-            <Tab key={3} name='Leadership'>
+            <Tab key={'leadership'} name='Leadership'>
               <h1>Leadership</h1>
             </Tab>
-            <Tab key={4} name='Ministries'>
+            <Tab key={'ministries'} name='Ministries'>
               <h1>Ministries</h1>
             </Tab>
-            <Tab key={4} name='Representation'>
+            <Tab key={'representation'} name='Representation'>
               <h1>Representation</h1>
             </Tab>
           </TabInterface>
