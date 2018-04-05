@@ -5,14 +5,14 @@ import './Main.css'
 
 class Main extends Component {
   render () {
-    const activeOuterTab = this.props.match.params.highLevelNav || 'indicators-of-success'
+    const activeOuterTab = this.props.match.params.highLevelNav || 'indicators-of-progress'
     const activeInnerTab = this.props.match.params.lowLevelNav || 'by-occupation'
 
     return (
       <div className='Main row'>
         <div className='col'>
           <TabInterface activeTabKey={activeOuterTab} matchURL={this.props.match.url}>
-            <Tab key={'indicators-of-success'} name='Indicators of Success'>
+            <Tab key={'indicators-of-progress'} name='Indicators of Progress'>
               <div className='Secondary'>
                 <TabInterface activeTabKey={activeInnerTab} baseURL={`/${activeOuterTab}`}>
                   <Tab key={'by-occupation'} name='By Occupation'>
