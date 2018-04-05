@@ -1,0 +1,27 @@
+Flow Report for Women,,,,,,,
+,,,,,,,
+Type,Category,Women_Reg,Men_Reg,TotalEmployees_Reg,Women_Aux,Men_Aux,TotalEmployees_Aux
+Employed,2013,994,22267,23261,25,1002,1027
+Employed,2015,946,22801,23747,34,1228,1262
+Hiring_Outside,Count,84,3602,3686,25,936,961
+Hiring_Outside,Proportion,2.278893109,97.72110689,100,2.601456816,97.39854318,100
+Hiring_TotalNew,Count,84,3602,3686,25,936,961
+Hiring_TotalNew,Proportion,2.278893109,97.72110689,100,2.601456816,97.39854318,100
+Hiring_AuxtoReg,Count,10,372,382,,,
+Hiring_AuxtoReg,Proportion,2.617801047,97.38219895,100,,,
+Hiring_TotalReg,Count,94,3974,4068,,,
+Hiring_TotalReg,Proportion,2.310717797,97.6892822,100,,,
+Separations_BCPS,Count,140,3460,3600,8,318,326
+Separations_BCPS,Proportion,3.888888889,96.11111111,100,2.45398773,97.54601227,100
+Separations_Total,Count,140,3460,3600,8,318,326
+Separations_Total,Proportion,3.888888889,96.11111111,100,2.45398773,97.54601227,100
+Separations_AuxtoReg,Count,,,,10,372,382
+Separations_AuxtoReg,Proportion,,,,2.617801047,97.38219895,100
+Separations_TotalAux,Count,,,,18,690,708
+Separations_TotalAux,Proportion,,,,2.542372881,97.45762712,100
+Promotions_BCPS,Count,66,2026,2092,<3,<3,16
+Promotions_BCPS,Proportion,3.154875717,96.84512428,100,<3,<3,100
+Promotions_Other,Count,19,731,750,<3,<3,10
+Promotions_Other,Proportion,2.533333333,97.46666667,100,<3,<3,100
+Promotions_Total,Count,85,2757,2842,<3,<3,26
+Promotions_Total,Proportion,2.990851513,97.00914849,100,<3,<3,100
