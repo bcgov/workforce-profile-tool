@@ -15,9 +15,9 @@ class VariableList extends Component {
           </ul>
           <h3>Target Groups</h3>
           <ul>
-            <li>All</li>
+            <li className='active'>All</li>
             <li>Women</li>
-            <li className='active'>Visible Minorities</li>
+            <li>Visible Minorities</li>
             <li>Indigenous Peoples</li>
             <li>People with Disabilities</li>
           </ul>
