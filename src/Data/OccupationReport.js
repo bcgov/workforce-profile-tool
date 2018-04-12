@@ -19,16 +19,27 @@ class OccupationReport {
     const totalLine = lineArray[ALL_OCCUPATIONS_TOTAL_ROW]
 
     this._data = {
-      total: new ORRResultRow(totalLine),
+      total: new ORRResultRow(totalLine, { isTotal: true }),
       management: {
-        occupations: managementLines.map(line => new ORRResultRow(line)),
-        total: new ORRResultRow(managementSubtotalLine)
+        occupations: managementLines.map(line => new ORRResultRow(line, { occupationType: 'management' })),
+        total: new ORRResultRow(managementSubtotalLine, { occupationType: 'management', isTotal: true })
       },
       nonManagement: {
-        occupations: nonManagementLines.map(line => new ORRResultRow(line)),
-        total: new ORRResultRow(nonManagementSubtotalLine)
+        occupations: nonManagementLines.map(line => new ORRResultRow(line, { occupationType: 'nonManagement' })),
+        total: new ORRResultRow(nonManagementSubtotalLine, { occupationType: 'nonManagement', isTotal: true })
       }
     }
+
+    console.log(this.getDataArray())
+  }
+
+  getDataArray (includeTotals = false) {
+    const data = []
+
+    this._data.management.occupations.forEach(r => data.push(r.asObject()))
+    this._data.nonManagement.occupations.forEach(r => data.push(r.asObject()))
+
+    return data
   }
 }
 
