@@ -30,14 +30,19 @@ class OccupationReport {
       }
     }
 
-    console.log(this.getDataArray())
+    console.log(this.getDataArray(true))
   }
 
   getDataArray (includeTotals = false) {
     const data = []
 
     this._data.management.occupations.forEach(r => data.push(r.asObject()))
+    if (includeTotals) data.push(this._data.management.total.asObject())
+
     this._data.nonManagement.occupations.forEach(r => data.push(r.asObject()))
+    if (includeTotals) data.push(this._data.nonManagement.total.asObject())
+
+    if (includeTotals) data.push(this._data.total.asObject())
 
     return data
   }
