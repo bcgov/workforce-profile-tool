@@ -6,7 +6,9 @@
   "dependencies": {
     "@plot-and-scatter/reactor-table": "^0.4.0",
     "concurrently": "^3.5.1",
+    "d3": "^5.0.0",
     "node-sass-chokidar": "^1.1.0",
+    "papaparse": "^4.3.7",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
