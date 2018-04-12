@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import TabInterface from '../Tabs/TabInterface'
 import Tab from '../Tabs/Tab'
 import './Main.css'
-import OccupationRegionGraph from '../Graphs/OccupationRegionGraph'
+import Occupation from '../Views/Occupation'
 
 class Main extends Component {
   render () {
@@ -17,8 +17,7 @@ class Main extends Component {
               <div className='Secondary'>
                 <TabInterface activeTabKey={activeInnerTab} baseURL={`/${activeOuterTab}`}>
                   <Tab key={'by-occupation'} name='By Occupation'>
-                    <h1>By Occupation</h1>
-                    <OccupationRegionGraph />
+                    <Occupation />
                   </Tab>
                   <Tab key={'by-region'} name='By Region'>
                     <h1>By Region</h1>

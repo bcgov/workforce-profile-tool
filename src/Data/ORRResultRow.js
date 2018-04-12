@@ -1,5 +1,6 @@
 import Papa from 'papaparse'
 
+const NAME_COL = 1
 const COUNT_COL = 2
 const NON_COUNT_COL = 3
 const TOTAL_COUNT_COL = 4
@@ -11,6 +12,7 @@ const SHORTFALL_COUNT_COL = 8
 class ORRResultRow {
   constructor (line) {
     const lineArray = Papa.parse(line).data[0]
+    this.name = lineArray[NAME_COL]
     this.count = lineArray[COUNT_COL]
     this.nonCount = lineArray[NON_COUNT_COL]
     this.totalCount = lineArray[TOTAL_COUNT_COL]
