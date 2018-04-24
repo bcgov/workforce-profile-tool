@@ -1,5 +1,4 @@
-import { GROUPS } from './Group'
-import OccupationRegionReport from './OccupationRegionReport'
+import * as d3 from 'd3'
 // import FlowReport from './FlowReport'
 
 const DATA_PATH_BASE = '/data/2015/'
@@ -12,36 +11,26 @@ class DataLoader {
     return array
   }
 
-  static async getFlowReport (group) {
-    const url = `${DATA_PATH_BASE}flow-report-${group.filename}.csv`
-    return DataLoader.loadTextAsArray(url)
+  static async loadCSV (url) {
+    return d3.csv(url)
   }
 
-  static async getOccupationRegionReport (group) {
-    const url = `${DATA_PATH_BASE}occupation-region-${group.filename}.csv`
-    return DataLoader.loadTextAsArray(url)
+  static async getFlowReport () {
+    const url = `${DATA_PATH_BASE}WP2015_Flow-1.csv`
+    return DataLoader.loadCSV(url)
+  }
+
+  static async getOccupationRegionReport () {
+    const url = `${DATA_PATH_BASE}WP2015_Rep_Occ_Rgn-1.csv`
+    return DataLoader.loadCSV(url)
   }
 
   static async loadAllData () {
-    console.log(GROUPS)
-
-    const occupationRegionReports = {}
-    const flowReports = {}
-    for (const group of Object.values(GROUPS)) {
-      console.log('group', group)
-      const key = group.key
-
-      const orrLineArray = await this.getOccupationRegionReport(group)
-      const orrData = new OccupationRegionReport(orrLineArray)
-      occupationRegionReports[key] = orrData
-
-      // const flowLineArray = await this.getFlowReport(group)
-      // const flowData = new FlowReport(flowLineArray)
-      // occupationRegionReports[key] = flowData
-    }
+    const orReport = await DataLoader.getOccupationRegionReport()
+    const flowReport = await DataLoader.getFlowReport()
     return {
-      occupationRegionReports,
-      flowReports
+      orReport,
+      flowReport
     }
   }
 }

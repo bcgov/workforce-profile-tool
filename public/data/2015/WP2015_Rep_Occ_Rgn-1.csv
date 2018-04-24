@@ -1,5 +1,3 @@
-"BCPS Representation by Occupation/Region (Combination of WP2015_BCPS_04, 06, 08, and 10)",,,,,,,,,,
-,,,,,,,,,,
 BCPS_Ministry_Group,DesignatedMinority_Group,Employee_Type,Occupation_Region_Group,DesGrp_Count_ORG,NonDesGrp_Count_ORG,Total_Count_ORG,DesGrp_Percent_ORG,DesGrp_Percent_AvailableWorkforce,DesGrp_Count_Expected,DesGrp_Count_Shortfall
 BCPS,VM,Employees_Reg,Senior Managers,82,923,1005,8.2,14,140,58
 BCPS,VM,Employees_Reg,Middle and Other Managers,217,1786,2003,10.8,19.5,390,173

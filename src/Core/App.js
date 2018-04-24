@@ -4,8 +4,23 @@ import './App.css'
 import Header from './Header'
 import Main from './Main'
 import VariableList from '../Variables/VariableList'
+import DataLoader from '../Data/DataLoader'
 
 class App extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      occupationRegionData: {},
+      flowData: {}
+    }
+  }
+
+  async componentDidMount () {
+    const occupationRegionData = await DataLoader.getOccupationRegionReport()
+    this.setState({ occupationRegionData })
+  }
+
   render () {
     return (
       <div className='App container-fluid'>

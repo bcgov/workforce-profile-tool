@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import DataLoader from '../Data/DataLoader'
-import { GROUPS } from '../Data/Group'
-import OccupationRegionReport from '../Data/OccupationRegionReport'
+import ORReport from '../Data/ORReport'
 
 class OccupationRegionGraph extends Component {
   constructor () {
@@ -11,14 +10,14 @@ class OccupationRegionGraph extends Component {
   }
 
   async componentDidMount () {
-    const lineArray = await DataLoader.getOccupationRegionReport(GROUPS.aboriginal)
-    const data = new OccupationRegionReport(lineArray)
+    const data = DataLoader.getOccupationRegionReport()
+    console.log('data', data)
     this.setState({ data })
   }
 
   render () {
     return (
-      <h1>Occupation by Region</h1>
+      <h1>Occupation</h1>
     )
   }
 }
