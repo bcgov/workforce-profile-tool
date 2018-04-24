@@ -7,6 +7,8 @@ import VariableList from '../Variables/VariableList'
 import DataLoader from '../Data/DataLoader'
 import qs from 'query-string'
 
+const ALL_VALUE = 'ALL'
+
 class App extends Component {
   constructor (props) {
     super(props)
@@ -16,30 +18,50 @@ class App extends Component {
       occupationRegionData: null,
       flowData: null
     }
+
+    // this.filterFromProps(props)
   }
 
-  filterDataByEmployeeType (employeeType) {
-    if (employeeType !== 'All') {
-      const occupationRegionData = this.state.originalData.occupationRegionData.filter(d => {
-        return d['Employee_Type'] === employeeType
-      })
+  processFilter (key, value, data) {
+    // If key or value are falsy, don't filter
+    if (!(key && value)) {
+      console.warn(`processFilter: key '${key}' and/or value '${value}' are falsy`)
+      return data
+    }
 
+    // If the value is ALL, don't filter
+    if (value === ALL_VALUE) return data
+
+    // We can filter
+    return data.filter(d => d[key] === value)
+  }
+
+  processFilters (filterObject, originalData) {
+    let filteredData = originalData
+    Object.keys(filterObject).forEach(key => {
+      const value = filterObject[key]
+      filteredData = this.processFilter(key, value, filteredData)
+    })
+    return filteredData
+  }
+
+  filterFromProps (props) {
+    const filters = qs.parse(props.location.search)
+    if (Object.keys(filters).length > 0 && this.state.originalData) {
+      const occupationRegionData = this.processFilters(filters, this.state.originalData.occupationRegionData)
       this.setState({ occupationRegionData })
     }
   }
 
   async componentDidMount () {
     const occupationRegionData = await DataLoader.getOccupationRegionReport()
-    this.setState({ occupationRegionData, originalData: { occupationRegionData } })
+    this.setState({ occupationRegionData, originalData: { occupationRegionData } }, () => {
+      this.filterFromProps(this.props)
+    })
   }
 
-  componentDidUpdate (prevProps, prevState) {
-    console.log('location', this.props.location)
-    const filters = qs.parse(this.props.location.search)
-    if (prevProps != this.props && filters['employee-type']) {
-      console.log('here we are')
-      this.filterDataByEmployeeType(filters['employee-type'])
-    }
+  componentWillReceiveProps (nextProps) {
+    this.filterFromProps(nextProps)
   }
 
   render () {
