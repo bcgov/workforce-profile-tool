@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, withRouter } from 'react-router-dom'
 import './App.css'
 import Header from './Header'
 import Main from './Main'
@@ -19,6 +19,10 @@ class App extends Component {
   async componentDidMount () {
     const occupationRegionData = await DataLoader.getOccupationRegionReport()
     this.setState({ occupationRegionData })
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    console.log('location', this.props.location)
   }
 
   render () {
@@ -42,4 +46,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default withRouter(App)
