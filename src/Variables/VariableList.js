@@ -2,6 +2,29 @@ import React, { Component } from 'react'
 import '../bootstrap/bootstrap.css'
 import './VariableList.css'
 
+export const VARIABLE_MAPPING = [
+  {
+    key: 'Employee_Type',
+    display: 'Employee Type',
+    options: [
+      { 'Employees_All': 'All' },
+      { 'Employees_Reg': 'Regular' },
+      { 'Employees_Aux': 'Auxiliary' }
+    ]
+  },
+  {
+    key: 'DesignatedMinority_Group',
+    display: 'Designated Group',
+    options: [
+      { 'All': 'All' },
+      { 'WOM': 'Women' },
+      { 'VM': 'Visible Minorities' },
+      { 'ABO': 'Aboriginal Peoples' },
+      { 'DIS': 'People with Disabilities' }
+    ]
+  }
+]
+
 class VariableList extends Component {
   render () {
     return (
