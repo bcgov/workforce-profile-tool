@@ -4,15 +4,8 @@ import Tab from '../Tabs/Tab'
 import './Main.css'
 import Occupation from '../Views/Occupation'
 import Region from '../Views/Region'
-import DataLoader from '../Data/DataLoader'
 
 class Main extends Component {
-  async componentDidMount () {
-    const data = await DataLoader.loadAllData()
-    console.log('- - - -')
-    console.log(data)
-  }
-
   render () {
     const activeOuterTab = this.props.match.params.highLevelNav || 'indicators-of-progress'
     const activeInnerTab = this.props.match.params.lowLevelNav || 'by-occupation'
@@ -25,7 +18,7 @@ class Main extends Component {
               <div className='Secondary'>
                 <TabInterface activeTabKey={activeInnerTab} baseURL={`/${activeOuterTab}`}>
                   <Tab key={'by-occupation'} name='By Occupation'>
-                    <Occupation />
+                    <Occupation data={this.props.data.occupationRegionData} />
                   </Tab>
                   <Tab key={'by-region'} name='By Region'>
                     <Region />

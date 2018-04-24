@@ -11,8 +11,8 @@ class App extends Component {
     super(props)
 
     this.state = {
-      occupationRegionData: {},
-      flowData: {}
+      occupationRegionData: null,
+      flowData: null
     }
   }
 
@@ -31,9 +31,9 @@ class App extends Component {
           </div>
           <div className='col-9'>
             <Switch>
-              <Route exact path={`/`} component={Main} />
-              <Route exact path={`/:highLevelNav`} component={Main} />
-              <Route exact path={`/:highLevelNav/:lowLevelNav`} component={Main} />
+              <Route exact path={`/`} render={props => <Main data={this.state} {...props} />} />
+              <Route exact path={`/:highLevelNav`} render={props => <Main data={this.state} {...props} />} />
+              <Route exact path={`/:highLevelNav/:lowLevelNav`} render={props => <Main data={this.state} {...props} />} />
             </Switch>
           </div>
         </div>
