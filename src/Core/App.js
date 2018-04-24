@@ -5,24 +5,41 @@ import Header from './Header'
 import Main from './Main'
 import VariableList from '../Variables/VariableList'
 import DataLoader from '../Data/DataLoader'
+import qs from 'query-string'
 
 class App extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
+      originalData: {},
       occupationRegionData: null,
       flowData: null
     }
   }
 
+  filterDataByEmployeeType (employeeType) {
+    if (employeeType !== 'All') {
+      const occupationRegionData = this.state.originalData.occupationRegionData.filter(d => {
+        return d['Employee_Type'] === employeeType
+      })
+
+      this.setState({ occupationRegionData })
+    }
+  }
+
   async componentDidMount () {
     const occupationRegionData = await DataLoader.getOccupationRegionReport()
-    this.setState({ occupationRegionData })
+    this.setState({ occupationRegionData, originalData: { occupationRegionData } })
   }
 
   componentDidUpdate (prevProps, prevState) {
     console.log('location', this.props.location)
+    const filters = qs.parse(this.props.location.search)
+    if (prevProps != this.props && filters['employee-type']) {
+      console.log('here we are')
+      this.filterDataByEmployeeType(filters['employee-type'])
+    }
   }
 
   render () {
