@@ -8,6 +8,7 @@ export const VARIABLE_MAPPING = [
   {
     key: 'Employee_Type',
     display: 'Employee Type',
+    exclusive: true,
     options: [
       { display: 'All', key: 'Employees_All', active: true },
       { display: 'Regular', key: 'Employees_Reg' },
@@ -77,7 +78,7 @@ class VariableList extends Component {
 
   render () {
     const variables = VARIABLE_MAPPING.map(v =>
-      <Variable key={v.key} variable={v} updateCallback={this.updateCallback} />
+      <Variable key={v.key} exclusive={v.exclusive} variable={v} updateCallback={this.updateCallback} />
     )
 
     return (
