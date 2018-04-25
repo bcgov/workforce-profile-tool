@@ -3,6 +3,10 @@
 .ReactorTable {
     @extend .table, .table-striped;
 
+    th, td {
+        font-size: 0.8rem;
+    }
+
     th span {
         cursor: pointer;
         &:after {
@@ -32,5 +36,23 @@
     .sortable-desc::after {
         font-family: "Font Awesome 5 Free";
         content: "\f0de";
-    }    
+    }
+
+    tfoot {
+        td {
+            background-color: $brand-color-fog;
+            font-weight: 600;
+        }
+    }
+}
+
+.ReactorTable.hide-header {
+    thead {
+        display: none;
+    }
+    tfoot {
+        td {
+            background-color: $brand-color-teal;
+        }
+    }
 }

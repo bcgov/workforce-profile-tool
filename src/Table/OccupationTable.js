@@ -9,7 +9,19 @@ class OccupationTable extends Component {
   render () {
     console.log('this.props.data', this.props.data)
 
-    const dataRows = this.props.data
+    let managementRows = []
+    let managementSubtotal = []
+    let nonManagementRows = []
+    let nonManagementSubtotal = []
+    let totalRow = []
+
+    if (this.props.data) {
+      managementRows = this.props.data.filter(d => d['Occupation_Type'] === 'Management')
+      managementSubtotal = this.props.data.filter(d => d['Occupation_Type'] === 'SubTotal_Mngt')
+      nonManagementRows = this.props.data.filter(d => d['Occupation_Type'] === 'NonManagement')
+      nonManagementSubtotal = this.props.data.filter(d => d['Occupation_Type'] === 'SubTotal_NonMngt')
+      totalRow = this.props.data.filter(d => d['Occupation_Type'] === 'Total')
+    }
 
     const columns = [
       {
@@ -59,11 +71,30 @@ class OccupationTable extends Component {
       <div className='Table row'>
         <div className='col'>
           { this.props.data &&
-            <Reactor.Table
-              columns={columns}
-              rows={dataRows}
-              rowFilter={rowFilter}
-            />
+            <div>
+              <h2>Management</h2>
+              <Reactor.Table
+                columns={columns}
+                rows={managementRows}
+                rowFilter={rowFilter}
+                totalRows={managementSubtotal}
+              />
+              <h2>Non-Management</h2>
+              <Reactor.Table
+                columns={columns}
+                rows={nonManagementRows}
+                rowFilter={rowFilter}
+                totalRows={nonManagementSubtotal}
+              />
+              <h2>Total</h2>
+              <Reactor.Table
+                tableClass={'hide-header'}
+                columns={columns}
+                rows={[]}
+                rowFilter={rowFilter}
+                totalRows={totalRow}
+              />
+            </div>
           }
         </div>
       </div>
