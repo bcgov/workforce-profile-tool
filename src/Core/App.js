@@ -42,13 +42,11 @@ class App extends Component {
   }
 
   processFilters (filterObject, originalData) {
-    console.log('oh hi')
     let filteredData = originalData
     Object.keys(filterObject).forEach(key => {
       const value = filterObject[key]
       filteredData = this.processFilter(key, value, filteredData)
     })
-    console.log('filteredData', filteredData)
     return filteredData
   }
 

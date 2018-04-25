@@ -21,7 +21,6 @@ class OccupationTable extends Component {
     })
 
     const tables = Object.keys(dataMap).sort().map(k => {
-      console.log(VARIABLE_MAPPING)
       let title = VARIABLE_MAPPING
         .filter(v => v.key === 'DesignatedMinority_Group')[0]
         .options
@@ -50,9 +49,6 @@ class OccupationTable extends Component {
 
 class OccupationSubTable extends Component {
   render () {
-    console.log('this.props.data', this.props.data)
-    console.log('hi')
-
     const managementRows = this.props.data.filter(d => d['Occupation_Type'] === 'Management')
     const managementSubtotal = this.props.data.filter(d => d['Occupation_Type'] === 'SubTotal_Mngt')
     const nonManagementRows = this.props.data.filter(d => d['Occupation_Type'] === 'NonManagement')

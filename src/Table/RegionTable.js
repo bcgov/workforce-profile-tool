@@ -21,7 +21,6 @@ class RegionTable extends Component {
     })
 
     const tables = Object.keys(dataMap).sort().map(k => {
-      console.log(VARIABLE_MAPPING)
       let title = VARIABLE_MAPPING
         .filter(v => v.key === 'DesignatedMinority_Group')[0]
         .options
@@ -48,8 +47,6 @@ class RegionTable extends Component {
 
 class RegionSubTable extends Component {
   render () {
-    console.log('this.props.data', this.props.data)
-
     let regionRows = []
     let totalRow = []
 
