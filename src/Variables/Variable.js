@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './Variable.css'
 
 class Variable extends Component {
   constructor (props) {
@@ -6,18 +7,32 @@ class Variable extends Component {
     this.state = {
       variable: props.variable
     }
+    this.toggleActive = this.toggleActive.bind(this)
+  }
+
+  toggleActive (option) {
+    option.active = !option.active
+
+    // TODO: not super idiomatic; ideally, we'd update the state directly
+    this.forceUpdate()
+    this.props.updateCallback(this.state.variable)
   }
 
   render () {
-    const options = this.state.variable.options.map(o =>
-      <li key={o.key} className={o.active ? 'active' : ''}>{o.display}</li>
-    )
-
-    console.log(this.state.variable.options)
-    console.log('options', options)
+    const options = this.state.variable.options.map(o => {
+      return (
+        <li
+          key={o.key}
+          className={o.active ? ' active' : ''}
+          onClick={e => this.toggleActive(o)}
+        >
+          {o.display}
+        </li>
+      )
+    })
 
     return (
-      <div>
+      <div className='Variable'>
         <h3>{this.props.variable.display}</h3>
         <ul>
           {options}
