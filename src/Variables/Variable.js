@@ -11,7 +11,10 @@ class Variable extends Component {
   }
 
   toggleActive (option) {
-    option.active = !option.active
+    const options = this.state.variable.options
+
+    options.forEach(o => { o.active = false })
+    option.active = true
 
     // TODO: not super idiomatic; ideally, we'd update the state directly
     this.forceUpdate()

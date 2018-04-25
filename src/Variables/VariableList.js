@@ -10,8 +10,8 @@ export const VARIABLE_MAPPING = [
     display: 'Employee Type',
     options: [
       { display: 'All', key: 'Employees_All', active: true },
-      { display: 'Regular', key: 'Employees_Reg', active: true },
-      { display: 'Auxiliary', key: 'Employees_Aux', active: true }
+      { display: 'Regular', key: 'Employees_Reg' },
+      { display: 'Auxiliary', key: 'Employees_Aux' }
     ]
   },
   {
@@ -19,9 +19,9 @@ export const VARIABLE_MAPPING = [
     display: 'Designated Group',
     options: [
       { display: 'Aboriginal Peoples', key: 'ABO', active: true },
-      { display: 'People with Disabilities', key: 'DIS', active: true },
-      { display: 'Visible Minorities', key: 'VM', active: true },
-      { display: 'Women', key: 'WOM', active: true }
+      { display: 'People with Disabilities', key: 'DIS' },
+      { display: 'Visible Minorities', key: 'VM' },
+      { display: 'Women', key: 'WOM' }
     ]
   }
 ]
@@ -30,10 +30,17 @@ class VariableList extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      active: {}
+      active: {
+        'Employee_Type': 'Employees_All',
+        'DesignatedMinority_Group': 'ABO'
+      }
     }
     this.updateCallback = this.updateCallback.bind(this)
     this.updateLocation = this.updateLocation.bind(this)
+  }
+
+  componentDidMount () {
+    this.updateLocation()
   }
 
   updateCallback (variable) {

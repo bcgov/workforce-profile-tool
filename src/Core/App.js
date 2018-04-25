@@ -42,18 +42,20 @@ class App extends Component {
   }
 
   processFilters (filterObject, originalData) {
+    console.log('oh hi')
     let filteredData = originalData
     Object.keys(filterObject).forEach(key => {
       const value = filterObject[key]
       filteredData = this.processFilter(key, value, filteredData)
     })
+    console.log('filteredData', filteredData)
     return filteredData
   }
 
   filterFromProps (props) {
     const filters = qs.parse(props.location.search)
     console.log('filters', filters)
-    if (Object.keys(filters).length > 0 && this.state.originalData) {
+    if (Object.keys(filters).length > 0 && this.state.originalData.occupationRegionData) {
       const occupationRegionData = this.processFilters(filters, this.state.originalData.occupationRegionData)
       this.setState({ occupationRegionData })
     }
@@ -61,6 +63,10 @@ class App extends Component {
 
   async componentDidMount () {
     const occupationRegionData = await DataLoader.getOccupationRegionReport()
+    // Build keys
+    occupationRegionData.forEach(r => {
+      r.key = ''.concat(Object.values(r))
+    })
     this.setState({ occupationRegionData, originalData: { occupationRegionData } }, () => {
       this.filterFromProps(this.props)
     })

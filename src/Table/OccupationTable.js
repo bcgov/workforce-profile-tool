@@ -25,14 +25,6 @@ class OccupationTable extends Component {
 
     const columns = [
       {
-        id: 'id',
-        name: 'ID',
-        cellClass: 'hidden',
-        headerClass: 'hidden',
-        accessor: d => ''.concat(Object.values(d)),
-        displayAccessor: d => ''
-      },
-      {
         id: 'DesignatedMinority_Group',
         name: 'Des. Grp.',
         accessor: d => d['DesignatedMinority_Group']
