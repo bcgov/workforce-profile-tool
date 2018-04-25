@@ -7,6 +7,31 @@ import './Table.css'
 
 class RegionTable extends Component {
   render () {
+    if (!this.props.data) {
+      return (<div><h1>Loading...</h1></div>)
+    }
+
+    // Split the data
+    const dataMap = {}
+    this.props.data.forEach(d => {
+      dataMap[d.DesignatedMinority_Group] = dataMap[d.DesignatedMinority_Group] || []
+      dataMap[d.DesignatedMinority_Group].push(d)
+    })
+
+    const tables = Object.keys(dataMap).sort().map(k => {
+      return <RegionSubTable data={dataMap[k]} />
+    })
+
+    return (
+      <div>
+        {tables}
+      </div>
+    )
+  }
+}
+
+class RegionSubTable extends Component {
+  render () {
     console.log('this.props.data', this.props.data)
 
     let regionRows = []

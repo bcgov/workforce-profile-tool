@@ -7,21 +7,39 @@ import './Table.css'
 
 class OccupationTable extends Component {
   render () {
-    console.log('this.props.data', this.props.data)
-
-    let managementRows = []
-    let managementSubtotal = []
-    let nonManagementRows = []
-    let nonManagementSubtotal = []
-    let totalRow = []
-
-    if (this.props.data) {
-      managementRows = this.props.data.filter(d => d['Occupation_Type'] === 'Management')
-      managementSubtotal = this.props.data.filter(d => d['Occupation_Type'] === 'SubTotal_Mngt')
-      nonManagementRows = this.props.data.filter(d => d['Occupation_Type'] === 'NonManagement')
-      nonManagementSubtotal = this.props.data.filter(d => d['Occupation_Type'] === 'SubTotal_NonMngt')
-      totalRow = this.props.data.filter(d => d['Occupation_Type'] === 'Total')
+    if (!this.props.data) {
+      return (<div><h1>Loading...</h1></div>)
     }
+
+    // Split the data
+    const dataMap = {}
+    this.props.data.forEach(d => {
+      dataMap[d.DesignatedMinority_Group] = dataMap[d.DesignatedMinority_Group] || []
+      dataMap[d.DesignatedMinority_Group].push(d)
+    })
+
+    const tables = Object.keys(dataMap).sort().map(k => {
+      return <OccupationSubTable data={dataMap[k]} />
+    })
+
+    return (
+      <div>
+        {tables}
+      </div>
+    )
+  }
+}
+
+class OccupationSubTable extends Component {
+  render () {
+    console.log('this.props.data', this.props.data)
+    console.log('hi')
+
+    const managementRows = this.props.data.filter(d => d['Occupation_Type'] === 'Management')
+    const managementSubtotal = this.props.data.filter(d => d['Occupation_Type'] === 'SubTotal_Mngt')
+    const nonManagementRows = this.props.data.filter(d => d['Occupation_Type'] === 'NonManagement')
+    const nonManagementSubtotal = this.props.data.filter(d => d['Occupation_Type'] === 'SubTotal_NonMngt')
+    const totalRow = this.props.data.filter(d => d['Occupation_Type'] === 'Total')
 
     const columns = [
       {
