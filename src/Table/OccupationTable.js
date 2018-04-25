@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
 
+import { formatNumber } from '../Services/formatter'
+
 class OccupationTable extends Component {
   render () {
     console.log('this.props.data', this.props.data)
@@ -27,17 +29,23 @@ class OccupationTable extends Component {
       {
         id: 'DesGrp_Count_ORG',
         name: 'Des. Grp.',
-        accessor: d => d['DesGrp_Count_ORG']
+        accessor: d => formatNumber(d['DesGrp_Count_ORG']),
+        cellClass: 'text-right',
+        headerClass: 'text-right'
       },
       {
         id: 'NonDesGrp_Count_ORG',
         name: 'Non-Des. Grp.',
-        accessor: d => d['NonDesGrp_Count_ORG']
+        accessor: d => formatNumber(d['NonDesGrp_Count_ORG']),
+        cellClass: 'text-right',
+        headerClass: 'text-right'
       },
       {
         id: 'Total_Count_ORG',
         name: 'Total',
-        accessor: d => d['Total_Count_ORG']
+        accessor: d => formatNumber(d['Total_Count_ORG']),
+        cellClass: 'text-right',
+        headerClass: 'text-right'
       }
     ]
 
