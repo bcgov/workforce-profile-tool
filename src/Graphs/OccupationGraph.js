@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import * as PlusPlot from '@plot-and-scatter/plusplot'
 
+import './Graphs.css'
+
 import { VARIABLE_MAPPING } from '../Variables/VariableList'
 
 class OccupationGraph extends Component {
@@ -40,6 +42,11 @@ class OccupationGraph extends Component {
       <PlusPlot.GroupedBarChart
         data={chartData}
         colors={['#70CCDB', '#D2E2EE', '#6c757d']}
+        options={{
+          margins: { top: 0, left: 60, bottom: 40, right: 20 },
+          axes: { xAxisLabel: '', yAxisLabel: 'Count in BCPS' },
+          font: 'Myriad Pro'
+        }}
       />
     )
   }
