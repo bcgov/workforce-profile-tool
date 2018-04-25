@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import './VariableList.css'
 import Variable from './Variable'
-import qs from 'query-string'
+import qs from '../Services/query-string'
 
 export const VARIABLE_MAPPING = [
   {

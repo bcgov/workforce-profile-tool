@@ -5,7 +5,7 @@ import Header from './Header'
 import Main from './Main'
 import VariableList from '../Variables/VariableList'
 import DataLoader from '../Data/DataLoader'
-import qs from 'query-string'
+import qs from '../Services/query-string'
 
 const ALL_VALUE = 'ALL'
 
