@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
 
+import { VARIABLE_MAPPING } from '../Variables/VariableList'
+
 import { formatNumber, parseIntClean } from '../Services/formatter'
 
 import './Table.css'
@@ -19,7 +21,19 @@ class OccupationTable extends Component {
     })
 
     const tables = Object.keys(dataMap).sort().map(k => {
-      return <OccupationSubTable data={dataMap[k]} />
+      console.log(VARIABLE_MAPPING)
+      const title = VARIABLE_MAPPING
+        .filter(v => v.key === 'DesignatedMinority_Group')[0]
+        .options
+        .filter(v => v.key === k)[0].display
+      return (
+        <div>
+          <h2>{title}</h2>
+          <OccupationSubTable data={dataMap[k]} />
+          <br />
+          <br />
+        </div>
+      )
     })
 
     return (
@@ -85,21 +99,21 @@ class OccupationSubTable extends Component {
         <div className='col'>
           { this.props.data &&
             <div>
-              <h2>Management</h2>
+              <h3>Management</h3>
               <Reactor.Table
                 columns={columns}
                 rows={managementRows}
                 rowFilter={rowFilter}
                 totalRows={managementSubtotal}
               />
-              <h2>Non-Management</h2>
+              <h3>Non-Management</h3>
               <Reactor.Table
                 columns={columns}
                 rows={nonManagementRows}
                 rowFilter={rowFilter}
                 totalRows={nonManagementSubtotal}
               />
-              <h2>Total</h2>
+              <h3>Total</h3>
               <Reactor.Table
                 tableClass={'hide-header'}
                 columns={columns}
