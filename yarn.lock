@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@plot-and-scatter/plusplot@^0.8.1":
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/@plot-and-scatter/plusplot/-/plusplot-0.8.1.tgz#f368da6ea88c730afd860c3f8e239a1a7de1712a"
+"@plot-and-scatter/plusplot@0.9.x":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@plot-and-scatter/plusplot/-/plusplot-0.9.0.tgz#d16bb594790ca70b65ab9af402504046081c91c1"
   dependencies:
     d3 "^4.9.1"
     react "^15.6.1"
