@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
 
-import { formatNumber } from '../Services/formatter'
+import { formatNumber, parseIntClean } from '../Services/formatter'
 
 import './Table.css'
 
@@ -45,21 +45,24 @@ class OccupationTable extends Component {
       {
         id: 'DesGrp_Count_ORG',
         name: 'Des. Grp.',
-        accessor: d => formatNumber(d['DesGrp_Count_ORG']),
+        accessor: d => parseIntClean(d['DesGrp_Count_ORG']),
+        displayAccessor: d => formatNumber(d['DesGrp_Count_ORG']),
         cellClass: 'text-right',
         headerClass: 'text-right'
       },
       {
         id: 'NonDesGrp_Count_ORG',
         name: 'Non-Des. Grp.',
-        accessor: d => formatNumber(d['NonDesGrp_Count_ORG']),
+        accessor: d => parseIntClean(d['NonDesGrp_Count_ORG']),
+        displayAccessor: d => formatNumber(d['NonDesGrp_Count_ORG']),
         cellClass: 'text-right',
         headerClass: 'text-right'
       },
       {
         id: 'Total_Count_ORG',
         name: 'Total',
-        accessor: d => formatNumber(d['Total_Count_ORG']),
+        accessor: d => parseIntClean(d['Total_Count_ORG']),
+        displayAccessor: d => formatNumber(d['Total_Count_ORG']),
         cellClass: 'text-right',
         headerClass: 'text-right'
       }
