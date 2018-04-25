@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import '../bootstrap/bootstrap.css'
 import './VariableList.css'
+import qs from 'query-string'
 
 export const VARIABLE_MAPPING = [
   {
@@ -26,6 +28,20 @@ export const VARIABLE_MAPPING = [
 ]
 
 class VariableList extends Component {
+  constructor (props) {
+    super(props)
+    this.updateLocation = this.updateLocation.bind(this)
+  }
+
+  updateLocation () {
+    console.log(qs.stringify({
+      'Employee_Type': ['Employees_Aux']
+    }))
+    this.props.history.push({
+      search: '?' + qs.stringify({'Employee_Type': ['Employees_All', 'Employees_Aux']})
+    }, null)
+  }
+
   render () {
     return (
       <div className='VariableList row'>
@@ -50,4 +66,4 @@ class VariableList extends Component {
   }
 }
 
-export default VariableList
+export default withRouter(VariableList)

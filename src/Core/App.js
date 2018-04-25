@@ -32,7 +32,12 @@ class App extends Component {
     // If the value is ALL, don't filter
     if (value === ALL_VALUE) return data
 
-    // We can filter
+    // If the value is an ARRAY, any of the included items is permissible
+    if (value instanceof Array) {
+      return data.filter(d => value.includes(d[key]))
+    }
+
+    // Not an array. Match only the selected item
     return data.filter(d => d[key] === value)
   }
 
@@ -47,6 +52,7 @@ class App extends Component {
 
   filterFromProps (props) {
     const filters = qs.parse(props.location.search)
+    console.log('filters', filters)
     if (Object.keys(filters).length > 0 && this.state.originalData) {
       const occupationRegionData = this.processFilters(filters, this.state.originalData.occupationRegionData)
       this.setState({ occupationRegionData })

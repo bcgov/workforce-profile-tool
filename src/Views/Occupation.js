@@ -14,7 +14,7 @@ class Occupation extends Component {
   render () {
     console.log('data', this.props.data)
 
-    const headerRow = this.props.data
+    const headerRow = this.props.data && this.props.data.length > 0
       ? <tr>{Object.keys(this.props.data[0]).map(k => <th key={k}>{k}</th>)}</tr>
       : null
 
