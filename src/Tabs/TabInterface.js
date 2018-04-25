@@ -35,8 +35,11 @@ class TabInterface extends React.Component {
     // Build the tab buttons at the top of the interface
     const tabButtons = this.props.children.map(child => {
       const key = child.key
+      const search = this.props.search
       const isActiveClass = (key === this.state.activeTabKey) ? ' active' : ''
-      const linkTo = this.props.baseURL ? `${this.props.baseURL}/${key}` : `/${key}`
+      const linkTo = this.props.baseURL
+        ? `${this.props.baseURL}/${key}${search}`
+        : `/${key}${search}`
       return (
         <div key={child.props.name} className={`TabButton ${isActiveClass}`}>
           <Link

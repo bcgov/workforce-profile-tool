@@ -13,10 +13,10 @@ class Main extends Component {
     return (
       <div className='Main row'>
         <div className='col'>
-          <TabInterface activeTabKey={activeOuterTab} matchURL={this.props.match.url}>
+          <TabInterface activeTabKey={activeOuterTab} matchURL={this.props.match.url} search={this.props.location.search}>
             <Tab key={'indicators-of-progress'} name='Indicators of Progress'>
               <div className='Secondary'>
-                <TabInterface activeTabKey={activeInnerTab} baseURL={`/${activeOuterTab}`}>
+                <TabInterface activeTabKey={activeInnerTab} baseURL={`/${activeOuterTab}`} search={this.props.location.search}>
                   <Tab key={'by-occupation'} name='By Occupation'>
                     <Occupation data={this.props.data.occupationRegionData} />
                   </Tab>
