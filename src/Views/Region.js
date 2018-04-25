@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
+import RegionTable from '../Table/RegionTable'
 
-class Occupation extends Component {
+class Region extends Component {
   render () {
     return (
-      <h1>Occupation</h1>
+      <div>
+        <h1>Region</h1>
+        <RegionTable data={this.props.data} />
+      </div>
     )
   }
 }
 
-export default Occupation
+export default Region

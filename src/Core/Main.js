@@ -10,6 +10,10 @@ class Main extends Component {
     return data ? data.filter(r => r['Variable_Type'] !== 'Region') : data
   }
 
+  getRegionData (data) {
+    return data ? data.filter(r => r['Variable_Type'] !== 'Management') : data
+  }
+
   render () {
     const activeOuterTab = this.props.match.params.highLevelNav || 'indicators-of-progress'
     const activeInnerTab = this.props.match.params.lowLevelNav || 'by-occupation'
@@ -25,7 +29,7 @@ class Main extends Component {
                     <Occupation data={this.getOccupationData(this.props.data.occupationRegionData)} />
                   </Tab>
                   <Tab key={'by-region'} name='By Region'>
-                    <Region />
+                    <Region data={this.getRegionData(this.props.data.occupationRegionData)} />
                   </Tab>
                   <Tab key={'flow-report'} name='Flow Report'>
                     <h1>Flow Report</h1>
