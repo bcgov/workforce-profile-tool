@@ -1,7 +1,7 @@
 import * as d3 from 'd3'
 // import FlowReport from './FlowReport'
 
-const DATA_PATH_BASE = '/data/2015/'
+const DATA_PATH_BASE = 'data/2015/'
 
 class DataLoader {
   static async loadTextAsArray (url) {
