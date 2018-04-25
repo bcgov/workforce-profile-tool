@@ -1,217 +1,217 @@
-BCPS_Ministry_Group,DesignatedMinority_Group,Employee_Type,Occupation_Region_Group,DesGrp_Count_ORG,NonDesGrp_Count_ORG,Total_Count_ORG,DesGrp_Percent_ORG,DesGrp_Percent_AvailableWorkforce,DesGrp_Count_Expected,DesGrp_Count_Shortfall
-BCPS,VM,Employees_Reg,Senior Managers,82,923,1005,8.2,14,140,58
-BCPS,VM,Employees_Reg,Middle and Other Managers,217,1786,2003,10.8,19.5,390,173
-BCPS,VM,Employees_Reg,Professionals,1432,9337,10769,13.3,20.4,2202,770
-BCPS,VM,Employees_Reg,"Semi-Professionals, Technicians",293,1636,1929,15.2,18.4,356,63
-BCPS,VM,Employees_Reg,Supervisors,83,566,649,12.8,24.8,161,78
-BCPS,VM,Employees_Reg,SubTotal_Mngt,2107,14248,16355,12.9,19.9,3250,1143
-BCPS,VM,Employees_Reg,Administrative & Senior Clerical,250,1368,1618,15.5,19.6,317,67
-BCPS,VM,Employees_Reg,Crafts and Trades,<3,<3,9,<3,19.1,,
-BCPS,VM,Employees_Reg,Clerical Personnel,542,3054,3596,15.1,27.1,975,433
-BCPS,VM,Employees_Reg,Intermediate Sales & Service,426,1726,2152,19.8,17.1,,
-BCPS,VM,Employees_Reg,Other Sales & Service Personnel,<3,<3,7,<3,35.4,,
-BCPS,VM,Employees_Reg,Manual Workers,<3,<3,10,<3,20,,
-BCPS,VM,Employees_Reg,Occupations Not Stated,,,0,,,,
-BCPS,VM,Employees_Reg,SubTotal_NonMngt,1222,6170,7392,16.5,22.5,1667,445
-BCPS,VM,Employees_Reg,Total,3329,20418,23747,14,20.7,4916,1587
-BCPS,VM,Employees_Reg,Vancouver CMA,1713,4569,6282,27.3,20.5,,
-BCPS,VM,Employees_Reg,Victoria CMA,1094,8193,9287,11.8,24.1,2239,1145
-BCPS,VM,Employees_Reg,Other B.C. and Not Specified,522,7656,8178,6.4,17,1391,869
-BCPS,VM,Employees_Aux,Senior Managers,<3,<3,4,<3,15.8,,
-BCPS,VM,Employees_Aux,Middle and Other Managers,<3,<3,12,<3,20.4,,
-BCPS,VM,Employees_Aux,Professionals,35,320,355,9.9,18.3,65,30
-BCPS,VM,Employees_Aux,"Semi-Professionals, Technicians",S,S,224,S,16.5,37,21
-BCPS,VM,Employees_Aux,Supervisors,<3,<3,9,<3,24.8,,
-BCPS,VM,Employees_Aux,SubTotal_Management,53,551,604,8.8,17.7,107,54
-BCPS,VM,Employees_Aux,Administrative & Senior Clerical,13,39,52,25,19.7,,
-BCPS,VM,Employees_Aux,Crafts and Trades,,,0,,,,
-BCPS,VM,Employees_Aux,Clerical Personnel,54,411,465,11.6,27.1,126,72
-BCPS,VM,Employees_Aux,Intermediate Sales & Service,12,44,56,21.4,20.7,,
-BCPS,VM,Employees_Aux,Other Sales & Service Personnel,<3,<3,5,<3,36.7,,
-BCPS,VM,Employees_Aux,Manual Workers,<3,<3,35,<3,11,,x
-BCPS,VM,Employees_Aux,Occupations Not Stated,S,S,45,S,25.8,,
-BCPS,VM,Employees_Aux,SubTotal_NonMngt,89,569,658,13.5,25.1,165,76
-BCPS,VM,Employees_Aux,Total,142,1120,1262,11.3,21.6,272,130
-BCPS,VM,Employees_Aux,Vancouver CMA,75,287,362,20.7,22.1,,
-BCPS,VM,Employees_Aux,Victoria CMA,41,330,371,11.1,24.2,90,49
-BCPS,VM,Employees_Aux,Other B.C. and Not Specified,26,503,529,4.9,19.4,102,76
-BCPS,VM,Employees_All,Senior Managers,S,S,1009,S,14,141,59
-BCPS,VM,Employees_All,Middle and Other Managers,S,S,2015,S,19.5,393,175
-BCPS,VM,Employees_All,Professionals,1467,9657,11124,13.2,20.4,2267,800
-BCPS,VM,Employees_All,"Semi-Professionals, Technicians",S,S,2153,S,18.2,393,84
-BCPS,VM,Employees_All,Supervisors,S,S,658,S,24.8,163,79
-BCPS,VM,Employees_All,SubTotal_Management,2160,14799,16959,12.7,19.8,3357,1197
-BCPS,VM,Employees_All,Administrative & Senior Clerical,263,1407,1670,15.7,19.6,328,65
-BCPS,VM,Employees_All,Crafts and Trades,<3,<3,9,<3,19.1,,
-BCPS,VM,Employees_All,Clerical Personnel,596,3465,4061,14.7,27.1,1102,506
-BCPS,VM,Employees_All,Intermediate Sales & Service,438,1770,2208,19.8,17.2,,
-BCPS,VM,Employees_All,Other Sales & Service Personnel,<3,<3,12,<3,36,,x
-BCPS,VM,Employees_All,Manual Workers,<3,<3,45,<3,13,,x
-BCPS,VM,Employees_All,Occupations Not Stated,S,S,45,S,25.8,,
-BCPS,VM,Employees_All,SubTotal_NonMngt,1311,6739,8050,16.3,22.8,1832,521
-BCPS,VM,Employees_All,Total,3471,21538,25009,13.9,20.7,5189,1718
-BCPS,VM,Employees_All,Vancouver CMA,1788,4856,6644,26.9,20.6,,
-BCPS,VM,Employees_All,Victoria CMA,1135,8523,9658,11.8,24.1,2329,1194
-BCPS,VM,Employees_All,Other B.C. and Not Specified,548,8159,8707,6.3,17.2,1493,945
-BCPS,ABO,Employees_Reg,Senior Managers,21,984,1005,2.1,5.3,53,32
-BCPS,ABO,Employees_Reg,Middle and Other Managers,43,1960,2003,2.1,4.4,88,45
-BCPS,ABO,Employees_Reg,Professionals,325,10444,10769,3,4.4,474,149
-BCPS,ABO,Employees_Reg,"Semi-Professionals, Technicians",76,1853,1929,3.9,9.7,187,111
-BCPS,ABO,Employees_Reg,Supervisors,22,627,649,3.4,2.3,,
-BCPS,ABO,Employees_Reg,SubTotal_Mngt,487,15868,16355,3,5,817,330
-BCPS,ABO,Employees_Reg,Administrative & Senior Clerical,S,S,1618,S,4.3,70,21
-BCPS,ABO,Employees_Reg,Crafts and Trades,<3,<3,9,<3,3.4,,
-BCPS,ABO,Employees_Reg,Clerical Personnel,143,3453,3596,4,3.5,,
-BCPS,ABO,Employees_Reg,Intermediate Sales & Service,68,2084,2152,3.2,5.9,128,60
-BCPS,ABO,Employees_Reg,Other Sales & Service Personnel,<3,<3,7,<3,6.5,,
-BCPS,ABO,Employees_Reg,Manual Workers,<3,<3,10,<3,6.1,,
-BCPS,ABO,Employees_Reg,Occupations Not Stated,,,0,,,,
-BCPS,ABO,Employees_Reg,SubTotal_NonMngt,260,7132,7392,3.5,4.4,326,66
-BCPS,ABO,Employees_Reg,Total,747,23000,23747,3.1,4.8,1143,396
-BCPS,ABO,Employees_Reg,Vancouver CMA,132,6150,6282,2.1,5.5,348,216
-BCPS,ABO,Employees_Reg,Victoria CMA,229,9058,9287,2.5,3.8,352,123
-BCPS,ABO,Employees_Reg,Other B.C. and Not Specified,386,7792,8178,4.7,5.4,443,57
-BCPS,ABO,Employees_Aux,Senior Managers,<3,<3,4,<3,4.8,,
-BCPS,ABO,Employees_Aux,Middle and Other Managers,<3,<3,12,<3,3.2,,
-BCPS,ABO,Employees_Aux,Professionals,11,344,355,3.1,5.6,20,9
-BCPS,ABO,Employees_Aux,"Semi-Professionals, Technicians",S,S,224,S,8.9,20,15
-BCPS,ABO,Employees_Aux,Supervisors,<3,<3,9,<3,2.3,,
-BCPS,ABO,Employees_Aux,SubTotal_Mngt,16,588,604,2.6,6.7,41,25
-BCPS,ABO,Employees_Aux,Administrative & Senior Clerical,<3,<3,52,<3,4.4,,
-BCPS,ABO,Employees_Aux,Crafts and Trades,,,0,,,,
-BCPS,ABO,Employees_Aux,Clerical Personnel,21,444,465,4.5,3.7,,
-BCPS,ABO,Employees_Aux,Intermediate Sales & Service,<3,<3,56,<3,6.3,,x
-BCPS,ABO,Employees_Aux,Other Sales & Service Personnel,<3,<3,5,<3,6.2,,
-BCPS,ABO,Employees_Aux,Manual Workers,<3,<3,35,<3,13.7,,x
-BCPS,ABO,Employees_Aux,Occupations Not Stated,<3,<3,45,<3,4.6,,
-BCPS,ABO,Employees_Aux,SubTotal_NonMngt,27,631,658,4.1,4.6,,
-BCPS,ABO,Employees_Aux,Total,43,1219,1262,3.4,5.6,71,28
-BCPS,ABO,Employees_Aux,Vancouver CMA,10,352,362,2.8,6.4,23,13
-BCPS,ABO,Employees_Aux,Victoria CMA,12,359,371,3.2,4.2,16,4
-BCPS,ABO,Employees_Aux,Other B.C. and Not Specified,21,508,529,4,6.1,32,11
-BCPS,ABO,Employees_All,Senior Managers,S,S,1009,S,5.3,54,33
-BCPS,ABO,Employees_All,Middle and Other Managers,S,S,2015,S,4.4,89,46
-BCPS,ABO,Employees_All,Professionals,336,10788,11124,3,4.4,494,158
-BCPS,ABO,Employees_All,"Semi-Professionals, Technicians",S,S,2153,S,9.6,207,126
-BCPS,ABO,Employees_All,Supervisors,S,S,658,S,2.3,,
-BCPS,ABO,Employees_All,SubTotal_Mngt,503,16456,16959,3,5.1,858,355
-BCPS,ABO,Employees_All,Administrative & Senior Clerical,S,S,1670,S,4.3,72,21
-BCPS,ABO,Employees_All,Crafts and Trades,<3,<3,9,<3,3.4,,
-BCPS,ABO,Employees_All,Clerical Personnel,164,3897,4061,4,3.5,,
-BCPS,ABO,Employees_All,Intermediate Sales & Service,S,S,2208,S,5.9,131,62
-BCPS,ABO,Employees_All,Other Sales & Service Personnel,<3,<3,12,<3,6.4,,
-BCPS,ABO,Employees_All,Manual Workers,<3,<3,45,<3,12,,x
-BCPS,ABO,Employees_All,Occupations Not Stated,<3,<3,45,<3,4.6,,
-BCPS,ABO,Employees_All,SubTotal_NonMngt,287,7763,8050,3.6,4.4,356,69
-BCPS,ABO,Employees_All,Total,790,24219,25009,3.2,4.9,1214,424
-BCPS,ABO,Employees_All,Vancouver CMA,142,6502,6644,2.1,5.6,371,229
-BCPS,ABO,Employees_All,Victoria CMA,241,9417,9658,2.5,3.8,368,127
-BCPS,ABO,Employees_All,Other B.C. and Not Specified,407,8300,8707,4.7,5.5,475,68
-BCPS,DIS,Employees_Reg,Senior Managers,21,984,1005,2.1,4.3,43,22
-BCPS,DIS,Employees_Reg,Middle and Other Managers,41,1962,2003,2,4.3,86,45
-BCPS,DIS,Employees_Reg,Professionals,392,10377,10769,3.6,5.4,577,185
-BCPS,DIS,Employees_Reg,"Semi-Professionals, Technicians",139,1790,1929,7.2,4.5,,
-BCPS,DIS,Employees_Reg,Supervisors,30,619,649,4.6,13.9,90,60
-BCPS,DIS,Employees_Reg,SubTotal_Mngt,623,15732,16355,3.8,5.4,883,260
-BCPS,DIS,Employees_Reg,Administrative & Senior Clerical,S,S,1618,S,3.8,,
-BCPS,DIS,Employees_Reg,Crafts and Trades,<3,<3,9,<3,7.6,,
-BCPS,DIS,Employees_Reg,Clerical Personnel,179,3417,3596,5,5.1,,
-BCPS,DIS,Employees_Reg,Intermediate Sales & Service,74,2078,2152,3.4,5.7,123,49
-BCPS,DIS,Employees_Reg,Other Sales & Service Personnel,<3,<3,7,<3,7.3,,
-BCPS,DIS,Employees_Reg,Manual Workers,<3,<3,10,<3,7.5,,
-BCPS,DIS,Employees_Reg,Occupations Not Stated,,,0,,,,
-BCPS,DIS,Employees_Reg,SubTotal_NonMngt,323,7069,7392,4.4,5,369,46
-BCPS,DIS,Employees_Reg,Total,946,22801,23747,4,5.3,1253,307
-BCPS,DIS,Employees_Reg,Vancouver CMA,256,6026,6282,4.1,5.3,334,78
-BCPS,DIS,Employees_Reg,Victoria CMA,362,8925,9287,3.9,5.2,480,118
-BCPS,DIS,Employees_Reg,Other B.C. and Not Specified,328,7850,8178,4,5.4,439,111
-BCPS,DIS,Employees_Aux,Senior Managers,<3,<3,4,<3,4.3,,
-BCPS,DIS,Employees_Aux,Middle and Other Managers,<3,<3,12,<3,4.3,,
-BCPS,DIS,Employees_Aux,Professionals,12,343,355,3.4,5.4,19,7
-BCPS,DIS,Employees_Aux,"Semi-Professionals, Technicians",S,S,224,S,4.5,10,3
-BCPS,DIS,Employees_Aux,Supervisors,<3,<3,9,<3,13.9,,
-BCPS,DIS,Employees_Aux,SubTotal_Mngt,19,585,604,3.1,5.1,31,12
-BCPS,DIS,Employees_Aux,Administrative & Senior Clerical,3,49,52,5.8,3.8,,
-BCPS,DIS,Employees_Aux,Crafts and Trades,,,0,,,,
-BCPS,DIS,Employees_Aux,Clerical Personnel,9,456,465,1.9,5.1,24,15
-BCPS,DIS,Employees_Aux,Intermediate Sales & Service,<3,<3,56,<3,5.7,,
-BCPS,DIS,Employees_Aux,Other Sales & Service Personnel,<3,<3,5,<3,7.3,,
-BCPS,DIS,Employees_Aux,Manual Workers,<3,<3,35,<3,5.7,,
-BCPS,DIS,Employees_Aux,Occupations Not Stated,<3,<3,45,<3,5.8,,
-BCPS,DIS,Employees_Aux,SubTotal_NonMngt,15,643,658,2.3,5.1,34,19
-BCPS,DIS,Employees_Aux,Total,34,1228,1262,2.7,5.1,65,31
-BCPS,DIS,Employees_Aux,Vancouver CMA,10,352,362,2.8,5.1,19,9
-BCPS,DIS,Employees_Aux,Victoria CMA,15,356,371,4,5.2,19,4
-BCPS,DIS,Employees_Aux,Other B.C. and Not Specified,9,520,529,1.7,5.1,27,18
-BCPS,DIS,Employees_All,Senior Managers,S,S,1009,S,4.3,43,22
-BCPS,DIS,Employees_All,Middle and Other Managers,S,S,2015,S,4.3,87,46
-BCPS,DIS,Employees_All,Professionals,404,10720,11124,3.6,5.4,596,192
-BCPS,DIS,Employees_All,"Semi-Professionals, Technicians",S,S,2153,S,4.5,,
-BCPS,DIS,Employees_All,Supervisors,S,S,658,S,13.9,91,61
-BCPS,DIS,Employees_All,SubTotal_Mngt,642,16317,16959,3.8,5.4,914,272
-BCPS,DIS,Employees_All,Administrative & Senior Clerical,72,1598,1670,4.3,3.8,,
-BCPS,DIS,Employees_All,Crafts and Trades,<3,<3,9,<3,7.6,,
-BCPS,DIS,Employees_All,Clerical Personnel,188,3873,4061,4.6,5.1,,
-BCPS,DIS,Employees_All,Intermediate Sales & Service,S,S,2208,S,5.7,126,50
-BCPS,DIS,Employees_All,Other Sales & Service Personnel,<3,<3,12,<3,7.3,,
-BCPS,DIS,Employees_All,Manual Workers,<3,<3,45,<3,6.1,,
-BCPS,DIS,Employees_All,Occupations Not Stated,<3,<3,45,<3,5.8,,
-BCPS,DIS,Employees_All,SubTotal_NonMngt,338,7712,8050,4.2,5,403,65
-BCPS,DIS,Employees_All,Total,980,24029,25009,3.9,5.3,1317,337
-BCPS,DIS,Employees_All,Vancouver CMA,266,6378,6644,4,5.3,352,86
-BCPS,DIS,Employees_All,Victoria CMA,377,9281,9658,3.9,5.2,499,122
-BCPS,DIS,Employees_All,Other B.C. and Not Specified,337,8370,8707,3.9,5.4,466,129
-BCPS,WOM,Employees_Reg,Senior Managers,21,984,1005,2.1,4.3,43,22
-BCPS,WOM,Employees_Reg,Middle and Other Managers,41,1962,2003,2,4.3,86,45
-BCPS,WOM,Employees_Reg,Professionals,392,10377,10769,3.6,5.4,577,185
-BCPS,WOM,Employees_Reg,"Semi-Professionals, Technicians",139,1790,1929,7.2,4.5,,
-BCPS,WOM,Employees_Reg,Supervisors,30,619,649,4.6,13.9,90,60
-BCPS,WOM,Employees_Reg,SubTotal_Mngt,623,15732,16355,3.8,5.4,883,260
-BCPS,WOM,Employees_Reg,Administrative & Senior Clerical,S,S,1618,S,3.8,,
-BCPS,WOM,Employees_Reg,Crafts and Trades,<3,<3,9,<3,7.6,,
-BCPS,WOM,Employees_Reg,Clerical Personnel,179,3417,3596,5,5.1,,
-BCPS,WOM,Employees_Reg,Intermediate Sales & Service,74,2078,2152,3.4,5.7,123,49
-BCPS,WOM,Employees_Reg,Other Sales & Service Personnel,<3,<3,7,<3,7.3,,
-BCPS,WOM,Employees_Reg,Manual Workers,<3,<3,10,<3,7.5,,
-BCPS,WOM,Employees_Reg,Occupations Not Stated,,,0,,,,
-BCPS,WOM,Employees_Reg,SubTotal_NonMngt,323,7069,7392,4.4,5,369,46
-BCPS,WOM,Employees_Reg,Total,946,22801,23747,4,5.3,1253,307
-BCPS,WOM,Employees_Reg,Vancouver CMA,256,6026,6282,4.1,5.3,334,78
-BCPS,WOM,Employees_Reg,Victoria CMA,362,8925,9287,3.9,5.2,480,118
-BCPS,WOM,Employees_Reg,Other B.C. and Not Specified,328,7850,8178,4,5.4,439,111
-BCPS,WOM,Employees_Aux,Senior Managers,<3,<3,4,<3,4.3,,
-BCPS,WOM,Employees_Aux,Middle and Other Managers,<3,<3,12,<3,4.3,,
-BCPS,WOM,Employees_Aux,Professionals,12,343,355,3.4,5.4,19,7
-BCPS,WOM,Employees_Aux,"Semi-Professionals, Technicians",S,S,224,S,4.5,10,3
-BCPS,WOM,Employees_Aux,Supervisors,<3,<3,9,<3,13.9,,
-BCPS,WOM,Employees_Aux,SubTotal_Mngt,19,585,604,3.1,5.1,31,12
-BCPS,WOM,Employees_Aux,Administrative & Senior Clerical,3,49,52,5.8,3.8,,
-BCPS,WOM,Employees_Aux,Crafts and Trades,,,0,,,,
-BCPS,WOM,Employees_Aux,Clerical Personnel,9,456,465,1.9,5.1,24,15
-BCPS,WOM,Employees_Aux,Intermediate Sales & Service,<3,<3,56,<3,5.7,,
-BCPS,WOM,Employees_Aux,Other Sales & Service Personnel,<3,<3,5,<3,7.3,,
-BCPS,WOM,Employees_Aux,Manual Workers,<3,<3,35,<3,5.7,,
-BCPS,WOM,Employees_Aux,Occupations Not Stated,<3,<3,45,<3,5.8,,
-BCPS,WOM,Employees_Aux,SubTotal_NonMngt,15,643,658,2.3,5.1,34,19
-BCPS,WOM,Employees_Aux,Total,34,1228,1262,2.7,5.1,65,31
-BCPS,WOM,Employees_Aux,Vancouver CMA,10,352,362,2.8,5.1,19,9
-BCPS,WOM,Employees_Aux,Victoria CMA,15,356,371,4,5.2,19,4
-BCPS,WOM,Employees_Aux,Other B.C. and Not Specified,9,520,529,1.7,5.1,27,18
-BCPS,WOM,Employees_All,Senior Managers,S,S,1009,S,4.3,43,22
-BCPS,WOM,Employees_All,Middle and Other Managers,S,S,2015,S,4.3,87,46
-BCPS,WOM,Employees_All,Professionals,404,10720,11124,3.6,5.4,596,192
-BCPS,WOM,Employees_All,"Semi-Professionals, Technicians",S,S,2153,S,4.5,,
-BCPS,WOM,Employees_All,Supervisors,S,S,658,S,13.9,91,61
-BCPS,WOM,Employees_All,SubTotal_Mngt,642,16317,16959,3.8,5.4,914,272
-BCPS,WOM,Employees_All,Administrative & Senior Clerical,72,1598,1670,4.3,3.8,,
-BCPS,WOM,Employees_All,Crafts and Trades,<3,<3,9,<3,7.6,,
-BCPS,WOM,Employees_All,Clerical Personnel,188,3873,4061,4.6,5.1,,
-BCPS,WOM,Employees_All,Intermediate Sales & Service,S,S,2208,S,5.7,126,50
-BCPS,WOM,Employees_All,Other Sales & Service Personnel,<3,<3,12,<3,7.3,,
-BCPS,WOM,Employees_All,Manual Workers,<3,<3,45,<3,6.1,,
-BCPS,WOM,Employees_All,Occupations Not Stated,<3,<3,45,<3,5.8,,
-BCPS,WOM,Employees_All,SubTotal_NonMngt,338,7712,8050,4.2,5,403,65
-BCPS,WOM,Employees_All,Total,980,24029,25009,3.9,5.3,1317,337
-BCPS,WOM,Employees_All,Vancouver CMA,266,6378,6644,4,5.3,352,86
-BCPS,WOM,Employees_All,Victoria CMA,377,9281,9658,3.9,5.2,499,122
-BCPS,WOM,Employees_All,Other B.C. and Not Specified,337,8370,8707,3.9,5.4,466,129
+BCPS_Ministry_Group,DesignatedMinority_Group,Employee_Type,Variable_Type,Occupation_Region_Group,DesGrp_Count_ORG,NonDesGrp_Count_ORG,Total_Count_ORG,DesGrp_Percent_ORG,DesGrp_Percent_AvailableWorkforce,DesGrp_Count_Expected,DesGrp_Count_Shortfall
+BCPS,VM,Employees_Reg,Occupation,Senior Managers,82,923,1005,8.2,14,140,58
+BCPS,VM,Employees_Reg,Occupation,Middle and Other Managers,217,1786,2003,10.8,19.5,390,173
+BCPS,VM,Employees_Reg,Occupation,Professionals,1432,9337,10769,13.3,20.4,2202,770
+BCPS,VM,Employees_Reg,Occupation,"Semi-Professionals, Technicians",293,1636,1929,15.2,18.4,356,63
+BCPS,VM,Employees_Reg,Occupation,Supervisors,83,566,649,12.8,24.8,161,78
+BCPS,VM,Employees_Reg,Occupation,SubTotal_Mngt,2107,14248,16355,12.9,19.9,3250,1143
+BCPS,VM,Employees_Reg,Occupation,Administrative & Senior Clerical,250,1368,1618,15.5,19.6,317,67
+BCPS,VM,Employees_Reg,Occupation,Crafts and Trades,<3,<3,9,<3,19.1,,
+BCPS,VM,Employees_Reg,Occupation,Clerical Personnel,542,3054,3596,15.1,27.1,975,433
+BCPS,VM,Employees_Reg,Occupation,Intermediate Sales & Service,426,1726,2152,19.8,17.1,,
+BCPS,VM,Employees_Reg,Occupation,Other Sales & Service Personnel,<3,<3,7,<3,35.4,,
+BCPS,VM,Employees_Reg,Occupation,Manual Workers,<3,<3,10,<3,20,,
+BCPS,VM,Employees_Reg,Occupation,Occupations Not Stated,,,0,,,,
+BCPS,VM,Employees_Reg,Occupation,SubTotal_NonMngt,1222,6170,7392,16.5,22.5,1667,445
+BCPS,VM,Employees_Reg,Total,Total,3329,20418,23747,14,20.7,4916,1587
+BCPS,VM,Employees_Reg,Region,Vancouver CMA,1713,4569,6282,27.3,20.5,,
+BCPS,VM,Employees_Reg,Region,Victoria CMA,1094,8193,9287,11.8,24.1,2239,1145
+BCPS,VM,Employees_Reg,Region,Other B.C. and Not Specified,522,7656,8178,6.4,17,1391,869
+BCPS,VM,Employees_Aux,Occupation,Senior Managers,<3,<3,4,<3,15.8,,
+BCPS,VM,Employees_Aux,Occupation,Middle and Other Managers,<3,<3,12,<3,20.4,,
+BCPS,VM,Employees_Aux,Occupation,Professionals,35,320,355,9.9,18.3,65,30
+BCPS,VM,Employees_Aux,Occupation,"Semi-Professionals, Technicians",S,S,224,S,16.5,37,21
+BCPS,VM,Employees_Aux,Occupation,Supervisors,<3,<3,9,<3,24.8,,
+BCPS,VM,Employees_Aux,Occupation,SubTotal_Management,53,551,604,8.8,17.7,107,54
+BCPS,VM,Employees_Aux,Occupation,Administrative & Senior Clerical,13,39,52,25,19.7,,
+BCPS,VM,Employees_Aux,Occupation,Crafts and Trades,,,0,,,,
+BCPS,VM,Employees_Aux,Occupation,Clerical Personnel,54,411,465,11.6,27.1,126,72
+BCPS,VM,Employees_Aux,Occupation,Intermediate Sales & Service,12,44,56,21.4,20.7,,
+BCPS,VM,Employees_Aux,Occupation,Other Sales & Service Personnel,<3,<3,5,<3,36.7,,
+BCPS,VM,Employees_Aux,Occupation,Manual Workers,<3,<3,35,<3,11,,x
+BCPS,VM,Employees_Aux,Occupation,Occupations Not Stated,S,S,45,S,25.8,,
+BCPS,VM,Employees_Aux,Occupation,SubTotal_NonMngt,89,569,658,13.5,25.1,165,76
+BCPS,VM,Employees_Aux,Total,Total,142,1120,1262,11.3,21.6,272,130
+BCPS,VM,Employees_Aux,Region,Vancouver CMA,75,287,362,20.7,22.1,,
+BCPS,VM,Employees_Aux,Region,Victoria CMA,41,330,371,11.1,24.2,90,49
+BCPS,VM,Employees_Aux,Region,Other B.C. and Not Specified,26,503,529,4.9,19.4,102,76
+BCPS,VM,Employees_All,Occupation,Senior Managers,S,S,1009,S,14,141,59
+BCPS,VM,Employees_All,Occupation,Middle and Other Managers,S,S,2015,S,19.5,393,175
+BCPS,VM,Employees_All,Occupation,Professionals,1467,9657,11124,13.2,20.4,2267,800
+BCPS,VM,Employees_All,Occupation,"Semi-Professionals, Technicians",S,S,2153,S,18.2,393,84
+BCPS,VM,Employees_All,Occupation,Supervisors,S,S,658,S,24.8,163,79
+BCPS,VM,Employees_All,Occupation,SubTotal_Management,2160,14799,16959,12.7,19.8,3357,1197
+BCPS,VM,Employees_All,Occupation,Administrative & Senior Clerical,263,1407,1670,15.7,19.6,328,65
+BCPS,VM,Employees_All,Occupation,Crafts and Trades,<3,<3,9,<3,19.1,,
+BCPS,VM,Employees_All,Occupation,Clerical Personnel,596,3465,4061,14.7,27.1,1102,506
+BCPS,VM,Employees_All,Occupation,Intermediate Sales & Service,438,1770,2208,19.8,17.2,,
+BCPS,VM,Employees_All,Occupation,Other Sales & Service Personnel,<3,<3,12,<3,36,,x
+BCPS,VM,Employees_All,Occupation,Manual Workers,<3,<3,45,<3,13,,x
+BCPS,VM,Employees_All,Occupation,Occupations Not Stated,S,S,45,S,25.8,,
+BCPS,VM,Employees_All,Occupation,SubTotal_NonMngt,1311,6739,8050,16.3,22.8,1832,521
+BCPS,VM,Employees_All,Total,Total,3471,21538,25009,13.9,20.7,5189,1718
+BCPS,VM,Employees_All,Region,Vancouver CMA,1788,4856,6644,26.9,20.6,,
+BCPS,VM,Employees_All,Region,Victoria CMA,1135,8523,9658,11.8,24.1,2329,1194
+BCPS,VM,Employees_All,Region,Other B.C. and Not Specified,548,8159,8707,6.3,17.2,1493,945
+BCPS,ABO,Employees_Reg,Occupation,Senior Managers,21,984,1005,2.1,5.3,53,32
+BCPS,ABO,Employees_Reg,Occupation,Middle and Other Managers,43,1960,2003,2.1,4.4,88,45
+BCPS,ABO,Employees_Reg,Occupation,Professionals,325,10444,10769,3,4.4,474,149
+BCPS,ABO,Employees_Reg,Occupation,"Semi-Professionals, Technicians",76,1853,1929,3.9,9.7,187,111
+BCPS,ABO,Employees_Reg,Occupation,Supervisors,22,627,649,3.4,2.3,,
+BCPS,ABO,Employees_Reg,Occupation,SubTotal_Mngt,487,15868,16355,3,5,817,330
+BCPS,ABO,Employees_Reg,Occupation,Administrative & Senior Clerical,S,S,1618,S,4.3,70,21
+BCPS,ABO,Employees_Reg,Occupation,Crafts and Trades,<3,<3,9,<3,3.4,,
+BCPS,ABO,Employees_Reg,Occupation,Clerical Personnel,143,3453,3596,4,3.5,,
+BCPS,ABO,Employees_Reg,Occupation,Intermediate Sales & Service,68,2084,2152,3.2,5.9,128,60
+BCPS,ABO,Employees_Reg,Occupation,Other Sales & Service Personnel,<3,<3,7,<3,6.5,,
+BCPS,ABO,Employees_Reg,Occupation,Manual Workers,<3,<3,10,<3,6.1,,
+BCPS,ABO,Employees_Reg,Occupation,Occupations Not Stated,,,0,,,,
+BCPS,ABO,Employees_Reg,Occupation,SubTotal_NonMngt,260,7132,7392,3.5,4.4,326,66
+BCPS,ABO,Employees_Reg,Total,Total,747,23000,23747,3.1,4.8,1143,396
+BCPS,ABO,Employees_Reg,Region,Vancouver CMA,132,6150,6282,2.1,5.5,348,216
+BCPS,ABO,Employees_Reg,Region,Victoria CMA,229,9058,9287,2.5,3.8,352,123
+BCPS,ABO,Employees_Reg,Region,Other B.C. and Not Specified,386,7792,8178,4.7,5.4,443,57
+BCPS,ABO,Employees_Aux,Occupation,Senior Managers,<3,<3,4,<3,4.8,,
+BCPS,ABO,Employees_Aux,Occupation,Middle and Other Managers,<3,<3,12,<3,3.2,,
+BCPS,ABO,Employees_Aux,Occupation,Professionals,11,344,355,3.1,5.6,20,9
+BCPS,ABO,Employees_Aux,Occupation,"Semi-Professionals, Technicians",S,S,224,S,8.9,20,15
+BCPS,ABO,Employees_Aux,Occupation,Supervisors,<3,<3,9,<3,2.3,,
+BCPS,ABO,Employees_Aux,Occupation,SubTotal_Mngt,16,588,604,2.6,6.7,41,25
+BCPS,ABO,Employees_Aux,Occupation,Administrative & Senior Clerical,<3,<3,52,<3,4.4,,
+BCPS,ABO,Employees_Aux,Occupation,Crafts and Trades,,,0,,,,
+BCPS,ABO,Employees_Aux,Occupation,Clerical Personnel,21,444,465,4.5,3.7,,
+BCPS,ABO,Employees_Aux,Occupation,Intermediate Sales & Service,<3,<3,56,<3,6.3,,x
+BCPS,ABO,Employees_Aux,Occupation,Other Sales & Service Personnel,<3,<3,5,<3,6.2,,
+BCPS,ABO,Employees_Aux,Occupation,Manual Workers,<3,<3,35,<3,13.7,,x
+BCPS,ABO,Employees_Aux,Occupation,Occupations Not Stated,<3,<3,45,<3,4.6,,
+BCPS,ABO,Employees_Aux,Occupation,SubTotal_NonMngt,27,631,658,4.1,4.6,,
+BCPS,ABO,Employees_Aux,Total,Total,43,1219,1262,3.4,5.6,71,28
+BCPS,ABO,Employees_Aux,Region,Vancouver CMA,10,352,362,2.8,6.4,23,13
+BCPS,ABO,Employees_Aux,Region,Victoria CMA,12,359,371,3.2,4.2,16,4
+BCPS,ABO,Employees_Aux,Region,Other B.C. and Not Specified,21,508,529,4,6.1,32,11
+BCPS,ABO,Employees_All,Occupation,Senior Managers,S,S,1009,S,5.3,54,33
+BCPS,ABO,Employees_All,Occupation,Middle and Other Managers,S,S,2015,S,4.4,89,46
+BCPS,ABO,Employees_All,Occupation,Professionals,336,10788,11124,3,4.4,494,158
+BCPS,ABO,Employees_All,Occupation,"Semi-Professionals, Technicians",S,S,2153,S,9.6,207,126
+BCPS,ABO,Employees_All,Occupation,Supervisors,S,S,658,S,2.3,,
+BCPS,ABO,Employees_All,Occupation,SubTotal_Mngt,503,16456,16959,3,5.1,858,355
+BCPS,ABO,Employees_All,Occupation,Administrative & Senior Clerical,S,S,1670,S,4.3,72,21
+BCPS,ABO,Employees_All,Occupation,Crafts and Trades,<3,<3,9,<3,3.4,,
+BCPS,ABO,Employees_All,Occupation,Clerical Personnel,164,3897,4061,4,3.5,,
+BCPS,ABO,Employees_All,Occupation,Intermediate Sales & Service,S,S,2208,S,5.9,131,62
+BCPS,ABO,Employees_All,Occupation,Other Sales & Service Personnel,<3,<3,12,<3,6.4,,
+BCPS,ABO,Employees_All,Occupation,Manual Workers,<3,<3,45,<3,12,,x
+BCPS,ABO,Employees_All,Occupation,Occupations Not Stated,<3,<3,45,<3,4.6,,
+BCPS,ABO,Employees_All,Occupation,SubTotal_NonMngt,287,7763,8050,3.6,4.4,356,69
+BCPS,ABO,Employees_All,Total,Total,790,24219,25009,3.2,4.9,1214,424
+BCPS,ABO,Employees_All,Region,Vancouver CMA,142,6502,6644,2.1,5.6,371,229
+BCPS,ABO,Employees_All,Region,Victoria CMA,241,9417,9658,2.5,3.8,368,127
+BCPS,ABO,Employees_All,Region,Other B.C. and Not Specified,407,8300,8707,4.7,5.5,475,68
+BCPS,DIS,Employees_Reg,Occupation,Senior Managers,21,984,1005,2.1,4.3,43,22
+BCPS,DIS,Employees_Reg,Occupation,Middle and Other Managers,41,1962,2003,2,4.3,86,45
+BCPS,DIS,Employees_Reg,Occupation,Professionals,392,10377,10769,3.6,5.4,577,185
+BCPS,DIS,Employees_Reg,Occupation,"Semi-Professionals, Technicians",139,1790,1929,7.2,4.5,,
+BCPS,DIS,Employees_Reg,Occupation,Supervisors,30,619,649,4.6,13.9,90,60
+BCPS,DIS,Employees_Reg,Occupation,SubTotal_Mngt,623,15732,16355,3.8,5.4,883,260
+BCPS,DIS,Employees_Reg,Occupation,Administrative & Senior Clerical,S,S,1618,S,3.8,,
+BCPS,DIS,Employees_Reg,Occupation,Crafts and Trades,<3,<3,9,<3,7.6,,
+BCPS,DIS,Employees_Reg,Occupation,Clerical Personnel,179,3417,3596,5,5.1,,
+BCPS,DIS,Employees_Reg,Occupation,Intermediate Sales & Service,74,2078,2152,3.4,5.7,123,49
+BCPS,DIS,Employees_Reg,Occupation,Other Sales & Service Personnel,<3,<3,7,<3,7.3,,
+BCPS,DIS,Employees_Reg,Occupation,Manual Workers,<3,<3,10,<3,7.5,,
+BCPS,DIS,Employees_Reg,Occupation,Occupations Not Stated,,,0,,,,
+BCPS,DIS,Employees_Reg,Occupation,SubTotal_NonMngt,323,7069,7392,4.4,5,369,46
+BCPS,DIS,Employees_Reg,Total,Total,946,22801,23747,4,5.3,1253,307
+BCPS,DIS,Employees_Reg,Region,Vancouver CMA,256,6026,6282,4.1,5.3,334,78
+BCPS,DIS,Employees_Reg,Region,Victoria CMA,362,8925,9287,3.9,5.2,480,118
+BCPS,DIS,Employees_Reg,Region,Other B.C. and Not Specified,328,7850,8178,4,5.4,439,111
+BCPS,DIS,Employees_Aux,Occupation,Senior Managers,<3,<3,4,<3,4.3,,
+BCPS,DIS,Employees_Aux,Occupation,Middle and Other Managers,<3,<3,12,<3,4.3,,
+BCPS,DIS,Employees_Aux,Occupation,Professionals,12,343,355,3.4,5.4,19,7
+BCPS,DIS,Employees_Aux,Occupation,"Semi-Professionals, Technicians",S,S,224,S,4.5,10,3
+BCPS,DIS,Employees_Aux,Occupation,Supervisors,<3,<3,9,<3,13.9,,
+BCPS,DIS,Employees_Aux,Occupation,SubTotal_Mngt,19,585,604,3.1,5.1,31,12
+BCPS,DIS,Employees_Aux,Occupation,Administrative & Senior Clerical,3,49,52,5.8,3.8,,
+BCPS,DIS,Employees_Aux,Occupation,Crafts and Trades,,,0,,,,
+BCPS,DIS,Employees_Aux,Occupation,Clerical Personnel,9,456,465,1.9,5.1,24,15
+BCPS,DIS,Employees_Aux,Occupation,Intermediate Sales & Service,<3,<3,56,<3,5.7,,
+BCPS,DIS,Employees_Aux,Occupation,Other Sales & Service Personnel,<3,<3,5,<3,7.3,,
+BCPS,DIS,Employees_Aux,Occupation,Manual Workers,<3,<3,35,<3,5.7,,
+BCPS,DIS,Employees_Aux,Occupation,Occupations Not Stated,<3,<3,45,<3,5.8,,
+BCPS,DIS,Employees_Aux,Occupation,SubTotal_NonMngt,15,643,658,2.3,5.1,34,19
+BCPS,DIS,Employees_Aux,Total,Total,34,1228,1262,2.7,5.1,65,31
+BCPS,DIS,Employees_Aux,Region,Vancouver CMA,10,352,362,2.8,5.1,19,9
+BCPS,DIS,Employees_Aux,Region,Victoria CMA,15,356,371,4,5.2,19,4
+BCPS,DIS,Employees_Aux,Region,Other B.C. and Not Specified,9,520,529,1.7,5.1,27,18
+BCPS,DIS,Employees_All,Occupation,Senior Managers,S,S,1009,S,4.3,43,22
+BCPS,DIS,Employees_All,Occupation,Middle and Other Managers,S,S,2015,S,4.3,87,46
+BCPS,DIS,Employees_All,Occupation,Professionals,404,10720,11124,3.6,5.4,596,192
+BCPS,DIS,Employees_All,Occupation,"Semi-Professionals, Technicians",S,S,2153,S,4.5,,
+BCPS,DIS,Employees_All,Occupation,Supervisors,S,S,658,S,13.9,91,61
+BCPS,DIS,Employees_All,Occupation,SubTotal_Mngt,642,16317,16959,3.8,5.4,914,272
+BCPS,DIS,Employees_All,Occupation,Administrative & Senior Clerical,72,1598,1670,4.3,3.8,,
+BCPS,DIS,Employees_All,Occupation,Crafts and Trades,<3,<3,9,<3,7.6,,
+BCPS,DIS,Employees_All,Occupation,Clerical Personnel,188,3873,4061,4.6,5.1,,
+BCPS,DIS,Employees_All,Occupation,Intermediate Sales & Service,S,S,2208,S,5.7,126,50
+BCPS,DIS,Employees_All,Occupation,Other Sales & Service Personnel,<3,<3,12,<3,7.3,,
+BCPS,DIS,Employees_All,Occupation,Manual Workers,<3,<3,45,<3,6.1,,
+BCPS,DIS,Employees_All,Occupation,Occupations Not Stated,<3,<3,45,<3,5.8,,
+BCPS,DIS,Employees_All,Occupation,SubTotal_NonMngt,338,7712,8050,4.2,5,403,65
+BCPS,DIS,Employees_All,Total,Total,980,24029,25009,3.9,5.3,1317,337
+BCPS,DIS,Employees_All,Region,Vancouver CMA,266,6378,6644,4,5.3,352,86
+BCPS,DIS,Employees_All,Region,Victoria CMA,377,9281,9658,3.9,5.2,499,122
+BCPS,DIS,Employees_All,Region,Other B.C. and Not Specified,337,8370,8707,3.9,5.4,466,129
+BCPS,WOM,Employees_Reg,Occupation,Senior Managers,21,984,1005,2.1,4.3,43,22
+BCPS,WOM,Employees_Reg,Occupation,Middle and Other Managers,41,1962,2003,2,4.3,86,45
+BCPS,WOM,Employees_Reg,Occupation,Professionals,392,10377,10769,3.6,5.4,577,185
+BCPS,WOM,Employees_Reg,Occupation,"Semi-Professionals, Technicians",139,1790,1929,7.2,4.5,,
+BCPS,WOM,Employees_Reg,Occupation,Supervisors,30,619,649,4.6,13.9,90,60
+BCPS,WOM,Employees_Reg,Occupation,SubTotal_Mngt,623,15732,16355,3.8,5.4,883,260
+BCPS,WOM,Employees_Reg,Occupation,Administrative & Senior Clerical,S,S,1618,S,3.8,,
+BCPS,WOM,Employees_Reg,Occupation,Crafts and Trades,<3,<3,9,<3,7.6,,
+BCPS,WOM,Employees_Reg,Occupation,Clerical Personnel,179,3417,3596,5,5.1,,
+BCPS,WOM,Employees_Reg,Occupation,Intermediate Sales & Service,74,2078,2152,3.4,5.7,123,49
+BCPS,WOM,Employees_Reg,Occupation,Other Sales & Service Personnel,<3,<3,7,<3,7.3,,
+BCPS,WOM,Employees_Reg,Occupation,Manual Workers,<3,<3,10,<3,7.5,,
+BCPS,WOM,Employees_Reg,Occupation,Occupations Not Stated,,,0,,,,
+BCPS,WOM,Employees_Reg,Occupation,SubTotal_NonMngt,323,7069,7392,4.4,5,369,46
+BCPS,WOM,Employees_Reg,Total,Total,946,22801,23747,4,5.3,1253,307
+BCPS,WOM,Employees_Reg,Region,Vancouver CMA,256,6026,6282,4.1,5.3,334,78
+BCPS,WOM,Employees_Reg,Region,Victoria CMA,362,8925,9287,3.9,5.2,480,118
+BCPS,WOM,Employees_Reg,Region,Other B.C. and Not Specified,328,7850,8178,4,5.4,439,111
+BCPS,WOM,Employees_Aux,Occupation,Senior Managers,<3,<3,4,<3,4.3,,
+BCPS,WOM,Employees_Aux,Occupation,Middle and Other Managers,<3,<3,12,<3,4.3,,
+BCPS,WOM,Employees_Aux,Occupation,Professionals,12,343,355,3.4,5.4,19,7
+BCPS,WOM,Employees_Aux,Occupation,"Semi-Professionals, Technicians",S,S,224,S,4.5,10,3
+BCPS,WOM,Employees_Aux,Occupation,Supervisors,<3,<3,9,<3,13.9,,
+BCPS,WOM,Employees_Aux,Occupation,SubTotal_Mngt,19,585,604,3.1,5.1,31,12
+BCPS,WOM,Employees_Aux,Occupation,Administrative & Senior Clerical,3,49,52,5.8,3.8,,
+BCPS,WOM,Employees_Aux,Occupation,Crafts and Trades,,,0,,,,
+BCPS,WOM,Employees_Aux,Occupation,Clerical Personnel,9,456,465,1.9,5.1,24,15
+BCPS,WOM,Employees_Aux,Occupation,Intermediate Sales & Service,<3,<3,56,<3,5.7,,
+BCPS,WOM,Employees_Aux,Occupation,Other Sales & Service Personnel,<3,<3,5,<3,7.3,,
+BCPS,WOM,Employees_Aux,Occupation,Manual Workers,<3,<3,35,<3,5.7,,
+BCPS,WOM,Employees_Aux,Occupation,Occupations Not Stated,<3,<3,45,<3,5.8,,
+BCPS,WOM,Employees_Aux,Occupation,SubTotal_NonMngt,15,643,658,2.3,5.1,34,19
+BCPS,WOM,Employees_Aux,Total,Total,34,1228,1262,2.7,5.1,65,31
+BCPS,WOM,Employees_Aux,Region,Vancouver CMA,10,352,362,2.8,5.1,19,9
+BCPS,WOM,Employees_Aux,Region,Victoria CMA,15,356,371,4,5.2,19,4
+BCPS,WOM,Employees_Aux,Region,Other B.C. and Not Specified,9,520,529,1.7,5.1,27,18
+BCPS,WOM,Employees_All,Occupation,Senior Managers,S,S,1009,S,4.3,43,22
+BCPS,WOM,Employees_All,Occupation,Middle and Other Managers,S,S,2015,S,4.3,87,46
+BCPS,WOM,Employees_All,Occupation,Professionals,404,10720,11124,3.6,5.4,596,192
+BCPS,WOM,Employees_All,Occupation,"Semi-Professionals, Technicians",S,S,2153,S,4.5,,
+BCPS,WOM,Employees_All,Occupation,Supervisors,S,S,658,S,13.9,91,61
+BCPS,WOM,Employees_All,Occupation,SubTotal_Mngt,642,16317,16959,3.8,5.4,914,272
+BCPS,WOM,Employees_All,Occupation,Administrative & Senior Clerical,72,1598,1670,4.3,3.8,,
+BCPS,WOM,Employees_All,Occupation,Crafts and Trades,<3,<3,9,<3,7.6,,
+BCPS,WOM,Employees_All,Occupation,Clerical Personnel,188,3873,4061,4.6,5.1,,
+BCPS,WOM,Employees_All,Occupation,Intermediate Sales & Service,S,S,2208,S,5.7,126,50
+BCPS,WOM,Employees_All,Occupation,Other Sales & Service Personnel,<3,<3,12,<3,7.3,,
+BCPS,WOM,Employees_All,Occupation,Manual Workers,<3,<3,45,<3,6.1,,
+BCPS,WOM,Employees_All,Occupation,Occupations Not Stated,<3,<3,45,<3,5.8,,
+BCPS,WOM,Employees_All,Occupation,SubTotal_NonMngt,338,7712,8050,4.2,5,403,65
+BCPS,WOM,Employees_All,Total,Total,980,24029,25009,3.9,5.3,1317,337
+BCPS,WOM,Employees_All,Region,Vancouver CMA,266,6378,6644,4,5.3,352,86
+BCPS,WOM,Employees_All,Region,Victoria CMA,377,9281,9658,3.9,5.2,499,122
+BCPS,WOM,Employees_All,Region,Other B.C. and Not Specified,337,8370,8707,3.9,5.4,466,129

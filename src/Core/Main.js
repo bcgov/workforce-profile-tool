@@ -6,6 +6,10 @@ import Occupation from '../Views/Occupation'
 import Region from '../Views/Region'
 
 class Main extends Component {
+  getOccupationData (data) {
+    return data ? data.filter(r => r['Variable_Type'] !== 'Region') : data
+  }
+
   render () {
     const activeOuterTab = this.props.match.params.highLevelNav || 'indicators-of-progress'
     const activeInnerTab = this.props.match.params.lowLevelNav || 'by-occupation'
@@ -18,7 +22,7 @@ class Main extends Component {
               <div className='Secondary'>
                 <TabInterface activeTabKey={activeInnerTab} baseURL={`/${activeOuterTab}`} search={this.props.location.search}>
                   <Tab key={'by-occupation'} name='By Occupation'>
-                    <Occupation data={this.props.data.occupationRegionData} />
+                    <Occupation data={this.getOccupationData(this.props.data.occupationRegionData)} />
                   </Tab>
                   <Tab key={'by-region'} name='By Region'>
                     <Region />
