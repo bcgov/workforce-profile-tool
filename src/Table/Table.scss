@@ -1,3 +1,5 @@
+@import '../bootstrap/bootstrap.scss';
+
 .ReactorTable {
     @extend .table, .table-striped;
 
@@ -6,6 +8,10 @@
         &:after {
             cursor: pointer;
         }
+    }
+
+    .hidden {
+        display: none;
     }
 
     .sortable,

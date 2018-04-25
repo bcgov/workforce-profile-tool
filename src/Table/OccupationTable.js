@@ -3,6 +3,8 @@ import Reactor from '@plot-and-scatter/reactor-table'
 
 import { formatNumber } from '../Services/formatter'
 
+import './Table.css'
+
 class OccupationTable extends Component {
   render () {
     console.log('this.props.data', this.props.data)
@@ -13,6 +15,8 @@ class OccupationTable extends Component {
       {
         id: 'id',
         name: 'ID',
+        cellClass: 'hidden',
+        headerClass: 'hidden',
         accessor: d => ''.concat(Object.values(d)),
         displayAccessor: d => ''
       },
