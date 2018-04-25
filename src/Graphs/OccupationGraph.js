@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import * as PlusPlot from '@plot-and-scatter/plusplot'
 
+import { VARIABLE_MAPPING } from '../Variables/VariableList'
+
 class OccupationGraph extends Component {
   render () {
     console.log(PlusPlot.GroupedBarChart)
@@ -22,8 +24,14 @@ class OccupationGraph extends Component {
         +data.DesGrp_Count_ORG,
         +data.DesGrp_Count_Shortfall
       ]
+
+      let title = VARIABLE_MAPPING
+        .filter(v => v.key === 'DesignatedMinority_Group')[0]
+        .options
+        .filter(v => v.key === k)[0].display
+
       return {
-        category: k,
+        category: title,
         values
       }
     })
