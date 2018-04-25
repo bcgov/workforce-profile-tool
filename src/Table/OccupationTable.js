@@ -22,10 +22,14 @@ class OccupationTable extends Component {
 
     const tables = Object.keys(dataMap).sort().map(k => {
       console.log(VARIABLE_MAPPING)
-      const title = VARIABLE_MAPPING
+      let title = VARIABLE_MAPPING
         .filter(v => v.key === 'DesignatedMinority_Group')[0]
         .options
         .filter(v => v.key === k)[0].display
+      title += ' — ' + VARIABLE_MAPPING
+        .filter(v => v.key === 'Employee_Type')[0]
+        .options
+        .filter(v => v.key === this.props.data[0]['Employee_Type'])[0].display
       return (
         <div>
           <h2>{title}</h2>
