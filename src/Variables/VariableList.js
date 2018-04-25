@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import '../bootstrap/bootstrap.css'
 import './VariableList.css'
+import Variable from './Variable'
 import qs from 'query-string'
 
 export const VARIABLE_MAPPING = [
@@ -9,20 +9,19 @@ export const VARIABLE_MAPPING = [
     key: 'Employee_Type',
     display: 'Employee Type',
     options: [
-      { 'Employees_All': 'All' },
-      { 'Employees_Reg': 'Regular' },
-      { 'Employees_Aux': 'Auxiliary' }
+      { display: 'All', key: 'Employees_All', active: true },
+      { display: 'Regular', key: 'Employees_Reg', active: true },
+      { display: 'Auxiliary', key: 'Employees_Aux', active: true }
     ]
   },
   {
     key: 'DesignatedMinority_Group',
     display: 'Designated Group',
     options: [
-      { 'All': 'All' },
-      { 'WOM': 'Women' },
-      { 'VM': 'Visible Minorities' },
-      { 'ABO': 'Aboriginal Peoples' },
-      { 'DIS': 'People with Disabilities' }
+      { display: 'Aboriginal Peoples', key: 'ABO', active: true },
+      { display: 'People with Disabilities', key: 'DIS', active: true },
+      { display: 'Visible Minorities', key: 'VM', active: true },
+      { display: 'Women', key: 'WOM', active: true }
     ]
   }
 ]
@@ -43,23 +42,12 @@ class VariableList extends Component {
   }
 
   render () {
+    const variables = VARIABLE_MAPPING.map(v => <Variable key={v.key} variable={v} />)
+
     return (
       <div className='VariableList row'>
         <div className='col'>
-          <h3>Employees</h3>
-          <ul>
-            <li className='active'>All</li>
-            <li>Regular</li>
-            <li>Auxiliary</li>
-          </ul>
-          <h3>Target Groups</h3>
-          <ul>
-            <li className='active'>All</li>
-            <li>Women</li>
-            <li>Visible Minorities</li>
-            <li>Indigenous Peoples</li>
-            <li>People with Disabilities</li>
-          </ul>
+          {variables}
         </div>
       </div>
     )
