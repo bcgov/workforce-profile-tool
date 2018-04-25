@@ -15,9 +15,16 @@ class OccupationGraph extends Component {
 
     const chartData = Object.keys(dataMap).sort().map(k => {
       console.log('k', k)
+      const data = dataMap[k].filter(d => d.Variable_Type === 'Total')[0]
+      console.log('--> data', data)
+      const values = [
+        +data.DesGrp_Count_Expected,
+        +data.DesGrp_Count_ORG,
+        +data.DesGrp_Count_Shortfall
+      ]
       return {
         category: k,
-        values: [5, 4, 3]
+        values
       }
     })
 
