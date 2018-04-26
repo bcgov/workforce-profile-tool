@@ -7,10 +7,10 @@ class Group {
 }
 
 const GROUPS = {
-  'aboriginal': new Group(
-    'aboriginal',
-    'Aboriginal',
-    'aboriginal'
+  'indigenous': new Group(
+    'indigenous',
+    'Indigenous',
+    'indigenous'
   ),
   'personsWithDisabilities': new Group(
     'personsWithDisabilities',
