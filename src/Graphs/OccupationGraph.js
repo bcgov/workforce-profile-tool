@@ -7,8 +7,6 @@ import { VARIABLE_MAPPING } from '../Variables/VariableList'
 
 class OccupationGraph extends Component {
   render () {
-    console.log(PlusPlot.GroupedBarChart)
-
     if (!this.props.data) return <div>Loading...</div>
 
     const dataMap = {}
@@ -18,9 +16,7 @@ class OccupationGraph extends Component {
     })
 
     const chartData = Object.keys(dataMap).sort().map(k => {
-      console.log('k', k)
       const data = dataMap[k].filter(d => d.Variable_Type === 'Total')[0]
-      console.log('--> data', data)
       const values = [
         +data.DesGrp_Count_Expected,
         +data.DesGrp_Count_ORG,
