@@ -1,0 +1,55 @@
+import React, { Component } from 'react'
+import * as PlusPlot from '@plot-and-scatter/plusplot'
+
+import './Graphs.css'
+
+import { VARIABLE_MAPPING } from '../Variables/VariableList'
+
+class RegionGraph extends Component {
+  render () {
+    console.log(PlusPlot.GroupedBarChart)
+
+    if (!this.props.data) return <div>Loading...</div>
+
+    const dataMap = {}
+    this.props.data.forEach(d => {
+      dataMap[d.DesignatedMinority_Group] = dataMap[d.DesignatedMinority_Group] || []
+      dataMap[d.DesignatedMinority_Group].push(d)
+    })
+
+    const chartData = Object.keys(dataMap).sort().map(k => {
+      console.log('k', k)
+      const data = dataMap[k].filter(d => d.Variable_Type === 'Total')[0]
+      console.log('--> data', data)
+      const values = [
+        +data.DesGrp_Count_Expected,
+        +data.DesGrp_Count_ORG,
+        +data.DesGrp_Count_Shortfall
+      ]
+
+      let title = VARIABLE_MAPPING
+        .filter(v => v.key === 'DesignatedMinority_Group')[0]
+        .options
+        .filter(v => v.key === k)[0].display
+
+      return {
+        category: title,
+        values
+      }
+    })
+
+    return (
+      <PlusPlot.GroupedBarChart
+        data={chartData}
+        colors={['#70CCDB', '#D2E2EE', '#6c757d']}
+        options={{
+          margins: { top: 0, left: 60, bottom: 40, right: 20 },
+          axes: { xAxisLabel: '', yAxisLabel: 'Count in BCPS' },
+          font: 'Myriad Pro'
+        }}
+      />
+    )
+  }
+}
+
+export default RegionGraph
