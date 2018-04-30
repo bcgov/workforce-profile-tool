@@ -61,13 +61,16 @@ class App extends Component {
 
   async componentDidMount () {
     const occupationRegionData = await DataLoader.getOccupationRegionReport()
+    const flowReportData = await DataLoader.getFlowReport()
     // Build keys
-    occupationRegionData.forEach(r => {
-      r.key = ''.concat(Object.values(r))
-    })
-    this.setState({ occupationRegionData, originalData: { occupationRegionData } }, () => {
-      this.filterFromProps(this.props)
-    })
+    occupationRegionData.forEach(r => { r.key = ''.concat(Object.values(r)) })
+    flowReportData.forEach(r => { r.key = ''.concat(Object.values(r)) })
+    console.log('flowReportData', flowReportData)
+    this.setState({
+      occupationRegionData,
+      flowReportData,
+      originalData: { occupationRegionData, flowReportData }
+    }, () => { this.filterFromProps(this.props) })
   }
 
   componentWillReceiveProps (nextProps) {
