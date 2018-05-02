@@ -75,9 +75,18 @@ class App extends Component {
     console.log('ministryData', ministryData)
 
     this.setState({
+      iopReportData,
+      comparisonData,
+      ministryData,
       occupationRegionData,
       flowReportData,
-      originalData: { occupationRegionData, flowReportData }
+      originalData: {
+        iopReportData,
+        comparisonData,
+        ministryData,
+        occupationRegionData,
+        flowReportData
+      }
     }, () => { this.filterFromProps(this.props) })
   }
 
