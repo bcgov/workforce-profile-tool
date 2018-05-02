@@ -7,6 +7,7 @@ import Region from '../Views/Region'
 import Ministry from '../Views/Ministry'
 import Leadership from '../Views/Leadership'
 import Comparison from '../Views/Comparison'
+import Progress from '../Views/Progress'
 
 class Main extends Component {
   getOccupationData (data) {
@@ -25,7 +26,9 @@ class Main extends Component {
       <div className='Main row'>
         <div className='col'>
           <TabInterface activeTabKey={activeOuterTab} matchURL={this.props.match.url} search={this.props.location.search}>
-            <Tab key={'indicators-of-progress'} name='Indicators of Progress' />
+            <Tab key={'indicators-of-progress'} name='Indicators of Progress'>
+              <Progress data={this.props.data.iopReportData} />
+            </Tab>
             <Tab key={'comparison'} name='Comparison'>
               <Comparison data={this.props.data.comparisonData} />
             </Tab>
