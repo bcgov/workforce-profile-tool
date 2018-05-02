@@ -8,6 +8,7 @@ import Ministry from '../Views/Ministry'
 import Leadership from '../Views/Leadership'
 import Comparison from '../Views/Comparison'
 import Progress from '../Views/Progress'
+import Hiring from '../Views/Hiring'
 
 class Main extends Component {
   getOccupationData (data) {
@@ -20,14 +21,23 @@ class Main extends Component {
 
   render () {
     const activeOuterTab = this.props.match.params.highLevelNav || 'indicators-of-progress'
-    const activeInnerTab = this.props.match.params.lowLevelNav || 'by-occupation'
+    const activeInnerTab = this.props.match.params.lowLevelNav || 'representation-by-group'
 
     return (
       <div className='Main row'>
         <div className='col'>
           <TabInterface activeTabKey={activeOuterTab} matchURL={this.props.match.url} search={this.props.location.search}>
             <Tab key={'indicators-of-progress'} name='Indicators of Progress'>
-              <Progress data={this.props.data.iopReportData} />
+              <div className='Secondary'>
+                <TabInterface activeTabKey={activeInnerTab} baseURL={`/${activeOuterTab}`} search={this.props.location.search}>
+                  <Tab key={'representation-by-group'} name='By Designated Group'>
+                    <Progress data={this.props.data.iopReportData} />
+                  </Tab>
+                  <Tab key={'hiring'} name='Hiring'>
+                    <Hiring data={this.props.data.iopReportData} />
+                  </Tab>
+                </TabInterface>
+              </div>
             </Tab>
             <Tab key={'comparison'} name='Comparison'>
               <Comparison data={this.props.data.comparisonData} />
