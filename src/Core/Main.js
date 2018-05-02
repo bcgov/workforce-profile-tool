@@ -6,6 +6,7 @@ import Occupation from '../Views/Occupation'
 import Region from '../Views/Region'
 import Ministry from '../Views/Ministry'
 import Leadership from '../Views/Leadership'
+import Comparison from '../Views/Comparison'
 
 class Main extends Component {
   getOccupationData (data) {
@@ -26,7 +27,7 @@ class Main extends Component {
           <TabInterface activeTabKey={activeOuterTab} matchURL={this.props.match.url} search={this.props.location.search}>
             <Tab key={'indicators-of-progress'} name='Indicators of Progress' />
             <Tab key={'comparison'} name='Comparison'>
-              <h1>Comparison</h1>
+              <Comparison data={this.props.data.comparisonData} />
             </Tab>
             <Tab key={'leadership'} name='Leadership'>
               <Leadership data={this.props.data.comparisonData} />
