@@ -60,12 +60,14 @@ class App extends Component {
   }
 
   async componentDidMount () {
+    const iopReportData = await DataLoader.getIndicatorsOfProgressReport()
     const occupationRegionData = await DataLoader.getOccupationRegionReport()
     const flowReportData = await DataLoader.getFlowReport()
     // Build keys
+    iopReportData.forEach(r => { r.key = ''.concat(Object.values(r)) })
     occupationRegionData.forEach(r => { r.key = ''.concat(Object.values(r)) })
     flowReportData.forEach(r => { r.key = ''.concat(Object.values(r)) })
-    console.log('flowReportData', flowReportData)
+    console.log('iopReportData', iopReportData)
     this.setState({
       occupationRegionData,
       flowReportData,

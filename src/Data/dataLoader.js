@@ -15,6 +15,11 @@ class DataLoader {
     return d3.csv(url)
   }
 
+  static async getIndicatorsOfProgressReport () {
+    const url = `${DATA_PATH_BASE}WP2015_Ind_Progress.csv`
+    return DataLoader.loadCSV(url)
+  }
+
   static async getFlowReport () {
     const url = `${DATA_PATH_BASE}WP2015_Flow-1.csv`
     return DataLoader.loadCSV(url)
@@ -26,9 +31,11 @@ class DataLoader {
   }
 
   static async loadAllData () {
+    const iopReport = await DataLoader.getIndicatorsOfProgressReport()
     const orReport = await DataLoader.getOccupationRegionReport()
     const flowReport = await DataLoader.getFlowReport()
     return {
+      iopReport,
       orReport,
       flowReport
     }
