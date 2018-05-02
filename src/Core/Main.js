@@ -22,7 +22,17 @@ class Main extends Component {
       <div className='Main row'>
         <div className='col'>
           <TabInterface activeTabKey={activeOuterTab} matchURL={this.props.match.url} search={this.props.location.search}>
-            <Tab key={'indicators-of-progress'} name='Indicators of Progress'>
+            <Tab key={'indicators-of-progress'} name='Indicators of Progress' />
+            <Tab key={'comparison'} name='Comparison'>
+              <h1>Comparison</h1>
+            </Tab>
+            <Tab key={'leadership'} name='Leadership'>
+              <h1>Leadership</h1>
+            </Tab>
+            <Tab key={'ministries'} name='Ministries'>
+              <h1>Ministries</h1>
+            </Tab>
+            <Tab key={'representation'} name='Representation'>
               <div className='Secondary'>
                 <TabInterface activeTabKey={activeInnerTab} baseURL={`/${activeOuterTab}`} search={this.props.location.search}>
                   <Tab key={'by-occupation'} name='By Occupation'>
@@ -36,18 +46,6 @@ class Main extends Component {
                   </Tab>
                 </TabInterface>
               </div>
-            </Tab>
-            <Tab key={'comparison'} name='Comparison'>
-              <h1>Comparison</h1>
-            </Tab>
-            <Tab key={'leadership'} name='Leadership'>
-              <h1>Leadership</h1>
-            </Tab>
-            <Tab key={'ministries'} name='Ministries'>
-              <h1>Ministries</h1>
-            </Tab>
-            <Tab key={'representation'} name='Representation'>
-              <h1>Representation</h1>
             </Tab>
           </TabInterface>
         </div>
