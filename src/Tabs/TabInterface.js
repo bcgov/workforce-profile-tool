@@ -14,7 +14,11 @@ class TabInterface extends React.Component {
   }
 
   setActiveTab (activeTab) {
-    this.setState({ activeTabKey: activeTab })
+    this.setState({ activeTabKey: activeTab }, () => {
+      // Fire a global event for any components that need to
+      // know when they are visible (e.g. MapViz)
+      window.dispatchEvent(new window.Event('shown'))
+    })
   }
 
   componentDidMount () {
@@ -22,11 +26,7 @@ class TabInterface extends React.Component {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    // Fire a global event for any components that need to
-    // know when they are visible (e.g. MapViz)
-    window.dispatchEvent(new window.Event('shown'))
     if (prevProps !== this.props && this.props.activeTabKey !== this.state.activeTabKey) {
-      console.log('activeTabKey', this.props.activeTabKey)
       this.setActiveTab(this.props.activeTabKey)
     }
   }
