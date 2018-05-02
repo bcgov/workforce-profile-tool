@@ -1,0 +1,48 @@
+import React, { Component } from 'react'
+import * as PlusPlot from '@plot-and-scatter/plusplot'
+
+import './Graphs.css'
+
+import { VARIABLE_MAPPING } from '../Variables/VariableList'
+
+class MinistryGraph extends Component {
+  render () {
+    if (!this.props.data) return <div>Loading...</div>
+
+    const dataMap = {}
+    this.props.data.forEach(d => {
+      dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
+      dataMap[d.Des_Grp].push(d)
+    })
+
+    console.log('dataMap', dataMap)
+
+    // delete dataMap['WOM']['Des_Grp']
+
+    console.log(dataMap['WOM'])
+
+    const thisData = dataMap['WOM'][0]
+    // delete thisData['Des_Grp']
+
+    const chartData = Object.keys(thisData)
+      .filter(k => k !== 'Des_Grp' && k !== 'key')
+      .map(k => ({ category: k, count: +thisData[k], color: '#70CCDB' }))
+
+    chartData.sort((a, b) => (a.count < b.count ? 1 : (a.count > b.count ? -1 : 0)))
+
+    return (
+      <PlusPlot.BarChart
+        data={chartData}
+        xLines={[]}
+        options={{
+          height: 600,
+          margins: { top: 0, left: 250, bottom: 40, right: 20 },
+          axes: { yAxisLabel: '', xAxisLabel: '% representation' },
+          font: 'Myriad Pro'
+        }}
+      />
+    )
+  }
+}
+
+export default MinistryGraph

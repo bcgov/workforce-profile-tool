@@ -4,6 +4,7 @@ import Tab from '../Tabs/Tab'
 import './Main.css'
 import Occupation from '../Views/Occupation'
 import Region from '../Views/Region'
+import Ministry from '../Views/Ministry'
 
 class Main extends Component {
   getOccupationData (data) {
@@ -30,7 +31,7 @@ class Main extends Component {
               <h1>Leadership</h1>
             </Tab>
             <Tab key={'ministries'} name='Ministries'>
-              <h1>Ministries</h1>
+              <Ministry data={this.props.data.ministryData} />
             </Tab>
             <Tab key={'representation'} name='Representation'>
               <div className='Secondary'>
