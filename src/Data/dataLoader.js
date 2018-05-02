@@ -25,6 +25,11 @@ class DataLoader {
     return DataLoader.loadCSV(url)
   }
 
+  static async getMinistryReport () {
+    const url = `${DATA_PATH_BASE}WP2015_Ministries.csv`
+    return DataLoader.loadCSV(url)
+  }
+
   static async getFlowReport () {
     const url = `${DATA_PATH_BASE}WP2015_Flow-1.csv`
     return DataLoader.loadCSV(url)
@@ -38,11 +43,13 @@ class DataLoader {
   static async loadAllData () {
     const iopReport = await DataLoader.getIndicatorsOfProgressReport()
     const comparisonReport = await DataLoader.getComparisonReport()
+    const ministryReport = await DataLoader.getMinistryReport()
     const orReport = await DataLoader.getOccupationRegionReport()
     const flowReport = await DataLoader.getFlowReport()
     return {
       iopReport,
       comparisonReport,
+      ministryReport,
       orReport,
       flowReport
     }
