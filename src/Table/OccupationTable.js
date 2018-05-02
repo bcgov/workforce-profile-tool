@@ -30,7 +30,7 @@ class OccupationTable extends Component {
         .options
         .filter(v => v.key === this.props.data[0]['Employee_Type'])[0].display
       return (
-        <div>
+        <div key={k}>
           <h2>{title}</h2>
           <OccupationSubTable data={dataMap[k]} />
           <br />

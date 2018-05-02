@@ -28,9 +28,9 @@ class RegionTable extends Component {
       title += ' — ' + VARIABLE_MAPPING
         .filter(v => v.key === 'Employee_Type')[0]
         .options
-        .filter(v => v.key === this.props.data[0]['Employee_Type'])[0].display        
+        .filter(v => v.key === this.props.data[0]['Employee_Type'])[0].display
       return (
-        <div>
+        <div key={k}>
           <h2>{title}</h2>
           <RegionSubTable data={dataMap[k]} />
         </div>
