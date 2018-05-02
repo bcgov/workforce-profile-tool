@@ -5,6 +5,7 @@ import './Main.css'
 import Occupation from '../Views/Occupation'
 import Region from '../Views/Region'
 import Ministry from '../Views/Ministry'
+import Leadership from '../Views/Leadership'
 
 class Main extends Component {
   getOccupationData (data) {
@@ -28,7 +29,7 @@ class Main extends Component {
               <h1>Comparison</h1>
             </Tab>
             <Tab key={'leadership'} name='Leadership'>
-              <h1>Leadership</h1>
+              <Leadership data={this.props.data.comparisonData} />
             </Tab>
             <Tab key={'ministries'} name='Ministries'>
               <Ministry data={this.props.data.ministryData} />
