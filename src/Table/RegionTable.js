@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
 
-import { VARIABLE_MAPPING } from '../Variables/VariableList'
+import { displayNameByKey, shortDisplayNameByKey } from '../Variables/VariableList'
 
-import { formatNumber, parseIntClean } from '../Services/formatter'
+import { formatNumber, parseIntClean, parseFloatClean, formatPercent } from '../Services/formatter'
 
 import './Table.css'
 
@@ -21,18 +21,12 @@ class RegionTable extends Component {
     })
 
     const tables = Object.keys(dataMap).map(k => {
-      let title = VARIABLE_MAPPING
-        .filter(v => v.key === 'Des_Grp')[0]
-        .options
-        .filter(v => v.key === k)[0].display
-      title += ' — ' + VARIABLE_MAPPING
-        .filter(v => v.key === 'Employee_Type')[0]
-        .options
-        .filter(v => v.key === this.props.data[0]['Employee_Type'])[0].display
+      let title = displayNameByKey('Des_Grp', k)
+      let shortTitle = shortDisplayNameByKey('Des_Grp', k)
       return (
         <div key={k}>
           <h2>{title}</h2>
-          <RegionSubTable data={dataMap[k]} />
+          <RegionSubTable data={dataMap[k]} shortTitle={shortTitle} />
         </div>
       )
     })
@@ -57,18 +51,13 @@ class RegionSubTable extends Component {
 
     const columns = [
       {
-        id: 'Des_Grp',
-        name: 'Des. Grp.',
-        accessor: d => d['Des_Grp']
-      },
-      {
         id: 'Occupation_Region_Group',
         name: 'Occupation',
         accessor: d => d['Occupation_Region_Group']
       },
       {
         id: 'DesGrp_Count_ORG',
-        name: 'Des. Grp.',
+        name: this.props.shortTitle,
         accessor: d => parseIntClean(d['DesGrp_Count_ORG']),
         displayAccessor: d => formatNumber(d['DesGrp_Count_ORG']),
         cellClass: 'text-right',
@@ -76,7 +65,7 @@ class RegionSubTable extends Component {
       },
       {
         id: 'NonDesGrp_Count_ORG',
-        name: 'Non-Des. Grp.',
+        name: `Non-${this.props.shortTitle}`,
         accessor: d => parseIntClean(d['NonDesGrp_Count_ORG']),
         displayAccessor: d => formatNumber(d['NonDesGrp_Count_ORG']),
         cellClass: 'text-right',
@@ -89,13 +78,45 @@ class RegionSubTable extends Component {
         displayAccessor: d => formatNumber(d['Total_Count_ORG']),
         cellClass: 'text-right',
         headerClass: 'text-right'
+      },
+      {
+        id: 'DesGrp_Percent_ORG',
+        name: `${this.props.shortTitle} as % of Total`,
+        accessor: d => parseFloatClean(d['DesGrp_Percent_ORG']),
+        displayAccessor: d => formatPercent(d['DesGrp_Percent_ORG'], 1, 100),
+        cellClass: 'text-right',
+        headerClass: 'text-right'
+      },
+      {
+        id: 'DesGrp_Percent_AvailableWorkforce',
+        name: `${this.props.shortTitle} as % of Available Workforce`,
+        accessor: d => parseFloatClean(d['DesGrp_Percent_AvailableWorkforce']),
+        displayAccessor: d => formatPercent(d['DesGrp_Percent_AvailableWorkforce'], 1, 100),
+        cellClass: 'text-right',
+        headerClass: 'text-right'
+      },
+      {
+        id: 'DesGrp_Count_Expected',
+        name: `Expected # ${this.props.shortTitle}`,
+        accessor: d => parseIntClean(d['DesGrp_Count_Expected']),
+        displayAccessor: d => formatNumber(d['DesGrp_Count_Expected'], ''),
+        cellClass: 'text-right',
+        headerClass: 'text-right'
+      },
+      {
+        id: 'DesGrp_Count_Shortfall',
+        name: `Shortfall of ${this.props.shortTitle}`,
+        accessor: d => parseIntClean(d['DesGrp_Count_Shortfall']),
+        displayAccessor: d => formatNumber(d['DesGrp_Count_Shortfall'], ''),
+        cellClass: 'text-right',
+        headerClass: 'text-right'
       }
     ]
 
     const rowFilter = (r) => true
 
     return (
-      <div className='Table row'>
+      <div className='Table RegionTable row'>
         <div className='col'>
           { this.props.data &&
             <div>

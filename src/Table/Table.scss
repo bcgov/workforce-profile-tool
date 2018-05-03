@@ -54,6 +54,9 @@
 
     tfoot {
         td {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             background-color: $brand-color-fog;
             font-weight: 600;
         }
@@ -66,10 +69,52 @@
     }
     tfoot {
         td {
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             background-color: lighten($brand-color-teal, 10%);
         }
     }
 }
+
+.OccupationTable, .RegionTable {
+    position: relative;
+    h3 {
+      text-transform: uppercase;
+      font-size: 1.1rem;
+      font-weight: 600;
+      position: relative;
+      top: 32px;
+      margin: 0;
+      left: 12px;
+      letter-spacing: 1px;
+    }
+    th {
+        font-weight: normal;
+    }
+    td:nth-child(n+2) {
+      width: 10%;
+    }
+    td:nth-child(5), th:nth-child(5) {
+      border-right: 2px solid #dee2e6;
+    }
+    tfoot {
+      td:nth-child(5) {
+        border-right: 2px solid darken($brand-color-fog, 10%);
+      }
+    }
+    .hide-header tfoot {
+      td:nth-child(5) {
+        border-right: 2px solid $brand-color-teal;
+      }
+    }
+    table.ReactorTable {
+      margin-top: 0;
+      margin-bottom: 0;
+      thead {
+        th, th.text-right {
+          font-weight: 600;
+        }
+      }
+    }
+    table.ReactorTable:last-child {
+      margin-top: 1rem;
+    }
+  }
