@@ -19,7 +19,7 @@ class RegionGraph extends Component {
       dataMap[d.Des_Grp].push(d)
     })
 
-    const chartData = Object.keys(dataMap).sort().map(k => {
+    const chartData = Object.keys(dataMap).map(k => {
       const data = dataMap[k][0]
       const values = [
         +data.Applied_Leadership,
