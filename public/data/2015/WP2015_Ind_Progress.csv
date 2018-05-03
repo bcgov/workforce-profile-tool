@@ -1,12 +1,12 @@
 Des_Grp,Employee_Type,2013_pc,2015_pc,2015_hired_ct
 AS_TOTAL,Employees_Reg,,23747,4068
-WOM_SM,Employees_Reg,41.5,46.1,
-WOM,Employees_Reg,60.6,61.2,2683
-VM,Employees_Reg,13.6,14.0,588
 IND,Employees_Reg,3.1,3.1,126
 DIS,Employees_Reg,4.3,4.0,94
+VM,Employees_Reg,13.6,14.0,588
+WOM,Employees_Reg,60.6,61.2,2683
+WOM_SM,Employees_Reg,41.5,46.1,
 AS_TOTAL,Employees_Aux,,1262,961
-WOM,Employees_Aux,69.4,69.3,673
-VM,Employees_Aux,11.9,11.3,103
 IND,Employees_Aux,3.8,3.4,34
 DIS,Employees_Aux,2.4,2.7,25
+VM,Employees_Aux,11.9,11.3,103
+WOM,Employees_Aux,69.4,69.3,673

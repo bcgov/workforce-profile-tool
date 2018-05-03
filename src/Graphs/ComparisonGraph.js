@@ -19,7 +19,7 @@ class RegionGraph extends Component {
       dataMap[d.Des_Grp].push(d)
     })
 
-    const chartData = Object.keys(dataMap).sort().map(k => {
+    const chartData = Object.keys(dataMap).map(k => {
       const data = dataMap[k][0]
       const values = [
         +data.Employees_Reg_BCPS,
@@ -44,7 +44,7 @@ class RegionGraph extends Component {
         colors={['#70CCDB', '#D2E2EE', '#6c757d']}
         options={{
           height: 500,
-          dataLabels: { position: 25, formatter: (d) => formatPercent(d / 100) },
+          dataLabels: { position: 25, formatter: (d) => formatPercent(d / 100, 1) },
           margins: { top: 0, left: 125, bottom: 40, right: 20 },
           axes: { yAxisLabel: '', xAxisLabel: '% representation' },
           font: 'Myriad Pro'

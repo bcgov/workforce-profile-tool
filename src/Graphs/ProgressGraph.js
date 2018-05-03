@@ -21,9 +21,8 @@ class ProgressGraph extends Component {
 
     delete dataMap['AS_TOTAL']
 
-    const chartData = Object.keys(dataMap).sort().map(k => {
+    const chartData = Object.keys(dataMap).map(k => {
       const data = dataMap[k][0]
-      console.log('data', data)
 
       const values = [
         +data['2013_pc'],
@@ -37,7 +36,6 @@ class ProgressGraph extends Component {
           .options
           .filter(v => v.key === k)[0].display
       } catch (e) {
-        console.log(e)
         if (k === 'WOM_SM') title = 'Women in Senior Mgmt'
       }
 
