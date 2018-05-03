@@ -1,0 +1,25 @@
+@import '../bootstrap/_colors';
+
+.FilterCount {
+  background-color: $gray-150;
+  padding: 1rem;
+  font-size: 1rem;
+  h1 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
+  > div {
+    font-size: 1.5rem;
+    text-align: right;
+  }
+  .numerator {
+    font-weight: 600;
+  }
+  .separator {
+    padding: 0px 15px;
+  }
+  .denominator {
+    font-weight: 300;
+  }
+  margin-bottom: 2rem;
+}

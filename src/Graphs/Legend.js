@@ -8,7 +8,9 @@ class Legend extends Component {
       return (
         <tr key={i.color}>
           <td className='color'>
-            <div className='swatch' style={{ 'backgroundColor': i.color }} />
+            <div className='swatch'>
+              <span style={{ 'color': i.color }}>●</span>
+            </div>
           </td>
           <td className='label'>
             {i.label}

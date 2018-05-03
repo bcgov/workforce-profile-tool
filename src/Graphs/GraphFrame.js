@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import FilterCount from './FilterCount'
+
 import './Graphs.css'
 
 class GraphFrame extends Component {
@@ -10,6 +12,7 @@ class GraphFrame extends Component {
           {this.props.graph}
         </div>
         <div className='col-3'>
+          <FilterCount />
           {this.props.legend}
         </div>
       </div>
