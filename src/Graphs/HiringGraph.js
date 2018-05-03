@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import * as PlusPlot from '@plot-and-scatter/plusplot'
+import { formatNumber } from '../Services/formatter'
 
 import './Graphs.css'
 
@@ -15,7 +16,6 @@ class HiringGraph extends Component {
       dataMap[d.Des_Grp].push(d)
     })
 
-    delete dataMap['TOTAL']
     delete dataMap['WOM_SM']
 
     const chartData = Object.keys(dataMap).sort().map(k => {
@@ -30,7 +30,7 @@ class HiringGraph extends Component {
           .filter(v => v.key === k)[0].display
       } catch (e) {
         console.log(e)
-        if (k === 'WOM_SM') title = 'Women in Senior Mgmt'
+        if (k === 'TOTAL') title = 'Total Hired'
       }
 
       return {
@@ -45,7 +45,9 @@ class HiringGraph extends Component {
         data={chartData}
         yLines={[]}
         options={{
-          margins: { top: 0, left: 50, bottom: 40, right: 20 },
+          height: 500,
+          dataLabels: { position: -10, formatter: (d) => formatNumber(d) },
+          margins: { top: 10, left: 50, bottom: 40, right: 20 },
           axes: { xAxisLabel: '', yAxisLabel: '% representation' },
           font: 'Myriad Pro'
         }}

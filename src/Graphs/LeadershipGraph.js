@@ -3,6 +3,8 @@ import * as PlusPlot from '@plot-and-scatter/plusplot'
 
 import './Graphs.css'
 
+import { formatPercent } from '../Services/formatter'
+
 import { VARIABLE_MAPPING } from '../Variables/VariableList'
 
 class RegionGraph extends Component {
@@ -39,7 +41,9 @@ class RegionGraph extends Component {
         data={chartData}
         colors={['#70CCDB', '#D2E2EE', '#6c757d']}
         options={{
-          margins: { top: 0, left: 125, bottom: 40, right: 20 },
+          height: 500,
+          dataLabels: { position: 25, formatter: (d) => formatPercent(d / 100, 1) },
+          margins: { top: 0, left: 125, bottom: 40, right: 40 },
           axes: { yAxisLabel: '', xAxisLabel: '% in leadership positions' },
           font: 'Myriad Pro'
         }}

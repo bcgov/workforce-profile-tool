@@ -21,7 +21,12 @@ class Main extends Component {
 
   render () {
     const activeOuterTab = this.props.match.params.highLevelNav || 'indicators-of-progress'
-    const activeInnerTab = this.props.match.params.lowLevelNav || 'representation-by-group'
+    let activeInnerTab
+    if (activeOuterTab === 'representation' && !activeInnerTab) {
+      activeInnerTab = 'by-occupation'
+    } else {
+      activeInnerTab = this.props.match.params.lowLevelNav || 'representation-by-group'
+    }
 
     return (
       <div className='Main row'>

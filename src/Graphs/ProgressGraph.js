@@ -3,6 +3,8 @@ import * as PlusPlot from '@plot-and-scatter/plusplot'
 
 import './Graphs.css'
 
+import { formatPercent } from '../Services/formatter'
+
 import { VARIABLE_MAPPING } from '../Variables/VariableList'
 
 class ProgressGraph extends Component {
@@ -49,8 +51,8 @@ class ProgressGraph extends Component {
         colors={['#70CCDB', '#D2E2EE', '#6c757d']}
         options={{
           height: 500,
-          dataLabels: { position: 15, formatter: (d) => d + '%' },
-          margins: { top: 0, left: 50, bottom: 40, right: 20 },
+          dataLabels: { position: -10, formatter: (d) => formatPercent(d / 100, 1) },
+          margins: { top: 10, left: 50, bottom: 40, right: 20 },
           axes: { xAxisLabel: '', yAxisLabel: '% representation' },
           font: 'Myriad Pro'
         }}

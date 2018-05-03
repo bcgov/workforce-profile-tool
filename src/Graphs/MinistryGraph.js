@@ -3,6 +3,8 @@ import * as PlusPlot from '@plot-and-scatter/plusplot'
 
 import './Graphs.css'
 
+import { formatPercent } from '../Services/formatter'
+
 import { VARIABLE_MAPPING } from '../Variables/VariableList'
 
 class MinistryGraph extends Component {
@@ -35,8 +37,9 @@ class MinistryGraph extends Component {
         data={chartData}
         xLines={[]}
         options={{
-          height: 600,
-          margins: { top: 0, left: 250, bottom: 40, right: 20 },
+          height: 700,
+          dataLabels: { position: 25, formatter: (d) => formatPercent(d / 100, 0) },
+          margins: { top: 0, left: 250, bottom: 40, right: 40 },
           axes: { yAxisLabel: '', xAxisLabel: '% representation' },
           font: 'Myriad Pro'
         }}
