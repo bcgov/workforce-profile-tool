@@ -21,7 +21,6 @@ class HiringGraph extends Component {
 
     const chartData = Object.keys(dataMap).sort().map(k => {
       const data = dataMap[k][0]
-      console.log('data', data)
 
       let title
       try {
@@ -30,7 +29,6 @@ class HiringGraph extends Component {
           .options
           .filter(v => v.key === k)[0].display
       } catch (e) {
-        console.log(e)
         if (k === 'AS_TOTAL') title = 'Total Hired'
       }
 

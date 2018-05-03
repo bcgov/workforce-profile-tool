@@ -28,10 +28,6 @@ class MinistryGraph extends Component {
       }
     })
 
-    console.log('chartData', chartData)
-
-    // console.log('dataMap', dataMap)
-
     // const chartData = Object.keys(dataMap).sort()
     //   .filter(k => k !== 'Des_Grp' && k !== 'key')
     //   .map(k => ({ category: k, count: +thisData[k], color: '#70CCDB' }))
