@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import LeadershipTable from '../Table/LeadershipTable'
+import LeadershipTable from '../Table/LeadershipTable'
 import LeadershipGraph from '../Graphs/LeadershipGraph'
 
 class Leadership extends Component {
@@ -8,7 +8,7 @@ class Leadership extends Component {
       <div>
         <h1>Leadership</h1>
         <LeadershipGraph data={this.props.data} />
-        {/* <LeadershipTable data={this.props.data} /> */}
+        <LeadershipTable data={this.props.data} />
       </div>
     )
   }

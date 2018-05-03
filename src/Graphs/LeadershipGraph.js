@@ -7,33 +7,21 @@ import './Graphs.css'
 
 import { formatPercent } from '../Services/formatter'
 
-import { VARIABLE_MAPPING } from '../Variables/VariableList'
+import { displayNameByKey } from '../Variables/VariableList'
 
 class RegionGraph extends Component {
   render () {
     if (!this.props.data) return <div>Loading...</div>
 
-    const dataMap = {}
-    this.props.data.forEach(d => {
-      dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
-      dataMap[d.Des_Grp].push(d)
-    })
-
-    const chartData = Object.keys(dataMap).map(k => {
-      const data = dataMap[k][0]
+    const chartData = this.props.data.map(d => {
       const values = [
-        +data.Applied_Leadership,
-        +data.Business_Leadership,
-        +data.Strategic_Leadership
+        +d.Applied_Leadership,
+        +d.Business_Leadership,
+        +d.Strategic_Leadership
       ]
 
-      let title = VARIABLE_MAPPING
-        .filter(v => v.key === 'Des_Grp')[0]
-        .options
-        .filter(v => v.key === k)[0].display
-
       return {
-        category: title,
+        category: displayNameByKey('Des_Grp', d['Des_Grp']),
         values
       }
     })

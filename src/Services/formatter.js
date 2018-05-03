@@ -6,7 +6,7 @@ export const formatNumber = (number, zeroValue = 0) => {
 }
 
 export const formatPercent = (number, decimals = 0) => {
-  return number.toLocaleString('en', {
+  return (+number).toLocaleString('en', {
     style: 'percent', minimumFractionDigits: decimals
   })
 }
