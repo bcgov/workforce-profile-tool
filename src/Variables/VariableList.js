@@ -19,10 +19,10 @@ export const VARIABLE_MAPPING = [
     key: 'Des_Grp',
     display: 'Designated Group',
     options: [
-      { selectable: true, display: 'Indigenous Peoples', key: 'IND', active: true },
-      { selectable: true, display: 'People with Disabilities', key: 'DIS' },
-      { selectable: true, display: 'Visible Minorities', key: 'VM' },
-      { selectable: true, display: 'Women', key: 'WOM' },
+      { selectable: true, shortDisplay: 'Indigenous', display: 'Indigenous Peoples', key: 'IND', active: true },
+      { selectable: true, shortDisplay: 'Disabled', display: 'People with Disabilities', key: 'DIS' },
+      { selectable: true, shortDisplay: 'Vis. Min.', display: 'Visible Minorities', key: 'VM' },
+      { selectable: true, shortDisplay: 'Women', display: 'Women', key: 'WOM' },
       { selectable: false, display: 'Women in Senior Mgmt', key: 'WOM_SM' },
       { selectable: false, display: 'Total', key: 'AS_TOTAL' }
     ]
@@ -35,6 +35,18 @@ export const displayNameByKey = (variableKey, valueKey) => {
       .filter(v => v.key === variableKey)[0]
       .options
       .filter(v => v.key === valueKey)[0].display
+  } catch (e) {
+    console.log(`displayNameByKey: no variableKey '${variableKey}' and valueKey'${valueKey}' match found`)
+    return ''
+  }
+}
+
+export const shortDisplayNameByKey = (variableKey, valueKey) => {
+  try {
+    return VARIABLE_MAPPING
+      .filter(v => v.key === variableKey)[0]
+      .options
+      .filter(v => v.key === valueKey)[0].shortDisplay
   } catch (e) {
     console.log(`displayNameByKey: no variableKey '${variableKey}' and valueKey'${valueKey}' match found`)
     return ''

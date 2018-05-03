@@ -3,6 +3,8 @@
 .ReactorTable {
     @extend .table, .table-striped;
 
+    border: solid 2px $brand-color-fog;
+
     th, td {
         font-size: 0.8rem;
     }
@@ -11,6 +13,18 @@
         cursor: pointer;
         &:after {
             cursor: pointer;
+        }
+    }
+
+    th, td {
+        border-top: none;
+    }
+
+    tr:hover {
+        td {
+            background-color: lighten($brand-color-gold, 10%);
+            // color: white;
+            font-weight: 600;
         }
     }
 
@@ -52,7 +66,10 @@
     }
     tfoot {
         td {
-            background-color: $brand-color-teal;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background-color: lighten($brand-color-teal, 10%);
         }
     }
 }
