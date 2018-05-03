@@ -38,11 +38,14 @@ class MinistryGraph extends Component {
 
     chartData.sort((a, b) => (a.values[0] < b.values[0] ? 1 : (a.values[0] > b.values[0] ? -1 : 0)))
 
+    // TODO: add colormap functionality to grouped chart
+    const COLORS = ['#234075', '#70CCDB', '#D2E2EE', '#E6B345']
+
     const graph = (
       <PlusPlot.GroupedBarChart
         data={chartData}
         xLines={[]}
-        colors={['#234075', '#70CCDB']}
+        colors={COLORS}
         options={{
           height: 1000,
           dataLabels: { position: 25, formatter: (d) => formatPercent(d / 100, 0) },
@@ -52,9 +55,6 @@ class MinistryGraph extends Component {
         }}
       />
     )
-
-    // TODO: add colormap functionality to grouped chart
-    const COLORS = ['#234075', '#70CCDB', '#D2E2EE', '#E6B345']
 
     const legendItems = this.props.data.map((d, i) => {
       const k = d['Des_Grp']
