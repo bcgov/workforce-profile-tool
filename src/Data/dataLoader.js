@@ -16,7 +16,7 @@ class DataLoader {
   }
 
   static async getIndicatorsOfProgressReport () {
-    const url = `${DATA_PATH_BASE}WP2015_Ind_Progress.csv`
+    const url = `${DATA_PATH_BASE}WP2015_Ind_Progress-2.csv`
     return DataLoader.loadCSV(url)
   }
 
@@ -36,7 +36,7 @@ class DataLoader {
   }
 
   static async getOccupationRegionReport () {
-    const url = `${DATA_PATH_BASE}WP2015_Rep_Occ_Rgn-1.csv`
+    const url = `${DATA_PATH_BASE}WP2015_Rep_Occ_Rgn_v3.csv`
     return DataLoader.loadCSV(url)
   }
 

@@ -97,6 +97,8 @@ class App extends Component {
     const occupationRegionData = await DataLoader.getOccupationRegionReport()
     const flowReportData = await DataLoader.getFlowReport()
 
+    console.log('occupationRegionData', occupationRegionData)
+
     // Build keys
     iopReportData.forEach(r => { r.key = ''.concat(Object.values(r)) })
     comparisonData.forEach(r => { r.key = ''.concat(Object.values(r)) })
