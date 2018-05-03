@@ -31,7 +31,7 @@ class HiringGraph extends Component {
           .filter(v => v.key === k)[0].display
       } catch (e) {
         console.log(e)
-        if (k === 'TOTAL') title = 'Total Hired'
+        if (k === 'AS_TOTAL') title = 'Total Hired'
       }
 
       return {

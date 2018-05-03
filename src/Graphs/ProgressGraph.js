@@ -19,7 +19,7 @@ class ProgressGraph extends Component {
       dataMap[d.Des_Grp].push(d)
     })
 
-    delete dataMap['TOTAL']
+    delete dataMap['AS_TOTAL']
 
     const chartData = Object.keys(dataMap).sort().map(k => {
       const data = dataMap[k][0]
@@ -54,7 +54,7 @@ class ProgressGraph extends Component {
         options={{
           height: 500,
           dataLabels: { position: -10, formatter: (d) => formatPercent(d / 100, 1) },
-          margins: { top: 10, left: 50, bottom: 40, right: 20 },
+          margins: { top: 20, left: 50, bottom: 40, right: 20 },
           axes: { xAxisLabel: '', yAxisLabel: '% representation' },
           font: 'Myriad Pro'
         }}

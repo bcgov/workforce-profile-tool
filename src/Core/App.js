@@ -33,12 +33,20 @@ class App extends Component {
     if (value === ALL_VALUE) return data
 
     // If the value is an ARRAY, any of the included items is permissible
+    // Note that keys starting with 'AS_' (Always Show) will never be filtered
+    // out.
     if (value instanceof Array) {
-      return data.filter(d => value.includes(d[key]))
+      return data.filter(d => {
+        return d[key].startsWith('AS_') ||
+          value.some(v => d[key].startsWith(v))
+      })
     }
 
     // Not an array. Match only the selected item
-    return data.filter(d => d[key] === value)
+    return data.filter(d => {
+      return d[key].startsWith('AS_') ||
+        d[key].startsWith(value)
+    })
   }
 
   processFilters (filterObject, originalData) {
