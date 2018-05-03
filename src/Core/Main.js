@@ -28,6 +28,8 @@ class Main extends Component {
       activeInnerTab = this.props.match.params.lowLevelNav || 'representation-by-group'
     }
 
+    console.log('this.props.data.filterCount', this.props.data.filterCount)
+
     return (
       <div className='Main row'>
         <div className='col'>
@@ -36,31 +38,52 @@ class Main extends Component {
               <div className='Secondary'>
                 <TabInterface activeTabKey={activeInnerTab} baseURL={`/${activeOuterTab}`} search={this.props.location.search}>
                   <Tab key={'representation-by-group'} name='By Designated Group'>
-                    <Progress data={this.props.data.iopReportData} />
+                    <Progress
+                      filterCount={this.props.data.filterCount}
+                      data={this.props.data.iopReportData}
+                    />
                   </Tab>
                   <Tab key={'hiring'} name='Hiring'>
-                    <Hiring data={this.props.data.iopReportData} />
+                    <Hiring
+                      filterCount={this.props.data.filterCount}
+                      data={this.props.data.iopReportData}
+                    />
                   </Tab>
                 </TabInterface>
               </div>
             </Tab>
             <Tab key={'comparison'} name='Comparison'>
-              <Comparison data={this.props.data.comparisonData} />
+              <Comparison
+                filterCount={this.props.data.filterCount}
+                data={this.props.data.comparisonData}
+              />
             </Tab>
             <Tab key={'leadership'} name='Leadership'>
-              <Leadership data={this.props.data.leadershipData} />
+              <Leadership
+                filterCount={this.props.data.filterCount}
+                data={this.props.data.leadershipData}
+              />
             </Tab>
             <Tab key={'ministries'} name='Ministries'>
-              <Ministry data={this.props.data.ministryData} />
+              <Ministry
+                filterCount={this.props.data.filterCount}
+                data={this.props.data.ministryData}
+              />
             </Tab>
             <Tab key={'representation'} name='Representation'>
               <div className='Secondary'>
                 <TabInterface activeTabKey={activeInnerTab} baseURL={`/${activeOuterTab}`} search={this.props.location.search}>
                   <Tab key={'by-occupation'} name='By Occupation'>
-                    <Occupation data={this.getOccupationData(this.props.data.occupationRegionData)} />
+                    <Occupation
+                      filterCount={this.props.data.filterCount}
+                      data={this.getOccupationData(this.props.data.occupationRegionData)}
+                    />
                   </Tab>
                   <Tab key={'by-region'} name='By Region'>
-                    <Region data={this.getRegionData(this.props.data.occupationRegionData)} />
+                    <Region
+                      filterCount={this.props.data.filterCount}
+                      data={this.getRegionData(this.props.data.occupationRegionData)}
+                    />
                   </Tab>
                   <Tab key={'flow-report'} name='Flow Report'>
                     <h1>Flow Report</h1>

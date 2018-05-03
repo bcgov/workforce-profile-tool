@@ -7,7 +7,7 @@ class Progress extends Component {
     return (
       <div>
         <h1>Progress</h1>
-        <ProgressGraph data={this.props.data} />
+        <ProgressGraph data={this.props.data} filterCount={this.props.filterCount} />
         <ProgressTable data={this.props.data} />
       </div>
     )

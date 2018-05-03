@@ -56,7 +56,7 @@ class ProgressGraph extends Component {
     )
 
     return (
-      <GraphFrame graph={graph} legend={legend} />
+      <GraphFrame graph={graph} legend={legend} filterCount={this.props.filterCount} />
     )
   }
 }

@@ -74,6 +74,10 @@ class App extends Component {
     console.log('filters', filters)
     if (Object.keys(filters).length > 0 && this.state.originalData.occupationRegionData) {
       const occupationRegionData = this.processFilters(filters, this.state.originalData.occupationRegionData)
+      // const filterCount = occupationRegionData
+        // .find(d => d['Variable_Type'] === 'Total')['Total_Count_ORG']
+      // TODO: we can't actually show the numerator because we would double-count
+      // individuals who are e.g. both female and indigenous.
       this.setState({ occupationRegionData })
     }
     if (Object.keys(filters).length > 0 && this.state.originalData.iopReportData) {

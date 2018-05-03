@@ -12,7 +12,7 @@ class GraphFrame extends Component {
           {this.props.graph}
         </div>
         <div className='col-3'>
-          <FilterCount />
+          {/* <FilterCount filterCount={this.props.filterCount} /> */}
           {this.props.legend}
         </div>
       </div>
