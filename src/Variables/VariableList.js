@@ -27,6 +27,13 @@ export const VARIABLE_MAPPING = [
   }
 ]
 
+export const displayNameByKey = (variableKey, valueKey) => {
+  return VARIABLE_MAPPING
+    .filter(v => v.key === variableKey)[0]
+    .options
+    .filter(v => v.key === valueKey)[0].display
+}
+
 class VariableList extends Component {
   constructor (props) {
     super(props)
