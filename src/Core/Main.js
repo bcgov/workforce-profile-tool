@@ -22,7 +22,7 @@ class Main extends Component {
   render () {
     const activeOuterTab = this.props.match.params.highLevelNav || 'indicators-of-progress'
     let activeInnerTab
-    if (activeOuterTab === 'representation' && !activeInnerTab) {
+    if (activeOuterTab === 'representation' && !this.props.match.params.lowLevelNav) {
       activeInnerTab = 'by-occupation'
     } else {
       activeInnerTab = this.props.match.params.lowLevelNav || 'representation-by-group'
