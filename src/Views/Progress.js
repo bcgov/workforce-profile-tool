@@ -4,9 +4,6 @@ import ProgressTable from '../Table/ProgressTable'
 
 class Progress extends Component {
   render () {
-
-    console.log('this.props.data', this.props.data)
-
     return (
       <div>
         <h1>Progress</h1>
