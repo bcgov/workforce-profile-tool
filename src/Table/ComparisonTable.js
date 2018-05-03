@@ -17,25 +17,25 @@ class ComparisonTable extends Component {
       },
       {
         id: 'Employees_Reg_BCPS',
-        name: 'BC Public Service',
+        name: 'BC Public Service, %',
         accessor: d => parseFloatClean(d['Employees_Reg_BCPS']),
-        displayAccessor: d => formatPercent(d['Employees_Reg_BCPS']),
+        displayAccessor: d => d['Employees_Reg_BCPS'],
         cellClass: 'text-right',
         headerClass: 'text-right'
       },
       {
         id: 'Employees_Reg_Available_Workforce',
-        name: 'Available Workforce',
+        name: 'Available Workforce, %',
         accessor: d => parseFloatClean(d['Employees_Reg_Available_Workforce']),
-        displayAccessor: d => formatPercent(d['Employees_Reg_Available_Workforce']),
+        displayAccessor: d => d['Employees_Reg_Available_Workforce'],
         cellClass: 'text-right',
         headerClass: 'text-right'
       },
       {
         id: 'Employees_BC_Population',
-        name: 'BC Population',
+        name: 'BC Population, %',
         accessor: d => parseFloatClean(d['Employees_BC_Population']),
-        displayAccessor: d => formatPercent(d['Employees_BC_Population']),
+        displayAccessor: d => d['Employees_BC_Population'],
         cellClass: 'text-right',
         headerClass: 'text-right'
       }
