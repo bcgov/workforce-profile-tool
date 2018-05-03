@@ -16,18 +16,18 @@ class ComparisonTable extends Component {
         accessor: d => displayNameByKey('Des_Grp', d['Des_Grp'])
       },
       {
-        id: 'Employees_Reg_BCPS',
+        id: 'BCPS',
         name: 'BC Public Service, %',
-        accessor: d => parseFloatClean(d['Employees_Reg_BCPS']),
-        displayAccessor: d => d['Employees_Reg_BCPS'],
+        accessor: d => parseFloatClean(d['BCPS']),
+        displayAccessor: d => d['BCPS'],
         cellClass: 'text-right',
         headerClass: 'text-right'
       },
       {
-        id: 'Employees_Reg_Available_Workforce',
+        id: 'Available_Workforce',
         name: 'Available Workforce, %',
-        accessor: d => parseFloatClean(d['Employees_Reg_Available_Workforce']),
-        displayAccessor: d => d['Employees_Reg_Available_Workforce'],
+        accessor: d => parseFloatClean(d['Available_Workforce']),
+        displayAccessor: d => d['Available_Workforce'],
         cellClass: 'text-right',
         headerClass: 'text-right'
       },

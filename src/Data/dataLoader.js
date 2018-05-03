@@ -21,7 +21,12 @@ class DataLoader {
   }
 
   static async getComparisonReport () {
-    const url = `${DATA_PATH_BASE}WP2015_Comparison.csv`
+    const url = `${DATA_PATH_BASE}WP2015_Comparison-2.csv`
+    return DataLoader.loadCSV(url)
+  }
+
+  static async getLeadershipReport () {
+    const url = `${DATA_PATH_BASE}WP2015_Leadership.csv`
     return DataLoader.loadCSV(url)
   }
 
@@ -43,12 +48,14 @@ class DataLoader {
   static async loadAllData () {
     const iopReport = await DataLoader.getIndicatorsOfProgressReport()
     const comparisonReport = await DataLoader.getComparisonReport()
+    const leadershipReport = await DataLoader.getLeadershipReport()
     const ministryReport = await DataLoader.getMinistryReport()
     const orReport = await DataLoader.getOccupationRegionReport()
     const flowReport = await DataLoader.getFlowReport()
     return {
       iopReport,
       comparisonReport,
+      leadershipReport,
       ministryReport,
       orReport,
       flowReport

@@ -84,6 +84,10 @@ class App extends Component {
       const comparisonData = this.processFilters(filters, this.state.originalData.comparisonData)
       this.setState({ comparisonData })
     }
+    if (Object.keys(filters).length > 0 && this.state.originalData.leadershipData) {
+      const leadershipData = this.processFilters(filters, this.state.originalData.leadershipData)
+      this.setState({ leadershipData })
+    }
     if (Object.keys(filters).length > 0 && this.state.originalData.ministryData) {
       const ministryData = this.processFilters(filters, this.state.originalData.ministryData)
       this.setState({ ministryData })
@@ -93,6 +97,7 @@ class App extends Component {
   async componentDidMount () {
     const iopReportData = await DataLoader.getIndicatorsOfProgressReport()
     const comparisonData = await DataLoader.getComparisonReport()
+    const leadershipData = await DataLoader.getLeadershipReport()
     const ministryData = await DataLoader.getMinistryReport()
     const occupationRegionData = await DataLoader.getOccupationRegionReport()
     const flowReportData = await DataLoader.getFlowReport()
@@ -102,6 +107,7 @@ class App extends Component {
     // Build keys
     iopReportData.forEach(r => { r.key = ''.concat(Object.values(r)) })
     comparisonData.forEach(r => { r.key = ''.concat(Object.values(r)) })
+    leadershipData.forEach(r => { r.key = ''.concat(Object.values(r)) })
     ministryData.forEach(r => { r.key = ''.concat(Object.values(r)) })
     occupationRegionData.forEach(r => { r.key = ''.concat(Object.values(r)) })
     flowReportData.forEach(r => { r.key = ''.concat(Object.values(r)) })
@@ -109,12 +115,14 @@ class App extends Component {
     this.setState({
       iopReportData,
       comparisonData,
+      leadershipData,
       ministryData,
       occupationRegionData,
       flowReportData,
       originalData: {
         iopReportData,
         comparisonData,
+        leadershipData,
         ministryData,
         occupationRegionData,
         flowReportData

@@ -48,7 +48,7 @@ class Main extends Component {
               <Comparison data={this.props.data.comparisonData} />
             </Tab>
             <Tab key={'leadership'} name='Leadership'>
-              <Leadership data={this.props.data.comparisonData} />
+              <Leadership data={this.props.data.leadershipData} />
             </Tab>
             <Tab key={'ministries'} name='Ministries'>
               <Ministry data={this.props.data.ministryData} />

@@ -14,8 +14,8 @@ class RegionGraph extends Component {
 
     const chartData = this.props.data.map(d => {
       const values = [
-        +d.Employees_Reg_BCPS,
-        +d.Employees_Reg_Available_Workforce,
+        +d.BCPS,
+        +d.Available_Workforce,
         +d.Employees_BC_Population
       ]
 
@@ -32,7 +32,7 @@ class RegionGraph extends Component {
         options={{
           height: 500,
           dataLabels: { position: 25, formatter: (d) => formatPercent(d / 100, 1) },
-          margins: { top: 0, left: 125, bottom: 40, right: 20 },
+          margins: { top: 0, left: 125, bottom: 40, right: 40 },
           axes: { yAxisLabel: '', xAxisLabel: '% representation' },
           font: 'Myriad Pro'
         }}
