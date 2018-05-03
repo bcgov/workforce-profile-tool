@@ -26,7 +26,7 @@ class Variable extends Component {
   }
 
   render () {
-    const options = this.state.variable.options.map(o => {
+    const options = this.state.variable.options.filter(o => o.selectable).map(o => {
       return (
         <li
           key={o.key}

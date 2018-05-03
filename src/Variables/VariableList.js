@@ -10,28 +10,35 @@ export const VARIABLE_MAPPING = [
     display: 'Employee Type',
     exclusive: true,
     options: [
-      { display: 'All', key: 'Employees_All', active: true },
-      { display: 'Regular', key: 'Employees_Reg' },
-      { display: 'Auxiliary', key: 'Employees_Aux' }
+      { selectable: true, display: 'All', key: 'Employees_All', active: true },
+      { selectable: true, display: 'Regular', key: 'Employees_Reg' },
+      { selectable: true, display: 'Auxiliary', key: 'Employees_Aux' }
     ]
   },
   {
     key: 'Des_Grp',
     display: 'Designated Group',
     options: [
-      { display: 'Indigenous Peoples', key: 'IND', active: true },
-      { display: 'People with Disabilities', key: 'DIS' },
-      { display: 'Visible Minorities', key: 'VM' },
-      { display: 'Women', key: 'WOM' }
+      { selectable: true, display: 'Indigenous Peoples', key: 'IND', active: true },
+      { selectable: true, display: 'People with Disabilities', key: 'DIS' },
+      { selectable: true, display: 'Visible Minorities', key: 'VM' },
+      { selectable: true, display: 'Women', key: 'WOM' },
+      { selectable: false, display: 'Women in Senior Mgmt', key: 'WOM_SM' },
+      { selectable: false, display: 'Total', key: 'AS_TOTAL' }
     ]
   }
 ]
 
 export const displayNameByKey = (variableKey, valueKey) => {
-  return VARIABLE_MAPPING
-    .filter(v => v.key === variableKey)[0]
-    .options
-    .filter(v => v.key === valueKey)[0].display
+  try {
+    return VARIABLE_MAPPING
+      .filter(v => v.key === variableKey)[0]
+      .options
+      .filter(v => v.key === valueKey)[0].display
+  } catch (e) {
+    console.log(`displayNameByKey: no variableKey '${variableKey}' and valueKey'${valueKey}' match found`)
+    return ''
+  }
 }
 
 class VariableList extends Component {
@@ -85,7 +92,12 @@ class VariableList extends Component {
 
   render () {
     const variables = VARIABLE_MAPPING.map(v =>
-      <Variable key={v.key} exclusive={v.exclusive} variable={v} updateCallback={this.updateCallback} />
+      <Variable
+        key={v.key}
+        exclusive={v.exclusive}
+        variable={v}
+        updateCallback={this.updateCallback}
+      />
     )
 
     return (
