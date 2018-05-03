@@ -47,7 +47,7 @@ class ProgressGraph extends Component {
       }
     })
 
-    const graphComponent = (
+    const graph = (
       <PlusPlot.GroupedColumnChart
         data={chartData}
         colors={['#70CCDB', '#D2E2EE', '#6c757d']}
@@ -60,7 +60,7 @@ class ProgressGraph extends Component {
         }}
     />)
 
-    const legendComponent = (
+    const legend = (
       <Legend items={[
         { label: '2013', color: '#70CCDB' },
         { label: '2015', color: '#D2E2EE' }
@@ -68,7 +68,7 @@ class ProgressGraph extends Component {
     )
 
     return (
-      <GraphFrame graph={graphComponent} legend={legendComponent} />
+      <GraphFrame graph={graph} legend={legend} />
     )
   }
 }

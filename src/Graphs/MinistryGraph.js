@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import * as PlusPlot from '@plot-and-scatter/plusplot'
+import GraphFrame from './GraphFrame'
+import Legend from './Legend'
 
 import './Graphs.css'
 
@@ -32,7 +34,7 @@ class MinistryGraph extends Component {
 
     chartData.sort((a, b) => (a.count < b.count ? 1 : (a.count > b.count ? -1 : 0)))
 
-    return (
+    const graph = (
       <PlusPlot.BarChart
         data={chartData}
         xLines={[]}
@@ -44,6 +46,16 @@ class MinistryGraph extends Component {
           font: 'Myriad Pro'
         }}
       />
+    )
+
+    const legend = (
+      <Legend items={[
+        { label: 'Women', color: '#70CCDB' }
+      ]} />
+    )
+
+    return (
+      <GraphFrame graph={graph} legend={legend} />
     )
   }
 }

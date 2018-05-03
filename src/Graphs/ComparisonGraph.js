@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import * as PlusPlot from '@plot-and-scatter/plusplot'
+import GraphFrame from './GraphFrame'
+import Legend from './Legend'
 
 import './Graphs.css'
 
@@ -36,7 +38,7 @@ class RegionGraph extends Component {
       }
     })
 
-    return (
+    const graph = (
       <PlusPlot.GroupedBarChart
         data={chartData}
         colors={['#70CCDB', '#D2E2EE', '#6c757d']}
@@ -48,6 +50,18 @@ class RegionGraph extends Component {
           font: 'Myriad Pro'
         }}
       />
+    )
+
+    const legend = (
+      <Legend items={[
+        { label: 'BC Public Service', color: '#70CCDB' },
+        { label: 'Available Workforce', color: '#D2E2EE' },
+        { label: 'BC Population', color: '#6c757d' }
+      ]} />
+    )
+
+    return (
+      <GraphFrame graph={graph} legend={legend} />
     )
   }
 }
