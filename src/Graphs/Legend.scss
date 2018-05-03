@@ -1,0 +1,22 @@
+@import '../bootstrap/_colors';
+
+.Legend {
+  h1 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+  }
+  > div {
+    border: solid 0.5px $brand-color-blue;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+  table {
+    td {
+      .swatch {
+        height: 20px;
+        width: 20px;
+      }
+      padding: 5px;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+import React, { Component } from 'react'
+
+import './Legend.css'
+
+class Legend extends Component {
+  render () {
+    const rows = this.props.items.map(i => {
+      return (
+        <tr key={i.color}>
+          <td className='color'>
+            <div className='swatch' style={{ 'background-color': i.color }} />
+          </td>
+          <td className='label'>
+            {i.label}
+          </td>
+        </tr>
+      )
+    })
+
+    return (
+      <div className='Legend'>
+        <h1>Legend</h1>
+        <div>
+          <table>
+            {rows}
+          </table>
+        </div>
+      </div>
+    )
+  }
+}
+
+export default Legend
