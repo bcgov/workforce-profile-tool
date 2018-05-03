@@ -7,36 +7,26 @@ import './Graphs.css'
 
 import { formatPercent } from '../Services/formatter'
 
-import { VARIABLE_MAPPING } from '../Variables/VariableList'
+import { displayNameByKey } from '../Variables/VariableList'
 
 class ProgressGraph extends Component {
   render () {
     if (!this.props.data) return <div>Loading...</div>
 
-    const dataMap = {}
-    this.props.data.forEach(d => {
-      dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
-      dataMap[d.Des_Grp].push(d)
-    })
+    const data = this.props.data.filter(d => d['Des_Grp'] !== 'AS_TOTAL')
 
-    delete dataMap['AS_TOTAL']
+    const chartData = data.map(d => {
+      const values = [ +d['2013_pc'], +d['2015_pc'] ]
+      const key = d['Des_Grp']
 
-    const chartData = Object.keys(dataMap).map(k => {
-      const data = dataMap[k][0]
-
-      const values = [
-        +data['2013_pc'],
-        +data['2015_pc']
-      ]
+      console.log('key', key)
 
       let title
       try {
-        title = VARIABLE_MAPPING
-          .filter(v => v.key === 'Des_Grp')[0]
-          .options
-          .filter(v => v.key === k)[0].display
+        title = displayNameByKey('Des_Grp', key)
       } catch (e) {
-        if (k === 'WOM_SM') title = 'Women in Senior Mgmt'
+        console.log('here')
+        if (key === 'WOM_SM') title = 'Women in Senior Mgmt'
       }
 
       return {
