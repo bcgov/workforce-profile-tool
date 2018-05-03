@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import * as PlusPlot from '@plot-and-scatter/plusplot'
 import Legend from './Legend'
+import GraphFrame from './GraphFrame'
 
 import './Graphs.css'
 
@@ -46,28 +47,28 @@ class ProgressGraph extends Component {
       }
     })
 
+    const graphComponent = (
+      <PlusPlot.GroupedColumnChart
+        data={chartData}
+        colors={['#70CCDB', '#D2E2EE', '#6c757d']}
+        options={{
+          height: 500,
+          dataLabels: { position: -10, formatter: (d) => formatPercent(d / 100, 1) },
+          margins: { top: 10, left: 50, bottom: 40, right: 20 },
+          axes: { xAxisLabel: '', yAxisLabel: '% representation' },
+          font: 'Myriad Pro'
+        }}
+    />)
+
+    const legendComponent = (
+      <Legend items={[
+        { label: '2013', color: '#70CCDB' },
+        { label: '2015', color: '#D2E2EE' }
+      ]} />
+    )
+
     return (
-      <div className='row'>
-        <div className='col-9'>
-          <PlusPlot.GroupedColumnChart
-            data={chartData}
-            colors={['#70CCDB', '#D2E2EE', '#6c757d']}
-            options={{
-              height: 500,
-              dataLabels: { position: -10, formatter: (d) => formatPercent(d / 100, 1) },
-              margins: { top: 10, left: 50, bottom: 40, right: 20 },
-              axes: { xAxisLabel: '', yAxisLabel: '% representation' },
-              font: 'Myriad Pro'
-            }}
-          />
-        </div>
-        <div className='col-3'>
-          <Legend items={[
-            { label: '2013', color: '#70CCDB' },
-            { label: '2015', color: '#D2E2EE' }
-          ]} />
-        </div>
-      </div>
+      <GraphFrame graph={graphComponent} legend={legendComponent} />
     )
   }
 }

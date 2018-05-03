@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import * as PlusPlot from '@plot-and-scatter/plusplot'
 import { formatNumber } from '../Services/formatter'
+import GraphFrame from './GraphFrame'
 
 import './Graphs.css'
 
@@ -40,7 +41,7 @@ class HiringGraph extends Component {
       }
     })
 
-    return (
+    const graph = (
       <PlusPlot.ColumnChart
         data={chartData}
         yLines={[]}
@@ -52,6 +53,10 @@ class HiringGraph extends Component {
           font: 'Myriad Pro'
         }}
       />
+    )
+
+    return (
+      <GraphFrame graph={graph} />
     )
   }
 }
