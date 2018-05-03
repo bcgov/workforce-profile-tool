@@ -20,7 +20,7 @@ class OccupationTable extends Component {
       dataMap[d.Des_Grp].push(d)
     })
 
-    const tables = Object.keys(dataMap).sort().map(k => {
+    const tables = Object.keys(dataMap).map(k => {
       let title = VARIABLE_MAPPING
         .filter(v => v.key === 'Des_Grp')[0]
         .options
