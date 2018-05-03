@@ -2,9 +2,9 @@ Des_Grp,Employee_Type,2013_pc,2015_pc,2015_hired_ct
 TOTAL,Employees_Reg,,23747,4068
 WOM_SM,Employees_Reg,41.5,46.1,
 WOM,Employees_Reg,60.6,61.2,2683
-VM,Employees_Reg,13.6,14,588
+VM,Employees_Reg,13.6,14.0,588
 IND,Employees_Reg,3.1,3.1,126
-DIS,Employees_Reg,4.3,4,94
+DIS,Employees_Reg,4.3,4.0,94
 TOTAL,Employees_Aux,,1262,961
 WOM,Employees_Aux,69.4,69.3,673
 VM,Employees_Aux,11.9,11.3,103
