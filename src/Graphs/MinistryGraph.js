@@ -5,7 +5,7 @@ import Legend from './Legend'
 
 import './Graphs.css'
 
-import { formatPercent } from '../Services/formatter'
+import { parseIntClean, formatPercent } from '../Services/formatter'
 
 import { VARIABLE_MAPPING } from '../Variables/VariableList'
 
@@ -13,33 +13,38 @@ class MinistryGraph extends Component {
   render () {
     if (!this.props.data) return <div>Loading...</div>
 
-    const dataMap = {}
-    this.props.data.forEach(d => {
-      dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
-      dataMap[d.Des_Grp].push(d)
+    let categories = this.props.data && this.props.data.length
+      ? Object.keys(this.props.data[0])
+      : []
+
+    categories = categories.filter(c => c !== 'key' && c !== 'Des_Grp')
+
+    const chartData = categories.sort().map(category => {
+      const values = this.props.data.map(row => +parseIntClean(row[category]))
+
+      return {
+        category: category,
+        values
+      }
     })
 
-    console.log('dataMap', dataMap)
+    console.log('chartData', chartData)
 
-    // delete dataMap['WOM']['Des_Grp']
+    // console.log('dataMap', dataMap)
 
-    console.log(dataMap['WOM'])
+    // const chartData = Object.keys(dataMap).sort()
+    //   .filter(k => k !== 'Des_Grp' && k !== 'key')
+    //   .map(k => ({ category: k, count: +thisData[k], color: '#70CCDB' }))
 
-    const thisData = dataMap['WOM'][0]
-    // delete thisData['Des_Grp']
-
-    const chartData = Object.keys(thisData)
-      .filter(k => k !== 'Des_Grp' && k !== 'key')
-      .map(k => ({ category: k, count: +thisData[k], color: '#70CCDB' }))
-
-    chartData.sort((a, b) => (a.count < b.count ? 1 : (a.count > b.count ? -1 : 0)))
+    chartData.sort((a, b) => (a.values[0] < b.values[0] ? 1 : (a.values[0] > b.values[0] ? -1 : 0)))
 
     const graph = (
-      <PlusPlot.BarChart
+      <PlusPlot.GroupedBarChart
         data={chartData}
         xLines={[]}
+        colors={['#234075', '#70CCDB']}
         options={{
-          height: 700,
+          height: 1000,
           dataLabels: { position: 25, formatter: (d) => formatPercent(d / 100, 0) },
           margins: { top: 0, left: 250, bottom: 40, right: 40 },
           axes: { yAxisLabel: '', xAxisLabel: '% representation' },
@@ -48,10 +53,20 @@ class MinistryGraph extends Component {
       />
     )
 
+    // TODO: add colormap functionality to grouped chart
+    const COLORS = ['#234075', '#70CCDB', '#D2E2EE', '#E6B345']
+
+    const legendItems = this.props.data.map((d, i) => {
+      const k = d['Des_Grp']
+      const label = VARIABLE_MAPPING
+        .filter(v => v.key === 'Des_Grp')[0]
+        .options
+        .filter(v => v.key === k)[0].display
+      return { label, color: COLORS[i] }
+    })
+
     const legend = (
-      <Legend items={[
-        { label: 'Women', color: '#70CCDB' }
-      ]} />
+      <Legend items={legendItems} />
     )
 
     return (

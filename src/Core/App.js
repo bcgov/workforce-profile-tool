@@ -29,7 +29,12 @@ class App extends Component {
       return data
     }
 
-    // If data is empty, don't filter
+    if (!data || !data.length) {
+      console.warn(`processFilter: data is empty or non-existent`)
+      return data
+    }
+
+    // If key doesn't exist, don't filter
     if (!data[0][key]) {
       console.warn(`processFilter: key '${key}' does not exist in 0th data item`)
       return data
@@ -78,6 +83,10 @@ class App extends Component {
     if (Object.keys(filters).length > 0 && this.state.originalData.comparisonData) {
       const comparisonData = this.processFilters(filters, this.state.originalData.comparisonData)
       this.setState({ comparisonData })
+    }
+    if (Object.keys(filters).length > 0 && this.state.originalData.ministryData) {
+      const ministryData = this.processFilters(filters, this.state.originalData.ministryData)
+      this.setState({ ministryData })
     }
   }
 
