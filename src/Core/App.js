@@ -98,11 +98,11 @@ class App extends Component {
     return (
       <div className='App container-fluid'>
         <div className='row'>
-          <div className='LeftColumn col-3'>
+          <div className='LeftColumn col-2'>
             <Header />
             <VariableList />
           </div>
-          <div className='col-9'>
+          <div className='col-10'>
             <Switch>
               <Route exact path={`/`} render={props => <Main data={this.state} {...props} />} />
               <Route exact path={`/:highLevelNav`} render={props => <Main data={this.state} {...props} />} />
