@@ -57,6 +57,10 @@ class App extends Component {
       const occupationRegionData = this.processFilters(filters, this.state.originalData.occupationRegionData)
       this.setState({ occupationRegionData })
     }
+    if (Object.keys(filters).length > 0 && this.state.originalData.iopReportData) {
+      const iopReportData = this.processFilters(filters, this.state.originalData.iopReportData)
+      this.setState({ iopReportData })
+    }
   }
 
   async componentDidMount () {

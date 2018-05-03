@@ -1,4 +1,4 @@
-BCPS_Ministry_Group,DesignatedMinority_Group,Type,DesGrp_Count_Reg,DesGrp_Percent_Reg,NonDesGrp_Count_Reg,NonDesGrp_Percent_Reg,Total_Count_Reg,Total_Percent_Reg,DesGrp_Count_Aux,DesGrp_Percent_Aux,NonDesGrp_Count_Aux,NonDesGrp_Percent_Aux,Total_Count_Aux,Total_Percent_Aux
+BCPS_Ministry_Group,Des_Grp,Type,DesGrp_Count_Reg,DesGrp_Percent_Reg,NonDesGrp_Count_Reg,NonDesGrp_Percent_Reg,Total_Count_Reg,Total_Percent_Reg,DesGrp_Count_Aux,DesGrp_Percent_Aux,NonDesGrp_Count_Aux,NonDesGrp_Percent_Aux,Total_Count_Aux,Total_Percent_Aux
 BCPS,VM,Employed_2013,3172,,20089,,23261,,122,,905,,1027,
 BCPS,VM,Employed_2015,3329,,20418,,23747,,142,,1120,,1262,
 BCPS,VM,Hiring_Outside,532,14.43298969,3154,85.56701031,3686,100,103,10.71800208,858,89.28199792,961,100

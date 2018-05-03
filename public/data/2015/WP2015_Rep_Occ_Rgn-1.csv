@@ -1,4 +1,4 @@
-BCPS_Ministry_Group,DesignatedMinority_Group,Employee_Type,Variable_Type,Occupation_Type,Occupation_Region_Group,DesGrp_Count_ORG,NonDesGrp_Count_ORG,Total_Count_ORG,DesGrp_Percent_ORG,DesGrp_Percent_AvailableWorkforce,DesGrp_Count_Expected,DesGrp_Count_Shortfall
+BCPS_Ministry_Group,Des_Grp,Employee_Type,Variable_Type,Occupation_Type,Occupation_Region_Group,DesGrp_Count_ORG,NonDesGrp_Count_ORG,Total_Count_ORG,DesGrp_Percent_ORG,DesGrp_Percent_AvailableWorkforce,DesGrp_Count_Expected,DesGrp_Count_Shortfall
 BCPS,VM,Employees_Reg,Occupation,Management,Senior Managers,82,923,1005,8.2,14,140,58
 BCPS,VM,Employees_Reg,Occupation,Management,Middle and Other Managers,217,1786,2003,10.8,19.5,390,173
 BCPS,VM,Employees_Reg,Occupation,Management,Professionals,1432,9337,10769,13.3,20.4,2202,770

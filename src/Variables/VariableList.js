@@ -16,7 +16,7 @@ export const VARIABLE_MAPPING = [
     ]
   },
   {
-    key: 'DesignatedMinority_Group',
+    key: 'Des_Grp',
     display: 'Designated Group',
     options: [
       { display: 'Indigenous Peoples', key: 'IND', active: true },
@@ -33,7 +33,7 @@ class VariableList extends Component {
     this.state = {
       active: {
         'Employee_Type': 'Employees_All',
-        'DesignatedMinority_Group': 'IND'
+        'Des_Grp': 'IND'
       }
     }
     this.updateCallback = this.updateCallback.bind(this)

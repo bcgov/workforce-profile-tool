@@ -16,13 +16,13 @@ class MinistryTable extends Component {
     // Split the data
     const dataMap = {}
     this.props.data.forEach(d => {
-      dataMap[d.DesignatedMinority_Group] = dataMap[d.DesignatedMinority_Group] || []
-      dataMap[d.DesignatedMinority_Group].push(d)
+      dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
+      dataMap[d.Des_Grp].push(d)
     })
 
     const tables = Object.keys(dataMap).sort().map(k => {
       let title = VARIABLE_MAPPING
-        .filter(v => v.key === 'DesignatedMinority_Group')[0]
+        .filter(v => v.key === 'Des_Grp')[0]
         .options
         .filter(v => v.key === k)[0].display
       title += ' — ' + VARIABLE_MAPPING
@@ -57,9 +57,9 @@ class MinistrySubTable extends Component {
 
     const columns = [
       {
-        id: 'DesignatedMinority_Group',
+        id: 'Des_Grp',
         name: 'Des. Grp.',
-        accessor: d => d['DesignatedMinority_Group']
+        accessor: d => d['Des_Grp']
       },
       {
         id: 'Occupation_Ministry_Group',

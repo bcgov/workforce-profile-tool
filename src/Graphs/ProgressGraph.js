@@ -33,7 +33,7 @@ class ProgressGraph extends Component {
       let title
       try {
         title = VARIABLE_MAPPING
-          .filter(v => v.key === 'DesignatedMinority_Group')[0]
+          .filter(v => v.key === 'Des_Grp')[0]
           .options
           .filter(v => v.key === k)[0].display
       } catch (e) {

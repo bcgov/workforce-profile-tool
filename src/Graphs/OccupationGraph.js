@@ -11,8 +11,8 @@ class OccupationGraph extends Component {
 
     const dataMap = {}
     this.props.data.forEach(d => {
-      dataMap[d.DesignatedMinority_Group] = dataMap[d.DesignatedMinority_Group] || []
-      dataMap[d.DesignatedMinority_Group].push(d)
+      dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
+      dataMap[d.Des_Grp].push(d)
     })
 
     const chartData = Object.keys(dataMap).sort().map(k => {
@@ -24,7 +24,7 @@ class OccupationGraph extends Component {
       ]
 
       let title = VARIABLE_MAPPING
-        .filter(v => v.key === 'DesignatedMinority_Group')[0]
+        .filter(v => v.key === 'Des_Grp')[0]
         .options
         .filter(v => v.key === k)[0].display
 
