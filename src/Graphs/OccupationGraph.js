@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import * as PlusPlot from '@plot-and-scatter/plusplot'
+import GraphFrame from './GraphFrame'
+import Legend from './Legend'
 
 import './Graphs.css'
 
@@ -34,7 +36,7 @@ class OccupationGraph extends Component {
       }
     })
 
-    return (
+    const graph = (
       <PlusPlot.GroupedBarChart
         data={chartData}
         colors={['#70CCDB', '#D2E2EE', '#6c757d']}
@@ -44,6 +46,18 @@ class OccupationGraph extends Component {
           font: 'Myriad Pro'
         }}
       />
+    )
+
+    const legend = (
+      <Legend items={[
+        { label: 'Expected', color: '#70CCDB' },
+        { label: 'Actual', color: '#D2E2EE' },
+        { label: 'Shortfall', color: '#6c757d' }
+      ]} />
+    )
+
+    return (
+      <GraphFrame graph={graph} legend={legend} />
     )
   }
 }
