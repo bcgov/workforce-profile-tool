@@ -63,7 +63,9 @@
         display: inline-block;
         width: 100%;
         text-align: center !important;
-        font-size: 0.9rem;
+        // font-size: 0.9rem;
+        // letter-spacing: 1px;
+        font-weight: 700;
         text-transform: uppercase;
         margin-bottom: 0.5rem;
     }
@@ -128,7 +130,7 @@
             border-right: 2px solid $brand-color-teal;
         }
     }
-    table.ReactorTable.hide-header:last-child {
+    table.ReactorTable:last-child {
         margin-top: 1rem;
     }
 }
