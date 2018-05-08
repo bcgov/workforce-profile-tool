@@ -123,21 +123,21 @@ class FlowReportSubTable extends Component {
                 columns={columns}
                 rows={hiringRows}
                 rowFilter={rowFilter}
-                tableClass={'hide-header'}
+                tableClass={'hiring'}
               />
               <h3>Separations</h3>
               <Reactor.Table
                 columns={columns}
                 rows={separationsRows}
                 rowFilter={rowFilter}
-                tableClass={'hide-header'}
+                tableClass={'separations'}
               />
               <h3>Promotions</h3>
               <Reactor.Table
                 columns={columns}
                 rows={promotionsRows}
                 rowFilter={rowFilter}
-                tableClass={'hide-header'}
+                tableClass={'promotions'}
               />
             </div>
           }

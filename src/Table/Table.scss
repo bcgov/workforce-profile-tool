@@ -1,4 +1,13 @@
 @import '../bootstrap/bootstrap.scss';
+
+%subtotal {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: $brand-color-fog;
+    font-weight: 600;
+}
+
 .ReactorTable {
     @extend .table,
     .table-striped;
@@ -47,11 +56,7 @@
     }
     tfoot {
         td {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background-color: $brand-color-fog;
-            font-weight: 600;
+            @extend %subtotal;
         }
     }
     th.hide-sort {
@@ -138,15 +143,28 @@
 }
 
 .FlowReportTable {
-    h3 {
-        top: 0px;
-        margin-top: 1rem;
-    }
     td:nth-child(n+2) {
-        width: 13%;
+        width: 12%;
     }
     td:nth-child(4),
     th:nth-child(4) {
         border-right: 2px solid #dee2e6;
+    }
+    table.ReactorTable.hiring,
+    table.ReactorTable.separations {
+        tr:nth-child(2n) {
+            @extend %subtotal;
+            td:nth-child(4) {
+                border-right: 2px solid darken($brand-color-fog, 10%);
+            }
+        }
+    }
+    table.ReactorTable.promotions {
+        tr:nth-child(3) {
+            @extend %subtotal;
+            td:nth-child(4) {
+                border-right: 2px solid darken($brand-color-fog, 10%);
+            }
+        }
     }
 }
