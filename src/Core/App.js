@@ -96,6 +96,10 @@ class App extends Component {
       const ministryData = this.processFilters(filters, this.state.originalData.ministryData)
       this.setState({ ministryData })
     }
+    if (Object.keys(filters).length > 0 && this.state.originalData.flowReportData) {
+      const flowReportData = this.processFilters(filters, this.state.originalData.flowReportData)
+      this.setState({ flowReportData })
+    }
   }
 
   async componentDidMount () {

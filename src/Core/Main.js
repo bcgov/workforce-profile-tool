@@ -9,6 +9,7 @@ import Leadership from '../Views/Leadership'
 import Comparison from '../Views/Comparison'
 import Progress from '../Views/Progress'
 import Hiring from '../Views/Hiring'
+import FlowReport from '../Views/FlowReport'
 
 class Main extends Component {
   getOccupationData (data) {
@@ -86,7 +87,9 @@ class Main extends Component {
                     />
                   </Tab>
                   <Tab key={'flow-report'} name='Flow Report'>
-                    <h1>Flow Report</h1>
+                    <FlowReport
+                      data={this.props.data.flowReportData}
+                    />
                   </Tab>
                 </TabInterface>
               </div>

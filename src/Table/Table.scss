@@ -1,37 +1,31 @@
 @import '../bootstrap/bootstrap.scss';
-
 .ReactorTable {
-    @extend .table, .table-striped;
-
+    @extend .table,
+    .table-striped;
     border: solid 2px $brand-color-fog;
-
-    th, td {
+    th,
+    td {
         font-size: 0.8rem;
     }
-
     th span {
         cursor: pointer;
         &:after {
             cursor: pointer;
         }
     }
-
-    th, td {
+    th,
+    td {
         border-top: none;
     }
-
     tr:hover {
         td {
-            background-color: lighten($brand-color-gold, 10%);
-            // color: white;
+            background-color: lighten($brand-color-gold, 10%); // color: white;
             font-weight: 600;
         }
     }
-
     .hidden {
         display: none;
     }
-
     .sortable,
     .sortable-asc,
     .sortable-desc {
@@ -51,7 +45,6 @@
         font-family: "Font Awesome 5 Free";
         content: "\f0de";
     }
-
     tfoot {
         td {
             font-size: 0.8rem;
@@ -59,6 +52,11 @@
             letter-spacing: 1px;
             background-color: $brand-color-fog;
             font-weight: 600;
+        }
+    }
+    th.hide-sort {
+        .sortable {
+            display: none;
         }
     }
 }
@@ -74,47 +72,65 @@
     }
 }
 
-.OccupationTable, .RegionTable {
+.OccupationTable,
+.RegionTable,
+.FlowReportTable {
     position: relative;
     h3 {
-      text-transform: uppercase;
-      font-size: 1.1rem;
-      font-weight: 600;
-      position: relative;
-      top: 32px;
-      margin: 0;
-      left: 12px;
-      letter-spacing: 1px;
+        text-transform: uppercase;
+        font-size: 1.1rem;
+        font-weight: 600;
+        position: relative;
+        top: 32px;
+        margin: 0;
+        left: 12px;
+        letter-spacing: 1px;
     }
     th {
         font-weight: normal;
     }
-    td:nth-child(n+2) {
-      width: 10%;
+    table.ReactorTable {
+        margin-top: 0;
+        margin-bottom: 0;
+        thead {
+            th,
+            th.text-right {
+                font-weight: 600;
+            }
+        }
     }
-    td:nth-child(5), th:nth-child(5) {
-      border-right: 2px solid #dee2e6;
+}
+
+.OccupationTable,
+.RegionTable {
+    td:nth-child(n+2) {
+        width: 10%;
+    }
+    td:nth-child(5),
+    th:nth-child(5) {
+        border-right: 2px solid #dee2e6;
     }
     tfoot {
-      td:nth-child(5) {
-        border-right: 2px solid darken($brand-color-fog, 10%);
-      }
+        td:nth-child(5) {
+            border-right: 2px solid darken($brand-color-fog, 10%);
+        }
     }
     .hide-header tfoot {
-      td:nth-child(5) {
-        border-right: 2px solid $brand-color-teal;
-      }
-    }
-    table.ReactorTable {
-      margin-top: 0;
-      margin-bottom: 0;
-      thead {
-        th, th.text-right {
-          font-weight: 600;
+        td:nth-child(5) {
+            border-right: 2px solid $brand-color-teal;
         }
-      }
     }
-    table.ReactorTable:last-child {
-      margin-top: 1rem;
+    table.ReactorTable.hide-header:last-child {
+        margin-top: 1rem;
     }
-  }
+}
+
+.FlowReportTable {
+    td:nth-child(n+2) {
+        width: 13%;
+    }
+    td:nth-child(4),
+    th:nth-child(4) {
+        border-right: 2px solid #dee2e6;
+    }
+}
