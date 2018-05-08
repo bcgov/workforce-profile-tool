@@ -66,7 +66,7 @@ class FlowReportSubTable extends Component {
       },
       {
         id: 'NonDesGrp_Count_Reg',
-        name: `Non-${this.props.shortTitle}`,
+        name: <span><span className='col-group-title'>REGULAR</span><br />{`Non-${this.props.shortTitle}`}</span>,
         accessor: d => parseIntClean(d['NonDesGrp_Count_Reg']),
         displayAccessor: d => formatNumber(d['NonDesGrp_Count_Reg'], ''),
         cellClass: 'text-right',
@@ -90,7 +90,7 @@ class FlowReportSubTable extends Component {
       },
       {
         id: 'NonDesGrp_Count_Aux',
-        name: `Non-${this.props.shortTitle}`,
+        name: <span><span className='col-group-title'>AUXILIARY</span><br />{`Non-${this.props.shortTitle}`}</span>,
         accessor: d => parseIntClean(d['NonDesGrp_Count_Aux']),
         displayAccessor: d => formatNumber(d['NonDesGrp_Count_Aux'], ''),
         cellClass: 'text-right',
@@ -113,6 +113,7 @@ class FlowReportSubTable extends Component {
         <div className='col'>
           { this.props.data &&
             <div>
+              <h3>Yearly Change</h3>
               <Reactor.Table
                 columns={columns}
                 rows={yearRows}

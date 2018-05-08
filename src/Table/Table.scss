@@ -59,6 +59,14 @@
             display: none;
         }
     }
+    th span.col-group-title {
+        display: inline-block;
+        width: 100%;
+        text-align: center !important;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+    }
 }
 
 .ReactorTable.hide-header {
