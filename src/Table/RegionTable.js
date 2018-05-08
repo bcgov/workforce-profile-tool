@@ -27,6 +27,8 @@ class RegionTable extends Component {
         <div key={k}>
           <h2>{title}</h2>
           <RegionSubTable data={dataMap[k]} shortTitle={shortTitle} />
+          <br />
+          <br />
         </div>
       )
     })
