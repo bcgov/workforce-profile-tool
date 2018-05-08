@@ -113,7 +113,6 @@ class FlowReportSubTable extends Component {
         <div className='col'>
           { this.props.data &&
             <div>
-              <h3>Yearly Change</h3>
               <Reactor.Table
                 columns={columns}
                 rows={yearRows}
@@ -124,18 +123,21 @@ class FlowReportSubTable extends Component {
                 columns={columns}
                 rows={hiringRows}
                 rowFilter={rowFilter}
+                tableClass={'hide-header'}
               />
               <h3>Separations</h3>
               <Reactor.Table
                 columns={columns}
                 rows={separationsRows}
                 rowFilter={rowFilter}
+                tableClass={'hide-header'}
               />
               <h3>Promotions</h3>
               <Reactor.Table
                 columns={columns}
                 rows={promotionsRows}
                 rowFilter={rowFilter}
+                tableClass={'hide-header'}
               />
             </div>
           }

@@ -75,11 +75,6 @@
     thead {
         display: none;
     }
-    tfoot {
-        td {
-            background-color: lighten($brand-color-teal, 10%);
-        }
-    }
 }
 
 .OccupationTable,
@@ -133,9 +128,20 @@
     table.ReactorTable:last-child {
         margin-top: 1rem;
     }
+    .hide-header {
+        tfoot {
+            td {
+                background-color: lighten($brand-color-teal, 10%);
+            }
+        }
+    }
 }
 
 .FlowReportTable {
+    h3 {
+        top: 0px;
+        margin-top: 1rem;
+    }
     td:nth-child(n+2) {
         width: 13%;
     }
