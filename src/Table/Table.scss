@@ -15,16 +15,15 @@
     th,
     td {
         font-size: 0.8rem;
-    }
-    th span {
-        cursor: pointer;
-        &:after {
-            cursor: pointer;
-        }
-    }
-    th,
-    td {
         border-top: none;
+        .sortable,
+        .sortable-asc,
+        .sortable-desc {
+            cursor: pointer;
+            &:after {
+                cursor: pointer;
+            }
+        }
     }
     tr:hover {
         td {

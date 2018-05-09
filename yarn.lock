@@ -10,9 +10,9 @@
     react "^15.6.1"
     react-dom "^15.6.1"
 
-"@plot-and-scatter/reactor-table@0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@plot-and-scatter/reactor-table/-/reactor-table-0.6.1.tgz#0123c7cd56d943432a7b67e8ae46e3045509a2f5"
+"@plot-and-scatter/reactor-table@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@plot-and-scatter/reactor-table/-/reactor-table-0.7.0.tgz#38d8961da44d3234be4fef0f36ad7108d608de41"
   dependencies:
     react "^15.6.1"
     react-dom "^15.6.1"

@@ -62,7 +62,8 @@ class FlowReportSubTable extends Component {
         accessor: d => parseIntClean(d['DesGrp_Count_Reg']),
         displayAccessor: d => formatNumber(d['DesGrp_Count_Reg'], ''),
         cellClass: 'text-right',
-        headerClass: 'text-right'
+        headerClass: 'text-right',
+        sortable: false
       },
       {
         id: 'NonDesGrp_Count_Reg',
@@ -70,7 +71,8 @@ class FlowReportSubTable extends Component {
         accessor: d => parseIntClean(d['NonDesGrp_Count_Reg']),
         displayAccessor: d => formatNumber(d['NonDesGrp_Count_Reg'], ''),
         cellClass: 'text-right',
-        headerClass: 'text-right'
+        headerClass: 'text-right',
+        sortable: false
       },
       {
         id: 'Total_Count_Reg',
@@ -78,7 +80,8 @@ class FlowReportSubTable extends Component {
         accessor: d => parseIntClean(d['Total_Count_Reg']),
         displayAccessor: d => formatNumber(d['Total_Count_Reg'], ''),
         cellClass: 'text-right',
-        headerClass: 'text-right'
+        headerClass: 'text-right',
+        sortable: false
       },
       {
         id: 'DesGrp_Count_Aux',
@@ -86,7 +89,8 @@ class FlowReportSubTable extends Component {
         accessor: d => parseIntClean(d['DesGrp_Count_Aux']),
         displayAccessor: d => formatNumber(d['DesGrp_Count_Aux'], ''),
         cellClass: 'text-right',
-        headerClass: 'text-right'
+        headerClass: 'text-right',
+        sortable: false
       },
       {
         id: 'NonDesGrp_Count_Aux',
@@ -94,7 +98,8 @@ class FlowReportSubTable extends Component {
         accessor: d => parseIntClean(d['NonDesGrp_Count_Aux']),
         displayAccessor: d => formatNumber(d['NonDesGrp_Count_Aux'], ''),
         cellClass: 'text-right',
-        headerClass: 'text-right'
+        headerClass: 'text-right',
+        sortable: false
       },
       {
         id: 'Total_Count_Aux',
@@ -102,7 +107,8 @@ class FlowReportSubTable extends Component {
         accessor: d => parseIntClean(d['Total_Count_Aux']),
         displayAccessor: d => formatNumber(d['Total_Count_Aux'], ''),
         cellClass: 'text-right',
-        headerClass: 'text-right'
+        headerClass: 'text-right',
+        sortable: false
       }
     ]
 

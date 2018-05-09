@@ -5,7 +5,7 @@
   "homepage": "http://plotandscatter.com/wes-workforce-profiles/",
   "dependencies": {
     "@plot-and-scatter/plusplot": "0.14.2",
-    "@plot-and-scatter/reactor-table": "0.6.1",
+    "@plot-and-scatter/reactor-table": "0.7.0",
     "concurrently": "^3.5.1",
     "d3": "^5.0.0",
     "node-sass-chokidar": "^1.1.0",
