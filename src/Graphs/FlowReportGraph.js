@@ -8,6 +8,19 @@ import './Graphs.css'
 import { displayNameByKey } from '../Variables/VariableList'
 
 class FlowReportGraph extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      proportional: false
+    }
+
+    this.toggleProportional = this.toggleProportional.bind(this)
+  }
+
+  toggleProportional () {
+    this.setState({ proportional: !this.state.proportional })
+  }
+
   render () {
     if (!this.props.data) return <div>Loading...</div>
 
@@ -42,26 +55,34 @@ class FlowReportGraph extends Component {
 
     const chartData = Object.values(chartDataOutline)
 
-    console.log('chartData', chartData)
-
     const graph = (
       <FlowReportChart
         data={chartData}
         yLines={[]}
         stackKeys={['group', 'nonGroup']}
         colors={['#70CCDB', '#D2E2EE']}
+        proportional={this.state.proportional}
         options={{
           height: 500,
           dataLabels: { position: -10, formatter: (d) => formatNumber(d) },
-          margins: { top: 10, left: 50, bottom: 40, right: 20 },
-          axes: { xAxisLabel: '', yAxisLabel: '% representation' },
+          margins: { top: 10, left: 70, bottom: 40, right: 20 },
+          axes: { xAxisLabel: '', yAxisLabel: 'Number' },
           font: 'Myriad Pro'
         }}
       />
     )
 
     return (
-      <GraphFrame graph={graph} />
+      <div>
+        <button className='btn btn-sm btn-primary' onClick={this.toggleProportional}>
+          {this.state.proportional
+            ? 'Show absolute numbers'
+            : 'Show proportional numbers'
+          }
+        </button>
+        <br /><br />
+        <GraphFrame graph={graph} />
+      </div>
     )
   }
 }

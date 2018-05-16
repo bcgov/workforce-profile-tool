@@ -37,13 +37,19 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
       .padding(0.2)
   }
 
+  stackMin (series) {
+    return d3.min(series, d => d[0])
+  }
+
+  stackMax (series) {
+    return d3.max(series, d => d[1])
+  }
+
   getYScale () {
     const minRange = 0
     const maxRange = this.height
-    const minDomain = 0
-    const maxDomain = d3.max(this.props.data.map(d =>
-      this.props.stackKeys.reduce((acc, k) => acc + d[k], 0)
-    ))
+    const minDomain = d3.min(this.stackedData(), this.stackMin)
+    const maxDomain = d3.max(this.stackedData(), this.stackMax)
     return d3.scaleLinear()
       .range([maxRange, minRange]) // Yes, we need to swap these
       .domain([minDomain, maxDomain])
@@ -101,15 +107,19 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
       .attr('fill', this.dataLabels.color)
   }
 
+  stackedData () {
+    let stack = d3.stack().keys(this.props.stackKeys)
+    if (this.props.proportional) {
+      stack = stack.offset(d3.stackOffsetExpand)
+    }
+    return stack(this.props.data)
+  }
+
   updateGraphicContents () {
-    const stack = d3.stack().keys(this.props.stackKeys).offset(d3.stackOffsetDiverging)
-
-    console.log('stack', stack(this.props.data))
-
     // The bars are the bars within each group
     const barGroups = this.wrapper
       .selectAll('.barGroup')
-      .data(stack(this.props.data), (d, i) => i)
+      .data(this.stackedData(), (d, i) => i)
 
     barGroups.enter().append('g')
       .attr('class', 'barGroup')
