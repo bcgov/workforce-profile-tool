@@ -28,8 +28,8 @@ class HiringGraph extends Component {
         options={{
           height: 500,
           dataLabels: { position: -10, formatter: (d) => formatNumber(d) },
-          margins: { top: 10, left: 50, bottom: 40, right: 20 },
-          axes: { xAxisLabel: '', yAxisLabel: '% representation' },
+          margins: { top: 10, left: 60, bottom: 40, right: 20 },
+          axes: { xAxisLabel: '', yAxisLabel: 'Count' },
           font: 'Myriad Pro'
         }}
       />
