@@ -19,13 +19,10 @@ class ProgressGraph extends Component {
       const values = [ +d['2013_pc'], +d['2015_pc'] ]
       const key = d['Des_Grp']
 
-      console.log('key', key)
-
       let title
       try {
         title = displayNameByKey('Des_Grp', key)
       } catch (e) {
-        console.log('here')
         if (key === 'WOM_SM') title = 'Women in Senior Mgmt'
       }
 

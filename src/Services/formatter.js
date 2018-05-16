@@ -22,7 +22,6 @@ export const parseIntClean = (number, zeroValue = 0) => {
 }
 
 export const parseFloatClean = (number, zeroValue = 0) => {
-  console.log('number', number)
   if (number === 'S') return -1
   if (number === '<3') return zeroValue
   if (+number === 0 || number === '') return zeroValue

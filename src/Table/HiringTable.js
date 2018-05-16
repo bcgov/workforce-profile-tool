@@ -19,8 +19,6 @@ class ProgressTable extends Component {
     const total = this.props.data.find(d => d['Des_Grp'] === 'AS_TOTAL')
     const totalHired = total ? +total['2015_hired_ct'] : 1
 
-    console.log('totalHired', totalHired)
-
     const columns = [
       {
         id: 'Des_Grp',
