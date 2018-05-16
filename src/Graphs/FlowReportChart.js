@@ -102,7 +102,9 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
   }
 
   updateGraphicContents () {
-    const stack = d3.stack().keys(this.props.stackKeys)
+    const stack = d3.stack().keys(this.props.stackKeys).offset(d3.stackOffsetDiverging)
+
+    console.log('stack', stack(this.props.data))
 
     // The bars are the bars within each group
     const barGroups = this.wrapper

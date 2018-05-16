@@ -11,8 +11,6 @@ class FlowReportGraph extends Component {
   render () {
     if (!this.props.data) return <div>Loading...</div>
 
-    const data = this.props.data.filter(d => !['WOM_SM'].includes(d['Des_Grp']))
-
     // Split the data
     const dataMap = {}
     this.props.data.forEach(d => {
@@ -22,36 +20,36 @@ class FlowReportGraph extends Component {
 
     console.log('dataMap', dataMap)
 
-    const ind = dataMap['IND']
-
-    const theData = []
-
-    const getRowByType = (array, key) => {
-      console.log('array', array, 'key', key)
-      const theItem = array.find(item => item.Type === key)
-      console.log('theItem', theItem)
-      return theItem
+    const chartDataOutline = {
+      'Hiring_TotalNew': { category: 'New', group: 0, nonGroup: 4068 },
+      'Employed_2015': { category: 'Employed', group: 0, nonGroup: 23747 },
+      'Promotions_Total': { category: 'Promotions', group: 0, nonGroup: 2842 },
+      'Separations_Total': { category: 'Separations', group: 0, nonGroup: 3600 }
     }
 
-    theData.push({
-      category: 'Employed',
-      group: +(getRowByType(ind, 'Employed_2015').DesGrp_Count_Reg),
-      nonGroup: +(getRowByType(ind, 'Employed_2015').NonDesGrp_Count_Reg)
-    })
-    theData.push({
-      category: 'New',
-      group: +(getRowByType(ind, 'Hiring_TotalNew').DesGrp_Count_Reg),
-      nonGroup: +(getRowByType(ind, 'Hiring_TotalNew').NonDesGrp_Count_Reg)
+    const getRowByType = (array, key) => array.find(item => item.Type === key)
+
+    Object.values(dataMap).forEach(values => {
+      console.log('values', values)
+      Object.keys(chartDataOutline).forEach(key => {
+        console.log('key', key)
+        const groupValue = +(getRowByType(values, key).DesGrp_Count_Reg)
+        console.log('groupValue', groupValue)
+        chartDataOutline[key].group += groupValue
+        chartDataOutline[key].nonGroup -= groupValue
+      })
     })
 
-    console.log('theData', theData)
+    const chartData = Object.values(chartDataOutline)
+
+    console.log('chartData', chartData)
 
     const graph = (
       <FlowReportChart
-        data={theData}
+        data={chartData}
         yLines={[]}
         stackKeys={['group', 'nonGroup']}
-        colors={['#1b6c94', '#1b4e94']}
+        colors={['#70CCDB', '#D2E2EE']}
         options={{
           height: 500,
           dataLabels: { position: -10, formatter: (d) => formatNumber(d) },
