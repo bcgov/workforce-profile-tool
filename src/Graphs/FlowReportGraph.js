@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import FlowReportChart from './FlowReportChart'
-import { formatNumber } from '../Services/formatter'
+import { formatNumber, parseFloatClean } from '../Services/formatter'
 import GraphFrame from './GraphFrame'
+import qs from '../Services/query-string'
+import {withRouter} from 'react-router-dom'
 
 import './Graphs.css'
 
@@ -42,13 +44,20 @@ class FlowReportGraph extends Component {
 
     const getRowByType = (array, key) => array.find(item => item.Type === key)
 
+    console.log('-->', this.props.location.search)
+
+    const keySuffix = qs.parse(this.props.location.search).Employee_Type === 'Employees_Aux'
+      ? '_Aux' : '_Reg'
+
+    console.log('keySuffix', keySuffix)
+
     Object.values(dataMap).forEach(values => {
       Object.keys(chartDataOutline).forEach(key => {
-        const groupValue = +(getRowByType(values, key).DesGrp_Count_Reg)
+        const groupValue = parseFloatClean(getRowByType(values, key)[`DesGrp_Count${keySuffix}`])
         // const nonGroupValue = +(getRowByType(values, key).NonDesGrp_Count_Reg)
         chartDataOutline[key].group += groupValue
         if (chartDataOutline[key].nonGroup === null) {
-          chartDataOutline[key].nonGroup = +(getRowByType(values, key).Total_Count_Reg)
+          chartDataOutline[key].nonGroup = parseFloatClean(getRowByType(values, key)[`Total_Count${keySuffix}`])
         }
         chartDataOutline[key].nonGroup -= groupValue
       })
@@ -59,6 +68,8 @@ class FlowReportGraph extends Component {
     if (this.state.absolute) {
       chartData.forEach(d => (d.group = -d.group))
     }
+
+    console.log(chartData)
 
     const graph = (
       <FlowReportChart
@@ -92,4 +103,4 @@ class FlowReportGraph extends Component {
   }
 }
 
-export default FlowReportGraph
+export default withRouter(FlowReportGraph)
