@@ -7,7 +7,7 @@ import { displayNameByKey, shortDisplayNameByKey } from '../Variables/VariableLi
 
 import './Graphs.css'
 
-import { parseIntClean, formatPercent } from '../Services/formatter'
+import { parseFloatClean, formatPercent } from '../Services/formatter'
 
 class MinistryGraph extends Component {
   render () {
@@ -63,7 +63,7 @@ class MinistrySubGraph extends Component {
     categories = categories.filter(c => c !== 'key' && c !== 'Des_Grp')
 
     const chartData = categories.sort().map(category => {
-      const values = this.props.data.map(row => +parseIntClean(row[category]))
+      const values = this.props.data.map(row => +parseFloatClean(row[category]))
 
       return {
         category: category,
@@ -87,6 +87,11 @@ class MinistrySubGraph extends Component {
 
     const color = COLOR_MAP[this.props.data[0]['Des_Grp']]
 
+    const formatter = (d) => {
+      console.log('d', d)
+      return (d === 0) ? '<3' : formatPercent(d, 1, 100)
+    }
+
     const graph = (
       <PlusPlot.GroupedBarChart
         data={chartData}
@@ -94,7 +99,7 @@ class MinistrySubGraph extends Component {
         colors={[color]}
         options={{
           height: 600,
-          dataLabels: { position: 25, formatter: (d) => formatPercent(d / 100, 0) },
+          dataLabels: { position: 25, formatter },
           margins: { top: 0, left: 250, bottom: 40, right: 40 },
           axes: { yAxisLabel: '', xAxisLabel: '% representation' },
           font: 'Myriad Pro'

@@ -8,7 +8,6 @@ export const formatNumber = (number, zeroValue = 0) => {
 export const formatPercent = (number, decimals = 0, divisor = 1, zeroValue = 0) => {
   if (number === 'S') return 'S'
   if (number === '<3') return '<3'
-  if (+number === 0 || number === '') return zeroValue
   return (+number / divisor).toLocaleString('en', {
     style: 'percent', minimumFractionDigits: decimals
   })
