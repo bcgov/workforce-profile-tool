@@ -34,21 +34,22 @@ class FlowReportGraph extends Component {
     console.log('dataMap', dataMap)
 
     const chartDataOutline = {
-      'Hiring_TotalNew': { category: 'New', group: 0, nonGroup: 4068 },
-      'Employed_2015': { category: 'Employed', group: 0, nonGroup: 23747 },
-      'Promotions_Total': { category: 'Promotions', group: 0, nonGroup: 2842 },
-      'Separations_Total': { category: 'Separations', group: 0, nonGroup: 3600 }
+      'Hiring_TotalNew': { category: 'New', group: 0, nonGroup: null },
+      'Employed_2015': { category: 'Employed', group: 0, nonGroup: null },
+      'Promotions_Total': { category: 'Promotions', group: 0, nonGroup: null },
+      'Separations_Total': { category: 'Separations', group: 0, nonGroup: null }
     }
 
     const getRowByType = (array, key) => array.find(item => item.Type === key)
 
     Object.values(dataMap).forEach(values => {
-      console.log('values', values)
       Object.keys(chartDataOutline).forEach(key => {
-        console.log('key', key)
         const groupValue = +(getRowByType(values, key).DesGrp_Count_Reg)
-        console.log('groupValue', groupValue)
+        // const nonGroupValue = +(getRowByType(values, key).NonDesGrp_Count_Reg)
         chartDataOutline[key].group += groupValue
+        if (chartDataOutline[key].nonGroup === null) {
+          chartDataOutline[key].nonGroup = +(getRowByType(values, key).Total_Count_Reg)
+        }
         chartDataOutline[key].nonGroup -= groupValue
       })
     })
