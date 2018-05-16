@@ -21,8 +21,6 @@ class FlowReportTable extends Component {
       dataMap[d.Des_Grp].push(d)
     })
 
-    console.log('this.props.data', this.props.data)
-
     const tables = Object.keys(dataMap).map(k => {
       let title = displayNameByKey('Des_Grp', k)
       let shortTitle = shortDisplayNameByKey('Des_Grp', k)

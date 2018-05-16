@@ -33,8 +33,6 @@ class FlowReportGraph extends Component {
       dataMap[d.Des_Grp].push(d)
     })
 
-    console.log('dataMap', dataMap)
-
     const chartDataOutline = {
       'Hiring_TotalNew': { category: 'New', group: 0, nonGroup: null },
       'Employed_2015': { category: 'Employed', group: 0, nonGroup: null },
@@ -44,12 +42,8 @@ class FlowReportGraph extends Component {
 
     const getRowByType = (array, key) => array.find(item => item.Type === key)
 
-    console.log('-->', this.props.location.search)
-
     const keySuffix = qs.parse(this.props.location.search).Employee_Type === 'Employees_Aux'
       ? '_Aux' : '_Reg'
-
-    console.log('keySuffix', keySuffix)
 
     Object.values(dataMap).forEach(values => {
       Object.keys(chartDataOutline).forEach(key => {
@@ -68,8 +62,6 @@ class FlowReportGraph extends Component {
     if (this.state.absolute) {
       chartData.forEach(d => (d.group = -d.group))
     }
-
-    console.log(chartData)
 
     const graph = (
       <FlowReportChart

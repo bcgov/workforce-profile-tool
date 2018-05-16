@@ -36,7 +36,7 @@ export const displayNameByKey = (variableKey, valueKey) => {
       .options
       .filter(v => v.key === valueKey)[0].display
   } catch (e) {
-    console.log(`displayNameByKey: no variableKey '${variableKey}' and valueKey'${valueKey}' match found`)
+    console.warn(`displayNameByKey: no variableKey '${variableKey}' and valueKey'${valueKey}' match found`)
     return ''
   }
 }
@@ -48,7 +48,7 @@ export const shortDisplayNameByKey = (variableKey, valueKey) => {
       .options
       .filter(v => v.key === valueKey)[0].shortDisplay
   } catch (e) {
-    console.log(`displayNameByKey: no variableKey '${variableKey}' and valueKey'${valueKey}' match found`)
+    console.warn(`displayNameByKey: no variableKey '${variableKey}' and valueKey'${valueKey}' match found`)
     return ''
   }
 }

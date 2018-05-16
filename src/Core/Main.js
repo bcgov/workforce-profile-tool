@@ -29,8 +29,6 @@ class Main extends Component {
       activeInnerTab = this.props.match.params.lowLevelNav || 'representation-by-group'
     }
 
-    console.log('this.props.data.filterCount', this.props.data.filterCount)
-
     return (
       <div className='Main row'>
         <div className='col'>
