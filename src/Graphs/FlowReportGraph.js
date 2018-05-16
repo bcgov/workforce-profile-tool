@@ -4,6 +4,7 @@ import { formatNumber, parseFloatClean } from '../Services/formatter'
 import GraphFrame from './GraphFrame'
 import qs from '../Services/query-string'
 import {withRouter} from 'react-router-dom'
+import Legend from './Legend'
 
 import './Graphs.css'
 
@@ -80,6 +81,13 @@ class FlowReportGraph extends Component {
       />
     )
 
+    const legend = (
+      <Legend items={[
+        { label: 'Non-Designated Group', color: '#70CCDB' },
+        { label: 'Designated Group', color: '#D2E2EE' }
+      ]} />
+    )
+
     return (
       <div>
         <button className='btn btn-sm btn-primary' onClick={this.toggleAbsolute}>
@@ -89,7 +97,7 @@ class FlowReportGraph extends Component {
           }
         </button>
         <br /><br />
-        <GraphFrame graph={graph} />
+        <GraphFrame graph={graph} legend={legend} />
       </div>
     )
   }
