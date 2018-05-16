@@ -7,7 +7,7 @@ import './Graphs.css'
 class GraphFrame extends Component {
   render () {
     return (
-      <div className='row'>
+      <div className={`row${this.props.className ? ` ${this.props.className}` : ''}`}>
         <div className='col-9'>
           {this.props.graph}
         </div>

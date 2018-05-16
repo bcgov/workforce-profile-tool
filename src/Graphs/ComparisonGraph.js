@@ -28,13 +28,13 @@ class RegionGraph extends Component {
     const chartData = this.props.data.map(d => {
       const count = +d.BCPS
       const comparators = [
-        { value: +d.Available_Workforce, color: '#6b747c' },
-        { value: +d.Employees_BC_Population, color: '#d3e2ef' }
+        { value: +d.Available_Workforce, color: '#70CCDB' },
+        { value: +d.Employees_BC_Population, color: '#D2E2EE' }
       ]
 
       return {
         category: displayNameByKey('Des_Grp', d['Des_Grp']),
-        color: '#70CCDB',
+        color: '#6c757d',
         count,
         comparators
       }
@@ -67,14 +67,14 @@ class RegionGraph extends Component {
 
     const legend = (
       <Legend items={[
-        { label: 'BC Public Service', color: '#70CCDB' },
-        { label: 'Available Workforce', color: '#D2E2EE' },
-        { label: 'BC Population', color: '#6c757d' }
+        { label: 'BC Public Service', color: '#6c757d' },
+        { label: 'Available Workforce', color: '#70CCDB' },
+        { label: 'BC Population', color: '#D2E2EE' }
       ]} />
     )
 
     return (
-      <GraphFrame graph={graph} legend={legend} />
+      <GraphFrame className='Comparison' graph={graph} legend={legend} />
     )
   }
 }
