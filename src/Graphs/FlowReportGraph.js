@@ -11,14 +11,14 @@ class FlowReportGraph extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      proportional: false
+      absolute: false
     }
 
-    this.toggleProportional = this.toggleProportional.bind(this)
+    this.toggleAbsolute = this.toggleAbsolute.bind(this)
   }
 
-  toggleProportional () {
-    this.setState({ proportional: !this.state.proportional })
+  toggleAbsolute () {
+    this.setState({ absolute: !this.state.absolute })
   }
 
   render () {
@@ -55,13 +55,17 @@ class FlowReportGraph extends Component {
 
     const chartData = Object.values(chartDataOutline)
 
+    if (this.state.absolute) {
+      chartData.forEach(d => (d.group = -d.group))
+    }
+
     const graph = (
       <FlowReportChart
         data={chartData}
         yLines={[]}
         stackKeys={['group', 'nonGroup']}
         colors={['#70CCDB', '#D2E2EE']}
-        proportional={this.state.proportional}
+        absolute={this.state.absolute}
         options={{
           height: 500,
           dataLabels: { position: -10, formatter: (d) => formatNumber(d) },
@@ -74,10 +78,10 @@ class FlowReportGraph extends Component {
 
     return (
       <div>
-        <button className='btn btn-sm btn-primary' onClick={this.toggleProportional}>
-          {this.state.proportional
-            ? 'Show absolute numbers'
-            : 'Show proportional numbers'
+        <button className='btn btn-sm btn-primary' onClick={this.toggleAbsolute}>
+          {this.state.absolute
+            ? 'Show proportional numbers'
+            : 'Show absolute numbers'
           }
         </button>
         <br /><br />

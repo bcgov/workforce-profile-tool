@@ -108,9 +108,9 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
   }
 
   stackedData () {
-    let stack = d3.stack().keys(this.props.stackKeys)
-    if (this.props.proportional) {
-      stack = stack.offset(d3.stackOffsetExpand)
+    let stack = d3.stack().keys(this.props.stackKeys).offset(d3.stackOffsetExpand)
+    if (this.props.absolute) {
+      stack = stack.offset(d3.stackOffsetDiverging)
     }
     return stack(this.props.data)
   }
