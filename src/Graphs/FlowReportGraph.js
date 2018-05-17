@@ -83,8 +83,8 @@ class FlowReportGraph extends Component {
 
     const legend = (
       <Legend items={[
-        { label: 'Non-Designated Group', color: '#70CCDB' },
-        { label: 'Designated Group', color: '#D2E2EE' }
+        { label: 'Designated Group', color: '#70CCDB' },
+        { label: 'Non-Designated Group', color: '#D2E2EE' }
       ]} />
     )
 
