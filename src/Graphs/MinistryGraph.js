@@ -87,10 +87,7 @@ class MinistrySubGraph extends Component {
 
     const color = COLOR_MAP[this.props.data[0]['Des_Grp']]
 
-    const formatter = (d) => {
-      console.log('d', d)
-      return (d === 0) ? '<3' : formatPercent(d, 1, 100)
-    }
+    const formatter = (d) => (d === 0) ? '<3' : formatPercent(d, 1, 100)
 
     const graph = (
       <PlusPlot.GroupedBarChart
