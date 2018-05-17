@@ -74,7 +74,7 @@ class FlowReportGraph extends Component {
         options={{
           height: 500,
           dataLabels: { position: -10, formatter: (d) => formatNumber(d) },
-          margins: { top: 10, left: 70, bottom: 40, right: 20 },
+          margins: { top: 20, left: 70, bottom: 40, right: 20 },
           axes: { xAxisTicksVisible: false, xAxisLabel: '', yAxisLabel: 'Number' },
           font: 'Myriad Pro'
         }}

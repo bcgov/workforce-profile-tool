@@ -78,33 +78,53 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
       .attr('height', 0)
   }
 
-  setDataLabels (dataLabelGroups) {
+  setDataLabels (dataLabels) {
     const positionAdjustment = this.dataLabels.position || 0
 
-    dataLabelGroups
-      .attr('transform', d => `translate(${this.getXScale()(d.category)},0)`)
+    const getY = (d) => {
+      if (this.props.absolute) {
+        if (d[0] < 0) {
+          return this.getYScale()(d[0]) - positionAdjustment
+        } else {
+          return this.getYScale()(d[1]) + positionAdjustment
+        }
+      } else {
+        return this.getYScale()(d[1]) + positionAdjustment
+      }
+    }
 
-    dataLabelGroups.selectAll('text')
-      .attr('x', (d, i) => this.getXScale()(i) + 0.5 * this.getXScale().bandwidth())
-      .attr('y', d => this.getYScale()(d) + positionAdjustment)
+    const getText = (d) => {
+      if (this.props.absolute) {
+        if (d[0] < 0) {
+          return d3.format(',.0f')(Math.abs(d[0]))
+        } else {
+          return d3.format(',.0f')(d[1])
+        }
+      } else {
+        if (d[1] < 1) {
+          return d3.format('.1%')(d[1])
+        } else {
+          return ''
+        }
+      }
+    }
+
+    dataLabels
+      .attr('x', (d, i) => this.getXScale()(d.data.category) + 0.5 * this.getXScale().bandwidth())
+      .attr('y', getY)
       .style('font-family', this.font)
       .style('text-anchor', 'middle')
       .style('alignment-baseline', 'middle')
-      .attr('fill', this.dataLabels.color)
-      .text(d => this.dataLabels.formatter ? this.dataLabels.formatter(d) : d)
+      .text(getText)
   }
 
-  setInitialDataLabels (dataLabelGroups) {
-    dataLabelGroups
-      .attr('transform', d => `translate(${this.getXScale()(d.category)},0)`)
-
-    dataLabelGroups.selectAll('text')
-      .attr('x', (d, i) => this.getXScale()(i) + 0.5 * this.getXScale().bandwidth())
+  setInitialDataLabels (dataLabels) {
+    dataLabels
+      .attr('x', (d) => this.getXScale()(d.data.category))
       .attr('y', d => this.height)
       .style('font-family', this.font)
       .style('text-anchor', 'middle')
       .style('alignment-baseline', 'middle')
-      .attr('fill', this.dataLabels.color)
   }
 
   stackedData () {
@@ -162,13 +182,33 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
 
     barGroups.exit().remove()
 
+    // The bars are the bars within each group
+    const dataLabelGroups = this.wrapper
+       .selectAll('.dataLabelGroup')
+       .data(this.stackedData(), (d, i) => i)
+
+    dataLabelGroups.enter().append('g')
+       .attr('class', 'dataLabelGroup')
+
+    dataLabelGroups.exit().remove()
+
     const bars = this.wrapper.selectAll('.barGroup')
       .selectAll('.bar')
+      .data(d => d, d => d.data.category)
+
+    const labels = this.wrapper.selectAll('.dataLabelGroup')
+      .selectAll('.dataLabel')
       .data(d => d, d => d.data.category)
 
     const duration = 300
 
     const exit = bars.exit()
+        .transition().duration(duration)
+        .attr('height', 0)
+        .attr('y', this.height)
+        .remove()
+
+    labels.exit()
         .transition().duration(duration)
         .attr('height', 0)
         .attr('y', this.height)
@@ -186,16 +226,15 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
       .transition().delay(delay).duration(duration)
       .call(this.setBarSizes)
 
-    if (this.dataLabels) {
-      // The dataLabels are the dataLabels within each group
-      // const dataLabels = this.wrapper.selectAll('.dataLabelGroup').selectAll('.dataLabel')
-      //   .data(d => d.values, (d, i) => i)
+    labels
+      .transition().delay(delay).duration(duration)
+      .call(this.setDataLabels)
 
-      // dataLabels.enter().append('text')
-      //   .attr('class', 'dataLabel')
-
-      // dataLabels.exit().remove()
-    }
+    labels.enter().append('text')
+      .attr('class', 'dataLabel')
+      .call(this.setInitialDataLabels)
+      .transition().delay(delay).duration(duration)
+      .call(this.setDataLabels)
 
     this.updateVizComponents(duration, delay)
   }
