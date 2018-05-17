@@ -57,7 +57,7 @@ class RegionGraph extends Component {
         options={{
           height: 500,
           dataLabels: { position: 25, formatter: (d) => formatPercent(d / 100, 1) },
-          margins: { top: 0, left: 125, bottom: 40, right: 40 },
+          margins: { top: 0, left: 140, bottom: 40, right: 40 },
           axes: { yAxisLabel: '', xAxisLabel: '% representation' },
           font: 'Myriad Pro'
         }}

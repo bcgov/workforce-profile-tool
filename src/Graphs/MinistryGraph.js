@@ -97,7 +97,7 @@ class MinistrySubGraph extends Component {
         options={{
           height: 600,
           dataLabels: { position: 25, formatter },
-          margins: { top: 0, left: 250, bottom: 40, right: 40 },
+          margins: { top: 0, left: 290, bottom: 40, right: 40 },
           axes: { yAxisLabel: '', xAxisLabel: '% representation' },
           font: 'Myriad Pro'
         }}

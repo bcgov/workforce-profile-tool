@@ -41,7 +41,7 @@ class OccupationGraph extends Component {
         data={chartData}
         colors={['#70CCDB', '#D2E2EE', '#6c757d']}
         options={{
-          margins: { top: 0, left: 125, bottom: 40, right: 20 },
+          margins: { top: 0, left: 140, bottom: 40, right: 20 },
           axes: { yAxisLabel: '', xAxisLabel: 'Count in BCPS' },
           font: 'Myriad Pro'
         }}
