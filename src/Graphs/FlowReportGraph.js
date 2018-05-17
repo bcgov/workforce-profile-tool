@@ -75,7 +75,7 @@ class FlowReportGraph extends Component {
           height: 500,
           dataLabels: { position: -10, formatter: (d) => formatNumber(d) },
           margins: { top: 10, left: 70, bottom: 40, right: 20 },
-          axes: { xAxisLabel: '', yAxisLabel: 'Number' },
+          axes: { xAxisTicksVisible: false, xAxisLabel: '', yAxisLabel: 'Number' },
           font: 'Myriad Pro'
         }}
       />
@@ -97,7 +97,7 @@ class FlowReportGraph extends Component {
           }
         </button>
         <br /><br />
-        <GraphFrame graph={graph} legend={legend} />
+        <GraphFrame className='FlowReport' graph={graph} legend={legend} />
       </div>
     )
   }

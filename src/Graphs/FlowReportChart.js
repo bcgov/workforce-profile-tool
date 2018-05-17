@@ -115,6 +115,41 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
     return stack(this.props.data)
   }
 
+  updateVizComponents (duration = 500, delay = 0) {
+    const yAxis = this.svg.select('.y-axis')
+    const xAxis = this.svg.select('.x-axis')
+
+    const axisLeft = d3.axisLeft(this.getYScale())
+
+    if (this.props.absolute) {
+      axisLeft.tickFormat(d => d3.format(',.0f')(Math.abs(d)))
+    } else {
+      axisLeft.tickFormat(d3.format('.0%'))
+    }
+
+    yAxis.transition()
+      .duration(duration).delay(delay)
+      .call(axisLeft)
+
+    // d3.selectAll
+
+    xAxis.transition()
+      .duration(duration).delay(delay)
+      .call(d3.axisBottom(this.getXScale()))
+
+    const rotation = this.axes.xAxisRotateTickLabels
+    const textAnchor =
+            rotation < 0
+            ? 'end'
+            : rotation > 0
+            ? 'start'
+            : 'middle'
+
+    this.wrapper.selectAll('.x-axis .tick text')
+      .attr('transform', `rotate(${rotation})`)
+      .style('text-anchor', textAnchor)
+  }
+
   updateGraphicContents () {
     // The bars are the bars within each group
     const barGroups = this.wrapper

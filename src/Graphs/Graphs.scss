@@ -3,7 +3,7 @@
     font-size: 0.9rem;
   }
   .y-axis .tick text {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
   .x-axis .tick text {
     font-size: 0.8rem;
@@ -15,4 +15,15 @@
 
 .bulletBarLabel {
   display: none;
+}
+
+.FlowReport {
+  .x-axis {
+    path.domain {
+      display: none;
+    }
+    .tick line {
+      display: none;
+    }
+  }
 }
