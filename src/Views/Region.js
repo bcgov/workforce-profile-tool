@@ -6,7 +6,7 @@ class Region extends Component {
   render () {
     return (
       <div>
-        <h1>Region</h1>
+        <h1>Representation — Region</h1>
         <RegionGraph data={this.props.data} />
         <RegionTable data={this.props.data} />
       </div>

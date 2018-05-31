@@ -6,7 +6,7 @@ class FlowReport extends Component {
   render () {
     return (
       <div>
-        <h1>Flow Report</h1>
+        <h1>Representation — Flow Report</h1>
         <FlowReportGraph data={this.props.data} />
         <FlowReportTable data={this.props.data} />
       </div>
