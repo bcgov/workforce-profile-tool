@@ -3,6 +3,8 @@ import * as PlusPlot from '@plot-and-scatter/plusplot'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 
+import { formatNumber } from '../Services/formatter'
+
 import './Graphs.css'
 
 import { VARIABLE_MAPPING } from '../Variables/VariableList'
@@ -41,6 +43,10 @@ class RegionGraph extends Component {
         data={chartData}
         colors={['#70CCDB', '#D2E2EE', '#6c757d']}
         options={{
+          dataLabels: {
+            position: 20,
+            formatter: (d) => formatNumber(d, '')
+          },
           margins: { top: 0, left: 140, bottom: 40, right: 20 },
           axes: { yAxisLabel: '', xAxisLabel: 'Count in BCPS' },
           font: 'Myriad Pro'
