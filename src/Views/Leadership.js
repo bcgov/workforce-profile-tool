@@ -6,7 +6,7 @@ class Leadership extends Component {
   render () {
     return (
       <div>
-        <h1>Leadership</h1>
+        <h1>Leadership by Type</h1>
         <LeadershipGraph data={this.props.data} />
         <LeadershipTable data={this.props.data} />
       </div>

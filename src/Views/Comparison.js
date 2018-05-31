@@ -8,7 +8,7 @@ class Comparison extends Component {
 
     return (
       <div>
-        <h1>Comparison</h1>
+        <h1>Comparison with Provincial Workforce</h1>
         <ComparisonGraph data={this.props.data} />
         <ComparisonTable data={this.props.data} />
       </div>

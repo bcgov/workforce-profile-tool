@@ -6,7 +6,7 @@ class Hiring extends Component {
   render () {
     return (
       <div>
-        <h1>Hiring</h1>
+        <h1>Indicators of Progress — Hiring</h1>
         <HiringGraph data={this.props.data} />
         <HiringTable data={this.props.data} />
       </div>
