@@ -21,7 +21,7 @@ class Main extends Component {
   }
 
   render () {
-    const activeOuterTab = this.props.match.params.highLevelNav || 'indicators-of-progress'
+    const activeOuterTab = this.props.match.params.highLevelNav || 'home'
     let activeInnerTab
     if (activeOuterTab === 'representation' && !this.props.match.params.lowLevelNav) {
       activeInnerTab = 'by-occupation'
@@ -33,6 +33,29 @@ class Main extends Component {
       <div className='Main row'>
         <div className='col'>
           <TabInterface activeTabKey={activeOuterTab} matchURL={this.props.match.url} search={this.props.location.search}>
+            <Tab key={'home'} name='Home'>
+              <div>
+                <h1>Workforce Profiles Report — 2015</h1>
+                <p className='lead'>
+                  Explore statistics on the representation of various designated groups across the BC Public Service.
+                </p>
+                <h2>List of charts and tables</h2>
+                <ul>
+                  <li>Indicators of Progress — By Designated Group</li>
+                  <li>Indicators of Progress — Hiring</li>
+                  <li>Comparison</li>
+                  <li>Leadership</li>
+                  <li>Ministries</li>
+                  <li>Representation — By Occupation</li>
+                  <li>Representation — By Region</li>
+                  <li>Representation — Flow Report</li>
+                </ul>
+                <h2>Notes</h2>
+                <p>Based on the 2015 Workforce Engagement Survey results and 2011 Statistics Canada Census data.</p>
+                <h2>Contact</h2>
+                <p>For additional information, contact _________________.</p>
+              </div>
+            </Tab>
             <Tab key={'indicators-of-progress'} name='Indicators of Progress'>
               <div className='Secondary'>
                 <TabInterface activeTabKey={activeInnerTab} baseURL={`/${activeOuterTab}`} search={this.props.location.search}>
