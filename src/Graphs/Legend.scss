@@ -1,22 +1,28 @@
 @import '../bootstrap/_colors';
 
 .Legend {
-  background-color: $gray-150;
-  h1 {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-  }
-  padding: 1rem;
-  font-size: 0.9rem;
-  table {
-    td {
-      padding: 5px;
-      .swatch {
-        line-height: 1.8rem;
-        font-size: 1.8rem;
-        padding-top: 5px;
-      }
-      vertical-align: middle;
+    background-color: $gray-150;
+    h1 {
+        font-size: 0.8rem;
+        text-transform: uppercase;
     }
-  }
+    padding: 1rem;
+    font-size: 0.9rem;
+    table {
+        td {
+            padding: 5px;
+            .swatch {
+                line-height: 1.8rem;
+                font-size: 1.8rem;
+                padding-top: 5px;
+            }
+            vertical-align: middle;
+        }
+    }
+    .Notes {
+        margin-top: 8px;
+        font-size: 0.8rem;
+        line-height: 120%;
+        color: $brand-color-dark-grey;
+    }
 }

@@ -32,6 +32,11 @@ class Legend extends Component {
             </tbody>
           </table>
         </div>
+        {this.props.notes &&
+          <div className='Notes'>
+            {this.props.notes}
+          </div>
+        }
       </div>
     )
   }

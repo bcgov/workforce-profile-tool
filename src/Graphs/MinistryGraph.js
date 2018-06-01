@@ -62,18 +62,18 @@ class MinistrySubGraph extends Component {
 
     categories = categories.filter(c => c !== 'key' && c !== 'Des_Grp')
 
+    let hasSuppressedData = false
+
     const chartData = categories.sort().map(category => {
       const values = this.props.data.map(row => +parseFloatClean(row[category]))
+
+      if (values.includes(0)) hasSuppressedData = true
 
       return {
         category: category,
         values
       }
     })
-
-    // const chartData = Object.keys(dataMap).sort()
-    //   .filter(k => k !== 'Des_Grp' && k !== 'key')
-    //   .map(k => ({ category: k, count: +thisData[k], color: '#70CCDB' }))
 
     chartData.sort((a, b) => (a.values[0] < b.values[0] ? 1 : (a.values[0] > b.values[0] ? -1 : 0)))
 
@@ -111,7 +111,9 @@ class MinistrySubGraph extends Component {
     })
 
     const legend = (
-      <Legend items={legendItems} />
+      <Legend
+        items={legendItems}
+        notes={!hasSuppressedData ? null : <span><b>&lt;3</b> indicates that data has been suppressed because the underlying value is less than 3.</span>} />
     )
 
     return (
