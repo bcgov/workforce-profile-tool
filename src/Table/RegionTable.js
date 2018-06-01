@@ -3,6 +3,8 @@ import Reactor from '@plot-and-scatter/reactor-table'
 
 import Tooltip from '../Core/Tooltip'
 
+import Definitions from './Definitions'
+
 import { displayNameByKey, shortDisplayNameByKey } from '../Variables/VariableList'
 
 import { formatNumber, parseIntClean, parseFloatClean, formatPercent } from '../Services/formatter'
@@ -141,6 +143,7 @@ class RegionSubTable extends Component {
               />
             </div>
           }
+          <Definitions />
         </div>
       </div>
     )

@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
 
+import Definitions from './Definitions'
+
+
 import { displayNameByKey, shortDisplayNameByKey } from '../Variables/VariableList'
 
-import { formatNumber, parseIntClean, parseFloatClean, formatPercent } from '../Services/formatter'
+import { formatNumber, parseIntClean } from '../Services/formatter'
 
 import './Table.css'
 import './OccupationTable.css'
@@ -147,6 +150,7 @@ class FlowReportSubTable extends Component {
               />
             </div>
           }
+          <Definitions />
         </div>
       </div>
     )

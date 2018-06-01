@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
 
 import Tooltip from '../Core/Tooltip'
+import Definitions from './Definitions'
 
 import { displayNameByKey, shortDisplayNameByKey } from '../Variables/VariableList'
 
@@ -153,6 +154,7 @@ class OccupationSubTable extends Component {
                 rowFilter={rowFilter}
                 totalRows={totalRow}
               />
+              <Definitions />
             </div>
           }
         </div>
