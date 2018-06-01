@@ -1,21 +1,10 @@
-/* global $ */
-
 import React, { Component } from 'react'
+
+import Tooltip from '../Core/Tooltip'
 
 import './Legend.css'
 
 class Legend extends Component {
-  constructor (props) {
-    super(props)
-    this.infoButtons = []
-  }
-
-  componentDidMount () {
-    this.infoButtons.forEach(infoButton => {
-      if (infoButton) $(infoButton).tooltip()
-    })
-  }
-
   render () {
     const rows = this.props.items.map((item, index) => {
       return (
@@ -27,16 +16,7 @@ class Legend extends Component {
           </td>
           <td className='label'>
             {item.label}
-            {item.tooltip &&
-              <a className='Info'
-                ref={infoButton => { this.infoButtons[index] = infoButton }}
-                data-toggle='tooltip'
-                title={item.tooltip}
-                data-placement='bottom'
-              >
-                <i className='fas fa-info-circle' />
-              </a>
-            }
+            {item.tooltip && <span>&nbsp;<Tooltip text={item.tooltip} /></span>}
           </td>
         </tr>
       )
