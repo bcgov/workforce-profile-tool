@@ -16,6 +16,8 @@
     td {
         font-size: 0.8rem;
         border-top: none;
+        padding-top: 5px;
+        padding-bottom: 5px;
         .sortable,
         .sortable-asc,
         .sortable-desc {
@@ -117,16 +119,20 @@
     }
     td:nth-child(5),
     th:nth-child(5) {
-        border-right: 2px solid #dee2e6;
+       border-right: 2px solid #dee2e6;
     }
     tfoot {
         td:nth-child(5) {
-            border-right: 2px solid darken($brand-color-fog, 10%);
+            @media screen {
+                border-right: 2px solid darken($brand-color-fog, 10%);
+            }
         }
     }
     .hide-header tfoot {
         td:nth-child(5) {
-            border-right: 2px solid $brand-color-teal;
+            @media screen {
+                border-right: 2px solid $brand-color-teal;
+            }
         }
     }
     table.ReactorTable:last-child {

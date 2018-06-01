@@ -148,7 +148,7 @@ class App extends Component {
             <Header />
             <VariableList />
           </div>
-          <div className='col-10'>
+          <div className='col-10 MainWrapper'>
             <Switch>
               <Route exact path={`/`} render={props => <Main data={this.state} {...props} />} />
               <Route exact path={`/:highLevelNav`} render={props => <Main data={this.state} {...props} />} />

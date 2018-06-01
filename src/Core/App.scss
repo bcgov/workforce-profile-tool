@@ -6,3 +6,29 @@
         background-color: $brand-color-blue;
     }
 }
+
+@media print {
+    @page {
+        margin: 0.5cm;
+    }
+
+    .TabButtons {
+        display: none !important;
+    }
+    .LeftColumn {
+        display: none !important;
+    }
+    .MainWrapper {
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        button {
+            display: none;
+        }
+    }
+    tr:hover {
+        td {
+            font-weight: normal !important;
+        }
+    }
+}
