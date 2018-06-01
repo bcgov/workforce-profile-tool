@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
 
+import Tooltip from '../Core/Tooltip'
+
 import { displayNameByKey, shortDisplayNameByKey } from '../Variables/VariableList'
 
 import { formatNumber, parseIntClean, parseFloatClean, formatPercent } from '../Services/formatter'
@@ -90,7 +92,10 @@ class OccupationSubTable extends Component {
       },
       {
         id: 'DesGrp_Percent_AvailableWorkforce',
-        name: `${this.props.shortTitle} as % of Available Workforce`,
+        name: <span>
+          {this.props.shortTitle} as % of Available Workforce
+          &nbsp;<Tooltip text={`The representation of visible minorities in the BC Workforce according to Statistics Canada's 2011 National Household Survey. The "Available Workforce" is adjusted in accordance with the occupational distribution of jobs within the Public Service, and the geographic area from which recruitment is carried out, in order to reflect the "available" workforce to the Public Service.`} />
+        </span>,
         accessor: d => parseFloatClean(d['DesGrp_Percent_AvailableWorkforce']),
         displayAccessor: d => formatPercent(d['DesGrp_Percent_AvailableWorkforce'], 1, 100),
         cellClass: 'text-right',
@@ -98,7 +103,13 @@ class OccupationSubTable extends Component {
       },
       {
         id: 'DesGrp_Count_Expected',
-        name: `Expected # ${this.props.shortTitle}`,
+        name: <span>
+          Expected # {this.props.shortTitle}
+          &nbsp;<Tooltip text={`Shortfall numbers are only shown when the shortfall is equal to or greater than 30 employees or 20% of the expected number, where:
+            <br />Expected Number = (Available Workforce Representation x Total in Occupation), and
+            <br />Shortfall = Expected Number - Visible Minority.
+            <br />Shortfall must be at least 2 to be considered a "significantly under-represented" occupation.</span>`} />
+        </span>,
         accessor: d => parseIntClean(d['DesGrp_Count_Expected']),
         displayAccessor: d => formatNumber(d['DesGrp_Count_Expected'], ''),
         cellClass: 'text-right',

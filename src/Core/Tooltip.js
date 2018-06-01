@@ -12,8 +12,9 @@ class Tooltip extends Component {
       <a className='Tooltip'
         ref={tooltip => { this.tooltip = tooltip }}
         data-toggle='tooltip'
-        title={this.props.text}
+        title={`${this.props.text}`}
         data-placement='bottom'
+        data-html='true'
       >
         <i className='fas fa-info-circle' />
       </a>
