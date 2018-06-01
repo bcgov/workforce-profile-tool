@@ -8,7 +8,7 @@ import './Graphs.css'
 import { formatPercent } from '../Services/formatter'
 import { displayNameByKey } from '../Variables/VariableList'
 
-class RegionGraph extends Component {
+class ComparisonGraph extends Component {
   render () {
     if (!this.props.data) return <div>Loading...</div>
 
@@ -79,4 +79,4 @@ class RegionGraph extends Component {
   }
 }
 
-export default RegionGraph
+export default ComparisonGraph
