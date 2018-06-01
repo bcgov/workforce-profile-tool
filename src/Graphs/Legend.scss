@@ -2,12 +2,12 @@
 
 .Legend {
   background-color: $gray-150;
-  padding: 1rem;
-  font-size: 1rem;
   h1 {
     font-size: 0.8rem;
     text-transform: uppercase;
   }
+  padding: 1rem;
+  font-size: 0.9rem;
   table {
     td {
       padding: 5px;
@@ -15,6 +15,9 @@
         line-height: 1.8rem;
         font-size: 1.8rem;
         padding-top: 5px;
+      }
+      .Info {
+        padding-left: 4px;
       }
       vertical-align: middle;
     }
