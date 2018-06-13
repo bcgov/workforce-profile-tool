@@ -9,6 +9,7 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         font-size: 0.9rem;
+        font-weight: 500;
         a {
             cursor: pointer;
             display: block;
@@ -17,23 +18,15 @@
             i {
                 margin-right: 0.5rem;
             }
-            &::after {
-                display: block;
-                content: attr(title);
-                font-weight: bold;
-                height: 0;
-                overflow: hidden;
-                visibility: hidden;
-            }
             &:hover {
-                font-weight: bold;
+                font-weight: 500;
                 color: $brand-color-gold;
             }
         }
     }
     .TabButton.active {
         a {
-            font-weight: bold;
+            font-weight: 700;
         }
     }
     .TabButton:first-child {
