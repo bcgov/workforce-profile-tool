@@ -10,9 +10,6 @@ class Variable {
   get selectable () { return this._selectable }
   get shortDisplay () { return this._shortDisplay }
   get display () { return this._display }
-  get active () { return this._active }
-
-  set active (active) { this._active = active }
 }
 
 class VariableGroup {
@@ -43,6 +40,17 @@ class VariableManager {
     this._variableGroups = variableGroups
     this._variableGroupMap = {}
     variableGroups.forEach(group => { this._variableGroupMap[group.key] = group })
+  }
+
+  emptySelectableVariableMap () {
+    const map = {}
+    this._variableGroups.forEach(group => {
+      map[group.key] = {}
+      group.selectableVariables.forEach(variable => {
+        map[group.key][variable.key] = false
+      })
+    })
+    return map
   }
 
   get variableGroupMap () {
@@ -95,3 +103,41 @@ export const VARIABLE_MANAGER = new VariableManager([
     ]
   )
 ])
+
+export const isVariableActive = (activeVariables, variableGroupKey, variableKey) => {
+  try {
+    return activeVariables[variableGroupKey][variableKey]
+  } catch (e) {
+    return false
+  }
+}
+
+export const areAllVariablesActive = (activeVariables, variableGroupKey) => {
+  return VARIABLE_MANAGER.variableGroupByKey(variableGroupKey)
+    .selectableVariables.every(variable => {
+      return isVariableActive(activeVariables, variableGroupKey, variable.key)
+    })
+}
+
+export const areNoVariablesActive = (activeVariables, variableGroupKey) => {
+  return VARIABLE_MANAGER.variableGroupByKey(variableGroupKey)
+    .selectableVariables.every(variable => {
+      return !isVariableActive(activeVariables, variableGroupKey, variable.key)
+    })
+}
+
+export const toggleVariable = (activeVariables, varGroupKey, varKey) => {
+  const isExclusive = VARIABLE_MANAGER.variableGroupByKey(varGroupKey).exclusive
+  if (!isExclusive) {
+    // Just toggle the variable
+    activeVariables[varGroupKey][varKey] = !activeVariables[varGroupKey][varKey]
+  } else {
+    // Set all variables to false
+    Object.keys(activeVariables[varGroupKey]).forEach(key => {
+      activeVariables[varGroupKey][key] = false
+    })
+    // Set this variable to true
+    activeVariables[varGroupKey][varKey] = true
+  }
+  return activeVariables
+}

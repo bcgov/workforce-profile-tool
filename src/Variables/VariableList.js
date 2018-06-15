@@ -5,11 +5,11 @@ import VariableDisplay from './VariableDisplay'
 
 class VariableList extends Component {
   render () {
-    const variables = this.props.variableMapping.variableGroups.map(group =>
+    const variables = this.props.variableManager.variableGroups.map(group =>
       <VariableDisplay
         key={group.key}
-        exclusive={group.exclusive}
         variableGroup={group}
+        activeVariables={this.props.activeVariables}
         updateCallback={this.props.updateVariable}
       />
     )

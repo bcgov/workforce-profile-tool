@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
+import { isVariableActive } from './VariableManager'
 import './VariableDisplay.css'
 
 class VariableDisplay extends Component {
   render () {
-    const options = this.props.variableGroup.selectableVariables.map(o => {
+    const options = this.props.variableGroup.selectableVariables.map(variable => {
+      const variableGroupKey = this.props.variableGroup.key
+      const variableKey = variable.key
+      const isActive = isVariableActive(this.props.activeVariables, variableGroupKey, variableKey)
       return (
         <li
-          key={o.key}
-          className={o.active ? ' active' : ''}
-          onClick={e => this.props.updateCallback(o)}
+          key={variable.key}
+          className={isActive ? ' active' : ''}
+          onClick={e => this.props.updateCallback(this.props.variableGroup, variable)}
         >
-          {o.display}
+          {variable.display}
         </li>
       )
     })

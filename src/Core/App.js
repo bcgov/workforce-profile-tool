@@ -4,9 +4,9 @@ import './App.css'
 import Header from './Header'
 import Main from './Main'
 import VariableList from '../Variables/VariableList'
-import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 import DataLoader from '../Data/DataLoader'
 import qs from '../Services/query-string'
+import { VARIABLE_MANAGER, toggleVariable } from '../Variables/VariableManager'
 
 const ALL_VALUE = 'ALL'
 
@@ -18,11 +18,11 @@ class App extends Component {
       originalData: {},
       occupationRegionData: null,
       flowData: null,
-      active: {},
-      variables: VARIABLE_MANAGER
+      activeVariables: VARIABLE_MANAGER.emptySelectableVariableMap()
     }
 
     this.updateLocation = this.updateLocation.bind(this)
+    this.updateVariable = this.updateVariable.bind(this)
   }
 
   processFilter (key, value, data) {
@@ -104,30 +104,16 @@ class App extends Component {
     }
   }
 
-  updateCallback (variable) {
-    const allActive = variable.options.every(o => o.active)
-    const noneActive = variable.options.every(o => !o.active)
+  updateVariable (variableGroup, variable) {
+    // variable.active = !variable.active
+    console.log('updateVariable', variableGroup, variable)
 
-    if (noneActive) {
-      // No options are active. For now, just set NONE as the variable filter.
-      // This will work unless there are some values that actually have the
-      // value 'NONE'. TODO: Tidy this up a bit
-      const active = this.state.active
-      active[variable.key] = 'NONE'
-      this.setState({ active }, () => this.updateLocation())
-    } else if (allActive) {
-      // All are active. We don't need to pass the variable key at all; this is
-      // the default for the data.
-      const active = this.state.active
-      delete active[variable.key]
-      this.setState({ active }, () => this.updateLocation())
-    } else {
-      // Some are active, some are not.
-      const activeKeys = variable.options.filter(o => o.active).map(o => o.key)
-      const active = this.state.active
-      active[variable.key] = activeKeys
-      this.setState({ active }, () => this.updateLocation())
-    }
+    const groupKey = variableGroup.key
+    const varKey = variable.key
+
+    const activeVariables = toggleVariable(this.state.activeVariables, groupKey, varKey)
+
+    this.setState({ activeVariables }, () => { this.updateLocation() })
   }
 
   updateLocation () {
@@ -192,8 +178,9 @@ class App extends Component {
           <div className='LeftColumn col-2'>
             <Header />
             <VariableList
-              updateVariable={this.updateLocation}
-              variableMapping={this.state.variables}
+              updateVariable={this.updateVariable}
+              variableManager={VARIABLE_MANAGER}
+              activeVariables={this.state.activeVariables}
             />
           </div>
           <div className='col-10 MainWrapper'>
