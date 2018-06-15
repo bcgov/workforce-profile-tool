@@ -6,7 +6,7 @@ import Main from './Main'
 import VariableList from '../Variables/VariableList'
 import DataLoader from '../Data/DataLoader'
 import qs from '../Services/query-string'
-import { VARIABLE_MANAGER, toggleVariable, toActiveVariableArray } from '../Variables/VariableManager'
+import { VARIABLE_MANAGER, toggleVariable, toActiveVariableArray, fromActiveVariableArray } from '../Variables/VariableManager'
 
 const ALL_VALUE = 'ALL'
 
@@ -117,22 +117,21 @@ class App extends Component {
   }
 
   updateLocation () {
-    const arr = qs.stringify(toActiveVariableArray(this.state.activeVariables))
-    console.log('----->>>', arr)
     this.props.history.push({
-      search: '?' + arr
+      search: '?' + qs.stringify(toActiveVariableArray(this.state.activeVariables))
     })
   }
 
   async componentDidMount () {
-    const active = qs.parse(this.props.location.search)
-    console.log('------>', active)
-    if (!active['Employee_Type']) {
-      active['Employee_Type'] = 'Employees_All'
-    }
-    if (!active['Des_Grp']) {
-      active['Des_Grp'] = 'IND'
-    }
+    const parsedQS = qs.parse(this.props.location.search)
+    const activeVariables = fromActiveVariableArray(this.state.activeVariables, parsedQS)
+    this.setState({ activeVariables })
+    // if (!active['Employee_Type']) {
+    //   active['Employee_Type'] = 'Employees_All'
+    // }
+    // if (!active['Des_Grp']) {
+    //   active['Des_Grp'] = 'IND'
+    // }
 
     const iopReportData = await DataLoader.getIndicatorsOfProgressReport()
     const comparisonData = await DataLoader.getComparisonReport()
@@ -150,7 +149,6 @@ class App extends Component {
     flowReportData.forEach(r => { r.key = ''.concat(Object.values(r)) })
 
     this.setState({
-      active,
       iopReportData,
       comparisonData,
       leadershipData,

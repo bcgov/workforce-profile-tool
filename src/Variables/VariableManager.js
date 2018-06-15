@@ -151,3 +151,15 @@ export const toActiveVariableArray = (activeVariables) => {
   })
   return map
 }
+
+export const fromActiveVariableArray = (activeVariables, parsedQS) => {
+  Object.keys(parsedQS).forEach(key => {
+    const values = parsedQS[key]
+    if (values instanceof Array) {
+      values.forEach(value => { activeVariables[key][value] = true })
+    } else {
+      activeVariables[key][values] = true
+    }
+  })
+  return activeVariables
+}
