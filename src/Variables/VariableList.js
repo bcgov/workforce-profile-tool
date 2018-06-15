@@ -5,7 +5,7 @@ import VariableDisplay from './VariableDisplay'
 
 class VariableList extends Component {
   render () {
-    const variables = this.props.variableMapping.groups.map(group =>
+    const variables = this.props.variableMapping.variableGroups.map(group =>
       <VariableDisplay
         key={group.key}
         exclusive={group.exclusive}

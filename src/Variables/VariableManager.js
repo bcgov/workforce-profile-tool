@@ -8,7 +8,7 @@ class Variable {
 
   get key () { return this._key }
   get selectable () { return this._selectable }
-  get shortDisplay () { return this.shortDisplay }
+  get shortDisplay () { return this._shortDisplay }
   get display () { return this._display }
   get active () { return this._active }
 
@@ -41,34 +41,36 @@ class VariableGroup {
 class VariableManager {
   constructor (variableGroups) {
     this._variableGroups = variableGroups
-    this._map = {}
-    variableGroups.forEach(group => { this._map[group.key] = group })
+    this._variableGroupMap = {}
+    variableGroups.forEach(group => { this._variableGroupMap[group.key] = group })
   }
 
-  get map () {
-    return this._map
+  get variableGroupMap () {
+    return this._variableGroupMap
   }
 
-  get groups () {
+  get variableGroups () {
     return this._variableGroups
   }
 
-  displayNameByKey (variableGroupKey, variableKey) {
+  variableGroupByKey (variableGroupKey) {
+    return this._variableGroupMap[variableGroupKey]
+  }
+
+  variableByKey (variableGroupKey, variableKey) {
     try {
-      return this._map[variableGroupKey].variableMap[variableKey].display
+      return this._variableGroupMap[variableGroupKey].variableMap[variableKey]
     } catch (e) {
-      console.warn(`displayNameByKey: no variableGroupKey '${variableGroupKey}' and variableKey '${variableKey}' match found`)
-      return ''
+      console.error(`variableByKey: no variableGroupKey '${variableGroupKey}' and variableKey '${variableKey}' match found`)
     }
   }
 
+  displayNameByKey (variableGroupKey, variableKey) {
+    return this.variableByKey(variableGroupKey, variableKey).display
+  }
+
   shortDisplayNameByKey (variableGroupKey, variableKey) {
-    try {
-      return this._map[variableGroupKey].variableMap[variableKey].shortDisplay
-    } catch (e) {
-      console.warn(`displayNameByKey: no variableGroupKey '${variableGroupKey}' and variableKey '${variableKey}' match found`)
-      return ''
-    }
+    return this.variableByKey(variableGroupKey, variableKey).shortDisplay
   }
 }
 
