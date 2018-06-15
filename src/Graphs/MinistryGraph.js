@@ -63,21 +63,8 @@ class MinistrySubGraph extends Component {
     categories = categories.filter(c => c !== 'key' && c !== 'Des_Grp')
 
     let hasSuppressedData = false
+    let color = ''
 
-    const chartData = categories.sort().map(category => {
-      const values = this.props.data.map(row => +parseFloatClean(row[category]))
-
-      if (values.includes(0)) hasSuppressedData = true
-
-      return {
-        category: category,
-        values
-      }
-    })
-
-    chartData.sort((a, b) => (a.values[0] < b.values[0] ? 1 : (a.values[0] > b.values[0] ? -1 : 0)))
-
-    // TODO: add colormap functionality to grouped chart
     const COLOR_MAP = {
       'IND': '#234075',
       'DIS': '#70CCDB',
@@ -85,15 +72,28 @@ class MinistrySubGraph extends Component {
       'WOM': '#E6B345'
     }
 
-    const color = COLOR_MAP[this.props.data[0]['Des_Grp']]
+    const chartData = categories.sort().map(category => {
+      const count = this.props.data.map(row => +parseFloatClean(row[category]))[0]
+
+      if (count === 0) hasSuppressedData = true
+
+      color = COLOR_MAP[this.props.data[0]['Des_Grp']]
+
+      return {
+        category,
+        count,
+        color
+      }
+    })
+
+    chartData.sort((a, b) => (a.count < b.count ? 1 : (a.count > b.count ? -1 : 0)))
 
     const formatter = (d) => (d === 0) ? '<3' : formatPercent(d, 1, 100)
 
     const graph = (
-      <PlusPlot.GroupedBarChart
+      <PlusPlot.BarChart
         data={chartData}
-        xLines={[]}
-        colors={[color]}
+        xLines={[{value: 5, label: 'Now', color: 'grey'}]}
         options={{
           height: 600,
           dataLabels: { position: 25, formatter },
