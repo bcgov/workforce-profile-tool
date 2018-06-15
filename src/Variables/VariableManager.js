@@ -141,3 +141,13 @@ export const toggleVariable = (activeVariables, varGroupKey, varKey) => {
   }
   return activeVariables
 }
+
+export const toActiveVariableArray = (activeVariables) => {
+  const map = {}
+  Object.keys(activeVariables).forEach(varGroupKey => {
+    const variables = activeVariables[varGroupKey]
+    const activeVariableKeys = Object.keys(variables).filter(varKey => variables[varKey] === true)
+    map[varGroupKey] = activeVariableKeys
+  })
+  return map
+}

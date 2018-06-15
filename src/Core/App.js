@@ -6,7 +6,7 @@ import Main from './Main'
 import VariableList from '../Variables/VariableList'
 import DataLoader from '../Data/DataLoader'
 import qs from '../Services/query-string'
-import { VARIABLE_MANAGER, toggleVariable } from '../Variables/VariableManager'
+import { VARIABLE_MANAGER, toggleVariable, toActiveVariableArray } from '../Variables/VariableManager'
 
 const ALL_VALUE = 'ALL'
 
@@ -117,9 +117,10 @@ class App extends Component {
   }
 
   updateLocation () {
-    console.log('here we are', qs.stringify(this.state.active))
+    const arr = qs.stringify(toActiveVariableArray(this.state.activeVariables))
+    console.log('----->>>', arr)
     this.props.history.push({
-      search: '?' + qs.stringify(this.state.active)
+      search: '?' + arr
     })
   }
 
