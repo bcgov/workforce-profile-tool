@@ -3,8 +3,7 @@ import Reactor from '@plot-and-scatter/reactor-table'
 
 import Definitions from './Definitions'
 
-
-import { displayNameByKey, shortDisplayNameByKey } from '../Variables/VariableList'
+import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
 import { formatNumber, parseIntClean } from '../Services/formatter'
 
@@ -25,8 +24,8 @@ class FlowReportTable extends Component {
     })
 
     const tables = Object.keys(dataMap).map(k => {
-      let title = displayNameByKey('Des_Grp', k)
-      let shortTitle = shortDisplayNameByKey('Des_Grp', k)
+      let title = VARIABLE_MANAGER.displayNameByKey('Des_Grp', k)
+      let shortTitle = VARIABLE_MANAGER.shortDisplayNameByKey('Des_Grp', k)
       return (
         <div key={k}>
           <h2>{title}</h2>

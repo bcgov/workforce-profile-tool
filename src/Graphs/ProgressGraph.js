@@ -7,7 +7,7 @@ import './Graphs.css'
 
 import { formatPercent } from '../Services/formatter'
 
-import { displayNameByKey } from '../Variables/VariableList'
+import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
 class ProgressGraph extends Component {
   render () {
@@ -21,7 +21,7 @@ class ProgressGraph extends Component {
 
       let title
       try {
-        title = displayNameByKey('Des_Grp', key)
+        title = VARIABLE_MANAGER.displayNameByKey('Des_Grp', key)
       } catch (e) {
         if (key === 'WOM_SM') title = 'Women in Senior Mgmt'
       }

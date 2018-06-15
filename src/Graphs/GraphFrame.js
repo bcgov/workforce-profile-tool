@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 
-import FilterCount from './FilterCount'
-
 import './Graphs.css'
 
 class GraphFrame extends Component {

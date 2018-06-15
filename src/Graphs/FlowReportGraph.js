@@ -8,8 +8,6 @@ import Legend from './Legend'
 
 import './Graphs.css'
 
-import { displayNameByKey } from '../Variables/VariableList'
-
 class FlowReportGraph extends Component {
   constructor (props) {
     super(props)

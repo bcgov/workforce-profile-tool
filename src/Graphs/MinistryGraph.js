@@ -3,7 +3,7 @@ import * as PlusPlot from '@plot-and-scatter/plusplot'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 
-import { displayNameByKey, shortDisplayNameByKey } from '../Variables/VariableList'
+import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
 import './Graphs.css'
 
@@ -36,8 +36,8 @@ class MinistryGraph extends Component {
     })
 
     const graphs = Object.keys(dataMap).map(k => {
-      let title = displayNameByKey('Des_Grp', k)
-      let shortTitle = shortDisplayNameByKey('Des_Grp', k)
+      let title = VARIABLE_MANAGER.displayNameByKey('Des_Grp', k)
+      let shortTitle = VARIABLE_MANAGER.shortDisplayNameByKey('Des_Grp', k)
       return (
         <div key={k}>
           <h2>{title}</h2>
@@ -106,7 +106,7 @@ class MinistrySubGraph extends Component {
 
     const legendItems = this.props.data.map((d, i) => {
       const k = d['Des_Grp']
-      const label = displayNameByKey('Des_Grp', k)
+      const label = VARIABLE_MANAGER.displayNameByKey('Des_Grp', k)
       return { label, color }
     })
 

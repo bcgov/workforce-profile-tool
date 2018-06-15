@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
 
-import { VARIABLE_MAPPING } from '../Variables/VariableList'
+import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
 import { formatNumber, parseIntClean } from '../Services/formatter'
 
@@ -21,11 +21,11 @@ class MinistryTable extends Component {
     })
 
     const tables = Object.keys(dataMap).sort().map(k => {
-      let title = VARIABLE_MAPPING
+      let title = VARIABLE_MANAGER
         .filter(v => v.key === 'Des_Grp')[0]
         .options
         .filter(v => v.key === k)[0].display
-      title += ' — ' + VARIABLE_MAPPING
+      title += ' — ' + VARIABLE_MANAGER
         .filter(v => v.key === 'Employee_Type')[0]
         .options
         .filter(v => v.key === this.props.data[0]['Employee_Type'])[0].display

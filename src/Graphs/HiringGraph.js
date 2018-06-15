@@ -5,7 +5,7 @@ import GraphFrame from './GraphFrame'
 
 import './Graphs.css'
 
-import { displayNameByKey } from '../Variables/VariableList'
+import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
 class HiringGraph extends Component {
   render () {
@@ -15,7 +15,7 @@ class HiringGraph extends Component {
 
     const chartData = data.map(d => {
       return {
-        category: displayNameByKey('Des_Grp', d['Des_Grp']),
+        category: VARIABLE_MANAGER.displayNameByKey('Des_Grp', d['Des_Grp']),
         count: +d['2015_hired_ct'],
         color: '#70CCDB'
       }

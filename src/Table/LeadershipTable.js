@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
 
-import { displayNameByKey } from '../Variables/VariableList'
+import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
 import { parseFloatClean } from '../Services/formatter'
 
@@ -13,7 +13,7 @@ class ComparisonTable extends Component {
       {
         id: 'Des_Grp',
         name: 'Designated Group',
-        accessor: d => displayNameByKey('Des_Grp', d['Des_Grp'])
+        accessor: d => VARIABLE_MANAGER.displayNameByKey('Des_Grp', d['Des_Grp'])
       },
       {
         id: 'Applied_Leadership',

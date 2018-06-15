@@ -4,6 +4,7 @@ import './App.css'
 import Header from './Header'
 import Main from './Main'
 import VariableList from '../Variables/VariableList'
+import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 import DataLoader from '../Data/DataLoader'
 import qs from '../Services/query-string'
 
@@ -16,10 +17,12 @@ class App extends Component {
     this.state = {
       originalData: {},
       occupationRegionData: null,
-      flowData: null
+      flowData: null,
+      active: {},
+      variables: VARIABLE_MANAGER
     }
 
-    // this.filterFromProps(props)
+    this.updateLocation = this.updateLocation.bind(this)
   }
 
   processFilter (key, value, data) {
@@ -71,7 +74,6 @@ class App extends Component {
 
   filterFromProps (props) {
     const filters = qs.parse(props.location.search)
-    console.log('filters', filters)
     if (Object.keys(filters).length > 0 && this.state.originalData.occupationRegionData) {
       const occupationRegionData = this.processFilters(filters, this.state.originalData.occupationRegionData)
       // const filterCount = occupationRegionData
@@ -102,7 +104,49 @@ class App extends Component {
     }
   }
 
+  updateCallback (variable) {
+    const allActive = variable.options.every(o => o.active)
+    const noneActive = variable.options.every(o => !o.active)
+
+    if (noneActive) {
+      // No options are active. For now, just set NONE as the variable filter.
+      // This will work unless there are some values that actually have the
+      // value 'NONE'. TODO: Tidy this up a bit
+      const active = this.state.active
+      active[variable.key] = 'NONE'
+      this.setState({ active }, () => this.updateLocation())
+    } else if (allActive) {
+      // All are active. We don't need to pass the variable key at all; this is
+      // the default for the data.
+      const active = this.state.active
+      delete active[variable.key]
+      this.setState({ active }, () => this.updateLocation())
+    } else {
+      // Some are active, some are not.
+      const activeKeys = variable.options.filter(o => o.active).map(o => o.key)
+      const active = this.state.active
+      active[variable.key] = activeKeys
+      this.setState({ active }, () => this.updateLocation())
+    }
+  }
+
+  updateLocation () {
+    console.log('here we are', qs.stringify(this.state.active))
+    this.props.history.push({
+      search: '?' + qs.stringify(this.state.active)
+    })
+  }
+
   async componentDidMount () {
+    const active = qs.parse(this.props.location.search)
+    console.log('------>', active)
+    if (!active['Employee_Type']) {
+      active['Employee_Type'] = 'Employees_All'
+    }
+    if (!active['Des_Grp']) {
+      active['Des_Grp'] = 'IND'
+    }
+
     const iopReportData = await DataLoader.getIndicatorsOfProgressReport()
     const comparisonData = await DataLoader.getComparisonReport()
     const leadershipData = await DataLoader.getLeadershipReport()
@@ -119,6 +163,7 @@ class App extends Component {
     flowReportData.forEach(r => { r.key = ''.concat(Object.values(r)) })
 
     this.setState({
+      active,
       iopReportData,
       comparisonData,
       leadershipData,
@@ -146,7 +191,10 @@ class App extends Component {
         <div className='row'>
           <div className='LeftColumn col-2'>
             <Header />
-            <VariableList />
+            <VariableList
+              updateVariable={this.updateLocation}
+              variableMapping={this.state.variables}
+            />
           </div>
           <div className='col-10 MainWrapper'>
             <Switch>

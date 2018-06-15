@@ -6,7 +6,7 @@ import Legend from './Legend'
 import './Graphs.css'
 
 import { formatPercent } from '../Services/formatter'
-import { displayNameByKey } from '../Variables/VariableList'
+import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
 class ComparisonGraph extends Component {
   render () {
@@ -33,7 +33,7 @@ class ComparisonGraph extends Component {
       ]
 
       return {
-        category: displayNameByKey('Des_Grp', d['Des_Grp']),
+        category: VARIABLE_MANAGER.displayNameByKey('Des_Grp', d['Des_Grp']),
         color: '#6c757d',
         count,
         comparators

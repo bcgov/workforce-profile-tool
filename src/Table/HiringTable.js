@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
 
-import { displayNameByKey } from '../Variables/VariableList'
+import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
 import { formatPercent, parseIntClean, parseFloatClean } from '../Services/formatter'
 
@@ -23,7 +23,7 @@ class ProgressTable extends Component {
       {
         id: 'Des_Grp',
         name: 'Designated Group',
-        accessor: d => displayNameByKey('Des_Grp', d['Des_Grp'])
+        accessor: d => VARIABLE_MANAGER.displayNameByKey('Des_Grp', d['Des_Grp'])
       },
       {
         id: '2015_hired_ct',

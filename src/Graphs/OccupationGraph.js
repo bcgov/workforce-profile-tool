@@ -7,7 +7,7 @@ import { formatNumber } from '../Services/formatter'
 
 import './Graphs.css'
 
-import { VARIABLE_MAPPING } from '../Variables/VariableList'
+import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
 class OccupationGraph extends Component {
   render () {
@@ -27,10 +27,7 @@ class OccupationGraph extends Component {
         +data.DesGrp_Count_Shortfall
       ]
 
-      let title = VARIABLE_MAPPING
-        .filter(v => v.key === 'Des_Grp')[0]
-        .options
-        .filter(v => v.key === k)[0].display
+      let title = VARIABLE_MANAGER.displayNameByKey('Des_Grp', k)
 
       return {
         category: title,

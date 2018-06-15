@@ -7,7 +7,7 @@ import './Graphs.css'
 
 import { formatPercent } from '../Services/formatter'
 
-import { displayNameByKey } from '../Variables/VariableList'
+import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
 class RegionGraph extends Component {
   render () {
@@ -21,7 +21,7 @@ class RegionGraph extends Component {
       ]
 
       return {
-        category: displayNameByKey('Des_Grp', d['Des_Grp']),
+        category: VARIABLE_MANAGER.displayNameByKey('Des_Grp', d['Des_Grp']),
         values
       }
     })

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import MinistryGraph from '../Graphs/MinistryGraph'
-import MinistryTable from '../Table/MinistryTable'
 
 class Ministry extends Component {
   render () {
