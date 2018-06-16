@@ -18,7 +18,7 @@ class App extends Component {
       originalData: {},
       occupationRegionData: null,
       flowData: null,
-      activeVariables: VARIABLE_MANAGER.emptySelectableVariableMap()
+      activeVariables: {}
     }
 
     this.updateLocation = this.updateLocation.bind(this)
@@ -74,6 +74,9 @@ class App extends Component {
 
   filterFromProps (props) {
     const filters = qs.parse(props.location.search)
+    if (!filters['Employee_Type']) {
+      filters['Employee_Type'] = 'Employees_All'
+    }
     if (Object.keys(filters).length > 0 && this.state.originalData.occupationRegionData) {
       const occupationRegionData = this.processFilters(filters, this.state.originalData.occupationRegionData)
       // const filterCount = occupationRegionData
@@ -105,9 +108,6 @@ class App extends Component {
   }
 
   updateVariable (variableGroup, variable) {
-    // variable.active = !variable.active
-    console.log('updateVariable', variableGroup, variable)
-
     const groupKey = variableGroup.key
     const varKey = variable.key
 
@@ -123,15 +123,8 @@ class App extends Component {
   }
 
   async componentDidMount () {
-    const parsedQS = qs.parse(this.props.location.search)
-    const activeVariables = fromActiveVariableArray(this.state.activeVariables, parsedQS)
-    this.setState({ activeVariables })
-    // if (!active['Employee_Type']) {
-    //   active['Employee_Type'] = 'Employees_All'
-    // }
-    // if (!active['Des_Grp']) {
-    //   active['Des_Grp'] = 'IND'
-    // }
+    const activeVariables = VARIABLE_MANAGER.emptySelectableVariableMap()
+    activeVariables['Employee_Type']['Employees_All'] = true
 
     const iopReportData = await DataLoader.getIndicatorsOfProgressReport()
     const comparisonData = await DataLoader.getComparisonReport()
@@ -149,6 +142,7 @@ class App extends Component {
     flowReportData.forEach(r => { r.key = ''.concat(Object.values(r)) })
 
     this.setState({
+      activeVariables,
       iopReportData,
       comparisonData,
       leadershipData,
