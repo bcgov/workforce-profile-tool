@@ -13,21 +13,6 @@ class MinistryGraph extends Component {
   render () {
     if (!this.props.data) return <div>Loading...</div>
 
-    // let categories = this.props.data && this.props.data.length
-    //   ? Object.keys(this.props.data[0])
-    //   : []
-
-    // categories = categories.filter(c => c !== 'key' && c !== 'Des_Grp')
-
-    // // const chartData = categories.sort().map(category => {
-    // //   const values = this.props.data.map(row => +parseIntClean(row[category]))
-
-    // //   return {
-    // //     category: category,
-    // //     values
-    // //   }
-    // // })
-
     // Split the data
     const dataMap = {}
     this.props.data.forEach(d => {
@@ -36,12 +21,15 @@ class MinistryGraph extends Component {
     })
 
     const graphs = Object.keys(dataMap).map(k => {
-      let title = VARIABLE_MANAGER.displayNameByKey('Des_Grp', k)
-      let shortTitle = VARIABLE_MANAGER.shortDisplayNameByKey('Des_Grp', k)
+      const title = VARIABLE_MANAGER.displayNameByKey('Des_Grp', k)
+      const shortTitle = VARIABLE_MANAGER.shortDisplayNameByKey('Des_Grp', k)
       return (
         <div key={k}>
           <h2>{title}</h2>
-          <MinistrySubGraph data={dataMap[k]} shortTitle={shortTitle} />
+          <MinistrySubGraph
+            data={dataMap[k]}
+            shortTitle={shortTitle}
+          />
           <br />
           <br />
         </div>
@@ -60,7 +48,9 @@ class MinistrySubGraph extends Component {
       ? Object.keys(this.props.data[0])
       : []
 
-    categories = categories.filter(c => c !== 'key' && c !== 'Des_Grp')
+    const provincialRepresentation = this.props.data[0]['BC Population']
+
+    categories = categories.filter(c => c !== 'key' && c !== 'Des_Grp' && c !== 'BC Population')
 
     let hasSuppressedData = false
     let color = ''
@@ -93,7 +83,12 @@ class MinistrySubGraph extends Component {
     const graph = (
       <PlusPlot.BarChart
         data={chartData}
-        xLines={[{value: 5, label: 'Now', color: 'grey'}]}
+        xLines={[{
+          value: provincialRepresentation,
+          label: `BC Pop: ${formatter(provincialRepresentation)}`,
+          color: 'black',
+          yPosition: -20
+        }]}
         options={{
           height: 600,
           dataLabels: { position: 25, formatter },
