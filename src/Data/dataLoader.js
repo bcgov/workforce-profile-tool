@@ -31,7 +31,7 @@ class DataLoader {
   }
 
   static async getMinistryReport () {
-    const url = `${DATA_PATH_BASE}WP2015_Ministries.csv`
+    const url = `${DATA_PATH_BASE}WP2018_Ministries.csv`
     return DataLoader.loadCSV(url)
   }
 
