@@ -94,12 +94,13 @@ class GraphFrame extends Component {
     return (
       <div className={`GraphFrame row${this.props.className ? ` ${this.props.className}` : ''}`}>
         <div className='col-9'>
-          <button className='btn btn-sm btn-primary' onClick={this.saveSVGAsPNG}>Save SVG</button>
           {this.props.graph}
         </div>
         <div className='col-3'>
-          {/* <FilterCount filterCount={this.props.filterCount} /> */}
           {this.props.legend}
+          <button className='btn btn-sm btn-primary SavePNG' onClick={this.saveSVGAsPNG}>
+            <i className='fas fa-download' />Save as PNG
+          </button>
         </div>
       </div>
     )
