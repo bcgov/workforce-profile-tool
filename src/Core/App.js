@@ -6,7 +6,7 @@ import Main from './Main'
 import VariableList from '../Variables/VariableList'
 import DataLoader from '../Data/DataLoader'
 import qs from '../Services/query-string'
-import { VARIABLE_MANAGER, toggleVariable, toActiveVariableArray, fromActiveVariableArray } from '../Variables/VariableManager'
+import { VARIABLE_MANAGER, toggleVariable, toActiveVariableArray } from '../Variables/VariableManager'
 
 const ALL_VALUE = 'ALL'
 
