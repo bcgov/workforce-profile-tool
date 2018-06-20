@@ -117,6 +117,7 @@ class MinistrySubGraph extends Component {
       <GraphFrame
         className={`Ministry-${this.props.shortTitle}`}
         title={`${this.props.masterTitle} — ${this.props.title}`}
+        hideFilterNotes
         graph={graph}
         legend={legend}
       />

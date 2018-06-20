@@ -165,5 +165,26 @@ export const fromActiveVariableArray = (activeVariables, parsedQS) => {
       activeVariables[key][values] = true
     }
   })
+  if (areNoVariablesActive(activeVariables, 'Employee_Type')) {
+    activeVariables['Employee_Type']['Employees_All'] = true
+  }
+  if (areNoVariablesActive(activeVariables, 'Des_Grp')) {
+    Object.keys(activeVariables['Des_Grp']).forEach(k => {
+      activeVariables['Des_Grp'][k] = true
+    })
+  }
   return activeVariables
+}
+
+export const activeVariablesToDisplay = (activeVariables) => {
+  const result = []
+  const activeVariableArray = toActiveVariableArray(activeVariables)
+  Object.keys(activeVariableArray).forEach(k => {
+    const name = VARIABLE_MANAGER.variableGroupDisplayNameByKey(k)
+    const optionNames = activeVariableArray[k].map(vk => {
+      return VARIABLE_MANAGER.displayNameByKey(k, vk)
+    })
+    result.push({ name, optionNames })
+  })
+  return result
 }

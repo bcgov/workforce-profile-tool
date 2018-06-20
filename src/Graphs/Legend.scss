@@ -1,6 +1,7 @@
 @import '../bootstrap/_colors';
 
-.Legend {
+.Legend,
+.FilterNotes {
     background-color: $gray-150;
     h1 {
         font-size: 0.8rem;
@@ -40,4 +41,8 @@
             color: $brand-color-dark-grey;
         }
     }
+}
+
+.FilterNotes {
+    margin-top: 15px;
 }

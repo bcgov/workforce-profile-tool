@@ -131,9 +131,6 @@ class App extends Component {
   async componentDidMount () {
     const activeVariables = VARIABLE_MANAGER.emptySelectableVariableMap()
     fromActiveVariableArray(activeVariables, qs.parse(this.props.location.search))
-    if (areNoVariablesActive(activeVariables, 'Employee_Type')) {
-      activeVariables['Employee_Type']['Employees_All'] = true
-    }
 
     const iopReportData = await DataLoader.getIndicatorsOfProgressReport()
     const comparisonData = await DataLoader.getComparisonReport()

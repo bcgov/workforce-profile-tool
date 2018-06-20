@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import * as saveSVG from 'save-svg-as-png'
 
+import FilterNotes from './FilterNotes'
+
 import './Graphs.css'
 
 class GraphFrame extends Component {
@@ -98,6 +100,9 @@ class GraphFrame extends Component {
         </div>
         <div className='col-3'>
           {this.props.legend}
+          {!this.props.hideFilterNotes &&
+            <FilterNotes />
+          }
           <button className='btn btn-sm btn-primary SavePNG' onClick={this.saveSVGAsPNG}>
             <i className='fas fa-download' />Save as PNG
           </button>
