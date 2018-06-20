@@ -9,7 +9,7 @@ import './Table.css'
 
 class ProgressTable extends Component {
   render () {
-    if (!this.props.data) return <div>Loading...</div>
+    if (!this.props.data) return <div>&nbsp;</div>
 
     // const totalRow = this.props.data.filter(d => d['Des_Grp'] === 'AS_TOTAL')
     const totalRow = null

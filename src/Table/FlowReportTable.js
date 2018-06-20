@@ -12,9 +12,7 @@ import './OccupationTable.css'
 
 class FlowReportTable extends Component {
   render () {
-    if (!this.props.data) {
-      return (<div><h1>Loading...</h1></div>)
-    }
+    if (!this.props.data) return <div>&nbsp;</div>
 
     // Split the data
     const dataMap = {}

@@ -23,7 +23,7 @@ class FlowReportGraph extends Component {
   }
 
   render () {
-    if (!this.props.data) return <div>Loading...</div>
+    if (!this.props.data) return <div>&nbsp;</div>
 
     // Split the data
     const dataMap = {}

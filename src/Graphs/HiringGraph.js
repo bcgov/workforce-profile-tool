@@ -9,7 +9,7 @@ import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
 class HiringGraph extends Component {
   render () {
-    if (!this.props.data) return <div>Loading...</div>
+    if (!this.props.data) return <div>&nbsp;</div>
 
     const data = this.props.data.filter(d => !['WOM_SM'].includes(d['Des_Grp']))
 

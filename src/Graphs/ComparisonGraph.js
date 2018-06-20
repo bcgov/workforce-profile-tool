@@ -10,7 +10,7 @@ import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
 class ComparisonGraph extends Component {
   render () {
-    if (!this.props.data) return <div>Loading...</div>
+    if (!this.props.data) return <div>&nbsp;</div>
 
     // const chartData = this.props.data.map(d => {
     //   const values = [
