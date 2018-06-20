@@ -50,7 +50,7 @@ class MinistrySubGraph extends Component {
       ? Object.keys(this.props.data[0])
       : []
 
-    const provincialRepresentation = this.props.data[0]['BC Population']
+    const provincialRepresentation = parseFloat(this.props.data[0]['BC Population'])
 
     categories = categories.filter(c => c !== 'key' && c !== 'Des_Grp' && c !== 'BC Population')
 
