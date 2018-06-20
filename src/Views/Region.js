@@ -5,13 +5,14 @@ import Loading from './Loading'
 
 class Region extends Component {
   render () {
+    const title = 'Representation — Region'
     return (
       <div>
-        <h1>Representation — Region</h1>
+        <h1>{title}</h1>
         {!this.props.data && <Loading />}
         {this.props.data &&
           <div>
-            <RegionGraph data={this.props.data} />
+            <RegionGraph data={this.props.data} title={title} />
             <RegionTable data={this.props.data} />
           </div>
         }

@@ -53,7 +53,7 @@ class ProgressGraph extends Component {
     )
 
     return (
-      <GraphFrame graph={graph} legend={legend} filterCount={this.props.filterCount} />
+      <GraphFrame className='Progress' title={this.props.title} graph={graph} legend={legend} />
     )
   }
 }

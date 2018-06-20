@@ -5,13 +5,14 @@ import Loading from './Loading'
 
 class Comparison extends Component {
   render () {
+    const title = 'Comparison with Provincial Workforce'
     return (
       <div>
-        <h1>Comparison with Provincial Workforce</h1>
+        <h1>{title}</h1>
         {!this.props.data && <Loading />}
         {this.props.data &&
           <div>
-            <ComparisonGraph data={this.props.data} />
+            <ComparisonGraph data={this.props.data} title={title} />
             <ComparisonTable data={this.props.data} />
           </div>
         }

@@ -5,13 +5,14 @@ import Loading from './Loading'
 
 class Occupation extends Component {
   render () {
+    const title = 'Representation — Occupation'
     return (
       <div>
-        <h1>Representation — Occupation</h1>
+        <h1>{title}</h1>
         {!this.props.data && <Loading />}
         {this.props.data &&
           <div>
-            <OccupationGraph data={this.props.data} />
+            <OccupationGraph data={this.props.data} title={title} />
             <OccupationTable data={this.props.data} />
           </div>
         }

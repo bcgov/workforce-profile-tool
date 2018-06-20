@@ -4,15 +4,15 @@ import Loading from './Loading'
 
 class Ministry extends Component {
   render () {
+    const title = 'Ministries'
     return (
       <div>
-        <h1>Ministries</h1>
+        <h1>{title}</h1>
         {!this.props.data && <Loading />}
         {this.props.data &&
           <div>
-            <MinistryGraph data={this.props.data} />
-            {/* <MinistryTable data={this.props.data} /> */}
-            </div>
+            <MinistryGraph data={this.props.data} title={title} />
+          </div>
         }
       </div>
     )

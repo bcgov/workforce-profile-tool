@@ -36,7 +36,7 @@ class HiringGraph extends Component {
     )
 
     return (
-      <GraphFrame graph={graph} />
+      <GraphFrame className='Hiring' title={this.props.title} graph={graph} />
     )
   }
 }

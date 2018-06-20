@@ -112,7 +112,7 @@ class MinistrySubGraph extends Component {
     )
 
     return (
-      <GraphFrame graph={graph} legend={legend} />
+      <GraphFrame className='Ministry' title={this.props.title} graph={graph} legend={legend} />
     )
   }
 }

@@ -5,13 +5,14 @@ import Loading from './Loading'
 
 class Progress extends Component {
   render () {
+    const title = 'Indicators of Progress — By Designated Group'
     return (
       <div>
-        <h1>Indicators of Progress — By Designated Group</h1>
+        <h1>{title}</h1>
         {!this.props.data && <Loading />}
         {this.props.data &&
           <div>
-            <ProgressGraph data={this.props.data} />
+            <ProgressGraph data={this.props.data} title={title} />
             <ProgressTable data={this.props.data} />
           </div>
         }

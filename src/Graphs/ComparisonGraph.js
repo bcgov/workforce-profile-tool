@@ -12,19 +12,6 @@ class ComparisonGraph extends Component {
   render () {
     if (!this.props.data) return <div>&nbsp;</div>
 
-    // const chartData = this.props.data.map(d => {
-    //   const values = [
-    //     +d.BCPS,
-    //     +d.Available_Workforce,
-    //     +d.Employees_BC_Population
-    //   ]
-
-    //   return {
-    //     category: displayNameByKey('Des_Grp', d['Des_Grp']),
-    //     values
-    //   }
-    // })
-
     const chartData = this.props.data.map(d => {
       const count = +d.BCPS
       const comparators = [
@@ -41,17 +28,6 @@ class ComparisonGraph extends Component {
     })
 
     const graph = (
-      // <PlusPlot.GroupedBarChart
-      //   data={chartData}
-      //   colors={['#70CCDB', '#D2E2EE', '#6c757d']}
-      //   options={{
-      //     height: 500,
-      //     dataLabels: { position: 25, formatter: (d) => formatPercent(d / 100, 1) },
-      //     margins: { top: 0, left: 125, bottom: 40, right: 40 },
-      //     axes: { yAxisLabel: '', xAxisLabel: '% representation' },
-      //     font: 'Myriad Pro'
-      //   }}
-      // />
       <PlusPlot.BulletBarChart
         data={chartData}
         options={{
@@ -74,7 +50,7 @@ class ComparisonGraph extends Component {
     )
 
     return (
-      <GraphFrame className='Comparison' graph={graph} legend={legend} />
+      <GraphFrame className='Comparison' title={this.props.title} graph={graph} legend={legend} />
     )
   }
 }

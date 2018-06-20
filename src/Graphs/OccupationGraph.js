@@ -60,7 +60,7 @@ class OccupationGraph extends Component {
     )
 
     return (
-      <GraphFrame graph={graph} legend={legend} />
+      <GraphFrame className='Occupation' title={this.props.title} graph={graph} legend={legend} />
     )
   }
 }

@@ -49,7 +49,7 @@ class RegionGraph extends Component {
     )
 
     return (
-      <GraphFrame graph={graph} legend={legend} />
+      <GraphFrame className='Leadership' title={this.props.title} graph={graph} legend={legend} />
     )
   }
 }
