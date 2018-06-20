@@ -6,7 +6,13 @@ import Main from './Main'
 import VariableList from '../Variables/VariableList'
 import DataLoader from '../Data/DataLoader'
 import qs from '../Services/query-string'
-import { VARIABLE_MANAGER, toggleVariable, toActiveVariableArray } from '../Variables/VariableManager'
+import {
+  VARIABLE_MANAGER,
+  toggleVariable,
+  toActiveVariableArray,
+  fromActiveVariableArray,
+  areNoVariablesActive
+} from '../Variables/VariableManager'
 
 const ALL_VALUE = 'ALL'
 
@@ -124,7 +130,10 @@ class App extends Component {
 
   async componentDidMount () {
     const activeVariables = VARIABLE_MANAGER.emptySelectableVariableMap()
-    activeVariables['Employee_Type']['Employees_All'] = true
+    fromActiveVariableArray(activeVariables, qs.parse(this.props.location.search))
+    if (areNoVariablesActive(activeVariables, 'Employee_Type')) {
+      activeVariables['Employee_Type']['Employees_All'] = true
+    }
 
     const iopReportData = await DataLoader.getIndicatorsOfProgressReport()
     const comparisonData = await DataLoader.getComparisonReport()

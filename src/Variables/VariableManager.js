@@ -73,6 +73,10 @@ class VariableManager {
     }
   }
 
+  variableGroupDisplayNameByKey (variableGroupKey) {
+    return this.variableGroupByKey(variableGroupKey).display
+  }
+
   displayNameByKey (variableGroupKey, variableKey) {
     return this.variableByKey(variableGroupKey, variableKey).display
   }
