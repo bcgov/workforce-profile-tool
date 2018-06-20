@@ -7,7 +7,7 @@ class FlowReport extends Component {
   render () {
     const title = 'Representation — Flow Report'
     return (
-      <div id='FlowReport'>
+      <div>
         <h1>{title}</h1>
         {!this.props.data && <Loading />}
         {this.props.data &&
