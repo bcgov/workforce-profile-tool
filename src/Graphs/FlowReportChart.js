@@ -171,6 +171,14 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
   }
 
   updateGraphicContents () {
+    // Try updating the Y-axis if necessary
+    try {
+      this.wrapper.select('.y-axis-label')
+        .text(this.props.options.axes.yAxisLabel)
+    } catch (e) {
+      console.warn('this.props.options.axes is undefined')
+    }
+
     // The bars are the bars within each group
     const barGroups = this.wrapper
       .selectAll('.barGroup')

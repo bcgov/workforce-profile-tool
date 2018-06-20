@@ -57,9 +57,11 @@ class FlowReportGraph extends Component {
     })
 
     const chartData = Object.values(chartDataOutline)
+    let yAxisLabel = 'Proportion'
 
     if (this.state.absolute) {
       chartData.forEach(d => (d.group = -d.group))
+      yAxisLabel = 'Number'
     }
 
     const graph = (
@@ -73,7 +75,7 @@ class FlowReportGraph extends Component {
           height: 500,
           dataLabels: { position: -10, formatter: (d) => formatNumber(d) },
           margins: { top: 20, left: 70, bottom: 40, right: 20 },
-          axes: { xAxisTicksVisible: false, xAxisLabel: '', yAxisLabel: 'Number' },
+          axes: { xAxisTicksVisible: false, xAxisLabel: '', yAxisLabel },
           font: 'Myriad Pro'
         }}
       />
