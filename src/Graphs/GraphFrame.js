@@ -21,11 +21,16 @@ class GraphFrame extends Component {
     let svg = document.querySelector(`.${this.props.className} svg`)
     svg = svg.cloneNode(true)
 
+    // We will copy the already-existing Legend div from the page, if it exists.
+    let legend = document.querySelector(`.${this.props.className} .Legend`)
+
     // We need to increase the height of the svg by TITLE_HEIGHT and the width by
-    // LEGEND_WIDTH
+    // LEGEND_WIDTH, if a legend exists.
     const originalSVGWidth = +svg.getAttribute('width')
     const originalSVGHeight = +svg.getAttribute('height')
-    svg.setAttribute('width', originalSVGWidth + LEGEND_WIDTH)
+    if (legend) {
+      svg.setAttribute('width', originalSVGWidth + LEGEND_WIDTH)
+    }
     svg.setAttribute('height', originalSVGHeight + TITLE_HEIGHT)
     svg.setAttribute('style', 'background-color: #fff')
 
@@ -51,30 +56,31 @@ class GraphFrame extends Component {
     g.setAttribute('transform', translateComponents.join(','))
 
     // Build a virtual foreignObject element and set its parameters.
-    var titleFO = document.createElementNS(FO_NAMESPACE, 'foreignObject')
+    const titleFO = document.createElementNS(FO_NAMESPACE, 'foreignObject')
     titleFO.setAttribute('height', TITLE_HEIGHT)
-    titleFO.setAttribute('width', originalSVGWidth + LEGEND_WIDTH)
+    titleFO.setAttribute('width', originalSVGWidth)
     titleFO.setAttribute('style', `font-family: "${FONT_FAMILY}"`)
 
     // Build the title element, append to the FO, and append the FO to the SVG
-    var title = document.createElement('h1')
+    const title = document.createElement('h1')
     title.innerHTML = this.props.title
     titleFO.appendChild(title)
     svg.appendChild(titleFO)
 
-    // We will copy the already-existing Legend div from the page. Again, we
-    // need to insert it into a foreign object and append it to the SVG.
-    var legendFO = document.createElementNS(FO_NAMESPACE, 'foreignObject')
-    legendFO.setAttribute('height', LEGEND_HEIGHT)
-    legendFO.setAttribute('width', LEGEND_WIDTH)
-    legendFO.setAttribute('y', graphTopMargin + TITLE_HEIGHT)
-    legendFO.setAttribute('x', originalSVGWidth)
+    if (legend) {
+      // If legend exists, we need to insert it into a foreign object and append
+      // it to the SVG.
+      var legendFO = document.createElementNS(FO_NAMESPACE, 'foreignObject')
+      legendFO.setAttribute('height', LEGEND_HEIGHT)
+      legendFO.setAttribute('width', LEGEND_WIDTH)
+      legendFO.setAttribute('y', graphTopMargin + TITLE_HEIGHT)
+      legendFO.setAttribute('x', originalSVGWidth)
 
-    var legend = document.querySelector(`.${this.props.className} .Legend`)
-    legend = legend.cloneNode(true)
-    legend.setAttribute('style', 'font-family: "Myriad Pro"')
-    legendFO.appendChild(legend)
-    svg.appendChild(legendFO)
+      legend = legend.cloneNode(true)
+      legend.setAttribute('style', 'font-family: "Myriad Pro"')
+      legendFO.appendChild(legend)
+      svg.appendChild(legendFO)
+    }
 
     // Now we can save our cloned SVG as a PNG.
     saveSVG.saveSvgAsPng(svg, `${this.props.className}.png`, { scale: 2 })
