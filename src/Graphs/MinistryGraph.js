@@ -28,6 +28,8 @@ class MinistryGraph extends Component {
           <h2>{title}</h2>
           <MinistrySubGraph
             data={dataMap[k]}
+            masterTitle={this.props.title}
+            title={title}
             shortTitle={shortTitle}
           />
           <br />
@@ -112,7 +114,12 @@ class MinistrySubGraph extends Component {
     )
 
     return (
-      <GraphFrame className='Ministry' title={this.props.title} graph={graph} legend={legend} />
+      <GraphFrame
+        className={`Ministry-${this.props.shortTitle}`}
+        title={`${this.props.masterTitle} — ${this.props.title}`}
+        graph={graph}
+        legend={legend}
+      />
     )
   }
 }
