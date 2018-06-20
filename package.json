@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "http://plotandscatter.com/wes-workforce-profiles/",
   "dependencies": {
-    "@plot-and-scatter/plusplot": "0.20.0",
+    "@plot-and-scatter/plusplot": "0.20.1",
     "@plot-and-scatter/reactor-table": "0.7.0",
     "concurrently": "^3.5.1",
     "d3": "^5.0.0",
@@ -13,7 +13,8 @@
     "react": "^16.3.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "save-svg-as-png": "^1.4.5"
   },
   "scripts": {
     "start": "concurrently 'yarn run watch-css' 'yarn run start-js'",

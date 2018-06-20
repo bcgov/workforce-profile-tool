@@ -96,7 +96,7 @@ class FlowReportGraph extends Component {
             : 'Show absolute numbers'
           }
         </button>
-        <GraphFrame className='FlowReport' graph={graph} legend={legend} />
+        <GraphFrame className='FlowReport' title={this.props.title} graph={graph} legend={legend} />
       </div>
     )
   }

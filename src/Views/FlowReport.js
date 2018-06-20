@@ -5,13 +5,14 @@ import Loading from './Loading'
 
 class FlowReport extends Component {
   render () {
+    const title = 'Representation — Flow Report'
     return (
-      <div>
-        <h1>Representation — Flow Report</h1>
+      <div id='FlowReport'>
+        <h1>{title}</h1>
         {!this.props.data && <Loading />}
         {this.props.data &&
           <div>
-            <FlowReportGraph data={this.props.data} />
+            <FlowReportGraph data={this.props.data} title={title} />
             <FlowReportTable data={this.props.data} />
           </div>
         }
