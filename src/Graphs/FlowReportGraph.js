@@ -19,6 +19,9 @@ class FlowReportGraph extends Component {
   }
 
   toggleAbsolute () {
+    const buttonIcon = document.querySelector('.ToggleAbsolute i.fa-sync')
+    buttonIcon.classList.add('fa-spin')
+    setTimeout(() => buttonIcon.classList.remove('fa-spin'), 300)
     this.setState({ absolute: !this.state.absolute })
   }
 
@@ -90,7 +93,8 @@ class FlowReportGraph extends Component {
 
     return (
       <div>
-        <button className='btn btn-sm btn-primary' onClick={this.toggleAbsolute}>
+        <button className='btn btn-sm btn-primary ToggleAbsolute' onClick={this.toggleAbsolute}>
+          <i className='fas fa-sync' />
           {this.state.absolute
             ? 'Show proportional numbers'
             : 'Show absolute numbers'
