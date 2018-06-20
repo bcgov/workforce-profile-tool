@@ -81,6 +81,16 @@ class GraphFrame extends Component {
       legend = legend.cloneNode(true)
       legend.setAttribute('style', 'font-family: "Myriad Pro"')
       legendFO.appendChild(legend)
+      // svg.appendChild(legendFO)
+    }
+
+    // Add the active filters for context, if available.
+    let filters = document.querySelector(`.${this.props.className} .FilterNotes`)
+    if (legend && filters) {
+      // Append the filters to the legend.
+      filters = filters.cloneNode(true)
+      filters.setAttribute('style', 'font-family: "Myriad Pro"')
+      legendFO.appendChild(filters)
       svg.appendChild(legendFO)
     }
 

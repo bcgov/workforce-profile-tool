@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import * as PlusPlot from '@plot-and-scatter/plusplot'
 import { formatNumber } from '../Services/formatter'
+import Legend from './Legend'
 import GraphFrame from './GraphFrame'
 
 import './Graphs.css'
@@ -35,8 +36,14 @@ class HiringGraph extends Component {
       />
     )
 
+    const legend = (
+      <Legend items={[
+        { label: 'Number Hired', color: '#70CCDB' }
+      ]} />
+    )
+
     return (
-      <GraphFrame className='Hiring' title={this.props.title} graph={graph} />
+      <GraphFrame className='Hiring' title={this.props.title} graph={graph} legend={legend} />
     )
   }
 }

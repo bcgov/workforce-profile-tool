@@ -26,23 +26,14 @@
         line-height: 120%;
         color: $brand-color-dark-grey;
     }
-    .Filters {
-        margin-top: 16px;
-        font-size: 0.8rem;
-        // color: $brand-color-dark-grey;
-        h2 {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-        }
-        p {
-            margin-bottom: 8px;
-        }
-        .Filter {
-            color: $brand-color-dark-grey;
-        }
-    }
 }
 
 .FilterNotes {
     margin-top: 15px;
+    p {
+        margin-bottom: 8px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 }
