@@ -10,8 +10,7 @@ import {
   VARIABLE_MANAGER,
   toggleVariable,
   toActiveVariableArray,
-  fromActiveVariableArray,
-  areNoVariablesActive
+  fromActiveVariableArray
 } from '../Variables/VariableManager'
 
 const ALL_VALUE = 'ALL'

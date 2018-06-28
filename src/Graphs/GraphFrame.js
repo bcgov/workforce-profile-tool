@@ -47,7 +47,7 @@ class GraphFrame extends Component {
 
     // Now translateComponents is something like ['translate(70', '20)']. We
     // can get the top margin by running parseInt on the second array item.
-    const graphTopMargin = parseInt(translateComponents[1])
+    const graphTopMargin = parseInt(translateComponents[1], 10)
 
     // Re-set the second array item by increasing the top margin by the height
     // of the title.

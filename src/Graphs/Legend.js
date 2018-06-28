@@ -1,16 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 
-import qs from '../Services/query-string'
-import {
-  VARIABLE_MANAGER,
-  toggleVariable,
-  toActiveVariableArray,
-  fromActiveVariableArray,
-  areNoVariablesActive,
-  activeVariablesToDisplay
-} from '../Variables/VariableManager'
-
 import Tooltip from '../Core/Tooltip'
 
 import './Legend.css'
