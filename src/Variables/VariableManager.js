@@ -205,6 +205,9 @@ export const fromActiveVariableArray = (activeVariables, parsedQS) => {
       activeVariables['Des_Grp'][k] = true
     })
   }
+  if (areNoVariablesActive(activeVariables, 'BCPS_Ministry_Group')) {
+    activeVariables['BCPS_Ministry_Group']['BCPS'] = true
+  }
   return activeVariables
 }
 

@@ -81,9 +81,12 @@ class App extends Component {
 
   filterFromProps (props) {
     const filters = qs.parse(props.location.search)
-    // if (!filters['Employee_Type']) {
-    //   filters['Employee_Type'] = 'Employees_All'
-    // }
+    if (!filters['Employee_Type']) {
+      filters['Employee_Type'] = 'Employees_All'
+    }
+    if (!filters['BCPS_Ministry_Group']) {
+      filters['BCPS_Ministry_Group'] = 'BCPS'
+    }
     if (Object.keys(filters).length > 0 && this.state.originalData.occupationRegionData) {
       const occupationRegionData = this.processFilters(filters, this.state.originalData.occupationRegionData)
       // const filterCount = occupationRegionData
