@@ -13,9 +13,9 @@ class ComparisonGraph extends Component {
     if (!this.props.data) return <div>&nbsp;</div>
 
     const chartData = this.props.data.map(d => {
-      const count = +d.BCPS
+      const count = +d.Employees_BCPS
       const comparators = [
-        { value: +d.Available_Workforce, color: '#70CCDB' },
+        { value: +d.Available_Workforce_BCPS, color: '#70CCDB' },
         { value: +d.Employees_BC_Population, color: '#D2E2EE' }
       ]
 

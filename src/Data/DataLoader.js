@@ -21,17 +21,17 @@ class DataLoader {
   }
 
   static async getComparisonReport () {
-    const url = `${DATA_PATH_BASE}WP2015_Comparison-2.csv`
+    const url = `${DATA_PATH_BASE}WP2018_Comparison-2.csv`
     return DataLoader.loadCSV(url)
   }
 
   static async getLeadershipReport () {
-    const url = `${DATA_PATH_BASE}WP2015_Leadership.csv`
+    const url = `${DATA_PATH_BASE}WP2018_Leadership.csv`
     return DataLoader.loadCSV(url)
   }
 
   static async getMinistryReport () {
-    const url = `${DATA_PATH_BASE}WP2018_Ministries.csv`
+    const url = `${DATA_PATH_BASE}WP2018_Ministries-1.csv`
     return DataLoader.loadCSV(url)
   }
 

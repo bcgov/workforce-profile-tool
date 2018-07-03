@@ -15,9 +15,8 @@ class RegionGraph extends Component {
 
     const chartData = this.props.data.map(d => {
       const values = [
-        +d.Applied_Leadership,
-        +d.Business_Leadership,
-        +d.Strategic_Leadership
+        +d.Executive,
+        +d.Management_Band
       ]
 
       return {
@@ -42,9 +41,8 @@ class RegionGraph extends Component {
 
     const legend = (
       <Legend items={[
-        { label: 'Applied Leadership', color: '#70CCDB' },
-        { label: 'Business Leadership', color: '#D2E2EE' },
-        { label: 'Strategic Leadership', color: '#6c757d' }
+        { label: 'Executive Leadership', color: '#70CCDB' },
+        { label: 'Management Band Leadership', color: '#D2E2EE' }
       ]} />
     )
 

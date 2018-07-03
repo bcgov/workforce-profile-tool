@@ -16,26 +16,18 @@ class ComparisonTable extends Component {
         accessor: d => VARIABLE_MANAGER.displayNameByKey('Des_Grp', d['Des_Grp'])
       },
       {
-        id: 'Applied_Leadership',
-        name: 'Applied Leadership, %',
-        accessor: d => parseFloatClean(d['Applied_Leadership']),
-        displayAccessor: d => d['Applied_Leadership'],
+        id: 'Executive',
+        name: 'Executive Leadership, %',
+        accessor: d => parseFloatClean(d['Executive']),
+        displayAccessor: d => d['Executive'],
         cellClass: 'text-right',
         headerClass: 'text-right'
       },
       {
-        id: 'Business_Leadership',
-        name: 'Business Leadership, %',
-        accessor: d => parseFloatClean(d['Business_Leadership']),
-        displayAccessor: d => d['Business_Leadership'],
-        cellClass: 'text-right',
-        headerClass: 'text-right'
-      },
-      {
-        id: 'Strategic_Leadership',
-        name: 'Strategic Leadership, %',
-        accessor: d => parseFloatClean(d['Strategic_Leadership']),
-        displayAccessor: d => d['Strategic_Leadership'],
+        id: 'Management_Band',
+        name: 'Management Band Leadership, %',
+        accessor: d => parseFloatClean(d['Management_Band']),
+        displayAccessor: d => d['Management_Band'],
         cellClass: 'text-right',
         headerClass: 'text-right'
       }

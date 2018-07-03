@@ -59,14 +59,14 @@ class App extends Component {
     if (value instanceof Array) {
       return data.filter(d => {
         return d[key].startsWith('AS_') ||
-          value.some(v => d[key].startsWith(v))
+          value.some(v => d[key] === v)
       })
     }
 
     // Not an array. Match only the selected item
     return data.filter(d => {
       return d[key].startsWith('AS_') ||
-        d[key].startsWith(value)
+        d[key] === value
     })
   }
 

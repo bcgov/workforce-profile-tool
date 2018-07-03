@@ -16,18 +16,18 @@ class ComparisonTable extends Component {
         accessor: d => VARIABLE_MANAGER.displayNameByKey('Des_Grp', d['Des_Grp'])
       },
       {
-        id: 'BCPS',
+        id: 'Employees_BCPS',
         name: 'BC Public Service, %',
-        accessor: d => parseFloatClean(d['BCPS']),
-        displayAccessor: d => d['BCPS'],
+        accessor: d => parseFloatClean(d['Employees_BCPS']),
+        displayAccessor: d => d['Employees_BCPS'],
         cellClass: 'text-right',
         headerClass: 'text-right'
       },
       {
-        id: 'Available_Workforce',
+        id: 'Available_Workforce_BCPS',
         name: 'Available Workforce, %',
-        accessor: d => parseFloatClean(d['Available_Workforce']),
-        displayAccessor: d => d['Available_Workforce'],
+        accessor: d => parseFloatClean(d['Available_Workforce_BCPS']),
+        displayAccessor: d => d['Available_Workforce_BCPS'],
         cellClass: 'text-right',
         headerClass: 'text-right'
       },
