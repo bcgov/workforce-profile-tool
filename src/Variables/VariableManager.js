@@ -105,6 +105,38 @@ export const VARIABLE_MANAGER = new VariableManager([
       new Variable('WOM_SM', false, null, 'Women in Senior Mgmt'),
       new Variable('AS_TOTAL', false, null, 'Total')
     ]
+  ),
+  new VariableGroup(
+    'BCPS_Ministry_Group', true, 'Ministry',
+    [
+      new Variable('BCPS', true, 'BCPS', 'BC Public Service'),
+      new Variable('AEST', true, 'AEST', 'AEST'),
+      new Variable('AG', true, 'AG', 'AG'),
+      new Variable('AGRI', true, 'AGRI', 'AGRI'),
+      new Variable('BCPSA', true, 'BCPSA', 'BCPSA'),
+      new Variable('CFD', true, 'CFD', 'CFD'),
+      new Variable('CITZ', true, 'CITZ', 'CITZ'),
+      new Variable('EAO', true, 'EAO', 'EAO'),
+      new Variable('EDUC', true, 'EDUC', 'EDUC'),
+      new Variable('EMBC', true, 'EMBC', 'EMBC'),
+      new Variable('EMPR', true, 'EMPR', 'EMPR'),
+      new Variable('ENV', true, 'ENV', 'ENV'),
+      new Variable('FIN', true, 'FIN', 'FIN'),
+      new Variable('FLNRORD', true, 'FLNRORD', 'FLNRORD'),
+      new Variable('GCPE', true, 'GCPE', 'GCPE'),
+      new Variable('HLTH', true, 'HLTH', 'HLTH'),
+      new Variable('IRR', true, 'IRR', 'IRR'),
+      new Variable('JTT', true, 'JTT', 'JTT'),
+      new Variable('LBR', true, 'LBR', 'LBR'),
+      new Variable('MAH', true, 'MAH', 'MAH'),
+      new Variable('MHA', true, 'MHA', 'MHA'),
+      new Variable('PGT', true, 'PGT', 'PGT'),
+      new Variable('PO', true, 'PO', 'PO'),
+      new Variable('PSSG', true, 'PSSG', 'PSSG'),
+      new Variable('SDPR', true, 'SDPR', 'SDPR'),
+      new Variable('TAC', true, 'TAC', 'TAC'),
+      new Variable('TRAN', true, 'TRAN', 'TRAN')
+    ]
   )
 ])
 

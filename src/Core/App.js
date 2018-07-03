@@ -31,6 +31,8 @@ class App extends Component {
   }
 
   processFilter (key, value, data) {
+    // console.log('---->', key, value, data)
+
     // If key or value are falsy, don't filter
     if (!(key && value)) {
       console.warn(`processFilter: key '${key}' and/or value '${value}' are falsy`)
@@ -69,7 +71,7 @@ class App extends Component {
   }
 
   processFilters (filterObject, originalData) {
-    let filteredData = originalData
+    let filteredData = originalData.slice()
     Object.keys(filterObject).forEach(key => {
       const value = filterObject[key]
       filteredData = this.processFilter(key, value, filteredData)
@@ -79,9 +81,9 @@ class App extends Component {
 
   filterFromProps (props) {
     const filters = qs.parse(props.location.search)
-    if (!filters['Employee_Type']) {
-      filters['Employee_Type'] = 'Employees_All'
-    }
+    // if (!filters['Employee_Type']) {
+    //   filters['Employee_Type'] = 'Employees_All'
+    // }
     if (Object.keys(filters).length > 0 && this.state.originalData.occupationRegionData) {
       const occupationRegionData = this.processFilters(filters, this.state.originalData.occupationRegionData)
       // const filterCount = occupationRegionData
@@ -145,6 +147,8 @@ class App extends Component {
     ministryData.forEach(r => { r.key = ''.concat(Object.values(r)) })
     occupationRegionData.forEach(r => { r.key = ''.concat(Object.values(r)) })
     flowReportData.forEach(r => { r.key = ''.concat(Object.values(r)) })
+
+    console.log('occupationRegionData', occupationRegionData)
 
     this.setState({
       activeVariables,

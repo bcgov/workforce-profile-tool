@@ -41,7 +41,7 @@ class DataLoader {
   }
 
   static async getOccupationRegionReport () {
-    const url = `${DATA_PATH_BASE}WP2018_Rep_Occ_Rgn_v3.5.csv`
+    const url = `${DATA_PATH_BASE}WP2018_Rep_Occ_Rgn_v_final.csv`
     return DataLoader.loadCSV(url)
   }
 
