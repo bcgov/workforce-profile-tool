@@ -135,7 +135,7 @@ export const VARIABLE_MANAGER = new VariableManager([
       new Variable('PSSG', true, 'PSSG', 'Public Safety and Solicitor General'),
       new Variable('SDPR', true, 'SDPR', 'Social Development and Poverty Reduction'),
       new Variable('TAC', true, 'TAC', 'Tourism, Arts and Culture'),
-      new Variable('TRAN', true, 'TRAN', 'Transportation and Infrastructure'),
+      new Variable('TRAN', true, 'TRAN', 'Transportation and Infrastructure')
     ]
   )
 ])
