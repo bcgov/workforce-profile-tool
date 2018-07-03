@@ -75,7 +75,10 @@ class OccupationSubTable extends Component {
       },
       {
         id: 'Total_Count_ORG',
-        name: 'Total',
+        name: <span>
+          Total
+          &nbsp;<Tooltip text={`Total includes all members of the population, including non-respondents and employees for whom there is no relevant demographic data available.`} />
+        </span>,
         accessor: d => parseIntClean(d['Total_Count_ORG']),
         displayAccessor: d => formatNumber(d['Total_Count_ORG']),
         cellClass: 'text-right',
@@ -83,7 +86,7 @@ class OccupationSubTable extends Component {
       },
       {
         id: 'DesGrp_Percent_ORG',
-        name: `${this.props.shortTitle} as % of Total`,
+        name: `Rate of ${this.props.shortTitle}`,
         accessor: d => parseFloatClean(d['DesGrp_Percent_ORG']),
         displayAccessor: d => formatPercent(d['DesGrp_Percent_ORG'], 1, 100),
         cellClass: 'text-right',
