@@ -14,7 +14,7 @@ class VariableDisplay extends Component {
           className={isActive ? ' active' : ''}
           onClick={e => this.props.updateCallback(this.props.variableGroup, variable)}
         >
-          {variable.display}
+          {this.props.useShortDisplay ? variable.shortDisplay : variable.display}
         </li>
       )
     })
