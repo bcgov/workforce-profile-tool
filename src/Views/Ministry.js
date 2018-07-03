@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import MinistryGraph from '../Graphs/MinistryGraph'
 import Loading from './Loading'
+import NoData from './NoData'
 
 class Ministry extends Component {
   render () {
@@ -9,7 +10,8 @@ class Ministry extends Component {
       <div>
         <h1>{title}</h1>
         {!this.props.data && <Loading />}
-        {this.props.data &&
+        {this.props.data && this.props.data.length === 0 && <NoData />}
+        {this.props.data && this.props.data.length > 0 &&
           <div>
             <MinistryGraph data={this.props.data} title={title} />
           </div>

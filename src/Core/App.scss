@@ -11,6 +11,16 @@ button i {
     margin-right: 10px;
 }
 
+.alert.alert-warning {
+    padding: 1rem;
+    h2 {
+        font-size: 1.3rem;
+    }
+    p {
+        margin-bottom: 0;
+    }
+}
+
 @media print {
     @page {
         margin: 0.5cm;

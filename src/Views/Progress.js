@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ProgressGraph from '../Graphs/ProgressGraph'
 import ProgressTable from '../Table/ProgressTable'
 import Loading from './Loading'
+import NoData from './NoData'
 
 class Progress extends Component {
   render () {
@@ -10,7 +11,8 @@ class Progress extends Component {
       <div>
         <h1>{title}</h1>
         {!this.props.data && <Loading />}
-        {this.props.data &&
+        {this.props.data && this.props.data.length === 0 && <NoData />}
+        {this.props.data && this.props.data.length > 0 &&
           <div>
             <ProgressGraph data={this.props.data} title={title} />
             <ProgressTable data={this.props.data} />

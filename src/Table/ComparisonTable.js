@@ -46,7 +46,7 @@ class ComparisonTable extends Component {
     return (
       <div className='Table row'>
         <div className='col'>
-          { this.props.data &&
+          { this.props.data && this.props.data.length &&
             <div>
               <Reactor.Table
                 columns={columns}
