@@ -12,6 +12,8 @@ button i {
 }
 
 .alert.alert-warning {
+    background-color: lighten($brand-color-gold, 30%);
+    color: darken($brand-color-gold, 20%);
     padding: 1rem;
     h2 {
         font-size: 1.3rem;
