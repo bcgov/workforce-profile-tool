@@ -16,7 +16,7 @@ class ProgressGraph extends Component {
     const data = this.props.data.filter(d => d['Des_Grp'] !== 'AS_TOTAL')
 
     const chartData = data.map(d => {
-      const values = [ +d['2015_pc'], +d['2018_pc'] ]
+      const values = [ d['2015_pc'], d['2018_pc'] ]
       const key = d['Des_Grp']
 
       let title
@@ -38,7 +38,7 @@ class ProgressGraph extends Component {
         colors={['#70CCDB', '#D2E2EE', '#6c757d']}
         options={{
           height: 500,
-          dataLabels: { position: -10, formatter: (d) => formatPercent(d / 100, 1) },
+          dataLabels: { position: -10, formatter: (d) => formatPercent(d, 1, 100) },
           margins: { top: 20, left: 50, bottom: 40, right: 20 },
           axes: { xAxisLabel: '', yAxisLabel: '% representation' },
           font: 'Myriad Pro'

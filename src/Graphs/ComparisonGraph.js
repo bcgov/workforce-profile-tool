@@ -13,7 +13,7 @@ class ComparisonGraph extends Component {
     if (!this.props.data) return <div>&nbsp;</div>
 
     const chartData = this.props.data.map(d => {
-      const count = +d.Employees_BCPS
+      const count = d.Employees_BCPS
       const comparators = [
         { value: +d.Available_Workforce_BCPS, color: '#70CCDB' },
         { value: +d.Employees_BC_Population, color: '#D2E2EE' }
@@ -32,7 +32,7 @@ class ComparisonGraph extends Component {
         data={chartData}
         options={{
           height: 500,
-          dataLabels: { position: 25, formatter: (d) => formatPercent(d / 100, 1) },
+          dataLabels: { position: 25, formatter: (d) => formatPercent(d, 1, 100) },
           margins: { top: 0, left: 140, bottom: 40, right: 40 },
           axes: { yAxisLabel: '', xAxisLabel: '% representation' },
           font: 'Myriad Pro'
