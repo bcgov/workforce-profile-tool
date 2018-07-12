@@ -16,7 +16,7 @@ class ProgressGraph extends Component {
     const data = this.props.data.filter(d => d['Des_Grp'] !== 'AS_TOTAL')
 
     const chartData = data.map(d => {
-      const values = [ +d['2013_pc'], +d['2015_pc'] ]
+      const values = [ +d['2015_pc'], +d['2018_pc'] ]
       const key = d['Des_Grp']
 
       let title
@@ -47,8 +47,8 @@ class ProgressGraph extends Component {
 
     const legend = (
       <Legend items={[
-        { label: '2013', color: '#70CCDB' },
-        { label: '2015', color: '#D2E2EE' }
+        { label: '2015', color: '#70CCDB' },
+        { label: '2018', color: '#D2E2EE' }
       ]} />
     )
 

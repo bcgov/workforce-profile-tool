@@ -51,7 +51,7 @@ class App extends Component {
     }
 
     // If the value is ALL, don't filter
-    if (value === ALL_VALUE) return data
+    // if (value === ALL_VALUE) return data
 
     // If the value is an ARRAY, any of the included items is permissible
     // Note that keys starting with 'AS_' (Always Show) will never be filtered

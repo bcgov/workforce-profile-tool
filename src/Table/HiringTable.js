@@ -17,7 +17,7 @@ class ProgressTable extends Component {
       .filter(d => !['AS_TOTAL', 'WOM_SM'].includes(d['Des_Grp']))
 
     const total = this.props.data.find(d => d['Des_Grp'] === 'AS_TOTAL')
-    const totalHired = total ? +total['2015_hired_ct'] : 1
+    const totalHired = total ? +total['2018_hired_ct'] : 1
 
     const columns = [
       {
@@ -26,16 +26,16 @@ class ProgressTable extends Component {
         accessor: d => VARIABLE_MANAGER.displayNameByKey('Des_Grp', d['Des_Grp'])
       },
       {
-        id: '2015_hired_ct',
-        name: 'Hired in 2015',
-        accessor: d => parseIntClean(d['2015_hired_ct']),
+        id: '2018_hired_ct',
+        name: 'Hired in 2018',
+        accessor: d => parseIntClean(d['2018_hired_ct']),
         cellClass: 'text-right',
         headerClass: 'text-right'
       },
       {
         id: 'percent_total',
-        name: 'Percent all 2015 hires, %',
-        accessor: d => formatPercent(parseFloatClean(d['2015_hired_ct']) / totalHired, 1),
+        name: 'Percent all 2018 hires, %',
+        accessor: d => formatPercent(parseFloatClean(d['2018_hired_ct']) / totalHired, 1),
         cellClass: 'text-right',
         headerClass: 'text-right'
       }
