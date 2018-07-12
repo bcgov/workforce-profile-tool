@@ -41,8 +41,8 @@ class RegionGraph extends Component {
 
     const legend = (
       <Legend items={[
-        { label: 'Executive Leadership', color: '#70CCDB' },
-        { label: 'Management Band Leadership', color: '#D2E2EE' }
+        { label: 'Executive Leadership', color: '#70CCDB', tooltip: `Executive Leadership includes all positions classified as Assistant Deputy Minister and Deputy Minister.` },
+        { label: 'Management Band Leadership', color: '#D2E2EE', tooltip: `Management Band Leadership includes all positions classified as Band 1 through 6, and those classified as Applied Leadership, Business Leadership, and Strategic Leadership. Order in Council (OIC) appointments within these classifications is also included.` }
       ]} />
     )
 
