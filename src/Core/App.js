@@ -13,8 +13,6 @@ import {
   fromActiveVariableArray
 } from '../Variables/VariableManager'
 
-const ALL_VALUE = 'ALL'
-
 class App extends Component {
   constructor (props) {
     super(props)
