@@ -7,7 +7,7 @@ class Header extends Component {
     return (
       <div className='Header row'>
         <div className='col'>
-          <Link to={'/'}><h1>Workforce Profiles 2015</h1></Link>
+          <Link to={'/'}><h1>Workforce Profiles 2018</h1></Link>
         </div>
       </div>
     )

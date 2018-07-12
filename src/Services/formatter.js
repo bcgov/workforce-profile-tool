@@ -16,7 +16,7 @@ export const formatPercent = (number, decimals = 0, divisor = 1, zeroValue = 0) 
 }
 
 export const parseIntClean = (number, zeroValue = 0) => {
-  if (number === 'S') return -1
+  if (number === 'S') return zeroValue
   if (number === '<3') return zeroValue
   if (number === 'x') return zeroValue
   if (+number === 0 || number === '') return zeroValue
@@ -24,7 +24,7 @@ export const parseIntClean = (number, zeroValue = 0) => {
 }
 
 export const parseFloatClean = (number, zeroValue = 0) => {
-  if (number === 'S') return -1
+  if (number === 'S') return zeroValue
   if (number === '<3') return zeroValue
   if (number === 'x') return zeroValue
   if (+number === 0 || number === '') return zeroValue

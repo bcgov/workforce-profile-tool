@@ -3,7 +3,7 @@ import Reactor from '@plot-and-scatter/reactor-table'
 
 import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
-import { formatPercent, parseIntClean, parseFloatClean } from '../Services/formatter'
+import { formatPercent, formatNumber, parseFloatClean } from '../Services/formatter'
 
 import './Table.css'
 
@@ -28,14 +28,14 @@ class ProgressTable extends Component {
       {
         id: '2018_hired_ct',
         name: 'Hired in 2018',
-        accessor: d => parseIntClean(d['2018_hired_ct']),
+        accessor: d => formatNumber(d['2018_hired_ct']),
         cellClass: 'text-right',
         headerClass: 'text-right'
       },
       {
         id: 'percent_total',
         name: 'Percent all 2018 hires, %',
-        accessor: d => formatPercent(parseFloatClean(d['2018_hired_ct']) / totalHired, 1),
+        accessor: d => formatPercent(d['2018_hired_ct'], 1, totalHired),
         cellClass: 'text-right',
         headerClass: 'text-right'
       }

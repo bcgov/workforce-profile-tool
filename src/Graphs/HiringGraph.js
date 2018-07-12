@@ -17,7 +17,7 @@ class HiringGraph extends Component {
     const chartData = data.map(d => {
       return {
         category: VARIABLE_MANAGER.displayNameByKey('Des_Grp', d['Des_Grp']),
-        count: +d['2018_hired_ct'],
+        count: d['2018_hired_ct'],
         color: '#70CCDB'
       }
     })
