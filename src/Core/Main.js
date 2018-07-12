@@ -35,25 +35,15 @@ class Main extends Component {
           <TabInterface activeTabKey={activeOuterTab} matchURL={this.props.match.url} search={this.props.location.search}>
             <Tab key={'home'} name='Home'>
               <div>
-                <h1>Workforce Profiles Report — 2015</h1>
+                <h1>Workforce Profiles Report 2018</h1>
                 <p className='lead'>
-                  Explore statistics on the representation of various designated groups across the BC Public Service.
+                  Explore statistics on the representation of designated equity groups across the BC Public Service. This online tool replaces the paper report that was previously produced which can be found on the <a href='https://www2.gov.bc.ca/gov/content/data/statistics/government/employee-research' target='_blank' rel='noopener noreferrer'>BC Stats website</a>.
                 </p>
-                <h2>List of charts and tables</h2>
-                <ul>
-                  <li>Indicators of Progress — By Designated Group</li>
-                  <li>Indicators of Progress — Hiring</li>
-                  <li>Comparison</li>
-                  <li>Leadership</li>
-                  <li>Ministries</li>
-                  <li>Representation — By Occupation</li>
-                  <li>Representation — By Region</li>
-                  <li>Representation — Flow Report</li>
-                </ul>
-                <h2>Notes</h2>
-                <p>Based on the 2015 Workforce Engagement Survey results and 2011 Statistics Canada Census data.</p>
+                <p className='lead'>
+                  Use the tabs at the top to begin your journey. You can refine your selections by using the filters on the left.
+                </p>
                 <h2>Contact</h2>
-                <p>For additional information, contact _________________.</p>
+                <p className='lead'>Questions? Contact us through <a href='https://www2.gov.bc.ca/gov/content/home/contact-us' target='_blank' rel='noopener noreferrer'>Service BC</a>.</p>
               </div>
             </Tab>
             <Tab key={'indicators-of-progress'} name='Indicators of Progress'>

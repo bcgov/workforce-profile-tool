@@ -11,5 +11,11 @@ a {
 
 p.lead {
   font-weight: 400;
-  margin: 30px 0;
+  margin: 20px 0;
+  a {
+    color: $brand-color-gold;
+    &:hover {
+      color: darken($brand-color-gold, 10%);
+    }
+  }
 }
