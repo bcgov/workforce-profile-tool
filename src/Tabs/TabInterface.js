@@ -59,14 +59,16 @@ class TabInterface extends React.Component {
     // The actual tabs
     const tabs = this.props.children.map((child) => {
       const key = child.key
-      const showTab = (key === this.state.activeTabKey) ? '' : 'none'
-      return (
-        <div key={key} className='Tab row' style={{display: showTab}}>
-          <div className='col'>
-            {child}
+      const showTab = (key === this.state.activeTabKey)
+      const element = showTab
+        ? (
+          <div key={key} className='Tab row'>
+            <div className='col'>
+              {child}
+            </div>
           </div>
-        </div>
-      )
+        ) : <div key={key} />
+      return element
     })
 
     return (
