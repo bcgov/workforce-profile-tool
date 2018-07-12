@@ -44,7 +44,7 @@ class FlowReportGraph extends Component {
 
     const getRowByType = (array, key) => array.find(item => item.Type === key)
 
-    const keySuffix = qs.parse(this.props.location.search).Employee_Type === 'Employees_Aux'
+    const keySuffix = qs.parse(this.props.location.search).Employee_Type === 'AUX'
       ? '_Aux' : '_Reg'
 
     Object.values(dataMap).forEach(values => {

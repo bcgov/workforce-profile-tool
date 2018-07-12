@@ -11,7 +11,7 @@ class VariableList extends Component {
         variableGroup={group}
         activeVariables={this.props.activeVariables}
         updateCallback={this.props.updateVariable}
-        // useShortDisplay={group.key === 'BCPS_Ministry_Group'}
+        // useShortDisplay={group.key === 'Ministry_Key'}
       />
     )
 

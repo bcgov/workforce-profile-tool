@@ -90,9 +90,9 @@ export const VARIABLE_MANAGER = new VariableManager([
   new VariableGroup(
     'Employee_Type', true, 'Employee Type',
     [
-      new Variable('Employees_All', true, null, 'All'),
-      new Variable('Employees_Reg', true, null, 'Regular'),
-      new Variable('Employees_Aux', true, null, 'Auxiliary')
+      new Variable('ALL', true, null, 'All'),
+      new Variable('REG', true, null, 'Regular'),
+      new Variable('AUX', true, null, 'Auxiliary')
     ]
   ),
   new VariableGroup(
@@ -107,7 +107,7 @@ export const VARIABLE_MANAGER = new VariableManager([
     ]
   ),
   new VariableGroup(
-    'BCPS_Ministry_Group', true, 'Ministry',
+    'Ministry_Key', true, 'Ministry',
     [
       new Variable('BCPS', true, 'BCPS', 'BC Public Service'),
       new Variable('AEST', true, 'AEST', 'Advanced Education, Skills and Training'),
@@ -198,15 +198,15 @@ export const fromActiveVariableArray = (activeVariables, parsedQS) => {
     }
   })
   if (areNoVariablesActive(activeVariables, 'Employee_Type')) {
-    activeVariables['Employee_Type']['Employees_All'] = true
+    activeVariables['Employee_Type']['ALL'] = true
   }
   if (areNoVariablesActive(activeVariables, 'Des_Grp')) {
     Object.keys(activeVariables['Des_Grp']).forEach(k => {
       activeVariables['Des_Grp'][k] = true
     })
   }
-  if (areNoVariablesActive(activeVariables, 'BCPS_Ministry_Group')) {
-    activeVariables['BCPS_Ministry_Group']['BCPS'] = true
+  if (areNoVariablesActive(activeVariables, 'Ministry_Key')) {
+    activeVariables['Ministry_Key']['BCPS'] = true
   }
   return activeVariables
 }

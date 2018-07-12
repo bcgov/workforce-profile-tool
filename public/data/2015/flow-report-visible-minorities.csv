@@ -1,6 +1,6 @@
 Flow Report for Visible Minorities,,,,,,,
 ,,,,,,,
-Type,Category,VisibleMinorities_Reg,NonVisibleMinorities_Reg,TotalEmployees_Reg,VisibleMinorities_Aux,NonVisibleMinorities_Aux,TotalEmployees_Aux
+Type,Category,VisibleMinorities_Reg,NonVisibleMinorities_Reg,TotalREG,VisibleMinorities_Aux,NonVisibleMinorities_Aux,TotalAUX
 Employed,2013,3172,20089,23261,122,905,1027
 Employed,2015,3329,20418,23747,142,1120,1262
 Hiring_Outside,Count,532,3154,3686,103,858,961

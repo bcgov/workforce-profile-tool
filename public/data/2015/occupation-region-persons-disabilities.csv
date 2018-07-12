@@ -1,60 +1,60 @@
 Representation of Persons with Disabilities by Occupation/Region,,,,,,,,
 ,,,,,,,,
 Employee_Type,Occupation_Region_Group,Disabled_BCPS,NonDisabled_BCPS,TotalEmployees_BCPS,Disabled_Percent_BCPS,Disabled_Percent_AvailableWorkforce,Disabled_UnderRep_Expected,Disabled_UnderRep_Shortfall
-Employees_Reg,Senior Managers,21,984,1005,2.1,4.3,43,22
-Employees_Reg,Middle and Other Managers,41,1962,2003,2,4.3,86,45
-Employees_Reg,Professionals,392,10377,10769,3.6,5.4,577,185
-Employees_Reg,"Semi-Professionals, Technicians",139,1790,1929,7.2,4.5,,
-Employees_Reg,Supervisors,30,619,649,4.6,13.9,90,60
-Employees_Reg,**Sub-Total,623,15732,16355,3.8,5.4,883,260
-Employees_Reg,Administrative & Senior Clerical,S,S,1618,S,3.8,,
-Employees_Reg,Crafts and Trades,<3,<3,9,<3,7.6,,
-Employees_Reg,Clerical Personnel,179,3417,3596,5,5.1,,
-Employees_Reg,Intermediate Sales & Service,74,2078,2152,3.4,5.7,123,49
-Employees_Reg,Other Sales & Service Personnel,<3,<3,7,<3,7.3,,
-Employees_Reg,Manual Workers,<3,<3,10,<3,7.5,,
-Employees_Reg,Occupations Not Stated,,,0,,,,
-Employees_Reg,**Sub-Total,323,7069,7392,4.4,5,369,46
-Employees_Reg,"Total, All Occupations",946,22801,23747,4,5.3,1253,307
-Employees_Reg,Vancouver CMA,256,6026,6282,4.1,5.3,334,78
-Employees_Reg,Victoria CMA,362,8925,9287,3.9,5.2,480,118
-Employees_Reg,Other B.C. and Not Specified,328,7850,8178,4,5.4,439,111
-Employees_Reg,Total B.C.,946,22801,23747,4,5.3,1253,307
-Employees_Aux,Senior Managers,<3,<3,4,<3,4.3,,
-Employees_Aux,Middle and Other Managers,<3,<3,12,<3,4.3,,
-Employees_Aux,Professionals,12,343,355,3.4,5.4,19,7
-Employees_Aux,"Semi-Professionals, Technicians",S,S,224,S,4.5,10,3
-Employees_Aux,Supervisors,<3,<3,9,<3,13.9,,
-Employees_Aux,**Sub-Total,19,585,604,3.1,5.1,31,12
-Employees_Aux,Administrative & Senior Clerical,3,49,52,5.8,3.8,,
-Employees_Aux,Crafts and Trades,,,0,,,,
-Employees_Aux,Clerical Personnel,9,456,465,1.9,5.1,24,15
-Employees_Aux,Intermediate Sales & Service,<3,<3,56,<3,5.7,,
-Employees_Aux,Other Sales & Service Personnel,<3,<3,5,<3,7.3,,
-Employees_Aux,Manual Workers,<3,<3,35,<3,5.7,,
-Employees_Aux,Occupations Not Stated,<3,<3,45,<3,5.8,,
-Employees_Aux,**Sub-Total,15,643,658,2.3,5.1,34,19
-Employees_Aux,"Total, All Occupations",34,1228,1262,2.7,5.1,65,31
-Employees_Aux,Vancouver CMA,10,352,362,2.8,5.1,19,9
-Employees_Aux,Victoria CMA,15,356,371,4,5.2,19,4
-Employees_Aux,Other B.C. and Not Specified,9,520,529,1.7,5.1,27,18
-Employees_Aux,Total B.C.,34,1228,1262,2.7,5.1,65,31
-Employees_All,Senior Managers,S,S,1009,S,4.3,43,22
-Employees_All,Middle and Other Managers,S,S,2015,S,4.3,87,46
-Employees_All,Professionals,404,10720,11124,3.6,5.4,596,192
-Employees_All,"Semi-Professionals, Technicians",S,S,2153,S,4.5,,
-Employees_All,Supervisors,S,S,658,S,13.9,91,61
-Employees_All,**Sub-Total,642,16317,16959,3.8,5.4,914,272
-Employees_All,Administrative & Senior Clerical,72,1598,1670,4.3,3.8,,
-Employees_All,Crafts and Trades,<3,<3,9,<3,7.6,,
-Employees_All,Clerical Personnel,188,3873,4061,4.6,5.1,,
-Employees_All,Intermediate Sales & Service,S,S,2208,S,5.7,126,50
-Employees_All,Other Sales & Service Personnel,<3,<3,12,<3,7.3,,
-Employees_All,Manual Workers,<3,<3,45,<3,6.1,,
-Employees_All,Occupations Not Stated,<3,<3,45,<3,5.8,,
-Employees_All,**Sub-Total,338,7712,8050,4.2,5,403,65
-Employees_All,"Total, All Occupations",980,24029,25009,3.9,5.3,1317,337
-Employees_All,Vancouver CMA,266,6378,6644,4,5.3,352,86
-Employees_All,Victoria CMA,377,9281,9658,3.9,5.2,499,122
-Employees_All,Other B.C. and Not Specified,337,8370,8707,3.9,5.4,466,129
-Employees_All,Total B.C.,980,24029,25009,3.9,5.3,1317,337
+REG,Senior Managers,21,984,1005,2.1,4.3,43,22
+REG,Middle and Other Managers,41,1962,2003,2,4.3,86,45
+REG,Professionals,392,10377,10769,3.6,5.4,577,185
+REG,"Semi-Professionals, Technicians",139,1790,1929,7.2,4.5,,
+REG,Supervisors,30,619,649,4.6,13.9,90,60
+REG,**Sub-Total,623,15732,16355,3.8,5.4,883,260
+REG,Administrative & Senior Clerical,S,S,1618,S,3.8,,
+REG,Crafts and Trades,<3,<3,9,<3,7.6,,
+REG,Clerical Personnel,179,3417,3596,5,5.1,,
+REG,Intermediate Sales & Service,74,2078,2152,3.4,5.7,123,49
+REG,Other Sales & Service Personnel,<3,<3,7,<3,7.3,,
+REG,Manual Workers,<3,<3,10,<3,7.5,,
+REG,Occupations Not Stated,,,0,,,,
+REG,**Sub-Total,323,7069,7392,4.4,5,369,46
+REG,"Total, All Occupations",946,22801,23747,4,5.3,1253,307
+REG,Vancouver CMA,256,6026,6282,4.1,5.3,334,78
+REG,Victoria CMA,362,8925,9287,3.9,5.2,480,118
+REG,Other B.C. and Not Specified,328,7850,8178,4,5.4,439,111
+REG,Total B.C.,946,22801,23747,4,5.3,1253,307
+AUX,Senior Managers,<3,<3,4,<3,4.3,,
+AUX,Middle and Other Managers,<3,<3,12,<3,4.3,,
+AUX,Professionals,12,343,355,3.4,5.4,19,7
+AUX,"Semi-Professionals, Technicians",S,S,224,S,4.5,10,3
+AUX,Supervisors,<3,<3,9,<3,13.9,,
+AUX,**Sub-Total,19,585,604,3.1,5.1,31,12
+AUX,Administrative & Senior Clerical,3,49,52,5.8,3.8,,
+AUX,Crafts and Trades,,,0,,,,
+AUX,Clerical Personnel,9,456,465,1.9,5.1,24,15
+AUX,Intermediate Sales & Service,<3,<3,56,<3,5.7,,
+AUX,Other Sales & Service Personnel,<3,<3,5,<3,7.3,,
+AUX,Manual Workers,<3,<3,35,<3,5.7,,
+AUX,Occupations Not Stated,<3,<3,45,<3,5.8,,
+AUX,**Sub-Total,15,643,658,2.3,5.1,34,19
+AUX,"Total, All Occupations",34,1228,1262,2.7,5.1,65,31
+AUX,Vancouver CMA,10,352,362,2.8,5.1,19,9
+AUX,Victoria CMA,15,356,371,4,5.2,19,4
+AUX,Other B.C. and Not Specified,9,520,529,1.7,5.1,27,18
+AUX,Total B.C.,34,1228,1262,2.7,5.1,65,31
+ALL,Senior Managers,S,S,1009,S,4.3,43,22
+ALL,Middle and Other Managers,S,S,2015,S,4.3,87,46
+ALL,Professionals,404,10720,11124,3.6,5.4,596,192
+ALL,"Semi-Professionals, Technicians",S,S,2153,S,4.5,,
+ALL,Supervisors,S,S,658,S,13.9,91,61
+ALL,**Sub-Total,642,16317,16959,3.8,5.4,914,272
+ALL,Administrative & Senior Clerical,72,1598,1670,4.3,3.8,,
+ALL,Crafts and Trades,<3,<3,9,<3,7.6,,
+ALL,Clerical Personnel,188,3873,4061,4.6,5.1,,
+ALL,Intermediate Sales & Service,S,S,2208,S,5.7,126,50
+ALL,Other Sales & Service Personnel,<3,<3,12,<3,7.3,,
+ALL,Manual Workers,<3,<3,45,<3,6.1,,
+ALL,Occupations Not Stated,<3,<3,45,<3,5.8,,
+ALL,**Sub-Total,338,7712,8050,4.2,5,403,65
+ALL,"Total, All Occupations",980,24029,25009,3.9,5.3,1317,337
+ALL,Vancouver CMA,266,6378,6644,4,5.3,352,86
+ALL,Victoria CMA,377,9281,9658,3.9,5.2,499,122
+ALL,Other B.C. and Not Specified,337,8370,8707,3.9,5.4,466,129
+ALL,Total B.C.,980,24029,25009,3.9,5.3,1317,337

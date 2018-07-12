@@ -1,4 +1,4 @@
-BCPS_Ministry_Group,Des_Grp,Type,Display_Type,DesGrp_Count_Reg,DesGrp_Percent_Reg,NonDesGrp_Count_Reg,NonDesGrp_Percent_Reg,Total_Count_Reg,Total_Percent_Reg,DesGrp_Count_Aux,DesGrp_Percent_Aux,NonDesGrp_Count_Aux,NonDesGrp_Percent_Aux,Total_Count_Aux,Total_Percent_Aux
+Ministry_Key,Des_Grp,Type,Display_Type,DesGrp_Count_Reg,DesGrp_Percent_Reg,NonDesGrp_Count_Reg,NonDesGrp_Percent_Reg,Total_Count_Reg,Total_Percent_Reg,DesGrp_Count_Aux,DesGrp_Percent_Aux,NonDesGrp_Count_Aux,NonDesGrp_Percent_Aux,Total_Count_Aux,Total_Percent_Aux
 BCPS,IND,Employed_2013,Employed 2013,718,,22543,,23261,,39,,988,,1027,
 BCPS,IND,Employed_2015,Employed 2015,747,,23000,,23747,,43,,1219,,1262,
 BCPS,IND,Hiring_Outside,Hired from Outside,108,2.930005426,3578,97.06999457,3686,100,34,3.53798127,927,96.46201873,961,100

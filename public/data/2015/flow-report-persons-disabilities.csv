@@ -1,6 +1,6 @@
 Flow Report for Persons with Disabilities,,,,,,,
 ,,,,,,,
-Type,Category,Disabled_Reg,NonDisabled_Reg,TotalEmployees_Reg,Disabled_Aux,NonDisabled_Aux,TotalEmployees_Aux
+Type,Category,Disabled_Reg,NonDisabled_Reg,TotalREG,Disabled_Aux,NonDisabled_Aux,TotalAUX
 Employed,2013,994,22267,23261,25,1002,1027
 Employed,2015,946,22801,23747,34,1228,1262
 Hiring_Outside,Count,84,3602,3686,25,936,961
