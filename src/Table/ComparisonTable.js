@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
+import Definitions from '../Table/Definitions'
 
 import { VARIABLE_MANAGER } from '../Variables/VariableManager'
-
 import { parseFloatClean } from '../Services/formatter'
 
 import './Table.css'
@@ -53,6 +53,7 @@ class ComparisonTable extends Component {
                 rows={this.props.data}
                 rowFilter={rowFilter}
               />
+              <Definitions />
             </div>
           }
         </div>

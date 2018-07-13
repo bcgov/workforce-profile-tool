@@ -21,11 +21,15 @@ class App extends Component {
       originalData: {},
       occupationRegionData: null,
       flowData: null,
-      activeVariables: {}
+      activeVariables: VARIABLE_MANAGER.emptySelectableVariableMap(),
+      lockVariables: false,
+      savedEmployeeType: null,
+      savedMinistry: null
     }
 
     this.updateLocation = this.updateLocation.bind(this)
     this.updateVariable = this.updateVariable.bind(this)
+    this.setVariableLock = this.setVariableLock.bind(this)
   }
 
   processFilter (key, value, data) {
@@ -79,12 +83,26 @@ class App extends Component {
 
   filterFromProps (props) {
     const filters = qs.parse(props.location.search)
+
     if (!filters['Employee_Type']) {
       filters['Employee_Type'] = 'ALL'
+      const activeVariables = toggleVariable(
+        this.state.activeVariables,
+        'Employee_Type', 'ALL'
+      )
+      this.setState({ activeVariables }, () => this.updateLocation())
     }
+
     if (!filters['Ministry_Key']) {
       filters['Ministry_Key'] = 'BCPS'
+      const activeVariables = toggleVariable(
+        this.state.activeVariables,
+        'Ministry_Key',
+        'BCPS'
+      )
+      this.setState({ activeVariables }, () => this.updateLocation())
     }
+
     if (Object.keys(filters).length > 0 && this.state.originalData.occupationRegionData) {
       const occupationRegionData = this.processFilters(filters, this.state.originalData.occupationRegionData)
       // const filterCount = occupationRegionData
@@ -115,12 +133,51 @@ class App extends Component {
     }
   }
 
+  setVariableLock (lockVariables) {
+    console.log('lockVariables', lockVariables)
+
+    if (lockVariables) {
+      const currentEmployeeType = this.state.savedEmployeeType || Object.assign({}, this.state.activeVariables.Employee_Type)
+      const currentMinistry = this.state.savedMinistry || Object.assign({}, this.state.activeVariables.Ministry_Key)
+
+      let activeVariables = toggleVariable(
+        this.state.activeVariables,
+        'Employee_Type', 'ALL'
+      )
+      activeVariables = toggleVariable(
+        this.state.activeVariables,
+        'Ministry_Key',
+        'BCPS'
+      )
+      this.setState({
+        lockVariables,
+        activeVariables,
+        savedEmployeeType: currentEmployeeType,
+        savedMinistry: currentMinistry
+      }, () => this.updateLocation())
+    } else {
+      if (this.state.savedEmployeeType || this.state.savedMinistry) {
+        const activeVariables = this.state.activeVariables
+        activeVariables.Employee_Type = this.state.savedEmployeeType
+        activeVariables.Ministry_Key = this.state.savedMinistry
+
+        this.setState({
+          lockVariables,
+          activeVariables,
+          savedEmployeeType: null,
+          savedMinistry: null
+        }, () => this.updateLocation())
+      } else {
+        this.setState({ lockVariables })
+      }
+    }
+  }
+
   updateVariable (variableGroup, variable) {
     const groupKey = variableGroup.key
     const varKey = variable.key
 
     const activeVariables = toggleVariable(this.state.activeVariables, groupKey, varKey)
-
     this.setState({ activeVariables }, () => { this.updateLocation() })
   }
 
@@ -131,7 +188,8 @@ class App extends Component {
   }
 
   async componentDidMount () {
-    const activeVariables = VARIABLE_MANAGER.emptySelectableVariableMap()
+    // const activeVariables =
+    const activeVariables = this.state.activeVariables
     fromActiveVariableArray(activeVariables, qs.parse(this.props.location.search))
 
     const iopReportData = await DataLoader.getIndicatorsOfProgressReport()
@@ -184,13 +242,14 @@ class App extends Component {
               updateVariable={this.updateVariable}
               variableManager={VARIABLE_MANAGER}
               activeVariables={this.state.activeVariables}
+              lockVariables={this.state.lockVariables}
             />
           </div>
           <div className='col-10 MainWrapper'>
             <Switch>
-              <Route exact path={`/`} render={props => <Main data={this.state} {...props} />} />
-              <Route exact path={`/:highLevelNav`} render={props => <Main data={this.state} {...props} />} />
-              <Route exact path={`/:highLevelNav/:lowLevelNav`} render={props => <Main data={this.state} {...props} />} />
+              <Route exact path={`/`} render={props => <Main data={this.state} variableLockCallback={this.setVariableLock} {...props} />} />
+              <Route exact path={`/:highLevelNav`} render={props => <Main data={this.state} variableLockCallback={this.setVariableLock} {...props} />} />
+              <Route exact path={`/:highLevelNav/:lowLevelNav`} render={props => <Main data={this.state} variableLockCallback={this.setVariableLock} {...props} />} />
             </Switch>
           </div>
         </div>

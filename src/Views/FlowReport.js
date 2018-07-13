@@ -5,6 +5,10 @@ import Loading from './Loading'
 import NoData from './NoData'
 
 class FlowReport extends Component {
+  componentDidMount () {
+    this.props.variableLockCallback(false)
+  }
+
   render () {
     const title = 'Representation — Flow Report'
     return (

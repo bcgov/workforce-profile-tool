@@ -1,7 +1,6 @@
 @import '../bootstrap/_colors';
 
 .VariableDisplay {
-  cursor: pointer;
 
   h3 {
     border: solid 0.5px $white;
@@ -27,6 +26,7 @@
     margin-left: 0;
     padding-left: 0;
     li {
+      cursor: pointer;
       font-size: 0.9rem;
       margin-left: 0;
       padding-left: 0;
@@ -34,6 +34,16 @@
       margin-bottom: 0.25rem;
       &:hover {
         color: $brand-color-gold;
+      }
+    }
+    li.locked {
+      cursor: not-allowed;
+      color: $brand-color-dark-grey;
+      a {
+        
+        &:hover {
+          color: inherit;
+        }
       }
     }
     li.active {

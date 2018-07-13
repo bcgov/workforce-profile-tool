@@ -8,6 +8,10 @@ import qs from '../Services/query-string'
 import { activeMinistry } from '../Services/activeMinistry'
 
 class Comparison extends Component {
+  componentDidMount () {
+    this.props.variableLockCallback(false)
+  }
+
   render () {
     const title = 'Comparison with Provincial Workforce'
     const filters = qs.parse(this.props.location.search)

@@ -8,6 +8,10 @@ import qs from '../Services/query-string'
 import { activeMinistry } from '../Services/activeMinistry'
 
 class Region extends Component {
+  componentDidMount () {
+    this.props.variableLockCallback(false)
+  }
+
   render () {
     const title = 'Representation — Region'
     const filters = qs.parse(this.props.location.search)

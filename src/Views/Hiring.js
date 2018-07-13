@@ -8,6 +8,10 @@ import qs from '../Services/query-string'
 import { activeMinistry } from '../Services/activeMinistry'
 
 class Hiring extends Component {
+  componentDidMount () {
+    this.props.variableLockCallback(false)
+  }
+
   render () {
     const title = 'Indicators of Progress — Hiring'
     const filters = qs.parse(this.props.location.search)

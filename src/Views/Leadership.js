@@ -5,6 +5,10 @@ import Loading from './Loading'
 import NoData from './NoData'
 
 class Leadership extends Component {
+  componentDidMount () {
+    this.props.variableLockCallback(true)
+  }
+
   render () {
     const title = 'Leadership by Type'
     return (

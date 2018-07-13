@@ -8,11 +8,14 @@ class VariableDisplay extends Component {
       const variableGroupKey = this.props.variableGroup.key
       const variableKey = variable.key
       const isActive = isVariableActive(this.props.activeVariables, variableGroupKey, variableKey)
+      const isLocked = this.props.lockVariables
       return (
         <li
           key={variable.key}
-          className={isActive ? ' active' : ''}
-          onClick={e => this.props.updateCallback(this.props.variableGroup, variable)}
+          className={`${isActive ? ' active' : ''} ${isLocked ? ' locked' : ''}`}
+          onClick={e => {
+            if (!isLocked) this.props.updateCallback(this.props.variableGroup, variable)
+          }}
         >
           {this.props.useShortDisplay ? variable.shortDisplay : variable.display}
         </li>

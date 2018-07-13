@@ -4,6 +4,10 @@ import Loading from './Loading'
 import NoData from './NoData'
 
 class Ministry extends Component {
+  componentDidMount () {
+    this.props.variableLockCallback(true)
+  }
+
   render () {
     const title = 'Ministries'
     return (

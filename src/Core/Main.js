@@ -51,13 +51,13 @@ class Main extends Component {
                 <TabInterface activeTabKey={activeInnerTab} baseURL={`/${activeOuterTab}`} search={this.props.location.search}>
                   <Tab key={'representation-by-group'} name='By Designated Group'>
                     <Progress
-                      filterCount={this.props.data.filterCount}
+                      variableLockCallback={this.props.variableLockCallback}
                       data={this.props.data.iopReportData}
                     />
                   </Tab>
                   <Tab key={'hiring'} name='Hiring'>
                     <Hiring
-                      filterCount={this.props.data.filterCount}
+                      variableLockCallback={this.props.variableLockCallback}
                       data={this.props.data.iopReportData}
                     />
                   </Tab>
@@ -66,19 +66,19 @@ class Main extends Component {
             </Tab>
             <Tab key={'comparison'} name='Comparison'>
               <Comparison
-                filterCount={this.props.data.filterCount}
+                variableLockCallback={this.props.variableLockCallback}
                 data={this.props.data.comparisonData}
               />
             </Tab>
             <Tab key={'leadership'} name='Leadership'>
               <Leadership
-                filterCount={this.props.data.filterCount}
+                variableLockCallback={this.props.variableLockCallback}
                 data={this.props.data.leadershipData}
               />
             </Tab>
             <Tab key={'ministries'} name='Ministries'>
               <Ministry
-                filterCount={this.props.data.filterCount}
+                variableLockCallback={this.props.variableLockCallback}
                 data={this.props.data.ministryData}
               />
             </Tab>
@@ -87,18 +87,19 @@ class Main extends Component {
                 <TabInterface activeTabKey={activeInnerTab} baseURL={`/${activeOuterTab}`} search={this.props.location.search}>
                   <Tab key={'by-occupation'} name='By Occupation'>
                     <Occupation
-                      filterCount={this.props.data.filterCount}
+                      variableLockCallback={this.props.variableLockCallback}
                       data={this.getOccupationData(this.props.data.occupationRegionData)}
                     />
                   </Tab>
                   <Tab key={'by-region'} name='By Region'>
                     <Region
-                      filterCount={this.props.data.filterCount}
+                      variableLockCallback={this.props.variableLockCallback}
                       data={this.getRegionData(this.props.data.occupationRegionData)}
                     />
                   </Tab>
                   <Tab key={'flow-report'} name='Flow Report'>
                     <FlowReport
+                      variableLockCallback={this.props.variableLockCallback}
                       data={this.props.data.flowReportData}
                     />
                   </Tab>

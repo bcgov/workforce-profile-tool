@@ -9,6 +9,10 @@ import Loading from './Loading'
 import NoData from './NoData'
 
 class Progress extends Component {
+  componentDidMount () {
+    this.props.variableLockCallback(false)
+  }
+
   render () {
     const title = 'Indicators of Progress — By Designated Group'
     const filters = qs.parse(this.props.location.search)
