@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
-
 import Tooltip from '../Core/Tooltip'
-
 import Definitions from './Definitions'
+import DownloadDataLink from './DownloadDataLink'
 
 import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
@@ -134,13 +133,18 @@ class RegionSubTable extends Component {
     return (
       <div className='Table RegionTable row'>
         <div className='col'>
-          { this.props.data &&
+          {this.props.data &&
             <div>
               <Reactor.Table
                 columns={columns}
                 rows={regionRows}
                 rowFilter={rowFilter}
                 totalRows={totalRow}
+              />
+              <DownloadDataLink
+                columns={columns}
+                rows={regionRows}
+                filename={'region'}
               />
             </div>
           }

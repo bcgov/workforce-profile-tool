@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
+import DownloadDataLink from './DownloadDataLink'
 
 import Tooltip from '../Core/Tooltip'
 import Definitions from './Definitions'
@@ -129,6 +130,12 @@ class OccupationSubTable extends Component {
 
     const rowFilter = (r) => true
 
+    const allRows = managementRows
+                      .concat(managementSubtotal)
+                      .concat(nonManagementRows)
+                      .concat(nonManagementSubtotal)
+                      .concat(totalRow)
+
     return (
       <div className='Table OccupationTable row'>
         <div className='col'>
@@ -136,6 +143,7 @@ class OccupationSubTable extends Component {
             <div>
               <h3>Management</h3>
               <Reactor.Table
+                tableClass={'no-top'}
                 columns={columns}
                 rows={managementRows}
                 rowFilter={rowFilter}
@@ -143,6 +151,7 @@ class OccupationSubTable extends Component {
               />
               <h3>Non-Management</h3>
               <Reactor.Table
+                tableClass={'no-top'}
                 columns={columns}
                 rows={nonManagementRows}
                 rowFilter={rowFilter}
@@ -154,6 +163,11 @@ class OccupationSubTable extends Component {
                 rows={[]}
                 rowFilter={rowFilter}
                 totalRows={totalRow}
+              />
+              <DownloadDataLink
+                columns={columns}
+                rows={allRows}
+                filename={'occupation'}
               />
               <Definitions />
             </div>

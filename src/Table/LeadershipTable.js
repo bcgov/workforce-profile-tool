@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
 
 import { VARIABLE_MANAGER } from '../Variables/VariableManager'
-
 import { parseFloatClean } from '../Services/formatter'
+import DownloadDataLink from './DownloadDataLink'
 
 import './Table.css'
 
@@ -44,6 +44,12 @@ class ComparisonTable extends Component {
                 columns={columns}
                 rows={this.props.data}
                 rowFilter={rowFilter}
+              />
+              <DownloadDataLink
+                columns={columns}
+                rows={this.props.data}
+                filename={'leadership'}
+                includeDefinitions={false}
               />
             </div>
           }

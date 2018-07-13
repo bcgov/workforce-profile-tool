@@ -77,12 +77,6 @@
     }
 }
 
-.ReactorTable.hide-header {
-    thead {
-        display: none;
-    }
-}
-
 .OccupationTable,
 .RegionTable,
 .FlowReportTable {
@@ -92,7 +86,7 @@
         font-size: 1.1rem;
         font-weight: 600;
         position: relative;
-        top: 32px;
+        top: 2rem;
         margin: 0;
         left: 12px;
         letter-spacing: 1px;
@@ -138,13 +132,27 @@
     table.ReactorTable:last-child {
         margin-top: 1rem;
     }
-    .hide-header {
+    table.ReactorTable.hide-header {
+        margin-bottom: 1rem;
         tfoot {
             td {
                 background-color: lighten($brand-color-teal, 10%);
             }
         }
     }
+    table.ReactorTable.no-top {
+        margin-top: 0;
+    }
+}
+
+.ReactorTable.hide-header {
+    thead {
+        display: none;
+    }
+}
+
+.RegionTable table.ReactorTable {
+    margin-bottom: 1rem;
 }
 
 .FlowReportTable {
