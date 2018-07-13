@@ -1,13 +1,13 @@
 import { DEFINITIONS } from '../Table/Definitions'
 
-const _downloadableCSV = (rows) => {
-  var content = 'data:text/csv;charset=utf-8,'
+const _toCSVString = (rows) => {
+  var content = ''
 
   rows.forEach(function (row, index) {
     content += row.join(',') + '\n'
   })
 
-  return encodeURI(content)
+  return content
 }
 
 export const exportData = (columns, rows, title, includeDefinitions = true) => {
@@ -45,5 +45,7 @@ export const exportData = (columns, rows, title, includeDefinitions = true) => {
     allRows = allRows.concat(definitions)
   }
 
-  return _downloadableCSV(allRows)
+  console.log('allrows', allRows)
+
+  return _toCSVString(allRows)
 }
