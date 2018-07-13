@@ -3,6 +3,9 @@ import LeadershipTable from '../Table/LeadershipTable'
 import LeadershipGraph from '../Graphs/LeadershipGraph'
 import Loading from './Loading'
 import NoData from './NoData'
+import { withRouter } from 'react-router-dom'
+import qs from '../Services/query-string'
+import { activeMinistry } from '../Services/activeMinistry'
 
 class Leadership extends Component {
   componentDidMount () {
@@ -11,9 +14,11 @@ class Leadership extends Component {
 
   render () {
     const title = 'Leadership by Type'
+    const filters = qs.parse(this.props.location.search)
     return (
       <div>
         <h1>{title}</h1>
+        <h2>{activeMinistry(filters.Ministry_Key)}</h2>
         {!this.props.data && <Loading />}
         {this.props.data && this.props.data.length === 0 && <NoData />}
         {this.props.data && this.props.data.length > 0 &&
@@ -27,4 +32,4 @@ class Leadership extends Component {
   }
 }
 
-export default Leadership
+export default withRouter(Leadership)
