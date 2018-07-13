@@ -3,13 +3,18 @@ import HiringGraph from '../Graphs/HiringGraph'
 import HiringTable from '../Table/HiringTable'
 import Loading from './Loading'
 import NoData from './NoData'
+import { withRouter } from 'react-router-dom'
+import qs from '../Services/query-string'
+import { activeMinistry } from '../Services/activeMinistry'
 
 class Hiring extends Component {
   render () {
     const title = 'Indicators of Progress — Hiring'
+    const filters = qs.parse(this.props.location.search)
     return (
       <div>
         <h1>{title}</h1>
+        <h2>{activeMinistry(filters.Ministry_Key)}</h2>
         {!this.props.data && <Loading />}
         {this.props.data && this.props.data.length === 0 && <NoData />}
         {this.props.data && this.props.data.length > 0 &&
@@ -23,4 +28,4 @@ class Hiring extends Component {
   }
 }
 
-export default Hiring
+export default withRouter(Hiring)
