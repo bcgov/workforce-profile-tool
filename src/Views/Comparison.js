@@ -15,16 +15,17 @@ class Comparison extends Component {
   render () {
     const title = 'Comparison with Provincial Workforce'
     const filters = qs.parse(this.props.location.search)
+    const ministry = activeMinistry(filters.Ministry_Key)
     return (
       <div>
         <h1>{title}</h1>
-        <h2>{activeMinistry(filters.Ministry_Key)}</h2>
+        <h2>{ministry}</h2>
         {!this.props.data && <Loading />}
         {this.props.data && this.props.data.length === 0 && <NoData />}
         {this.props.data && this.props.data.length > 0 &&
           <div>
-            <ComparisonGraph data={this.props.data} title={title} />
-            <ComparisonTable data={this.props.data} />
+            <ComparisonGraph data={this.props.data} title={title} ministry={ministry} />
+            <ComparisonTable data={this.props.data} ministry={ministry} />
           </div>
         }
       </div>

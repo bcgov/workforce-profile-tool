@@ -18,7 +18,7 @@ class ComparisonTable extends Component {
       },
       {
         id: 'Employees_BCPS',
-        name: 'BC Public Service, %',
+        name: `${this.props.ministry}, %`,
         accessor: d => parseFloatClean(d['Employees_BCPS']),
         displayAccessor: d => d['Employees_BCPS'],
         cellClass: 'text-right',

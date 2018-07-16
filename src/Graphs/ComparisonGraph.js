@@ -43,7 +43,7 @@ class ComparisonGraph extends Component {
 
     const legend = (
       <Legend items={[
-        { label: 'BC Public Service', color: '#6c757d' },
+        { label: `${this.props.ministry}`, color: '#6c757d' },
         { label: 'Available Workforce', color: '#70CCDB', tooltip: `The representation of the target group in the BC Workforce according to Statistics Canada's 2011 National Household Survey The "Available Workforce" is adjusted in accordance with the occupational distribution of jobs within the Organization, and the geographic area from which recruitment is carried out, in order to reflect the "available" workforce to the Organization.` },
         { label: 'BC Population', color: '#D2E2EE', tooltip: `Statistics Canada, 2011 National Household Survey` }
       ]} />
