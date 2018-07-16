@@ -38,11 +38,15 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
   }
 
   stackMin (series) {
-    return d3.min(series, d => d[0])
+    return d3.min(series, d => d[0]) * 1.05
   }
 
   stackMax (series) {
-    return d3.max(series, d => d[1])
+    const max = d3.max(series, d => d[1])
+    // We want to return max * 1.05 if max isn't 1. When max is 1, we're showing
+    // the proportional figures, and don't want to extend the height of the
+    // graph.
+    return max !== 1 ? max * 1.05 : max
   }
 
   getYScale () {
@@ -83,7 +87,7 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
 
     const getY = (d) => {
       if (this.props.absolute) {
-        if (d[0] < 0) {
+        if (d[0] < 0 || (d[0] === 0 && d[0] === d[1])) {
           return this.getYScale()(d[0]) - positionAdjustment
         } else {
           return this.getYScale()(d[1]) + positionAdjustment
