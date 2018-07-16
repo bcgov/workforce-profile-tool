@@ -16,16 +16,33 @@ class Progress extends Component {
   render () {
     const title = 'Indicators of Progress — By Designated Group'
     const filters = qs.parse(this.props.location.search)
+
+    const codeOrder = {
+      'IND': 0,
+      'DIS': 1,
+      'VM': 2,
+      'WOM': 3,
+      'WOM_SM': 4,
+      'AS_TOTAL': 5
+    }
+
+    const data = this.props.data
+    if (data && data.length) {
+      data.sort((a, b) => {
+        return codeOrder[a.Des_Grp] - codeOrder[b.Des_Grp]
+      })
+    }
+
     return (
       <div>
         <h1>{title}</h1>
         <h2>{activeMinistry(filters.Ministry_Key)}</h2>
-        {!this.props.data && <Loading />}
-        {this.props.data && this.props.data.length === 0 && <NoData />}
-        {this.props.data && this.props.data.length > 0 &&
+        {!data && <Loading />}
+        {data && data.length === 0 && <NoData />}
+        {data && data.length > 0 &&
           <div>
-            <ProgressGraph data={this.props.data} title={title} />
-            <ProgressTable data={this.props.data} />
+            <ProgressGraph data={data} title={title} />
+            <ProgressTable data={data} />
           </div>
         }
       </div>
