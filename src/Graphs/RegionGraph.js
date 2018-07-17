@@ -46,7 +46,7 @@ class RegionGraph extends Component {
           },
           margins: { top: 0, left: 140, bottom: 40, right: 20 },
           axes: { yAxisLabel: '', xAxisLabel: 'Count in BCPS' },
-          font: 'Myriad Pro'
+          font: '"myriad-pro", "Myriad Pro"'
         }}
       />
     )
