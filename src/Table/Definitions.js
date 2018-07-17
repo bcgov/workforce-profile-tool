@@ -13,14 +13,15 @@ class Definitions extends Component {
     const definitionRows = DEFINITIONS.map(item => {
       return (
         <React.Fragment key={item.term}>
-          <dt>{item.term}</dt><dd>{item.definition}</dd>
+          <div className='term'>{item.term}</div>
+          <div className='definition'>{item.definition}</div>
         </React.Fragment>
       )
     })
     return (
-      <dl className='Definitions'>
+      <div className='Definitions'>
         { definitionRows }
-      </dl>
+      </div>
     )
   }
 }
