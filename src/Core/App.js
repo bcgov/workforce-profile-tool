@@ -207,8 +207,6 @@ class App extends Component {
     occupationRegionData.forEach(r => { r.key = ''.concat(Object.values(r)) })
     flowReportData.forEach(r => { r.key = ''.concat(Object.values(r)) })
 
-    console.log('occupationRegionData', occupationRegionData)
-
     this.setState({
       activeVariables,
       iopReportData,

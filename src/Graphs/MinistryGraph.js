@@ -98,7 +98,7 @@ class MinistrySubGraph extends Component {
           dataLabels: { position: 25, formatter },
           margins: { top: 0, left: 250, bottom: 40, right: 40 },
           axes: { yAxisLabel: '', xAxisLabel: '% representation' },
-          font: 'Myriad Pro'
+          font: '"myriad-pro", "Myriad Pro"'
         }}
       />
     )

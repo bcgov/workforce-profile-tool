@@ -79,7 +79,7 @@ class FlowReportGraph extends Component {
           dataLabels: { position: -10, formatter: (d) => formatNumber(d) },
           margins: { top: 20, left: 70, bottom: 40, right: 20 },
           axes: { xAxisTicksVisible: false, xAxisLabel: '', yAxisLabel },
-          font: 'Myriad Pro'
+          font: '"myriad-pro", "Myriad Pro"'
         }}
       />
     )
