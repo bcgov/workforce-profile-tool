@@ -31,7 +31,7 @@ class HiringGraph extends Component {
           dataLabels: { position: -10, formatter: (d) => formatNumber(d) },
           margins: { top: 10, left: 60, bottom: 40, right: 20 },
           axes: { xAxisLabel: '', yAxisLabel: 'Count' },
-          font: 'Myriad Pro'
+          font: '"myriad-pro", "Myriad Pro"'
         }}
       />
     )

@@ -15,9 +15,16 @@ class TabInterface extends React.Component {
 
   setActiveTab (activeTab) {
     this.setState({ activeTabKey: activeTab }, () => {
-      // Fire a global event for any components that need to
-      // know when they are visible (e.g. MapViz)
-      window.dispatchEvent(new window.Event('shown'))
+      // Fire a global event for any components that need to know when they are
+      // visible (e.g. MapViz). Awkward code a result of fixing for IE.
+      let event
+      if (typeof window.Event === 'function') {
+        event = new window.Event('shown')
+      } else {
+        event = document.createEvent('Event')
+        event.initEvent('shown', true, true)
+      }
+      window.dispatchEvent(event)
     })
   }
 

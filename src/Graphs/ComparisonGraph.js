@@ -35,7 +35,7 @@ class ComparisonGraph extends Component {
           dataLabels: { position: 25, formatter: (d) => formatPercent(d, 1, 100) },
           margins: { top: 0, left: 140, bottom: 40, right: 40 },
           axes: { yAxisLabel: '', xAxisLabel: '% representation' },
-          font: 'Myriad Pro'
+          font: '"myriad-pro", "Myriad Pro"'
         }}
         xLines={[]}
       />

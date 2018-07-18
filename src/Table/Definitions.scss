@@ -10,13 +10,13 @@
     flex-wrap: wrap;
     color: $brand-color-dark-grey;
     font-size: 0.9rem;
-    dt {
+    div.term {
         flex: 0 0 60px;
         font-weight: 600;
         text-align: right;
         padding-right: 30px;
     }
-    dd {
-        flex: 0 0 calc(100% - 60px);
+    div.definition {
+        flex: 0 0 calc(100% - 90px);
     }
 }

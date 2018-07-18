@@ -43,7 +43,19 @@ class GraphFrame extends Component {
     // the graph has been translated (effectively, the left and right margins of
     // the graph, respectively).
     const g = svg.firstChild
-    const translateComponents = g.getAttribute('transform').split(',')
+    console.log('g', g)
+    console.log('g.getAttribute(transform)',)
+
+    // On IE Edge, the two items are actually not separated by a ',', so we need
+    // to split on the space instead.
+    const transform = g.getAttribute('transform')
+    console.log(transform)
+
+    const translateComponents = transform.indexOf(',') > 0
+      ? transform.split(',')
+      : transform.split(' ')
+    
+    console.log('translateComponents', translateComponents)
 
     // Now translateComponents is something like ['translate(70', '20)']. We
     // can get the top margin by running parseInt on the second array item.
@@ -79,7 +91,7 @@ class GraphFrame extends Component {
       legendFO.setAttribute('x', originalSVGWidth)
 
       legend = legend.cloneNode(true)
-      legend.setAttribute('style', 'font-family: "Myriad Pro"')
+      legend.setAttribute('style', `font-family: "${FONT_FAMILY}"`)
       legendFO.appendChild(legend)
       // svg.appendChild(legendFO)
     }
@@ -89,7 +101,7 @@ class GraphFrame extends Component {
     if (legend && filters) {
       // Append the filters to the legend.
       filters = filters.cloneNode(true)
-      filters.setAttribute('style', 'font-family: "Myriad Pro"')
+      filters.setAttribute('style', `font-family: "${FONT_FAMILY}"`)
       legendFO.appendChild(filters)
       svg.appendChild(legendFO)
     }
@@ -103,6 +115,8 @@ class GraphFrame extends Component {
       console.warn('GraphFrame should be provided a className attribute')
     }
 
+    const isIE = /*@cc_on!@*/false || !!document.documentMode;
+
     return (
       <div className={`GraphFrame row${this.props.className ? ` ${this.props.className}` : ''}`}>
         <div className='col-9'>
@@ -113,9 +127,11 @@ class GraphFrame extends Component {
           {!this.props.hideFilterNotes &&
             <FilterNotes />
           }
-          <button className='btn btn-sm btn-primary SavePNG' onClick={this.saveSVGAsPNG}>
-            <i className='fas fa-download' />Save as PNG
-          </button>
+          {!isIE && 
+            <button className='btn btn-sm btn-primary SavePNG' onClick={this.saveSVGAsPNG}>
+              <i className='fas fa-download' />Save as PNG
+            </button>
+          }
         </div>
       </div>
     )

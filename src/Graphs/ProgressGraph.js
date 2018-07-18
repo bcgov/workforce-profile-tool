@@ -41,7 +41,7 @@ class ProgressGraph extends Component {
           dataLabels: { position: -10, formatter: (d) => formatPercent(d, 1, 100) },
           margins: { top: 20, left: 50, bottom: 40, right: 20 },
           axes: { xAxisLabel: '', yAxisLabel: '% representation' },
-          font: 'Myriad Pro'
+          font: '"myriad-pro", "Myriad Pro"'
         }}
     />)
 
