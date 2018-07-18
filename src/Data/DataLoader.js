@@ -17,7 +17,7 @@ class DataLoader {
   }
 
   static async getIndicatorsOfProgressReport () {
-    const url = `${DATA_PATH_BASE_2018}WP2018_Ind_Progress-2_Updated.csv`
+    const url = `${DATA_PATH_BASE_2018}WP2018_Ind_Progress-2_UpdJUL17.csv`
     return DataLoader.loadCSV(url)
   }
 
