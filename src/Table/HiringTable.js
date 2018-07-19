@@ -28,14 +28,14 @@ class ProgressTable extends Component {
       },
       {
         id: '2018_hired_ct',
-        name: 'Hired in 2018',
+        name: 'Hired, 2015 to 2018',
         accessor: d => formatNumber(d['2018_hired_ct']),
         cellClass: 'text-right',
         headerClass: 'text-right'
       },
       {
         id: 'percent_total',
-        name: 'Percent all 2018 hires, %',
+        name: 'Percent of all hires',
         accessor: d => formatPercent(d['2018_hired_ct'], 1, totalHired),
         cellClass: 'text-right',
         headerClass: 'text-right'

@@ -13,7 +13,7 @@ class Hiring extends Component {
   }
 
   render () {
-    const title = 'Indicators of Progress — Hiring'
+    const title = 'Indicators of Progress — Hiring, 2015 to 2018'
     const filters = qs.parse(this.props.location.search)
     return (
       <div>

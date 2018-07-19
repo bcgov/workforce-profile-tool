@@ -38,7 +38,7 @@ class HiringGraph extends Component {
 
     const legend = (
       <Legend items={[
-        { label: 'Number Hired', color: '#70CCDB' }
+        { label: 'Hired, 2015 to 2018', color: '#70CCDB' }
       ]} />
     )
 
