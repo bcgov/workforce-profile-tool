@@ -7,12 +7,18 @@
     }
 }
 
+h2 {
+    color: $brand-color-dark-grey !important;
+    margin-bottom: 1rem !important;
+}
+
 .alert.alert-warning {
     background-color: lighten($brand-color-gold, 30%);
     color: darken($brand-color-gold, 20%);
     padding: 1rem;
     h2 {
         font-size: 1.3rem;
+        color: darken($brand-color-gold, 20%) !important;
     }
     p {
         margin-bottom: 0;
