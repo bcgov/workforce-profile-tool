@@ -7,7 +7,7 @@ export const subtitle = (locationSearch, ministry, employeeType) => {
   const filters = qs.parse(locationSearch)
   const displayMinistry = ministry || activeMinistry(filters.Ministry_Key)
   const displayEmployeeType = employeeType || activeEmployeeType(filters.Employee_Type)
-  return `${displayMinistry}, % ${displayEmployeeType.toLowerCase()} employees reporting`
+  return `${displayMinistry}, ${displayEmployeeType.toLowerCase()} employees`
 }
 
 class Title extends Component {
