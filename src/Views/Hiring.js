@@ -5,7 +5,7 @@ import Loading from './Loading'
 import NoData from './NoData'
 import { withRouter } from 'react-router-dom'
 import qs from '../Services/query-string'
-import { activeMinistry } from '../Services/activeMinistry'
+import { activeMinistry, activeEmployeeType } from '../Services/activeVariables'
 
 class Hiring extends Component {
   componentDidMount () {
@@ -15,10 +15,12 @@ class Hiring extends Component {
   render () {
     const title = 'Indicators of Progress — Hiring, 2015 to 2018'
     const filters = qs.parse(this.props.location.search)
+    const ministry = activeMinistry(filters.Ministry_Key)
+    const employeeType = activeEmployeeType(filters.Employee_Type)
     return (
       <div>
         <h1>{title}</h1>
-        <h2>{activeMinistry(filters.Ministry_Key)}</h2>
+        <h2>{ministry} — {employeeType} Employees</h2>
         {!this.props.data && <Loading />}
         {this.props.data && this.props.data.length === 0 && <NoData />}
         {this.props.data && this.props.data.length > 0 &&

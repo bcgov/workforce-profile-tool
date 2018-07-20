@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import qs from '../Services/query-string'
-import { activeMinistry } from '../Services/activeMinistry'
+import { activeMinistry, activeEmployeeType } from '../Services/activeVariables'
 import ProgressGraph from '../Graphs/ProgressGraph'
 import ProgressTable from '../Table/ProgressTable'
 
@@ -16,6 +16,8 @@ class Progress extends Component {
   render () {
     const title = 'Indicators of Progress — By Designated Group'
     const filters = qs.parse(this.props.location.search)
+    const ministry = activeMinistry(filters.Ministry_Key)
+    const employeeType = activeEmployeeType(filters.Employee_Type)
 
     const codeOrder = {
       'IND': 0,
@@ -36,7 +38,7 @@ class Progress extends Component {
     return (
       <div>
         <h1>{title}</h1>
-        <h2>{activeMinistry(filters.Ministry_Key)}</h2>
+        <h2>{ministry} — {employeeType} Employees</h2>
         {!data && <Loading />}
         {data && data.length === 0 && <NoData />}
         {data && data.length > 0 &&

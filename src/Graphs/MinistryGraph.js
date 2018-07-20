@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import * as PlusPlot from '@plot-and-scatter/plusplot'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
+import { withRouter } from 'react-router-dom'
+import qs from '../Services/query-string'
+import { activeEmployeeType } from '../Services/activeVariables'
 
 import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
@@ -23,9 +26,13 @@ class MinistryGraph extends Component {
     const graphs = Object.keys(dataMap).map(k => {
       const title = VARIABLE_MANAGER.displayNameByKey('Des_Grp', k)
       const shortTitle = VARIABLE_MANAGER.shortDisplayNameByKey('Des_Grp', k)
+
+      const filters = qs.parse(this.props.location.search)
+      const employeeType = activeEmployeeType(filters.Employee_Type)
+
       return (
         <div key={k}>
-          <h2>{title}</h2>
+          <h2>{title} — {employeeType} Employees</h2>
           <MinistrySubGraph
             data={dataMap[k]}
             masterTitle={this.props.title}
@@ -128,4 +135,4 @@ class MinistrySubGraph extends Component {
   }
 }
 
-export default MinistryGraph
+export default withRouter(MinistryGraph)
