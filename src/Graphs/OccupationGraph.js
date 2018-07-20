@@ -22,9 +22,9 @@ class OccupationGraph extends Component {
     const chartData = Object.keys(dataMap).map(k => {
       const data = dataMap[k].filter(d => d.Variable_Type === 'Total')[0]
       const values = [
-        +data.DesGrp_Count_Expected,
-        +data.DesGrp_Count_ORG,
-        +data.DesGrp_Count_Shortfall
+        data.DesGrp_Count_Expected,
+        data.DesGrp_Count_ORG,
+        data.DesGrp_Count_Shortfall
       ]
 
       let title = VARIABLE_MANAGER.displayNameByKey('Des_Grp', k)
