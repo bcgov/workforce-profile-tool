@@ -5,9 +5,30 @@ import Loading from './Loading'
 import NoData from './NoData'
 import Title from './Title'
 
+import { withRouter } from 'react-router-dom'
+import qs from '../Services/query-string'
+
 class Region extends Component {
+  setVariableLock () {
+    const filters = qs.parse(this.props.location.search)
+    // console.log('filters.Ministry_Key', filters.Ministry_Key, (filters.Ministry_Key !== 'BCPS'))
+    if (filters.Ministry_Key !== 'BCPS') {
+      this.props.variableLockCallback({
+        Employee_Type: 'REG'
+      })
+    } else {
+      this.props.variableLockCallback(false)
+    }
+  }
+
   componentDidMount () {
-    this.props.variableLockCallback(false)
+    this.setVariableLock()
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (this.props.location.search !== prevProps.location.search) {
+      this.setVariableLock()
+    }
   }
 
   render () {
@@ -28,4 +49,4 @@ class Region extends Component {
   }
 }
 
-export default Region
+export default withRouter(Region)

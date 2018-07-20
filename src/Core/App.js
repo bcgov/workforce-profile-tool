@@ -22,7 +22,7 @@ class App extends Component {
       occupationRegionData: null,
       flowData: null,
       activeVariables: VARIABLE_MANAGER.emptySelectableVariableMap(),
-      lockVariables: false,
+      variablesToLock: false,
       savedEmployeeType: null,
       savedMinistry: null
     }
@@ -133,10 +133,16 @@ class App extends Component {
     }
   }
 
-  setVariableLock (lockVariables, variablesToLock) {
-    if (lockVariables) {
-      const currentEmployeeType = this.state.savedEmployeeType || Object.assign({}, this.state.activeVariables.Employee_Type)
-      const currentMinistry = this.state.savedMinistry || Object.assign({}, this.state.activeVariables.Ministry_Key)
+  setVariableLock (variablesToLock) {
+    if (variablesToLock) {
+      let currentEmployeeType = this.state.activeVariables['Employee_Type']
+      let currentMinistry = this.state.activeVariables['Ministry_Key']
+      if (variablesToLock['Employee_Type']) {
+        currentEmployeeType = this.state.savedEmployeeType || Object.assign({}, this.state.activeVariables.Employee_Type)
+      }
+      if (variablesToLock['Ministry_Key']) {
+        currentMinistry = this.state.savedMinistry || Object.assign({}, this.state.activeVariables.Ministry_Key)
+      }
 
       let activeVariables
 
@@ -149,7 +155,7 @@ class App extends Component {
       })
 
       this.setState({
-        lockVariables,
+        variablesToLock,
         activeVariables,
         savedEmployeeType: currentEmployeeType,
         savedMinistry: currentMinistry
@@ -161,13 +167,13 @@ class App extends Component {
         activeVariables.Ministry_Key = this.state.savedMinistry
 
         this.setState({
-          lockVariables,
+          variablesToLock,
           activeVariables,
           savedEmployeeType: null,
           savedMinistry: null
         }, () => this.updateLocation())
       } else {
-        this.setState({ lockVariables })
+        this.setState({ variablesToLock })
       }
     }
   }
@@ -181,6 +187,7 @@ class App extends Component {
   }
 
   updateLocation () {
+    // console.log('this.state.activeVariables', this.state.activeVariables)
     this.props.history.push({
       search: '?' + qs.stringify(toActiveVariableArray(this.state.activeVariables))
     })
@@ -239,7 +246,7 @@ class App extends Component {
               updateVariable={this.updateVariable}
               variableManager={VARIABLE_MANAGER}
               activeVariables={this.state.activeVariables}
-              lockVariables={this.state.lockVariables}
+              variablesToLock={this.state.variablesToLock}
             />
           </div>
           <div className='col-10 MainWrapper'>

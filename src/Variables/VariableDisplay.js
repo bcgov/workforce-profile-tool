@@ -13,6 +13,7 @@ class VariableDisplay extends Component {
         variableKey
       )
       const isLocked = this.props.lockVariables
+      // console.log('isLocked', isLocked)
       return (
         <li
           key={variable.key}

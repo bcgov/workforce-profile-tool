@@ -7,10 +7,9 @@ import Title from './Title'
 
 class Leadership extends Component {
   componentDidMount () {
-    this.props.variableLockCallback(
-      true,
-      { Employee_Type: 'ALL', Ministry_Key: 'BCPS' }
-    )
+    this.props.variableLockCallback({
+      Employee_Type: 'ALL', Ministry_Key: 'BCPS'
+    })
   }
 
   render () {

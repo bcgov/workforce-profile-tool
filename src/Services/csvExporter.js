@@ -45,7 +45,7 @@ export const exportData = (columns, rows, title, includeDefinitions = true) => {
     allRows = allRows.concat(definitions)
   }
 
-  console.log('allrows', allRows)
+  // console.log('allrows', allRows)
 
   return _toCSVString(allRows)
 }

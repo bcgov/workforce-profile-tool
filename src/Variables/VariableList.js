@@ -11,7 +11,7 @@ class VariableList extends Component {
         variableGroup={group}
         activeVariables={this.props.activeVariables}
         updateCallback={this.props.updateVariable}
-        lockVariables={group.key !== 'Des_Grp' && this.props.lockVariables}
+        lockVariables={this.props.variablesToLock[group.key]}
         // useShortDisplay={group.key === 'Ministry_Key'}
       />
     )

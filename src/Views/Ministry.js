@@ -5,10 +5,9 @@ import NoData from './NoData'
 
 class Ministry extends Component {
   componentDidMount () {
-    this.props.variableLockCallback(
-      true,
-      { Employee_Type: 'REG', Ministry_Key: 'BCPS' }
-    )
+    this.props.variableLockCallback({
+      Employee_Type: 'REG', Ministry_Key: 'BCPS'
+    })
   }
 
   render () {
