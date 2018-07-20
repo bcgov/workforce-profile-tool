@@ -22,7 +22,7 @@ class DataLoader {
   }
 
   static async getComparisonReport () {
-    const url = `${DATA_PATH_BASE_2018}WP2018_Comparison-2_updJUL17.csv`
+    const url = `${DATA_PATH_BASE_2018}WP2018_Comparison-2_updJUL20.csv`
     return DataLoader.loadCSV(url)
   }
 
