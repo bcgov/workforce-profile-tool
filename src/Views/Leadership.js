@@ -9,7 +9,10 @@ import { activeMinistry } from '../Services/activeMinistry'
 
 class Leadership extends Component {
   componentDidMount () {
-    this.props.variableLockCallback(true)
+    this.props.variableLockCallback(
+      true,
+      { Employee_Type: 'ALL', Ministry_Key: 'BCPS' }
+    )
   }
 
   render () {

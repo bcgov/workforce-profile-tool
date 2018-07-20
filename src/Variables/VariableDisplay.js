@@ -7,7 +7,11 @@ class VariableDisplay extends Component {
     const options = this.props.variableGroup.selectableVariables.map(variable => {
       const variableGroupKey = this.props.variableGroup.key
       const variableKey = variable.key
-      const isActive = isVariableActive(this.props.activeVariables, variableGroupKey, variableKey)
+      const isActive = isVariableActive(
+        this.props.activeVariables,
+        variableGroupKey,
+        variableKey
+      )
       const isLocked = this.props.lockVariables
       return (
         <li

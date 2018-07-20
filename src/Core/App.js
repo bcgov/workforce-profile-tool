@@ -133,22 +133,21 @@ class App extends Component {
     }
   }
 
-  setVariableLock (lockVariables) {
-    console.log('lockVariables', lockVariables)
-
+  setVariableLock (lockVariables, variablesToLock) {
     if (lockVariables) {
       const currentEmployeeType = this.state.savedEmployeeType || Object.assign({}, this.state.activeVariables.Employee_Type)
       const currentMinistry = this.state.savedMinistry || Object.assign({}, this.state.activeVariables.Ministry_Key)
 
-      let activeVariables = toggleVariable(
-        this.state.activeVariables,
-        'Employee_Type', 'ALL'
-      )
-      activeVariables = toggleVariable(
-        this.state.activeVariables,
-        'Ministry_Key',
-        'BCPS'
-      )
+      let activeVariables
+
+      Object.keys(variablesToLock).forEach(variableGroupKey => {
+        activeVariables = toggleVariable(
+          this.state.activeVariables,
+          variableGroupKey,
+          variablesToLock[variableGroupKey]
+        )
+      })
+
       this.setState({
         lockVariables,
         activeVariables,
