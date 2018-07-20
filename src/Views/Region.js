@@ -3,9 +3,7 @@ import RegionGraph from '../Graphs/RegionGraph'
 import RegionTable from '../Table/RegionTable'
 import Loading from './Loading'
 import NoData from './NoData'
-import { withRouter } from 'react-router-dom'
-import qs from '../Services/query-string'
-import { activeMinistry, activeEmployeeType } from '../Services/activeVariables'
+import Title from './Title'
 
 class Region extends Component {
   componentDidMount () {
@@ -14,13 +12,9 @@ class Region extends Component {
 
   render () {
     const title = 'Representation — Region'
-    const filters = qs.parse(this.props.location.search)
-    const ministry = activeMinistry(filters.Ministry_Key)
-    const employeeType = activeEmployeeType(filters.Employee_Type)
     return (
       <div>
-        <h1>{title}</h1>
-        <h2>{ministry} — {employeeType} Employees</h2>
+        <Title title={title} />
         {!this.props.data && <Loading />}
         {this.props.data && this.props.data.length === 0 && <NoData />}
         {this.props.data && this.props.data.length > 0 &&
@@ -34,4 +28,4 @@ class Region extends Component {
   }
 }
 
-export default withRouter(Region)
+export default Region
