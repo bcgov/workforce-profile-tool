@@ -31,6 +31,7 @@ class MinistryGraph extends Component {
             masterTitle={this.props.title}
             title={title}
             shortTitle={shortTitle}
+            varKey={k}
           />
           <br />
           <br />
@@ -117,7 +118,7 @@ class MinistrySubGraph extends Component {
 
     return (
       <GraphFrame
-        className={`Ministry-${this.props.shortTitle}`}
+        className={`Ministry-${this.props.varKey}`}
         title={`${this.props.masterTitle} — ${this.props.title}`}
         hideFilterNotes
         graph={graph}
