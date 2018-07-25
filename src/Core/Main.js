@@ -9,7 +9,7 @@ import Leadership from '../Views/Leadership'
 import Comparison from '../Views/Comparison'
 import Progress from '../Views/Progress'
 import Hiring from '../Views/Hiring'
-import FlowReport from '../Views/FlowReport'
+// import FlowReport from '../Views/FlowReport'
 
 class Main extends Component {
   getOccupationData (data) {
