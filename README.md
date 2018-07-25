@@ -1,6 +1,8 @@
 # workforce-profile-tool
 Workforce Profile tool
 
+[![Build Status](https://travis-ci.org/bcgov/workforce-profile-tool.svg?branch=master)](https://travis-ci.org/bcgov/workforce-profile-tool)
+
 ## Notes
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
