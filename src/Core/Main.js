@@ -9,7 +9,7 @@ import Leadership from '../Views/Leadership'
 import Comparison from '../Views/Comparison'
 import Progress from '../Views/Progress'
 import Hiring from '../Views/Hiring'
-// import FlowReport from '../Views/FlowReport'
+import FlowReport from '../Views/FlowReport'
 
 class Main extends Component {
   getOccupationData (data) {
@@ -98,14 +98,10 @@ class Main extends Component {
                     />
                   </Tab>
                   <Tab key={'flow-report'} name='Flow Report'>
-                    {/* <FlowReport
+                    <FlowReport
                       variableLockCallback={this.props.variableLockCallback}
                       data={this.props.data.flowReportData}
-                    /> Commented out while we are waiting for Flow data - FH */}
-                    <div className='alert alert-warning' role='alert'>
-                      <h2>Data for 2018 not yet available</h2>
-                      <p>The Flow Report data for 2018 is still being generated, and will be added to the tool once available.</p>
-                    </div>
+                    />
                   </Tab>
                 </TabInterface>
               </div>

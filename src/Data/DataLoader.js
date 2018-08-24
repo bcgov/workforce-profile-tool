@@ -1,7 +1,5 @@
 import * as d3 from 'd3'
-// import FlowReport from './FlowReport'
 
-const DATA_PATH_BASE_2015 = 'data/2015/'
 const DATA_PATH_BASE_2018 = 'data/2018/'
 
 class DataLoader {
@@ -37,7 +35,7 @@ class DataLoader {
   }
 
   static async getFlowReport () {
-    const url = `${DATA_PATH_BASE_2015}WP2015_Flow-1.csv`
+    const url = `${DATA_PATH_BASE_2018}WP2018_Flow-1.csv`
     return DataLoader.loadCSV(url)
   }
 
