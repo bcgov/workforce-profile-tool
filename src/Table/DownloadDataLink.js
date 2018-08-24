@@ -4,7 +4,13 @@ import { exportData } from '../Services/csvExporter'
 class DownloadButton extends Component {
   download () {
     // Help from https://github.com/mholt/PapaParse/issues/175#issuecomment-75597039
-    const csvString = exportData(this.props.columns, this.props.rows, null, this.props.includeDefinitions)
+    const csvString = exportData(
+      this.props.columns,
+      this.props.rows,
+      null,
+      this.props.includeDefinitions,
+      this.props.columnPrefixes
+    )
     var blob = new window.Blob([csvString])
     if (window.navigator.msSaveOrOpenBlob) { // IE hack; see http://msdn.microsoft.com/en-us/library/ie/hh779016.aspx
       window.navigator.msSaveBlob(blob, `${this.props.filename}.csv`)

@@ -165,7 +165,7 @@
     }
     table.ReactorTable.hiring,
     table.ReactorTable.separations {
-        tr:nth-child(2n) {
+        tr:nth-child(2n + 3) {
             @extend %subtotal;
             td:nth-child(4) {
                 border-right: 2px solid darken($brand-color-fog, 10%);
@@ -179,5 +179,6 @@
                 border-right: 2px solid darken($brand-color-fog, 10%);
             }
         }
+        margin-bottom: 1rem;
     }
 }

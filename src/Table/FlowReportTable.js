@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
-
 import Definitions from './Definitions'
+import DownloadDataLink from './DownloadDataLink'
 
 import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
@@ -139,6 +139,16 @@ class FlowReportSubTable extends Component {
 
     const rowFilter = (r) => true
 
+    const columnPrefixes = ['',
+      'Regular – ', 'Regular – ', 'Regular – ',
+      'Auxiliary – ', 'Auxiliary – ', 'Auxiliary – '
+    ]
+
+    const allRows = yearRows
+      .concat(hiringRows)
+      .concat(separationsRows)
+      .concat(promotionsRows)
+
     return (
       <div className='Table FlowReportTable row'>
         <div className='col'>
@@ -169,6 +179,12 @@ class FlowReportSubTable extends Component {
                 rows={promotionsRows}
                 rowFilter={rowFilter}
                 tableClass={'promotions'}
+              />
+              <DownloadDataLink
+                columns={columns}
+                columnPrefixes={columnPrefixes}
+                rows={allRows}
+                filename={'flow-report'}
               />
             </div>
           }

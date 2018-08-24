@@ -10,8 +10,8 @@ const _toCSVString = (rows) => {
   return content
 }
 
-export const exportData = (columns, rows, title, includeDefinitions = true) => {
-  const columnRow = columns.map(c => {
+export const exportData = (columns, rows, title, includeDefinitions = true, columnPrefixes = null) => {
+  const columnRow = columns.map((c, index) => {
     let name = c.name
     if (typeof name === 'object') {
       // Special case for columns with HTML in them. In that case, c.name will
@@ -20,6 +20,11 @@ export const exportData = (columns, rows, title, includeDefinitions = true) => {
       // column text, so we can just filter on those and join them together to
       // get the proper column text.
       name = name.props.children.filter(c => typeof c === 'string').join('')
+    }
+    // If there are prefixes, attach them
+    if (columnPrefixes) {
+      const prefix = columnPrefixes[index] || ''
+      name = prefix + name
     }
     return `"${name}"`
   })
