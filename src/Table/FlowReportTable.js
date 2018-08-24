@@ -14,9 +14,34 @@ class FlowReportTable extends Component {
   render () {
     if (!this.props.data) return <div>&nbsp;</div>
 
+    const codeOrder = {
+      'Employed_2015': 1,
+      'Employed_2018': 2,
+      'Hiring_Outside': 3,
+      'Hiring_Other': 4,
+      'Hiring_TotalNew': 5,
+      'Hiring_AuxtoReg': 6,
+      'Hiring_TotalReg': 7,
+      'Separations_BCPS': 8,
+      'Separations_Other': 9,
+      'Separations_Total': 10,
+      'Separations_AuxtoReg': 11,
+      'Separations_TotalAux': 12,
+      'Promotions_Same': 13,
+      'Promotions_Other': 14,
+      'Promotions_Total': 15
+    }
+
+    const data = this.props.data
+    if (data && data.length) {
+      data.sort((a, b) => {
+        return codeOrder[a.Type] - codeOrder[b.Type]
+      })
+    }
+
     // Split the data
     const dataMap = {}
-    this.props.data.forEach(d => {
+    data.forEach(d => {
       dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
       dataMap[d.Des_Grp].push(d)
     })
