@@ -7,7 +7,9 @@ import Title from './Title'
 
 class FlowReport extends Component {
   componentDidMount () {
-    this.props.variableLockCallback(false)
+    this.props.variableLockCallback({
+      Employee_Type: 'ALL'
+    })
   }
 
   render () {
