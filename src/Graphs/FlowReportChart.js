@@ -93,6 +93,8 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
           return this.getYScale()(d[1]) + positionAdjustment
         }
       } else {
+        console.log('d', d, 'd[0]', d[0], 'd[1]', d[1])
+        console.log(this.getYScale()(d[1]))
         return this.getYScale()(d[1]) + positionAdjustment
       }
     }
@@ -105,7 +107,8 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
           return d3.format(',.0f')(d[1])
         }
       } else {
-        if (d[1] < 1) {
+        console.log('d', d)
+        if (d[0] === 0) {
           return d3.format('.1%')(d[1])
         } else {
           return ''
@@ -164,10 +167,10 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
     const rotation = this.axes.xAxisRotateTickLabels
     const textAnchor =
             rotation < 0
-            ? 'end'
-            : rotation > 0
-            ? 'start'
-            : 'middle'
+              ? 'end'
+              : rotation > 0
+                ? 'start'
+                : 'middle'
 
     this.wrapper.selectAll('.x-axis .tick text')
       .attr('transform', `rotate(${rotation})`)
@@ -196,11 +199,11 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
 
     // The bars are the bars within each group
     const dataLabelGroups = this.wrapper
-       .selectAll('.dataLabelGroup')
-       .data(this.stackedData(), (d, i) => i)
+      .selectAll('.dataLabelGroup')
+      .data(this.stackedData(), (d, i) => i)
 
     dataLabelGroups.enter().append('g')
-       .attr('class', 'dataLabelGroup')
+      .attr('class', 'dataLabelGroup')
 
     dataLabelGroups.exit().remove()
 
@@ -215,16 +218,16 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
     const duration = 300
 
     const exit = bars.exit()
-        .transition().duration(duration)
-        .attr('height', 0)
-        .attr('y', this.height)
-        .remove()
+      .transition().duration(duration)
+      .attr('height', 0)
+      .attr('y', this.height)
+      .remove()
 
     labels.exit()
-        .transition().duration(duration)
-        .attr('height', 0)
-        .attr('y', this.height)
-        .remove()
+      .transition().duration(duration)
+      .attr('height', 0)
+      .attr('y', this.height)
+      .remove()
 
     const delay = exit.size() ? duration : 0
 
