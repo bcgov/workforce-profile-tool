@@ -56,6 +56,11 @@ class FlowReportGraph extends Component {
           chartDataOutline[key].nonGroup = parseFloatClean(getRowByType(values, key)[`Total_Count${keySuffix}`])
         }
         chartDataOutline[key].nonGroup -= groupValue
+        if (chartDataOutline[key].nonGroup < 0) {
+          // Non-group might be negative; this is if there are more people who
+          // are in categories than non-categories. In this case set it to 0.
+          chartDataOutline[key].nonGroup = 0
+        }
       })
     })
 
@@ -63,7 +68,7 @@ class FlowReportGraph extends Component {
     let yAxisLabel = 'Proportion'
 
     if (this.state.absolute) {
-      chartData.forEach(d => (d.group = -d.group))
+      chartData.forEach(d => { d.group = -d.group })
       yAxisLabel = 'Number'
     }
 
