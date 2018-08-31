@@ -85,10 +85,13 @@ class FlowReportGraph extends Component {
     )
 
     const legend = (
-      <Legend items={[
-        { label: 'Designated Group', color: '#70CCDB' },
-        { label: 'Non-Designated Group', color: '#D2E2EE' }
-      ]} />
+      <Legend
+        items={[
+          { label: 'Designated Group', color: '#70CCDB' },
+          { label: 'Non-Designated Group', color: '#D2E2EE' }
+        ]}
+        notes={'Proportion may be greater than 100% because individuals may belong to more than one designated group.'}
+      />
     )
 
     return (
