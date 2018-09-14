@@ -44,6 +44,11 @@ class DataLoader {
     return DataLoader.loadCSV(url)
   }
 
+  static async getEmployeeCounts () {
+    const url = `${DATA_PATH_BASE_2018}WP2018_EmpCounts.csv`
+    return DataLoader.loadCSV(url)
+  }
+
   static async loadAllData () {
     const iopReport = await DataLoader.getIndicatorsOfProgressReport()
     const comparisonReport = await DataLoader.getComparisonReport()
@@ -51,13 +56,15 @@ class DataLoader {
     const ministryReport = await DataLoader.getMinistryReport()
     const orReport = await DataLoader.getOccupationRegionReport()
     const flowReport = await DataLoader.getFlowReport()
+    const employeeCounts = await DataLoader.getEmployeeCounts()
     return {
       iopReport,
       comparisonReport,
       leadershipReport,
       ministryReport,
       orReport,
-      flowReport
+      flowReport,
+      employeeCounts
     }
   }
 }
