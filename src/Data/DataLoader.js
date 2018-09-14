@@ -35,7 +35,7 @@ class DataLoader {
   }
 
   static async getFlowReport () {
-    const url = `${DATA_PATH_BASE_2018}WP2018_Flow-1.csv`
+    const url = `${DATA_PATH_BASE_2018}WP2018_Flow-1_Sept10.csv`
     return DataLoader.loadCSV(url)
   }
 
