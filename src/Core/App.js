@@ -106,7 +106,7 @@ class App extends Component {
     if (Object.keys(filters).length > 0 && this.state.originalData.occupationRegionData) {
       const occupationRegionData = this.processFilters(filters, this.state.originalData.occupationRegionData)
       // const filterCount = occupationRegionData
-        // .find(d => d['Variable_Type'] === 'Total')['Total_Count_ORG']
+      // .find(d => d['Variable_Type'] === 'Total')['Total_Count_ORG']
       // TODO: we can't actually show the numerator because we would double-count
       // individuals who are e.g. both female and indigenous.
       this.setState({ occupationRegionData })
@@ -130,6 +130,10 @@ class App extends Component {
     if (Object.keys(filters).length > 0 && this.state.originalData.flowReportData) {
       const flowReportData = this.processFilters(filters, this.state.originalData.flowReportData)
       this.setState({ flowReportData })
+    }
+    if (Object.keys(filters).length > 0 && this.state.originalData.flowReportData) {
+      const employeeCountData = this.processFilters(filters, this.state.originalData.employeeCountData)
+      this.setState({ employeeCountData })
     }
   }
 
@@ -204,6 +208,7 @@ class App extends Component {
     const ministryData = await DataLoader.getMinistryReport()
     const occupationRegionData = await DataLoader.getOccupationRegionReport()
     const flowReportData = await DataLoader.getFlowReport()
+    const employeeCountData = await DataLoader.getEmployeeCount()
 
     // Build keys
     iopReportData.forEach(r => { r.key = ''.concat(Object.values(r)) })
@@ -212,6 +217,7 @@ class App extends Component {
     ministryData.forEach(r => { r.key = ''.concat(Object.values(r)) })
     occupationRegionData.forEach(r => { r.key = ''.concat(Object.values(r)) })
     flowReportData.forEach(r => { r.key = ''.concat(Object.values(r)) })
+    employeeCountData.forEach(r => { r.key = ''.concat(Object.values(r)) })
 
     this.setState({
       activeVariables,
@@ -221,13 +227,15 @@ class App extends Component {
       ministryData,
       occupationRegionData,
       flowReportData,
+      employeeCountData,
       originalData: {
         iopReportData,
         comparisonData,
         leadershipData,
         ministryData,
         occupationRegionData,
-        flowReportData
+        flowReportData,
+        employeeCountData
       }
     }, () => { this.filterFromProps(this.props) })
   }

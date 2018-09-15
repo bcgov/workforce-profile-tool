@@ -3,11 +3,13 @@ import { withRouter } from 'react-router-dom'
 import qs from '../Services/query-string'
 import { activeMinistry, activeEmployeeType } from '../Services/activeVariables'
 
-export const subtitle = (locationSearch, ministry, employeeType) => {
+export const subtitle = (locationSearch, ministry, employeeType, employeeCount = null) => {
   const filters = qs.parse(locationSearch)
   const displayMinistry = ministry || activeMinistry(filters.Ministry_Key)
   const displayEmployeeType = employeeType || activeEmployeeType(filters.Employee_Type)
-  return `${displayMinistry}, ${displayEmployeeType.toLowerCase()} employees`
+  let title = `${displayMinistry}, ${displayEmployeeType.toLowerCase()} employees`
+  if (employeeCount) { title += (` (n = ${employeeCount.toLocaleString()})`) }
+  return title
 }
 
 class Title extends Component {
@@ -16,7 +18,7 @@ class Title extends Component {
     return (
       <div>
         <h1>{title}</h1>
-        <h2>{subtitle(this.props.location.search)}</h2>
+        <h2>{subtitle(this.props.location.search, null, null, this.props.employeeCount)}</h2>
       </div>
     )
   }

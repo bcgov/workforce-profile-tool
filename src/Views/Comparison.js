@@ -19,7 +19,7 @@ class Comparison extends Component {
     const ministry = activeMinistry(filters.Ministry_Key)
     return (
       <div>
-        <Title title={'Comparison with Provincial Workforce'} />
+        <Title title={'Comparison with Provincial Workforce'} employeeCount={this.props.employeeCount} />
         {!this.props.data && <Loading />}
         {this.props.data && this.props.data.length === 0 && <NoData />}
         {this.props.data && this.props.data.length > 0 &&

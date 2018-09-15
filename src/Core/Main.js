@@ -29,6 +29,12 @@ class Main extends Component {
       activeInnerTab = this.props.match.params.lowLevelNav || 'representation-by-group'
     }
 
+    const employeeCount = this.props.data.employeeCountData
+      ? +this.props.data.employeeCountData[0]['Employee_Count']
+      : ''
+
+    console.log('employeeCount', employeeCount)
+
     return (
       <div className='Main row'>
         <div className='col'>
@@ -68,6 +74,7 @@ class Main extends Component {
               <Comparison
                 variableLockCallback={this.props.variableLockCallback}
                 data={this.props.data.comparisonData}
+                employeeCount={employeeCount}
               />
             </Tab>
             <Tab key={'leadership'} name='Leadership'>
@@ -80,6 +87,7 @@ class Main extends Component {
               <Ministry
                 variableLockCallback={this.props.variableLockCallback}
                 data={this.props.data.ministryData}
+                employeeCount={employeeCount}
               />
             </Tab>
             <Tab key={'representation'} name='Representation'>
@@ -89,18 +97,21 @@ class Main extends Component {
                     <Occupation
                       variableLockCallback={this.props.variableLockCallback}
                       data={this.getOccupationData(this.props.data.occupationRegionData)}
+                      employeeCount={employeeCount}
                     />
                   </Tab>
                   <Tab key={'by-region'} name='By Region'>
                     <Region
                       variableLockCallback={this.props.variableLockCallback}
                       data={this.getRegionData(this.props.data.occupationRegionData)}
+                      employeeCount={employeeCount}
                     />
                   </Tab>
                   <Tab key={'flow-report'} name='Flow Report'>
                     <FlowReport
                       variableLockCallback={this.props.variableLockCallback}
                       data={this.props.data.flowReportData}
+                      employeeCount={employeeCount}
                     />
                   </Tab>
                 </TabInterface>

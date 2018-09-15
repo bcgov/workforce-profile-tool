@@ -19,7 +19,7 @@ class Ministry extends Component {
         {this.props.data && this.props.data.length === 0 && <NoData />}
         {this.props.data && this.props.data.length > 0 &&
           <div>
-            <MinistryGraph data={this.props.data} title={title} />
+            <MinistryGraph data={this.props.data} title={title} employeeCount={this.props.employeeCount} />
           </div>
         }
       </div>
