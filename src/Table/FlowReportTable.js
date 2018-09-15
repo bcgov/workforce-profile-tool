@@ -3,6 +3,7 @@ import Reactor from '@plot-and-scatter/reactor-table'
 import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
 
+import Tooltip from '../Core/Tooltip'
 import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
 import { formatNumber, parseIntClean } from '../Services/formatter'
@@ -101,7 +102,10 @@ class FlowReportSubTable extends Component {
       },
       {
         id: 'Total_Count_Reg',
-        name: 'Total',
+        name: <span>
+          Total
+          &nbsp;<Tooltip text={`Total includes all members of the population, including non-respondents and employees for whom there is no relevant demographic data available.`} />
+        </span>,
         accessor: d => parseIntClean(d['Total_Count_Reg']),
         displayAccessor: d => formatNumber(d['Total_Count_Reg'], ''),
         cellClass: 'text-right',
@@ -128,7 +132,10 @@ class FlowReportSubTable extends Component {
       },
       {
         id: 'Total_Count_Aux',
-        name: 'Total',
+        name: <span>
+          Total
+          &nbsp;<Tooltip text={`Total includes all members of the population, including non-respondents and employees for whom there is no relevant demographic data available.`} />
+        </span>,
         accessor: d => parseIntClean(d['Total_Count_Aux']),
         displayAccessor: d => formatNumber(d['Total_Count_Aux'], ''),
         cellClass: 'text-right',
