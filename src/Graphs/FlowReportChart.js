@@ -93,15 +93,15 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
           return this.getYScale()(d[0]) - positionAdjustment
         }
       } else {
-        console.log('d', d, 'd[0]', d[0], 'd[1]', d[1])
-        console.log(this.getYScale()(d[1]))
+        // console.log('d', d, 'd[0]', d[0], 'd[1]', d[1])
+        // console.log(this.getYScale()(d[1]))
         return this.getYScale()(d[1]) + positionAdjustment
       }
     }
 
     const getText = (d) => {
       if (this.props.absolute) {
-        console.log('d', d)
+        // console.log('d', d)
         if (d[0] < 0) {
           return d3.format(',.0f')(Math.abs(d[0]))
         } else {

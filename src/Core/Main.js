@@ -33,7 +33,7 @@ class Main extends Component {
       ? +this.props.data.employeeCountData[0]['Employee_Count']
       : ''
 
-    console.log('employeeCount', employeeCount)
+    // console.log('employeeCount', employeeCount)
 
     return (
       <div className='Main row'>
