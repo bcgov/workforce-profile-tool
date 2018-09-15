@@ -59,12 +59,14 @@ class Main extends Component {
                     <Progress
                       variableLockCallback={this.props.variableLockCallback}
                       data={this.props.data.iopReportData}
+                      employeeCount={employeeCount}
                     />
                   </Tab>
                   <Tab key={'hiring'} name='Hiring'>
                     <Hiring
                       variableLockCallback={this.props.variableLockCallback}
                       data={this.props.data.iopReportData}
+                      employeeCount={employeeCount}
                     />
                   </Tab>
                 </TabInterface>
