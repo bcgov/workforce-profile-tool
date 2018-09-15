@@ -4,7 +4,7 @@ import Definitions from '../Table/Definitions'
 import DownloadDataLink from './DownloadDataLink'
 
 import { VARIABLE_MANAGER } from '../Variables/VariableManager'
-import { parseFloatClean } from '../Services/formatter'
+import { formatPercent, parseFloatClean } from '../Services/formatter'
 
 import './Table.css'
 
@@ -26,7 +26,7 @@ class ProgressTable extends Component {
         id: '2015_pc',
         name: '2015, %',
         accessor: d => parseFloatClean(d['2015_pc']),
-        displayAccessor: d => d['2015_pc'],
+        displayAccessor: d => formatPercent(d['2015_pc'], 1, 100),
         cellClass: 'text-right',
         headerClass: 'text-right'
       },
@@ -34,7 +34,7 @@ class ProgressTable extends Component {
         id: '2018_pc',
         name: '2018, %',
         accessor: d => parseFloatClean(d['2018_pc']),
-        displayAccessor: d => d['2018_pc'],
+        displayAccessor: d => formatPercent(d['2018_pc'], 1, 100),
         cellClass: 'text-right',
         headerClass: 'text-right'
       }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
 
 import { VARIABLE_MANAGER } from '../Variables/VariableManager'
-import { parseFloatClean } from '../Services/formatter'
+import { formatPercent, parseFloatClean } from '../Services/formatter'
 import DownloadDataLink from './DownloadDataLink'
 
 import './Table.css'
@@ -19,7 +19,7 @@ class ComparisonTable extends Component {
         id: 'Executive',
         name: 'Executive Leadership, %',
         accessor: d => parseFloatClean(d['Executive']),
-        displayAccessor: d => d['Executive'],
+        displayAccessor: d => formatPercent(d['Executive'], 1, 100),
         cellClass: 'text-right',
         headerClass: 'text-right'
       },
@@ -27,7 +27,7 @@ class ComparisonTable extends Component {
         id: 'Management_Band',
         name: 'Management Band Leadership, %',
         accessor: d => parseFloatClean(d['Management_Band']),
-        displayAccessor: d => d['Management_Band'],
+        displayAccessor: d => formatPercent(d['Management_Band'], 1, 100),
         cellClass: 'text-right',
         headerClass: 'text-right'
       }

@@ -4,7 +4,7 @@ import Definitions from '../Table/Definitions'
 import DownloadDataLink from './DownloadDataLink'
 
 import { VARIABLE_MANAGER } from '../Variables/VariableManager'
-import { parseFloatClean } from '../Services/formatter'
+import { formatPercent, parseFloatClean } from '../Services/formatter'
 
 import './Table.css'
 
@@ -20,7 +20,7 @@ class ComparisonTable extends Component {
         id: 'Employees_BCPS',
         name: `${this.props.ministry}, %`,
         accessor: d => parseFloatClean(d['Employees_BCPS']),
-        displayAccessor: d => d['Employees_BCPS'],
+        displayAccessor: d => formatPercent(d['Employees_BCPS'], 1, 100),
         cellClass: 'text-right',
         headerClass: 'text-right'
       },
@@ -28,7 +28,7 @@ class ComparisonTable extends Component {
         id: 'Available_Workforce_BCPS',
         name: 'Available Workforce, %',
         accessor: d => parseFloatClean(d['Available_Workforce_BCPS']),
-        displayAccessor: d => d['Available_Workforce_BCPS'],
+        displayAccessor: d => formatPercent(d['Available_Workforce_BCPS'], 1, 100),
         cellClass: 'text-right',
         headerClass: 'text-right'
       },
@@ -36,7 +36,7 @@ class ComparisonTable extends Component {
         id: 'Employees_BC_Population',
         name: 'BC Population, %',
         accessor: d => parseFloatClean(d['Employees_BC_Population']),
-        displayAccessor: d => d['Employees_BC_Population'],
+        displayAccessor: d => formatPercent(d['Employees_BC_Population'], 1, 100),
         cellClass: 'text-right',
         headerClass: 'text-right'
       }
