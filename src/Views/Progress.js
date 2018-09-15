@@ -32,7 +32,7 @@ class Progress extends Component {
 
     return (
       <div>
-        <Title title={title} />
+        <Title title={title} employeeCount={this.props.employeeCount} />
         {!data && <Loading />}
         {data && data.length === 0 && <NoData />}
         {data && data.length > 0 &&

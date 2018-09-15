@@ -16,7 +16,7 @@ class FlowReport extends Component {
     const title = 'Representation — Flow Report'
     return (
       <div>
-        <Title title={title} />
+        <Title title={title} employeeCount={this.props.employeeCount} />
         {!this.props.data && <Loading />}
         {this.props.data && this.props.data.length === 0 && <NoData />}
         {this.props.data && this.props.data.length > 0 &&
