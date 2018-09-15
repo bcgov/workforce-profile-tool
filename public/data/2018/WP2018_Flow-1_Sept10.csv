@@ -1,4 +1,4 @@
-BCPS_Ministry_Group,Des_Grp,Type,Display_Type,DesGrp_Count_Reg,DesGrp_Percent_Reg,NonDesGrp_Count_Reg,NonDesGrp_Percent_Reg,Total_Count_Reg,Total_Percent_Reg,DesGrp_Count_Aux,DesGrp_Percent_Aux,NonDesGrp_Count_Aux,NonDesGrp_Percent_Aux,Total_Count_Aux,Total_Percent_Aux
+Ministry_Key,Des_Grp,Type,Display_Type,DesGrp_Count_Reg,DesGrp_Percent_Reg,NonDesGrp_Count_Reg,NonDesGrp_Percent_Reg,Total_Count_Reg,Total_Percent_Reg,DesGrp_Count_Aux,DesGrp_Percent_Aux,NonDesGrp_Count_Aux,NonDesGrp_Percent_Aux,Total_Count_Aux,Total_Percent_Aux
 AEST,DIS,Hiring_AuxtoReg,Changed Status from Aux to Reg,<3,<3,<3,<3,5,100.0,,,,,,
 AEST,DIS,Hiring_Other,Hired from Other Ministry,<3,<3,<3,<3,45,100.0,,,,,0,100.0
 AEST,DIS,Hiring_Outside,Hired from Outside,S,S,S,S,110,100.0,4,18.2,18,81.8,22,100.0
