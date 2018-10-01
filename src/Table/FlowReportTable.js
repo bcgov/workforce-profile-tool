@@ -15,7 +15,7 @@ class FlowReportTable extends Component {
   render () {
     if (!this.props.data) return <div>&nbsp;</div>
 
-    const codeOrder = {
+    const rowOrder = {
       'Employed_2015': 1,
       'Employed_2018': 2,
       'Hiring_Outside': 3,
@@ -33,11 +33,13 @@ class FlowReportTable extends Component {
       'Promotions_Total': 15
     }
 
+    const groupOrder = { 'IND': 0, 'DIS': 1, 'VM': 2, 'WOM': 3 }
+
+    // Sort the data
     const data = this.props.data
     if (data && data.length) {
-      data.sort((a, b) => {
-        return codeOrder[a.Type] - codeOrder[b.Type]
-      })
+      data.sort((a, b) => rowOrder[a.Type] - rowOrder[b.Type])
+      data.sort((a, b) => groupOrder[a.Des_Grp] - groupOrder[b.Des_Grp])
     }
 
     // Split the data
