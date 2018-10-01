@@ -3,7 +3,7 @@ import FlowReportChart from './FlowReportChart'
 import { formatNumber, parseFloatClean } from '../Services/formatter'
 import GraphFrame from './GraphFrame'
 import qs from '../Services/query-string'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import Legend from './Legend'
 
 import './Graphs.css'
