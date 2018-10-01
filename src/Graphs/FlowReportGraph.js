@@ -44,16 +44,19 @@ class FlowReportGraph extends Component {
 
     const getRowByType = (array, key) => array.find(item => item.Type === key)
 
-    const keySuffix = qs.parse(this.props.location.search).Employee_Type === 'AUX'
-      ? '_Aux' : '_Reg'
-
     Object.values(dataMap).forEach(values => {
       Object.keys(chartDataOutline).forEach(key => {
-        const groupValue = parseFloatClean(getRowByType(values, key)[`DesGrp_Count${keySuffix}`])
+        const groupValue =
+          parseFloatClean(getRowByType(values, key)[`DesGrp_Count_Reg`]) +
+          parseFloatClean(getRowByType(values, key)[`DesGrp_Count_Aux`])
         // const nonGroupValue = +(getRowByType(values, key).NonDesGrp_Count_Reg)
         chartDataOutline[key].group += groupValue
         if (chartDataOutline[key].nonGroup === null) {
-          chartDataOutline[key].nonGroup = parseFloatClean(getRowByType(values, key)[`Total_Count${keySuffix}`])
+          chartDataOutline[key].nonGroup =
+            parseFloatClean(getRowByType(values, key)[`DesGrp_Count_Reg`]) +
+            parseFloatClean(getRowByType(values, key)[`DesGrp_Count_Aux`]) +
+            parseFloatClean(getRowByType(values, key)[`NonDesGrp_Count_Reg`]) +
+            parseFloatClean(getRowByType(values, key)[`NonDesGrp_Count_Aux`])
         }
         chartDataOutline[key].nonGroup -= groupValue
         if (chartDataOutline[key].nonGroup < 0) {
