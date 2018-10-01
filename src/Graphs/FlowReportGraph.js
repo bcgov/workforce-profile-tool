@@ -36,7 +36,7 @@ class FlowReportGraph extends Component {
     })
 
     const chartDataOutline = {
-      'Hiring_TotalNew': { category: 'New', group: 0, nonGroup: null },
+      'Hiring_TotalNew': { category: 'New Hires', group: 0, nonGroup: null },
       'Employed_2018': { category: 'Employed', group: 0, nonGroup: null },
       'Promotions_Total': { category: 'Promotions', group: 0, nonGroup: null },
       'Separations_Total': { category: 'Separations', group: 0, nonGroup: null }
