@@ -14,7 +14,8 @@
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
-    "save-svg-as-png": "^1.4.5"
+    "save-svg-as-png": "^1.4.5",
+    "standard": "^12.0.1"
   },
   "scripts": {
     "start": "concurrently 'yarn run watch-css' 'yarn run start-js'",
