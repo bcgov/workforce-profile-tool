@@ -8,6 +8,8 @@ import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 
 import { formatNumber, parseIntClean } from '../Services/formatter'
 
+import stable from 'stable'
+
 import './Table.css'
 import './OccupationTable.css'
 
@@ -38,8 +40,9 @@ class FlowReportTable extends Component {
     // Sort the data
     const data = this.props.data
     if (data && data.length) {
-      data.sort((a, b) => rowOrder[a.Type] - rowOrder[b.Type])
-      data.sort((a, b) => groupOrder[a.Des_Grp] - groupOrder[b.Des_Grp])
+      // Stable sort; JS implementation is not
+      stable.inplace(data, (a, b) => rowOrder[a.Type] - rowOrder[b.Type])
+      stable.inplace(data, (a, b) => groupOrder[a.Des_Grp] - groupOrder[b.Des_Grp])
     }
 
     // Split the data
