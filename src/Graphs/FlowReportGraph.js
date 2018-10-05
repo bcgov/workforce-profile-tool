@@ -44,9 +44,7 @@ class FlowReportGraph extends Component {
     const getRowByType = (array, key) => array.find(item => item.Type === key)
 
     Object.values(dataMap).forEach(values => {
-      console.log('values', values)
       Object.keys(chartDataOutline).forEach(key => {
-        console.log('key', key)
         let groupValue
         switch (key) {
           case 'Hiring_TotalNew': {
