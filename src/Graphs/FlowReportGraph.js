@@ -44,18 +44,56 @@ class FlowReportGraph extends Component {
     const getRowByType = (array, key) => array.find(item => item.Type === key)
 
     Object.values(dataMap).forEach(values => {
+      console.log('values', values)
       Object.keys(chartDataOutline).forEach(key => {
-        const groupValue =
-          parseFloatClean(getRowByType(values, key)[`DesGrp_Count_Reg`]) +
-          parseFloatClean(getRowByType(values, key)[`DesGrp_Count_Aux`])
-        // const nonGroupValue = +(getRowByType(values, key).NonDesGrp_Count_Reg)
+        console.log('key', key)
+        let groupValue
+        switch (key) {
+          case 'Hiring_TotalNew': {
+            groupValue =
+              parseFloatClean(getRowByType(values, 'Hiring_TotalReg')[`DesGrp_Count_Reg`]) +
+              parseFloatClean(getRowByType(values, 'Hiring_TotalNew')[`DesGrp_Count_Aux`])
+            break
+          }
+          case 'Separations_Total': {
+            groupValue =
+              parseFloatClean(getRowByType(values, 'Separations_Total')[`DesGrp_Count_Reg`]) +
+              parseFloatClean(getRowByType(values, 'Separations_TotalAux')[`DesGrp_Count_Aux`])
+            break
+          }
+          default: {
+            groupValue =
+              parseFloatClean(getRowByType(values, key)[`DesGrp_Count_Reg`]) +
+              parseFloatClean(getRowByType(values, key)[`DesGrp_Count_Aux`])
+          }
+        }
         chartDataOutline[key].group += groupValue
         if (chartDataOutline[key].nonGroup === null) {
-          chartDataOutline[key].nonGroup =
-            parseFloatClean(getRowByType(values, key)[`DesGrp_Count_Reg`]) +
-            parseFloatClean(getRowByType(values, key)[`DesGrp_Count_Aux`]) +
-            parseFloatClean(getRowByType(values, key)[`NonDesGrp_Count_Reg`]) +
-            parseFloatClean(getRowByType(values, key)[`NonDesGrp_Count_Aux`])
+          switch (key) {
+            case 'Hiring_TotalNew': {
+              chartDataOutline[key].nonGroup =
+                parseFloatClean(getRowByType(values, 'Hiring_TotalReg')[`DesGrp_Count_Reg`]) +
+                parseFloatClean(getRowByType(values, 'Hiring_TotalNew')[`DesGrp_Count_Aux`]) +
+                parseFloatClean(getRowByType(values, 'Hiring_TotalReg')[`NonDesGrp_Count_Reg`]) +
+                parseFloatClean(getRowByType(values, 'Hiring_TotalNew')[`NonDesGrp_Count_Aux`])
+              break
+            }
+            case 'Separations_Total': {
+              chartDataOutline[key].nonGroup =
+                parseFloatClean(getRowByType(values, 'Separations_Total')[`DesGrp_Count_Reg`]) +
+                parseFloatClean(getRowByType(values, 'Separations_TotalAux')[`DesGrp_Count_Aux`]) +
+                parseFloatClean(getRowByType(values, 'Separations_Total')[`NonDesGrp_Count_Reg`]) +
+                parseFloatClean(getRowByType(values, 'Separations_TotalAux')[`NonDesGrp_Count_Aux`])
+              break
+            }
+            default: {
+              chartDataOutline[key].nonGroup =
+                parseFloatClean(getRowByType(values, key)[`DesGrp_Count_Reg`]) +
+                parseFloatClean(getRowByType(values, key)[`DesGrp_Count_Aux`]) +
+                parseFloatClean(getRowByType(values, key)[`NonDesGrp_Count_Reg`]) +
+                parseFloatClean(getRowByType(values, key)[`NonDesGrp_Count_Aux`])
+            }
+          }
         }
         chartDataOutline[key].nonGroup -= groupValue
         if (chartDataOutline[key].nonGroup < 0) {
