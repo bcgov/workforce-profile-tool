@@ -43,7 +43,7 @@ class ProgressGraph extends Component {
           axes: { xAxisLabel: '', yAxisLabel: '% representation' },
           font: '"myriad-pro", "Myriad Pro"'
         }}
-    />)
+      />)
 
     const legend = (
       <Legend items={[
