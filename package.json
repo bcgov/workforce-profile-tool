@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "http://securesurveys.gov.bc.ca/ERAP/workforce-profiles/",
   "dependencies": {
-    "@plot-and-scatter/plusplot": "0.23.0",
+    "@plot-and-scatter/plusplot": "0.24.0",
     "@plot-and-scatter/reactor-table": "0.7.0",
     "concurrently": "^3.5.1",
     "d3": "^5.0.0",
