@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FlowReportChart from './FlowReportChart'
-import { formatNumber, parseFloatClean } from '../Services/formatter'
+import { parseFloatClean } from '../Services/formatter'
 import GraphFrame from './GraphFrame'
 import { withRouter } from 'react-router-dom'
 import Legend from './Legend'
@@ -35,65 +35,65 @@ class FlowReportGraph extends Component {
     })
 
     const chartDataOutline = {
-      'Employed_2018': { category: 'Employed', group: 0, nonGroup: null },
-      'Hiring_TotalNew': { category: 'New Hires', group: 0, nonGroup: null },
-      'Separations_Total': { category: 'Separations', group: 0, nonGroup: null },
-      'Promotions_Total': { category: 'Promotions', group: 0, nonGroup: null }
+      'Employed_2018': { category: 'Employed', group: 0, nonGroup: null, suppressed: false },
+      'Hiring_TotalNew': { category: 'New Hires', group: 0, nonGroup: null, suppressed: false },
+      'Separations_Total': { category: 'Separations', group: 0, nonGroup: null, suppressed: false },
+      'Promotions_Total': { category: 'Promotions', group: 0, nonGroup: null, suppressed: false }
     }
 
     const getRowByType = (array, key) => array.find(item => item.Type === key)
 
     Object.values(dataMap).forEach(values => {
       Object.keys(chartDataOutline).forEach(key => {
-        let groupValue
+        let regGroup
+        let auxGroup
         switch (key) {
           case 'Hiring_TotalNew': {
-            groupValue =
-              parseFloatClean(getRowByType(values, 'Hiring_TotalReg')[`DesGrp_Count_Reg`]) +
-              parseFloatClean(getRowByType(values, 'Hiring_TotalNew')[`DesGrp_Count_Aux`])
+            regGroup = getRowByType(values, 'Hiring_TotalReg')[`DesGrp_Count_Reg`]
+            auxGroup = getRowByType(values, 'Hiring_TotalNew')[`DesGrp_Count_Aux`]
             break
           }
           case 'Separations_Total': {
-            groupValue =
-              parseFloatClean(getRowByType(values, 'Separations_Total')[`DesGrp_Count_Reg`]) +
-              parseFloatClean(getRowByType(values, 'Separations_TotalAux')[`DesGrp_Count_Aux`])
+            regGroup = getRowByType(values, 'Separations_Total')[`DesGrp_Count_Reg`]
+            auxGroup = getRowByType(values, 'Separations_TotalAux')[`DesGrp_Count_Aux`]
             break
           }
           default: {
-            groupValue =
-              parseFloatClean(getRowByType(values, key)[`DesGrp_Count_Reg`]) +
-              parseFloatClean(getRowByType(values, key)[`DesGrp_Count_Aux`])
+            regGroup = getRowByType(values, key)[`DesGrp_Count_Reg`]
+            auxGroup = getRowByType(values, key)[`DesGrp_Count_Aux`]
           }
         }
-        chartDataOutline[key].group += groupValue
-        if (chartDataOutline[key].nonGroup === null) {
+        chartDataOutline[key].group += parseFloatClean(regGroup) + parseFloatClean(auxGroup)
+        if (isNaN(regGroup) || isNaN(auxGroup)) { chartDataOutline[key].suppressed = true }
+
+        if (chartDataOutline[key].nonGroup === null || chartDataOutline[key].nonGroup === 0) {
+          let regNonGroup = 0
+          let auxNonGroup = 0
           switch (key) {
             case 'Hiring_TotalNew': {
-              chartDataOutline[key].nonGroup =
-                parseFloatClean(getRowByType(values, 'Hiring_TotalReg')[`DesGrp_Count_Reg`]) +
-                parseFloatClean(getRowByType(values, 'Hiring_TotalNew')[`DesGrp_Count_Aux`]) +
-                parseFloatClean(getRowByType(values, 'Hiring_TotalReg')[`NonDesGrp_Count_Reg`]) +
-                parseFloatClean(getRowByType(values, 'Hiring_TotalNew')[`NonDesGrp_Count_Aux`])
+              regNonGroup = getRowByType(values, 'Hiring_TotalReg')[`NonDesGrp_Count_Reg`]
+              auxNonGroup = getRowByType(values, 'Hiring_TotalNew')[`NonDesGrp_Count_Aux`]
               break
             }
             case 'Separations_Total': {
-              chartDataOutline[key].nonGroup =
-                parseFloatClean(getRowByType(values, 'Separations_Total')[`DesGrp_Count_Reg`]) +
-                parseFloatClean(getRowByType(values, 'Separations_TotalAux')[`DesGrp_Count_Aux`]) +
-                parseFloatClean(getRowByType(values, 'Separations_Total')[`NonDesGrp_Count_Reg`]) +
-                parseFloatClean(getRowByType(values, 'Separations_TotalAux')[`NonDesGrp_Count_Aux`])
+              regNonGroup = getRowByType(values, 'Separations_Total')[`NonDesGrp_Count_Reg`]
+              auxNonGroup = getRowByType(values, 'Separations_TotalAux')[`NonDesGrp_Count_Aux`]
               break
             }
             default: {
-              chartDataOutline[key].nonGroup =
-                parseFloatClean(getRowByType(values, key)[`DesGrp_Count_Reg`]) +
-                parseFloatClean(getRowByType(values, key)[`DesGrp_Count_Aux`]) +
-                parseFloatClean(getRowByType(values, key)[`NonDesGrp_Count_Reg`]) +
-                parseFloatClean(getRowByType(values, key)[`NonDesGrp_Count_Aux`])
+              regNonGroup = getRowByType(values, key)[`NonDesGrp_Count_Reg`]
+              auxNonGroup = getRowByType(values, key)[`NonDesGrp_Count_Aux`]
             }
           }
+          chartDataOutline[key].nonGroup =
+            parseFloatClean(regNonGroup) +
+            parseFloatClean(auxNonGroup) +
+            parseFloatClean(regGroup) +
+            parseFloatClean(auxGroup)
+          if (isNaN(regNonGroup) || isNaN(auxNonGroup)) { chartDataOutline[key].suppressed = true }
         }
-        chartDataOutline[key].nonGroup -= groupValue
+        chartDataOutline[key].nonGroup -= (parseFloatClean(regGroup) + parseFloatClean(auxGroup))
+
         if (chartDataOutline[key].nonGroup < 0) {
           // Non-group might be negative; this is if there are more people who
           // are in categories than non-categories. In this case set it to 0.
@@ -119,7 +119,7 @@ class FlowReportGraph extends Component {
         absolute={this.state.absolute}
         options={{
           height: 500,
-          dataLabels: { position: -10, formatter: (d) => formatNumber(d) },
+          dataLabels: { position: -10 },
           margins: { top: 20, left: 70, bottom: 40, right: 20 },
           axes: { xAxisTicksVisible: false, xAxisLabel: '', yAxisLabel },
           font: '"myriad-pro", "Myriad Pro"'
@@ -133,7 +133,11 @@ class FlowReportGraph extends Component {
           { label: 'Designated Group', color: '#70CCDB' },
           { label: 'Non-Designated Group', color: '#D2E2EE' }
         ]}
-        notes={'Proportion may be greater than 100% because individuals may belong to more than one designated group.'}
+        notes={
+          <span>Proportion may be greater than 100% because individuals may belong to more than one designated group.
+            <br /><br />
+          * indicates suppressed data has been excluded from the calculation. Refer to the tables below.</span>
+        }
       />
     )
 

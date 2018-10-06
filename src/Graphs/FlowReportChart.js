@@ -100,16 +100,20 @@ class FlowReportChart extends PlusPlot.AbstractPlot {
     }
 
     const getText = (d) => {
+      const suppressedText = d.data.suppressed ? ' *' : ''
       if (this.props.absolute) {
-        // console.log('d', d)
         if (d[0] < 0) {
-          return d3.format(',.0f')(Math.abs(d[0]))
+          return d3.format(',.0f')(Math.abs(d[0])) + suppressedText
+        } else if (d[0] === 0 && d[1] === 0 && d.data.suppressed) {
+          return 'S'
         } else {
-          return d3.format(',.0f')(d[1])
+          return d3.format(',.0f')(d[1]) + suppressedText
         }
       } else {
-        if (d[0] === 0) {
-          return d3.format('.1%')(d[1])
+        if (d[0] === 0 && d[1] === 0 && d.data.suppressed) {
+          return 'S'
+        } else if (d[0] === 0) {
+          return d3.format('.1%')(d[1]) + suppressedText
         } else {
           return ''
         }
