@@ -44,7 +44,9 @@ class FlowReportGraph extends Component {
     const getRowByType = (array, key) => array.find(item => item.Type === key)
 
     Object.values(dataMap).forEach(values => {
+      // console.log('values', values)
       Object.keys(chartDataOutline).forEach(key => {
+        // console.log('key', key)
         let regGroup
         let auxGroup
         switch (key) {
@@ -64,6 +66,7 @@ class FlowReportGraph extends Component {
           }
         }
         chartDataOutline[key].group += parseFloatClean(regGroup) + parseFloatClean(auxGroup)
+        // console.log(regGroup, auxGroup, chartDataOutline[key].group)
         if (isNaN(regGroup) || isNaN(auxGroup)) { chartDataOutline[key].suppressed = true }
 
         if (chartDataOutline[key].nonGroup === null || chartDataOutline[key].nonGroup === 0) {
