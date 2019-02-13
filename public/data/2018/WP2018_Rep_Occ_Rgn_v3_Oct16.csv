@@ -1,4 +1,4 @@
-BCPS_Ministry_Group,Des_Grp,Employee_Type,Variable_Type,Occupation_Type,Occupation_Region_Group,DesGrp_Count_ORG,NonDesGrp_Count_ORG,Total_Count_ORG,DesGrp_Percent_ORG,DesGrp_Percent_AvailableWorkforce,DesGrp_Count_Expected,DesGrp_Count_Shortfall
+Ministry_Key,Des_Grp,Employee_Type,Variable_Type,Occupation_Type,Occupation_Region_Group,DesGrp_Count_ORG,NonDesGrp_Count_ORG,Total_Count_ORG,DesGrp_Percent_ORG,DesGrp_Percent_AvailableWorkforce,DesGrp_Count_Expected,DesGrp_Count_Shortfall
 BCPS,IND,ALL,Occupation,Management,Middle and Other Managers,99,2522,2656,3.8,6.1,161,62
 BCPS,IND,ALL,Occupation,Management,Professionals,480,10580,11529,4.3,4.4,,
 BCPS,IND,ALL,Occupation,Management,"Semi-professionals, Technicians",S,S,1373,S,10.9,,x
