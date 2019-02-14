@@ -161,10 +161,12 @@ function parse (input, options) {
   }, Object.create(null))
 }
 
-exports.extract = extract
-exports.parse = parse
+const qs = {}
 
-exports.stringify = (obj, options) => {
+qs.extract = extract
+qs.parse = parse
+
+qs.stringify = (obj, options) => {
   const defaults = {
     encode: true,
     strict: true,
@@ -208,9 +210,11 @@ exports.stringify = (obj, options) => {
   }).filter(x => x.length > 0).join('&') : ''
 }
 
-exports.parseUrl = (input, options) => {
+qs.parseUrl = (input, options) => {
   return {
     url: input.split('?')[0] || '',
     query: parse(extract(input), options)
   }
 }
+
+export default qs
