@@ -35,8 +35,9 @@ class DataLoader {
   }
 
   static async getFlowReport () {
-    const url = `${DATA_PATH_BASE_2018}WP2018_Flow-1_Oct2.csv`
-    return DataLoader.loadCSV(url)
+    //const url = ``
+    //return DataLoader.loadCSV(url)
+    return [];
   }
 
   static async getOccupationRegionReport () {

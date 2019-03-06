@@ -9,7 +9,7 @@ import Leadership from '../Views/Leadership'
 import Comparison from '../Views/Comparison'
 import Progress from '../Views/Progress'
 import Hiring from '../Views/Hiring'
-import FlowReport from '../Views/FlowReport'
+//import FlowReport from '../Views/FlowReport'
 
 class Main extends Component {
   getOccupationData (data) {
@@ -47,6 +47,10 @@ class Main extends Component {
                 </p>
                 <p className='lead'>
                   Use the tabs at the top to begin your journey. You can refine your selections by using the filters on the left.
+                </p>
+                <h2>Caveats:</h2>
+                <p className='lead'>                
+                This tool uses data from the BC Public Service Work Environment Survey (WES), which was conducted in February, 2018.  Therefore, the data on this site may not match other reports produced by the Public Service Agency regarding the same demographic groups.
                 </p>
                 <h2>Contact</h2>
                 <p className='lead'>Questions? Contact us through <a href='https://www2.gov.bc.ca/gov/content/home/contact-us' target='_blank' rel='noopener noreferrer'>Service BC</a>.</p>
@@ -109,13 +113,13 @@ class Main extends Component {
                       employeeCount={employeeCount}
                     />
                   </Tab>
-                  <Tab key={'flow-report'} name='Flow Report'>
+                  {/*<Tab key={'flow-report'} name='Flow Report'>
                     <FlowReport
                       variableLockCallback={this.props.variableLockCallback}
                       data={this.props.data.flowReportData}
                       employeeCount={employeeCount}
                     />
-                  </Tab>
+    </Tab>*/}
                 </TabInterface>
               </div>
             </Tab>
