@@ -21,7 +21,7 @@
     "strict-uri-encode": "^2.0.0"
   },
   "scripts": {
-    "start": "concurrently 'yarn run watch-css' 'yarn run start-js'",
+    "start": "concurrently \"yarn run watch-css\" \"yarn run start-js\"",
     "start-js": "react-scripts start",
     "build": "concurrently 'yarn run build-css' 'yarn run build-js'",
     "build-js": "react-scripts build",
