@@ -113,6 +113,12 @@ class Main extends Component {
                       employeeCount={employeeCount}
                     />
                   </Tab>
+                  <Tab key={'flow-report'} name='Flow Report'>                    
+                    <div className='alert alert-warning' role='alert'>
+                      <h2>Data for 2018 not yet available</h2>
+                      <p>The Flow Report data for 2018 is still being generated, and will be added to the tool once available.</p>
+                    </div>
+                  </Tab>
                   {/*<Tab key={'flow-report'} name='Flow Report'>
                     <FlowReport
                       variableLockCallback={this.props.variableLockCallback}
