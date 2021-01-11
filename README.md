@@ -1,6 +1,7 @@
 # workforce-profile-tool
 Workforce Profile tool
 
+[![img](https://img.shields.io/badge/Lifecycle-Dormant-ff7f2a)]
 [![Build Status](https://travis-ci.org/bcgov/workforce-profile-tool.svg?branch=master)](https://travis-ci.org/bcgov/workforce-profile-tool)
 
 ## Notes
