@@ -3,9 +3,9 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
     "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"
+    "plugin:@typescript-eslint/recommended"
   ],
   "plugins": [
     "react",
@@ -30,14 +30,10 @@
     "space-before-function-paren": [
       "error",
       {
-        "anonymous": "never",
+        "anonymous": "always",
         "asyncArrow": "always",
         "named": "never"
       }
-    ],
-    "comma-dangle": [
-      "error",
-      "never"
     ],
     "@typescript-eslint/ban-ts-comment": [
       "error",
@@ -50,11 +46,26 @@
       "error",
       {
         "singleQuote": true,
-        "trailingCommas": "none",
+        "trailingCommas": "es5",
         "semi": false
       }
     ]
   },
+  "overrides": [
+    {
+      "files": ["**"],
+      "rules": {
+        "space-before-function-paren": [
+          "error",
+          {
+            "anonymous": "always",
+            "asyncArrow": "always",
+            "named": "never"
+          }
+        ]
+      }
+    }
+  ],
   "settings": {
     "react": {
       "pragma": "React",
