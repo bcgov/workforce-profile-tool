@@ -8,44 +8,30 @@ import { RouteComponentProps, withRouter } from 'react-router-dom'
 import qs from '../Services/query-string'
 import { activeMinistry } from '../Services/activeVariables'
 import FixTypeLater from '../@types/FixTypeLater'
+import { useDataManager } from '../Data/DataManager'
 
-interface Props extends RouteComponentProps {
-  data: FixTypeLater[]
-  location: FixTypeLater
-  employeeCount: FixTypeLater
-  variableLockCallback: FixTypeLater
-}
+const Comparison = (): JSX.Element => {
+  const title = 'Comparison with Provincial Workforce'
+  const employeeCount = 1000 // useQueryParams
+  const ministry = '' // useQueryParams
+  const { indicatorsOfProgressData: data } = useDataManager()
 
-class Comparison extends Component<Props> {
-  componentDidMount() {
-    this.props.variableLockCallback(false)
-  }
-
-  render(): JSX.Element {
-    const title = 'Comparison with Provincial Workforce'
-    const filters = qs.parse(this.props.location.search)
-    const ministry = activeMinistry(filters.Ministry_Key)
-    return (
-      <div>
-        <Title
-          title={'Comparison with Provincial Workforce'}
-          employeeCount={this.props.employeeCount}
-        />
-        {!this.props.data && <Loading />}
-        {this.props.data && this.props.data.length === 0 && <NoData />}
-        {this.props.data && this.props.data.length > 0 && (
-          <div>
-            <ComparisonGraph
-              data={this.props.data}
-              title={title}
-              ministry={ministry}
-            />
-            <ComparisonTable data={this.props.data} ministry={ministry} />
-          </div>
-        )}
-      </div>
-    )
-  }
+  return (
+    <div>
+      <Title
+        title={'Comparison with Provincial Workforce'}
+        employeeCount={employeeCount}
+      />
+      {!data && <Loading />}
+      {data && data.length === 0 && <NoData />}
+      {data && data.length > 0 && (
+        <div>
+          <ComparisonGraph data={data} title={title} ministry={ministry} />
+          <ComparisonTable data={data} ministry={ministry} />
+        </div>
+      )}
+    </div>
+  )
 }
 
 export default withRouter(Comparison)

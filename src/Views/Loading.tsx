@@ -1,9 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Loading extends Component {
-  render(): JSX.Element {
-    return <div>Loading...</div>
-  }
+const Loading = (): JSX.Element => {
+  return <div>Loading...</div>
 }
 
 export default Loading

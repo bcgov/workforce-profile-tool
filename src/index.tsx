@@ -1,14 +1,30 @@
+import { HashRouter } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './Core/App'
+
 import * as serviceWorker from './serviceWorker'
+import App from './Core/App'
+
 import './bootstrap/bootstrap.scss'
 import './index.scss'
-import { HashRouter } from 'react-router-dom'
+
+const queryConfig = {
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60,
+      refetchOnWindowFocus: false,
+    },
+  },
+}
+
+const queryClient = new QueryClient(queryConfig)
 
 ReactDOM.render(
   <HashRouter>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </HashRouter>,
   document.getElementById('root')
 )

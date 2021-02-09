@@ -5,36 +5,26 @@ import Loading from './Loading'
 import NoData from './NoData'
 import Title from './Title'
 import FixTypeLater from '../@types/FixTypeLater'
+import { useDataManager } from '../Data/DataManager'
 
-interface Props {
-  data: FixTypeLater[]
-  variableLockCallback: FixTypeLater
-}
+// TODO: Set variables: ALL employees, BCPS ministry
+const Leadership = (): JSX.Element => {
+  const title = 'Leadership by Type'
+  const { indicatorsOfProgressData: data } = useDataManager()
 
-class Leadership extends Component<Props> {
-  componentDidMount(): void {
-    this.props.variableLockCallback({
-      Employee_Type: 'ALL',
-      Ministry_Key: 'BCPS',
-    })
-  }
-
-  render(): JSX.Element {
-    const title = 'Leadership by Type'
-    return (
-      <div>
-        <Title title={title} />
-        {!this.props.data && <Loading />}
-        {this.props.data && this.props.data.length === 0 && <NoData />}
-        {this.props.data && this.props.data.length > 0 && (
-          <div>
-            <LeadershipGraph data={this.props.data} title={title} />
-            <LeadershipTable data={this.props.data} />
-          </div>
-        )}
-      </div>
-    )
-  }
+  return (
+    <div>
+      <Title title={title} />
+      {!data && <Loading />}
+      {data && data.length === 0 && <NoData />}
+      {data && data.length > 0 && (
+        <div>
+          <LeadershipGraph data={data} title={title} />
+          <LeadershipTable data={data} />
+        </div>
+      )}
+    </div>
+  )
 }
 
 export default Leadership

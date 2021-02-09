@@ -1,42 +1,33 @@
 import React, { Component } from 'react'
 import FixTypeLater from '../@types/FixTypeLater'
+import { useDataManager } from '../Data/DataManager'
 import MinistryGraph from '../Graphs/MinistryGraph'
 import Loading from './Loading'
 import NoData from './NoData'
 
-interface Props {
-  variableLockCallback: FixTypeLater
-  data: FixTypeLater[]
-  employeeCount: FixTypeLater
-}
+// TODO: lock variables: REG and BCPS
 
-class Ministry extends Component<Props> {
-  componentDidMount(): void {
-    this.props.variableLockCallback({
-      Employee_Type: 'REG',
-      Ministry_Key: 'BCPS',
-    })
-  }
+const Ministry = (): JSX.Element => {
+  const title = 'Ministries'
+  const employeeCount = 1000 // useQueryParams
+  const { indicatorsOfProgressData: data } = useDataManager()
 
-  render(): JSX.Element {
-    const title = 'Ministries'
-    return (
-      <div>
-        <h1>{title}</h1>
-        {!this.props.data && <Loading />}
-        {this.props.data && this.props.data.length === 0 && <NoData />}
-        {this.props.data && this.props.data.length > 0 && (
-          <div>
-            <MinistryGraph
-              data={this.props.data}
-              title={title}
-              employeeCount={this.props.employeeCount}
-            />
-          </div>
-        )}
-      </div>
-    )
-  }
+  return (
+    <div>
+      <h1>{title}</h1>
+      {!data && <Loading />}
+      {data && data.length === 0 && <NoData />}
+      {data && data.length > 0 && (
+        <div>
+          <MinistryGraph
+            data={data}
+            title={title}
+            employeeCount={employeeCount}
+          />
+        </div>
+      )}
+    </div>
+  )
 }
 
 export default Ministry
