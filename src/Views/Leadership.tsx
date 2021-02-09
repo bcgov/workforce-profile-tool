@@ -19,8 +19,8 @@ const Leadership = (): JSX.Element => {
       {data && data.length === 0 && <NoData />}
       {data && data.length > 0 && (
         <div>
-          <LeadershipGraph data={data} title={title} />
-          <LeadershipTable data={data} />
+          <LeadershipGraph title={title} />
+          {/* <LeadershipTable /> */}
         </div>
       )}
     </div>

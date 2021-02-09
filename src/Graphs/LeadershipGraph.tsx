@@ -10,67 +10,79 @@ import { formatPercent } from '../Services/formatter'
 import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 import FixTypeLater from '../@types/FixTypeLater'
 
-interface Props {
-  data: FixTypeLater[]
+import * as R from 'recharts'
+import { useDataManager } from '../Data/DataManager'
+import { Leadership2018RawDataType } from '../@types/DataTypes'
+
+interface TitleProps {
   title: string
 }
 
-class RegionGraph extends Component<Props> {
-  render(): JSX.Element {
-    if (!this.props.data) return <div>&nbsp;</div>
+const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
+  const { leadershipData: data } = useDataManager()
 
-    const chartData = this.props.data.map((d) => {
-      const values = [+d.Executive, +d.Management_Band]
+  if (!data) return <div>&nbsp;</div>
 
-      return {
-        category: VARIABLE_MANAGER.displayNameByKey('Des_Grp', d['Des_Grp']),
-        values,
-      }
-    })
+  const legend = (
+    <Legend
+      items={[
+        {
+          label: 'Executive Leadership',
+          color: '#70CCDB',
+          tooltip: `Executive Leadership includes all positions classified as Assistant Deputy Minister and Deputy Minister.`,
+        },
+        {
+          label: 'Management Band Leadership',
+          color: '#D2E2EE',
+          tooltip: `Management Band Leadership includes all positions classified as Band 1 through 6, and those classified as Applied Leadership, Business Leadership, and Strategic Leadership. Order in Council (OIC) appointments within these classifications is also included.`,
+        },
+      ]}
+    />
+  )
 
-    const graph = (
-      <PlusPlot.GroupedBarChart
-        data={chartData}
-        colors={['#70CCDB', '#D2E2EE', '#6c757d']}
-        options={{
-          height: 500,
-          dataLabels: {
-            position: 25,
-            formatter: (d: FixTypeLater) => formatPercent(d / 100, 1),
-          },
-          margins: { top: 0, left: 140, bottom: 40, right: 40 },
-          axes: { yAxisLabel: '', xAxisLabel: '% in leadership positions' },
-          font: '"myriad-pro", "Myriad Pro"',
-        }}
-      />
-    )
+  const graph = (
+    <R.ResponsiveContainer width="100%" height={500}>
+      <R.BarChart
+        data={data}
+        layout="vertical"
+        margin={{ left: 30 }}
+        barCategoryGap={3}
+        barGap={2}
+      >
+        <R.CartesianGrid horizontal={false} />
+        <R.XAxis type="number" />
+        <R.YAxis dataKey="Des_Grp" type="category" />
+        <R.Tooltip />
+        <R.Bar dataKey="Executive" fill="#70CCDB">
+          {/* @ts-ignore The typings are incorrect, see https://github.com/recharts/recharts/issues/2396 */}
+          <R.LabelList
+            dataKey="Executive"
+            // @ts-ignore The typings are wrong
+            position={'right'}
+            formatter={(d: string) => `${d}%`}
+          />
+        </R.Bar>
+        <R.Bar dataKey="Management_Band" fill="#D2E2EE">
+          {/* @ts-ignore The typings are incorrect, see https://github.com/recharts/recharts/issues/2396 */}
+          <R.LabelList
+            dataKey="Management_Band"
+            // @ts-ignore The typings are wrong
+            position={'right'}
+            formatter={(d: string) => `${d}%`}
+          />
+        </R.Bar>
+      </R.BarChart>
+    </R.ResponsiveContainer>
+  )
 
-    const legend = (
-      <Legend
-        items={[
-          {
-            label: 'Executive Leadership',
-            color: '#70CCDB',
-            tooltip: `Executive Leadership includes all positions classified as Assistant Deputy Minister and Deputy Minister.`,
-          },
-          {
-            label: 'Management Band Leadership',
-            color: '#D2E2EE',
-            tooltip: `Management Band Leadership includes all positions classified as Band 1 through 6, and those classified as Applied Leadership, Business Leadership, and Strategic Leadership. Order in Council (OIC) appointments within these classifications is also included.`,
-          },
-        ]}
-      />
-    )
-
-    return (
-      <GraphFrame
-        className="Leadership"
-        title={this.props.title}
-        graph={graph}
-        legend={legend}
-      />
-    )
-  }
+  return (
+    <GraphFrame
+      className="Leadership"
+      title={title}
+      graph={graph}
+      legend={legend}
+    />
+  )
 }
 
-export default RegionGraph
+export default LeadershipGraph
