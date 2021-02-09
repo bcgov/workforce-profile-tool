@@ -28,12 +28,6 @@ const Main = (props: Props): JSX.Element => {
     activeInnerTab = props.match.params.lowLevelNav || 'representation-by-group'
   }
 
-  const employeeCount = props.data.employeeCountData
-    ? +props.data.employeeCountData[0]['Employee_Count']
-    : ''
-
-  // console.log('employeeCount', employeeCount)
-
   return (
     <div className="Main row">
       <div className="col">

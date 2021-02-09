@@ -1,9 +1,13 @@
 import React from 'react'
-import { IndicatorsOfProgress2018RawDataType } from '../@types/DataTypes'
+import {
+  IndicatorsOfProgress2018RawDataType,
+  Leadership2018RawDataType,
+} from '../@types/DataTypes'
 import FixTypeLater from '../@types/FixTypeLater'
 
 type DataManagerContextType = {
   indicatorsOfProgressData?: IndicatorsOfProgress2018RawDataType[]
+  leadershipData?: Leadership2018RawDataType[]
 }
 
 const DataManagerContext = React.createContext<
@@ -16,30 +20,32 @@ function useDataManager(): DataManagerContextType {
     throw new Error(`useDataManager must be used within a DataManagerProvider`)
   }
 
-  const { indicatorsOfProgressData } = context
+  const { indicatorsOfProgressData, leadershipData } = context
 
   return {
     indicatorsOfProgressData,
+    leadershipData,
   }
 }
 
 interface IDataManagerProviderProps {
   children: React.ReactNode
   indicatorsOfProgressData?: IndicatorsOfProgress2018RawDataType[]
+  leadershipData?: Leadership2018RawDataType[]
 }
 
 function DataManagerProvider({
   children,
   indicatorsOfProgressData,
+  leadershipData,
 }: IDataManagerProviderProps): FixTypeLater {
   const value = React.useMemo(
     () => ({
       indicatorsOfProgressData,
+      leadershipData,
     }),
-    [indicatorsOfProgressData]
+    [indicatorsOfProgressData, leadershipData]
   )
-
-  console.log('indicatorsOfProgressData', indicatorsOfProgressData)
 
   return (
     <DataManagerContext.Provider value={value}>

@@ -13,7 +13,7 @@ export const subtitle = (
   const filters = qs.parse(locationSearch)
   const displayMinistry = ministry || activeMinistry(filters.Ministry_Key)
   const displayEmployeeType =
-    employeeType || activeEmployeeType(filters.Employee_Type)
+    employeeType || activeEmployeeType(filters.Employee_Type) || ''
   let title = `${displayMinistry}, ${displayEmployeeType.toLowerCase()} employees`
   if (employeeCount) {
     title += ` (n = ${employeeCount.toLocaleString()})`

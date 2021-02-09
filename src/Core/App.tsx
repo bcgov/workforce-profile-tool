@@ -21,7 +21,10 @@ import FixTypeLater from '../@types/FixTypeLater'
 import { DataManagerProvider } from '../Data/DataManager'
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 import * as d3 from 'd3'
-import { IndicatorsOfProgress2018RawDataType } from '../@types/DataTypes'
+import {
+  IndicatorsOfProgress2018RawDataType,
+  Leadership2018RawDataType,
+} from '../@types/DataTypes'
 
 const BASE_URL = ''
 const QUERY_INDICATORS_OF_PROGRESS =
@@ -43,6 +46,17 @@ const App = (props: Props): JSX.Element => {
     )
   })
 
+  const {
+    data: leadershipData,
+    isLoading: leadershipIsLoading,
+    isError: leadershipIsError,
+  } = useQuery('leadership', async () => {
+    const url = `${BASE_URL}/${QUERY_INDICATORS_OF_PROGRESS}`
+    return await (await d3.csv(url)).map(
+      (d) => (d as unknown) as Leadership2018RawDataType
+    )
+  })
+
   console.log(
     indicatorsOfProgressData,
     indicatorsOfProgressIsLoading,
@@ -51,7 +65,10 @@ const App = (props: Props): JSX.Element => {
 
   return (
     <div className="App container-fluid">
-      <DataManagerProvider indicatorsOfProgressData={indicatorsOfProgressData}>
+      <DataManagerProvider
+        indicatorsOfProgressData={indicatorsOfProgressData}
+        leadershipData={leadershipData}
+      >
         <div className="row">
           <div className="LeftColumn col-2">
             <Header />
@@ -60,6 +77,16 @@ const App = (props: Props): JSX.Element => {
           <div className="col-10 MainWrapper">
             <Switch>
               <Route exact path={`/`} render={(props) => <Main {...props} />} />
+              <Route
+                exact
+                path={`/:highLevelNav`}
+                render={(props) => <Main {...props} />}
+              />
+              <Route
+                exact
+                path={`/:highLevelNav/:lowLevelNav`}
+                render={(props) => <Main {...props} />}
+              />
             </Switch>
           </div>
         </div>
