@@ -8,7 +8,7 @@ const Header = (): JSX.Element => {
     <div className="Header row">
       <div className="col">
         <Link to={'/'}>
-          <h1>Workforce Profiles 2018</h1>
+          <h1>Workforce Profiles</h1>
         </Link>
       </div>
     </div>
