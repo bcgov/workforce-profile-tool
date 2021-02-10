@@ -1,9 +1,11 @@
-import React, { Component } from 'react'
-import { RouteComponentProps, withRouter } from 'react-router-dom'
-import './VariableList.scss'
-import VariableDisplay from './VariableDisplay'
-import FixTypeLater from '../@types/FixTypeLater'
+import { withRouter } from 'react-router-dom'
+import React from 'react'
+
 import { VARIABLE_MANAGER } from './VariableManager'
+import FixTypeLater from '../@types/FixTypeLater'
+import VariableDisplay from './VariableDisplay'
+
+import './VariableList.scss'
 
 const VariableList = (): JSX.Element => {
   const variables = VARIABLE_MANAGER.variableGroups.map(

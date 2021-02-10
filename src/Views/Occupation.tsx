@@ -1,14 +1,12 @@
-import React, { Component } from 'react'
-import OccupationTable from '../Table/OccupationTable'
-import OccupationGraph from '../Graphs/OccupationGraph'
+import { withRouter } from 'react-router-dom'
+import React from 'react'
+
+import { useDataManager } from '../Data/DataManager'
 import Loading from './Loading'
 import NoData from './NoData'
+import OccupationGraph from '../Graphs/OccupationGraph'
+import OccupationTable from '../Table/OccupationTable'
 import Title from './Title'
-
-import { RouteComponentProps, withRouter } from 'react-router-dom'
-import qs from '../Services/query-string'
-import FixTypeLater from '../@types/FixTypeLater'
-import { useDataManager } from '../Data/DataManager'
 
 // TODO: If the ministry_key is BCPS, lock employee type to REG; otherwise don't
 // lock variables

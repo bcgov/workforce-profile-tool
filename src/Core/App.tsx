@@ -14,6 +14,7 @@ import './App.scss'
 const BASE_URL = 'ERAP/workforce-profiles/data/2018'
 const PROGRESS_FILE = 'WP2018_Ind_Progress-2_Sep2018.csv'
 const LEADERSHIP_FILE = 'WP2018_Leadership.csv'
+const MINISTRY_FILE = 'WP2018_Ministries.csv'
 
 const loadData = <T,>(fileName: string) => {
   return useQuery(fileName, async () =>
@@ -24,12 +25,14 @@ const loadData = <T,>(fileName: string) => {
 const App = (): JSX.Element => {
   const { data: progressData } = loadData<ProgressRawData>(PROGRESS_FILE)
   const { data: leadershipData } = loadData<LeadershipRawData>(LEADERSHIP_FILE)
+  const { data: ministryData } = loadData<LeadershipRawData>(MINISTRY_FILE)
 
   return (
     <div className="App container-fluid">
       <DataManagerProvider
         progressData={progressData}
         leadershipData={leadershipData}
+        ministryData={ministryData}
       >
         <div className="row">
           <div className="LeftColumn col-2">

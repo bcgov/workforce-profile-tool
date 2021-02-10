@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import { isVariableActive } from './VariableManager'
-import './VariableDisplay.scss'
+import React from 'react'
+
 import FixTypeLater from '../@types/FixTypeLater'
+
+import './VariableDisplay.scss'
 
 interface Props {
   variableGroup: FixTypeLater
@@ -14,8 +15,8 @@ const VariableDisplay = ({
 }: Props): JSX.Element => {
   const options = variableGroup.selectableVariables.map(
     (variable: FixTypeLater) => {
-      const variableGroupKey = variableGroup.key
-      const variableKey = variable.key
+      // const variableGroupKey = variableGroup.key
+      // const variableKey = variable.key
       const isActive = true // TODO: fix this
       const isLocked = false // TODO: fix this
       return (

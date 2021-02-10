@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import FixTypeLater from '../@types/FixTypeLater'
+import React from 'react'
+
 import { useDataManager } from '../Data/DataManager'
 import HiringGraph from '../Graphs/HiringGraph'
 import HiringTable from '../Table/HiringTable'

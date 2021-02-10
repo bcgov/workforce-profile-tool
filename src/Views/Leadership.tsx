@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
-import LeadershipTable from '../Table/LeadershipTable'
+import React from 'react'
+
+import { useDataManager } from '../Data/DataManager'
 import LeadershipGraph from '../Graphs/LeadershipGraph'
 import Loading from './Loading'
 import NoData from './NoData'
 import Title from './Title'
-import FixTypeLater from '../@types/FixTypeLater'
-import { useDataManager } from '../Data/DataManager'
 
 // TODO: Set variables: ALL employees, BCPS ministry
 const Leadership = (): JSX.Element => {

@@ -1,16 +1,17 @@
-import React, { Component } from 'react'
-import TabInterface from '../Tabs/TabInterface'
-import Tab from '../Tabs/Tab'
-import './Main.scss'
-import Occupation from '../Views/Occupation'
-import Region from '../Views/Region'
-import Ministry from '../Views/Ministry'
-import Leadership from '../Views/Leadership'
+import React from 'react'
+
 import Comparison from '../Views/Comparison'
-import Progress from '../Views/Progress'
-import Hiring from '../Views/Hiring'
 import FixTypeLater from '../@types/FixTypeLater'
-//import FlowReport from '../Views/FlowReport'
+import Hiring from '../Views/Hiring'
+import Leadership from '../Views/Leadership'
+import Ministry from '../Views/Ministry'
+import Occupation from '../Views/Occupation'
+import Progress from '../Views/Progress'
+import Region from '../Views/Region'
+import Tab from '../Tabs/Tab'
+import TabInterface from '../Tabs/TabInterface'
+
+import './Main.scss'
 
 interface Props {
   data?: FixTypeLater

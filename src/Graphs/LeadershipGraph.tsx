@@ -1,15 +1,14 @@
-import React from 'react'
 import * as R from 'recharts'
+import React from 'react'
 
 import { formatPercent } from '../Services/formatter'
 import { ticks } from '../Services/scales'
 import { useDataManager } from '../Data/DataManager'
 import GraphFrame from './GraphFrame'
-import LabelList from './LabelList'
+import LabelledBar from './LabelledBar'
 import Legend from './Legend'
 
 import './Graphs.scss'
-import LabelledBar from './LabelledBar'
 
 interface TitleProps {
   title: string

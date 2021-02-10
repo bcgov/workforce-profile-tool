@@ -1,14 +1,12 @@
-import React, { Component } from 'react'
-import ComparisonTable from '../Table/ComparisonTable'
+import { withRouter } from 'react-router-dom'
+import React from 'react'
+
+import { useDataManager } from '../Data/DataManager'
 import ComparisonGraph from '../Graphs/ComparisonGraph'
+import ComparisonTable from '../Table/ComparisonTable'
 import Loading from './Loading'
 import NoData from './NoData'
 import Title from './Title'
-import { RouteComponentProps, withRouter } from 'react-router-dom'
-import qs from '../Services/query-string'
-import { activeMinistry } from '../Services/activeVariables'
-import FixTypeLater from '../@types/FixTypeLater'
-import { useDataManager } from '../Data/DataManager'
 
 const Comparison = (): JSX.Element => {
   const title = 'Comparison with Provincial Workforce'

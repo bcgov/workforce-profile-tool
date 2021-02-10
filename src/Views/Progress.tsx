@@ -1,10 +1,7 @@
-import React, { Component } from 'react'
-import Dictionary from '../@types/Dictionary'
-import FixTypeLater from '../@types/FixTypeLater'
-import { useDataManager } from '../Data/DataManager'
-import ProgressGraph from '../Graphs/ProgressGraph'
-import ProgressTable from '../Table/ProgressTable'
+import React from 'react'
 
+import { useDataManager } from '../Data/DataManager'
+import Dictionary from '../@types/Dictionary'
 import Loading from './Loading'
 import NoData from './NoData'
 import Title from './Title'
