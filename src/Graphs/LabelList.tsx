@@ -17,6 +17,7 @@ const LabelList = (props: Props): JSX.Element => {
       // @ts-ignore The typings are wrong
       formatter={props.formatter}
       position={position}
+      fill={'#333'} // TODO: Does this need to be overriden?
       style={{
         fontSize: '14px',
       }}

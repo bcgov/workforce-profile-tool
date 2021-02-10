@@ -1,18 +1,15 @@
-import React, { Component } from 'react'
-import * as PlusPlot from '@plot-and-scatter/plusplot'
+import React from 'react'
+import * as R from 'recharts'
+
+import { formatPercent } from '../Services/formatter'
+import { ticks } from '../Services/scales'
+import { useDataManager } from '../Data/DataManager'
 import GraphFrame from './GraphFrame'
+import LabelList from './LabelList'
 import Legend from './Legend'
 
 import './Graphs.scss'
-
-import { formatPercent } from '../Services/formatter'
-
-import { VARIABLE_MANAGER } from '../Variables/VariableManager'
-import FixTypeLater from '../@types/FixTypeLater'
-
-import * as R from 'recharts'
-import { useDataManager } from '../Data/DataManager'
-import { Leadership2018RawDataType } from '../@types/DataTypes'
+import LabelledBar from './LabelledBar'
 
 interface TitleProps {
   title: string
@@ -22,6 +19,10 @@ const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
   const { leadershipData: data } = useDataManager()
 
   if (!data) return <div>&nbsp;</div>
+
+  const tickArray: number[] = ticks(data, ['Executive', 'Management_Band'])
+
+  console.log('tickArray', tickArray)
 
   const legend = (
     <Legend
@@ -45,32 +46,27 @@ const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
       <R.BarChart
         data={data}
         layout="vertical"
-        margin={{ left: 30 }}
-        barCategoryGap={3}
+        margin={{ left: 30, bottom: 15, right: 10 }}
+        barCategoryGap={15}
         barGap={2}
       >
-        <R.CartesianGrid horizontal={false} />
-        <R.XAxis type="number" />
+        <R.XAxis type="number" ticks={tickArray} interval={0}>
+          <R.Label offset={-10} position={'insideBottom'}>
+            % in leadership positions
+          </R.Label>
+        </R.XAxis>
         <R.YAxis dataKey="Des_Grp" type="category" />
         <R.Tooltip />
-        <R.Bar dataKey="Executive" fill="#70CCDB">
-          {/* @ts-ignore The typings are incorrect, see https://github.com/recharts/recharts/issues/2396 */}
-          <R.LabelList
-            dataKey="Executive"
-            // @ts-ignore The typings are wrong
-            position={'right'}
-            formatter={(d: string) => `${d}%`}
-          />
-        </R.Bar>
-        <R.Bar dataKey="Management_Band" fill="#D2E2EE">
-          {/* @ts-ignore The typings are incorrect, see https://github.com/recharts/recharts/issues/2396 */}
-          <R.LabelList
-            dataKey="Management_Band"
-            // @ts-ignore The typings are wrong
-            position={'right'}
-            formatter={(d: string) => `${d}%`}
-          />
-        </R.Bar>
+        {LabelledBar({
+          dataKey: 'Executive',
+          fill: '#70CCDB',
+          formatter: (d) => formatPercent(d, 1, 100),
+        })}
+        {LabelledBar({
+          dataKey: 'Management_Band',
+          fill: '#D2E2EE',
+          formatter: (d) => formatPercent(d, 1, 100),
+        })}
       </R.BarChart>
     </R.ResponsiveContainer>
   )
