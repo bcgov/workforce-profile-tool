@@ -12,7 +12,7 @@ import Title from './Title'
 const Progress = (): JSX.Element => {
   const title = 'Indicators of Progress — By Designated Group'
   const employeeCount = 1000 // useQueryParams
-  const { indicatorsOfProgressData } = useDataManager()
+  const { progressData: indicatorsOfProgressData } = useDataManager()
 
   const codeOrder: Dictionary = {
     IND: 0,

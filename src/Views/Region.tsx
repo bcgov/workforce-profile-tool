@@ -15,7 +15,7 @@ import { useDataManager } from '../Data/DataManager'
 const Region = (): JSX.Element => {
   const title = 'Representation — Region'
   const employeeCount = 1000 // useQueryParams
-  const { indicatorsOfProgressData: data } = useDataManager()
+  const { progressData: data } = useDataManager()
 
   return (
     <div>

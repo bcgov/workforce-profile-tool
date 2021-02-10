@@ -1,4 +1,6 @@
-export type IndicatorsOfProgress2018RawDataType = {
+import Dictionary from './Dictionary'
+
+export type ProgressRawData = {
   Ministry_Key: string
   Des_Grp: string
   Employee_Type: string
@@ -7,7 +9,7 @@ export type IndicatorsOfProgress2018RawDataType = {
   '2018_hired_ct': number
 }
 
-export type Leadership2018RawDataType = {
+export type LeadershipRawData = {
   Des_Grp: string
   Executive: number
   Management_Band: number
@@ -15,3 +17,5 @@ export type Leadership2018RawDataType = {
   ALL_Available_Workforce: number
   ALL_BCPS: number
 }
+
+export type MinistryRawDataType = Dictionary

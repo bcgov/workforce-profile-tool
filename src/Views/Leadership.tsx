@@ -10,7 +10,9 @@ import { useDataManager } from '../Data/DataManager'
 // TODO: Set variables: ALL employees, BCPS ministry
 const Leadership = (): JSX.Element => {
   const title = 'Leadership by Type'
-  const { indicatorsOfProgressData: data } = useDataManager()
+  const { progressData: data } = useDataManager()
+
+  console.log('data', data)
 
   return (
     <div>

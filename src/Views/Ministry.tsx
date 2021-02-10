@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import FixTypeLater from '../@types/FixTypeLater'
+import React from 'react'
+
 import { useDataManager } from '../Data/DataManager'
-import MinistryGraph from '../Graphs/MinistryGraph'
 import Loading from './Loading'
+import MinistryGraph from '../Graphs/MinistryGraph'
 import NoData from './NoData'
 
 // TODO: lock variables: REG and BCPS
@@ -10,7 +10,7 @@ import NoData from './NoData'
 const Ministry = (): JSX.Element => {
   const title = 'Ministries'
   const employeeCount = 1000 // useQueryParams
-  const { indicatorsOfProgressData: data } = useDataManager()
+  const { progressData: data } = useDataManager()
 
   return (
     <div>
