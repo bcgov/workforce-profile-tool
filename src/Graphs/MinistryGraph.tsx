@@ -9,6 +9,7 @@ import FixTypeLater from '../@types/FixTypeLater'
 import MinistrySubGraph from './MinistrySubgraph'
 
 import './Graphs.scss'
+import { MinistryRawData } from '../@types/DataTypes'
 
 interface Props extends RouteComponentProps {
   title: string
@@ -21,7 +22,7 @@ const MinistryGraph = (props: Props): JSX.Element => {
   if (!data) return <div>&nbsp;</div>
 
   // Split the data
-  const dataMap: Dictionary = {}
+  const dataMap: Dictionary<MinistryRawData[]> = {}
   data.forEach((d) => {
     dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
     dataMap[d.Des_Grp].push(d)

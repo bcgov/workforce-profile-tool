@@ -33,7 +33,7 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
   let hasSuppressedData = false
   let color = ''
 
-  const COLOR_MAP: Dictionary = {
+  const COLOR_MAP: Dictionary<string> = {
     IND: '#234075',
     DIS: '#70CCDB',
     VM: '#D2E2EE',

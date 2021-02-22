@@ -2,7 +2,7 @@ import React from 'react'
 
 import {
   LeadershipRawData,
-  MinistryRawDataType,
+  MinistryRawData,
   ProgressRawData,
 } from '../@types/DataTypes'
 import FixTypeLater from '../@types/FixTypeLater'
@@ -10,7 +10,7 @@ import FixTypeLater from '../@types/FixTypeLater'
 type DataManagerContextType = {
   progressData?: ProgressRawData[]
   leadershipData?: LeadershipRawData[]
-  ministryData?: MinistryRawDataType[]
+  ministryData?: MinistryRawData[]
 }
 
 const DataManagerContext = React.createContext<
@@ -36,7 +36,7 @@ interface IDataManagerProviderProps {
   children: React.ReactNode
   progressData?: ProgressRawData[]
   leadershipData?: LeadershipRawData[]
-  ministryData?: MinistryRawDataType[]
+  ministryData?: MinistryRawData[]
 }
 
 function DataManagerProvider({

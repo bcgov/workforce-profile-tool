@@ -1,7 +1,3 @@
-import FixTypeLater from './FixTypeLater'
-
-type Dictionary<T = FixTypeLater> = {
-  [key: string]: T
-}
+type Dictionary<T> = Record<string, T>
 
 export default Dictionary

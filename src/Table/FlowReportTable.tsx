@@ -25,7 +25,7 @@ class FlowReportTable extends Component<Props> {
   render(): JSX.Element {
     if (!this.props.data) return <div>&nbsp;</div>
 
-    const rowOrder: Dictionary = {
+    const rowOrder: Dictionary<any> = {
       Employed_2015: 1,
       Employed_2018: 2,
       Hiring_Outside: 3,
@@ -43,7 +43,7 @@ class FlowReportTable extends Component<Props> {
       Promotions_Total: 15,
     }
 
-    const groupOrder: Dictionary = { IND: 0, DIS: 1, VM: 2, WOM: 3 }
+    const groupOrder: Dictionary<any> = { IND: 0, DIS: 1, VM: 2, WOM: 3 }
 
     // Sort the data
     const data = this.props.data
@@ -57,7 +57,7 @@ class FlowReportTable extends Component<Props> {
     }
 
     // Split the data
-    const dataMap: Dictionary = {}
+    const dataMap: Dictionary<any> = {}
     data.forEach((d) => {
       dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
       dataMap[d.Des_Grp].push(d)

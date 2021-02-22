@@ -1,5 +1,3 @@
-import Dictionary from './Dictionary'
-
 export type ProgressRawData = {
   Ministry_Key: string
   Des_Grp: string
@@ -18,4 +16,8 @@ export type LeadershipRawData = {
   ALL_BCPS: number
 }
 
-export type MinistryRawDataType = Dictionary
+export type MinistryRawData = {
+  Des_Grp: string
+  Ministry_Key: string
+  Value: string
+}

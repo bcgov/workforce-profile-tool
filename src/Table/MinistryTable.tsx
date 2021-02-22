@@ -19,7 +19,7 @@ class MinistryTable extends Component<Props> {
     if (!this.props.data) return <div>&nbsp;</div>
 
     // Split the data
-    const dataMap: Dictionary = {}
+    const dataMap: Dictionary<any> = {}
     this.props.data.forEach((d) => {
       dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
       dataMap[d.Des_Grp].push(d)

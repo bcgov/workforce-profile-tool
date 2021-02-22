@@ -20,7 +20,7 @@ class RegionGraph extends Component<Props> {
   render(): JSX.Element {
     if (!this.props.data) return <div>&nbsp;</div>
 
-    const dataMap: Dictionary = {}
+    const dataMap: Dictionary<any> = {}
     this.props.data.forEach((d) => {
       dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
       dataMap[d.Des_Grp].push(d)

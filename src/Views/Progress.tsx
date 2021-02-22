@@ -11,7 +11,7 @@ const Progress = (): JSX.Element => {
   const employeeCount = 1000 // useQueryParams
   const { progressData: indicatorsOfProgressData } = useDataManager()
 
-  const codeOrder: Dictionary = {
+  const codeOrder: Dictionary<number> = {
     IND: 0,
     DIS: 1,
     VM: 2,

@@ -1,7 +1,8 @@
 import * as d3 from 'd3'
 import Dictionary from '../@types/Dictionary'
+import FixTypeLater from '../@types/FixTypeLater'
 
-export const ticks = <T extends Dictionary>(
+export const ticks = <T extends Dictionary<FixTypeLater>>(
   data: T[],
   keys: string[]
 ): number[] => {
@@ -10,7 +11,7 @@ export const ticks = <T extends Dictionary>(
   data.forEach((d) => {
     Object.keys(d).forEach((k) => {
       if (keys.includes(k)) {
-        domainValues.push(d[k])
+        domainValues.push(+d[k])
       }
     })
   })
