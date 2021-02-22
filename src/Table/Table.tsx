@@ -5,10 +5,11 @@ import React from 'react'
 
 import ColumnSort from './ColumnSort'
 import FixTypeLater from '../@types/FixTypeLater'
+import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 
 interface Props<T extends Record<string, unknown>> {
   data: T[]
-  columns: FixTypeLater
+  columns: ColumnWithClassName<T>[]
 }
 
 const Table = <T extends Record<string, unknown>>({

@@ -23,18 +23,26 @@ export const formatPercent = (
   })
 }
 
-export const parseIntClean = (number: string, zeroValue = 0): number => {
+export const parseIntClean = (
+  number: string | number,
+  zeroValue = 0
+): number => {
+  if (typeof number === 'number') return Math.floor(number)
   if (number === 'S') return zeroValue
   if (number === '<3') return zeroValue
   if (number === 'x') return zeroValue
-  if (+number === 0 || number === '') return zeroValue
+  if (number === '') return zeroValue
   return parseInt(number, 10)
 }
 
-export const parseFloatClean = (number: string, zeroValue = 0): number => {
+export const parseFloatClean = (
+  number: string | number,
+  zeroValue = 0
+): number => {
+  if (typeof number === 'number') return number
   if (number === 'S') return zeroValue
   if (number === '<3') return zeroValue
   if (number === 'x') return zeroValue
-  if (+number === 0 || number === '') return zeroValue
+  if (number === '') return zeroValue
   return parseFloat(number)
 }

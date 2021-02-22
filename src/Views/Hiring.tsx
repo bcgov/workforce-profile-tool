@@ -19,8 +19,8 @@ const Hiring = (): JSX.Element => {
       {data && data.length === 0 && <NoData />}
       {data && data.length > 0 && (
         <div>
-          <HiringGraph data={data} title={title} />
-          <HiringTable data={data} />
+          {/* <HiringGraph title={title} /> */}
+          <HiringTable />
         </div>
       )}
     </div>

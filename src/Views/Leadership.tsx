@@ -10,7 +10,7 @@ import Title from './Title'
 // TODO: Set variables: ALL employees, BCPS ministry
 const Leadership = (): JSX.Element => {
   const title = 'Leadership by Type'
-  const { progressData: data } = useDataManager()
+  const { leadershipData: data } = useDataManager()
 
   console.log('data', data)
 

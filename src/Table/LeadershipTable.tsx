@@ -8,24 +8,25 @@ import FixTypeLater from '../@types/FixTypeLater'
 import Table from './Table'
 
 import './Table.scss'
+import { LeadershipRawData } from '../@types/DataTypes'
 
 const LeadershipTable = (): JSX.Element => {
   const { leadershipData: data } = useDataManager()
 
   const columns: FixTypeLater[] = [
     {
-      accessor: (r: FixTypeLater) =>
-        VARIABLE_MANAGER.displayNameByKey('Des_Grp', r['Des_Grp']),
+      accessor: (r: LeadershipRawData) =>
+        VARIABLE_MANAGER.displayNameByKey('Des_Grp', r.Des_Grp),
       Header: 'Designated Group',
       id: 'Des_Grp',
     },
     {
-      accessor: (r: FixTypeLater) => parseFloatClean(r['Executive']),
+      accessor: (r: LeadershipRawData) => parseFloatClean(r.Executive),
       className: 'text-right',
       Header: 'Executive Leadership, %',
     },
     {
-      accessor: (r: FixTypeLater) => parseFloatClean(r['Management_Band']),
+      accessor: (r: LeadershipRawData) => parseFloatClean(r.Management_Band),
       className: 'text-right',
       Header: 'Management Band Leadership, %',
     },

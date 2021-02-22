@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import Reactor from '@plot-and-scatter/reactor-table'
+import React from 'react'
 import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
 
@@ -7,74 +6,68 @@ import { VARIABLE_MANAGER } from '../Variables/VariableManager'
 import { formatNumber, formatPercent } from '../Services/formatter'
 
 import './Table.scss'
-import FixTypeLater from '../@types/FixTypeLater'
-import ReactorTableColumn from '../@types/ReactorTableColumn'
+import { ProgressRawData } from '../@types/DataTypes'
+import { useDataManager } from '../Data/DataManager'
+import Loading from '../Views/Loading'
+import Table from './Table'
+import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 
-interface Props {
-  data: FixTypeLater[]
-}
+const ProgressTable = (): JSX.Element => {
+  const { progressData: data } = useDataManager()
 
-class ProgressTable extends Component<Props> {
-  render(): JSX.Element {
-    if (!this.props.data) return <div>&nbsp;</div>
+  if (!data) return <Loading />
 
-    // const totalRow = this.props.data.filter(d => d['Des_Grp'] === 'AS_TOTAL')
-    const totalRow = null
-    const data = this.props.data.filter(
-      (d) => !['AS_TOTAL', 'WOM_SM'].includes(d['Des_Grp'])
-    )
+  // const totalRow = this.props.data.filter(d => d['Des_Grp'] === 'AS_TOTAL')
+  // const totalRow = null
+  const filteredData = data
+    .filter((d) => !['AS_TOTAL', 'WOM_SM'].includes(d['Des_Grp']))
+    .filter((d) => d.Ministry_Key === 'BCPS') // TODO: remove this
+    .filter((d) => d.Employee_Type === 'ALL')
 
-    const total = this.props.data.find((d) => d['Des_Grp'] === 'AS_TOTAL')
-    const totalHired = total ? +total['2018_hired_ct'] : 1
+  const total = data.find(
+    (d) =>
+      d['Des_Grp'] === 'AS_TOTAL' &&
+      d.Employee_Type === 'ALL' &&
+      d.Ministry_Key === 'BCPS'
+  )
+  const totalHired = total ? +total['2018_hired_ct'] : 1
 
-    const columns: ReactorTableColumn[] = [
-      {
-        id: 'Des_Grp',
-        name: 'Designated Group',
-        accessor: (d) =>
-          VARIABLE_MANAGER.displayNameByKey('Des_Grp', d['Des_Grp']) || '',
-      },
-      {
-        id: '2018_hired_ct',
-        name: 'Hired, 2015 to 2018',
-        accessor: (d) => formatNumber(d['2018_hired_ct']),
-        cellClass: 'text-right',
-        headerClass: 'text-right',
-      },
-      {
-        id: 'percent_total',
-        name: 'Percent of all hires',
-        accessor: (d) => formatPercent(d['2018_hired_ct'], 1, totalHired),
-        cellClass: 'text-right',
-        headerClass: 'text-right',
-      },
-    ]
+  const columns: ColumnWithClassName<ProgressRawData>[] = [
+    {
+      id: 'Des_Grp',
+      Header: 'Designated Group',
+      accessor: (r) =>
+        VARIABLE_MANAGER.displayNameByKey('Des_Grp', r.Des_Grp) || '',
+    },
+    {
+      id: '2018_hired_ct',
+      Header: 'Hired, 2015 to 2018',
+      accessor: (r) => formatNumber(r['2018_hired_ct']),
+      className: 'text-right',
+    },
+    {
+      id: 'percent_total',
+      Header: 'Percent of all hires',
+      accessor: (r) => formatPercent(r['2018_hired_ct'], 1, totalHired),
+      className: 'text-right',
+    },
+  ]
 
-    const rowFilter = () => true
-
-    return (
-      <div className="Table row">
-        <div className="col">
-          {this.props.data && (
-            <div>
-              <Reactor.Table
-                columns={columns}
-                rows={data}
-                totalRows={totalRow}
-                rowFilter={rowFilter}
-              />
-              <DownloadDataLink
-                columns={columns}
-                rows={data}
-                filename={'hiring'}
-              />
-              <Definitions />
-            </div>
-          )}
+  return (
+    <div className="Table row">
+      <div className="col">
+        <div>
+          <Table columns={columns} data={filteredData} />
+          <DownloadDataLink
+            columns={columns}
+            rows={filteredData}
+            filename={'hiring'}
+          />
+          <Definitions />
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default ProgressTable
