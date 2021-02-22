@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
 
-import { VARIABLE_MANAGER } from '../Variables/VariableManager'
+import { VARIABLES } from '../Variables/VariableManager'
 
 import { formatNumber, parseIntClean } from '../Services/formatter'
 
@@ -28,12 +28,12 @@ class MinistryTable extends Component<Props> {
     const tables = Object.keys(dataMap)
       .sort()
       .map((k) => {
-        let title = (VARIABLE_MANAGER as FixTypeLater)
+        let title = (VARIABLES as FixTypeLater)
           .filter((v: FixTypeLater) => v.key === 'Des_Grp')[0]
           .options.filter((v: FixTypeLater) => v.key === k)[0].display
         title +=
           ' — ' +
-          (VARIABLE_MANAGER as FixTypeLater)
+          (VARIABLES as FixTypeLater)
             .filter((v: FixTypeLater) => v.key === 'Employee_Type')[0]
             .options.filter(
               (v: FixTypeLater) => v.key === this.props.data[0]['Employee_Type']

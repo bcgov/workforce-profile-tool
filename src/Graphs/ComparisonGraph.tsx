@@ -6,7 +6,7 @@ import Legend from './Legend'
 import './Graphs.scss'
 
 import { formatPercent } from '../Services/formatter'
-import { VARIABLE_MANAGER } from '../Variables/VariableManager'
+import { VARIABLES } from '../Variables/VariableManager'
 import FixTypeLater from '../@types/FixTypeLater'
 
 interface Props {
@@ -27,7 +27,7 @@ class ComparisonGraph extends Component<Props> {
       ]
 
       return {
-        category: VARIABLE_MANAGER.displayNameByKey('Des_Grp', d['Des_Grp']),
+        category: VARIABLES.displayNameByKey('Des_Grp', d['Des_Grp']),
         color: '#6c757d',
         count,
         comparators,

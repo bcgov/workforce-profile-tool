@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode, createContext, useContext, useMemo } from 'react'
 
 import {
   LeadershipRawData,
@@ -13,27 +13,27 @@ type DataManagerContextType = {
   ministryData?: MinistryRawData[]
 }
 
-const DataManagerContext = React.createContext<
-  DataManagerContextType | undefined
->(undefined)
+const DataManagerContext = createContext<DataManagerContextType | undefined>(
+  undefined
+)
 
 function useDataManager(): DataManagerContextType {
-  const context = React.useContext(DataManagerContext)
+  const context = useContext(DataManagerContext)
   if (!context) {
     throw new Error(`useDataManager must be used within a DataManagerProvider`)
   }
 
-  const { progressData: progressData, leadershipData, ministryData } = context
+  const { progressData, leadershipData, ministryData } = context
 
   return {
-    progressData: progressData,
+    progressData,
     leadershipData,
     ministryData,
   }
 }
 
-interface IDataManagerProviderProps {
-  children: React.ReactNode
+interface DataManagerProviderProps {
+  children: ReactNode
   progressData?: ProgressRawData[]
   leadershipData?: LeadershipRawData[]
   ministryData?: MinistryRawData[]
@@ -44,8 +44,8 @@ function DataManagerProvider({
   progressData,
   leadershipData,
   ministryData,
-}: IDataManagerProviderProps): FixTypeLater {
-  const value = React.useMemo(
+}: DataManagerProviderProps): FixTypeLater {
+  const value = useMemo(
     () => ({
       progressData,
       leadershipData,

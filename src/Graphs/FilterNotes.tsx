@@ -4,7 +4,7 @@ import FixTypeLater from '../@types/FixTypeLater'
 
 import qs from '../Services/query-string'
 import {
-  VARIABLE_MANAGER,
+  VARIABLES,
   activeVariablesToDisplay,
   fromActiveVariableArray,
 } from '../Variables/VariableManager'
@@ -15,7 +15,7 @@ interface Props extends RouteComponentProps {
 
 class FilterNotes extends Component<Props> {
   render(): JSX.Element {
-    const activeVariables = VARIABLE_MANAGER.emptySelectableVariableMap()
+    const activeVariables = VARIABLES.emptySelectableVariableMap()
     fromActiveVariableArray(
       activeVariables,
       qs.parse(this.props.location.search)

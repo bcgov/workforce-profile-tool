@@ -6,7 +6,7 @@ import GraphFrame from './GraphFrame'
 
 import './Graphs.scss'
 
-import { VARIABLE_MANAGER } from '../Variables/VariableManager'
+import { VARIABLES } from '../Variables/VariableManager'
 import FixTypeLater from '../@types/FixTypeLater'
 
 interface Props {
@@ -24,7 +24,7 @@ class HiringGraph extends Component<Props> {
 
     const chartData = data.map((d) => {
       return {
-        category: VARIABLE_MANAGER.displayNameByKey('Des_Grp', d['Des_Grp']),
+        category: VARIABLES.displayNameByKey('Des_Grp', d['Des_Grp']),
         count: d['2018_hired_ct'],
         color: '#70CCDB',
       }

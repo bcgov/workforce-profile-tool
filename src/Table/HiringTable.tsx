@@ -2,7 +2,7 @@ import React from 'react'
 import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
 
-import { VARIABLE_MANAGER } from '../Variables/VariableManager'
+import { VARIABLES } from '../Variables/VariableManager'
 import { formatNumber, formatPercent } from '../Services/formatter'
 
 import './Table.scss'
@@ -36,8 +36,7 @@ const ProgressTable = (): JSX.Element => {
     {
       id: 'Des_Grp',
       Header: 'Designated Group',
-      accessor: (r) =>
-        VARIABLE_MANAGER.displayNameByKey('Des_Grp', r.Des_Grp) || '',
+      accessor: (r) => VARIABLES.displayNameByKey('Des_Grp', r.Des_Grp) || '',
     },
     {
       id: '2018_hired_ct',

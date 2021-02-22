@@ -3,7 +3,7 @@ import Reactor from '@plot-and-scatter/reactor-table'
 import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
 
-import { VARIABLE_MANAGER } from '../Variables/VariableManager'
+import { VARIABLES } from '../Variables/VariableManager'
 import { formatPercent, parseFloatClean } from '../Services/formatter'
 
 import './Table.scss'
@@ -27,7 +27,7 @@ class ProgressTable extends Component<Props> {
         id: 'Des_Grp',
         name: 'Designated Group',
         accessor: (d) =>
-          VARIABLE_MANAGER.displayNameByKey('Des_Grp', d['Des_Grp']) || '',
+          VARIABLES.displayNameByKey('Des_Grp', d['Des_Grp']) || '',
       },
       {
         id: '2015_pc',

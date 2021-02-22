@@ -2,7 +2,7 @@ import React from 'react'
 
 import { parseFloatClean } from '../Services/formatter'
 import { useDataManager } from '../Data/DataManager'
-import { VARIABLE_MANAGER } from '../Variables/VariableManager'
+import { VARIABLES } from '../Variables/VariableManager'
 import DownloadDataLink from './DownloadDataLink'
 import FixTypeLater from '../@types/FixTypeLater'
 import Table from './Table'
@@ -16,7 +16,7 @@ const LeadershipTable = (): JSX.Element => {
   const columns: FixTypeLater[] = [
     {
       accessor: (r: LeadershipRawData) =>
-        VARIABLE_MANAGER.displayNameByKey('Des_Grp', r.Des_Grp),
+        VARIABLES.displayNameByKey('Des_Grp', r.Des_Grp),
       Header: 'Designated Group',
       id: 'Des_Grp',
     },

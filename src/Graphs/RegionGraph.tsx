@@ -7,7 +7,7 @@ import { formatNumber } from '../Services/formatter'
 
 import './Graphs.scss'
 
-import { VARIABLE_MANAGER } from '../Variables/VariableManager'
+import { VARIABLES } from '../Variables/VariableManager'
 import Dictionary from '../@types/Dictionary'
 import FixTypeLater from '../@types/FixTypeLater'
 
@@ -36,7 +36,7 @@ class RegionGraph extends Component<Props> {
         data.DesGrp_Count_Shortfall,
       ]
 
-      const title = VARIABLE_MANAGER.displayNameByKey('Des_Grp', k)
+      const title = VARIABLES.displayNameByKey('Des_Grp', k)
 
       return {
         category: title,

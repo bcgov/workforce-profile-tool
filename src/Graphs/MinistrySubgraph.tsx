@@ -2,7 +2,7 @@ import * as R from 'recharts'
 import React from 'react'
 
 import { formatPercent, parseFloatClean } from '../Services/formatter'
-import { VARIABLE_MANAGER } from '../Variables/VariableManager'
+import { VARIABLES } from '../Variables/VariableManager'
 import Dictionary from '../@types/Dictionary'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
@@ -118,7 +118,7 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
 
   const legendItems = props.data.map((d) => {
     const k = d['Des_Grp']
-    const label = VARIABLE_MANAGER.displayNameByKey('Des_Grp', k)
+    const label = VARIABLES.displayNameByKey('Des_Grp', k)
     return { label, color }
   })
 

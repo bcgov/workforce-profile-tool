@@ -3,7 +3,7 @@ import React from 'react'
 
 import { subtitle } from '../Views/Title'
 import { useDataManager } from '../Data/DataManager'
-import { VARIABLE_MANAGER } from '../Variables/VariableManager'
+import { VARIABLES } from '../Variables/VariableManager'
 import Dictionary from '../@types/Dictionary'
 import FixTypeLater from '../@types/FixTypeLater'
 import MinistrySubGraph from './MinistrySubgraph'
@@ -29,8 +29,8 @@ const MinistryGraph = (props: Props): JSX.Element => {
   })
 
   const graphs = Object.keys(dataMap).map((k) => {
-    const title = VARIABLE_MANAGER.displayNameByKey('Des_Grp', k)
-    const shortTitle = VARIABLE_MANAGER.shortDisplayNameByKey('Des_Grp', k)
+    const title = VARIABLES.displayNameByKey('Des_Grp', k)
+    const shortTitle = VARIABLES.shortDisplayNameByKey('Des_Grp', k)
 
     return (
       <div key={k}>

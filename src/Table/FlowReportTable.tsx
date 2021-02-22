@@ -4,7 +4,7 @@ import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
 
 import Tooltip from '../Core/Tooltip'
-import { VARIABLE_MANAGER } from '../Variables/VariableManager'
+import { VARIABLES } from '../Variables/VariableManager'
 
 import { formatNumber, parseIntClean } from '../Services/formatter'
 
@@ -64,8 +64,8 @@ class FlowReportTable extends Component<Props> {
     })
 
     const tables = Object.keys(dataMap).map((k) => {
-      const title = VARIABLE_MANAGER.displayNameByKey('Des_Grp', k)
-      const shortTitle = VARIABLE_MANAGER.shortDisplayNameByKey('Des_Grp', k)
+      const title = VARIABLES.displayNameByKey('Des_Grp', k)
+      const shortTitle = VARIABLES.shortDisplayNameByKey('Des_Grp', k)
       return (
         <div key={k}>
           <h2>{title}</h2>

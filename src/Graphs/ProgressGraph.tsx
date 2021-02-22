@@ -7,7 +7,7 @@ import './Graphs.scss'
 
 import { formatPercent } from '../Services/formatter'
 
-import { VARIABLE_MANAGER } from '../Variables/VariableManager'
+import { VARIABLES } from '../Variables/VariableManager'
 import FixTypeLater from '../@types/FixTypeLater'
 
 interface Props {
@@ -27,7 +27,7 @@ class ProgressGraph extends Component<Props> {
 
       let title
       try {
-        title = VARIABLE_MANAGER.displayNameByKey('Des_Grp', key)
+        title = VARIABLES.displayNameByKey('Des_Grp', key)
       } catch (e) {
         if (key === 'WOM_SM') title = 'Women in Senior Mgmt'
       }

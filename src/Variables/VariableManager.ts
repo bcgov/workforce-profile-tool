@@ -1,86 +1,7 @@
 import Dictionary from '../@types/Dictionary'
 import FixTypeLater from '../@types/FixTypeLater'
-
-class Variable {
-  private _key: string
-  private _selectable: boolean
-  private _shortDisplay: string
-  private _display: string
-
-  constructor(
-    key: string,
-    selectable: boolean,
-    shortDisplay: string | null,
-    display: string
-  ) {
-    this._key = key
-    this._selectable = selectable
-    this._shortDisplay = shortDisplay || display
-    this._display = display
-  }
-
-  get key() {
-    return this._key
-  }
-  get selectable() {
-    return this._selectable
-  }
-  get shortDisplay() {
-    return this._shortDisplay
-  }
-  get display() {
-    return this._display
-  }
-}
-
-class VariableGroup {
-  private _key: string
-  private _exclusive: boolean
-  private _display: string
-  private _variables: Variable[]
-  private _selectableVariables: Variable[]
-  private _variableMap: Dictionary<Variable> = {}
-
-  constructor(
-    key: string,
-    exclusive: boolean,
-    display: string,
-    variables: Variable[]
-  ) {
-    this._key = key
-    this._exclusive = exclusive
-    this._display = display
-    this._variables = variables
-    this._selectableVariables = variables.filter((v) => v.selectable)
-    this._buildVariableMap()
-  }
-
-  get key() {
-    return this._key
-  }
-  get exclusive() {
-    return this._exclusive
-  }
-  get display() {
-    return this._display
-  }
-  get variables() {
-    return this._variables
-  }
-  get selectableVariables() {
-    return this._selectableVariables
-  }
-  get variableMap() {
-    return this._variableMap
-  }
-
-  _buildVariableMap() {
-    this._variableMap = {}
-    this._variables.forEach((v) => {
-      this._variableMap[v.key] = v
-    })
-  }
-}
+import { Variable } from './Variable'
+import { VariableGroup } from './VariableGroup'
 
 class VariableManager {
   private _variableGroupMap: Dictionary<VariableGroup>
@@ -140,7 +61,7 @@ class VariableManager {
   }
 }
 
-export const VARIABLE_MANAGER = new VariableManager([
+export const VARIABLES = new VariableManager([
   new VariableGroup('Employee_Type', true, 'Employee Type', [
     new Variable('ALL', true, null, 'All'),
     new Variable('REG', true, null, 'Regular'),
@@ -221,7 +142,7 @@ export const areAllVariablesActive = (
   activeVariables: FixTypeLater,
   variableGroupKey: FixTypeLater
 ): FixTypeLater => {
-  return VARIABLE_MANAGER.variableGroupByKey(
+  return VARIABLES.variableGroupByKey(
     variableGroupKey
   ).selectableVariables.every((variable) => {
     return isVariableActive(activeVariables, variableGroupKey, variable.key)
@@ -232,7 +153,7 @@ export const areNoVariablesActive = (
   activeVariables: FixTypeLater,
   variableGroupKey: FixTypeLater
 ): FixTypeLater => {
-  return VARIABLE_MANAGER.variableGroupByKey(
+  return VARIABLES.variableGroupByKey(
     variableGroupKey
   ).selectableVariables.every((variable) => {
     return !isVariableActive(activeVariables, variableGroupKey, variable.key)
@@ -244,7 +165,7 @@ export const toggleVariable = (
   varGroupKey: FixTypeLater,
   varKey: FixTypeLater
 ): FixTypeLater => {
-  const isExclusive = VARIABLE_MANAGER.variableGroupByKey(varGroupKey).exclusive
+  const isExclusive = VARIABLES.variableGroupByKey(varGroupKey).exclusive
   if (!isExclusive) {
     // Just toggle the variable
     activeVariables[varGroupKey][varKey] = !activeVariables[varGroupKey][varKey]
@@ -307,9 +228,9 @@ export const activeVariablesToDisplay = (
   const result: FixTypeLater[] = []
   const activeVariableArray = toActiveVariableArray(activeVariables)
   Object.keys(activeVariableArray).forEach((k) => {
-    const name = VARIABLE_MANAGER.variableGroupDisplayNameByKey(k)
+    const name = VARIABLES.variableGroupDisplayNameByKey(k)
     const optionNames = activeVariableArray[k].map((vk: FixTypeLater) => {
-      return VARIABLE_MANAGER.displayNameByKey(k, vk)
+      return VARIABLES.displayNameByKey(k, vk)
     })
     result.push({ name, optionNames })
   })

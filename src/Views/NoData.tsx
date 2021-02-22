@@ -1,11 +1,9 @@
 import React from 'react'
 import FixTypeLater from '../@types/FixTypeLater'
-import { VARIABLE_MANAGER } from '../Variables/VariableManager'
+import { VARIABLES } from '../Variables/VariableManager'
 
 const NoData = (): JSX.Element => {
-  let groupNames: FixTypeLater = VARIABLE_MANAGER.variableGroups.map(
-    (g) => g.display
-  )
+  let groupNames: FixTypeLater = VARIABLES.variableGroups.map((g) => g.display)
   groupNames[groupNames.length - 1] = `or ${groupNames[groupNames.length - 1]}`
   groupNames = groupNames.join(', ')
   return (
