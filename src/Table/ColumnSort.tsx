@@ -15,9 +15,9 @@ const ColumnSortIndicator = (props: Props): JSX.Element => {
     <span>
       {column.isSorted ? (
         column.isSortedDesc ? (
-          <>&blacktriangledown;</>
+          <>&nbsp;&#9660;{/* Unicode: black down-pointing triangle */}</>
         ) : (
-          <>&blacktriangleup;</>
+          <>&nbsp;&#9650;{/* Unicode: black up-pointing triangle */}</>
         )
       ) : (
         ''
