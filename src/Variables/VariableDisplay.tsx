@@ -1,11 +1,11 @@
 import React from 'react'
 
-import FixTypeLater from '../@types/FixTypeLater'
-
 import './VariableDisplay.scss'
+import { VariableGroup } from './VariableGroup'
+import VariableItemDisplay from './VariableItemDisplay'
 
 interface Props {
-  variableGroup: FixTypeLater
+  variableGroup: VariableGroup
   useShortDisplay?: boolean
 }
 
@@ -13,27 +13,14 @@ const VariableDisplay = ({
   useShortDisplay,
   variableGroup,
 }: Props): JSX.Element => {
-  const options = variableGroup.selectableVariables.map(
-    (variable: FixTypeLater) => {
-      // const variableGroupKey = variableGroup.key
-      // const variableKey = variable.key
-      const isActive = true // TODO: fix this
-      const isLocked = false // TODO: fix this
-      return (
-        <li
-          key={variable.key}
-          className={`${isActive ? ' active' : ''} ${
-            isLocked ? ' locked' : ''
-          }`}
-          onClick={() => {
-            console.log('Toggle') // TODO: fix this
-          }}
-        >
-          {useShortDisplay ? variable.shortDisplay : variable.display}
-        </li>
-      )
-    }
-  )
+  const options = variableGroup.selectableVariables.map((variable) => (
+    <VariableItemDisplay
+      key={variable.key}
+      variable={variable}
+      useShortDisplay={useShortDisplay}
+      variableGroup={variableGroup}
+    />
+  ))
 
   return (
     <div className="VariableDisplay">

@@ -62,68 +62,101 @@ class VariableManager {
 }
 
 export const VARIABLES = new VariableManager([
-  new VariableGroup('Employee_Type', true, 'Employee Type', [
-    new Variable('ALL', true, null, 'All'),
-    new Variable('REG', true, null, 'Regular'),
-    new Variable('AUX', true, null, 'Auxiliary'),
-  ]),
-  new VariableGroup('Des_Grp', false, 'Designated Group', [
-    new Variable('IND', true, 'Indigenous', 'Indigenous Peoples'),
-    new Variable('DIS', true, 'Disabled', 'People with Disabilities'),
-    new Variable('VM', true, 'Vis. Min.', 'Visible Minorities'),
-    new Variable('WOM', true, 'Women', 'Women'),
-    new Variable('WOM_SM', false, null, 'Women in Senior Mgmt'),
-    new Variable('AS_TOTAL', false, null, 'Total'),
-  ]),
-  new VariableGroup('Ministry_Key', true, 'Ministry', [
-    new Variable('BCPS', true, 'BCPS', 'BC Public Service'),
-    new Variable(
-      'AEST',
-      true,
-      'AEST',
-      'Advanced Education, Skills and Training'
-    ),
-    new Variable('AG', true, 'AG', 'Attorney General'),
-    new Variable('AGRI', true, 'AGRI', 'Agriculture'),
-    new Variable('BCPSA', true, 'BCPSA', 'BC Public Service Agency'),
-    new Variable('CFD', true, 'CFD', 'Children and Family Development'),
-    new Variable('CITZ', true, 'CITZ', "Citizens' Services"),
-    new Variable('EAO', true, 'EAO', 'Environmental Assessment Office'),
-    new Variable('EDUC', true, 'EDUC', 'Education'),
-    new Variable('EMBC', true, 'EMBC', 'Emergency Management BC'),
-    new Variable('EMPR', true, 'EMPR', 'Energy, Mines and Petroleum Resources'),
-    new Variable('ENV', true, 'ENV', 'Environment and Climate Change Strategy'),
-    new Variable('FIN', true, 'FIN', 'Finance'),
-    new Variable(
-      'FLNRORD',
-      true,
-      'FLNRORD',
-      'Forests, Lands, Natural Resource Operations and Rural Development'
-    ),
-    new Variable(
-      'GCPE',
-      true,
-      'GCPE',
-      'Government Communications and Public Engagement'
-    ),
-    new Variable('HLTH', true, 'HLTH', 'Health'),
-    new Variable('IRR', true, 'IRR', 'Indigenous Relations and Reconciliation'),
-    new Variable('JTT', true, 'JTT', 'Jobs, Trade and Technology'),
-    new Variable('LBR', true, 'LBR', 'Labour'),
-    new Variable('MAH', true, 'MAH', 'Municipal Affairs and Housing'),
-    new Variable('MHA', true, 'MHA', 'Mental Health and Addictions'),
-    new Variable('PGT', true, 'PGT', 'Public Guardian and Trustee'),
-    new Variable('PO', true, 'PO', 'Office of the Premier'),
-    new Variable('PSSG', true, 'PSSG', 'Public Safety and Solicitor General'),
-    new Variable(
-      'SDPR',
-      true,
-      'SDPR',
-      'Social Development and Poverty Reduction'
-    ),
-    new Variable('TAC', true, 'TAC', 'Tourism, Arts and Culture'),
-    new Variable('TRAN', true, 'TRAN', 'Transportation and Infrastructure'),
-  ]),
+  new VariableGroup(
+    'Employee_Type',
+    true,
+    'Employee Type',
+    [
+      new Variable('ALL', true, null, 'All'),
+      new Variable('REG', true, null, 'Regular'),
+      new Variable('AUX', true, null, 'Auxiliary'),
+    ],
+    'ALL'
+  ),
+  new VariableGroup(
+    'Des_Grp',
+    false,
+    'Designated Group',
+    [
+      new Variable('IND', true, 'Indigenous', 'Indigenous Peoples'),
+      new Variable('DIS', true, 'Disabled', 'People with Disabilities'),
+      new Variable('VM', true, 'Vis. Min.', 'Visible Minorities'),
+      new Variable('WOM', true, 'Women', 'Women'),
+      new Variable('WOM_SM', false, null, 'Women in Senior Mgmt'),
+      new Variable('AS_TOTAL', false, null, 'Total'),
+    ],
+    ['IND', 'DIS', 'VM', 'WOM']
+  ),
+  new VariableGroup(
+    'Ministry_Key',
+    true,
+    'Ministry',
+    [
+      new Variable('BCPS', true, 'BCPS', 'BC Public Service'),
+      new Variable(
+        'AEST',
+        true,
+        'AEST',
+        'Advanced Education, Skills and Training'
+      ),
+      new Variable('AG', true, 'AG', 'Attorney General'),
+      new Variable('AGRI', true, 'AGRI', 'Agriculture'),
+      new Variable('BCPSA', true, 'BCPSA', 'BC Public Service Agency'),
+      new Variable('CFD', true, 'CFD', 'Children and Family Development'),
+      new Variable('CITZ', true, 'CITZ', "Citizens' Services"),
+      new Variable('EAO', true, 'EAO', 'Environmental Assessment Office'),
+      new Variable('EDUC', true, 'EDUC', 'Education'),
+      new Variable('EMBC', true, 'EMBC', 'Emergency Management BC'),
+      new Variable(
+        'EMPR',
+        true,
+        'EMPR',
+        'Energy, Mines and Petroleum Resources'
+      ),
+      new Variable(
+        'ENV',
+        true,
+        'ENV',
+        'Environment and Climate Change Strategy'
+      ),
+      new Variable('FIN', true, 'FIN', 'Finance'),
+      new Variable(
+        'FLNRORD',
+        true,
+        'FLNRORD',
+        'Forests, Lands, Natural Resource Operations and Rural Development'
+      ),
+      new Variable(
+        'GCPE',
+        true,
+        'GCPE',
+        'Government Communications and Public Engagement'
+      ),
+      new Variable('HLTH', true, 'HLTH', 'Health'),
+      new Variable(
+        'IRR',
+        true,
+        'IRR',
+        'Indigenous Relations and Reconciliation'
+      ),
+      new Variable('JTT', true, 'JTT', 'Jobs, Trade and Technology'),
+      new Variable('LBR', true, 'LBR', 'Labour'),
+      new Variable('MAH', true, 'MAH', 'Municipal Affairs and Housing'),
+      new Variable('MHA', true, 'MHA', 'Mental Health and Addictions'),
+      new Variable('PGT', true, 'PGT', 'Public Guardian and Trustee'),
+      new Variable('PO', true, 'PO', 'Office of the Premier'),
+      new Variable('PSSG', true, 'PSSG', 'Public Safety and Solicitor General'),
+      new Variable(
+        'SDPR',
+        true,
+        'SDPR',
+        'Social Development and Poverty Reduction'
+      ),
+      new Variable('TAC', true, 'TAC', 'Tourism, Arts and Culture'),
+      new Variable('TRAN', true, 'TRAN', 'Transportation and Infrastructure'),
+    ],
+    'BCPS'
+  ),
 ])
 
 export const isVariableActive = (

@@ -8,18 +8,21 @@ export class VariableGroup {
   private _variables: Variable[]
   private _selectableVariables: Variable[]
   private _variableMap: Dictionary<Variable> = {}
+  private _defaultSelected: string | string[]
 
   constructor(
     key: string,
     exclusive: boolean,
     display: string,
-    variables: Variable[]
+    variables: Variable[],
+    defaultSelected: string | string[]
   ) {
     this._key = key
     this._exclusive = exclusive
     this._display = display
     this._variables = variables
     this._selectableVariables = variables.filter((v) => v.selectable)
+    this._defaultSelected = defaultSelected
     this._buildVariableMap()
   }
 
@@ -40,6 +43,9 @@ export class VariableGroup {
   }
   get variableMap(): Dictionary<Variable> {
     return this._variableMap
+  }
+  get defaultSelected(): string | string[] {
+    return this._defaultSelected
   }
 
   _buildVariableMap(): void {

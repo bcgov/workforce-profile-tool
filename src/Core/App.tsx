@@ -14,6 +14,7 @@ import Main from './Main'
 import VariableList from '../Variables/VariableList'
 
 import './App.scss'
+import { VARIABLES } from '../Variables/VariableManager'
 
 const BASE_URL = 'workforce-profiles/data/2018'
 const PROGRESS_FILE = 'WP2018_Ind_Progress-2_Sep2018.csv'
