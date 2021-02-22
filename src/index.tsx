@@ -1,4 +1,4 @@
-import { HashRouter } from 'react-router-dom'
+import { HashRouter, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -8,6 +8,7 @@ import App from './Core/App'
 
 import './bootstrap/bootstrap.scss'
 import './index.scss'
+import { QueryParamProvider } from 'use-query-params'
 
 const queryConfig = {
   defaultOptions: {
@@ -22,9 +23,11 @@ const queryClient = new QueryClient(queryConfig)
 
 ReactDOM.render(
   <HashRouter>
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
+    <QueryParamProvider ReactRouterRoute={Route}>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
+    </QueryParamProvider>
   </HashRouter>,
   document.getElementById('root')
 )
