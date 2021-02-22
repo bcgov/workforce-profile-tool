@@ -2,6 +2,7 @@ import React from 'react'
 
 import { useDataManager } from '../Data/DataManager'
 import LeadershipGraph from '../Graphs/LeadershipGraph'
+import LeadershipTable from '../Table/LeadershipTable'
 import Loading from './Loading'
 import NoData from './NoData'
 import Title from './Title'
@@ -21,7 +22,7 @@ const Leadership = (): JSX.Element => {
       {data && data.length > 0 && (
         <div>
           <LeadershipGraph title={title} />
-          {/* <LeadershipTable /> */}
+          <LeadershipTable />
         </div>
       )}
     </div>
