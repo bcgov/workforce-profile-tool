@@ -4,7 +4,11 @@ import * as d3 from 'd3'
 import React from 'react'
 
 import { DataManagerProvider } from '../Data/DataManager'
-import { LeadershipRawData, ProgressRawData } from '../@types/DataTypes'
+import {
+  LeadershipRawData,
+  MinistryRawData,
+  ProgressRawData,
+} from '../@types/DataTypes'
 import Header from './Header'
 import Main from './Main'
 import VariableList from '../Variables/VariableList'
@@ -25,7 +29,7 @@ const loadData = <T,>(fileName: string) => {
 const App = (): JSX.Element => {
   const { data: progressData } = loadData<ProgressRawData>(PROGRESS_FILE)
   const { data: leadershipData } = loadData<LeadershipRawData>(LEADERSHIP_FILE)
-  const { data: ministryData } = loadData<LeadershipRawData>(MINISTRY_FILE)
+  const { data: ministryData } = loadData<MinistryRawData>(MINISTRY_FILE)
 
   return (
     <div className="App container-fluid">
