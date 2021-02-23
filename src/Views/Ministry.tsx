@@ -6,13 +6,12 @@ import MinistryGraph from '../Graphs/MinistryGraph'
 
 const Ministry = (): JSX.Element => {
   const title = 'Ministries'
-  const employeeCount = 1000 // useQueryParams
 
   return (
     <div>
       <h1>{title}</h1>
       <div>
-        <MinistryGraph title={title} employeeCount={employeeCount} />
+        <MinistryGraph title={title} />
       </div>
     </div>
   )

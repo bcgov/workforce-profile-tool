@@ -11,12 +11,11 @@ import Title from './Title'
 // lock variables
 const Region = (): JSX.Element => {
   const title = 'Representation — Region'
-  const employeeCount = 1000 // useQueryParams
   const { progressData: data } = useDataManager()
 
   return (
     <div>
-      <Title title={title} employeeCount={employeeCount} />
+      <Title title={title} />
       {!data && <Loading />}
       {data && data.length === 0 && <NoData />}
       {data && data.length > 0 && (

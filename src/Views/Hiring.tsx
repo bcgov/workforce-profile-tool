@@ -9,12 +9,11 @@ import Title from './Title'
 
 const Hiring = (): JSX.Element => {
   const title = 'Indicators of Progress — Hiring, 2015 to 2018'
-  const employeeCount = 1000 // useQueryParams
   const { progressData: data } = useDataManager()
 
   return (
     <div>
-      <Title title={title} employeeCount={employeeCount} />
+      <Title title={title} />
       {!data && <Loading />}
       {data && data.length === 0 && <NoData />}
       {data && data.length > 0 && (

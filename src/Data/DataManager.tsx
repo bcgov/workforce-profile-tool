@@ -9,6 +9,7 @@ import {
 
 import {
   ComparisonRawData,
+  EmployeeCountRawData,
   GenericRawData,
   LeadershipRawData,
   MinistryRawData,
@@ -19,9 +20,11 @@ import FixTypeLater from '../@types/FixTypeLater'
 type DataManagerContextType = {
   progressData?: ProgressRawData[]
   hiringTotal?: number
+  employeeCount?: number
   leadershipData?: LeadershipRawData[]
   ministryData?: MinistryRawData[]
   comparisonData?: ComparisonRawData[]
+  employeeCountData?: EmployeeCountRawData[]
 }
 
 const DataManagerContext = createContext<DataManagerContextType | undefined>(
@@ -46,13 +49,31 @@ const filterData = <T extends GenericRawData>(
     : []
 }
 
+const getEmployeeCount = (
+  employeeCountData: EmployeeCountRawData[] | undefined,
+  queryValues: FixTypeLater
+): number | undefined => {
+  if (!employeeCountData) return undefined
+
+  const data = filterData<EmployeeCountRawData>(employeeCountData, queryValues)
+  if (data && data.length) return +data[0].Employee_Count
+
+  return undefined
+}
+
 function useDataManager(): DataManagerContextType {
   const context = useContext(DataManagerContext)
   if (!context) {
     throw new Error(`useDataManager must be used within a DataManagerProvider`)
   }
 
-  const { progressData, leadershipData, ministryData, comparisonData } = context
+  const {
+    progressData,
+    leadershipData,
+    ministryData,
+    comparisonData,
+    employeeCountData,
+  } = context
 
   const [queryValues] = useQueryParams({
     Employee_Type: StringParam,
@@ -71,6 +92,7 @@ function useDataManager(): DataManagerContextType {
     leadershipData,
     ministryData,
     comparisonData: filterData(comparisonData, queryValues),
+    employeeCount: getEmployeeCount(employeeCountData, queryValues),
   }
 }
 
@@ -80,6 +102,7 @@ interface DataManagerProviderProps {
   leadershipData?: LeadershipRawData[]
   ministryData?: MinistryRawData[]
   progressData?: ProgressRawData[]
+  employeeCountData?: EmployeeCountRawData[]
 }
 
 function DataManagerProvider({
@@ -88,6 +111,7 @@ function DataManagerProvider({
   progressData,
   leadershipData,
   ministryData,
+  employeeCountData,
 }: DataManagerProviderProps): FixTypeLater {
   const value = useMemo(
     () => ({
@@ -95,8 +119,15 @@ function DataManagerProvider({
       progressData,
       leadershipData,
       ministryData,
+      employeeCountData,
     }),
-    [comparisonData, progressData, leadershipData, ministryData]
+    [
+      employeeCountData,
+      comparisonData,
+      progressData,
+      leadershipData,
+      ministryData,
+    ]
   )
 
   return (

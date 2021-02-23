@@ -6,6 +6,7 @@ import React from 'react'
 import { DataManagerProvider } from '../Data/DataManager'
 import {
   ComparisonRawData,
+  EmployeeCountRawData,
   LeadershipRawData,
   MinistryRawData,
   ProgressRawData,
@@ -22,6 +23,7 @@ const PROGRESS_FILE = 'WP2018_Ind_Progress-2_Sep2018.csv'
 const LEADERSHIP_FILE = 'WP2018_Leadership.csv'
 const MINISTRY_FILE = 'WP2018_Ministries.csv'
 const COMPARISON_FILE = 'WP2018_Comparison-2_updJUL17.csv'
+const EMP_COUNT_FILE = 'WP2018_EmpCounts.csv'
 
 const loadData = <T,>(fileName: string) => {
   return useQuery(fileName, async () =>
@@ -34,6 +36,9 @@ const App = (): JSX.Element => {
   const { data: leadershipData } = loadData<LeadershipRawData>(LEADERSHIP_FILE)
   const { data: ministryData } = loadData<MinistryRawData>(MINISTRY_FILE)
   const { data: comparisonData } = loadData<ComparisonRawData>(COMPARISON_FILE)
+  const { data: employeeCountData } = loadData<EmployeeCountRawData>(
+    EMP_COUNT_FILE
+  )
 
   return (
     <div className="App container-fluid">
@@ -42,6 +47,7 @@ const App = (): JSX.Element => {
         leadershipData={leadershipData}
         ministryData={ministryData}
         comparisonData={comparisonData}
+        employeeCountData={employeeCountData}
       >
         <div className="row">
           <div className="LeftColumn col-2">

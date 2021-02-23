@@ -3,17 +3,18 @@ import { RouteComponentProps, withRouter } from 'react-router-dom'
 import qs from '../Services/query-string'
 import { activeEmployeeType, activeMinistry } from '../Services/activeVariables'
 import FixTypeLater from '../@types/FixTypeLater'
+import { useDataManager } from '../Data/DataManager'
+import { ArrayParam, StringParam, useQueryParams } from 'use-query-params'
 
 export const subtitle = (
-  locationSearch: FixTypeLater,
+  queryValues: FixTypeLater,
   ministry: FixTypeLater,
   employeeType?: FixTypeLater,
-  employeeCount?: FixTypeLater
+  employeeCount?: number
 ): string => {
-  const filters = qs.parse(locationSearch)
-  const displayMinistry = ministry || activeMinistry(filters.Ministry_Key)
+  const displayMinistry = ministry || activeMinistry(queryValues.Ministry_Key)
   const displayEmployeeType =
-    employeeType || activeEmployeeType(filters.Employee_Type) || ''
+    employeeType || activeEmployeeType(queryValues.Employee_Type) || ''
   let title = `${displayMinistry}, ${displayEmployeeType.toLowerCase()} employees`
   if (employeeCount) {
     title += ` (n = ${employeeCount.toLocaleString()})`
@@ -21,28 +22,24 @@ export const subtitle = (
   return title
 }
 
-interface Props extends RouteComponentProps {
+interface Props {
   title: string
-  employeeCount?: FixTypeLater
 }
 
-class Title extends Component<Props> {
-  render() {
-    const title = this.props.title
-    return (
-      <div>
-        <h1>{title}</h1>
-        <h2>
-          {subtitle(
-            this.props.location.search,
-            null,
-            null,
-            this.props.employeeCount
-          )}
-        </h2>
-      </div>
-    )
-  }
+const Title = ({ title }: Props): JSX.Element => {
+  const { employeeCount } = useDataManager()
+  const [queryValues] = useQueryParams({
+    Employee_Type: StringParam,
+    Des_Grp: ArrayParam,
+    Ministry_Key: StringParam,
+  })
+
+  return (
+    <div>
+      <h1>{title}</h1>
+      <h2>{subtitle(queryValues, null, null, employeeCount)}</h2>
+    </div>
+  )
 }
 
-export default withRouter(Title)
+export default Title

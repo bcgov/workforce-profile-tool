@@ -5,7 +5,6 @@ import { subtitle } from '../Views/Title'
 import { useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'
 import Dictionary from '../@types/Dictionary'
-import FixTypeLater from '../@types/FixTypeLater'
 import MinistrySubGraph from './MinistrySubgraph'
 
 import './Graphs.scss'
@@ -13,7 +12,6 @@ import { MinistryRawData } from '../@types/DataTypes'
 
 interface Props extends RouteComponentProps {
   title: string
-  employeeCount: FixTypeLater
 }
 
 const MinistryGraph = (props: Props): JSX.Element => {

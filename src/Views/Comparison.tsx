@@ -13,10 +13,7 @@ const Comparison = (): JSX.Element => {
 
   return (
     <div>
-      <Title
-        title={'Comparison with Provincial Workforce'}
-        employeeCount={employeeCount}
-      />
+      <Title title={'Comparison with Provincial Workforce'} />
       {!data && <Loading />}
       {data && data.length === 0 && <NoData />}
       {data && data.length > 0 && (
