@@ -52,7 +52,8 @@ class VariableManager {
     return this.variableGroupByKey(variableGroupKey).display
   }
 
-  displayNameByKey(variableGroupKey: string, variableKey: string) {
+  displayNameByKey(variableGroupKey: string, variableKey?: string | null) {
+    if (!variableKey) return ''
     return this.variableByKey(variableGroupKey, variableKey)?.display
   }
 

@@ -1,81 +1,71 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Reactor from '@plot-and-scatter/reactor-table'
 import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
 
 import { VARIABLES } from '../Variables/VariableManager'
-import { formatPercent, parseFloatClean } from '../Services/formatter'
+import { formatPercent } from '../Services/formatter'
 
 import './Table.scss'
-import ReactorTableColumn from '../@types/ReactorTableColumn'
-import FixTypeLater from '../@types/FixTypeLater'
+import { ColumnWithClassName } from '../@types/ColumnWithClassName'
+import { ComparisonRawData } from '../@types/DataTypes'
+import { useDataManager } from '../Data/DataManager'
+import Loading from '../Views/Loading'
+import Table from './Table'
+import { StringParam, useQueryParam } from 'use-query-params'
 
-interface Props {
-  data: FixTypeLater[]
-  ministry: string
-}
+const ComparisonTable = (): JSX.Element => {
+  const { comparisonData: data } = useDataManager()
 
-class ComparisonTable extends Component<Props> {
-  render(): JSX.Element {
-    const columns: ReactorTableColumn[] = [
-      {
-        id: 'Des_Grp',
-        name: 'Designated Group',
-        accessor: (d) =>
-          VARIABLES.displayNameByKey('Des_Grp', d['Des_Grp']) || '',
-      },
-      {
-        id: 'Employees_BCPS',
-        name: `${this.props.ministry}, %`,
-        accessor: (d) => parseFloatClean(d['Employees_BCPS']),
-        displayAccessor: (d) => formatPercent(d['Employees_BCPS'], 1, 100),
-        cellClass: 'text-right',
-        headerClass: 'text-right',
-      },
-      {
-        id: 'Available_Workforce_BCPS',
-        name: 'Available Workforce, %',
-        accessor: (d) => parseFloatClean(d['Available_Workforce_BCPS']),
-        displayAccessor: (d) =>
-          formatPercent(d['Available_Workforce_BCPS'], 1, 100),
-        cellClass: 'text-right',
-        headerClass: 'text-right',
-      },
-      {
-        id: 'Employees_BC_Population',
-        name: 'BC Population, %',
-        accessor: (d) => parseFloatClean(d['Employees_BC_Population']),
-        displayAccessor: (d) =>
-          formatPercent(d['Employees_BC_Population'], 1, 100),
-        cellClass: 'text-right',
-        headerClass: 'text-right',
-      },
-    ]
+  const [ministryKey] = useQueryParam('Ministry_Key', StringParam)
+  const ministry = VARIABLES.displayNameByKey('Ministry_Key', ministryKey) // TODO: cleaner implementation of this
 
-    const rowFilter = () => true
+  if (!data) return <Loading />
 
-    return (
-      <div className="Table row">
-        <div className="col">
-          {this.props.data && this.props.data.length && (
-            <div>
-              <Reactor.Table
-                columns={columns}
-                rows={this.props.data}
-                rowFilter={rowFilter}
-              />
-              <DownloadDataLink
-                columns={columns}
-                rows={this.props.data}
-                filename={'comparison'}
-              />
-              <Definitions />
-            </div>
-          )}
-        </div>
+  const columns: ColumnWithClassName<ComparisonRawData>[] = [
+    {
+      id: 'Des_Grp',
+      Header: 'Designated Group',
+      accessor: (d) =>
+        VARIABLES.displayNameByKey('Des_Grp', d['Des_Grp']) || '',
+    },
+    {
+      id: 'Employees_BCPS',
+      Header: `${ministry}, %`,
+      accessor: (d) => formatPercent(d['Employees_BCPS'], 1, 100),
+      className: 'text-right',
+    },
+    {
+      id: 'Available_Workforce_BCPS',
+      Header: 'Available Workforce, %',
+      accessor: (d) => formatPercent(d['Available_Workforce_BCPS'], 1, 100),
+      className: 'text-right',
+    },
+    {
+      id: 'Employees_BC_Population',
+      Header: 'BC Population, %',
+      accessor: (d) => formatPercent(d['Employees_BC_Population'], 1, 100),
+      className: 'text-right',
+    },
+  ]
+
+  return (
+    <div className="Table row">
+      <div className="col">
+        {data && (
+          <div>
+            <Table columns={columns} data={data} />
+            <DownloadDataLink
+              columns={columns}
+              rows={data}
+              filename={'comparison'}
+            />
+            <Definitions />
+          </div>
+        )}
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default ComparisonTable

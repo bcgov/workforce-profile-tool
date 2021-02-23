@@ -1,3 +1,4 @@
+import { filter } from 'd3'
 import React, { ReactNode, createContext, useContext, useMemo } from 'react'
 import {
   ArrayParam,
@@ -7,6 +8,7 @@ import {
 } from 'use-query-params'
 
 import {
+  ComparisonRawData,
   GenericRawData,
   LeadershipRawData,
   MinistryRawData,
@@ -17,9 +19,9 @@ import FixTypeLater from '../@types/FixTypeLater'
 type DataManagerContextType = {
   progressData?: ProgressRawData[]
   hiringTotal?: number
-  filteredProgressData?: ProgressRawData[]
   leadershipData?: LeadershipRawData[]
   ministryData?: MinistryRawData[]
+  comparisonData?: ComparisonRawData[]
 }
 
 const DataManagerContext = createContext<DataManagerContextType | undefined>(
@@ -50,7 +52,7 @@ function useDataManager(): DataManagerContextType {
     throw new Error(`useDataManager must be used within a DataManagerProvider`)
   }
 
-  const { progressData, leadershipData, ministryData } = context
+  const { progressData, leadershipData, ministryData, comparisonData } = context
 
   const [queryValues] = useQueryParams({
     Employee_Type: StringParam,
@@ -68,29 +70,33 @@ function useDataManager(): DataManagerContextType {
     )?.['2018_hired_ct'],
     leadershipData,
     ministryData,
+    comparisonData: filterData(comparisonData, queryValues),
   }
 }
 
 interface DataManagerProviderProps {
   children: ReactNode
-  progressData?: ProgressRawData[]
+  comparisonData?: ComparisonRawData[]
   leadershipData?: LeadershipRawData[]
   ministryData?: MinistryRawData[]
+  progressData?: ProgressRawData[]
 }
 
 function DataManagerProvider({
   children,
+  comparisonData,
   progressData,
   leadershipData,
   ministryData,
 }: DataManagerProviderProps): FixTypeLater {
   const value = useMemo(
     () => ({
+      comparisonData,
       progressData,
       leadershipData,
       ministryData,
     }),
-    [progressData, leadershipData, ministryData]
+    [comparisonData, progressData, leadershipData, ministryData]
   )
 
   return (

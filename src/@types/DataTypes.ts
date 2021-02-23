@@ -31,6 +31,14 @@ export type MinistryRawData = DesignatedGroupKeyedData &
     Value: string
   }
 
+export type ComparisonRawData = MinistryKeyedData &
+  DesignatedGroupKeyedData &
+  EmployeeTypeKeyedData & {
+    Employees_BC_Population: number
+    Available_Workforce_BCPS: number
+    Employees_BCPS: number
+  }
+
 export type GenericRawData = {
   Ministry_Key?: string
   Des_Grp?: string
