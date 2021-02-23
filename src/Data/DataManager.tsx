@@ -84,8 +84,8 @@ function useDataManager(): DataManagerContextType {
         d.Des_Grp === 'AS_TOTAL' &&
         d.Ministry_Key === queryValues.Ministry_Key
     )?.['2018_hired_ct'],
-    leadershipData,
-    ministryData,
+    leadershipData: filterData(leadershipData, queryValues),
+    ministryData: filterData(ministryData, queryValues),
     comparisonData: filterData(comparisonData, queryValues),
     employeeCount: getEmployeeCount(employeeCountData, queryValues),
   }
