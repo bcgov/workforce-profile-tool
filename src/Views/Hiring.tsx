@@ -1,28 +1,60 @@
 import React from 'react'
 
+import { ColumnWithClassName } from '../@types/ColumnWithClassName'
+import { formatNumber, formatPercent } from '../Services/formatter'
+import { ProgressRawData } from '../@types/DataTypes'
 import { useDataManager } from '../Data/DataManager'
-import HiringGraph from '../Graphs/HiringGraph'
-import HiringTable from '../Table/HiringTable'
-import Loading from './Loading'
-import NoData from './NoData'
-import Title from './Title'
+import { VARIABLES } from '../Variables/VariableManager'
+import Dictionary from '../@types/Dictionary'
+import GenericTable from '../Table/GenericTable'
+import GenericView from './GenericView'
 
 const Hiring = (): JSX.Element => {
-  const title = 'Indicators of Progress — Hiring, 2015 to 2018'
-  const { progressData: data } = useDataManager()
+  const { progressData: data, hiringTotal } = useDataManager()
+
+  const totalHired = hiringTotal
+
+  const columns: ColumnWithClassName<ProgressRawData>[] = [
+    {
+      id: 'Des_Grp',
+      Header: 'Designated Group',
+      accessor: (r) => VARIABLES.displayNameByKey('Des_Grp', r.Des_Grp) || '',
+    },
+    {
+      id: '2018_hired_ct',
+      Header: 'Hired, 2015 to 2018',
+      accessor: (r) => formatNumber(r['2018_hired_ct']),
+      className: 'text-right',
+    },
+    {
+      id: 'percent_total',
+      Header: 'Percent of all hires',
+      accessor: (r) => formatPercent(r['2018_hired_ct'], 1, totalHired),
+      className: 'text-right',
+    },
+  ]
+
+  const codeOrder: Dictionary<number> = {
+    // TODO: Factor this out
+    IND: 0,
+    DIS: 1,
+    VM: 2,
+    WOM: 3,
+    WOM_SM: 4,
+    AS_TOTAL: 5,
+  }
+
+  if (data && data.length) {
+    data.sort((a, b) => codeOrder[a.Des_Grp] - codeOrder[b.Des_Grp])
+  }
 
   return (
-    <div>
-      <Title title={title} />
-      {!data && <Loading />}
-      {data && data.length === 0 && <NoData />}
-      {data && data.length > 0 && (
-        <div>
-          {/* <HiringGraph title={title} /> */}
-          <HiringTable />
-        </div>
-      )}
-    </div>
+    <GenericView
+      title="Indicators of Progress — Hiring, 2015 to 2018"
+      data={data}
+    >
+      <GenericTable columns={columns} data={data} filename="hiring" />
+    </GenericView>
   )
 }
 

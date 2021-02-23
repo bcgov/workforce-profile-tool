@@ -9,28 +9,29 @@ import Dictionary from '../@types/Dictionary'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
 
-const columns: ColumnWithClassName<ProgressRawData>[] = [
-  {
-    id: 'Des_Grp',
-    Header: 'Designated Group',
-    accessor: (d) => VARIABLES.displayNameByKey('Des_Grp', d['Des_Grp']) || '',
-  },
-  {
-    id: '2015_pc',
-    Header: '2015, %',
-    accessor: (d) => formatPercent(d['2015_pc'], 1, 100),
-    className: 'text-right',
-  },
-  {
-    id: '2018_pc',
-    Header: '2018, %',
-    accessor: (d) => formatPercent(d['2018_pc'], 1, 100),
-    className: 'text-right',
-  },
-]
-
 const Progress = (): JSX.Element => {
-  const { progressData: indicatorsOfProgressData } = useDataManager()
+  const { progressData: data } = useDataManager()
+
+  const columns: ColumnWithClassName<ProgressRawData>[] = [
+    {
+      id: 'Des_Grp',
+      Header: 'Designated Group',
+      accessor: (d) =>
+        VARIABLES.displayNameByKey('Des_Grp', d['Des_Grp']) || '',
+    },
+    {
+      id: '2015_pc',
+      Header: '2015, %',
+      accessor: (d) => formatPercent(d['2015_pc'], 1, 100),
+      className: 'text-right',
+    },
+    {
+      id: '2018_pc',
+      Header: '2018, %',
+      accessor: (d) => formatPercent(d['2018_pc'], 1, 100),
+      className: 'text-right',
+    },
+  ]
 
   const codeOrder: Dictionary<number> = {
     // TODO: Factor this out
@@ -42,7 +43,6 @@ const Progress = (): JSX.Element => {
     AS_TOTAL: 5,
   }
 
-  const data = indicatorsOfProgressData
   if (data && data.length) {
     data.sort((a, b) => codeOrder[a.Des_Grp] - codeOrder[b.Des_Grp])
   }
