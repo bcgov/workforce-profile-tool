@@ -1,11 +1,5 @@
-import { filter } from 'd3'
 import React, { ReactNode, createContext, useContext, useMemo } from 'react'
-import {
-  ArrayParam,
-  StringParam,
-  useQueryParam,
-  useQueryParams,
-} from 'use-query-params'
+import { ArrayParam, StringParam, useQueryParams } from 'use-query-params'
 
 import {
   ComparisonRawData,
@@ -41,7 +35,9 @@ const filterData = <T extends GenericRawData>(
           d.Employee_Type ? d.Employee_Type === queryValues.Employee_Type : true
         )
         .filter((d) =>
-          d.Des_Grp ? queryValues.Des_Grp.includes(d.Des_Grp) : true
+          d.Des_Grp && queryValues.Des_Grp
+            ? queryValues.Des_Grp.includes(d.Des_Grp)
+            : true
         )
         .filter((d) =>
           d.Ministry_Key ? d.Ministry_Key === queryValues.Ministry_Key : true
@@ -56,9 +52,8 @@ const getEmployeeCount = (
   if (!employeeCountData) return undefined
 
   const data = filterData<EmployeeCountRawData>(employeeCountData, queryValues)
-  if (data && data.length) return +data[0].Employee_Count
 
-  return undefined
+  return data.length ? +data[0].Employee_Count : undefined
 }
 
 function useDataManager(): DataManagerContextType {
