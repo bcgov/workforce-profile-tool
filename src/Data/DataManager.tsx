@@ -7,6 +7,7 @@ import {
   GenericRawData,
   LeadershipRawData,
   MinistryRawData,
+  OccupationRegionRawData,
   ProgressRawData,
 } from '../@types/DataTypes'
 import FixTypeLater from '../@types/FixTypeLater'
@@ -19,6 +20,7 @@ type DataManagerContextType = {
   ministryData?: MinistryRawData[]
   comparisonData?: ComparisonRawData[]
   employeeCountData?: EmployeeCountRawData[]
+  occupationRegionData?: OccupationRegionRawData[]
 }
 
 const DataManagerContext = createContext<DataManagerContextType | undefined>(
@@ -84,6 +86,7 @@ function useDataManager(): DataManagerContextType {
     ministryData,
     comparisonData,
     employeeCountData,
+    occupationRegionData,
   } = context
 
   const [queryValues] = useQueryParams({
@@ -99,6 +102,7 @@ function useDataManager(): DataManagerContextType {
     ministryData: filterData(ministryData, queryValues),
     comparisonData: filterData(comparisonData, queryValues),
     employeeCount: getEmployeeCount(employeeCountData, queryValues),
+    occupationRegionData: filterData(occupationRegionData, queryValues),
   }
 }
 
@@ -109,6 +113,7 @@ interface DataManagerProviderProps {
   ministryData?: MinistryRawData[]
   progressData?: ProgressRawData[]
   employeeCountData?: EmployeeCountRawData[]
+  occupationRegionData?: OccupationRegionRawData[]
 }
 
 function DataManagerProvider({
@@ -118,6 +123,7 @@ function DataManagerProvider({
   leadershipData,
   ministryData,
   employeeCountData,
+  occupationRegionData,
 }: DataManagerProviderProps): FixTypeLater {
   const value = useMemo(
     () => ({
@@ -126,6 +132,7 @@ function DataManagerProvider({
       leadershipData,
       ministryData,
       employeeCountData,
+      occupationRegionData,
     }),
     [
       employeeCountData,
@@ -133,6 +140,7 @@ function DataManagerProvider({
       progressData,
       leadershipData,
       ministryData,
+      occupationRegionData,
     ]
   )
 

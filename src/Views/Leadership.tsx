@@ -1,31 +1,40 @@
 import React from 'react'
 
+import { ColumnWithClassName } from '../@types/ColumnWithClassName'
+import { LeadershipRawData } from '../@types/DataTypes'
+import { parseFloatClean } from '../Services/formatter'
 import { useDataManager } from '../Data/DataManager'
-import LeadershipGraph from '../Graphs/LeadershipGraph'
-import LeadershipTable from '../Table/LeadershipTable'
-import Loading from './Loading'
-import NoData from './NoData'
-import Title from './Title'
+import { VARIABLES } from '../Variables/VariableManager'
+import GenericTable from '../Table/GenericTable'
+import GenericView from './GenericView'
 
-// TODO: Set variables: ALL employees, BCPS ministry
+// TODO: Set + lock variables: ALL employees, BCPS ministry
 const Leadership = (): JSX.Element => {
-  const title = 'Leadership by Type'
   const { leadershipData: data } = useDataManager()
 
-  console.log('data', data)
+  const columns: ColumnWithClassName<LeadershipRawData>[] = [
+    {
+      accessor: (r: LeadershipRawData) =>
+        VARIABLES.displayNameByKey('Des_Grp', r.Des_Grp),
+      Header: 'Designated Group',
+      id: 'Des_Grp',
+    },
+    {
+      accessor: (r: LeadershipRawData) => parseFloatClean(r.Executive),
+      className: 'text-right',
+      Header: 'Executive Leadership, %',
+    },
+    {
+      accessor: (r: LeadershipRawData) => parseFloatClean(r.Management_Band),
+      className: 'text-right',
+      Header: 'Management Band Leadership, %',
+    },
+  ]
 
   return (
-    <div>
-      <Title title={title} />
-      {!data && <Loading />}
-      {data && data.length === 0 && <NoData />}
-      {data && data.length > 0 && (
-        <div>
-          <LeadershipGraph title={title} />
-          <LeadershipTable />
-        </div>
-      )}
-    </div>
+    <GenericView data={data} title={'Leadership by Type'}>
+      <GenericTable data={data} columns={columns} filename="leadership" />
+    </GenericView>
   )
 }
 

@@ -23,11 +23,18 @@ interface Props {
 const Main = (props: Props): JSX.Element => {
   const activeOuterTab = props.match.params.highLevelNav || 'home'
   let activeInnerTab
-  if (activeOuterTab === 'representation' && props.match.params.lowLevelNav) {
+  if (activeOuterTab === 'representation' && !props.match.params.lowLevelNav) {
     activeInnerTab = 'by-occupation'
   } else {
     activeInnerTab = props.match.params.lowLevelNav || 'representation-by-group'
   }
+
+  console.log(
+    'activeOuterTab',
+    activeOuterTab,
+    'activeInnerTab',
+    activeInnerTab
+  )
 
   return (
     <div className="Main row">
@@ -117,7 +124,7 @@ const Main = (props: Props): JSX.Element => {
                 <Tab key={'by-region'} name="By Region">
                   <Region />
                 </Tab>
-                <Tab key={'flow-report'} name="Flow Report">
+                {/* <Tab key={'flow-report'} name="Flow Report">
                   <div className="alert alert-warning" role="alert">
                     <h2>Data for 2018 not yet available</h2>
                     <p>
@@ -125,7 +132,7 @@ const Main = (props: Props): JSX.Element => {
                       and will be added to the tool once available.
                     </p>
                   </div>
-                </Tab>
+                </Tab> */}
               </TabInterface>
             </div>
           </Tab>

@@ -9,6 +9,7 @@ import {
   EmployeeCountRawData,
   LeadershipRawData,
   MinistryRawData,
+  OccupationRegionRawData,
   ProgressRawData,
 } from '../@types/DataTypes'
 import Header from './Header'
@@ -16,7 +17,6 @@ import Main from './Main'
 import VariableList from '../Variables/VariableList'
 
 import './App.scss'
-import { VARIABLES } from '../Variables/VariableManager'
 
 const BASE_URL = 'workforce-profiles/data/2018'
 const PROGRESS_FILE = 'WP2018_Ind_Progress-2_Sep2018.csv'
@@ -24,6 +24,7 @@ const LEADERSHIP_FILE = 'WP2018_Leadership.csv'
 const MINISTRY_FILE = 'WP2018_Ministries.csv'
 const COMPARISON_FILE = 'WP2018_Comparison-2_updJUL17.csv'
 const EMP_COUNT_FILE = 'WP2018_EmpCounts.csv'
+const OCC_REG_FILE = 'WP2018_Rep_Occ_Rgn_v_final.csv'
 
 const loadData = <T,>(fileName: string) => {
   return useQuery(fileName, async () =>
@@ -39,6 +40,9 @@ const App = (): JSX.Element => {
   const { data: employeeCountData } = loadData<EmployeeCountRawData>(
     EMP_COUNT_FILE
   )
+  const { data: occupationRegionData } = loadData<OccupationRegionRawData>(
+    OCC_REG_FILE
+  )
 
   return (
     <div className="App container-fluid">
@@ -48,6 +52,7 @@ const App = (): JSX.Element => {
         ministryData={ministryData}
         comparisonData={comparisonData}
         employeeCountData={employeeCountData}
+        occupationRegionData={occupationRegionData}
       >
         <div className="row">
           <div className="LeftColumn col-2">

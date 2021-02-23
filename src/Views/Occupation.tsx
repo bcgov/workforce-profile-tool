@@ -3,29 +3,41 @@ import React from 'react'
 
 import { useDataManager } from '../Data/DataManager'
 import Loading from './Loading'
-import NoData from './NoData'
-import OccupationGraph from '../Graphs/OccupationGraph'
-import OccupationTable from '../Table/OccupationTable'
-import Title from './Title'
+import GenericView from './GenericView'
+import Dictionary from '../@types/Dictionary'
+import { VARIABLES } from '../Variables/VariableManager'
+import { OccupationRegionRawData } from '../@types/DataTypes'
+import OccupationSubtable from '../Table/OccupationSubtable'
 
 // TODO: If the ministry_key is BCPS, lock employee type to REG; otherwise don't
 // lock variables
 const Occupation = (): JSX.Element => {
-  const title = 'Representation — Occupation'
-  const { progressData: data } = useDataManager()
+  const { occupationRegionData: data } = useDataManager()
+
+  if (!data) return <Loading />
+
+  // Split the data
+  const dataMap: Dictionary<OccupationRegionRawData[]> = {}
+  data.forEach((d) => {
+    dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
+    dataMap[d.Des_Grp].push(d)
+  })
+
+  const tables = Object.keys(dataMap).map((k) => {
+    const title = VARIABLES.displayNameByKey('Des_Grp', k)
+    const shortTitle = VARIABLES.shortDisplayNameByKey('Des_Grp', k)
+    return (
+      <div key={k}>
+        <h2>{title}</h2>
+        <OccupationSubtable data={dataMap[k]} shortTitle={shortTitle} />
+      </div>
+    )
+  })
 
   return (
-    <div>
-      <Title title={title} />
-      {!data && <Loading />}
-      {data && data.length === 0 && <NoData />}
-      {data && data.length > 0 && (
-        <div>
-          <OccupationGraph data={data} title={title} />
-          <OccupationTable data={data} />
-        </div>
-      )}
-    </div>
+    <GenericView title={'Representation — Occupation'} data={data}>
+      {tables}
+    </GenericView>
   )
 }
 
