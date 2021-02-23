@@ -1,14 +1,24 @@
-export type ProgressRawData = {
+type MinistryKeyedData = {
   Ministry_Key: string
-  Des_Grp: string
-  Employee_Type: string
-  '2015_pc': number
-  '2018_pc': number
-  '2018_hired_ct': number
 }
 
-export type LeadershipRawData = {
+type DesignatedGroupKeyedData = {
   Des_Grp: string
+}
+
+type EmployeeTypeKeyedData = {
+  Employee_Type: string
+}
+
+export type ProgressRawData = MinistryKeyedData &
+  EmployeeTypeKeyedData &
+  DesignatedGroupKeyedData & {
+    '2015_pc': number
+    '2018_pc': number
+    '2018_hired_ct': number
+  }
+
+export type LeadershipRawData = DesignatedGroupKeyedData & {
   Executive: number
   Management_Band: number
   Employees_BC_Population: number
@@ -16,8 +26,13 @@ export type LeadershipRawData = {
   ALL_BCPS: number
 }
 
-export type MinistryRawData = {
-  Des_Grp: string
-  Ministry_Key: string
-  Value: string
+export type MinistryRawData = DesignatedGroupKeyedData &
+  MinistryKeyedData & {
+    Value: string
+  }
+
+export type GenericRawData = {
+  Ministry_Key?: string
+  Des_Grp?: string
+  Employee_Type?: string
 }
