@@ -18,7 +18,8 @@ import './Table.scss'
 import './OccupationTable.scss'
 import FixTypeLater from '../@types/FixTypeLater'
 import Dictionary from '../@types/Dictionary'
-import ReactorTableColumn from '../@types/ReactorTableColumn'
+import { ColumnWithClassName } from '../@types/ColumnWithClassName'
+import { OccupationRegionRawData } from '../@types/DataTypes'
 
 interface Props {
   data: FixTypeLater[]
@@ -71,31 +72,27 @@ class OccupationSubTable extends Component<Props> {
       (d) => d['Occupation_Type'] === 'Total'
     )
 
-    const columns: ReactorTableColumn[] = [
+    const columns: ColumnWithClassName<OccupationRegionRawData>[] = [
       {
         id: 'Occupation_Region_Group',
-        name: 'Occupation',
+        Header: 'Occupation',
         accessor: (d) => d['Occupation_Region_Group'],
       },
       {
         id: 'DesGrp_Count_ORG',
-        name: this.props.shortTitle,
-        accessor: (d) => parseIntClean(d['DesGrp_Count_ORG']),
-        displayAccessor: (d) => formatNumber(d['DesGrp_Count_ORG']),
-        cellClass: 'text-right',
-        headerClass: 'text-right',
+        Header: this.props.shortTitle,
+        accessor: (d) => formatNumber(d['DesGrp_Count_ORG']),
+        className: 'text-right',
       },
       {
         id: 'NonDesGrp_Count_ORG',
-        name: `Non-${this.props.shortTitle}`,
-        accessor: (d) => parseIntClean(d['NonDesGrp_Count_ORG']),
-        displayAccessor: (d) => formatNumber(d['NonDesGrp_Count_ORG']),
-        cellClass: 'text-right',
-        headerClass: 'text-right',
+        Header: `Non-${this.props.shortTitle}`,
+        accessor: (d) => formatNumber(d['NonDesGrp_Count_ORG']),
+        className: 'text-right',
       },
       {
         id: 'Total_Count_ORG',
-        name: (
+        Header: (
           <span>
             Total &nbsp;
             <Tooltip
@@ -103,22 +100,18 @@ class OccupationSubTable extends Component<Props> {
             />
           </span>
         ),
-        accessor: (d) => parseIntClean(d['Total_Count_ORG']),
-        displayAccessor: (d) => formatNumber(d['Total_Count_ORG']),
-        cellClass: 'text-right',
-        headerClass: 'text-right',
+        accessor: (d) => formatNumber(d['Total_Count_ORG']),
+        className: 'text-right',
       },
       {
         id: 'DesGrp_Percent_ORG',
-        name: `Rate of ${this.props.shortTitle}`,
-        accessor: (d) => parseFloatClean(d['DesGrp_Percent_ORG']),
-        displayAccessor: (d) => formatPercent(d['DesGrp_Percent_ORG'], 1, 100),
-        cellClass: 'text-right',
-        headerClass: 'text-right',
+        Header: `Rate of ${this.props.shortTitle}`,
+        accessor: (d) => formatPercent(d['DesGrp_Percent_ORG'], 1, 100),
+        className: 'text-right',
       },
       {
         id: 'DesGrp_Percent_AvailableWorkforce',
-        name: (
+        Header: (
           <span>
             {this.props.shortTitle} as % of Available Workforce &nbsp;
             <Tooltip
@@ -127,15 +120,12 @@ class OccupationSubTable extends Component<Props> {
           </span>
         ),
         accessor: (d) =>
-          parseFloatClean(d['DesGrp_Percent_AvailableWorkforce']),
-        displayAccessor: (d) =>
           formatPercent(d['DesGrp_Percent_AvailableWorkforce'], 1, 100),
-        cellClass: 'text-right',
-        headerClass: 'text-right',
+        className: 'text-right',
       },
       {
         id: 'DesGrp_Count_Expected',
-        name: (
+        Header: (
           <span>
             Expected # {this.props.shortTitle}
             &nbsp;
@@ -147,18 +137,14 @@ class OccupationSubTable extends Component<Props> {
             />
           </span>
         ),
-        accessor: (d) => parseIntClean(d['DesGrp_Count_Expected']),
-        displayAccessor: (d) => formatNumber(d['DesGrp_Count_Expected'], ''),
-        cellClass: 'text-right',
-        headerClass: 'text-right',
+        accessor: (d) => formatNumber(d['DesGrp_Count_Expected'], ''),
+        className: 'text-right',
       },
       {
         id: 'DesGrp_Count_Shortfall',
-        name: `Shortfall of ${this.props.shortTitle}`,
-        accessor: (d) => parseIntClean(d['DesGrp_Count_Shortfall']),
-        displayAccessor: (d) => formatNumber(d['DesGrp_Count_Shortfall'], ''),
-        cellClass: 'text-right',
-        headerClass: 'text-right',
+        Header: `Shortfall of ${this.props.shortTitle}`,
+        accessor: (d) => formatNumber(d['DesGrp_Count_Shortfall'], ''),
+        className: 'text-right',
       },
     ]
 

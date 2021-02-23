@@ -8,7 +8,7 @@
     font-weight: 600;
 }
 
-.ReactorTable {
+.Table table {
     @extend .table,
     .table-striped;
     border: solid 2px $brand-color-fog;

@@ -56,6 +56,22 @@ const getEmployeeCount = (
   return data.length ? +data[0].Employee_Count : undefined
 }
 
+const getHiringTotal = (
+  progressData: ProgressRawData[] | undefined,
+  queryValues: FixTypeLater
+): number | undefined => {
+  if (!progressData) return undefined
+
+  const data = progressData?.find(
+    (d) =>
+      d.Employee_Type === queryValues.Employee_Type &&
+      d.Des_Grp === 'AS_TOTAL' &&
+      d.Ministry_Key === queryValues.Ministry_Key
+  )
+
+  return data ? +data['2018_hired_ct'] : undefined
+}
+
 function useDataManager(): DataManagerContextType {
   const context = useContext(DataManagerContext)
   if (!context) {
@@ -78,12 +94,7 @@ function useDataManager(): DataManagerContextType {
 
   return {
     progressData: filterData(progressData, queryValues),
-    hiringTotal: progressData?.find(
-      (d) =>
-        d.Employee_Type === queryValues.Employee_Type &&
-        d.Des_Grp === 'AS_TOTAL' &&
-        d.Ministry_Key === queryValues.Ministry_Key
-    )?.['2018_hired_ct'],
+    hiringTotal: getHiringTotal(progressData, queryValues),
     leadershipData: filterData(leadershipData, queryValues),
     ministryData: filterData(ministryData, queryValues),
     comparisonData: filterData(comparisonData, queryValues),

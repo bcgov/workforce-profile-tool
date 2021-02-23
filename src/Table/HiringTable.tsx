@@ -12,7 +12,7 @@ import Loading from '../Views/Loading'
 import Table from './Table'
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 
-const ProgressTable = (): JSX.Element => {
+const HiringTable = (): JSX.Element => {
   const { progressData: data, hiringTotal } = useDataManager()
 
   if (!data) return <Loading />
@@ -52,4 +52,4 @@ const ProgressTable = (): JSX.Element => {
   )
 }
 
-export default ProgressTable
+export default HiringTable
