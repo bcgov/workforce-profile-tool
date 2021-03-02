@@ -8,6 +8,7 @@ import { VARIABLES } from '../Variables/VariableManager'
 import Dictionary from '../@types/Dictionary'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
+import ProgressGraph from '../Graphs/ProgressGraph'
 
 const Progress = (): JSX.Element => {
   const { progressData: data } = useDataManager()
@@ -52,6 +53,7 @@ const Progress = (): JSX.Element => {
       title="Indicators of Progress — By Designated Group"
       data={data}
     >
+      <ProgressGraph title={'Indicators of Progress — By Designated Group'} />
       <GenericTable columns={columns} data={data} filename="progress" />
     </GenericView>
   )

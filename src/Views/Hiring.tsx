@@ -8,6 +8,7 @@ import { VARIABLES } from '../Variables/VariableManager'
 import Dictionary from '../@types/Dictionary'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
+import HiringGraph from '../Graphs/HiringGraph'
 
 const Hiring = (): JSX.Element => {
   const { progressData: data, hiringTotal } = useDataManager()
@@ -53,6 +54,7 @@ const Hiring = (): JSX.Element => {
       title="Indicators of Progress — Hiring, 2015 to 2018"
       data={data}
     >
+      <HiringGraph title={'Indicators of Progress — Hiring, 2015 to 2018'} />
       <GenericTable columns={columns} data={data} filename="hiring" />
     </GenericView>
   )

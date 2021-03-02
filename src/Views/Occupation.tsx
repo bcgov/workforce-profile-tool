@@ -8,6 +8,7 @@ import Dictionary from '../@types/Dictionary'
 import { VARIABLES } from '../Variables/VariableManager'
 import { OccupationRegionRawData } from '../@types/DataTypes'
 import OccupationSubtable from '../Table/OccupationSubtable'
+import OccupationGraph from '../Graphs/OccupationGraph'
 
 // TODO: If the ministry_key is BCPS, lock employee type to REG; otherwise don't
 // lock variables
@@ -36,6 +37,7 @@ const Occupation = (): JSX.Element => {
 
   return (
     <GenericView title={'Representation — Occupation'} data={data}>
+      <OccupationGraph title={'Representation — Occupation'} />
       {tables}
     </GenericView>
   )

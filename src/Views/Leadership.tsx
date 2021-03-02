@@ -7,6 +7,7 @@ import { useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
+import LeadershipGraph from '../Graphs/LeadershipGraph'
 
 // TODO: Set + lock variables: ALL employees, BCPS ministry
 const Leadership = (): JSX.Element => {
@@ -33,6 +34,7 @@ const Leadership = (): JSX.Element => {
 
   return (
     <GenericView data={data} title={'Leadership by Type'}>
+      <LeadershipGraph title={'Leadership by Type'} />
       <GenericTable data={data} columns={columns} filename="leadership" />
     </GenericView>
   )

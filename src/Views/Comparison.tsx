@@ -8,6 +8,7 @@ import { useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
+import ComparisonGraph from '../Graphs/ComparisonGraph'
 
 const Comparison = (): JSX.Element => {
   const { comparisonData: data } = useDataManager()
@@ -44,6 +45,10 @@ const Comparison = (): JSX.Element => {
 
   return (
     <GenericView title={'Comparison with Provincial Workforce'} data={data}>
+      <ComparisonGraph
+        title={'Comparison with Provincial Workforce'}
+        ministry={ministryKey}
+      />
       <GenericTable data={data} columns={columns} filename={'comparison'} />
     </GenericView>
   )

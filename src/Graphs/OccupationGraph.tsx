@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import * as PlusPlot from '@plot-and-scatter/plusplot'
+import * as R from 'recharts'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 
@@ -10,75 +11,118 @@ import './Graphs.scss'
 import { VARIABLES } from '../Variables/VariableManager'
 import Dictionary from '../@types/Dictionary'
 import FixTypeLater from '../@types/FixTypeLater'
+import { JsxEmit } from 'typescript'
+import { useDataManager } from '../Data/DataManager'
+import LabelledBar from './LabelledBar'
 
 interface Props {
-  data: FixTypeLater[]
   title: string
 }
 
-class OccupationGraph extends Component<Props> {
-  render(): JSX.Element {
-    if (!this.props.data) return <div>&nbsp;</div>
+const OccupationGraph = ({ title }: Props): JSX.Element => {
+  const { occupationRegionData: data } = useDataManager()
 
-    const dataMap: Dictionary<any> = {}
-    this.props.data.forEach((d) => {
-      dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
-      dataMap[d.Des_Grp].push(d)
-    })
+  if (!data) return <div>&nbsp;</div>
 
-    const chartData = Object.keys(dataMap).map((k) => {
-      const data = dataMap[k].filter(
-        (d: FixTypeLater) => d.Variable_Type === 'Total'
-      )[0]
-      const values = [
-        data.DesGrp_Count_Expected,
-        data.DesGrp_Count_ORG,
-        data.DesGrp_Count_Shortfall,
-      ]
+  const dataMap: Dictionary<any> = {}
+  data.forEach((d) => {
+    dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
+    dataMap[d.Des_Grp].push(d)
+  })
 
-      const title = VARIABLES.displayNameByKey('Des_Grp', k)
+  const filteredData = data.filter((d) => d.Variable_Type === 'Total')
 
-      return {
-        category: title,
-        values,
-      }
-    })
+  console.log('filteredData', filteredData, 'dataMap', dataMap)
 
-    const graph = (
-      <PlusPlot.GroupedBarChart
-        data={chartData}
-        colors={['#70CCDB', '#D2E2EE', '#6c757d']}
-        options={{
-          dataLabels: {
-            position: 20,
-            formatter: (d: FixTypeLater) => formatNumber(d, ''),
-          },
-          margins: { top: 0, left: 140, bottom: 40, right: 20 },
-          axes: { yAxisLabel: '', xAxisLabel: 'Count in BCPS' },
-          font: '"myriad-pro", "Myriad Pro"',
-        }}
-      />
-    )
+  // const filteredData = dat
 
-    const legend = (
-      <Legend
-        items={[
-          { label: 'Expected', color: '#70CCDB' },
-          { label: 'Actual', color: '#D2E2EE' },
-          { label: 'Shortfall', color: '#6c757d' },
-        ]}
-      />
-    )
+  // const chartData = Object.keys(dataMap).map((k) => {
+  //   const data = dataMap[k].filter(
+  //     (d: FixTypeLater) => d.Variable_Type === 'Total'
+  //   )[0]
+  //   const values = [
+  //     data.DesGrp_Count_Expected,
+  //     data.DesGrp_Count_ORG,
+  //     data.DesGrp_Count_Shortfall,
+  //   ]
 
-    return (
-      <GraphFrame
-        className="Occupation"
-        title={this.props.title}
-        graph={graph}
-        legend={legend}
-      />
-    )
-  }
+  //   const title = VARIABLES.displayNameByKey('Des_Grp', k)
+
+  //   return {
+  //     category: title,
+  //     values,
+  //   }
+  // })
+
+  // const graph = (
+  //   <PlusPlot.GroupedBarChart
+  //     data={chartData}
+  //     colors={['#70CCDB', '#D2E2EE', '#6c757d']}
+  //     options={{
+  //       dataLabels: {
+  //         position: 20,
+  //         formatter: (d: FixTypeLater) => formatNumber(d, ''),
+  //       },
+  //       margins: { top: 0, left: 140, bottom: 40, right: 20 },
+  //       axes: { yAxisLabel: '', xAxisLabel: 'Count in BCPS' },
+  //       font: '"myriad-pro", "Myriad Pro"',
+  //     }}
+  //   />
+  // )
+
+  const graph = (
+    <R.ResponsiveContainer width="100%" height={500}>
+      <R.BarChart
+        data={filteredData}
+        layout="vertical"
+        margin={{ left: 30, bottom: 15, right: 10 }}
+        barCategoryGap={15}
+        barGap={2}
+      >
+        <R.XAxis type="number" interval={0}>
+          <R.Label offset={-10} position={'insideBottom'}>
+            % in leadership positions
+          </R.Label>
+        </R.XAxis>
+        <R.YAxis dataKey="Des_Grp" type="category" />
+        <R.Tooltip />
+        {LabelledBar({
+          dataKey: 'DesGrp_Count_Expected',
+          fill: '#70CCDB',
+          formatter: (d) => formatNumber(d, 1),
+        })}
+        {LabelledBar({
+          dataKey: 'DesGrp_Count_ORG',
+          fill: '#D2E2EE',
+          formatter: (d) => formatNumber(d, 1),
+        })}
+        {LabelledBar({
+          dataKey: 'DesGrp_Count_Shortfall',
+          fill: '#6c757d',
+          formatter: (d) => formatNumber(d, 1),
+        })}
+      </R.BarChart>
+    </R.ResponsiveContainer>
+  )
+
+  const legend = (
+    <Legend
+      items={[
+        { label: 'Expected', color: '#70CCDB' },
+        { label: 'Actual', color: '#D2E2EE' },
+        { label: 'Shortfall', color: '#6c757d' },
+      ]}
+    />
+  )
+
+  return (
+    <GraphFrame
+      className="Occupation"
+      title={title}
+      graph={graph}
+      legend={legend}
+    />
+  )
 }
 
 export default OccupationGraph
