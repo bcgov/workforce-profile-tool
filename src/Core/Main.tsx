@@ -29,13 +29,6 @@ const Main = (props: Props): JSX.Element => {
     activeInnerTab = props.match.params.lowLevelNav || 'representation-by-group'
   }
 
-  console.log(
-    'activeOuterTab',
-    activeOuterTab,
-    'activeInnerTab',
-    activeInnerTab
-  )
-
   return (
     <div className="Main row">
       <div className="col">

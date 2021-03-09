@@ -18,8 +18,6 @@ const Occupation = (): JSX.Element => {
 
   const [ministryQueryVars] = useQueryParam('Ministry_Key', ArrayParam)
 
-  console.log('ministryQueryVars', ministryQueryVars)
-
   useEffect(() => {
     const varsToLock: Dictionary<string[]> = ministryQueryVars?.includes('BCPS')
       ? {}

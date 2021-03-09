@@ -6,7 +6,6 @@ import GenericView from './GenericView'
 import Dictionary from '../@types/Dictionary'
 import { VARIABLES } from '../Variables/VariableManager'
 import RegionSubtable from '../Table/RegionSubtable'
-import RegionGraph from '../Graphs/RegionGraph'
 import OccupationGraph from '../Graphs/OccupationGraph'
 import { ArrayParam, useQueryParam } from 'use-query-params'
 
@@ -16,8 +15,6 @@ const Region = (): JSX.Element => {
   const { occupationRegionData: data, setLockedVars } = useDataManager()
 
   const [ministryQueryVars] = useQueryParam('Ministry_Key', ArrayParam)
-
-  console.log('ministryQueryVars', ministryQueryVars)
 
   useEffect(() => {
     const varsToLock: Dictionary<string[]> = ministryQueryVars?.includes('BCPS')

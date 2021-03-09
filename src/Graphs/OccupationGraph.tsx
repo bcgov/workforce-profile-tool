@@ -1,19 +1,14 @@
-import React, { Component } from 'react'
-import * as PlusPlot from '@plot-and-scatter/plusplot'
 import * as R from 'recharts'
-import GraphFrame from './GraphFrame'
-import Legend from './Legend'
+import React from 'react'
 
 import { formatNumber } from '../Services/formatter'
+import { useDataManager } from '../Data/DataManager'
+import Dictionary from '../@types/Dictionary'
+import GraphFrame from './GraphFrame'
+import LabelledBar from './LabelledBar'
+import Legend from './Legend'
 
 import './Graphs.scss'
-
-import { VARIABLES } from '../Variables/VariableManager'
-import Dictionary from '../@types/Dictionary'
-import FixTypeLater from '../@types/FixTypeLater'
-import { JsxEmit } from 'typescript'
-import { useDataManager } from '../Data/DataManager'
-import LabelledBar from './LabelledBar'
 
 interface Props {
   title: string
@@ -31,8 +26,6 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
   })
 
   const filteredData = data.filter((d) => d.Variable_Type === 'Total')
-
-  console.log('filteredData', filteredData, 'dataMap', dataMap)
 
   // const filteredData = dat
 

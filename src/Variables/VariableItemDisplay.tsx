@@ -112,8 +112,6 @@ const VariableItemDisplay = (props: Props): JSX.Element => {
     return false
   }, [props.variable, props.variableGroup, lockedVars])
 
-  console.log('isLocked', isLocked, props.variableGroup.key, props.variable.key)
-
   if (props.variableGroup.exclusive) {
     return (
       <VariableItemDisplayExclusive

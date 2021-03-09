@@ -48,8 +48,6 @@ const HiringGraph = ({ title }: Props): JSX.Element => {
   //   />
   // )
 
-  console.log('--< filteredData', filteredData)
-
   const graph = (
     <R.ResponsiveContainer width="100%" height={500}>
       <R.BarChart
