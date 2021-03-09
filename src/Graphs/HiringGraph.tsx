@@ -1,16 +1,14 @@
-import React, { Component } from 'react'
-import * as PlusPlot from '@plot-and-scatter/plusplot'
-import { formatNumber, formatPercent } from '../Services/formatter'
-import Legend from './Legend'
-import GraphFrame from './GraphFrame'
 import * as R from 'recharts'
+import React from 'react'
+
+import { formatDesGrpTick, formatNumber } from '../Services/formatter'
+import { useDataManager } from '../Data/DataManager'
+import { VARIABLES } from '../Variables/VariableManager'
+import GraphFrame from './GraphFrame'
+import LabelledBar from './LabelledBar'
+import Legend from './Legend'
 
 import './Graphs.scss'
-
-import { VARIABLES } from '../Variables/VariableManager'
-import FixTypeLater from '../@types/FixTypeLater'
-import { useDataManager } from '../Data/DataManager'
-import LabelledBar from './LabelledBar'
 
 interface Props {
   title: string
@@ -23,31 +21,6 @@ const HiringGraph = ({ title }: Props): JSX.Element => {
 
   const filteredData = data.filter((d) => !['WOM_SM'].includes(d['Des_Grp']))
 
-  // const chartData = data.map((d) => {
-  //   return {
-  //     category: VARIABLES.displayNameByKey('Des_Grp', d['Des_Grp']),
-  //     count: d['2018_hired_ct'],
-  //     color: '#70CCDB',
-  //   }
-  // })
-
-  // const graph = (
-  //   <PlusPlot.ColumnChart
-  //     data={chartData}
-  //     yLines={[]}
-  //     options={{
-  //       height: 500,
-  //       dataLabels: {
-  //         position: -10,
-  //         formatter: (d: FixTypeLater) => formatNumber(d),
-  //       },
-  //       margins: { top: 10, left: 60, bottom: 40, right: 20 },
-  //       axes: { xAxisLabel: '', yAxisLabel: 'Count' },
-  //       font: '"myriad-pro", "Myriad Pro"',
-  //     }}
-  //   />
-  // )
-
   const graph = (
     <R.ResponsiveContainer width="100%" height={500}>
       <R.BarChart
@@ -56,7 +29,11 @@ const HiringGraph = ({ title }: Props): JSX.Element => {
         barCategoryGap={15}
         barGap={2}
       >
-        <R.XAxis dataKey="Des_Grp" type="category"></R.XAxis>
+        <R.XAxis
+          dataKey="Des_Grp"
+          type="category"
+          tickFormatter={(desGrpKey) => formatDesGrpTick(desGrpKey)}
+        />
         <R.YAxis
           type="number"
           interval={0}
@@ -65,7 +42,7 @@ const HiringGraph = ({ title }: Props): JSX.Element => {
               Count
             </R.Text>
           }
-        ></R.YAxis>
+        />
         <R.Tooltip />
         {LabelledBar({
           dataKey: '2018_hired_ct',
@@ -77,16 +54,14 @@ const HiringGraph = ({ title }: Props): JSX.Element => {
     </R.ResponsiveContainer>
   )
 
-  const legend = (
-    <Legend items={[{ label: 'Hired, 2015 to 2018', color: '#70CCDB' }]} />
-  )
-
   return (
     <GraphFrame
       className="Hiring"
       title={title}
       graph={graph}
-      legend={legend}
+      legend={
+        <Legend items={[{ label: 'Hired, 2015 to 2018', color: '#70CCDB' }]} />
+      }
     />
   )
 }

@@ -1,7 +1,7 @@
 import * as R from 'recharts'
 import React from 'react'
 
-import { formatPercent } from '../Services/formatter'
+import { formatDesGrpTick, formatPercent } from '../Services/formatter'
 import { ticks } from '../Services/scales'
 import { useDataManager } from '../Data/DataManager'
 import GraphFrame from './GraphFrame'
@@ -9,6 +9,7 @@ import LabelledBar from './LabelledBar'
 import Legend from './Legend'
 
 import './Graphs.scss'
+import { VARIABLES } from '../Variables/VariableManager'
 
 interface TitleProps {
   title: string
@@ -54,7 +55,11 @@ const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
             % in leadership positions
           </R.Label>
         </R.XAxis>
-        <R.YAxis dataKey="Des_Grp" type="category" />
+        <R.YAxis
+          dataKey="Des_Grp"
+          type="category"
+          tickFormatter={(desGrpKey) => formatDesGrpTick(desGrpKey)}
+        />
         <R.Tooltip />
         {LabelledBar({
           dataKey: 'Executive',

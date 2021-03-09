@@ -1,3 +1,5 @@
+import { VARIABLES } from '../Variables/VariableManager'
+
 export const formatNumber = (
   number: string | number,
   zeroValue: number | string = 0
@@ -45,4 +47,8 @@ export const parseFloatClean = (
   if (number === 'x') return zeroValue
   if (number === '') return zeroValue
   return parseFloat(number)
+}
+
+export const formatDesGrpTick = (desGrpKey: string): string => {
+  return VARIABLES.displayNameByKey('Des_Grp', desGrpKey as string)!
 }

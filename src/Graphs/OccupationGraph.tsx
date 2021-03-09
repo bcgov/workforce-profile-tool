@@ -1,16 +1,14 @@
 import * as R from 'recharts'
 import React from 'react'
 
-import { formatNumber } from '../Services/formatter'
+import { formatDesGrpTick, formatNumber } from '../Services/formatter'
 import { useDataManager } from '../Data/DataManager'
-import Dictionary from '../@types/Dictionary'
 import GraphFrame from './GraphFrame'
 import LabelledBar from './LabelledBar'
 import Legend from './Legend'
 
 import './Graphs.scss'
-import { OccupationRegionRawData } from '../@types/DataTypes'
-import FixTypeLater from '../@types/FixTypeLater'
+import { VARIABLES } from '../Variables/VariableManager'
 
 interface Props {
   title: string
@@ -21,31 +19,7 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
 
   if (!data) return <div>&nbsp;</div>
 
-  const dataMap: Dictionary<OccupationRegionRawData[]> = {}
-  data.forEach((d) => {
-    dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
-    dataMap[d.Des_Grp].push(d)
-  })
-
   const filteredData = data.filter((d) => d.Variable_Type === 'Total')
-
-  const formatter = (d: FixTypeLater) => formatNumber(d, '')
-
-  // const graph = (
-  //   <PlusPlot.GroupedBarChart
-  //     data={chartData}
-  //     colors={['#70CCDB', '#D2E2EE', '#6c757d']}
-  //     options={{
-  //       dataLabels: {
-  //         position: 20,
-  //         formatter: (d: FixTypeLater) => formatNumber(d, ''),
-  //       },
-  //       margins: { top: 0, left: 140, bottom: 40, right: 20 },
-  //       axes: { yAxisLabel: '', xAxisLabel: 'Count in BCPS' },
-  //       font: '"myriad-pro", "Myriad Pro"',
-  //     }}
-  //   />
-  // )
 
   const graph = (
     <R.ResponsiveContainer width="100%" height={500}>
@@ -56,12 +30,20 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
         barCategoryGap={15}
         barGap={2}
       >
-        <R.XAxis type="number" interval={0}>
+        <R.XAxis
+          type="number"
+          interval={0}
+          tickFormatter={(d) => formatNumber(d)}
+        >
           <R.Label offset={-10} position={'insideBottom'}>
             Count in BCPS {/* TODO: Fix this? Should it be ministryName? */}
           </R.Label>
         </R.XAxis>
-        <R.YAxis dataKey="Des_Grp" type="category" />
+        <R.YAxis
+          dataKey="Des_Grp"
+          type="category"
+          tickFormatter={(desGrpKey) => formatDesGrpTick(desGrpKey)}
+        />
         <R.Tooltip />
         {LabelledBar({
           dataKey: 'DesGrp_Count_Expected',
