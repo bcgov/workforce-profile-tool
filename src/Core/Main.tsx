@@ -58,7 +58,7 @@ const Main = (props: Props): JSX.Element => {
                 Use the tabs at the top to begin your journey. You can refine
                 your selections by using the filters on the left.
               </p>
-              <h2>Caveats:</h2>
+              <h2>Caveats</h2>
               <p className="lead">
                 This tool uses data from the BC Public Service Work Environment
                 Survey (WES), which was conducted in February, 2018. Therefore,
