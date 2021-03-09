@@ -9,6 +9,8 @@ import LabelledBar from './LabelledBar'
 import Legend from './Legend'
 
 import './Graphs.scss'
+import { OccupationRegionRawData } from '../@types/DataTypes'
+import FixTypeLater from '../@types/FixTypeLater'
 
 interface Props {
   title: string
@@ -19,7 +21,7 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
 
   if (!data) return <div>&nbsp;</div>
 
-  const dataMap: Dictionary<any> = {}
+  const dataMap: Dictionary<OccupationRegionRawData[]> = {}
   data.forEach((d) => {
     dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
     dataMap[d.Des_Grp].push(d)
@@ -27,25 +29,7 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
 
   const filteredData = data.filter((d) => d.Variable_Type === 'Total')
 
-  // const filteredData = dat
-
-  // const chartData = Object.keys(dataMap).map((k) => {
-  //   const data = dataMap[k].filter(
-  //     (d: FixTypeLater) => d.Variable_Type === 'Total'
-  //   )[0]
-  //   const values = [
-  //     data.DesGrp_Count_Expected,
-  //     data.DesGrp_Count_ORG,
-  //     data.DesGrp_Count_Shortfall,
-  //   ]
-
-  //   const title = VARIABLES.displayNameByKey('Des_Grp', k)
-
-  //   return {
-  //     category: title,
-  //     values,
-  //   }
-  // })
+  const formatter = (d: FixTypeLater) => formatNumber(d, '')
 
   // const graph = (
   //   <PlusPlot.GroupedBarChart
@@ -82,17 +66,17 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
         {LabelledBar({
           dataKey: 'DesGrp_Count_Expected',
           fill: '#70CCDB',
-          formatter: (d) => formatNumber(d, 1),
+          formatter: (d) => formatNumber(d, ''),
         })}
         {LabelledBar({
           dataKey: 'DesGrp_Count_ORG',
           fill: '#D2E2EE',
-          formatter: (d) => formatNumber(d, 1),
+          formatter: (d) => formatNumber(d, ''),
         })}
         {LabelledBar({
           dataKey: 'DesGrp_Count_Shortfall',
           fill: '#6c757d',
-          formatter: (d) => formatNumber(d, 1),
+          formatter: (d) => formatNumber(d, ''),
         })}
       </R.BarChart>
     </R.ResponsiveContainer>

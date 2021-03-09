@@ -65,8 +65,6 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
 
   const tickArray: number[] = ticks(chartData, ['count'])
 
-  console.log('tickArray', tickArray)
-
   const graph = (
     <R.ResponsiveContainer width="100%" height={600}>
       <R.BarChart
