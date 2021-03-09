@@ -1,14 +1,11 @@
-import React, { useEffect } from 'react'
 import { useDataManager } from '../Data/DataManager'
+import React, { useEffect } from 'react'
 
+import GenericView from './GenericView'
 import MinistryGraph from '../Graphs/MinistryGraph'
 
-// TODO: lock variables: REG and BCPS
-
 const Ministry = (): JSX.Element => {
-  const title = 'Ministries'
-
-  const { setLockedVars } = useDataManager()
+  const { ministryData: data, setLockedVars } = useDataManager()
 
   useEffect(
     () => setLockedVars({ Employee_Type: ['REG'], Ministry_Key: ['BCPS'] }),
@@ -16,12 +13,9 @@ const Ministry = (): JSX.Element => {
   )
 
   return (
-    <div>
-      <h1>{title}</h1>
-      <div>
-        <MinistryGraph title={title} />
-      </div>
-    </div>
+    <GenericView data={data}>
+      <MinistryGraph title={'Ministries'} />
+    </GenericView>
   )
 }
 

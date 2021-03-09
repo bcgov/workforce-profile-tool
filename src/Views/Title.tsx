@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
-import { RouteComponentProps, withRouter } from 'react-router-dom'
-import qs from '../Services/query-string'
-import { activeEmployeeType, activeMinistry } from '../Services/activeVariables'
-import FixTypeLater from '../@types/FixTypeLater'
-import { useDataManager } from '../Data/DataManager'
 import { ArrayParam, StringParam, useQueryParams } from 'use-query-params'
+import React from 'react'
+
+import { activeEmployeeType, activeMinistry } from '../Services/activeVariables'
+import { useDataManager } from '../Data/DataManager'
+import FixTypeLater from '../@types/FixTypeLater'
 
 export const subtitle = (
   queryValues: FixTypeLater,

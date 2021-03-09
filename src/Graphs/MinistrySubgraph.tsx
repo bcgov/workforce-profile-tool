@@ -63,27 +63,6 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
   const formatter = (d: FixTypeLater) =>
     d === 0 ? '<3' : formatPercent(d, 1, 100)
 
-  // const graph = (
-  //   <PlusPlot.BarChart
-  //     data={chartData}
-  //     xLines={[
-  //       {
-  //         value: provincialRepresentation,
-  //         label: `BC Pop: ${formatter(provincialRepresentation)}`,
-  //         color: 'black',
-  //         yPosition: -20,
-  //       },
-  //     ]}
-  //     options={{
-  //       height: 600,
-  //       dataLabels: { position: 25, formatter },
-  //       margins: { top: 0, left: 250, bottom: 40, right: 40 },
-  //       axes: { yAxisLabel: '', xAxisLabel: '% representation' },
-  //       font: '"myriad-pro", "Myriad Pro"',
-  //     }}
-  //   />
-  // )
-
   const tickArray: number[] = ticks(chartData, ['count'])
 
   console.log('tickArray', tickArray)
@@ -112,6 +91,11 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
           fill: chartData[0].color,
           formatter,
         })}
+        <R.ReferenceLine x={provincialRepresentation} stroke={'#333'}>
+          <R.Label position="insideBottomLeft" dy={-10} dx={5}>
+            {`BC Pop: ${formatter(provincialRepresentation)}`}
+          </R.Label>
+        </R.ReferenceLine>
       </R.BarChart>
     </R.ResponsiveContainer>
   )
