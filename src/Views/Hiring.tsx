@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { formatNumber, formatPercent } from '../Services/formatter'
@@ -11,7 +11,9 @@ import GenericView from './GenericView'
 import HiringGraph from '../Graphs/HiringGraph'
 
 const Hiring = (): JSX.Element => {
-  const { progressData: data, hiringTotal } = useDataManager()
+  const { progressData: data, hiringTotal, setLockedVars } = useDataManager()
+
+  useEffect(() => setLockedVars({}), [])
 
   const totalHired = hiringTotal
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { useDataManager } from '../Data/DataManager'
 import Loading from './Loading'
@@ -8,11 +8,23 @@ import { VARIABLES } from '../Variables/VariableManager'
 import RegionSubtable from '../Table/RegionSubtable'
 import RegionGraph from '../Graphs/RegionGraph'
 import OccupationGraph from '../Graphs/OccupationGraph'
+import { ArrayParam, useQueryParam } from 'use-query-params'
 
 // TODO: If the ministry_key is BCPS, lock employee type to REG; otherwise don't
 // lock variables
 const Region = (): JSX.Element => {
-  const { occupationRegionData: data } = useDataManager()
+  const { occupationRegionData: data, setLockedVars } = useDataManager()
+
+  const [ministryQueryVars] = useQueryParam('Ministry_Key', ArrayParam)
+
+  console.log('ministryQueryVars', ministryQueryVars)
+
+  useEffect(() => {
+    const varsToLock: Dictionary<string[]> = ministryQueryVars?.includes('BCPS')
+      ? {}
+      : { Employee_Type: ['REG'] }
+    setLockedVars(varsToLock)
+  }, [ministryQueryVars])
 
   if (!data) return <Loading />
 

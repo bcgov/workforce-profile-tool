@@ -19,12 +19,15 @@ export class Variable {
   get key(): string {
     return this._key
   }
+
   get selectable(): boolean {
     return this._selectable
   }
+
   get shortDisplay(): string {
     return this._shortDisplay
   }
+
   get display(): string {
     return this._display
   }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { ComparisonRawData } from '../@types/DataTypes'
@@ -11,7 +11,9 @@ import GenericView from './GenericView'
 import ComparisonGraph from '../Graphs/ComparisonGraph'
 
 const Comparison = (): JSX.Element => {
-  const { comparisonData: data } = useDataManager()
+  const { comparisonData: data, setLockedVars } = useDataManager()
+
+  useEffect(() => setLockedVars({}), [])
 
   const [ministryKey] = useQueryParam('Ministry_Key', StringParam)
   const ministry = VARIABLES.displayNameByKey('Ministry_Key', ministryKey) // TODO: cleaner implementation of this

@@ -1,4 +1,10 @@
-import React, { ReactNode, createContext, useContext, useMemo } from 'react'
+import React, {
+  ReactNode,
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+} from 'react'
 import { ArrayParam, StringParam, useQueryParams } from 'use-query-params'
 
 import {
@@ -10,6 +16,7 @@ import {
   OccupationRegionRawData,
   ProgressRawData,
 } from '../@types/DataTypes'
+import Dictionary from '../@types/Dictionary'
 import FixTypeLater from '../@types/FixTypeLater'
 
 type DataManagerContextType = {
@@ -21,6 +28,8 @@ type DataManagerContextType = {
   comparisonData?: ComparisonRawData[]
   employeeCountData?: EmployeeCountRawData[]
   occupationRegionData?: OccupationRegionRawData[]
+  lockedVars: Dictionary<string[]>
+  setLockedVars: (vars: Dictionary<string[]>) => void
 }
 
 const DataManagerContext = createContext<DataManagerContextType | undefined>(
@@ -87,6 +96,8 @@ function useDataManager(): DataManagerContextType {
     comparisonData,
     employeeCountData,
     occupationRegionData,
+    lockedVars,
+    setLockedVars,
   } = context
 
   const [queryValues] = useQueryParams({
@@ -103,6 +114,8 @@ function useDataManager(): DataManagerContextType {
     comparisonData: filterData(comparisonData, queryValues),
     employeeCount: getEmployeeCount(employeeCountData, queryValues),
     occupationRegionData: filterData(occupationRegionData, queryValues),
+    lockedVars,
+    setLockedVars,
   }
 }
 
@@ -125,6 +138,8 @@ function DataManagerProvider({
   employeeCountData,
   occupationRegionData,
 }: DataManagerProviderProps): FixTypeLater {
+  const [lockedVars, setLockedVars] = useState<Dictionary<string[]>>({})
+
   const value = useMemo(
     () => ({
       comparisonData,
@@ -133,6 +148,8 @@ function DataManagerProvider({
       ministryData,
       employeeCountData,
       occupationRegionData,
+      lockedVars,
+      setLockedVars,
     }),
     [
       employeeCountData,
@@ -141,6 +158,8 @@ function DataManagerProvider({
       leadershipData,
       ministryData,
       occupationRegionData,
+      lockedVars,
+      setLockedVars,
     ]
   )
 

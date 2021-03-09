@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDataManager } from '../Data/DataManager'
 
 import MinistryGraph from '../Graphs/MinistryGraph'
 
@@ -6,6 +7,13 @@ import MinistryGraph from '../Graphs/MinistryGraph'
 
 const Ministry = (): JSX.Element => {
   const title = 'Ministries'
+
+  const { setLockedVars } = useDataManager()
+
+  useEffect(
+    () => setLockedVars({ Employee_Type: ['REG'], Ministry_Key: ['BCPS'] }),
+    []
+  )
 
   return (
     <div>

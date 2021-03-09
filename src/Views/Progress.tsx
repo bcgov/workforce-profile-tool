@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { formatPercent } from '../Services/formatter'
@@ -11,7 +11,9 @@ import GenericView from './GenericView'
 import ProgressGraph from '../Graphs/ProgressGraph'
 
 const Progress = (): JSX.Element => {
-  const { progressData: data } = useDataManager()
+  const { progressData: data, setLockedVars } = useDataManager()
+
+  useEffect(() => setLockedVars({}), [])
 
   const columns: ColumnWithClassName<ProgressRawData>[] = [
     {

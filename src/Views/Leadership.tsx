@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { LeadershipRawData } from '../@types/DataTypes'
@@ -9,9 +9,13 @@ import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
 import LeadershipGraph from '../Graphs/LeadershipGraph'
 
-// TODO: Set + lock variables: ALL employees, BCPS ministry
 const Leadership = (): JSX.Element => {
-  const { leadershipData: data } = useDataManager()
+  const { leadershipData: data, setLockedVars } = useDataManager()
+
+  useEffect(
+    () => setLockedVars({ Employee_Type: ['ALL'], Ministry_Key: ['BCPS'] }),
+    []
+  )
 
   const columns: ColumnWithClassName<LeadershipRawData>[] = [
     {
