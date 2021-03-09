@@ -46,7 +46,7 @@ const Main = (props: Props): JSX.Element => {
         >
           <Tab key={'home'} name="Home">
             <div>
-              <h1>Workforce Profiles Report 2018</h1>
+              <h1>Workforce Profiles Report</h1>
               <p className="lead">
                 Explore statistics on the representation of designated equity
                 groups across the BC Public Service. This online tool replaces
