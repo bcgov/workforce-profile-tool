@@ -68,13 +68,13 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
       <R.BarChart
         data={filteredData}
         layout="vertical"
-        margin={{ left: 30, bottom: 15, right: 10 }}
+        margin={{ left: 30, bottom: 15, right: 20 }}
         barCategoryGap={15}
         barGap={2}
       >
         <R.XAxis type="number" interval={0}>
           <R.Label offset={-10} position={'insideBottom'}>
-            % in leadership positions
+            Count in BCPS {/* TODO: Fix this? Should it be ministryName? */}
           </R.Label>
         </R.XAxis>
         <R.YAxis dataKey="Des_Grp" type="category" />

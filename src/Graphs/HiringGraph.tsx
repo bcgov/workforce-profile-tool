@@ -52,21 +52,26 @@ const HiringGraph = ({ title }: Props): JSX.Element => {
     <R.ResponsiveContainer width="100%" height={500}>
       <R.BarChart
         data={filteredData}
-        margin={{ left: 30, bottom: 15, right: 10 }}
+        margin={{ left: 30, bottom: 15, right: 10, top: 10 }}
         barCategoryGap={15}
         barGap={2}
       >
         <R.XAxis dataKey="Des_Grp" type="category"></R.XAxis>
-        <R.YAxis type="number" interval={0}>
-          <R.Label offset={-10} position={'insideBottom'}>
-            % representation
-          </R.Label>
-        </R.YAxis>
+        <R.YAxis
+          type="number"
+          interval={0}
+          label={
+            <R.Text angle={-90} x={40} y={260}>
+              Count
+            </R.Text>
+          }
+        ></R.YAxis>
         <R.Tooltip />
         {LabelledBar({
           dataKey: '2018_hired_ct',
           fill: '#70CCDB',
           formatter: (d) => formatNumber(d, 1),
+          position: 'top',
         })}
       </R.BarChart>
     </R.ResponsiveContainer>

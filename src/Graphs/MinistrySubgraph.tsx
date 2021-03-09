@@ -2,19 +2,19 @@ import * as R from 'recharts'
 import React from 'react'
 
 import { formatPercent, parseFloatClean } from '../Services/formatter'
+import { ticks } from '../Services/scales'
 import { VARIABLES } from '../Variables/VariableManager'
 import Dictionary from '../@types/Dictionary'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
-import Legend from './Legend'
 import LabelledBar from './LabelledBar'
-import { ticks } from '../Services/scales'
+import Legend from './Legend'
 
 interface SubgraphProps {
   data: FixTypeLater[]
   masterTitle?: string
-  title?: string
   shortTitle?: string
+  title?: string
   varKey?: FixTypeLater
 }
 
@@ -102,7 +102,7 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
       >
         <R.XAxis type="number" ticks={tickArray} interval={0}>
           <R.Label offset={-10} position={'insideBottom'}>
-            % in leadership positions
+            % representation
           </R.Label>
         </R.XAxis>
         <R.YAxis dataKey="category" type="category" width={250} interval={0} />

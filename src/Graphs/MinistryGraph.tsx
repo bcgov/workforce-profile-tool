@@ -1,6 +1,7 @@
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import React from 'react'
 
+import { MinistryRawData } from '../@types/DataTypes'
 import { subtitle } from '../Views/Title'
 import { useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'
@@ -8,7 +9,6 @@ import Dictionary from '../@types/Dictionary'
 import MinistrySubGraph from './MinistrySubgraph'
 
 import './Graphs.scss'
-import { MinistryRawData } from '../@types/DataTypes'
 
 interface Props extends RouteComponentProps {
   title: string

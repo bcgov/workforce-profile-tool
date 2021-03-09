@@ -1,16 +1,14 @@
-import React, { Component } from 'react'
-import * as PlusPlot from '@plot-and-scatter/plusplot'
+import React from 'react'
 import * as R from 'recharts'
+
+import { formatPercent } from '../Services/formatter'
+import { useDataManager } from '../Data/DataManager'
+import { VARIABLES } from '../Variables/VariableManager'
 import GraphFrame from './GraphFrame'
+import LabelledBar from './LabelledBar'
 import Legend from './Legend'
 
 import './Graphs.scss'
-
-import { formatPercent } from '../Services/formatter'
-import { VARIABLES } from '../Variables/VariableManager'
-import FixTypeLater from '../@types/FixTypeLater'
-import { useDataManager } from '../Data/DataManager'
-import LabelledBar from './LabelledBar'
 
 interface Props {
   ministry?: string | null
@@ -67,7 +65,7 @@ const ComparisonGraph = ({ ministry, title }: Props): JSX.Element => {
       >
         <R.XAxis type="number" interval={0}>
           <R.Label offset={-10} position={'insideBottom'}>
-            % in leadership positions
+            % representation
           </R.Label>
         </R.XAxis>
         <R.YAxis dataKey="Des_Grp" type="category" />
