@@ -2,7 +2,7 @@
   "name": "wes-workforce-profiles",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://securesurveys.gov.bc.ca/ERAP/workforce-profiles/",
+  "homepage": "https://plotandscatter.com/wes-workforce-profiles/",
   "dependencies": {
     "@plot-and-scatter/plusplot": "0.31.0",
     "@plot-and-scatter/reactor-table": "0.11.0",
