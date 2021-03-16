@@ -77,7 +77,12 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
         barCategoryGap={2}
         barGap={2}
       >
-        <R.XAxis type="number" ticks={tickArray} interval={0}>
+        <R.XAxis
+          type="number"
+          ticks={tickArray}
+          interval={0}
+          tickFormatter={(d) => formatPercent(d, 0, 100)}
+        >
           <R.Label offset={-10} position={'insideBottom'}>
             % representation
           </R.Label>

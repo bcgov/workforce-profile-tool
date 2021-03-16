@@ -37,8 +37,9 @@ const HiringGraph = ({ title }: Props): JSX.Element => {
         <R.YAxis
           type="number"
           interval={0}
+          tickFormatter={(d) => formatNumber(d)}
           label={
-            <R.Text angle={-90} x={40} y={260}>
+            <R.Text angle={-90} x={30} y={260}>
               Count
             </R.Text>
           }

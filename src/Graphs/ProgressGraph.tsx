@@ -37,8 +37,9 @@ const ProgressGraph = ({ title }: Props): JSX.Element => {
         <R.YAxis
           type="number"
           interval={0}
+          tickFormatter={(d) => formatPercent(d, 0, 100)}
           label={
-            <R.Text angle={-90} x={50} y={260}>
+            <R.Text angle={-90} x={40} y={260}>
               % representation
             </R.Text>
           }

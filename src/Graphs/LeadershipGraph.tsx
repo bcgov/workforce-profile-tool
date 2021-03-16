@@ -46,11 +46,16 @@ const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
       <R.BarChart
         data={data}
         layout="vertical"
-        margin={{ left: 30, bottom: 15, right: 10 }}
+        margin={{ left: 30, bottom: 15, right: 15 }}
         barCategoryGap={15}
         barGap={2}
       >
-        <R.XAxis type="number" ticks={tickArray} interval={0}>
+        <R.XAxis
+          type="number"
+          ticks={tickArray}
+          interval={0}
+          tickFormatter={(d) => formatPercent(d, 0, 100)}
+        >
           <R.Label offset={-10} position={'insideBottom'}>
             % in leadership positions
           </R.Label>

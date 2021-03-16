@@ -30,7 +30,11 @@ const ComparisonGraph = ({ ministry, title }: Props): JSX.Element => {
         barCategoryGap={15}
         barGap={2}
       >
-        <R.XAxis type="number" interval={0}>
+        <R.XAxis
+          type="number"
+          interval={0}
+          tickFormatter={(d) => formatPercent(d, 0, 100)}
+        >
           <R.Label offset={-10} position={'insideBottom'}>
             % representation
           </R.Label>
