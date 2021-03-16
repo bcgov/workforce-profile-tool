@@ -39,8 +39,6 @@ class GraphFrame extends Component<Props> {
     // We will copy the already-existing Legend div from the page, if it exists.
     let legend = document.querySelector(`.${this.props.className} .Legend`)
 
-    console.log('legend', legend)
-
     // We need to increase the height of the svg by TITLE_HEIGHT and the width by
     // LEGEND_WIDTH, if a legend exists.
     const originalSVGWidth = +svg.getAttribute('width')!
@@ -55,8 +53,6 @@ class GraphFrame extends Component<Props> {
     svg.setAttribute('viewBox', `0 0 ${width} ${height}`)
     svg.setAttribute('style', 'background-color: #fff')
 
-    console.log('svg', svg)
-
     // The graph itself is in a <g> tag as a first child of the <svg>. We need
     // to translate it downwards to accommodate the title at the top. Note that
     // g.getAttribute('transform') returns something like 'translate(70, 20)',
@@ -68,10 +64,7 @@ class GraphFrame extends Component<Props> {
       return c.classList.contains('recharts-layer')
     })
 
-    console.log(gTags)
-
     Array.from(gTags).forEach((gTag) => {
-      console.log('--> gTag', gTag)
       gTag.setAttribute('transform', `translate(0, ${TITLE_HEIGHT})`)
       gTag.setAttribute('style', `font-family: "${FONT_FAMILY}"`)
     })
