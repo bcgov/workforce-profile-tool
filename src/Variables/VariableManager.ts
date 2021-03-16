@@ -93,7 +93,7 @@ export const VARIABLES = new VariableManager([
     true,
     'Ministry',
     [
-      new Variable('BCPS', true, 'BCPS', 'BC Public Service'),
+      new Variable('BCPS', true, 'BCPS', 'BC Public Service – Total'),
       new Variable(
         'AEST',
         true,
