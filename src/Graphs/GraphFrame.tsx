@@ -39,15 +39,23 @@ class GraphFrame extends Component<Props> {
     // We will copy the already-existing Legend div from the page, if it exists.
     let legend = document.querySelector(`.${this.props.className} .Legend`)
 
+    console.log('legend', legend)
+
     // We need to increase the height of the svg by TITLE_HEIGHT and the width by
     // LEGEND_WIDTH, if a legend exists.
     const originalSVGWidth = +svg.getAttribute('width')!
     const originalSVGHeight = +svg.getAttribute('height')!
+    let width = originalSVGWidth
+    const height = originalSVGHeight + TITLE_HEIGHT
     if (legend) {
-      svg.setAttribute('width', `${originalSVGWidth + LEGEND_WIDTH}`)
+      width += LEGEND_WIDTH
     }
-    svg.setAttribute('height', `${originalSVGHeight + TITLE_HEIGHT}`)
+    svg.setAttribute('width', `${width}`)
+    svg.setAttribute('height', `${height}`)
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`)
     svg.setAttribute('style', 'background-color: #fff')
+
+    console.log('svg', svg)
 
     // The graph itself is in a <g> tag as a first child of the <svg>. We need
     // to translate it downwards to accommodate the title at the top. Note that
@@ -55,26 +63,37 @@ class GraphFrame extends Component<Props> {
     // where the first number is the x-distance and the second is the y-distance
     // the graph has been translated (effectively, the left and right margins of
     // the graph, respectively).
-    const g = svg.firstChild as Element
+    // const g = Array.from(svg.childre  //as Element
+    const gTags = Array.from(svg.children).filter((c) => {
+      return c.classList.contains('recharts-layer')
+    })
+
+    console.log(gTags)
+
+    Array.from(gTags).forEach((gTag) => {
+      console.log('--> gTag', gTag)
+      gTag.setAttribute('transform', `translate(0, ${TITLE_HEIGHT})`)
+      gTag.setAttribute('style', `font-family: "${FONT_FAMILY}"`)
+    })
 
     // On IE Edge, the two items are actually not separated by a ',', so we need
     // to split on the space instead.
-    const transform = g.getAttribute('transform') as string
+    // const transform = g.getAttribute('transform') as string
 
-    const translateComponents =
-      transform.indexOf(',') > 0 ? transform.split(',') : transform.split(' ')
+    // const translateComponents =
+    //   transform.indexOf(',') > 0 ? transform.split(',') : transform.split(' ')
 
     // Now translateComponents is something like ['translate(70', '20)']. We
     // can get the top margin by running parseInt on the second array item.
-    const graphTopMargin = parseInt(translateComponents[1], 10)
+    // const graphTopMargin = parseInt(translateComponents[1], 10)
 
     // Re-set the second array item by increasing the top margin by the height
     // of the title.
-    translateComponents[1] = graphTopMargin + TITLE_HEIGHT + ')'
+    // translateComponents[1] = graphTopMargin + TITLE_HEIGHT + ')'
 
     // Re-set the transform attribute by re-joining the translateComponents
     // array. Now we have something like 'translate(70, 70)'.
-    g.setAttribute('transform', translateComponents.join(','))
+    // g.setAttribute('transform', translateComponents.join(','))
 
     // Build a virtual foreignObject element and set its parameters.
     const titleFO = document.createElementNS(FO_NAMESPACE, 'foreignObject')
@@ -96,7 +115,7 @@ class GraphFrame extends Component<Props> {
       legendFO = document.createElementNS(FO_NAMESPACE, 'foreignObject')
       legendFO.setAttribute('height', `${LEGEND_HEIGHT}`)
       legendFO.setAttribute('width', `${LEGEND_WIDTH}`)
-      legendFO.setAttribute('y', `${graphTopMargin + TITLE_HEIGHT}`)
+      legendFO.setAttribute('y', `${TITLE_HEIGHT}`)
       legendFO.setAttribute('x', `${originalSVGWidth}`)
 
       legend = legend.cloneNode(true) as Element
