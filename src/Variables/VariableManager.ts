@@ -80,7 +80,7 @@ export const VARIABLES = new VariableManager([
     'Designated Group',
     [
       new Variable('IND', true, 'Indigenous', 'Indigenous Peoples'),
-      new Variable('DIS', true, 'Disabled', 'People with Disabilities'),
+      new Variable('DIS', true, 'Disabled', 'Persons with Disabilities'),
       new Variable('VM', true, 'Vis. Min.', 'Visible Minorities'),
       new Variable('WOM', true, 'Women', 'Women'),
       new Variable('WOM_SM', false, null, 'Women in Senior Mgmt'),
