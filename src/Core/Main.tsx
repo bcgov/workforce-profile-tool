@@ -80,7 +80,8 @@ const Main = (props: Props): JSX.Element => {
             </div>
           </Tab>
           <Tab key={'indicators-of-progress'} name="Indicators of Progress">
-            <div className="Secondary">
+            <Progress />
+            {/* <div className="Secondary">
               <TabInterface
                 activeTabKey={activeInnerTab}
                 baseURL={`/${activeOuterTab}`}
@@ -89,11 +90,11 @@ const Main = (props: Props): JSX.Element => {
                 <Tab key={'representation-by-group'} name="By Designated Group">
                   <Progress />
                 </Tab>
-                <Tab key={'hiring'} name="Hiring">
+                 <Tab key={'hiring'} name="Hiring">
                   <Hiring />
-                </Tab>
-              </TabInterface>
-            </div>
+                </Tab> 
+              </TabInterface> 
+            </div> */}
           </Tab>
           <Tab key={'comparison'} name="Comparison">
             <Comparison />
