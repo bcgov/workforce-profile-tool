@@ -9,9 +9,10 @@ import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import LabelledBar from './LabelledBar'
 import Legend from './Legend'
+import { MinistryRawData } from '../@types/DataTypes'
 
 interface SubgraphProps {
-  data: FixTypeLater[]
+  data: MinistryRawData[]
   masterTitle?: string
   shortTitle?: string
   title?: string
@@ -22,9 +23,15 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
   if (!props.data) return <div>&nbsp;</div>
 
   let categories =
-    props.data && props.data.length ? Object.keys(props.data[0]) : []
+    props.data && props.data.length ? props.data.map((d) => d.Ministry_Key) : []
 
-  const provincialRepresentation = parseFloat(props.data[0]['BC Population'])
+  console.log('categories', categories, props.data[0])
+
+  const provincialRepresentation = parseFloat(
+    props.data.find((d) => d.Ministry_Key === 'BC Population')!.Value
+  )
+
+  console.log(provincialRepresentation)
 
   categories = categories.filter(
     (c) => c !== 'key' && c !== 'Des_Grp' && c !== 'BC Population'
@@ -40,8 +47,10 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
     WOM: '#E6B345',
   }
 
-  const chartData = categories.sort().map((category) => {
-    const count = props.data.map((row) => +parseFloatClean(row[category]))[0]
+  const chartData = categories.map((category) => {
+    const count = +parseFloatClean(
+      props.data.find((d) => d.Ministry_Key === category)!.Value
+    )
 
     if (count === 0) hasSuppressedData = true
 
@@ -103,11 +112,12 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
     </R.ResponsiveContainer>
   )
 
-  const legendItems = props.data.map((d) => {
-    const k = d['Des_Grp']
-    const label = VARIABLES.displayNameByKey('Des_Grp', k)
-    return { label, color }
-  })
+  const legendItems = [
+    {
+      label: VARIABLES.displayNameByKey('Des_Grp', props.data[0].Des_Grp),
+      color,
+    },
+  ]
 
   const legend = (
     <Legend

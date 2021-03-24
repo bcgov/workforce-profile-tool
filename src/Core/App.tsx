@@ -21,7 +21,6 @@ import './App.scss'
 const BASE_URL = process.env.REACT_APP_BASE_URL
 const PROGRESS_FILE = 'WP2020_Ind_Progress.csv'
 const LEADERSHIP_FILE = 'WP2020_Leadership.csv'
-const MINISTRY_FILE = 'WP2020_Ministries.csv'
 const COMPARISON_FILE = 'WP2020_Comparison.csv'
 const EMP_COUNT_FILE = 'WP2020_EmpCounts.csv'
 const OCC_REG_FILE = 'WP2020_Rep_Occ_Rgn.csv'
@@ -35,7 +34,6 @@ const loadData = <T,>(fileName: string) => {
 const App = (): JSX.Element => {
   const { data: progressData } = loadData<ProgressRawData>(PROGRESS_FILE)
   const { data: leadershipData } = loadData<LeadershipRawData>(LEADERSHIP_FILE)
-  const { data: ministryData } = loadData<MinistryRawData>(MINISTRY_FILE)
   const { data: comparisonData } = loadData<ComparisonRawData>(COMPARISON_FILE)
   const { data: employeeCountData } = loadData<EmployeeCountRawData>(
     EMP_COUNT_FILE
@@ -49,7 +47,6 @@ const App = (): JSX.Element => {
       <DataManagerProvider
         progressData={progressData}
         leadershipData={leadershipData}
-        ministryData={ministryData}
         comparisonData={comparisonData}
         employeeCountData={employeeCountData}
         occupationRegionData={occupationRegionData}

@@ -12,6 +12,8 @@ const Ministry = (): JSX.Element => {
     []
   )
 
+  console.log('data', data)
+
   return (
     <GenericView data={data}>
       <MinistryGraph title={'Ministries'} />
