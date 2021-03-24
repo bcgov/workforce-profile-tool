@@ -46,7 +46,7 @@ const Main = (props: Props): JSX.Element => {
                 the paper report that was previously produced which can be found
                 on the{' '}
                 <a
-                  href="https://www2.gov.bc.ca/gov/content/data/statistics/government/employee-research"
+                  href="https://www2.gov.bc.ca/gov/content/data/statistics/government/employee-research/workforce-profiles"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
