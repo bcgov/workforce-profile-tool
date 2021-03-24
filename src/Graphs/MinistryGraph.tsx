@@ -34,7 +34,9 @@ const MinistryGraph = (props: Props): JSX.Element => {
 
     return (
       <div key={k}>
-        <h2>{subtitle('', title)}</h2>
+        <h2>
+          {title}, regular employees {/* TODO: tidy up */}
+        </h2>
         <MinistrySubGraph
           data={dataMap[k]}
           masterTitle={props.title}

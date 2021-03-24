@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 
 import GenericView from './GenericView'
 import MinistryGraph from '../Graphs/MinistryGraph'
+import Title from './Title'
 
 const Ministry = (): JSX.Element => {
   const { ministryData: data, setLockedVars } = useDataManager()
@@ -16,6 +17,7 @@ const Ministry = (): JSX.Element => {
 
   return (
     <GenericView data={data}>
+      <h1>Ministries</h1>
       <MinistryGraph title={'Ministries'} />
     </GenericView>
   )

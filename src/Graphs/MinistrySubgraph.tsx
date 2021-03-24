@@ -52,6 +52,8 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
       props.data.find((d) => d.Ministry_Key === category)!.Value
     )
 
+    const categoryName = VARIABLES.displayNameByKey('Ministry_Key', category)
+
     if (count === 0) hasSuppressedData = true
 
     color = COLOR_MAP[props.data[0]['Des_Grp']]
@@ -61,7 +63,7 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
     }
 
     return {
-      category,
+      category: categoryName,
       count,
       color,
     }
@@ -75,7 +77,7 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
   const tickArray: number[] = ticks(chartData, ['count'])
 
   const graph = (
-    <R.ResponsiveContainer width="100%" height={600}>
+    <R.ResponsiveContainer width="100%" height={700}>
       <R.BarChart
         data={chartData}
         layout="vertical"
@@ -137,7 +139,6 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
     <GraphFrame
       className={`Ministry-${props.varKey}`}
       title={`${props.masterTitle} — ${props.title}`}
-      hideFilterNotes
       graph={graph}
       legend={legend}
     />
