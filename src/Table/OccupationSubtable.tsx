@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
-import { formatNumber, formatPercent } from '../Services/formatter'
+import { formatNumber, formatPercent } from '../Helpers/formatter'
 import { OccupationRegionRawData } from '../@types/DataTypes'
 import DownloadDataLink from './DownloadDataLink'
 import GenericTable from './GenericTable'

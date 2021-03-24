@@ -1,7 +1,7 @@
 import * as R from 'recharts'
 import React from 'react'
 
-import { formatDesGrpTick, formatNumber } from '../Services/formatter'
+import { formatDesGrpTick, formatNumber } from '../Helpers/formatter'
 import { useDataManager } from '../Data/DataManager'
 import GraphFrame from './GraphFrame'
 import LabelledBar from './LabelledBar'
@@ -9,6 +9,7 @@ import Legend from './Legend'
 
 import './Graphs.scss'
 import { VARIABLES } from '../Variables/VariableManager'
+import { BAR_V_CATEGORY_GAP_SIZE, BAR_V_GAP_SIZE } from '../Helpers/graphs'
 
 interface Props {
   title: string
@@ -27,8 +28,8 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
         data={filteredData}
         layout="vertical"
         margin={{ left: 30, bottom: 15, right: 20 }}
-        barCategoryGap={15}
-        barGap={2}
+        barCategoryGap={BAR_V_CATEGORY_GAP_SIZE}
+        barGap={BAR_V_GAP_SIZE}
       >
         <R.XAxis
           type="number"

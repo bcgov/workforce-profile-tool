@@ -1,8 +1,8 @@
 import * as R from 'recharts'
 import React from 'react'
 
-import { formatPercent, parseFloatClean } from '../Services/formatter'
-import { ticks } from '../Services/scales'
+import { formatPercent, parseFloatClean } from '../Helpers/formatter'
+import { ticks } from '../Helpers/scales'
 import { VARIABLES } from '../Variables/VariableManager'
 import Dictionary from '../@types/Dictionary'
 import FixTypeLater from '../@types/FixTypeLater'

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { LeadershipRawData } from '../@types/DataTypes'
-import { parseFloatClean } from '../Services/formatter'
+import { parseFloatClean } from '../Helpers/formatter'
 import { useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'
 import GenericTable from '../Table/GenericTable'

@@ -1,15 +1,16 @@
 import * as R from 'recharts'
 import React from 'react'
 
-import { formatDesGrpTick, formatPercent } from '../Services/formatter'
+import { BAR_H_CATEGORY_GAP_SIZE, BAR_H_GAP_SIZE } from '../Helpers/graphs'
+import { formatDesGrpTick, formatPercent } from '../Helpers/formatter'
 import { useDataManager } from '../Data/DataManager'
-import { VARIABLES } from '../Variables/VariableManager'
 import GraphFrame from './GraphFrame'
 import LabelledBar from './LabelledBar'
 import Legend from './Legend'
 
 import './Graphs.scss'
 
+// TODO: Factor this out
 interface Props {
   title: string
 }
@@ -26,8 +27,8 @@ const ProgressGraph = ({ title }: Props): JSX.Element => {
       <R.BarChart
         data={filteredData}
         margin={{ left: 30, bottom: 15, right: 10, top: 10 }}
-        barCategoryGap={15}
-        barGap={2}
+        barCategoryGap={BAR_H_CATEGORY_GAP_SIZE}
+        barGap={BAR_H_GAP_SIZE}
       >
         <R.XAxis
           dataKey="Des_Grp"

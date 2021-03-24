@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router'
 import FixTypeLater from '../@types/FixTypeLater'
 
-import qs from '../Services/query-string'
+import qs from '../Helpers/query-string'
 import {
   VARIABLES,
   activeVariablesToDisplay,
@@ -18,7 +18,7 @@ class FilterNotes extends Component<Props> {
     const activeVariables = VARIABLES.emptySelectableVariableMap()
     fromActiveVariableArray(
       activeVariables,
-      qs.parse(this.props.location.search)
+      qs.parse(this.props.location.search) // TODO: remove this and use the react query string library instead
     )
     const displayVariables = activeVariablesToDisplay(activeVariables)
 

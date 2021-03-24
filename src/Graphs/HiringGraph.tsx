@@ -1,7 +1,7 @@
 import * as R from 'recharts'
 import React from 'react'
 
-import { formatDesGrpTick, formatNumber } from '../Services/formatter'
+import { formatDesGrpTick, formatNumber } from '../Helpers/formatter'
 import { useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'
 import GraphFrame from './GraphFrame'

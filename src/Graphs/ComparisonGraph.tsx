@@ -1,13 +1,14 @@
 import React from 'react'
 import * as R from 'recharts'
 
-import { formatDesGrpTick, formatPercent } from '../Services/formatter'
+import { formatDesGrpTick, formatPercent } from '../Helpers/formatter'
 import { useDataManager } from '../Data/DataManager'
 import GraphFrame from './GraphFrame'
 import LabelledBar from './LabelledBar'
 import Legend from './Legend'
 
 import './Graphs.scss'
+import { BAR_V_CATEGORY_GAP_SIZE, BAR_V_GAP_SIZE } from '../Helpers/graphs'
 
 interface Props {
   ministry?: string | null
@@ -27,8 +28,8 @@ const ComparisonGraph = ({ ministry, title }: Props): JSX.Element => {
         data={filteredData}
         layout="vertical"
         margin={{ left: 30, bottom: 15, right: 10 }}
-        barCategoryGap={15}
-        barGap={2}
+        barCategoryGap={BAR_V_CATEGORY_GAP_SIZE}
+        barGap={BAR_V_GAP_SIZE}
       >
         <R.XAxis
           type="number"

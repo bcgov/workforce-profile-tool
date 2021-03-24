@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import './FilterCount.scss'
 
-import { formatNumber } from '../Services/formatter'
+import { formatNumber } from '../Helpers/formatter'
 
 interface Props {
   filterCount: number

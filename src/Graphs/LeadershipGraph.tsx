@@ -1,8 +1,8 @@
 import * as R from 'recharts'
 import React from 'react'
 
-import { formatDesGrpTick, formatPercent } from '../Services/formatter'
-import { ticks } from '../Services/scales'
+import { formatDesGrpTick, formatPercent } from '../Helpers/formatter'
+import { ticks } from '../Helpers/scales'
 import { useDataManager } from '../Data/DataManager'
 import GraphFrame from './GraphFrame'
 import LabelledBar from './LabelledBar'
@@ -10,6 +10,7 @@ import Legend from './Legend'
 
 import './Graphs.scss'
 import { VARIABLES } from '../Variables/VariableManager'
+import { BAR_V_CATEGORY_GAP_SIZE, BAR_V_GAP_SIZE } from '../Helpers/graphs'
 
 interface TitleProps {
   title: string
@@ -47,8 +48,8 @@ const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
         data={data}
         layout="vertical"
         margin={{ left: 30, bottom: 15, right: 15 }}
-        barCategoryGap={15}
-        barGap={2}
+        barCategoryGap={BAR_V_CATEGORY_GAP_SIZE}
+        barGap={BAR_V_GAP_SIZE}
       >
         <R.XAxis
           type="number"

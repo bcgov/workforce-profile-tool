@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { ComparisonRawData } from '../@types/DataTypes'
-import { formatPercent } from '../Services/formatter'
+import { formatPercent } from '../Helpers/formatter'
 import { StringParam, useQueryParam } from 'use-query-params'
 import { useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'

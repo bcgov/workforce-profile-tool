@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import FixTypeLater from '../@types/FixTypeLater'
-import { exportData } from '../Services/csvExporter'
+import { exportData } from '../Helpers/csvExporter'
 
 interface Props {
   columns: FixTypeLater

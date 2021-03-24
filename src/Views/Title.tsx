@@ -1,7 +1,7 @@
 import { ArrayParam, StringParam, useQueryParams } from 'use-query-params'
 import React from 'react'
 
-import { activeEmployeeType, activeMinistry } from '../Services/activeVariables'
+import { activeEmployeeType, activeMinistry } from '../Helpers/activeVariables'
 import { useDataManager } from '../Data/DataManager'
 import FixTypeLater from '../@types/FixTypeLater'
 

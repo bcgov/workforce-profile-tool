@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
-import { formatPercent } from '../Services/formatter'
+import { formatPercent } from '../Helpers/formatter'
 import { ProgressRawData } from '../@types/DataTypes'
 import { useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'
