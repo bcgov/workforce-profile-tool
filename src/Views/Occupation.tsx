@@ -38,7 +38,7 @@ const Occupation = (): JSX.Element => {
     const title = VARIABLES.displayNameByKey('Des_Grp', k)
     const shortTitle = VARIABLES.shortDisplayNameByKey('Des_Grp', k)
     return (
-      <div key={k}>
+      <div key={k} className="mb-5">
         <h2>{title}</h2>
         <OccupationSubtable data={dataMap[k]} shortTitle={shortTitle} />
       </div>

@@ -14,17 +14,9 @@ interface Props {
 }
 
 const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
-  const managementRows = data.filter((d) => d.Occupation_Type === 'Management')
-  const managementSubtotal = data.filter(
-    (d) => d.Occupation_Type === 'SubTotal_Mngt'
-  )
-  const nonManagementRows = data.filter(
-    (d) => d.Occupation_Type === 'NonManagement'
-  )
-  const nonManagementSubtotal = data.filter(
-    (d) => d.Occupation_Type === 'SubTotal_NonMngt'
-  )
-  const totalRow = data.filter((d) => d['Occupation_Type'] === 'Total')
+  const totalRow = data.filter((d) => d['Variable_Type'] === 'Total')
+
+  const filteredData = data.filter((d) => d.Variable_Type === 'Occupation')
 
   const columns: ColumnWithClassName<OccupationRegionRawData>[] = [
     {
@@ -104,22 +96,12 @@ const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
 
   // TODO: Add table footers to GenericTable
 
-  const allRows = managementRows
-    .concat(managementSubtotal)
-    .concat(nonManagementRows)
-    .concat(nonManagementSubtotal)
-    .concat(totalRow)
+  const allRows = filteredData.concat(totalRow)
 
   return (
     <div className="OccupationSubtable">
-      <h3>Management</h3>
-      <GenericTable columns={columns} data={managementRows} hideDefinitions />
-      <h3>Non-Management</h3>
-      <GenericTable
-        columns={columns}
-        data={nonManagementRows}
-        hideDefinitions
-      />
+      {/* <h3>Management</h3> */}
+      <GenericTable columns={columns} data={filteredData} hideDefinitions />
       <GenericTable columns={columns} data={totalRow} hideDefinitions />
       <DownloadDataLink
         columns={columns}
