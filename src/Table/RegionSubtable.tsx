@@ -101,9 +101,10 @@ const RegionSubtable = ({ data, shortTitle }: Props): JSX.Element => {
   return (
     <div className="RegionSubtable">
       <GenericTable columns={columns} data={regionRows} hideDefinitions />
+      <GenericTable columns={columns} data={totalRow} hideDefinitions />
       <DownloadDataLink
         columns={columns}
-        rows={regionRows}
+        rows={regionRows.concat(totalRow)}
         filename={'region'}
       />
       <Definitions />
