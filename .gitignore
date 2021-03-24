@@ -23,4 +23,5 @@ yarn-error.log*
 
 src/**/*.css
 *.zip
+public/data/**/*.csv
 
