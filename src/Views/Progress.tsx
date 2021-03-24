@@ -23,15 +23,15 @@ const Progress = (): JSX.Element => {
         VARIABLES.displayNameByKey('Des_Grp', d['Des_Grp']) || '',
     },
     {
-      id: '2015_pc',
-      Header: '2015, %',
-      accessor: (d) => formatPercent(d['2015_pc'], 1, 100),
-      className: 'text-right',
-    },
-    {
       id: '2018_pc',
       Header: '2018, %',
       accessor: (d) => formatPercent(d['2018_pc'], 1, 100),
+      className: 'text-right',
+    },
+    {
+      id: '2020_pc',
+      Header: '2020, %',
+      accessor: (d) => formatPercent(d['2020_pc'], 1, 100),
       className: 'text-right',
     },
   ]

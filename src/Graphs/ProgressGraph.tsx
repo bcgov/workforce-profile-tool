@@ -46,13 +46,13 @@ const ProgressGraph = ({ title }: Props): JSX.Element => {
         />
         <R.Tooltip />
         {LabelledBar({
-          dataKey: '2015_pc',
+          dataKey: '2018_pc',
           fill: '#70CCDB',
           formatter: (d) => formatPercent(d, 1, 100),
           position: 'top',
         })}
         {LabelledBar({
-          dataKey: '2018_pc',
+          dataKey: '2020_pc',
           fill: '#D2E2EE',
           formatter: (d) => formatPercent(d, 1, 100),
           position: 'top',
@@ -64,8 +64,8 @@ const ProgressGraph = ({ title }: Props): JSX.Element => {
   const legend = (
     <Legend
       items={[
-        { label: '2015', color: '#70CCDB' },
-        { label: '2018', color: '#D2E2EE' },
+        { label: '2018', color: '#70CCDB' },
+        { label: '2020', color: '#D2E2EE' },
       ]}
     />
   )

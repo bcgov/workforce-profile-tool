@@ -24,15 +24,15 @@ const Hiring = (): JSX.Element => {
       accessor: (r) => VARIABLES.displayNameByKey('Des_Grp', r.Des_Grp) || '',
     },
     {
-      id: '2018_hired_ct',
+      id: '2020_hired_ct',
       Header: 'Hired, 2015 to 2018',
-      accessor: (r) => formatNumber(r['2018_hired_ct']),
+      accessor: (r) => formatNumber(r['2020_hired_ct']),
       className: 'text-right',
     },
     {
       id: 'percent_total',
       Header: 'Percent of all hires',
-      accessor: (r) => formatPercent(r['2018_hired_ct'], 1, totalHired),
+      accessor: (r) => formatPercent(r['2020_hired_ct'], 1, totalHired),
       className: 'text-right',
     },
   ]

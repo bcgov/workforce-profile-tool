@@ -80,7 +80,7 @@ const getHiringTotal = (
       d.Ministry_Key === queryValues.Ministry_Key
   )
 
-  return data ? +data['2018_hired_ct'] : undefined
+  return data ? +data['2020_hired_ct'] : undefined
 }
 
 function useDataManager(): DataManagerContextType {

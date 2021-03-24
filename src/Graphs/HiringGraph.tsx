@@ -46,7 +46,7 @@ const HiringGraph = ({ title }: Props): JSX.Element => {
         />
         <R.Tooltip />
         {LabelledBar({
-          dataKey: '2018_hired_ct',
+          dataKey: '2020_hired_ct',
           fill: '#70CCDB',
           formatter: (d) => formatNumber(d, 1),
           position: 'top',

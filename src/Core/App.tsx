@@ -19,12 +19,12 @@ import VariableList from '../Variables/VariableList'
 import './App.scss'
 
 const BASE_URL = process.env.REACT_APP_BASE_URL
-const PROGRESS_FILE = 'WP2018_Ind_Progress-2_Sep2018.csv'
-const LEADERSHIP_FILE = 'WP2018_Leadership.csv'
-const MINISTRY_FILE = 'WP2018_Ministries-1.csv'
-const COMPARISON_FILE = 'WP2018_Comparison-2_updJUL20.csv'
-const EMP_COUNT_FILE = 'WP2018_EmpCounts.csv'
-const OCC_REG_FILE = 'WP2018_Rep_Occ_Rgn_v3_Oct16.csv'
+const PROGRESS_FILE = 'WP2020_Ind_Progress.csv'
+const LEADERSHIP_FILE = 'WP2020_Leadership.csv'
+const MINISTRY_FILE = 'WP2020_Ministries.csv'
+const COMPARISON_FILE = 'WP2020_Comparison.csv'
+const EMP_COUNT_FILE = 'WP2020_EmpCounts.csv'
+const OCC_REG_FILE = 'WP2020_Rep_Occ_Rgn.csv'
 
 const loadData = <T,>(fileName: string) => {
   return useQuery(fileName, async () =>

@@ -13,9 +13,9 @@ type EmployeeTypeKeyedData = {
 export type ProgressRawData = MinistryKeyedData &
   EmployeeTypeKeyedData &
   DesignatedGroupKeyedData & {
-    '2015_pc': string
     '2018_pc': string
-    '2018_hired_ct': string
+    '2020_pc': string
+    '2020_hired_ct': string
   }
 
 export type LeadershipRawData = DesignatedGroupKeyedData & {
