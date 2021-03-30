@@ -7,7 +7,7 @@ interface Props {
   dataKey: string
   fill: string
   formatter?: (d: string) => string
-  position?: string
+  position?: R.LabelProps['position']
 }
 
 const LabelledBar = (props: Props): JSX.Element => {

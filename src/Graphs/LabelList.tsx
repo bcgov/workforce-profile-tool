@@ -5,7 +5,7 @@ import * as R from 'recharts'
 interface Props {
   dataKey: string
   formatter?: (d: string) => string
-  position?: string
+  position?: R.LabelProps['position']
 }
 
 const LabelList = (props: Props): JSX.Element => {
