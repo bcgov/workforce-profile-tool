@@ -1,7 +1,7 @@
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import * as d3 from 'd3'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { DataManagerProvider } from '../Data/DataManager'
 import {
@@ -17,29 +17,50 @@ import Main from './Main'
 import VariableList from '../Variables/VariableList'
 
 import './App.scss'
+import { StringParam, useQueryParam } from 'use-query-params'
+import FixTypeLater from '../@types/FixTypeLater'
 
 const BASE_URL = process.env.REACT_APP_BASE_URL
-const PROGRESS_FILE = 'WP2020_Ind_Progress.csv'
-const LEADERSHIP_FILE = 'WP2020_Leadership.csv'
-const COMPARISON_FILE = 'WP2020_Comparison.csv'
-const EMP_COUNT_FILE = 'WP2020_EmpCounts.csv'
-const OCC_REG_FILE = 'WP2020_Rep_Occ_Rgn.csv'
+const PROGRESS_FILE = 'WPXXXX_Ind_Progress.csv'
+const LEADERSHIP_FILE = 'WPXXXX_Leadership.csv'
+const COMPARISON_FILE = 'WPXXXX_Comparison.csv'
+const EMP_COUNT_FILE = 'WPXXXX_EmpCounts.csv'
+const OCC_REG_FILE = 'WPXXXX_Rep_Occ_Rgn.csv'
 
-const loadData = <T,>(fileName: string) => {
-  return useQuery(fileName, async () =>
-    (await d3.csv(`${BASE_URL}/${fileName}`)).map((d) => (d as unknown) as T)
-  )
+const loadData = <T,>(fileName: string, year: string | null | undefined) => {
+  return useQuery(fileName, async () => {
+    if (year) {
+      return (
+        await d3.csv(`${BASE_URL}${year}/${fileName.replace('XXXX', year)}`)
+      ).map((d) => (d as unknown) as T)
+    } else {
+      return []
+    }
+  })
 }
 
 const App = (): JSX.Element => {
-  const { data: progressData } = loadData<ProgressRawData>(PROGRESS_FILE)
-  const { data: leadershipData } = loadData<LeadershipRawData>(LEADERSHIP_FILE)
-  const { data: comparisonData } = loadData<ComparisonRawData>(COMPARISON_FILE)
+  const [yearQueryVar, setYearQueryVar] = useQueryParam('Year', StringParam)
+
+  const { data: progressData } = loadData<ProgressRawData>(
+    PROGRESS_FILE,
+    yearQueryVar
+  )
+  const { data: leadershipData } = loadData<LeadershipRawData>(
+    LEADERSHIP_FILE,
+    yearQueryVar
+  )
+  const { data: comparisonData } = loadData<ComparisonRawData>(
+    COMPARISON_FILE,
+    yearQueryVar
+  )
   const { data: employeeCountData } = loadData<EmployeeCountRawData>(
-    EMP_COUNT_FILE
+    EMP_COUNT_FILE,
+    yearQueryVar
   )
   const { data: occupationRegionData } = loadData<OccupationRegionRawData>(
-    OCC_REG_FILE
+    OCC_REG_FILE,
+    yearQueryVar
   )
 
   return (

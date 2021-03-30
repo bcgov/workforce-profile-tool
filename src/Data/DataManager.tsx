@@ -113,22 +113,30 @@ const buildMinistryData = (
   data.push({
     Des_Grp: 'IND',
     Ministry_Key: 'BC Population',
-    Value: bcPops.find((d) => d.Des_Grp === 'IND')!.Employees_BC_Population,
+    Value: bcPops.find((d) => d.Des_Grp === 'IND')
+      ? bcPops.find((d) => d.Des_Grp === 'IND')!.Employees_BC_Population
+      : '',
   })
   data.push({
     Des_Grp: 'WOM',
     Ministry_Key: 'BC Population',
-    Value: bcPops.find((d) => d.Des_Grp === 'WOM')!.Employees_BC_Population,
+    Value: bcPops.find((d) => d.Des_Grp === 'WOM')
+      ? bcPops.find((d) => d.Des_Grp === 'WOM')!.Employees_BC_Population
+      : '',
   })
   data.push({
     Des_Grp: 'VM',
     Ministry_Key: 'BC Population',
-    Value: bcPops.find((d) => d.Des_Grp === 'VM')!.Employees_BC_Population,
+    Value: bcPops.find((d) => d.Des_Grp === 'VM')
+      ? bcPops.find((d) => d.Des_Grp === 'VM')!.Employees_BC_Population
+      : '',
   })
   data.push({
     Des_Grp: 'DIS',
     Ministry_Key: 'BC Population',
-    Value: bcPops.find((d) => d.Des_Grp === 'DIS')!.Employees_BC_Population,
+    Value: bcPops.find((d) => d.Des_Grp === 'DIS')
+      ? bcPops.find((d) => d.Des_Grp === 'DIS')!.Employees_BC_Population
+      : '',
   })
 
   return data

@@ -9,6 +9,9 @@ import LabelledBar from './LabelledBar'
 import Legend from './Legend'
 
 import './Graphs.scss'
+import FixTypeLater from '../@types/FixTypeLater'
+import CustomTooltip from './CustomTooltip'
+import { VARIABLES } from '../Variables/VariableManager'
 
 // TODO: Factor this out
 interface Props {
@@ -45,7 +48,14 @@ const ProgressGraph = ({ title }: Props): JSX.Element => {
             </R.Text>
           }
         />
-        <R.Tooltip />
+        <R.Tooltip
+          content={<CustomTooltip />}
+          labelFormatter={(d: FixTypeLater): FixTypeLater => {
+            const label = VARIABLES.displayNameByKey('Des_Grp', d)
+            if (label) return label
+            return d === '2018_pc' ? '2018' : '2020'
+          }}
+        />
         {LabelledBar({
           dataKey: '2018_pc',
           fill: '#70CCDB',

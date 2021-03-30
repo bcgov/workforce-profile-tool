@@ -64,6 +64,16 @@ class VariableManager {
 
 export const VARIABLES = new VariableManager([
   new VariableGroup(
+    'Year',
+    true,
+    'Data Year',
+    [
+      new Variable('2018', true, null, '2018'),
+      new Variable('2020', true, null, '2020'),
+    ],
+    '2020'
+  ),
+  new VariableGroup(
     'Employee_Type',
     true,
     'Employee Type',

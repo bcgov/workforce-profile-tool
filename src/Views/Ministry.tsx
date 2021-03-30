@@ -8,10 +8,7 @@ import Title from './Title'
 const Ministry = (): JSX.Element => {
   const { ministryData: data, setLockedVars } = useDataManager()
 
-  useEffect(
-    () => setLockedVars({ Employee_Type: ['REG'], Ministry_Key: ['BCPS'] }),
-    []
-  )
+  useEffect(() => setLockedVars({ Ministry_Key: ['BCPS'] }), [])
 
   console.log('data', data)
 
