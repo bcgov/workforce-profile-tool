@@ -81,7 +81,7 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
       <R.BarChart
         data={chartData}
         layout="vertical"
-        margin={{ left: 0, bottom: 15, right: 10 }}
+        margin={{ left: 0, bottom: 15, right: 35 }}
         style={{
           fontSize: '12px',
         }}
@@ -91,6 +91,7 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
         <R.XAxis
           type="number"
           ticks={tickArray}
+          domain={['dataMin', 'dataMax']}
           interval={0}
           tickFormatter={(d) => formatPercent(d, 0, 100)}
         >

@@ -12,6 +12,7 @@ import './Graphs.scss'
 import FixTypeLater from '../@types/FixTypeLater'
 import CustomTooltip from './CustomTooltip'
 import { VARIABLES } from '../Variables/VariableManager'
+import { ticks } from '../Helpers/scales'
 
 // TODO: Factor this out
 interface Props {
@@ -24,6 +25,10 @@ const ProgressGraph = ({ title }: Props): JSX.Element => {
   if (!data) return <div>&nbsp;</div>
 
   const filteredData = data.filter((d) => d['Des_Grp'] !== 'AS_TOTAL')
+
+  const tickArray: number[] = ticks(data, ['2018_pc', '2020_pc'])
+
+  console.log('tickArray', tickArray)
 
   const graph = (
     <R.ResponsiveContainer width="100%" height={500}>
@@ -39,6 +44,8 @@ const ProgressGraph = ({ title }: Props): JSX.Element => {
           tickFormatter={(desGrpKey) => formatDesGrpTick(desGrpKey)}
         />
         <R.YAxis
+          domain={['dataMin', 'dataMax']}
+          ticks={tickArray}
           type="number"
           interval={0}
           tickFormatter={(d) => formatPercent(d, 0, 100)}
