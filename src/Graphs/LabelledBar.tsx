@@ -12,9 +12,15 @@ interface Props {
 
 const LabelledBar = (props: Props): JSX.Element => {
   return (
-    <R.Bar {...props} dataKey={props.dataKey} fill={props.fill}>
+    <R.Bar
+      {...props}
+      dataKey={props.dataKey}
+      fill={props.fill}
+      isAnimationActive={false}
+    >
       <LabelList
         {...props}
+        key={Math.random()}
         dataKey={props.dataKey}
         formatter={props.formatter}
       />

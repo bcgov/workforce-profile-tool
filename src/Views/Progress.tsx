@@ -9,6 +9,7 @@ import Dictionary from '../@types/Dictionary'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
 import ProgressGraph from '../Graphs/ProgressGraph'
+import ProgressGraph2 from '../Graphs/ProgressGraph2'
 
 const Progress = (): JSX.Element => {
   const { progressData: data, setLockedVars } = useDataManager()
@@ -55,7 +56,8 @@ const Progress = (): JSX.Element => {
       title="Indicators of Progress — By Designated Group"
       data={data}
     >
-      <ProgressGraph title={'Indicators of Progress — By Designated Group'} />
+      {/* <ProgressGraph title={'Indicators of Progress — By Designated Group'} /> */}
+      <ProgressGraph2 title={'Indicators of Progress — By Designated Group'} />
       <GenericTable columns={columns} data={data} filename="progress" />
     </GenericView>
   )

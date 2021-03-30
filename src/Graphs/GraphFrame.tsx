@@ -149,7 +149,9 @@ class GraphFrame extends Component<Props> {
           this.props.className ? ` ${this.props.className}` : ''
         }`}
       >
-        <div className="col-9">{this.props.graph}</div>
+        <div className="col-9" style={{ height: '500px' }}>
+          {this.props.graph}
+        </div>
         <div className="col-3">
           {this.props.legend}
           {!this.props.hideFilterNotes && <FilterNotes />}
