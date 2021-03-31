@@ -27,6 +27,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-table": "^7.6.3",
+    "react-use-dimensions": "^1.2.1",
     "recharts": "^2.0.9",
     "save-svg-as-png": "^1.4.5",
     "strict-uri-encode": "^2.0.0",
@@ -41,9 +42,9 @@
     "prettier": "^2.2.1"
   },
   "scripts": {
-    "predeploy": "yarn build",
+    "predeploy": "node patch-react-spring.js && yarn build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "node patch-react-spring.js && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

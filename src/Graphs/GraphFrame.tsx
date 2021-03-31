@@ -1,12 +1,15 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 import * as saveSVG from 'save-svg-as-png'
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
 
 import FilterNotes from './FilterNotes'
 import FixTypeLater from '../@types/FixTypeLater'
 
 import './Graphs.scss'
+import { CHART_FONT } from '../Helpers/graphs'
+
+import useDimensions from 'react-use-dimensions'
 
 interface Props {
   className: string
@@ -14,15 +17,19 @@ interface Props {
   hideFilterNotes?: boolean
   legend: React.ReactNode
   title: string
+  setWidthCallback?: FixTypeLater
 }
 
-class GraphFrame extends Component<Props> {
-  constructor(props: Props) {
-    super(props)
-    this.saveSVGAsPNG = this.saveSVGAsPNG.bind(this)
-  }
+const GraphFrame = (props: Props): JSX.Element => {
+  const [ref, { width }] = useDimensions()
 
-  saveSVGAsPNG(): void {
+  useEffect(() => {
+    if (props.setWidthCallback) {
+      props.setWidthCallback(width)
+    }
+  }, [width])
+
+  const saveSVGAsPNG = (): void => {
     // Documentation for library: https://github.com/exupero/saveSvgAsPng
     const TITLE_HEIGHT = 50
     const LEGEND_WIDTH = 250
@@ -32,12 +39,12 @@ class GraphFrame extends Component<Props> {
 
     // First, get the actually-existing SVG and clone it
     let svg: Element = document.querySelector(
-      `.${this.props.className} svg`
+      `.${props.className} svg`
     ) as Element
     svg = svg.cloneNode(true) as Element
 
     // We will copy the already-existing Legend div from the page, if it exists.
-    let legend = document.querySelector(`.${this.props.className} .Legend`)
+    let legend = document.querySelector(`.${props.className} .Legend`)
 
     // We need to increase the height of the svg by TITLE_HEIGHT and the width by
     // LEGEND_WIDTH, if a legend exists.
@@ -66,7 +73,7 @@ class GraphFrame extends Component<Props> {
 
     Array.from(gTags).forEach((gTag) => {
       gTag.setAttribute('transform', `translate(0, ${TITLE_HEIGHT})`)
-      gTag.setAttribute('style', `font-family: "${FONT_FAMILY}"`)
+      gTag.setAttribute('style', `font-family: '${FONT_FAMILY}'`)
     })
 
     // On IE Edge, the two items are actually not separated by a ',', so we need
@@ -96,7 +103,7 @@ class GraphFrame extends Component<Props> {
 
     // Build the title element, append to the FO, and append the FO to the SVG
     const title = document.createElement('h1')
-    title.innerHTML = this.props.title
+    title.innerHTML = props.title
     titleFO.appendChild(title)
     svg.appendChild(titleFO)
 
@@ -119,7 +126,7 @@ class GraphFrame extends Component<Props> {
 
     // Add the active filters for context, if available.
     let filters: Element = document.querySelector(
-      `.${this.props.className} .FilterNotes`
+      `.${props.className} .FilterNotes`
     ) as Element
     if (legend && filters) {
       // Append the filters to the legend.
@@ -132,42 +139,40 @@ class GraphFrame extends Component<Props> {
     }
 
     // Now we can save our cloned SVG as a PNG.
-    saveSVG.saveSvgAsPng(svg, `${this.props.className}.png`, { scale: 2 })
+    saveSVG.saveSvgAsPng(svg, `${props.className}.png`, { scale: 2 })
   }
 
-  render(): JSX.Element {
-    if (!this.props.className) {
-      console.warn('GraphFrame should be provided a className attribute')
-    }
+  if (!props.className) {
+    console.warn('GraphFrame should be provided a className attribute')
+  }
 
-    const isIE =
-      /*  @cc_on!@ */ false || !!(document as FixTypeLater).documentMode
+  const isIE =
+    /*  @cc_on!@ */ false || !!(document as FixTypeLater).documentMode
 
-    return (
-      <div
-        className={`GraphFrame row${
-          this.props.className ? ` ${this.props.className}` : ''
-        }`}
-      >
-        <div className="col-9" style={{ height: '500px' }}>
-          {this.props.graph}
-        </div>
-        <div className="col-3">
-          {this.props.legend}
-          {!this.props.hideFilterNotes && <FilterNotes />}
-          {!isIE && (
-            <button
-              className="btn btn-sm btn-primary SavePNG"
-              onClick={this.saveSVGAsPNG}
-            >
-              <i className="fas fa-download" />
-              Save as PNG
-            </button>
-          )}
-        </div>
+  return (
+    <div
+      className={`GraphFrame row${
+        props.className ? ` ${props.className}` : ''
+      }`}
+    >
+      <div className="col-9" style={{ height: '500px' }} ref={ref}>
+        {props.graph}
       </div>
-    )
-  }
+      <div className="col-3">
+        {props.legend}
+        {!props.hideFilterNotes && <FilterNotes />}
+        {!isIE && (
+          <button
+            className="btn btn-sm btn-primary SavePNG"
+            onClick={saveSVGAsPNG}
+          >
+            <i className="fas fa-download" />
+            Save as PNG
+          </button>
+        )}
+      </div>
+    </div>
+  )
 }
 
 export default GraphFrame
