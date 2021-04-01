@@ -94,7 +94,8 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
           `${(+d).toLocaleString(undefined, { maximumFractionDigits: 0 })}`,
       }}
       labelFormat={(d): FixTypeLater => {
-        const numD = +d
+        const numD = isNaN(+d) ? 0 : +d
+        console.log('numD', numD)
         return ((
           <tspan
             dy={0}
@@ -103,8 +104,8 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
             dx={`${5 + (numD * (width - 220)) / 2 / maxItem}`}
             style={{ textAnchor: 'start' }}
           >
-            {d === 0 && '<3'}
-            {d > 0 && <>{formatNumber(d)}</>}
+            {numD === 0 && '<3'}
+            {numD > 0 && <>{formatNumber(numD)}</>}
           </tspan>
         ) as unknown) as string
       }}
