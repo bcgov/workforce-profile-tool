@@ -95,7 +95,6 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
       }}
       labelFormat={(d): FixTypeLater => {
         const numD = isNaN(+d) ? 0 : +d
-        console.log('numD', numD)
         return ((
           <tspan
             dy={0}
