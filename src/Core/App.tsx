@@ -1,7 +1,7 @@
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import * as d3 from 'd3'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import { DataManagerProvider } from '../Data/DataManager'
 import {
@@ -15,6 +15,7 @@ import {
 import Header from './Header'
 import Main from './Main'
 import VariableList from '../Variables/VariableList'
+import { queryClient } from '../index'
 
 import './App.scss'
 import { StringParam, useQueryParam } from 'use-query-params'
@@ -27,50 +28,84 @@ const COMPARISON_FILE = 'WPXXXX_Comparison.csv'
 const EMP_COUNT_FILE = 'WPXXXX_EmpCounts.csv'
 const OCC_REG_FILE = 'WPXXXX_Rep_Occ_Rgn.csv'
 
-const loadData = <T,>(fileName: string, year: string | null | undefined) => {
-  return useQuery(fileName, async () => {
-    if (year) {
-      return (
-        await d3.csv(`${BASE_URL}${year}/${fileName.replace('XXXX', year)}`)
-      ).map((d) => (d as unknown) as T)
-    } else {
-      return []
-    }
-  })
+const refetchOptions = {
+  enabled: false,
+  refetchOnWindowFocus: false,
+  refetchInterval: 0,
 }
 
 const App = (): JSX.Element => {
   const [yearQueryVar, setYearQueryVar] = useQueryParam('Year', StringParam)
+  const [time, setTime] = useState<number>(0)
 
-  const { data: progressData } = loadData<ProgressRawData>(
+  console.log('yearQueryVar', yearQueryVar)
+
+  const cb = useCallback(
+    async (fileName) => {
+      console.log('--> in here 2', yearQueryVar)
+      if (yearQueryVar) {
+        return await d3.csv(
+          `${BASE_URL}${yearQueryVar}/${fileName.replace(
+            'XXXX',
+            yearQueryVar || 'XXXX'
+          )}`
+        )
+      } else {
+        return []
+      }
+    },
+    [yearQueryVar]
+  )
+
+  const { data: progressData, refetch: progressRefetch } = useQuery(
     PROGRESS_FILE,
-    yearQueryVar
+    cb.bind(undefined, PROGRESS_FILE),
+    refetchOptions
   )
-  const { data: leadershipData } = loadData<LeadershipRawData>(
+  const { data: leadershipData, refetch: leadershipRefetch } = useQuery(
     LEADERSHIP_FILE,
-    yearQueryVar
+    cb.bind(undefined, LEADERSHIP_FILE),
+    refetchOptions
   )
-  const { data: comparisonData } = loadData<ComparisonRawData>(
+  const { data: comparisonData, refetch: comparisonRefetch } = useQuery(
     COMPARISON_FILE,
-    yearQueryVar
+    cb.bind(undefined, COMPARISON_FILE),
+    refetchOptions
   )
-  const { data: employeeCountData } = loadData<EmployeeCountRawData>(
+  const { data: employeeCountData, refetch: employeeCountRefetch } = useQuery(
     EMP_COUNT_FILE,
-    yearQueryVar
+    cb.bind(undefined, EMP_COUNT_FILE),
+    refetchOptions
   )
-  const { data: occupationRegionData } = loadData<OccupationRegionRawData>(
-    OCC_REG_FILE,
-    yearQueryVar
-  )
+  const {
+    data: occupationRegionData,
+    refetch: occupationRegionRefetch,
+  } = useQuery(OCC_REG_FILE, cb.bind(undefined, OCC_REG_FILE), refetchOptions)
+
+  useEffect(() => {
+    if (yearQueryVar) {
+      progressRefetch()
+      leadershipRefetch()
+      comparisonRefetch()
+      employeeCountRefetch()
+      occupationRegionRefetch()
+    }
+  }, [yearQueryVar])
+
+  console.log('progressData', progressData)
+
+  // useEffect(() => {
+  //   queryClient.refetchQueries()
+  // }, [yearQueryVar])
 
   return (
     <div className="App container-fluid">
       <DataManagerProvider
-        progressData={progressData}
-        leadershipData={leadershipData}
-        comparisonData={comparisonData}
-        employeeCountData={employeeCountData}
-        occupationRegionData={occupationRegionData}
+        progressData={progressData as ProgressRawData[]}
+        leadershipData={leadershipData as LeadershipRawData[]}
+        comparisonData={comparisonData as ComparisonRawData[]}
+        employeeCountData={employeeCountData as EmployeeCountRawData[]}
+        occupationRegionData={occupationRegionData as OccupationRegionRawData[]}
       >
         <div className="row">
           <div className="LeftColumn col-2">

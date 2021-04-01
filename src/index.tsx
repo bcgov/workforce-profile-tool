@@ -19,7 +19,7 @@ const queryConfig = {
   },
 }
 
-const queryClient = new QueryClient(queryConfig)
+export const queryClient = new QueryClient(queryConfig)
 
 ReactDOM.render(
   <HashRouter>
