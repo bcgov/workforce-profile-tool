@@ -18,10 +18,14 @@ const Occupation = (): JSX.Element => {
 
   const [ministryQueryVars] = useQueryParam('Ministry_Key', ArrayParam)
 
+  console.log('ministryQueryVars', ministryQueryVars)
+
+  console.log('occupationRegionData', data)
+
   useEffect(() => {
     const varsToLock: Dictionary<string[]> = ministryQueryVars?.includes('BCPS')
       ? {}
-      : { Employee_Type: ['REG'] }
+      : { Employee_Type: ['ALL'] }
     setLockedVars(varsToLock)
   }, [ministryQueryVars])
 
