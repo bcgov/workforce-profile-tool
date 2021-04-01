@@ -2,6 +2,7 @@ import { ResponsiveBar } from '@nivo/bar'
 import React, { useState } from 'react'
 
 import { NIVO_BASE_PROPS } from '../Helpers/graphs'
+import { parseFloatClean } from '../Helpers/formatter'
 import { useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'
 import FixTypeLater from '../@types/FixTypeLater'
@@ -9,7 +10,6 @@ import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 
 import './Graphs.scss'
-import { parseFloatClean } from '../Helpers/formatter'
 
 interface Props {
   ministry?: string | null
@@ -18,7 +18,7 @@ interface Props {
 
 const LEFT_MARGIN = 140
 const RIGHT_MARGIN = 50
-const TOP_MARGIN = 50
+const TOP_MARGIN = 0
 const BOTTOM_MARGIN = 50
 
 const ComparisonGraph = ({ ministry, title }: Props): JSX.Element => {
@@ -97,13 +97,7 @@ const ComparisonGraph = ({ ministry, title }: Props): JSX.Element => {
         const numD = +d
         const dx = 5 + (numD * (width - 220)) / 2 / maxItem
         return ((
-          <tspan
-            dy={0}
-            // dx={-numD + 5 + numD * ((width - 180 - 30) / maxItem)}
-            // dx={numD * ((width - 180 - 30) / maxItem)}
-            dx={dx}
-            style={{ textAnchor: 'start' }}
-          >
+          <tspan dy={0} dx={dx} style={{ textAnchor: 'start' }}>
             {d === 0 && '<3'}
             {d > 0 && (
               <>{d.toLocaleString(undefined, { minimumFractionDigits: 1 })}%</>

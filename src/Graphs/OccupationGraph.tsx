@@ -1,21 +1,15 @@
-import * as R from 'recharts'
+import { ResponsiveBar } from '@nivo/bar'
 import React, { useState } from 'react'
 
-import { formatDesGrpTick, formatNumber } from '../Helpers/formatter'
+import { formatNumber } from '../Helpers/formatter'
+import { NIVO_BASE_PROPS } from '../Helpers/graphs'
 import { useDataManager } from '../Data/DataManager'
+import { VARIABLES } from '../Variables/VariableManager'
+import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
-import LabelledBar from './LabelledBar'
 import Legend from './Legend'
 
 import './Graphs.scss'
-import { VARIABLES } from '../Variables/VariableManager'
-import {
-  BAR_V_CATEGORY_GAP_SIZE,
-  BAR_V_GAP_SIZE,
-  NIVO_BASE_PROPS,
-} from '../Helpers/graphs'
-import FixTypeLater from '../@types/FixTypeLater'
-import { ResponsiveBar } from '@nivo/bar'
 
 interface Props {
   title: string
@@ -23,7 +17,7 @@ interface Props {
 
 const LEFT_MARGIN = 140
 const RIGHT_MARGIN = 50
-const TOP_MARGIN = 50
+const TOP_MARGIN = 0
 const BOTTOM_MARGIN = 50
 
 const OccupationGraph = ({ title }: Props): JSX.Element => {
@@ -98,8 +92,6 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
         return ((
           <tspan
             dy={0}
-            // dx={-numD + 5 + numD * ((width - 180 - 30) / maxItem)}
-            // dx={numD * ((width - 180 - 30) / maxItem)}
             dx={`${5 + (numD * (width - 220)) / 2 / maxItem}`}
             style={{ textAnchor: 'start' }}
           >
@@ -119,49 +111,6 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
       {...NIVO_BASE_PROPS}
     />
   )
-
-  // const graph = (
-  //   <R.ResponsiveContainer width="100%" height={500}>
-  //     <R.BarChart
-  //       data={filteredData}
-  //       layout="vertical"
-  //       margin={{ left: 30, bottom: 15, right: 20 }}
-  //       barCategoryGap={BAR_V_CATEGORY_GAP_SIZE}
-  //       barGap={BAR_V_GAP_SIZE}
-  //     >
-  //       <R.XAxis
-  //         type="number"
-  //         interval={0}
-  //         tickFormatter={(d) => formatNumber(d)}
-  //       >
-  //         <R.Label offset={-10} position={'insideBottom'}>
-  //           Count in BCPS {/* TODO: Fix this? Should it be ministryName? */}
-  //         </R.Label>
-  //       </R.XAxis>
-  //       <R.YAxis
-  //         dataKey="Des_Grp"
-  //         type="category"
-  //         tickFormatter={(desGrpKey) => formatDesGrpTick(desGrpKey)}
-  //       />
-  //       <R.Tooltip />
-  //       {LabelledBar({
-  //         dataKey: 'DesGrp_Count_Expected',
-  //         fill: '#70CCDB',
-  //         formatter: (d) => formatNumber(d, ''),
-  //       })}
-  //       {LabelledBar({
-  //         dataKey: 'DesGrp_Count_ORG',
-  //         fill: '#D2E2EE',
-  //         formatter: (d) => formatNumber(d, ''),
-  //       })}
-  //       {LabelledBar({
-  //         dataKey: 'DesGrp_Count_Shortfall',
-  //         fill: '#6c757d',
-  //         formatter: (d) => formatNumber(d, ''),
-  //       })}
-  //     </R.BarChart>
-  //   </R.ResponsiveContainer>
-  // )
 
   const legend = (
     <Legend

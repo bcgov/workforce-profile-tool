@@ -1,22 +1,14 @@
-import * as R from 'recharts'
+import { ResponsiveBar } from '@nivo/bar'
 import React, { useState } from 'react'
 
-import { formatDesGrpTick, formatPercent } from '../Helpers/formatter'
-import { ticks } from '../Helpers/scales'
+import { NIVO_BASE_PROPS } from '../Helpers/graphs'
 import { useDataManager } from '../Data/DataManager'
+import { VARIABLES } from '../Variables/VariableManager'
+import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
-import LabelledBar from './LabelledBar'
 import Legend from './Legend'
 
 import './Graphs.scss'
-import { VARIABLES } from '../Variables/VariableManager'
-import {
-  BAR_V_CATEGORY_GAP_SIZE,
-  BAR_V_GAP_SIZE,
-  NIVO_BASE_PROPS,
-} from '../Helpers/graphs'
-import FixTypeLater from '../@types/FixTypeLater'
-import { ResponsiveBar } from '@nivo/bar'
 
 interface TitleProps {
   title: string
@@ -24,7 +16,7 @@ interface TitleProps {
 
 const LEFT_MARGIN = 140
 const RIGHT_MARGIN = 40
-const TOP_MARGIN = 50
+const TOP_MARGIN = 0
 const BOTTOM_MARGIN = 50
 
 const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
@@ -33,10 +25,6 @@ const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
   const [width, setWidth] = useState(620)
 
   if (!data) return <div>&nbsp;</div>
-
-  const tickArray: number[] = ticks(data, ['Executive', 'Management_Band'])
-
-  console.log('tickArray', tickArray)
 
   const items = data
     .map((d): number[] => {
@@ -133,45 +121,6 @@ const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
       {...NIVO_BASE_PROPS}
     />
   )
-
-  // const graph = (
-  //   <R.ResponsiveContainer width="100%" height={500}>
-  //     <R.BarChart
-  //       data={data}
-  //       layout="vertical"
-  //       margin={{ left: 30, bottom: 15, right: 15 }}
-  //       barCategoryGap={BAR_V_CATEGORY_GAP_SIZE}
-  //       barGap={BAR_V_GAP_SIZE}
-  //     >
-  //       <R.XAxis
-  //         type="number"
-  //         ticks={tickArray}
-  //         interval={0}
-  //         tickFormatter={(d) => formatPercent(d, 0, 100)}
-  //       >
-  //         <R.Label offset={-10} position={'insideBottom'}>
-  //           % in leadership positions
-  //         </R.Label>
-  //       </R.XAxis>
-  //       <R.YAxis
-  //         dataKey="Des_Grp"
-  //         type="category"
-  //         tickFormatter={(desGrpKey) => formatDesGrpTick(desGrpKey)}
-  //       />
-  //       <R.Tooltip />
-  //       {LabelledBar({
-  //         dataKey: 'Executive',
-  //         fill: '#70CCDB',
-  //         formatter: (d) => formatPercent(d, 1, 100),
-  //       })}
-  //       {LabelledBar({
-  //         dataKey: 'Management_Band',
-  //         fill: '#D2E2EE',
-  //         formatter: (d) => formatPercent(d, 1, 100),
-  //       })}
-  //     </R.BarChart>
-  //   </R.ResponsiveContainer>
-  // )
 
   return (
     <GraphFrame

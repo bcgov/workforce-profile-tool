@@ -2,7 +2,6 @@ import { RouteComponentProps, withRouter } from 'react-router-dom'
 import React from 'react'
 
 import { MinistryRawData } from '../@types/DataTypes'
-import { subtitle } from '../Views/Title'
 import { useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'
 import Dictionary from '../@types/Dictionary'
