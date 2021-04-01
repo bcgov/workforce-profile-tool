@@ -18,6 +18,7 @@ interface Props {
   legend: React.ReactNode
   title: string
   setWidthCallback?: FixTypeLater
+  height?: number
 }
 
 const GraphFrame = (props: Props): JSX.Element => {
@@ -155,7 +156,11 @@ const GraphFrame = (props: Props): JSX.Element => {
         props.className ? ` ${props.className}` : ''
       }`}
     >
-      <div className="col-9" style={{ height: '500px' }} ref={ref}>
+      <div
+        className="col-9"
+        style={{ height: `${props.height || 500}px` }}
+        ref={ref}
+      >
         {props.graph}
       </div>
       <div className="col-3">

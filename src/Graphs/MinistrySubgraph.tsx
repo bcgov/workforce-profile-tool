@@ -1,5 +1,5 @@
 import * as R from 'recharts'
-import React from 'react'
+import React, { useState } from 'react'
 
 import { formatPercent, parseFloatClean } from '../Helpers/formatter'
 import { ticks } from '../Helpers/scales'
@@ -10,6 +10,8 @@ import GraphFrame from './GraphFrame'
 import LabelledBar from './LabelledBar'
 import Legend from './Legend'
 import { MinistryRawData } from '../@types/DataTypes'
+import { NIVO_BASE_PROPS } from '../Helpers/graphs'
+import { ResponsiveBar } from '@nivo/bar'
 
 interface SubgraphProps {
   data: MinistryRawData[]
@@ -22,16 +24,14 @@ interface SubgraphProps {
 const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
   if (!props.data) return <div>&nbsp;</div>
 
+  const [width, setWidth] = useState(620)
+
   let categories =
     props.data && props.data.length ? props.data.map((d) => d.Ministry_Key) : []
-
-  console.log('categories', categories, props.data[0])
 
   const provincialRepresentation = parseFloat(
     props.data.find((d) => d.Ministry_Key === 'BC Population')!.Value
   )
-
-  console.log(provincialRepresentation)
 
   categories = categories.filter(
     (c) => c !== 'key' && c !== 'Des_Grp' && c !== 'BC Population'
@@ -69,7 +69,15 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
     }
   })
 
-  chartData.sort((a, b) => (a.count < b.count ? 1 : a.count > b.count ? -1 : 0))
+  const items = chartData
+    .map((d): number[] => {
+      return ['count'].map((e: string): number => +(d as FixTypeLater)[e])
+    })
+    .flat()
+
+  const maxItem = Math.max(...items)
+
+  chartData.sort((b, a) => (a.count < b.count ? 1 : a.count > b.count ? -1 : 0))
 
   const formatter = (d: FixTypeLater) =>
     d === 0 ? '<3' : formatPercent(d, 1, 100)
@@ -77,43 +85,129 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
   const tickArray: number[] = ticks(chartData, ['count'])
 
   const graph = (
-    <R.ResponsiveContainer width="100%" height={700}>
-      <R.BarChart
-        data={chartData}
-        layout="vertical"
-        margin={{ left: 0, bottom: 15, right: 35 }}
-        style={{
-          fontSize: '12px',
-        }}
-        barCategoryGap={2}
-        barGap={2}
-      >
-        <R.XAxis
-          type="number"
-          ticks={tickArray}
-          domain={['dataMin', 'dataMax']}
-          interval={0}
-          tickFormatter={(d) => formatPercent(d, 0, 100)}
-        >
-          <R.Label offset={-10} position={'insideBottom'}>
-            % representation
-          </R.Label>
-        </R.XAxis>
-        <R.YAxis dataKey="category" type="category" width={250} interval={0} />
-        <R.Tooltip />
-        {LabelledBar({
-          dataKey: 'count',
-          fill: chartData[0].color,
-          formatter,
-        })}
-        <R.ReferenceLine x={provincialRepresentation} stroke={'#333'}>
-          <R.Label position="insideBottomLeft" dy={-10} dx={5}>
-            {`BC Pop: ${formatter(provincialRepresentation)}`}
-          </R.Label>
-        </R.ReferenceLine>
-      </R.BarChart>
-    </R.ResponsiveContainer>
+    <ResponsiveBar
+      data={chartData}
+      keys={['count']}
+      indexBy="category"
+      margin={{ top: 0, right: 60, bottom: 50, left: 260 }}
+      valueScale={{ type: 'linear' }}
+      indexScale={{ type: 'band', round: true }}
+      colors={chartData[0].color}
+      groupMode={'grouped'}
+      borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
+      layout={'horizontal'}
+      layers={[
+        'grid',
+        'axes',
+        'bars',
+        'markers',
+        'legends',
+        (d) => {
+          return (
+            <>
+              <line
+                x1={d.xScale(provincialRepresentation)}
+                x2={d.xScale(provincialRepresentation)}
+                y1={0}
+                y2={d.height}
+                width={3}
+                stroke={'#333'}
+              />
+              <text
+                x={d.xScale(provincialRepresentation) + 5}
+                y={d.height - 10}
+              >
+                BC Pop: {provincialRepresentation}%
+              </text>
+            </>
+          )
+        },
+      ]}
+      axisLeft={{
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: 0,
+        // legend: 'Values',
+        legendPosition: 'middle',
+        legendOffset: 32,
+        format: (d: FixTypeLater) => d,
+      }}
+      axisBottom={{
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: 0,
+        legend: '% representation',
+        legendPosition: 'middle',
+        legendOffset: 40,
+        format: (d: FixTypeLater) =>
+          `${(+d).toLocaleString(undefined, { maximumFractionDigits: 0 })}%`,
+      }}
+      labelFormat={(d) => {
+        const numD = isNaN(+d) ? 0 : +d
+        return ((
+          <tspan
+            dy={0}
+            // dx={-numD + 5 + numD * ((width - 180 - 30) / maxItem)}
+            // dx={numD * ((width - 180 - 30) / maxItem)}
+            dx={`${0 + (numD * (width - 320)) / 2 / maxItem}`}
+            style={{ textAnchor: 'start' }}
+          >
+            {d === 0 && '<3'}
+            {d > 0 && (
+              <>{d.toLocaleString(undefined, { minimumFractionDigits: 1 })}%</>
+            )}
+          </tspan>
+        ) as unknown) as string
+      }}
+      tooltip={(d: FixTypeLater): JSX.Element => {
+        return (
+          <div style={{ color: d.color }}>
+            {d.indexValue}: {d.data[d.id]}%
+          </div>
+        )
+      }}
+      {...NIVO_BASE_PROPS}
+    />
   )
+
+  // const graph = (
+  //   <R.ResponsiveContainer width="100%" height={700}>
+  //     <R.BarChart
+  //       data={chartData}
+  //       layout="vertical"
+  //       margin={{ left: 0, bottom: 15, right: 35 }}
+  //       style={{
+  //         fontSize: '12px',
+  //       }}
+  //       barCategoryGap={2}
+  //       barGap={2}
+  //     >
+  //       <R.XAxis
+  //         type="number"
+  //         ticks={tickArray}
+  //         domain={['dataMin', 'dataMax']}
+  //         interval={0}
+  //         tickFormatter={(d) => formatPercent(d, 0, 100)}
+  //       >
+  //         <R.Label offset={-10} position={'insideBottom'}>
+  //           % representation
+  //         </R.Label>
+  //       </R.XAxis>
+  //       <R.YAxis dataKey="category" type="category" width={250} interval={0} />
+  //       <R.Tooltip />
+  //       {LabelledBar({
+  //         dataKey: 'count',
+  //         fill: chartData[0].color,
+  //         formatter,
+  //       })}
+  //       <R.ReferenceLine x={provincialRepresentation} stroke={'#333'}>
+  //         <R.Label position="insideBottomLeft" dy={-10} dx={5}>
+  //           {`BC Pop: ${formatter(provincialRepresentation)}`}
+  //         </R.Label>
+  //       </R.ReferenceLine>
+  //     </R.BarChart>
+  //   </R.ResponsiveContainer>
+  // )
 
   const legendItems = [
     {
@@ -142,6 +236,8 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
       title={`${props.masterTitle} — ${props.title}`}
       graph={graph}
       legend={legend}
+      setWidthCallback={setWidth}
+      height={600}
     />
   )
 }
