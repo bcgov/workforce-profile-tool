@@ -16,6 +16,7 @@ interface Props {
 
 const ProgressGraph = ({ title }: Props): JSX.Element => {
   const dataDefinitions = [
+    { key: '2015_pc', label: '2015', color: '#6c757d' },
     { key: '2018_pc', label: '2018', color: '#70CCDB' },
     { key: '2020_pc', label: '2020', color: '#D2E2EE' },
   ]
@@ -24,23 +25,31 @@ const ProgressGraph = ({ title }: Props): JSX.Element => {
 
   if (!data) return <div>&nbsp;</div>
 
+  const dataKeys = Object.keys(data[0]).filter((key) => key.endsWith('_pc'))
+
   const filteredData = data
     .filter((d) => d['Des_Grp'] !== 'AS_TOTAL')
-    .map((d) => ({
-      Des_Grp: d.Des_Grp,
-      '2018_pc': parseFloatClean(d['2018_pc']),
-      '2020_pc': parseFloatClean(d['2020_pc']),
-    }))
+    .map((d: FixTypeLater) => {
+      const obj: FixTypeLater = { Des_Grp: d.Des_Grp }
+      dataKeys.forEach(
+        (dataKey) => (obj[dataKey] = parseFloatClean(d[dataKey]))
+      )
+      return obj
+    })
+    .sort((a, b) => a['Des_Grp'].localeCompare(b['Des_Grp']))
 
   const graph = (
     <ResponsiveBar
       data={filteredData}
-      keys={['2018_pc', '2020_pc']}
+      keys={dataKeys}
       indexBy="Des_Grp"
       margin={{ top: 50, right: 30, bottom: 50, left: 70 }}
       valueScale={{ type: 'linear' }}
       indexScale={{ type: 'band', round: true }}
-      colors={['#70CCDB', '#D2E2EE']}
+      colors={dataKeys.map(
+        (dataKey) =>
+          dataDefinitions.find((dd) => dd.key === dataKey)?.color || ''
+      )}
       groupMode={'grouped'}
       innerPadding={2}
       borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
@@ -87,7 +96,9 @@ const ProgressGraph = ({ title }: Props): JSX.Element => {
     />
   )
 
-  const legend = <Legend items={dataDefinitions} />
+  const legend = (
+    <Legend items={dataDefinitions.filter((dd) => dataKeys.includes(dd.key))} />
+  )
 
   return (
     <GraphFrame

@@ -53,6 +53,7 @@ const ComparisonGraph = ({ ministry, title }: Props): JSX.Element => {
       Available_Workforce_BCPS: parseFloatClean(d['Available_Workforce_BCPS']),
       Employees_BC_Population: parseFloatClean(d['Employees_BC_Population']),
     }))
+    .sort((a, b) => b['Des_Grp'].localeCompare(a['Des_Grp']))
 
   const items = filteredData
     .map((d): number[] => {

@@ -50,13 +50,17 @@ const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
     })
     .flat()
 
+  const sortedData = data.sort((a, b) =>
+    b['Des_Grp'].localeCompare(a['Des_Grp'])
+  )
+
   const maxItem = Math.max(...items)
 
   const legend = <Legend items={dataDefinitions} />
 
   const graph = (
     <ResponsiveBar
-      data={data}
+      data={sortedData}
       keys={['Executive', 'Management_Band']}
       indexBy="Des_Grp"
       margin={{

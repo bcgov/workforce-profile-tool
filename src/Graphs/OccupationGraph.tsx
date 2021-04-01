@@ -34,7 +34,9 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
 
   if (!data) return <div>&nbsp;</div>
 
-  const filteredData = data.filter((d) => d.Variable_Type === 'Total')
+  const filteredData = data
+    .filter((d) => d.Variable_Type === 'Total')
+    .sort((a, b) => b['Des_Grp'].localeCompare(a['Des_Grp']))
 
   console.log('filteredData', filteredData)
 
@@ -102,8 +104,7 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
             dx={`${3 + (numD * (width - 210)) / 2 / maxItem}`}
             style={{ textAnchor: 'start' }}
           >
-            {numD === 0 && '<3'}
-            {numD > 0 && <>{formatNumber(numD)}</>}
+            {formatNumber(d)}
           </tspan>
         ) as unknown) as string
       }}

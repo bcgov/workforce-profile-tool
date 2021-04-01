@@ -1,25 +1,22 @@
 import { Route, Switch, withRouter } from 'react-router-dom'
+import { StringParam, useQueryParam } from 'use-query-params'
 import { useQuery } from 'react-query'
 import * as d3 from 'd3'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect } from 'react'
 
 import { DataManagerProvider } from '../Data/DataManager'
 import {
   ComparisonRawData,
   EmployeeCountRawData,
   LeadershipRawData,
-  MinistryRawData,
   OccupationRegionRawData,
   ProgressRawData,
 } from '../@types/DataTypes'
 import Header from './Header'
 import Main from './Main'
 import VariableList from '../Variables/VariableList'
-import { queryClient } from '../index'
 
 import './App.scss'
-import { StringParam, useQueryParam } from 'use-query-params'
-import FixTypeLater from '../@types/FixTypeLater'
 
 const BASE_URL = process.env.REACT_APP_BASE_URL
 const PROGRESS_FILE = 'WPXXXX_Ind_Progress.csv'
@@ -35,20 +32,14 @@ const refetchOptions = {
 }
 
 const App = (): JSX.Element => {
-  const [yearQueryVar, setYearQueryVar] = useQueryParam('Year', StringParam)
-  const [time, setTime] = useState<number>(0)
+  const [yearQueryVar] = useQueryParam('Year', StringParam)
 
-  console.log('yearQueryVar', yearQueryVar)
-
+  // TODO: Still a bit of a kludge
   const cb = useCallback(
     async (fileName) => {
-      console.log('--> in here 2', yearQueryVar)
       if (yearQueryVar) {
         return await d3.csv(
-          `${BASE_URL}${yearQueryVar}/${fileName.replace(
-            'XXXX',
-            yearQueryVar || 'XXXX'
-          )}`
+          `${BASE_URL}${yearQueryVar}/${fileName.replace('XXXX', yearQueryVar)}`
         )
       } else {
         return []
@@ -91,12 +82,6 @@ const App = (): JSX.Element => {
       occupationRegionRefetch()
     }
   }, [yearQueryVar])
-
-  console.log('progressData', progressData)
-
-  // useEffect(() => {
-  //   queryClient.refetchQueries()
-  // }, [yearQueryVar])
 
   return (
     <div className="App container-fluid">

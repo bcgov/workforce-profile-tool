@@ -20,10 +20,12 @@ const MinistryGraph = (props: Props): JSX.Element => {
 
   // Split the data
   const dataMap: Dictionary<MinistryRawData[]> = {}
-  data.forEach((d) => {
-    dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
-    dataMap[d.Des_Grp].push(d)
-  })
+  data
+    .sort((a, b) => b['Des_Grp'].localeCompare(a['Des_Grp']))
+    .forEach((d) => {
+      dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
+      dataMap[d.Des_Grp].push(d)
+    })
 
   const graphs = Object.keys(dataMap).map((k) => {
     const title = VARIABLES.displayNameByKey('Des_Grp', k)

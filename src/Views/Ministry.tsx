@@ -3,14 +3,11 @@ import React, { useEffect } from 'react'
 
 import GenericView from './GenericView'
 import MinistryGraph from '../Graphs/MinistryGraph'
-import Title from './Title'
 
 const Ministry = (): JSX.Element => {
   const { ministryData: data, setLockedVars } = useDataManager()
 
   useEffect(() => setLockedVars({ Ministry_Key: ['BCPS'] }), [])
-
-  console.log('data', data)
 
   return (
     <GenericView data={data}>
