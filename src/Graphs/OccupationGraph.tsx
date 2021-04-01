@@ -1,5 +1,6 @@
 import { ResponsiveBar } from '@nivo/bar'
 import React, { useState } from 'react'
+import Color from 'color'
 
 import { formatNumber } from '../Helpers/formatter'
 import { NIVO_BASE_PROPS } from '../Helpers/graphs'
@@ -98,7 +99,7 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
         return ((
           <tspan
             dy={0}
-            dx={`${5 + (numD * (width - 220)) / 2 / maxItem}`}
+            dx={`${3 + (numD * (width - 210)) / 2 / maxItem}`}
             style={{ textAnchor: 'start' }}
           >
             {numD === 0 && '<3'}
@@ -108,7 +109,7 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
       }}
       tooltip={(d: FixTypeLater): JSX.Element => {
         return (
-          <div style={{ color: d.color }}>
+          <div style={{ color: Color(d.color).darken(0.3).hex() }}>
             {VARIABLES.displayNameByKey('Des_Grp', d.indexValue)},{' '}
             {dataDefinitions.find((dd) => dd.key === d.id)?.label}:{' '}
             {formatNumber(d.data[d.id])}

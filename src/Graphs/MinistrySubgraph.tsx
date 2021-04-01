@@ -1,4 +1,5 @@
 import { ResponsiveBar } from '@nivo/bar'
+import Color from 'color'
 import React, { useState } from 'react'
 
 import { parseFloatClean } from '../Helpers/formatter'
@@ -87,6 +88,8 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
       indexScale={{ type: 'band', round: true }}
       colors={chartData[0].color}
       groupMode={'grouped'}
+      enableGridX={true}
+      enableGridY={false}
       borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
       layout={'horizontal'}
       layers={[
@@ -154,7 +157,7 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
       }}
       tooltip={(d: FixTypeLater): JSX.Element => {
         return (
-          <div style={{ color: d.color }}>
+          <div style={{ color: Color(d.color).darken(0.3).hex() }}>
             {d.indexValue}: {d.data[d.id]}%
           </div>
         )

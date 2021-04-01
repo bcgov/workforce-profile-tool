@@ -1,4 +1,5 @@
 import { ResponsiveBar } from '@nivo/bar'
+import Color from 'color'
 import React, { useState } from 'react'
 
 import { NIVO_BASE_PROPS } from '../Helpers/graphs'
@@ -112,7 +113,7 @@ const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
       }}
       tooltip={(d: FixTypeLater): JSX.Element => {
         return (
-          <div style={{ color: d.color }}>
+          <div style={{ color: Color(d.color).darken(0.3).hex() }}>
             {VARIABLES.displayNameByKey('Des_Grp', d.indexValue)},{' '}
             {dataDefinitions.find((dd) => dd.key === d.id)?.label}:{' '}
             {d.data[d.id]}%
