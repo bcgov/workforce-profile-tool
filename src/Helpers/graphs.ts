@@ -52,7 +52,7 @@ export const NIVO_BASE_PROPS = {
   motionStiffness: 90,
   motionDamping: 15,
   theme: NIVO_THEME,
-  labelSkipWidth: 12,
+  labelSkipWidth: 0,
   labelSkipHeight: 0,
   labelTextColor,
   axisTop: null,

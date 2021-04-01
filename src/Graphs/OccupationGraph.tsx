@@ -100,7 +100,7 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
             dy={0}
             // dx={-numD + 5 + numD * ((width - 180 - 30) / maxItem)}
             // dx={numD * ((width - 180 - 30) / maxItem)}
-            dx={`${5 + (numD * (width - 210)) / 2 / maxItem}`}
+            dx={`${5 + (numD * (width - 220)) / 2 / maxItem}`}
             style={{ textAnchor: 'start' }}
           >
             {d === 0 && '<3'}

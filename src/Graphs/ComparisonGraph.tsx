@@ -1,21 +1,15 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import * as R from 'recharts'
+import { ResponsiveBar } from '@nivo/bar'
+import React, { useState } from 'react'
 
-import { formatDesGrpTick, formatPercent } from '../Helpers/formatter'
+import { NIVO_BASE_PROPS } from '../Helpers/graphs'
 import { useDataManager } from '../Data/DataManager'
+import { VARIABLES } from '../Variables/VariableManager'
+import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
-import LabelledBar from './LabelledBar'
 import Legend from './Legend'
 
 import './Graphs.scss'
-import {
-  BAR_V_CATEGORY_GAP_SIZE,
-  BAR_V_GAP_SIZE,
-  NIVO_BASE_PROPS,
-} from '../Helpers/graphs'
-import FixTypeLater from '../@types/FixTypeLater'
-import { ResponsiveBar } from '@nivo/bar'
-import { VARIABLES } from '../Variables/VariableManager'
+import { parseFloatClean } from '../Helpers/formatter'
 
 interface Props {
   ministry?: string | null
@@ -23,7 +17,7 @@ interface Props {
 }
 
 const LEFT_MARGIN = 140
-const RIGHT_MARGIN = 40
+const RIGHT_MARGIN = 50
 const TOP_MARGIN = 50
 const BOTTOM_MARGIN = 50
 
@@ -35,8 +29,15 @@ const ComparisonGraph = ({ ministry, title }: Props): JSX.Element => {
   if (!data) return <div>&nbsp;</div>
 
   const filteredData = data
+    .filter((d) => d['Des_Grp'] !== 'AS_TOTAL')
+    .map((d) => ({
+      Des_Grp: d.Des_Grp,
+      Employees_BCPS: parseFloatClean(d['Employees_BCPS']),
+      Available_Workforce_BCPS: parseFloatClean(d['Available_Workforce_BCPS']),
+      Employees_BC_Population: parseFloatClean(d['Employees_BC_Population']),
+    }))
 
-  const items = data
+  const items = filteredData
     .map((d): number[] => {
       return [
         'Employees_BCPS',
@@ -94,12 +95,13 @@ const ComparisonGraph = ({ ministry, title }: Props): JSX.Element => {
       }}
       labelFormat={(d): FixTypeLater => {
         const numD = +d
+        const dx = 5 + (numD * (width - 220)) / 2 / maxItem
         return ((
           <tspan
             dy={0}
             // dx={-numD + 5 + numD * ((width - 180 - 30) / maxItem)}
             // dx={numD * ((width - 180 - 30) / maxItem)}
-            dx={`${5 + (numD * (width - 210)) / 2 / maxItem}`}
+            dx={dx}
             style={{ textAnchor: 'start' }}
           >
             {d === 0 && '<3'}

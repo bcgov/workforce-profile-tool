@@ -26,8 +26,6 @@ const MinistryGraph = (props: Props): JSX.Element => {
     dataMap[d.Des_Grp].push(d)
   })
 
-  console.log('dataMap', dataMap)
-
   const graphs = Object.keys(dataMap).map((k) => {
     const title = VARIABLES.displayNameByKey('Des_Grp', k)
     const shortTitle = VARIABLES.shortDisplayNameByKey('Des_Grp', k)
