@@ -71,6 +71,7 @@ const ComparisonGraph = ({ ministry, title }: Props): JSX.Element => {
       borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
       enableGridX={true}
       enableGridY={false}
+      innerPadding={2}
       axisLeft={{
         tickSize: 5,
         tickPadding: 5,

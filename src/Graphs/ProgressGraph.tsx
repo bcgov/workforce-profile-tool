@@ -36,6 +36,7 @@ const ProgressGraph = ({ title }: Props): JSX.Element => {
       indexScale={{ type: 'band', round: true }}
       colors={['#70CCDB', '#D2E2EE']}
       groupMode={'grouped'}
+      innerPadding={2}
       borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
       axisBottom={{
         tickSize: 5,
