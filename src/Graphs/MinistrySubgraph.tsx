@@ -165,7 +165,8 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
 
   const legendItems = [
     {
-      label: VARIABLES.displayNameByKey('Des_Grp', props.data[0].Des_Grp),
+      key: 'Des_Grp',
+      label: VARIABLES.displayNameByKey('Des_Grp', props.data[0].Des_Grp) || '',
       color,
     },
   ]

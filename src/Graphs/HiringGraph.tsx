@@ -3,7 +3,6 @@ import React from 'react'
 
 import { formatDesGrpTick, formatNumber } from '../Helpers/formatter'
 import { useDataManager } from '../Data/DataManager'
-import { VARIABLES } from '../Variables/VariableManager'
 import GraphFrame from './GraphFrame'
 import LabelledBar from './LabelledBar'
 import Legend from './Legend'
@@ -15,6 +14,10 @@ interface Props {
 }
 
 const HiringGraph = ({ title }: Props): JSX.Element => {
+  const dataDefinitions = [
+    { key: '2020_hired_ct', label: 'Hired, 2015 to 2018', color: '#70CCDB' },
+  ]
+
   const { progressData: data } = useDataManager()
 
   if (!data) return <div>&nbsp;</div>
@@ -60,9 +63,7 @@ const HiringGraph = ({ title }: Props): JSX.Element => {
       className="Hiring"
       title={title}
       graph={graph}
-      legend={
-        <Legend items={[{ label: 'Hired, 2015 to 2018', color: '#70CCDB' }]} />
-      }
+      legend={<Legend items={dataDefinitions} />}
     />
   )
 }

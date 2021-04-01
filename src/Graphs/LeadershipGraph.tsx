@@ -20,6 +20,21 @@ const TOP_MARGIN = 0
 const BOTTOM_MARGIN = 50
 
 const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
+  const dataDefinitions = [
+    {
+      key: 'Executive',
+      label: 'Executive Leadership',
+      color: '#70CCDB',
+      tooltip: `Executive Leadership includes all positions classified as Assistant Deputy Minister and Deputy Minister.`,
+    },
+    {
+      key: 'Management_Band',
+      label: 'Management Band Leadership',
+      color: '#D2E2EE',
+      tooltip: `Management Band Leadership includes all positions classified as Band 1 through 6, and those classified as Applied Leadership, Business Leadership, and Strategic Leadership. Order in Council (OIC) appointments within these classifications is also included.`,
+    },
+  ]
+
   const { leadershipData: data } = useDataManager()
 
   const [width, setWidth] = useState(620)
@@ -36,22 +51,7 @@ const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
 
   const maxItem = Math.max(...items)
 
-  const legend = (
-    <Legend
-      items={[
-        {
-          label: 'Executive Leadership',
-          color: '#70CCDB',
-          tooltip: `Executive Leadership includes all positions classified as Assistant Deputy Minister and Deputy Minister.`,
-        },
-        {
-          label: 'Management Band Leadership',
-          color: '#D2E2EE',
-          tooltip: `Management Band Leadership includes all positions classified as Band 1 through 6, and those classified as Applied Leadership, Business Leadership, and Strategic Leadership. Order in Council (OIC) appointments within these classifications is also included.`,
-        },
-      ]}
-    />
-  )
+  const legend = <Legend items={dataDefinitions} />
 
   const graph = (
     <ResponsiveBar
@@ -113,7 +113,8 @@ const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
       tooltip={(d: FixTypeLater): JSX.Element => {
         return (
           <div style={{ color: d.color }}>
-            {VARIABLES.displayNameByKey('Des_Grp', d.indexValue)}, {d.id}:{' '}
+            {VARIABLES.displayNameByKey('Des_Grp', d.indexValue)},{' '}
+            {dataDefinitions.find((dd) => dd.key === d.id)?.label}:{' '}
             {d.data[d.id]}%
           </div>
         )

@@ -22,6 +22,22 @@ const TOP_MARGIN = 0
 const BOTTOM_MARGIN = 50
 
 const ComparisonGraph = ({ ministry, title }: Props): JSX.Element => {
+  const dataDefinitions = [
+    { key: 'Employees_BCPS', label: `${ministry}`, color: '#6c757d' },
+    {
+      key: 'Available_Workforce_BCPS',
+      label: 'Available Workforce',
+      color: '#70CCDB',
+      tooltip: `The representation of the target group in the BC Workforce according to Statistics Canada's 2011 National Household Survey The "Available Workforce" is adjusted in accordance with the occupational distribution of jobs within the Organization, and the geographic area from which recruitment is carried out, in order to reflect the "available" workforce to the Organization.`,
+    },
+    {
+      key: 'Employees_BC_Population',
+      label: 'BC Population',
+      color: '#D2E2EE',
+      tooltip: `Statistics Canada, 2011 National Household Survey`,
+    },
+  ]
+
   const { comparisonData: data } = useDataManager()
 
   const [width, setWidth] = useState(620)
@@ -108,7 +124,8 @@ const ComparisonGraph = ({ ministry, title }: Props): JSX.Element => {
       tooltip={(d: FixTypeLater): JSX.Element => {
         return (
           <div style={{ color: d.color }}>
-            {VARIABLES.displayNameByKey('Des_Grp', d.indexValue)}, {d.id}:{' '}
+            {VARIABLES.displayNameByKey('Des_Grp', d.indexValue)},{' '}
+            {dataDefinitions.find((dd) => dd.key === d.id)?.label}:{' '}
             {d.data[d.id]}%
           </div>
         )
@@ -117,23 +134,7 @@ const ComparisonGraph = ({ ministry, title }: Props): JSX.Element => {
     />
   )
 
-  const legend = (
-    <Legend
-      items={[
-        { label: `${ministry}`, color: '#6c757d' },
-        {
-          label: 'Available Workforce',
-          color: '#70CCDB',
-          tooltip: `The representation of the target group in the BC Workforce according to Statistics Canada's 2011 National Household Survey The "Available Workforce" is adjusted in accordance with the occupational distribution of jobs within the Organization, and the geographic area from which recruitment is carried out, in order to reflect the "available" workforce to the Organization.`,
-        },
-        {
-          label: 'BC Population',
-          color: '#D2E2EE',
-          tooltip: `Statistics Canada, 2011 National Household Survey`,
-        },
-      ]}
-    />
-  )
+  const legend = <Legend items={dataDefinitions} />
 
   return (
     <GraphFrame

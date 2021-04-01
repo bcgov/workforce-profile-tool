@@ -21,6 +21,12 @@ const TOP_MARGIN = 0
 const BOTTOM_MARGIN = 50
 
 const OccupationGraph = ({ title }: Props): JSX.Element => {
+  const dataDefinitions = [
+    { key: 'DesGrp_Count_Expected', label: 'Expected', color: '#70CCDB' },
+    { key: 'DesGrp_Count_ORG', label: 'Actual', color: '#D2E2EE' },
+    { key: 'DesGrp_Count_Shortfall', label: 'Shortfall', color: '#6c757d' },
+  ]
+
   const { occupationRegionData: data } = useDataManager()
 
   const [width, setWidth] = useState(620)
@@ -103,7 +109,8 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
       tooltip={(d: FixTypeLater): JSX.Element => {
         return (
           <div style={{ color: d.color }}>
-            {VARIABLES.displayNameByKey('Des_Grp', d.indexValue)}, {d.id}:{' '}
+            {VARIABLES.displayNameByKey('Des_Grp', d.indexValue)},{' '}
+            {dataDefinitions.find((dd) => dd.key === d.id)?.label}:{' '}
             {formatNumber(d.data[d.id])}
           </div>
         )
@@ -112,15 +119,7 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
     />
   )
 
-  const legend = (
-    <Legend
-      items={[
-        { label: 'Expected', color: '#70CCDB' },
-        { label: 'Actual', color: '#D2E2EE' },
-        { label: 'Shortfall', color: '#6c757d' },
-      ]}
-    />
-  )
+  const legend = <Legend items={dataDefinitions} />
 
   return (
     <GraphFrame

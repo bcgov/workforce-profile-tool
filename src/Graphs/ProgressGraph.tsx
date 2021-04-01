@@ -14,6 +14,11 @@ interface Props {
 }
 
 const ProgressGraph = ({ title }: Props): JSX.Element => {
+  const dataDefinitions = [
+    { key: '2018_pc', label: '2018', color: '#70CCDB' },
+    { key: '2020_pc', label: '2020', color: '#D2E2EE' },
+  ]
+
   const { progressData: data } = useDataManager()
 
   if (!data) return <div>&nbsp;</div>
@@ -71,7 +76,8 @@ const ProgressGraph = ({ title }: Props): JSX.Element => {
       tooltip={(d: FixTypeLater): JSX.Element => {
         return (
           <div style={{ color: d.color }}>
-            {VARIABLES.displayNameByKey('Des_Grp', d.indexValue)}, {d.id}:{' '}
+            {VARIABLES.displayNameByKey('Des_Grp', d.indexValue)},{' '}
+            {dataDefinitions.find((dd) => dd.key === d.id)?.label}:{' '}
             {d.data[d.id]}%
           </div>
         )
@@ -80,14 +86,7 @@ const ProgressGraph = ({ title }: Props): JSX.Element => {
     />
   )
 
-  const legend = (
-    <Legend
-      items={[
-        { label: '2018', color: '#70CCDB' },
-        { label: '2020', color: '#D2E2EE' },
-      ]}
-    />
-  )
+  const legend = <Legend items={dataDefinitions} />
 
   return (
     <GraphFrame

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router'
-import FixTypeLater from '../@types/FixTypeLater'
 
+import { DataDefinition } from '../@types/DataDefinition'
 import Tooltip from '../Core/Tooltip'
 
 import './Legend.scss'
 
 interface Props extends RouteComponentProps {
-  items: FixTypeLater[]
+  items: DataDefinition[]
   notes?: React.ReactNode
 }
 
