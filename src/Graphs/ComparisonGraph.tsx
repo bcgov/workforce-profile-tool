@@ -1,6 +1,6 @@
 import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import { NIVO_BASE_PROPS } from '../Helpers/graphs'
 import { parseFloatClean } from '../Helpers/formatter'
@@ -11,6 +11,7 @@ import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 
 import './Graphs.scss'
+import { getTooltip } from '../Data/tooltipHelper'
 
 interface Props {
   ministry?: string | null
@@ -23,23 +24,23 @@ const TOP_MARGIN = 0
 const BOTTOM_MARGIN = 50
 
 const ComparisonGraph = ({ ministry, title }: Props): JSX.Element => {
+  const { comparisonData: data, year = '' } = useDataManager()
+
   const dataDefinitions = [
     { key: 'Employees_BCPS', label: `${ministry}`, color: '#6c757d' },
     {
       key: 'Available_Workforce_BCPS',
       label: 'Available Workforce',
       color: '#70CCDB',
-      tooltip: `The representation of the target group in the BC Workforce according to Statistics Canada's 2011 National Household Survey The "Available Workforce" is adjusted in accordance with the occupational distribution of jobs within the Organization, and the geographic area from which recruitment is carried out, in order to reflect the "available" workforce to the Organization.`,
+      tooltip: getTooltip('comparison-available-workforce', year),
     },
     {
       key: 'Employees_BC_Population',
       label: 'BC Population',
       color: '#D2E2EE',
-      tooltip: `Statistics Canada, 2011 National Household Survey`,
+      tooltip: getTooltip('comparison-bc-population', year),
     },
   ]
-
-  const { comparisonData: data } = useDataManager()
 
   const [width, setWidth] = useState(620)
 

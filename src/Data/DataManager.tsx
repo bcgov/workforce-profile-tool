@@ -21,6 +21,7 @@ import FixTypeLater from '../@types/FixTypeLater'
 import { DES_GRP_ORDERING } from '../Variables/VariableManager'
 
 type DataManagerContextType = {
+  year?: string
   progressData?: ProgressRawData[]
   hiringTotal?: number
   employeeCount?: number
@@ -174,9 +175,11 @@ function useDataManager(): DataManagerContextType {
     Employee_Type: StringParam,
     Des_Grp: ArrayParam,
     Ministry_Key: StringParam,
+    Year: StringParam,
   })
 
   return {
+    year: queryValues.Year || '',
     progressData: sortData(filterData(progressData, queryValues)),
     hiringTotal: getHiringTotal(progressData, queryValues),
     leadershipData: sortData(filterData(leadershipData, queryValues)),

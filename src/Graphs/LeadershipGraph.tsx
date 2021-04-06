@@ -10,6 +10,7 @@ import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 
 import './Graphs.scss'
+import { getTooltip } from '../Data/tooltipHelper'
 
 interface TitleProps {
   title: string
@@ -21,22 +22,22 @@ const TOP_MARGIN = 0
 const BOTTOM_MARGIN = 50
 
 const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
+  const { leadershipData: data, year = '' } = useDataManager() // TODO: don't assign default '' to year
+
   const dataDefinitions = [
     {
       key: 'Executive',
       label: 'Executive Leadership',
       color: '#70CCDB',
-      tooltip: `Executive Leadership includes all positions classified as Assistant Deputy Minister and Deputy Minister.`,
+      tooltip: getTooltip('leadership-executive-leadership', year),
     },
     {
       key: 'Management_Band',
       label: 'Management Band Leadership',
       color: '#D2E2EE',
-      tooltip: `Management Band Leadership includes all positions classified as Band 1 through 6, and those classified as Applied Leadership, Business Leadership, and Strategic Leadership. Order in Council (OIC) appointments within these classifications is also included.`,
+      tooltip: getTooltip('leadership-management-band-leadership', year),
     },
   ]
-
-  const { leadershipData: data } = useDataManager()
 
   const [width, setWidth] = useState(620)
 
