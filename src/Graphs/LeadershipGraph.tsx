@@ -16,8 +16,8 @@ interface TitleProps {
   title: string
 }
 
-const LEFT_MARGIN = 140
-const RIGHT_MARGIN = 40
+const LEFT_MARGIN = 160
+const RIGHT_MARGIN = 50
 const TOP_MARGIN = 0
 const BOTTOM_MARGIN = 50
 
@@ -106,7 +106,7 @@ const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
             dy={0}
             // dx={-numD + 5 + numD * ((width - 180 - 30) / maxItem)}
             // dx={numD * ((width - 180 - 30) / maxItem)}
-            dx={`${5 + (numD * (width - 210)) / 2 / maxItem}`}
+            dx={`${5 + (numD * (width - 240)) / 2 / maxItem}`}
             style={{ textAnchor: 'start' }}
           >
             {d === 0 && '<3'}

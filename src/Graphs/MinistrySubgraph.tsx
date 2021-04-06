@@ -83,7 +83,7 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
       data={chartData}
       keys={['count']}
       indexBy="category"
-      margin={{ top: 0, right: 60, bottom: 50, left: 230 }}
+      margin={{ top: 0, right: 60, bottom: 50, left: 255 }}
       valueScale={{ type: 'linear' }}
       indexScale={{ type: 'band', round: true }}
       colors={chartData[0].color}
@@ -145,7 +145,7 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
             dy={0}
             // dx={-numD + 5 + numD * ((width - 180 - 30) / maxItem)}
             // dx={numD * ((width - 180 - 30) / maxItem)}
-            dx={`${3 + (numD * (width - 320)) / 2 / maxItem}`}
+            dx={`${3 + (numD * (width - 335)) / 2 / maxItem}`}
             style={{ textAnchor: 'start' }}
           >
             {d === 0 && '<3'}

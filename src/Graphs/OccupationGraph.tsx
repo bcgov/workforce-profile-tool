@@ -16,8 +16,8 @@ interface Props {
   title: string
 }
 
-const LEFT_MARGIN = 140
-const RIGHT_MARGIN = 50
+const LEFT_MARGIN = 160
+const RIGHT_MARGIN = 55
 const TOP_MARGIN = 0
 const BOTTOM_MARGIN = 50
 
@@ -101,7 +101,7 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
         return ((
           <tspan
             dy={0}
-            dx={`${3 + (numD * (width - 210)) / 2 / maxItem}`}
+            dx={`${3 + (numD * (width - 240)) / 2 / maxItem}`}
             style={{ textAnchor: 'start' }}
           >
             {formatNumber(d)}

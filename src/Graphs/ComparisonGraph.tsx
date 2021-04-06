@@ -18,7 +18,7 @@ interface Props {
   title: string
 }
 
-const LEFT_MARGIN = 140
+const LEFT_MARGIN = 160
 const RIGHT_MARGIN = 50
 const TOP_MARGIN = 0
 const BOTTOM_MARGIN = 50
@@ -114,7 +114,7 @@ const ComparisonGraph = ({ ministry, title }: Props): JSX.Element => {
       }}
       labelFormat={(d): FixTypeLater => {
         const numD = +d
-        const dx = 5 + (numD * (width - 220)) / 2 / maxItem
+        const dx = 5 + (numD * (width - 240)) / 2 / maxItem
         return ((
           <tspan dy={0} dx={dx} style={{ textAnchor: 'start' }}>
             {d === 0 && '<3'}
