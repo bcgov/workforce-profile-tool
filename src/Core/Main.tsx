@@ -67,15 +67,12 @@ const Main = (props: Props): JSX.Element => {
               </p>
               <h2>Contact</h2>
               <p className="lead">
-                Questions? Contact us through{' '}
-                <a
-                  href="https://www2.gov.bc.ca/gov/content/home/contact-us"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Service BC
-                </a>
-                .
+                Please{' '}
+                <a href="mailto:work.environment.survey@gov.bc.ca">
+                  contact BC Stats
+                </a>{' '}
+                if you experience any technical difficulties or have any
+                questions about the content of this app.
               </p>
             </div>
           </Tab>
