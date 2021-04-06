@@ -3,6 +3,8 @@ import FixTypeLater from '../@types/FixTypeLater'
 import { Variable } from './Variable'
 import { VariableGroup } from './VariableGroup'
 
+export const DES_GRP_ORDERING = ['IND', 'DIS', 'VM', 'WOM']
+
 class VariableManager {
   private _variableGroupMap: Dictionary<VariableGroup>
   private _variableGroups: VariableGroup[]

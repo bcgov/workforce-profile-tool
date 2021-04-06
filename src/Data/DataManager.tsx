@@ -18,6 +18,7 @@ import {
 } from '../@types/DataTypes'
 import Dictionary from '../@types/Dictionary'
 import FixTypeLater from '../@types/FixTypeLater'
+import { DES_GRP_ORDERING } from '../Variables/VariableManager'
 
 type DataManagerContextType = {
   progressData?: ProgressRawData[]
@@ -53,6 +54,17 @@ const filterData = <T extends GenericRawData>(
         .filter((d) =>
           d.Ministry_Key ? d.Ministry_Key === queryValues.Ministry_Key : true
         )
+    : []
+}
+
+const sortData = <T extends GenericRawData>(data: T[] | undefined): T[] => {
+  return data
+    ? data.sort((a, b) =>
+        a.Des_Grp && b.Des_Grp
+          ? DES_GRP_ORDERING.indexOf(a.Des_Grp) -
+            DES_GRP_ORDERING.indexOf(b.Des_Grp)
+          : 0
+      )
     : []
 }
 
@@ -165,13 +177,15 @@ function useDataManager(): DataManagerContextType {
   })
 
   return {
-    progressData: filterData(progressData, queryValues),
+    progressData: sortData(filterData(progressData, queryValues)),
     hiringTotal: getHiringTotal(progressData, queryValues),
-    leadershipData: filterData(leadershipData, queryValues),
-    ministryData: buildMinistryData(comparisonData, queryValues),
-    comparisonData: filterData(comparisonData, queryValues),
+    leadershipData: sortData(filterData(leadershipData, queryValues)),
+    ministryData: sortData(buildMinistryData(comparisonData, queryValues)),
+    comparisonData: sortData(filterData(comparisonData, queryValues)),
     employeeCount: getEmployeeCount(employeeCountData, queryValues),
-    occupationRegionData: filterData(occupationRegionData, queryValues),
+    occupationRegionData: sortData(
+      filterData(occupationRegionData, queryValues)
+    ),
     lockedVars,
     setLockedVars,
   }
