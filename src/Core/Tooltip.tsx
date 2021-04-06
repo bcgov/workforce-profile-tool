@@ -1,17 +1,19 @@
 /* globals $ */
 
+import { timeDays } from 'd3-time'
 import React, { Component } from 'react'
 
 import FixTypeLater from '../@types/FixTypeLater'
 
 interface Props {
-  text: string
+  text: string | undefined
 }
 
 class Tooltip extends Component<Props> {
   private tooltip: FixTypeLater
 
   componentDidMount(): void {
+    // TODO: Fix so that new text props update the rendering
     const tooltip = $(this.tooltip) as FixTypeLater
     tooltip.tooltip()
   }

@@ -7,6 +7,8 @@ import DownloadDataLink from './DownloadDataLink'
 import GenericTable from './GenericTable'
 import Tooltip from '../Core/Tooltip'
 import Definitions from './Definitions'
+import { useDataManager } from '../Data/DataManager'
+import { getTooltip } from '../Data/tooltipHelper'
 
 interface Props {
   data: OccupationRegionRawData[]
@@ -15,6 +17,8 @@ interface Props {
 
 const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
   const totalRow = data.filter((d) => d['Variable_Type'] === 'Total')
+
+  const { year = '' } = useDataManager()
 
   const filteredData = data.filter((d) => d.Variable_Type === 'Occupation')
 
@@ -41,9 +45,7 @@ const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
       Header: (
         <span>
           Total &nbsp;
-          <Tooltip
-            text={`Total includes all members of the population, including non-respondents and employees for whom there is no relevant demographic data available.`}
-          />
+          <Tooltip text={getTooltip('representation-total', year)} />
         </span>
       ),
       accessor: (d) => formatNumber(d['Total_Count_ORG']),
@@ -61,7 +63,7 @@ const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
         <span>
           {shortTitle} as % of Available Workforce &nbsp;
           <Tooltip
-            text={`The representation of visible minorities in the BC Workforce according to Statistics Canada's 2011 National Household Survey. The "Available Workforce" is adjusted in accordance with the occupational distribution of jobs within the Public Service, and the geographic area from which recruitment is carried out, in order to reflect the "available" workforce to the Public Service.`}
+            text={getTooltip('representation-available-workforce', year)}
           />
         </span>
       ),
@@ -75,12 +77,7 @@ const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
         <span>
           Expected # {shortTitle}
           &nbsp;
-          <Tooltip
-            text={`Shortfall numbers are only shown when the shortfall is equal to or greater than 30 employees or 20% of the expected number, where:
-          <br />Expected Number = (Available Workforce Representation x Total in Occupation), and
-          <br />Shortfall = Expected Number - Visible Minority.
-          <br />Shortfall must be at least 2 to be considered a "significantly under-represented" occupation.</span>`}
-          />
+          <Tooltip text={getTooltip('representation-expected', year)} />
         </span>
       ),
       accessor: (d) => formatNumber(d['DesGrp_Count_Expected'], ''),
@@ -88,7 +85,17 @@ const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
     },
     {
       id: 'DesGrp_Count_Shortfall',
-      Header: `Shortfall of ${shortTitle}`,
+      Header: (
+        <span>
+          Shortfall of {shortTitle}
+          {getTooltip('representation-expected', year) && (
+            <>
+              &nbsp;
+              <Tooltip text={getTooltip('representation-expected', year)} />
+            </>
+          )}
+        </span>
+      ),
       accessor: (d) => formatNumber(d['DesGrp_Count_Shortfall'], ''),
       className: 'text-right',
     },
