@@ -1,4 +1,4 @@
-@import '../bootstrap/_colors';
+@import '../common';
 
 .Header {
     background-color: $brand-color-blue;
@@ -15,6 +15,7 @@
         h1 {
             margin-bottom: 0;
             font-size: 1.5rem;
+            
         }
     }
 }

@@ -1,8 +1,8 @@
-@import '../bootstrap/_colors';
+@import '../common';
 
 .Legend,
 .FilterNotes {
-    background-color: $gray-150;
+    background-color: $gray-100;
     h1 {
         font-size: 0.8rem;
         text-transform: uppercase;

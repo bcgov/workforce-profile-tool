@@ -6,7 +6,7 @@ export const BAR_H_CATEGORY_GAP_SIZE = 30 // Horizontal space between bar groups
 export const BAR_V_GAP_SIZE = 2 // Vertical space between bars within a group
 export const BAR_V_CATEGORY_GAP_SIZE = 15 // Vertical space between bar groups
 
-export const CHART_FONT = `"myriad-pro", "Myriad Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`
+export const CHART_FONT = `BCSans, "myriad-pro", "Myriad Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`
 
 export const NIVO_THEME = {
   axis: {

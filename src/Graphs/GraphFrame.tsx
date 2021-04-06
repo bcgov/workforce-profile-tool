@@ -36,7 +36,7 @@ const GraphFrame = (props: Props): JSX.Element => {
     const LEGEND_WIDTH = 250
     const LEGEND_HEIGHT = 400
     const FO_NAMESPACE = 'http://www.w3.org/2000/svg'
-    const FONT_FAMILY = 'Myriad Pro'
+    const FONT_FAMILY = 'BC Sans'
 
     // First, get the actually-existing SVG and clone it
     let svg: Element = document.querySelector(

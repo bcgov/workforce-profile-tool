@@ -6,7 +6,6 @@ import ReactDOM from 'react-dom'
 import * as serviceWorker from './serviceWorker'
 import App from './Core/App'
 
-import './bootstrap/bootstrap.scss'
 import './index.scss'
 import { QueryParamProvider } from 'use-query-params'
 

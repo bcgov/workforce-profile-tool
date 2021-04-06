@@ -1,4 +1,4 @@
-@import '../bootstrap/bootstrap.scss';
+@import '../common';
 
 %subtotal {
     font-size: 0.8rem;
@@ -9,8 +9,6 @@
 }
 
 .Table table {
-    @extend .table,
-    .table-striped;
     border: solid 2px $brand-color-fog;
     th,
     td {
