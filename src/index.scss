@@ -14,13 +14,15 @@ p {
   font-weight: 400;
   margin: 20px 0;
   a {
-    font-weight: 500;
     color: $brand-color-gold;
-    &:hover,
-    &:active,
-    &:focus {
-      color: darken($brand-color-gold, 10%) !important;
-    }
+  }
+}
+
+a {
+  &:hover,
+  &:active,
+  &:focus {
+    color: darken($brand-color-gold, 10%) !important;
   }
 }
 
