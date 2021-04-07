@@ -2,19 +2,19 @@ import { useDataManager } from '../Data/DataManager'
 import React, { useEffect } from 'react'
 
 import GenericView from './GenericView'
-import MinistryGraph from '../Graphs/MinistryGraph'
+import OrganizationGraph from '../Graphs/OrganizationGraph'
 
-const Ministry = (): JSX.Element => {
+const Organization = (): JSX.Element => {
   const { ministryData: data, setLockedVars } = useDataManager()
 
   useEffect(() => setLockedVars({ Ministry_Key: ['BCPS'] }), [])
 
   return (
     <GenericView data={data}>
-      <h1>Ministries</h1>
-      <MinistryGraph title={'Ministries'} />
+      <h1>Organizations</h1>
+      <OrganizationGraph title={'Organizations'} />
     </GenericView>
   )
 }
 
-export default Ministry
+export default Organization

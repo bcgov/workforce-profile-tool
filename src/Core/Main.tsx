@@ -4,7 +4,7 @@ import Comparison from '../Views/Comparison'
 import FixTypeLater from '../@types/FixTypeLater'
 import Hiring from '../Views/Hiring'
 import Leadership from '../Views/Leadership'
-import Ministry from '../Views/Ministry'
+import Organization from '../Views/Organization'
 import Occupation from '../Views/Occupation'
 import Progress from '../Views/Progress'
 import Region from '../Views/Region'
@@ -64,8 +64,8 @@ const Main = (props: Props): JSX.Element => {
           <Tab key={'leadership'} name="Leadership">
             <Leadership />
           </Tab>
-          <Tab key={'ministries'} name="Ministries">
-            <Ministry />
+          <Tab key={'organizations'} name="Organizations">
+            <Organization />
           </Tab>
           <Tab key={'representation'} name="Representation">
             <div className="Secondary">

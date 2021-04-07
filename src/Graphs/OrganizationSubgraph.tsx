@@ -19,7 +19,7 @@ interface SubgraphProps {
   varKey?: FixTypeLater
 }
 
-const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
+const OrganizationSubGraph = (props: SubgraphProps): JSX.Element => {
   if (!props.data) return <div>&nbsp;</div>
 
   const [width, setWidth] = useState(620)
@@ -200,4 +200,4 @@ const MinistrySubGraph = (props: SubgraphProps): JSX.Element => {
   )
 }
 
-export default MinistrySubGraph
+export default OrganizationSubGraph

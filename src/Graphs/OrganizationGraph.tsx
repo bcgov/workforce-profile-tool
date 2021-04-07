@@ -5,7 +5,7 @@ import { MinistryRawData } from '../@types/DataTypes'
 import { useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'
 import Dictionary from '../@types/Dictionary'
-import MinistrySubGraph from './MinistrySubgraph'
+import OrganizationSubGraph from './OrganizationSubgraph'
 
 import './Graphs.scss'
 
@@ -36,7 +36,7 @@ const MinistryGraph = (props: Props): JSX.Element => {
         <h2>
           {title}, regular employees {/* TODO: tidy up */}
         </h2>
-        <MinistrySubGraph
+        <OrganizationSubGraph
           data={dataMap[k]}
           masterTitle={props.title}
           title={title}
