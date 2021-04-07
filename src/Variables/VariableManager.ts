@@ -103,7 +103,7 @@ export const VARIABLES = new VariableManager([
   new VariableGroup(
     'Ministry_Key',
     true,
-    'Ministry',
+    'Organization',
     [
       new Variable('BCPS', true, 'BCPS', 'BC Public Service – Total'),
       new Variable(
