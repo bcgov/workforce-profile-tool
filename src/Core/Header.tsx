@@ -7,7 +7,7 @@ import logo from './bc-stats-logo.png'
 const Header = (): JSX.Element => {
   return (
     <div className="Header row">
-      <div className="col mb-4 text-center">
+      <div className="col mb-4">
         <Link to={'/'}>
           <img src={logo} style={{ maxWidth: '100%' }} />
           <br />
