@@ -1,6 +1,7 @@
-@import './common';
+@import "./common";
 
-body, html {
+body,
+html {
   min-height: 100%;
   color: $brand-color-blue;
 }
@@ -9,13 +10,16 @@ a {
   text-decoration: none !important;
 }
 
-p.lead {
+p {
   font-weight: 400;
   margin: 20px 0;
   a {
+    font-weight: 500;
     color: $brand-color-gold;
-    &:hover {
-      color: darken($brand-color-gold, 10%);
+    &:hover,
+    &:active,
+    &:focus {
+      color: darken($brand-color-gold, 10%) !important;
     }
   }
 }

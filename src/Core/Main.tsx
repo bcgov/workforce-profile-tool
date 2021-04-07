@@ -12,6 +12,7 @@ import Tab from '../Tabs/Tab'
 import TabInterface from '../Tabs/TabInterface'
 
 import './Main.scss'
+import Home from './Home'
 
 interface Props {
   data?: FixTypeLater
@@ -38,43 +39,7 @@ const Main = (props: Props): JSX.Element => {
           search={props.location.search}
         >
           <Tab key={'home'} name="Home">
-            <div>
-              <h1>Workforce Profiles Report</h1>
-              <p className="lead">
-                Explore statistics on the representation of designated equity
-                groups across the BC Public Service. This online tool replaces
-                the paper report that was previously produced which can be found
-                on the{' '}
-                <a
-                  href="https://www2.gov.bc.ca/gov/content/data/statistics/government/employee-research/workforce-profiles"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  BC Stats website
-                </a>
-                .
-              </p>
-              <p className="lead">
-                Use the tabs at the top to begin your journey. You can refine
-                your selections by using the filters on the left.
-              </p>
-              <h2>Caveats</h2>
-              <p className="lead">
-                This tool uses data from the BC Public Service Work Environment
-                Survey (WES), which was conducted in February, 2018. Therefore,
-                the data on this site may not match other reports produced by
-                the Public Service Agency regarding the same demographic groups.
-              </p>
-              <h2>Contact</h2>
-              <p className="lead">
-                Please{' '}
-                <a href="mailto:work.environment.survey@gov.bc.ca">
-                  contact BC Stats
-                </a>{' '}
-                if you experience any technical difficulties or have any
-                questions about the content of this app.
-              </p>
-            </div>
+            <Home />
           </Tab>
           <Tab key={'indicators-of-progress'} name="Indicators of Progress">
             <Progress />
