@@ -11,16 +11,14 @@ interface Props extends RouteComponentProps {
   notes?: React.ReactNode
 }
 
-const Legend = (props: Props): JSX.Element => {
-  const rows = props.items.map((item) => {
+const Legend = ({ items, notes }: Props): JSX.Element => {
+  const rows = items.map((item) => {
     return (
-      <tr key={item.color}>
-        <td className="color">
-          <div className="swatch">
-            <span style={{ color: item.color }}>●</span>
-          </div>
-        </td>
-        <td className="label">
+      <div key={item.color} className={'d-flex align-items-top'}>
+        <div className="swatch">
+          <span style={{ color: item.color }}>●</span>
+        </div>
+        <div className="label">
           {item.label}
           {item.tooltip && (
             <span>
@@ -28,8 +26,8 @@ const Legend = (props: Props): JSX.Element => {
               <Tooltip text={item.tooltip} />
             </span>
           )}
-        </td>
-      </tr>
+        </div>
+      </div>
     )
   })
 
@@ -37,12 +35,8 @@ const Legend = (props: Props): JSX.Element => {
   return (
     <div className="Legend" key={Date.now()}>
       <h1>Legend</h1>
-      <div>
-        <table>
-          <tbody>{rows}</tbody>
-        </table>
-      </div>
-      {props.notes && <div className="Notes">{props.notes}</div>}
+      <div className="LegendRows">{rows}</div>
+      {notes && <div className="Notes">{notes}</div>}
     </div>
   )
 }

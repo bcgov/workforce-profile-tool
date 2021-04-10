@@ -32,7 +32,11 @@ const ComparisonGraph = ({
   year,
 }: Props): JSX.Element => {
   const dataDefinitions = [
-    { key: 'Employees_BCPS', label: `${ministry}`, color: '#6c757d' },
+    {
+      key: 'Employees_BCPS',
+      label: `${VARIABLES.displayNameByKey('Ministry_Key', ministry)}`,
+      color: '#6c757d',
+    },
     {
       key: 'Available_Workforce_BCPS',
       label: 'Available Workforce',
