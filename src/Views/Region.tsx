@@ -61,7 +61,12 @@ const Region = (): JSX.Element => {
   })
 
   return (
-    <GenericView title={'Representation — Region'} data={unfilteredData}>
+    <GenericView
+      title={'Representation — Region'}
+      data={unfilteredData}
+      isLoading={isLoading}
+      error={error}
+    >
       <OccupationGraph data={data} title={'Representation – Region'} />
       {tables}
     </GenericView>

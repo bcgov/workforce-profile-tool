@@ -9,10 +9,9 @@ import './Graphs.scss'
 
 interface Props {
   data: MinistryRawData[]
-  title: string
 }
 
-const MinistryGraph = ({ data, title }: Props): JSX.Element => {
+const MinistryGraph = ({ data }: Props): JSX.Element => {
   if (!data) return <div>&nbsp;</div>
 
   // Split the data

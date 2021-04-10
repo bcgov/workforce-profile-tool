@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, {
   ReactNode,
   createContext,
@@ -13,7 +14,6 @@ import {
   EmployeeCountRawData,
   GenericRawData,
   MinistryRawData,
-  OccupationRegionRawData,
   ProgressRawData,
 } from '../@types/DataTypes'
 import Dictionary from '../@types/Dictionary'

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
 import React, { useState } from 'react'

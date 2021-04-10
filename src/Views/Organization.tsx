@@ -41,7 +41,7 @@ const Organization = (): JSX.Element => {
       title={'Comparison with Provincial Workforce'}
     >
       <h1>Organizations</h1>
-      <OrganizationGraph data={data} title={'Organizations'} />
+      <OrganizationGraph data={data} />
     </GenericView>
   )
 }

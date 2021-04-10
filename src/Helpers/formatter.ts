@@ -50,5 +50,5 @@ export const parseFloatClean = (
 }
 
 export const formatDesGrpTick = (desGrpKey: string): string => {
-  return VARIABLES.displayNameByKey('Des_Grp', desGrpKey as string)!
+  return VARIABLES.displayNameByKey('Des_Grp', desGrpKey as string) || ''
 }

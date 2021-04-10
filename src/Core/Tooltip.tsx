@@ -1,6 +1,5 @@
 /* globals $ */
 
-import { timeDays } from 'd3-time'
 import React, { Component } from 'react'
 
 import FixTypeLater from '../@types/FixTypeLater'

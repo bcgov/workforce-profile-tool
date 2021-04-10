@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { RouteComponentProps, withRouter } from 'react-router'
 
 import { DataDefinition } from '../@types/DataDefinition'

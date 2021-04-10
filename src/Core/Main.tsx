@@ -2,23 +2,22 @@ import React from 'react'
 
 import Comparison from '../Views/Comparison'
 import FixTypeLater from '../@types/FixTypeLater'
-import Hiring from '../Views/Hiring'
+import Home from './Home'
 import Leadership from '../Views/Leadership'
-import Organization from '../Views/Organization'
 import Occupation from '../Views/Occupation'
+import Organization from '../Views/Organization'
 import Progress from '../Views/Progress'
 import Region from '../Views/Region'
 import Tab from '../Tabs/Tab'
 import TabInterface from '../Tabs/TabInterface'
 
 import './Main.scss'
-import Home from './Home'
 
 interface Props {
   data?: FixTypeLater
+  location?: FixTypeLater
   match?: FixTypeLater
   variableLockCallback?: FixTypeLater
-  location?: FixTypeLater
 }
 
 const Main = (props: Props): JSX.Element => {

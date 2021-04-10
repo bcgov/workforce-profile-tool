@@ -1,15 +1,14 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 import * as saveSVG from 'save-svg-as-png'
-import React, { Component, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import useDimensions from 'react-use-dimensions'
 
+// import { CHART_FONT } from '../Helpers/graphs'
 import FilterNotes from './FilterNotes'
 import FixTypeLater from '../@types/FixTypeLater'
 
 import './Graphs.scss'
-import { CHART_FONT } from '../Helpers/graphs'
-
-import useDimensions from 'react-use-dimensions'
 
 interface Props {
   className: string
