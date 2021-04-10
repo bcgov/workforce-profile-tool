@@ -1,17 +1,20 @@
+import { useQuery } from 'react-query'
+import * as d3 from 'd3'
 import React, { useEffect } from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
+import { filterData, sortData, useDataManager } from '../Data/DataManager'
 import { LeadershipRawData } from '../@types/DataTypes'
 import { parseFloatClean } from '../Helpers/formatter'
-import { useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
 import LeadershipGraph from '../Graphs/LeadershipGraph'
 
 const Leadership = (): JSX.Element => {
-  const { leadershipData: data, setLockedVars, year } = useDataManager()
+  const { setLockedVars, metadata, year, queryValues } = useDataManager()
 
+  // When page loads, set the locked variables as appropriate.
   useEffect(() => {
     if (year === '2018') {
       setLockedVars({ Employee_Type: ['ALL'], Ministry_Key: ['BCPS'] })
@@ -19,6 +22,23 @@ const Leadership = (): JSX.Element => {
       setLockedVars({ Ministry_Key: ['BCPS'] })
     }
   }, [year])
+
+  const dataKey = `WP${year}_Leadership`
+  const url = metadata ? metadata[dataKey].url : ''
+
+  // Load the raw data.
+  const { isLoading, error, data: unfilteredData } = useQuery(
+    dataKey,
+    async () => {
+      return (await d3.csv(url)) as LeadershipRawData[]
+    },
+    {
+      enabled: !!metadata,
+    }
+  )
+
+  // TODO: If app is slow, can useMemo on this one
+  const data = sortData(filterData(unfilteredData, queryValues))
 
   const columns: ColumnWithClassName<LeadershipRawData>[] = [
     {
@@ -40,8 +60,17 @@ const Leadership = (): JSX.Element => {
   ]
 
   return (
-    <GenericView data={data} title={'Leadership by Type'}>
-      <LeadershipGraph title={'Leadership by Type'} />
+    <GenericView
+      isLoading={isLoading}
+      error={error}
+      data={unfilteredData}
+      title={'Leadership by Type'}
+    >
+      <LeadershipGraph
+        data={data}
+        title={'Leadership by Type'}
+        year={year || ''}
+      />
       <GenericTable data={data} columns={columns} filename="leadership" />
     </GenericView>
   )

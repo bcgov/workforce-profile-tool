@@ -3,20 +3,20 @@ import Color from 'color'
 import React, { useState } from 'react'
 
 import { getTooltip } from '../Data/tooltipHelper'
+import { LeadershipRawData } from '../@types/DataTypes'
 import { NIVO_BASE_PROPS } from '../Helpers/graphs'
-import { useDataManager } from '../Data/DataManager'
+import { parseFloatClean } from '../Helpers/formatter'
 import { VARIABLES } from '../Variables/VariableManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 
-import { LeadershipRawData } from '../@types/DataTypes'
-
 import './Graphs.scss'
-import { parseFloatClean } from '../Helpers/formatter'
 
 interface Props {
+  data: LeadershipRawData[]
   title: string
+  year: string
 }
 
 const MARGINS = {
@@ -26,9 +26,7 @@ const MARGINS = {
   bottom: 50,
 }
 
-const LeadershipGraph = ({ title }: Props): JSX.Element => {
-  const { leadershipData: data, year = '' } = useDataManager() // TODO: don't assign default '' to year
-
+const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
   const dataDefinitions = [
     {
       key: 'Executive',
@@ -55,12 +53,7 @@ const LeadershipGraph = ({ title }: Props): JSX.Element => {
       )
     })
     .flat()
-
-  console.log('items', items)
-
-  const sortedData = data.sort((a, b) =>
-    b['Des_Grp'].localeCompare(a['Des_Grp'])
-  )
+    .reverse() // TODO: Don't call reverse(); use Nivo setting instead
 
   const maxItem = Math.max(...items)
 
@@ -68,7 +61,7 @@ const LeadershipGraph = ({ title }: Props): JSX.Element => {
 
   const graph = (
     <ResponsiveBar
-      data={sortedData}
+      data={data}
       keys={['Executive', 'Management_Band']}
       indexBy="Des_Grp"
       margin={MARGINS}

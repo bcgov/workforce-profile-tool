@@ -28,7 +28,6 @@ type DataManagerContextType = {
   setMetadata?: FixTypeLater
   hiringTotal?: number
   employeeCount?: number
-  leadershipData?: LeadershipRawData[]
   ministryData?: MinistryRawData[]
   employeeCountData?: EmployeeCountRawData[]
   occupationRegionData?: OccupationRegionRawData[]
@@ -168,7 +167,6 @@ function useDataManager(): DataManagerContextType {
 
   const {
     metadata,
-    leadershipData,
     employeeCountData,
     occupationRegionData,
     lockedVars,
@@ -186,7 +184,6 @@ function useDataManager(): DataManagerContextType {
     metadata,
     queryValues,
     year: queryValues.Year || '',
-    leadershipData: sortData(filterData(leadershipData, queryValues)),
     ministryData: sortData(buildMinistryData([], queryValues)),
     employeeCount: getEmployeeCount(employeeCountData, queryValues),
     occupationRegionData: sortData(
@@ -199,7 +196,6 @@ function useDataManager(): DataManagerContextType {
 
 interface DataManagerProviderProps {
   children: ReactNode
-  leadershipData?: LeadershipRawData[]
   progressData?: ProgressRawData[]
   employeeCountData?: EmployeeCountRawData[]
   occupationRegionData?: OccupationRegionRawData[]
