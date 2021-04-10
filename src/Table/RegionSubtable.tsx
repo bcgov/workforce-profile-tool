@@ -25,7 +25,7 @@ const RegionSubtable = ({ data, shortTitle }: Props): JSX.Element => {
   const columns: ColumnWithClassName<OccupationRegionRawData>[] = [
     {
       id: 'Occupation_Region_Group',
-      Header: 'Occupation',
+      Header: 'Region',
       accessor: (d) => d['Occupation_Region_Group'],
     },
     {
