@@ -1,22 +1,44 @@
+import { useQuery } from 'react-query'
+import * as d3 from 'd3'
 import React, { useEffect } from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { ComparisonRawData } from '../@types/DataTypes'
 import { formatPercent } from '../Helpers/formatter'
 import { StringParam, useQueryParam } from 'use-query-params'
-import { useDataManager } from '../Data/DataManager'
+import { filterData, sortData, useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'
+import ComparisonGraph from '../Graphs/ComparisonGraph'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
-import ComparisonGraph from '../Graphs/ComparisonGraph'
 
 const Comparison = (): JSX.Element => {
-  const { comparisonData: data, setLockedVars } = useDataManager()
+  const { setLockedVars, metadata, year, queryValues } = useDataManager()
 
   useEffect(() => setLockedVars({}), [])
 
+  const dataKey = `WP${year}_Comparison`
+  const url = metadata ? metadata[dataKey].url : ''
+
+  // Load the raw data.
+  const { isLoading, error, data: unfilteredData } = useQuery(
+    dataKey,
+    async () => {
+      return (await d3.csv(url)) as ComparisonRawData[]
+    },
+    {
+      enabled: !!metadata,
+    }
+  )
+
+  // TODO: If app is slow, can useMemo on this one
+  const data = sortData(filterData(unfilteredData, queryValues))
+
   const [ministryKey] = useQueryParam('Ministry_Key', StringParam)
-  const ministry = VARIABLES.displayNameByKey('Ministry_Key', ministryKey) // TODO: cleaner implementation of this
+  const ministry = VARIABLES.displayNameByKey(
+    'Ministry_Key',
+    queryValues.Ministry_Key
+  ) // TODO: cleaner implementation of this
 
   const columns: ColumnWithClassName<ComparisonRawData>[] = [
     {
@@ -46,10 +68,17 @@ const Comparison = (): JSX.Element => {
   ]
 
   return (
-    <GenericView title={'Comparison with Provincial Workforce'} data={data}>
+    <GenericView
+      data={unfilteredData}
+      error={error}
+      isLoading={isLoading}
+      title={'Comparison with Provincial Workforce'}
+    >
       <ComparisonGraph
-        title={'Comparison with Provincial Workforce'}
+        data={data}
         ministry={ministryKey}
+        title={'Comparison with Provincial Workforce'}
+        year={year || ''}
       />
       <GenericTable data={data} columns={columns} filename={'comparison'} />
     </GenericView>

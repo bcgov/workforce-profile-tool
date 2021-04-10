@@ -1,10 +1,9 @@
 import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 
 import { NIVO_BASE_PROPS } from '../Helpers/graphs'
 import { parseFloatClean } from '../Helpers/formatter'
-import { useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
@@ -12,10 +11,13 @@ import Legend from './Legend'
 
 import './Graphs.scss'
 import { getTooltip } from '../Data/tooltipHelper'
+import { ComparisonRawData } from '../@types/DataTypes'
 
 interface Props {
+  data: ComparisonRawData[]
   ministry?: string | null
   title: string
+  year: string
 }
 
 const LEFT_MARGIN = 160
@@ -23,9 +25,12 @@ const RIGHT_MARGIN = 50
 const TOP_MARGIN = 0
 const BOTTOM_MARGIN = 50
 
-const ComparisonGraph = ({ ministry, title }: Props): JSX.Element => {
-  const { comparisonData: data, year = '' } = useDataManager()
-
+const ComparisonGraph = ({
+  data,
+  ministry,
+  title,
+  year,
+}: Props): JSX.Element => {
   const dataDefinitions = [
     { key: 'Employees_BCPS', label: `${ministry}`, color: '#6c757d' },
     {
@@ -54,7 +59,7 @@ const ComparisonGraph = ({ ministry, title }: Props): JSX.Element => {
       Available_Workforce_BCPS: parseFloatClean(d['Available_Workforce_BCPS']),
       Employees_BC_Population: parseFloatClean(d['Employees_BC_Population']),
     }))
-    .sort((a, b) => b['Des_Grp'].localeCompare(a['Des_Grp']))
+    .reverse()
 
   const items = filteredData
     .map((d): number[] => {
