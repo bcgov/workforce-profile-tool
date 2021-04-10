@@ -6,9 +6,6 @@ import { DefaultTooltipContent } from 'recharts/lib/component/DefaultTooltipCont
 import FixTypeLater from '../@types/FixTypeLater'
 
 const CustomTooltip = (props: FixTypeLater): JSX.Element => {
-  console.log('------------')
-  console.log('props', props)
-
   // we don't need to check payload[0] as there's a better prop for this purpose
   if (!props.active || !props.payload) {
     // I think returning null works based on this: http://recharts.org/en-US/examples/CustomContentOfTooltip

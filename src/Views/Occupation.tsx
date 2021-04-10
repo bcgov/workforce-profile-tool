@@ -1,26 +1,22 @@
-import { withRouter } from 'react-router-dom'
+import { ArrayParam, useQueryParam } from 'use-query-params'
+import { useQuery } from 'react-query'
+import * as d3 from 'd3'
 import React, { useEffect } from 'react'
 
-import { useDataManager } from '../Data/DataManager'
-import Loading from './Loading'
+import { filterData, sortData, useDataManager } from '../Data/DataManager'
 import GenericView from './GenericView'
 import Dictionary from '../@types/Dictionary'
 import { VARIABLES } from '../Variables/VariableManager'
 import { OccupationRegionRawData } from '../@types/DataTypes'
 import OccupationSubtable from '../Table/OccupationSubtable'
 import OccupationGraph from '../Graphs/OccupationGraph'
-import { ArrayParam, useQueryParam } from 'use-query-params'
 
 // TODO: If the ministry_key is BCPS, lock employee type to REG; otherwise don't
 // lock variables
 const Occupation = (): JSX.Element => {
-  const { occupationRegionData: data, setLockedVars } = useDataManager()
+  const { setLockedVars, metadata, year, queryValues } = useDataManager()
 
   const [ministryQueryVars] = useQueryParam('Ministry_Key', ArrayParam)
-
-  console.log('ministryQueryVars', ministryQueryVars)
-
-  console.log('occupationRegionData', data)
 
   useEffect(() => {
     const varsToLock: Dictionary<string[]> = ministryQueryVars?.includes('BCPS')
@@ -29,7 +25,21 @@ const Occupation = (): JSX.Element => {
     setLockedVars(varsToLock)
   }, [ministryQueryVars])
 
-  if (!data) return <Loading />
+  const dataKey = `WP${year}_Rep_Occ_Rgn`
+  const url = metadata ? metadata[dataKey].url : ''
+
+  // Load the raw data.
+  const { isLoading, error, data: unfilteredData } = useQuery(
+    dataKey,
+    async () => {
+      return (await d3.csv(url)) as OccupationRegionRawData[]
+    },
+    {
+      enabled: !!metadata,
+    }
+  )
+
+  const data = sortData(filterData(unfilteredData, queryValues))
 
   // Split the data
   const dataMap: Dictionary<OccupationRegionRawData[]> = {}
@@ -50,11 +60,16 @@ const Occupation = (): JSX.Element => {
   })
 
   return (
-    <GenericView title={'Representation — Occupation'} data={data}>
-      <OccupationGraph title={'Representation — Occupation'} />
+    <GenericView
+      data={unfilteredData}
+      error={error}
+      isLoading={isLoading}
+      title={'Representation — Occupation'}
+    >
+      <OccupationGraph data={data} title={'Representation — Occupation'} />
       {tables}
     </GenericView>
   )
 }
 
-export default withRouter(Occupation)
+export default Occupation

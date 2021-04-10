@@ -4,16 +4,17 @@ import Color from 'color'
 
 import { formatNumber } from '../Helpers/formatter'
 import { NIVO_BASE_PROPS } from '../Helpers/graphs'
-import { useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 
 import './Graphs.scss'
+import { OccupationRegionRawData } from '../@types/DataTypes'
 
 interface Props {
   title: string
+  data: OccupationRegionRawData[]
 }
 
 const LEFT_MARGIN = 160
@@ -21,14 +22,12 @@ const RIGHT_MARGIN = 55
 const TOP_MARGIN = 0
 const BOTTOM_MARGIN = 50
 
-const OccupationGraph = ({ title }: Props): JSX.Element => {
+const OccupationGraph = ({ data, title }: Props): JSX.Element => {
   const dataDefinitions = [
     { key: 'DesGrp_Count_Expected', label: 'Expected', color: '#70CCDB' },
     { key: 'DesGrp_Count_ORG', label: 'Actual', color: '#D2E2EE' },
     { key: 'DesGrp_Count_Shortfall', label: 'Shortfall', color: '#6c757d' },
   ]
-
-  const { occupationRegionData: data } = useDataManager()
 
   const [width, setWidth] = useState(620)
 
@@ -37,8 +36,6 @@ const OccupationGraph = ({ title }: Props): JSX.Element => {
   const filteredData = data
     .filter((d) => d.Variable_Type === 'Total')
     .sort((a, b) => b['Des_Grp'].localeCompare(a['Des_Grp']))
-
-  console.log('filteredData', filteredData)
 
   const items = filteredData
     .map((d): number[] => {

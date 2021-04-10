@@ -28,7 +28,6 @@ type DataManagerContextType = {
   hiringTotal?: number
   employeeCount?: number
   employeeCountData?: EmployeeCountRawData[]
-  occupationRegionData?: OccupationRegionRawData[]
   lockedVars: Dictionary<string[]>
   setLockedVars: (vars: Dictionary<string[]>) => void
   queryValues?: FixTypeLater
@@ -163,13 +162,7 @@ function useDataManager(): DataManagerContextType {
     throw new Error(`useDataManager must be used within a DataManagerProvider`)
   }
 
-  const {
-    metadata,
-    employeeCountData,
-    occupationRegionData,
-    lockedVars,
-    setLockedVars,
-  } = context
+  const { metadata, employeeCountData, lockedVars, setLockedVars } = context
 
   const [queryValues] = useQueryParams({
     Employee_Type: StringParam,
@@ -183,9 +176,6 @@ function useDataManager(): DataManagerContextType {
     queryValues,
     year: queryValues.Year || '',
     employeeCount: getEmployeeCount(employeeCountData, queryValues),
-    occupationRegionData: sortData(
-      filterData(occupationRegionData, queryValues)
-    ),
     lockedVars,
     setLockedVars,
   }
@@ -193,9 +183,7 @@ function useDataManager(): DataManagerContextType {
 
 interface DataManagerProviderProps {
   children: ReactNode
-  progressData?: ProgressRawData[]
   employeeCountData?: EmployeeCountRawData[]
-  occupationRegionData?: OccupationRegionRawData[]
 }
 
 function DataManagerProvider({
@@ -224,7 +212,7 @@ function DataManagerProvider({
         },
         {}
       )
-      console.log('Metadata loaded.')
+      console.log('Metadata loaded.', keyedMetadata)
       setMetadata(keyedMetadata)
     }
 

@@ -1,18 +1,20 @@
+import { ArrayParam, useQueryParam } from 'use-query-params'
+import { useQuery } from 'react-query'
+import * as d3 from 'd3'
 import React, { useEffect } from 'react'
 
-import { useDataManager } from '../Data/DataManager'
-import Loading from './Loading'
+import { filterData, sortData, useDataManager } from '../Data/DataManager'
 import GenericView from './GenericView'
 import Dictionary from '../@types/Dictionary'
 import { VARIABLES } from '../Variables/VariableManager'
 import RegionSubtable from '../Table/RegionSubtable'
 import OccupationGraph from '../Graphs/OccupationGraph'
-import { ArrayParam, useQueryParam } from 'use-query-params'
+import { OccupationRegionRawData } from '../@types/DataTypes'
 
 // TODO: If the ministry_key is BCPS, lock employee type to REG; otherwise don't
 // lock variables
 const Region = (): JSX.Element => {
-  const { occupationRegionData: data, setLockedVars } = useDataManager()
+  const { setLockedVars, metadata, year, queryValues } = useDataManager()
 
   const [ministryQueryVars] = useQueryParam('Ministry_Key', ArrayParam)
 
@@ -23,10 +25,25 @@ const Region = (): JSX.Element => {
     setLockedVars(varsToLock)
   }, [ministryQueryVars])
 
-  if (!data) return <Loading />
+  const dataKey = `WP${year}_Rep_Occ_Rgn`
+  const url = metadata ? metadata[dataKey].url : ''
+
+  // Load the raw data.
+  const { isLoading, error, data: unfilteredData } = useQuery(
+    dataKey,
+    async () => {
+      return (await d3.csv(url)) as OccupationRegionRawData[]
+    },
+    {
+      enabled: !!metadata,
+    }
+  )
 
   // Split the data
-  const dataMap: Dictionary<any> = {}
+  const data = sortData(filterData(unfilteredData, queryValues))
+
+  // Split the data
+  const dataMap: Dictionary<OccupationRegionRawData[]> = {}
   data.forEach((d) => {
     dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
     dataMap[d.Des_Grp].push(d)
@@ -44,8 +61,8 @@ const Region = (): JSX.Element => {
   })
 
   return (
-    <GenericView title={'Representation — Region'} data={data}>
-      <OccupationGraph title={'Representation – Region'} />
+    <GenericView title={'Representation — Region'} data={unfilteredData}>
+      <OccupationGraph data={data} title={'Representation – Region'} />
       {tables}
     </GenericView>
   )
