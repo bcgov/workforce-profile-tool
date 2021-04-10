@@ -2,10 +2,13 @@ import React, {
   ReactNode,
   createContext,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react'
+import { useQuery } from 'react-query'
 import { ArrayParam, StringParam, useQueryParams } from 'use-query-params'
+import * as d3 from 'd3'
 
 import {
   ComparisonRawData,
@@ -19,9 +22,12 @@ import {
 import Dictionary from '../@types/Dictionary'
 import FixTypeLater from '../@types/FixTypeLater'
 import { DES_GRP_ORDERING } from '../Variables/VariableManager'
+import { Metadata } from '../@types/Metadata'
 
 type DataManagerContextType = {
   year?: string
+  metadata?: FixTypeLater
+  setMetadata?: FixTypeLater
   progressData?: ProgressRawData[]
   hiringTotal?: number
   employeeCount?: number
@@ -32,13 +38,14 @@ type DataManagerContextType = {
   occupationRegionData?: OccupationRegionRawData[]
   lockedVars: Dictionary<string[]>
   setLockedVars: (vars: Dictionary<string[]>) => void
+  queryValues?: FixTypeLater
 }
 
 const DataManagerContext = createContext<DataManagerContextType | undefined>(
   undefined
 )
 
-const filterData = <T extends GenericRawData>(
+export const filterData = <T extends GenericRawData>(
   data: T[] | undefined,
   queryValues: FixTypeLater // TODO: really fix this!
 ): T[] => {
@@ -58,7 +65,9 @@ const filterData = <T extends GenericRawData>(
     : []
 }
 
-const sortData = <T extends GenericRawData>(data: T[] | undefined): T[] => {
+export const sortData = <T extends GenericRawData>(
+  data: T[] | undefined
+): T[] => {
   return data
     ? data.sort((a, b) =>
         a.Des_Grp && b.Des_Grp
@@ -162,6 +171,7 @@ function useDataManager(): DataManagerContextType {
   }
 
   const {
+    metadata,
     progressData,
     leadershipData,
     comparisonData,
@@ -171,6 +181,9 @@ function useDataManager(): DataManagerContextType {
     setLockedVars,
   } = context
 
+  // console.log('progressData', progressData)
+  // console.log('metadata', metadata)
+
   const [queryValues] = useQueryParams({
     Employee_Type: StringParam,
     Des_Grp: ArrayParam,
@@ -179,6 +192,8 @@ function useDataManager(): DataManagerContextType {
   })
 
   return {
+    metadata,
+    queryValues,
     year: queryValues.Year || '',
     progressData: sortData(filterData(progressData, queryValues)),
     hiringTotal: getHiringTotal(progressData, queryValues),
@@ -205,34 +220,65 @@ interface DataManagerProviderProps {
 
 function DataManagerProvider({
   children,
-  comparisonData,
-  progressData,
-  leadershipData,
-  employeeCountData,
-  occupationRegionData,
 }: DataManagerProviderProps): FixTypeLater {
   const [lockedVars, setLockedVars] = useState<Dictionary<string[]>>({})
+  const [metadata, setMetadata] = useState<Dictionary<Metadata>>()
 
-  const value = useMemo(
-    () => ({
-      comparisonData,
-      progressData,
-      leadershipData,
-      employeeCountData,
-      occupationRegionData,
-      lockedVars,
-      setLockedVars,
-    }),
-    [
-      employeeCountData,
-      comparisonData,
-      progressData,
-      leadershipData,
-      occupationRegionData,
-      lockedVars,
-      setLockedVars,
-    ]
-  )
+  // Initial load of metadata
+  useEffect(() => {
+    const loadMetadata = async () => {
+      const data: FixTypeLater = await d3.json(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        process.env.REACT_APP_PACKAGE_METADATA_URL!
+      )
+      const newMetadata: Metadata[] = data.result.resources.map(
+        (resource: FixTypeLater) => {
+          return {
+            key: resource.name,
+            url: resource.url,
+          }
+        }
+      )
+      const keyedMetadata = newMetadata.reduce(
+        (obj: Dictionary<Metadata>, currentValue) => {
+          obj[currentValue.key] = currentValue
+          return obj
+        },
+        {}
+      )
+      console.log('Metadata loaded.')
+      setMetadata(keyedMetadata)
+    }
+    loadMetadata()
+  }, [])
+
+  // const value = useMemo(
+  //   () => ({
+  //     comparisonData,
+  //     progressData,
+  //     leadershipData,
+  //     employeeCountData,
+  //     occupationRegionData,
+  //     lockedVars,
+  //     setLockedVars,
+  //   }),
+  //   [
+  //     employeeCountData,
+  //     comparisonData,
+  //     progressData,
+  //     leadershipData,
+  //     occupationRegionData,
+  //     lockedVars,
+  //     setLockedVars,
+  //   ]
+  // )
+
+  const value = {
+    lockedVars,
+    setLockedVars,
+    metadata,
+    setMetadata,
+  }
 
   return (
     <DataManagerContext.Provider value={value}>

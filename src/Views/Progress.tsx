@@ -1,17 +1,35 @@
+import { useQuery } from 'react-query'
+import * as d3 from 'd3'
 import React, { useEffect } from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
+import { filterData, sortData, useDataManager } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { ProgressRawData } from '../@types/DataTypes'
-import { useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'
 import Dictionary from '../@types/Dictionary'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
 import ProgressGraph from '../Graphs/ProgressGraph'
 
+import Loading from './Loading'
+
 const Progress = (): JSX.Element => {
-  const { progressData: data, setLockedVars } = useDataManager()
+  const { setLockedVars, metadata, year, queryValues } = useDataManager()
+
+  const dataKey = `WP${year}_Ind_Progress`
+  const url = metadata ? metadata[dataKey].url : ''
+
+  // TODO: Bring error into GenericView
+  const { isLoading, error, data: unfilteredData } = useQuery(
+    dataKey,
+    async () => {
+      return (await d3.csv(url)) as ProgressRawData[]
+    },
+    {
+      enabled: !!metadata,
+    }
+  )
 
   useEffect(() => setLockedVars({}), [])
 
@@ -36,6 +54,14 @@ const Progress = (): JSX.Element => {
     },
   ]
 
+  // TODO: Bring these into GenericView
+  if (isLoading) return <Loading />
+  if (!unfilteredData || unfilteredData.length === 0) return <>No data yet.</>
+
+  // TODO: If app is slow, can useMemo on this one
+  const data = sortData(filterData(unfilteredData, queryValues))
+
+  // TODO: Factor this out
   const codeOrder: Dictionary<number> = {
     // TODO: Factor this out
     IND: 0,
@@ -52,11 +78,13 @@ const Progress = (): JSX.Element => {
 
   return (
     <GenericView
-      title="Indicators of Progress — By Designated Group"
       data={data}
+      title="Indicators of Progress — By Designated Group"
     >
-      {/* <ProgressGraph title={'Indicators of Progress — By Designated Group'} /> */}
-      <ProgressGraph title={'Indicators of Progress — By Designated Group'} />
+      <ProgressGraph
+        data={data}
+        title={'Indicators of Progress — By Designated Group'}
+      />
       <GenericTable columns={columns} data={data} filename="progress" />
     </GenericView>
   )

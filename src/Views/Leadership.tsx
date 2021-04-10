@@ -10,12 +10,15 @@ import GenericView from './GenericView'
 import LeadershipGraph from '../Graphs/LeadershipGraph'
 
 const Leadership = (): JSX.Element => {
-  const { leadershipData: data, setLockedVars } = useDataManager()
+  const { leadershipData: data, setLockedVars, year } = useDataManager()
 
-  useEffect(
-    () => setLockedVars({ Employee_Type: ['ALL'], Ministry_Key: ['BCPS'] }),
-    []
-  )
+  useEffect(() => {
+    if (year === '2018') {
+      setLockedVars({ Employee_Type: ['ALL'], Ministry_Key: ['BCPS'] })
+    } else {
+      setLockedVars({ Ministry_Key: ['BCPS'] })
+    }
+  }, [year])
 
   const columns: ColumnWithClassName<LeadershipRawData>[] = [
     {

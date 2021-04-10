@@ -2,6 +2,7 @@ import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
 import React, { useState } from 'react'
 
+import { getTooltip } from '../Data/tooltipHelper'
 import { NIVO_BASE_PROPS } from '../Helpers/graphs'
 import { useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'
@@ -9,19 +10,23 @@ import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 
-import './Graphs.scss'
-import { getTooltip } from '../Data/tooltipHelper'
+import { LeadershipRawData } from '../@types/DataTypes'
 
-interface TitleProps {
+import './Graphs.scss'
+import { parseFloatClean } from '../Helpers/formatter'
+
+interface Props {
   title: string
 }
 
-const LEFT_MARGIN = 160
-const RIGHT_MARGIN = 50
-const TOP_MARGIN = 0
-const BOTTOM_MARGIN = 50
+const MARGINS = {
+  left: 160,
+  right: 50,
+  top: 0,
+  bottom: 50,
+}
 
-const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
+const LeadershipGraph = ({ title }: Props): JSX.Element => {
   const { leadershipData: data, year = '' } = useDataManager() // TODO: don't assign default '' to year
 
   const dataDefinitions = [
@@ -44,12 +49,14 @@ const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
   if (!data) return <div>&nbsp;</div>
 
   const items = data
-    .map((d): number[] => {
+    .map((datum): number[] => {
       return ['Executive', 'Management_Band'].map(
-        (e: string): number => +(d as FixTypeLater)[e]
+        (e): number => +parseFloatClean((datum as FixTypeLater)[e])
       )
     })
     .flat()
+
+  console.log('items', items)
 
   const sortedData = data.sort((a, b) =>
     b['Des_Grp'].localeCompare(a['Des_Grp'])
@@ -64,12 +71,7 @@ const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
       data={sortedData}
       keys={['Executive', 'Management_Band']}
       indexBy="Des_Grp"
-      margin={{
-        top: TOP_MARGIN,
-        right: RIGHT_MARGIN,
-        bottom: BOTTOM_MARGIN,
-        left: LEFT_MARGIN,
-      }}
+      margin={MARGINS}
       valueScale={{ type: 'linear' }}
       indexScale={{ type: 'band', round: true }}
       colors={['#70CCDB', '#D2E2EE']}
@@ -100,7 +102,7 @@ const LeadershipGraph = ({ title }: TitleProps): JSX.Element => {
           `${(+d).toLocaleString(undefined, { maximumFractionDigits: 0 })}%`,
       }}
       labelFormat={(d): FixTypeLater => {
-        const numD = +d
+        const numD = isNaN(+d) ? 0 : +d
         return ((
           <tspan
             dy={0}

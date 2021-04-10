@@ -1,6 +1,7 @@
 import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
 import React from 'react'
+import * as d3 from 'd3'
 
 import { NIVO_BASE_PROPS } from '../Helpers/graphs'
 import { parseFloatClean } from '../Helpers/formatter'
@@ -9,19 +10,20 @@ import { VARIABLES } from '../Variables/VariableManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
+import { useQuery } from 'react-query'
+import { ProgressRawData } from '../@types/DataTypes'
 
 interface Props {
   title: string
+  data: ProgressRawData[]
 }
 
-const ProgressGraph = ({ title }: Props): JSX.Element => {
+const ProgressGraph = ({ data, title }: Props): JSX.Element => {
   const dataDefinitions = [
     { key: '2015_pc', label: '2015', color: '#6c757d' },
     { key: '2018_pc', label: '2018', color: '#70CCDB' },
     { key: '2020_pc', label: '2020', color: '#D2E2EE' },
   ]
-
-  const { progressData: data } = useDataManager()
 
   if (!data) return <div>&nbsp;</div>
 
