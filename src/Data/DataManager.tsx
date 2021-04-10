@@ -12,7 +12,6 @@ import {
   ComparisonRawData,
   EmployeeCountRawData,
   GenericRawData,
-  LeadershipRawData,
   MinistryRawData,
   OccupationRegionRawData,
   ProgressRawData,
@@ -28,7 +27,6 @@ type DataManagerContextType = {
   setMetadata?: FixTypeLater
   hiringTotal?: number
   employeeCount?: number
-  ministryData?: MinistryRawData[]
   employeeCountData?: EmployeeCountRawData[]
   occupationRegionData?: OccupationRegionRawData[]
   lockedVars: Dictionary<string[]>
@@ -184,7 +182,6 @@ function useDataManager(): DataManagerContextType {
     metadata,
     queryValues,
     year: queryValues.Year || '',
-    ministryData: sortData(buildMinistryData([], queryValues)),
     employeeCount: getEmployeeCount(employeeCountData, queryValues),
     occupationRegionData: sortData(
       filterData(occupationRegionData, queryValues)
