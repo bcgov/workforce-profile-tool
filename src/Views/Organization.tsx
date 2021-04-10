@@ -1,18 +1,47 @@
-import { useDataManager } from '../Data/DataManager'
+import { useQuery } from 'react-query'
+import * as d3 from 'd3'
 import React, { useEffect } from 'react'
 
+import {
+  buildMinistryData,
+  sortData,
+  useDataManager,
+} from '../Data/DataManager'
+import { ComparisonRawData } from '../@types/DataTypes'
 import GenericView from './GenericView'
 import OrganizationGraph from '../Graphs/OrganizationGraph'
 
 const Organization = (): JSX.Element => {
-  const { ministryData: data, setLockedVars } = useDataManager()
+  const { setLockedVars, metadata, year, queryValues } = useDataManager()
 
   useEffect(() => setLockedVars({ Ministry_Key: ['BCPS'] }), [])
 
+  const dataKey = `WP${year}_Comparison`
+  const url = metadata ? metadata[dataKey].url : ''
+
+  // Load the raw data.
+  const { isLoading, error, data: unfilteredData } = useQuery(
+    dataKey,
+    async () => {
+      return (await d3.csv(url)) as ComparisonRawData[]
+    },
+    {
+      enabled: !!metadata,
+    }
+  )
+
+  // TODO: If app is slow, can useMemo on this one
+  const data = sortData(buildMinistryData(unfilteredData, queryValues))
+
   return (
-    <GenericView data={data}>
+    <GenericView
+      data={unfilteredData}
+      error={error}
+      isLoading={isLoading}
+      title={'Comparison with Provincial Workforce'}
+    >
       <h1>Organizations</h1>
-      <OrganizationGraph title={'Organizations'} />
+      <OrganizationGraph data={data} title={'Organizations'} />
     </GenericView>
   )
 }
