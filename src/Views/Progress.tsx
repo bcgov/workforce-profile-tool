@@ -61,21 +61,6 @@ const Progress = (): JSX.Element => {
   // TODO: If app is slow, can useMemo on this one
   const data = sortData(filterData(unfilteredData, queryValues))
 
-  // TODO: Factor this out
-  const codeOrder: Dictionary<number> = {
-    // TODO: Factor this out
-    IND: 0,
-    DIS: 1,
-    VM: 2,
-    WOM: 3,
-    WOM_SM: 4,
-    AS_TOTAL: 5,
-  }
-
-  if (data && data.length) {
-    data.sort((a, b) => codeOrder[a.Des_Grp] - codeOrder[b.Des_Grp])
-  }
-
   return (
     <GenericView
       data={data}

@@ -1,16 +1,13 @@
 import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
 import React from 'react'
-import * as d3 from 'd3'
 
 import { NIVO_BASE_PROPS } from '../Helpers/graphs'
 import { parseFloatClean } from '../Helpers/formatter'
-import { useDataManager } from '../Data/DataManager'
 import { VARIABLES } from '../Variables/VariableManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
-import { useQuery } from 'react-query'
 import { ProgressRawData } from '../@types/DataTypes'
 
 interface Props {
@@ -38,7 +35,6 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
       )
       return obj
     })
-    .sort((a, b) => a['Des_Grp'].localeCompare(b['Des_Grp']))
 
   const graph = (
     <ResponsiveBar
