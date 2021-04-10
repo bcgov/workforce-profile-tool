@@ -7,20 +7,20 @@ import { filterData, sortData, useDataManager } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { ProgressRawData } from '../@types/DataTypes'
 import { VARIABLES } from '../Variables/VariableManager'
-import Dictionary from '../@types/Dictionary'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
 import ProgressGraph from '../Graphs/ProgressGraph'
 
-import Loading from './Loading'
-
 const Progress = (): JSX.Element => {
   const { setLockedVars, metadata, year, queryValues } = useDataManager()
+
+  // When page loads, set the locked variables as appropriate.
+  useEffect(() => setLockedVars({}), [])
 
   const dataKey = `WP${year}_Ind_Progress`
   const url = metadata ? metadata[dataKey].url : ''
 
-  // TODO: Bring error into GenericView
+  // Load the raw data.
   const { isLoading, error, data: unfilteredData } = useQuery(
     dataKey,
     async () => {
@@ -31,7 +31,8 @@ const Progress = (): JSX.Element => {
     }
   )
 
-  useEffect(() => setLockedVars({}), [])
+  // TODO: If app is slow, can useMemo on this one
+  const data = sortData(filterData(unfilteredData, queryValues))
 
   const columns: ColumnWithClassName<ProgressRawData>[] = [
     {
@@ -54,16 +55,11 @@ const Progress = (): JSX.Element => {
     },
   ]
 
-  // TODO: Bring these into GenericView
-  if (isLoading) return <Loading />
-  if (!unfilteredData || unfilteredData.length === 0) return <>No data yet.</>
-
-  // TODO: If app is slow, can useMemo on this one
-  const data = sortData(filterData(unfilteredData, queryValues))
-
   return (
     <GenericView
-      data={data}
+      isLoading={isLoading}
+      error={error}
+      data={unfilteredData}
       title="Indicators of Progress — By Designated Group"
     >
       <ProgressGraph

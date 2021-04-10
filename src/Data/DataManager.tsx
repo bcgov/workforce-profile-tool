@@ -3,10 +3,8 @@ import React, {
   createContext,
   useContext,
   useEffect,
-  useMemo,
   useState,
 } from 'react'
-import { useQuery } from 'react-query'
 import { ArrayParam, StringParam, useQueryParams } from 'use-query-params'
 import * as d3 from 'd3'
 
@@ -28,7 +26,6 @@ type DataManagerContextType = {
   year?: string
   metadata?: FixTypeLater
   setMetadata?: FixTypeLater
-  progressData?: ProgressRawData[]
   hiringTotal?: number
   employeeCount?: number
   leadershipData?: LeadershipRawData[]
@@ -78,7 +75,7 @@ export const sortData = <T extends GenericRawData>(
     : []
 }
 
-const getEmployeeCount = (
+export const getEmployeeCount = (
   employeeCountData: EmployeeCountRawData[] | undefined,
   queryValues: FixTypeLater
 ): number | undefined => {
@@ -89,7 +86,7 @@ const getEmployeeCount = (
   return data.length ? +data[0].Employee_Count : undefined
 }
 
-const getHiringTotal = (
+export const getHiringTotal = (
   progressData: ProgressRawData[] | undefined,
   queryValues: FixTypeLater
 ): number | undefined => {
@@ -105,7 +102,7 @@ const getHiringTotal = (
   return data ? +data['2020_hired_ct'] : undefined
 }
 
-const buildMinistryData = (
+export const buildMinistryData = (
   comparisonData: ComparisonRawData[] | undefined,
   queryValues: FixTypeLater
 ): MinistryRawData[] => {
@@ -172,7 +169,6 @@ function useDataManager(): DataManagerContextType {
 
   const {
     metadata,
-    progressData,
     leadershipData,
     comparisonData,
     employeeCountData,
@@ -180,9 +176,6 @@ function useDataManager(): DataManagerContextType {
     lockedVars,
     setLockedVars,
   } = context
-
-  // console.log('progressData', progressData)
-  // console.log('metadata', metadata)
 
   const [queryValues] = useQueryParams({
     Employee_Type: StringParam,
@@ -195,8 +188,6 @@ function useDataManager(): DataManagerContextType {
     metadata,
     queryValues,
     year: queryValues.Year || '',
-    progressData: sortData(filterData(progressData, queryValues)),
-    hiringTotal: getHiringTotal(progressData, queryValues),
     leadershipData: sortData(filterData(leadershipData, queryValues)),
     ministryData: sortData(buildMinistryData(comparisonData, queryValues)),
     comparisonData: sortData(filterData(comparisonData, queryValues)),
@@ -224,7 +215,7 @@ function DataManagerProvider({
   const [lockedVars, setLockedVars] = useState<Dictionary<string[]>>({})
   const [metadata, setMetadata] = useState<Dictionary<Metadata>>()
 
-  // Initial load of metadata
+  // Initial load of metadata.
   useEffect(() => {
     const loadMetadata = async () => {
       const data: FixTypeLater = await d3.json(
@@ -232,12 +223,10 @@ function DataManagerProvider({
         process.env.REACT_APP_PACKAGE_METADATA_URL!
       )
       const newMetadata: Metadata[] = data.result.resources.map(
-        (resource: FixTypeLater) => {
-          return {
-            key: resource.name,
-            url: resource.url,
-          }
-        }
+        (resource: Dictionary<string>) => ({
+          key: resource.name,
+          url: resource.url,
+        })
       )
       const keyedMetadata = newMetadata.reduce(
         (obj: Dictionary<Metadata>, currentValue) => {
@@ -249,29 +238,10 @@ function DataManagerProvider({
       console.log('Metadata loaded.')
       setMetadata(keyedMetadata)
     }
+
+    // Load the metadata just once on load.
     loadMetadata()
   }, [])
-
-  // const value = useMemo(
-  //   () => ({
-  //     comparisonData,
-  //     progressData,
-  //     leadershipData,
-  //     employeeCountData,
-  //     occupationRegionData,
-  //     lockedVars,
-  //     setLockedVars,
-  //   }),
-  //   [
-  //     employeeCountData,
-  //     comparisonData,
-  //     progressData,
-  //     leadershipData,
-  //     occupationRegionData,
-  //     lockedVars,
-  //     setLockedVars,
-  //   ]
-  // )
 
   const value = {
     lockedVars,
