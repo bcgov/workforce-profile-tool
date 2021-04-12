@@ -1,11 +1,12 @@
 import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
+import { formatPercent } from '../Helpers/formatter'
 import { getTooltip } from '../Data/tooltipHelper'
+import { horizontalLabel, labelValue } from './horizontalLabel'
 import { LeadershipRawData } from '../@types/DataTypes'
-import { NIVO_BASE_PROPS } from '../Helpers/graphs'
-import { parseFloatClean } from '../Helpers/formatter'
+import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
 import { VARIABLES } from '../Variables/VariableManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
@@ -19,12 +20,7 @@ interface Props {
   year: string
 }
 
-const MARGINS = {
-  left: 160,
-  right: 50,
-  top: 0,
-  bottom: 50,
-}
+const MARGINS = { left: 160, right: 50, top: 0, bottom: 50 }
 
 const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
   const dataDefinitions = [
@@ -46,23 +42,28 @@ const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
 
   if (!data) return <div>&nbsp;</div>
 
-  const items = data
-    .map((datum): number[] => {
-      return ['Executive', 'Management_Band'].map(
-        (e): number => +parseFloatClean((datum as FixTypeLater)[e])
-      )
+  const { dataKeys, filteredData } = processDataForGraph(data, dataDefinitions)
+  filteredData.reverse()
+
+  const items = filteredData
+    .map((d: FixTypeLater): number[] => {
+      return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
     })
     .flat()
     .reverse() // TODO: Don't call reverse(); use Nivo setting instead
 
   const maxItem = Math.max(...items)
 
-  const legend = <Legend items={dataDefinitions} />
+  const labelCallback = useCallback(() => {
+    return horizontalLabel(MARGINS, width, maxItem, (d: FixTypeLater) => {
+      return formatPercent(d, 1, 100)
+    })
+  }, [maxItem, width])
 
   const graph = (
     <ResponsiveBar
-      data={data}
-      keys={['Executive', 'Management_Band']}
+      data={filteredData}
+      keys={dataKeys}
       indexBy="Des_Grp"
       margin={MARGINS}
       valueScale={{ type: 'linear' }}
@@ -78,7 +79,6 @@ const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        // legend: 'Values',
         legendPosition: 'middle',
         legendOffset: 32,
         format: (d: FixTypeLater) =>
@@ -94,23 +94,8 @@ const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
         format: (d: FixTypeLater) =>
           `${(+d).toLocaleString(undefined, { maximumFractionDigits: 0 })}%`,
       }}
-      labelFormat={(d): FixTypeLater => {
-        const numD = isNaN(+d) ? 0 : +d
-        return ((
-          <tspan
-            dy={0}
-            // dx={-numD + 5 + numD * ((width - 180 - 30) / maxItem)}
-            // dx={numD * ((width - 180 - 30) / maxItem)}
-            dx={`${5 + (numD * (width - 240)) / 2 / maxItem}`}
-            style={{ textAnchor: 'start' }}
-          >
-            {d === 0 && '<3'}
-            {d > 0 && (
-              <>{d.toLocaleString(undefined, { minimumFractionDigits: 1 })}%</>
-            )}
-          </tspan>
-        ) as unknown) as string
-      }}
+      label={labelValue}
+      labelFormat={labelCallback()}
       tooltip={(d: FixTypeLater): JSX.Element => {
         return (
           <div style={{ color: Color(d.color).darken(0.3).hex() }}>
@@ -123,6 +108,8 @@ const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
       {...NIVO_BASE_PROPS}
     />
   )
+
+  const legend = <Legend items={dataDefinitions} />
 
   return (
     <GraphFrame

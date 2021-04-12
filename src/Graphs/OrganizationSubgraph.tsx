@@ -1,16 +1,17 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
-import { parseFloatClean } from '../Helpers/formatter'
+import { formatPercent, parseFloatClean } from '../Helpers/formatter'
 import { MinistryRawData } from '../@types/DataTypes'
-import { NIVO_BASE_PROPS } from '../Helpers/graphs'
+import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
 import { VARIABLES } from '../Variables/VariableManager'
 import Dictionary from '../@types/Dictionary'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
+import { horizontalLabel, labelValue } from './horizontalLabel'
 
 interface SubgraphProps {
   data: MinistryRawData[]
@@ -19,6 +20,8 @@ interface SubgraphProps {
   title?: string
   varKey?: FixTypeLater
 }
+
+const MARGINS = { top: 0, right: 60, bottom: 50, left: 255 }
 
 const OrganizationSubGraph = (props: SubgraphProps): JSX.Element => {
   if (!props.data) return <div>&nbsp;</div>
@@ -47,9 +50,8 @@ const OrganizationSubGraph = (props: SubgraphProps): JSX.Element => {
   }
 
   const chartData = categories.map((category) => {
-    const count = +parseFloatClean(
-      props.data.find((d) => d.Ministry_Key === category)!.Value
-    )
+    const countStr = props.data.find((d) => d.Ministry_Key === category)!.Value
+    const count = +parseFloatClean(countStr)
 
     let categoryName =
       VARIABLES.displayNameByKey('Ministry_Key', category) || ''
@@ -65,26 +67,63 @@ const OrganizationSubGraph = (props: SubgraphProps): JSX.Element => {
     return {
       category: categoryName,
       count,
+      count_str: countStr,
       color,
     }
   })
 
-  const items = chartData
-    .map((d): number[] => {
-      return ['count'].map((e: string): number => +(d as FixTypeLater)[e])
+  const legendItems = [
+    {
+      key: 'Des_Grp',
+      label: VARIABLES.displayNameByKey('Des_Grp', props.data[0].Des_Grp) || '',
+      color,
+    },
+  ]
+
+  const dataDefinitions = [
+    {
+      key: 'count',
+    },
+  ]
+
+  const { dataKeys, filteredData } = processDataForGraph(
+    chartData,
+    dataDefinitions,
+    (d: FixTypeLater, obj: FixTypeLater) => {
+      obj.category = d.category
+    }
+  )
+
+  console.log('chartData', chartData, filteredData)
+
+  const items = filteredData
+    .map((d: FixTypeLater): number[] => {
+      return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
     })
     .flat()
 
   const maxItem = Math.max(...items)
 
-  chartData.sort((b, a) => (a.count < b.count ? 1 : a.count > b.count ? -1 : 0))
+  console.log('maxItem', maxItem)
+
+  const labelCallback = useCallback(() => {
+    return horizontalLabel(MARGINS, width, maxItem, (d: FixTypeLater) => {
+      return formatPercent(d, 1, 100)
+    })
+  }, [maxItem, width])
+
+  filteredData.sort((b: FixTypeLater, a: FixTypeLater) =>
+    a.count < b.count ? 1 : a.count > b.count ? -1 : 0
+  )
+
+  console.log('chartData', chartData)
 
   const graph = (
     <ResponsiveBar
-      data={chartData}
+      data={filteredData}
       keys={['count']}
       indexBy="category"
-      margin={{ top: 0, right: 60, bottom: 50, left: 255 }}
+      margin={MARGINS}
       valueScale={{ type: 'linear' }}
       indexScale={{ type: 'band', round: true }}
       colors={chartData[0].color}
@@ -139,23 +178,8 @@ const OrganizationSubGraph = (props: SubgraphProps): JSX.Element => {
         format: (d: FixTypeLater) =>
           `${(+d).toLocaleString(undefined, { maximumFractionDigits: 0 })}%`,
       }}
-      labelFormat={(d) => {
-        const numD = isNaN(+d) ? 0 : +d
-        return ((
-          <tspan
-            dy={0}
-            // dx={-numD + 5 + numD * ((width - 180 - 30) / maxItem)}
-            // dx={numD * ((width - 180 - 30) / maxItem)}
-            dx={`${3 + (numD * (width - 335)) / 2 / maxItem}`}
-            style={{ textAnchor: 'start' }}
-          >
-            {d === 0 && '<3'}
-            {d > 0 && (
-              <>{d.toLocaleString(undefined, { minimumFractionDigits: 1 })}%</>
-            )}
-          </tspan>
-        ) as unknown) as string
-      }}
+      label={labelValue}
+      labelFormat={labelCallback()}
       tooltip={(d: FixTypeLater): JSX.Element => {
         return (
           <div style={{ color: Color(d.color).darken(0.3).hex() }}>
@@ -166,14 +190,6 @@ const OrganizationSubGraph = (props: SubgraphProps): JSX.Element => {
       {...NIVO_BASE_PROPS}
     />
   )
-
-  const legendItems = [
-    {
-      key: 'Des_Grp',
-      label: VARIABLES.displayNameByKey('Des_Grp', props.data[0].Des_Grp) || '',
-      color,
-    },
-  ]
 
   const legend = (
     <Legend

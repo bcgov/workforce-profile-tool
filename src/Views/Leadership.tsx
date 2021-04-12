@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { filterData, sortData, useDataManager } from '../Data/DataManager'
 import { LeadershipRawData } from '../@types/DataTypes'
-import { parseFloatClean } from '../Helpers/formatter'
+import { formatPercent, parseFloatClean } from '../Helpers/formatter'
 import { VARIABLES } from '../Variables/VariableManager'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
@@ -48,12 +48,13 @@ const Leadership = (): JSX.Element => {
       id: 'Des_Grp',
     },
     {
-      accessor: (r: LeadershipRawData) => parseFloatClean(r.Executive),
+      accessor: (r: LeadershipRawData) => formatPercent(r.Executive, 1, 100),
       className: 'text-right',
       Header: 'Executive Leadership, %',
     },
     {
-      accessor: (r: LeadershipRawData) => parseFloatClean(r.Management_Band),
+      accessor: (r: LeadershipRawData) =>
+        formatPercent(r.Management_Band, 1, 100),
       className: 'text-right',
       Header: 'Management Band Leadership, %',
     },

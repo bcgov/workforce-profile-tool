@@ -1,17 +1,18 @@
 import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
-import { NIVO_BASE_PROPS } from '../Helpers/graphs'
-import { parseFloatClean } from '../Helpers/formatter'
+import { ComparisonRawData } from '../@types/DataTypes'
+import { formatPercent } from '../Helpers/formatter'
+import { getTooltip } from '../Data/tooltipHelper'
+import { horizontalLabel, labelValue } from './horizontalLabel'
+import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
 import { VARIABLES } from '../Variables/VariableManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 
 import './Graphs.scss'
-import { getTooltip } from '../Data/tooltipHelper'
-import { ComparisonRawData } from '../@types/DataTypes'
 
 interface Props {
   data: ComparisonRawData[]
@@ -20,10 +21,12 @@ interface Props {
   year: string
 }
 
-const LEFT_MARGIN = 160
-const RIGHT_MARGIN = 50
-const TOP_MARGIN = 0
-const BOTTOM_MARGIN = 50
+const MARGINS = {
+  left: 160,
+  right: 50,
+  top: 0,
+  bottom: 50,
+}
 
 const ComparisonGraph = ({
   data,
@@ -55,43 +58,31 @@ const ComparisonGraph = ({
 
   if (!data) return <div>&nbsp;</div>
 
-  const filteredData = data
-    .filter((d) => d['Des_Grp'] !== 'AS_TOTAL')
-    .map((d) => ({
-      Des_Grp: d.Des_Grp,
-      Employees_BCPS: parseFloatClean(d['Employees_BCPS']),
-      Available_Workforce_BCPS: parseFloatClean(d['Available_Workforce_BCPS']),
-      Employees_BC_Population: parseFloatClean(d['Employees_BC_Population']),
-    }))
-    .reverse()
+  const { dataKeys, filteredData } = processDataForGraph(data, dataDefinitions)
+  filteredData.reverse()
 
   const items = filteredData
-    .map((d): number[] => {
-      return [
-        'Employees_BCPS',
-        'Available_Workforce_BCPS',
-        'Employees_BC_Population',
-      ].map((e: string): number => +(d as FixTypeLater)[e])
+    .map((d: FixTypeLater): number[] => {
+      return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
     })
     .flat()
 
   const maxItem = Math.max(...items)
 
+  const labelCallback = useCallback(() => {
+    return horizontalLabel(MARGINS, width, maxItem, (d: FixTypeLater) => {
+      return formatPercent(d, 1, 100)
+    })
+  }, [maxItem, width])
+
+  console.log('filteredData ==>', filteredData)
+
   const graph = (
     <ResponsiveBar
       data={filteredData}
-      keys={[
-        'Employees_BCPS',
-        'Available_Workforce_BCPS',
-        'Employees_BC_Population',
-      ]}
+      keys={dataKeys}
       indexBy="Des_Grp"
-      margin={{
-        top: TOP_MARGIN,
-        right: RIGHT_MARGIN,
-        bottom: BOTTOM_MARGIN,
-        left: LEFT_MARGIN,
-      }}
+      margin={MARGINS}
       valueScale={{ type: 'linear' }}
       indexScale={{ type: 'band', round: true }}
       colors={['#6c757d', '#70CCDB', '#D2E2EE']}
@@ -105,7 +96,6 @@ const ComparisonGraph = ({
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        // legend: 'Values',
         legendPosition: 'middle',
         legendOffset: 32,
         format: (d: FixTypeLater) =>
@@ -121,18 +111,8 @@ const ComparisonGraph = ({
         format: (d: FixTypeLater) =>
           `${(+d).toLocaleString(undefined, { maximumFractionDigits: 0 })}%`,
       }}
-      labelFormat={(d): FixTypeLater => {
-        const numD = +d
-        const dx = 5 + (numD * (width - 240)) / 2 / maxItem
-        return ((
-          <tspan dy={0} dx={dx} style={{ textAnchor: 'start' }}>
-            {d === 0 && '<3'}
-            {d > 0 && (
-              <>{d.toLocaleString(undefined, { minimumFractionDigits: 1 })}%</>
-            )}
-          </tspan>
-        ) as unknown) as string
-      }}
+      label={labelValue}
+      labelFormat={labelCallback()}
       tooltip={(d: FixTypeLater): JSX.Element => {
         return (
           <div style={{ color: Color(d.color).darken(0.3).hex() }}>

@@ -1,4 +1,5 @@
 import FixTypeLater from '../@types/FixTypeLater'
+import { parseFloatClean } from './formatter'
 
 export const BAR_H_GAP_SIZE = 3 // Horizontal space between bars within a group
 export const BAR_H_CATEGORY_GAP_SIZE = 30 // Horizontal space between bar groups
@@ -57,4 +58,26 @@ export const NIVO_BASE_PROPS = {
   labelTextColor,
   axisTop: null,
   axisRight: null,
+}
+
+export const processDataForGraph = (
+  data: FixTypeLater[],
+  dataDefinitions: FixTypeLater[],
+  additionalMapping?: FixTypeLater
+): FixTypeLater => {
+  const dataKeys = dataDefinitions.map((d) => d.key)
+  const filteredData = data
+    .filter((d) => d['Des_Grp'] !== 'AS_TOTAL')
+    .map((d: FixTypeLater) => {
+      const obj: FixTypeLater = { Des_Grp: d.Des_Grp }
+      if (additionalMapping) {
+        additionalMapping(d, obj)
+      }
+      dataKeys.forEach((dataKey) => {
+        obj[dataKey] = parseFloatClean(d[dataKey])
+        obj[`${dataKey}_str`] = d[dataKey]
+      })
+      return obj
+    })
+  return { dataKeys, filteredData }
 }

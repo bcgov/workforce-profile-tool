@@ -9,11 +9,15 @@ import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 import { ProgressRawData } from '../@types/DataTypes'
+import Dictionary from '../@types/Dictionary'
+import { labelValue } from './horizontalLabel'
 
 interface Props {
   title: string
   data: ProgressRawData[]
 }
+
+const MARGINS = { top: 50, right: 30, bottom: 50, left: 70 }
 
 const ProgressGraph = ({ data, title }: Props): JSX.Element => {
   const dataDefinitions = [
@@ -30,18 +34,21 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
     .filter((d) => d['Des_Grp'] !== 'AS_TOTAL')
     .map((d: FixTypeLater) => {
       const obj: FixTypeLater = { Des_Grp: d.Des_Grp }
-      dataKeys.forEach(
-        (dataKey) => (obj[dataKey] = parseFloatClean(d[dataKey]))
-      )
+      dataKeys.forEach((dataKey) => {
+        obj[dataKey] = parseFloatClean(d[dataKey])
+        obj[`${dataKey}_str`] = d[dataKey]
+      })
       return obj
     })
+
+  console.log('dataKeys', dataKeys)
 
   const graph = (
     <ResponsiveBar
       data={filteredData}
       keys={dataKeys}
       indexBy="Des_Grp"
-      margin={{ top: 50, right: 30, bottom: 50, left: 70 }}
+      margin={MARGINS}
       valueScale={{ type: 'linear' }}
       indexScale={{ type: 'band', round: true }}
       colors={dataKeys.map(
@@ -71,6 +78,7 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
         format: (d: FixTypeLater) =>
           `${(+d).toLocaleString(undefined, { maximumFractionDigits: 0 })}%`,
       }}
+      label={labelValue}
       labelFormat={(d) =>
         ((
           <tspan y={-10}>
