@@ -21,9 +21,19 @@ const MinistryGraph = ({ data }: Props): JSX.Element => {
     dataMap[d.Des_Grp].push(d)
   })
 
+  console.log('dataMap', dataMap)
+
+  const COLOR_MAP: Dictionary<string> = {
+    IND: '#234075',
+    DIS: '#70CCDB',
+    VM: '#D2E2EE',
+    WOM: '#E6B345',
+  }
+
   const graphs = Object.keys(dataMap).map((k) => {
     const title = VARIABLES.displayNameByKey('Des_Grp', k)
     const shortTitle = VARIABLES.shortDisplayNameByKey('Des_Grp', k)
+    const color = COLOR_MAP[k]
 
     return (
       <div key={k}>
@@ -31,6 +41,7 @@ const MinistryGraph = ({ data }: Props): JSX.Element => {
           {title}, regular employees {/* TODO: tidy up */}
         </h2>
         <OrganizationSubGraph
+          color={color}
           data={dataMap[k]}
           masterTitle={title}
           title={title}

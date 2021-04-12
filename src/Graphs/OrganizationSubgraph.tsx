@@ -3,17 +3,17 @@ import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
 import React, { useCallback, useState } from 'react'
 
-import { formatPercent, parseFloatClean } from '../Helpers/formatter'
+import { formatPercent, parseIntClean } from '../Helpers/formatter'
+import { horizontalLabel, labelValue } from './horizontalLabel'
 import { MinistryRawData } from '../@types/DataTypes'
 import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
 import { VARIABLES } from '../Variables/VariableManager'
-import Dictionary from '../@types/Dictionary'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
-import { horizontalLabel, labelValue } from './horizontalLabel'
 
 interface SubgraphProps {
+  color?: string
   data: MinistryRawData[]
   masterTitle?: string
   shortTitle?: string
@@ -23,78 +23,54 @@ interface SubgraphProps {
 
 const MARGINS = { top: 0, right: 60, bottom: 50, left: 255 }
 
-const OrganizationSubGraph = (props: SubgraphProps): JSX.Element => {
-  if (!props.data) return <div>&nbsp;</div>
+const OrganizationSubGraph = ({
+  data,
+  varKey,
+  title,
+  masterTitle,
+  color,
+}: SubgraphProps): JSX.Element => {
+  let dataDefinitions = []
+
+  if (!data) return <div>&nbsp;</div>
+
+  dataDefinitions = data
+    .map((d) => d.Ministry_Key)
+    .filter((c) => c !== 'key' && c !== 'Des_Grp' && c !== 'BC Population')
+
+  console.log('data', data)
+  console.log('dataDefinitions', dataDefinitions)
 
   const [width, setWidth] = useState(620)
 
-  let categories =
-    props.data && props.data.length ? props.data.map((d) => d.Ministry_Key) : []
-
   const provincialRepresentation = parseFloat(
-    props.data.find((d) => d.Ministry_Key === 'BC Population')!.Value
-  )
-
-  categories = categories.filter(
-    (c) => c !== 'key' && c !== 'Des_Grp' && c !== 'BC Population'
+    data.find((d) => d.Ministry_Key === 'BC Population')!.Value
   )
 
   let hasSuppressedData = false
-  let color = ''
-
-  const COLOR_MAP: Dictionary<string> = {
-    IND: '#234075',
-    DIS: '#70CCDB',
-    VM: '#D2E2EE',
-    WOM: '#E6B345',
-  }
-
-  const chartData = categories.map((category) => {
-    const countStr = props.data.find((d) => d.Ministry_Key === category)!.Value
-    const count = +parseFloatClean(countStr)
-
-    let categoryName =
-      VARIABLES.displayNameByKey('Ministry_Key', category) || ''
-
-    if (count === 0) hasSuppressedData = true
-
-    color = COLOR_MAP[props.data[0]['Des_Grp']]
-
-    if (categoryName.length > 37) {
-      categoryName = categoryName.replace(/[^A-Z]/g, '')
-    }
-
-    return {
-      category: categoryName,
-      count,
-      count_str: countStr,
-      color,
-    }
-  })
 
   const legendItems = [
     {
       key: 'Des_Grp',
-      label: VARIABLES.displayNameByKey('Des_Grp', props.data[0].Des_Grp) || '',
-      color,
-    },
-  ]
-
-  const dataDefinitions = [
-    {
-      key: 'count',
+      label: VARIABLES.displayNameByKey('Des_Grp', data[0].Des_Grp) || '',
+      color: color || 'black',
     },
   ]
 
   const { dataKeys, filteredData } = processDataForGraph(
-    chartData,
-    dataDefinitions,
+    data,
+    [{ key: 'Value' }],
     (d: FixTypeLater, obj: FixTypeLater) => {
-      obj.category = d.category
+      // console.log('d', d)
+      if (parseIntClean(d.Value) === 0) hasSuppressedData = true
+      let categoryShortName = d.Ministry_Key
+      if (categoryShortName.length > 37) {
+        categoryShortName = categoryShortName.replace(/[^A-Z]/g, '')
+      }
+      obj.category = d.Ministry_Key
+      obj.categoryShortName = categoryShortName
     }
   )
-
-  console.log('chartData', chartData, filteredData)
 
   const items = filteredData
     .map((d: FixTypeLater): number[] => {
@@ -104,8 +80,6 @@ const OrganizationSubGraph = (props: SubgraphProps): JSX.Element => {
 
   const maxItem = Math.max(...items)
 
-  console.log('maxItem', maxItem)
-
   const labelCallback = useCallback(() => {
     return horizontalLabel(MARGINS, width, maxItem, (d: FixTypeLater) => {
       return formatPercent(d, 1, 100)
@@ -113,20 +87,20 @@ const OrganizationSubGraph = (props: SubgraphProps): JSX.Element => {
   }, [maxItem, width])
 
   filteredData.sort((b: FixTypeLater, a: FixTypeLater) =>
-    a.count < b.count ? 1 : a.count > b.count ? -1 : 0
+    a.Value < b.Value ? 1 : a.Value > b.Value ? -1 : 0
   )
 
-  console.log('chartData', chartData)
+  console.log('filteredData', filteredData)
 
   const graph = (
     <ResponsiveBar
       data={filteredData}
-      keys={['count']}
-      indexBy="category"
+      keys={['Value']}
+      indexBy={'categoryShortName'}
       margin={MARGINS}
       valueScale={{ type: 'linear' }}
       indexScale={{ type: 'band', round: true }}
-      colors={chartData[0].color}
+      colors={color}
       groupMode={'grouped'}
       enableGridX={true}
       enableGridY={false}
@@ -207,8 +181,8 @@ const OrganizationSubGraph = (props: SubgraphProps): JSX.Element => {
 
   return (
     <GraphFrame
-      className={`Ministry-${props.varKey}`}
-      title={`${props.masterTitle} — ${props.title}`}
+      className={`Ministry-${varKey}`}
+      title={`${masterTitle} — ${title}`}
       graph={graph}
       legend={legend}
       setWidthCallback={setWidth}

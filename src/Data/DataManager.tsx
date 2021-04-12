@@ -116,7 +116,7 @@ export const buildMinistryData = (
       return {
         Des_Grp: d.Des_Grp,
         Ministry_Key: d.Ministry_Key,
-        Value: `${d.Employees_BCPS}${isNaN(+d.Employees_BCPS) ? '' : '%'}`,
+        Value: `${d.Employees_BCPS}`,
       }
     })
 
