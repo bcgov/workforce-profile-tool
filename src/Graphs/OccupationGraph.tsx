@@ -44,9 +44,7 @@ const OccupationGraph = ({ data, title }: Props): JSX.Element => {
     semiFilteredData,
     dataDefinitions
   )
-  filteredData.sort((a: FixTypeLater, b: FixTypeLater) =>
-    b['Des_Grp'].localeCompare(a['Des_Grp'])
-  )
+  filteredData.reverse()
 
   const items = filteredData
     .map((d: FixTypeLater): number[] => {
@@ -58,12 +56,9 @@ const OccupationGraph = ({ data, title }: Props): JSX.Element => {
 
   const labelCallback = useCallback(() => {
     return horizontalLabel(MARGINS, width, maxItem, (d: FixTypeLater) => {
-      console.log('--> d', d)
       return formatNumber(d, '')
     })
   }, [maxItem, width])
-
-  console.log('filteredData -->', filteredData)
 
   const graph = (
     <ResponsiveBar
