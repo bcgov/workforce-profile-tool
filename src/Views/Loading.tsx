@@ -1,7 +1,11 @@
 import React from 'react'
 
 const Loading = (): JSX.Element => {
-  return <div>Loading...</div>
+  return (
+    <div className="alert alert-primary" role="alert">
+      <h2 className="my-3">Loading...</h2>
+    </div>
+  )
 }
 
 export default Loading
