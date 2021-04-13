@@ -1,11 +1,10 @@
-import { withRouter } from 'react-router-dom'
 import React from 'react'
 
+import { VariableGroup } from './VariableGroup'
 import { VARIABLES } from './VariableManager'
 import VariableDisplay from './VariableDisplay'
 
 import './VariableList.scss'
-import { VariableGroup } from './VariableGroup'
 
 const VariableList = (): JSX.Element => {
   const variables = VARIABLES.variableGroups.map((group: VariableGroup) => (
@@ -19,4 +18,4 @@ const VariableList = (): JSX.Element => {
   )
 }
 
-export default withRouter(VariableList)
+export default VariableList
