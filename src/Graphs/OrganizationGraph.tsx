@@ -21,8 +21,6 @@ const MinistryGraph = ({ data }: Props): JSX.Element => {
     dataMap[d.Des_Grp].push(d)
   })
 
-  console.log('dataMap', dataMap)
-
   const COLOR_MAP: Dictionary<string> = {
     IND: '#234075',
     DIS: '#70CCDB',

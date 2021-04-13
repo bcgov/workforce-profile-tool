@@ -30,16 +30,7 @@ const OrganizationSubGraph = ({
   masterTitle,
   color,
 }: SubgraphProps): JSX.Element => {
-  let dataDefinitions = []
-
   if (!data) return <div>&nbsp;</div>
-
-  dataDefinitions = data
-    .map((d) => d.Ministry_Key)
-    .filter((c) => c !== 'key' && c !== 'Des_Grp' && c !== 'BC Population')
-
-  console.log('data', data)
-  console.log('dataDefinitions', dataDefinitions)
 
   const [width, setWidth] = useState(620)
 
@@ -58,27 +49,34 @@ const OrganizationSubGraph = ({
   ]
 
   const { dataKeys, filteredData } = processDataForGraph(
-    data,
+    data.filter((d: FixTypeLater) => {
+      return d.Ministry_Key !== 'BC Population'
+    }),
     [{ key: 'Value' }],
     (d: FixTypeLater, obj: FixTypeLater) => {
-      // console.log('d', d)
       if (parseIntClean(d.Value) === 0) hasSuppressedData = true
-      let categoryShortName = d.Ministry_Key
-      if (categoryShortName.length > 37) {
+      const categoryFullName = VARIABLES.displayNameByKey(
+        'Ministry_Key',
+        d.Ministry_Key
+      )
+      let categoryShortName = categoryFullName
+      if (categoryShortName && categoryShortName.length > 37) {
         categoryShortName = categoryShortName.replace(/[^A-Z]/g, '')
       }
       obj.category = d.Ministry_Key
+      obj.categoryFullName = categoryFullName
       obj.categoryShortName = categoryShortName
     }
   )
 
   const items = filteredData
+
     .map((d: FixTypeLater): number[] => {
       return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
     })
     .flat()
 
-  const maxItem = Math.max(...items)
+  const maxItem = Math.max(...items, provincialRepresentation + 3)
 
   const labelCallback = useCallback(() => {
     return horizontalLabel(MARGINS, width, maxItem, (d: FixTypeLater) => {
@@ -89,8 +87,6 @@ const OrganizationSubGraph = ({
   filteredData.sort((b: FixTypeLater, a: FixTypeLater) =>
     a.Value < b.Value ? 1 : a.Value > b.Value ? -1 : 0
   )
-
-  console.log('filteredData', filteredData)
 
   const graph = (
     <ResponsiveBar
@@ -104,6 +100,7 @@ const OrganizationSubGraph = ({
       groupMode={'grouped'}
       enableGridX={true}
       enableGridY={false}
+      maxValue={maxItem}
       borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
       layout={'horizontal'}
       layers={[
@@ -121,13 +118,19 @@ const OrganizationSubGraph = ({
                 y1={0}
                 y2={d.height}
                 width={3}
-                stroke={'#333'}
+                stroke={'#666'}
               />
               <text
                 x={d.xScale(provincialRepresentation) + 5}
                 y={d.height - 10}
+                textAnchor={'start'}
+                fill={'#666'}
               >
-                BC Pop: {provincialRepresentation}%
+                BC Pop:{' '}
+                {provincialRepresentation.toLocaleString(undefined, {
+                  minimumFractionDigits: 1,
+                })}
+                %
               </text>
             </>
           )
@@ -157,7 +160,7 @@ const OrganizationSubGraph = ({
       tooltip={(d: FixTypeLater): JSX.Element => {
         return (
           <div style={{ color: Color(d.color).darken(0.3).hex() }}>
-            {d.indexValue}: {d.data[d.id]}%
+            {d.data.categoryFullName}: {d.data[d.id]}%
           </div>
         )
       }}

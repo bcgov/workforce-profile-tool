@@ -105,7 +105,7 @@ export const VARIABLES = new VariableManager([
     true,
     'Organization',
     [
-      new Variable('BCPS', true, 'BCPS', 'BC Public Service – Total'),
+      new Variable('BCPS', true, 'BCPS', 'BC Public Service'),
       new Variable(
         'AEST',
         true,
@@ -151,6 +151,12 @@ export const VARIABLES = new VariableManager([
         true,
         'IRR',
         'Indigenous Relations and Reconciliation'
+      ),
+      new Variable(
+        'JEDC',
+        true,
+        'JEDC',
+        'Jobs, Economic Development and Competitiveness (formerly JTT)'
       ),
       new Variable('JTT', true, 'JTT', 'Jobs, Trade and Technology'),
       new Variable('LBR', true, 'LBR', 'Labour'),
