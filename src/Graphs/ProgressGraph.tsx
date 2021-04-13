@@ -2,15 +2,14 @@ import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
 import React from 'react'
 
+import { labelValue } from './horizontalLabel'
 import { NIVO_BASE_PROPS } from '../Helpers/graphs'
 import { parseFloatClean } from '../Helpers/formatter'
+import { ProgressRawData } from '../@types/DataTypes'
 import { VARIABLES } from '../Variables/VariableManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
-import { ProgressRawData } from '../@types/DataTypes'
-import Dictionary from '../@types/Dictionary'
-import { labelValue } from './horizontalLabel'
 
 interface Props {
   title: string

@@ -7,6 +7,7 @@ import { filterData, sortData, useDataManager } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { ProgressRawData } from '../@types/DataTypes'
 import { VARIABLES } from '../Variables/VariableManager'
+import Dictionary from '../@types/Dictionary'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
 import ProgressGraph from '../Graphs/ProgressGraph'
@@ -41,19 +42,19 @@ const Progress = (): JSX.Element => {
       accessor: (d) =>
         VARIABLES.displayNameByKey('Des_Grp', d['Des_Grp']) || '',
     },
-    {
-      id: '2018_pc',
-      Header: '2018, %',
-      accessor: (d) => formatPercent(d['2018_pc'], 1, 100),
-      className: 'text-right',
-    },
-    {
-      id: '2020_pc',
-      Header: '2020, %',
-      accessor: (d) => formatPercent(d['2020_pc'], 1, 100),
-      className: 'text-right',
-    },
   ]
+
+  const dataKeys = Object.keys(data[0]).filter((key) => key.endsWith('_pc'))
+
+  dataKeys.forEach((dataKey) => {
+    columns.push({
+      id: dataKey,
+      Header: `${dataKey.split('_')[0]}, %`,
+      accessor: (d) =>
+        formatPercent((d as Dictionary<string>)[dataKey], 1, 100),
+      className: 'text-right',
+    })
+  })
 
   return (
     <GenericView
