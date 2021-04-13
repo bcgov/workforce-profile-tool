@@ -1,7 +1,8 @@
 @import '../common';
 
 .Header {
-    background-color: $brand-color-blue;
+    background-color: darken($brand-color-blue, 5%);
+    box-shadow: 2px 0px 2px rgba(0, 0, 0, 0.25);
     color: $white;
     // height: 102px;
     display: flex;

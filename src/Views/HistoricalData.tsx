@@ -12,7 +12,7 @@ const HistoricalData = (): JSX.Element => {
   }
 
   return (
-    <div className="alert alert-warning" role="alert">
+    <div className="alert alert-warning Shadow" role="alert">
       <h2>Historical data</h2>
       <p>You are currently viewing data from {year}.</p>
     </div>

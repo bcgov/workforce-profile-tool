@@ -42,7 +42,7 @@ class FilterNotes extends Component<Props> {
     })
 
     return (
-      <div className="FilterNotes">
+      <div className="FilterNotes Shadow">
         <h1>Active Filters</h1>
         {filters}
       </div>

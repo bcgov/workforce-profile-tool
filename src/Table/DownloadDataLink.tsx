@@ -38,7 +38,7 @@ class DownloadButton extends Component<Props> {
   render(): JSX.Element {
     return (
       <button
-        className="btn btn-sm btn-primary"
+        className="btn btn-sm btn-primary Shadow"
         onClick={this.download.bind(this)}
       >
         <i className="fas fa-file-alt" />

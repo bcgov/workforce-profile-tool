@@ -33,7 +33,7 @@ const Legend = ({ items, notes }: Props): JSX.Element => {
 
   // TODO: Fix Date.now() as key, and invalidate props properly
   return (
-    <div className="Legend" key={Date.now()}>
+    <div className="Legend Shadow" key={Date.now()}>
       <h1>Legend</h1>
       <div className="LegendRows">{rows}</div>
       {notes && <div className="Notes">{notes}</div>}

@@ -162,7 +162,7 @@ const GraphFrame = (props: Props): JSX.Element => {
         {!props.hideFilterNotes && <FilterNotes />}
         {!isIE && (
           <button
-            className="btn btn-sm btn-primary SavePNG"
+            className="btn btn-sm btn-primary SavePNG Shadow"
             onClick={saveSVGAsPNG}
           >
             <i className="fas fa-download" />

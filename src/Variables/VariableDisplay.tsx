@@ -55,7 +55,7 @@ const VariableDisplay = ({
 
   return (
     <div className="VariableDisplay">
-      <h3>{variableGroup.display}</h3>
+      <h3 className="">{variableGroup.display}</h3>
       <ul>{options}</ul>
     </div>
   )

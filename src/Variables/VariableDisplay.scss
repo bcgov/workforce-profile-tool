@@ -1,8 +1,14 @@
 @import "../common";
 
 .VariableDisplay {
+
+
   h3 {
-    border: solid 0.5px $white;
+    background-color: $brand-color-blue;
+    border-bottom: solid 1px darken($brand-color-blue, 10%);
+    border-top: solid 0.5px lighten($brand-color-blue, 5%);
+    // border: solid 0.5px $white;
+    box-shadow: 0 10px 5px rgba(darken($brand-color-blue, 10%), 0.25);
     border-left: 0px;
     border-right: 0px;
     text-transform: uppercase;
@@ -20,6 +26,7 @@
   }
 
   ul {
+    
     margin-top: 0.5rem;
     margin-bottom: 2rem;
     list-style: none;
