@@ -25,11 +25,11 @@ const GenericView = <T extends Dictionary<unknown>>({
 }: Props<T>): JSX.Element => {
   return (
     <div>
+      <HistoricalData />
       {title && <Title title={title} />}
       {(isLoading || !data) && <Loading />}
       {error && <Error />}
       {data && data.length === 0 && <NoData />}
-      <HistoricalData />
       {data && data.length > 0 && <div>{children}</div>}
     </div>
   )
