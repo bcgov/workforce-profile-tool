@@ -27,6 +27,7 @@ const Organization = (): JSX.Element => {
     },
     {
       enabled: !!metadata,
+      keepPreviousData: true,
     }
   )
 

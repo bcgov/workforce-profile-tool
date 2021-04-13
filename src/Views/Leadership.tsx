@@ -34,6 +34,7 @@ const Leadership = (): JSX.Element => {
     },
     {
       enabled: !!metadata,
+      keepPreviousData: true,
     }
   )
 

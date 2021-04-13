@@ -38,6 +38,7 @@ const Occupation = (): JSX.Element => {
     },
     {
       enabled: !!metadata,
+      keepPreviousData: true,
     }
   )
 

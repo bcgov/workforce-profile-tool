@@ -30,6 +30,7 @@ const VariableDisplay = ({
     },
     {
       enabled: !!metadata,
+      keepPreviousData: true,
     }
   )
 

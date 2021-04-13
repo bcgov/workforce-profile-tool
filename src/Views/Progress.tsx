@@ -29,6 +29,7 @@ const Progress = (): JSX.Element => {
     },
     {
       enabled: !!metadata,
+      keepPreviousData: true,
     }
   )
 

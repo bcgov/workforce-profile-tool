@@ -38,6 +38,7 @@ const Region = (): JSX.Element => {
     },
     {
       enabled: !!metadata,
+      keepPreviousData: true,
     }
   )
 

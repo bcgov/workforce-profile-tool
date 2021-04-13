@@ -28,6 +28,7 @@ const Comparison = (): JSX.Element => {
     },
     {
       enabled: !!metadata,
+      keepPreviousData: true,
     }
   )
 
