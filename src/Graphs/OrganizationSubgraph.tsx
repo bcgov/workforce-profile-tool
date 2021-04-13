@@ -84,9 +84,9 @@ const OrganizationSubGraph = ({
     })
   }, [maxItem, width])
 
-  filteredData.sort((b: FixTypeLater, a: FixTypeLater) =>
-    a.Value < b.Value ? 1 : a.Value > b.Value ? -1 : 0
-  )
+  // filteredData.sort((b: FixTypeLater, a: FixTypeLater) =>
+  //   a.Value < b.Value ? 1 : a.Value > b.Value ? -1 : 0
+  // )
 
   const graph = (
     <ResponsiveBar

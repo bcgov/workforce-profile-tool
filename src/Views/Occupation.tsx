@@ -19,11 +19,13 @@ const Occupation = (): JSX.Element => {
   const [ministryQueryVars] = useQueryParam('Ministry_Key', ArrayParam)
 
   useEffect(() => {
+    const employeeType = year === '2018' ? ['REG'] : ['ALL']
+
     const varsToLock: Dictionary<string[]> = ministryQueryVars?.includes('BCPS')
       ? {}
-      : { Employee_Type: ['ALL'] }
+      : { Employee_Type: employeeType }
     setLockedVars(varsToLock)
-  }, [ministryQueryVars])
+  }, [ministryQueryVars, year])
 
   const dataKey = `WP${year}_Rep_Occ_Rgn`
   const url = metadata ? metadata[dataKey].url : ''
