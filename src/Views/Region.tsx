@@ -3,10 +3,15 @@ import { useQuery } from 'react-query'
 import * as d3 from 'd3'
 import React, { useEffect } from 'react'
 
-import { filterData, sortData, useDataManager } from '../Data/DataManager'
+import {
+  filterData,
+  shortDisplayNameByKey,
+  sortData,
+  useDataManager,
+} from '../Data/DataManager'
 import GenericView from './GenericView'
 import Dictionary from '../@types/Dictionary'
-import { VARIABLES } from '../Variables/VariableManager'
+import { displayNameByKey } from '../Data/DataManager'
 import RegionSubtable from '../Table/RegionSubtable'
 import OccupationGraph from '../Graphs/OccupationGraph'
 import { OccupationRegionRawData } from '../@types/DataTypes'
@@ -53,8 +58,8 @@ const Region = (): JSX.Element => {
   })
 
   const tables = Object.keys(dataMap).map((k) => {
-    const title = VARIABLES.displayNameByKey('Des_Grp', k)
-    const shortTitle = VARIABLES.shortDisplayNameByKey('Des_Grp', k)
+    const title = displayNameByKey('Des_Grp', k)
+    const shortTitle = shortDisplayNameByKey('Des_Grp', k)
     return (
       <div key={k}>
         <h2>{title}</h2>

@@ -6,7 +6,7 @@ import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
 import { filterData, sortData, useDataManager } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { LeadershipRawData } from '../@types/DataTypes'
-import { VARIABLES } from '../Variables/VariableManager'
+import { displayNameByKey } from '../Data/DataManager'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
 import LeadershipGraph from '../Graphs/LeadershipGraph'
@@ -44,7 +44,7 @@ const Leadership = (): JSX.Element => {
   const columns: ColumnWithClassNameAndFooter<LeadershipRawData>[] = [
     {
       accessor: (r: LeadershipRawData) =>
-        VARIABLES.displayNameByKey('Des_Grp', r.Des_Grp),
+        displayNameByKey('Des_Grp', r.Des_Grp),
       Header: 'Designated Group',
       id: 'Des_Grp',
     },

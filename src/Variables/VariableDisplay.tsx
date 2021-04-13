@@ -3,11 +3,12 @@ import * as d3 from 'd3'
 import React from 'react'
 
 import { MinistryKeyRawData } from '../@types/DataTypes'
-import { useDataManager } from '../Data/DataManager'
-import { VariableGroup } from './VariableGroup'
+import { VARIABLE_MAP, useDataManager } from '../Data/DataManager'
 import VariableItemDisplay from './VariableItemDisplay'
 
 import './VariableDisplay.scss'
+import { VariableGroup } from '../@types/VariableGroup'
+import { Variable } from '../@types/Variable'
 
 interface Props {
   variableGroup: VariableGroup
@@ -19,6 +20,8 @@ const VariableDisplay = ({
   variableGroup,
 }: Props): JSX.Element => {
   const { metadata, year } = useDataManager()
+
+  console.log('variableGroup', variableGroup)
 
   const dataKey = `WP${year}_MinistryKey`
   const url = metadata ? metadata[dataKey].url : ''
@@ -34,15 +37,28 @@ const VariableDisplay = ({
     }
   )
 
-  const keysForYear = unfilteredData?.map((d) => d.Ministry_Key) || []
+  let selectableVariables: Variable[] = variableGroup.variables
 
-  let selectableVariables = variableGroup.selectableVariables
-
-  if (variableGroup.key === 'Ministry_Key') {
-    selectableVariables = selectableVariables.filter((sv) => {
-      return keysForYear.includes(sv.key)
-    })
+  if (variableGroup.key === 'Ministry_Key' && unfilteredData) {
+    selectableVariables =
+      unfilteredData?.map(
+        (d): Variable => {
+          return {
+            key: d.Ministry_Key,
+            name: d.Ministry_Title,
+            shortName: d.Ministry_Key,
+          }
+        }
+      ) || []
+    const indexOfBCPS = selectableVariables.findIndex((v) => v.key === 'BCPS')
+    const bcpsElement = selectableVariables.splice(indexOfBCPS, 1).pop()
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    selectableVariables = [bcpsElement!, ...selectableVariables]
+    VARIABLE_MAP['Ministry_Key'].variables = selectableVariables
+    // TODO: This should probably be moved to the DataManager.
   }
+
+  console.log(selectableVariables)
 
   const options = selectableVariables.map((variable) => (
     <VariableItemDisplay
@@ -55,7 +71,7 @@ const VariableDisplay = ({
 
   return (
     <div className="VariableDisplay">
-      <h3 className="">{variableGroup.display}</h3>
+      <h3 className="">{variableGroup.name}</h3>
       <ul>{options}</ul>
     </div>
   )

@@ -6,7 +6,7 @@ import { labelValue } from './horizontalLabel'
 import { NIVO_BASE_PROPS } from '../Helpers/graphs'
 import { parseFloatClean } from '../Helpers/formatter'
 import { ProgressRawData } from '../@types/DataTypes'
-import { VARIABLES } from '../Variables/VariableManager'
+import { displayNameByKey } from '../Data/DataManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
@@ -63,7 +63,7 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
         legendPosition: 'middle',
         legendOffset: 32,
         format: (d: FixTypeLater) =>
-          VARIABLES.displayNameByKey('Des_Grp', d) as string,
+          displayNameByKey('Des_Grp', d) as string,
       }}
       axisLeft={{
         tickSize: 5,
@@ -89,7 +89,7 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
       tooltip={(d: FixTypeLater): JSX.Element => {
         return (
           <div style={{ color: Color(d.color).darken(0.3).hex() }}>
-            {VARIABLES.displayNameByKey('Des_Grp', d.indexValue)},{' '}
+            {displayNameByKey('Des_Grp', d.indexValue)},{' '}
             {dataDefinitions.find((dd) => dd.key === d.id)?.label}:{' '}
             {d.data[d.id]}%
           </div>

@@ -18,8 +18,49 @@ import {
 } from '../@types/DataTypes'
 import Dictionary from '../@types/Dictionary'
 import FixTypeLater from '../@types/FixTypeLater'
-import { DES_GRP_ORDERING } from '../Variables/VariableManager'
 import { Metadata } from '../@types/Metadata'
+
+import variableJson from './variables.json'
+import { VariableGroup } from '../@types/VariableGroup'
+import { Variable } from '../@types/Variable'
+
+export const VARIABLE_MAP = variableJson as Dictionary<VariableGroup>
+
+export const indexOfVariable = (
+  variableGroupKey: string,
+  variableKey: string
+): number => {
+  return VARIABLE_MAP[variableGroupKey].variables.findIndex(
+    (v) => v.key === variableKey
+  )
+}
+
+export const variableByKey = (
+  variableGroupKey: string,
+  variableKey: string | null
+): Variable | undefined => {
+  return VARIABLE_MAP[variableGroupKey].variables.find(
+    (v) => v.key === variableKey
+  )
+}
+
+export const displayNameByKey = (
+  variableGroupKey: string,
+  variableKey: string | null | undefined
+): string => {
+  if (!variableKey) return ''
+  const variable = variableByKey(variableGroupKey, variableKey)
+  return variable ? variable.name : ''
+}
+
+export const shortDisplayNameByKey = (
+  variableGroupKey: string,
+  variableKey: string
+): string => {
+  if (!variableKey) return ''
+  const variable = variableByKey(variableGroupKey, variableKey)
+  return variable && variable.shortName ? variable.shortName : ''
+}
 
 type DataManagerContextType = {
   year?: string
@@ -63,8 +104,8 @@ export const sortData = <T extends GenericRawData>(
   return data
     ? data.sort((a, b) =>
         a.Des_Grp && b.Des_Grp
-          ? DES_GRP_ORDERING.indexOf(a.Des_Grp) -
-            DES_GRP_ORDERING.indexOf(b.Des_Grp)
+          ? indexOfVariable('Des_Grp', a.Des_Grp) -
+            indexOfVariable('Des_Grp', b.Des_Grp)
           : 0
       )
     : []
@@ -191,6 +232,7 @@ function DataManagerProvider({
 }: DataManagerProviderProps): FixTypeLater {
   const [lockedVars, setLockedVars] = useState<Dictionary<string[]>>({})
   const [metadata, setMetadata] = useState<Dictionary<Metadata>>()
+  // const [variableMap, setVariableMap] = useState<Dictionary<VariableGroup>>(VARIABLE_MAP)
 
   // Initial load of metadata.
   useEffect(() => {
@@ -214,6 +256,15 @@ function DataManagerProvider({
       )
       console.log('Metadata loaded.', keyedMetadata)
       setMetadata(keyedMetadata)
+
+      // VARIABLE_MAP['Ministry_Key'].variables = []
+
+      // const newVariableMap: Dictionary<VariableGroup> = Object.assign(
+      //   {},
+      //   variableMap
+      // )
+      // newVariableMap['Ministry_Key'].variables = []
+      // setVariableMap(newVariableMap)
     }
 
     // Load the metadata just once on load.

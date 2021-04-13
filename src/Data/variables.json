@@ -1,0 +1,74 @@
+{
+  "Year": {
+    "key": "Year",
+    "name": "Data Year",
+    "isExclusive": true,
+    "default": "2020",
+    "variables": [
+      {
+        "key": "2018",
+        "name": "2018"
+      },
+      {
+        "key": "2020",
+        "name": "2020"
+      }
+    ]
+  },
+  "Employee_Type": {
+    "key": "Employee_Type",
+    "name": "Employee Type",
+    "isExclusive": true,
+    "default": "ALL",
+    "variables": [
+      {
+        "key": "ALL",
+        "name": "All"
+      },
+      {
+        "key": "REG",
+        "name": "Regular"
+      },
+      {
+        "key": "AUX",
+        "name": "Auxiliary"
+      }
+    ]
+  },
+  "Des_Grp": {
+    "key": "Des_Grp",
+    "name": "Designated Group",
+    "isExclusive": false,
+    "default": ["IND", "DIS", "VM", "WOM"],
+    "variables": [
+      {
+        "key": "IND",
+        "shortName": "Indigenous",
+        "name": "Indigenous Peoples"
+      },
+      {
+        "key": "DIS",
+        "shortName": "Disabled",
+        "name": "Persons with Disabilities"
+      },
+      {
+        "key": "VM",
+        "shortName": "Vis. Min.",
+        "name": "Visible Minorities"
+      },
+      {
+        "key": "WOM",
+        "shortName": "Women",
+        "name": "Women"
+      }
+    ]
+  },
+  "Ministry_Key": {
+    "key": "Ministry_Key",
+    "name": "Organization",
+    "isExclusive": true,
+    "default": "BCPS",
+    "loadsDynamically": true,
+    "variables": []
+  }
+}

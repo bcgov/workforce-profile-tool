@@ -4,7 +4,7 @@ import Color from 'color'
 
 import { formatNumber } from '../Helpers/formatter'
 import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
-import { VARIABLES } from '../Variables/VariableManager'
+import { displayNameByKey } from '../Data/DataManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
@@ -82,8 +82,7 @@ const OccupationGraph = ({ data, title }: Props): JSX.Element => {
         // legend: 'Values',
         legendPosition: 'middle',
         legendOffset: 32,
-        format: (d: FixTypeLater) =>
-          VARIABLES.displayNameByKey('Des_Grp', d) as string,
+        format: (d: FixTypeLater) => displayNameByKey('Des_Grp', d) as string,
       }}
       axisBottom={{
         tickSize: 5,
@@ -100,7 +99,7 @@ const OccupationGraph = ({ data, title }: Props): JSX.Element => {
       tooltip={(d: FixTypeLater): JSX.Element => {
         return (
           <div style={{ color: Color(d.color).darken(0.3).hex() }}>
-            {VARIABLES.displayNameByKey('Des_Grp', d.indexValue)},{' '}
+            {displayNameByKey('Des_Grp', d.indexValue)},{' '}
             {dataDefinitions.find((dd) => dd.key === d.id)?.label}:{' '}
             {formatNumber(d.data[d.id])}
           </div>

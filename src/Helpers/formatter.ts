@@ -1,4 +1,4 @@
-import { VARIABLES } from '../Variables/VariableManager'
+import { displayNameByKey } from '../Data/DataManager'
 
 export const formatNumber = (
   number: string | number,
@@ -56,5 +56,5 @@ export const parseFloatClean = (
 }
 
 export const formatDesGrpTick = (desGrpKey: string): string => {
-  return VARIABLES.displayNameByKey('Des_Grp', desGrpKey as string) || ''
+  return displayNameByKey('Des_Grp', desGrpKey as string) || ''
 }

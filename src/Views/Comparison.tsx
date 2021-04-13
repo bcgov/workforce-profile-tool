@@ -7,7 +7,7 @@ import { ComparisonRawData } from '../@types/DataTypes'
 import { formatPercent } from '../Helpers/formatter'
 import { StringParam, useQueryParam } from 'use-query-params'
 import { filterData, sortData, useDataManager } from '../Data/DataManager'
-import { VARIABLES } from '../Variables/VariableManager'
+import { displayNameByKey } from '../Data/DataManager'
 import ComparisonGraph from '../Graphs/ComparisonGraph'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
@@ -36,17 +36,13 @@ const Comparison = (): JSX.Element => {
   const data = sortData(filterData(unfilteredData, queryValues))
 
   const [ministryKey] = useQueryParam('Ministry_Key', StringParam)
-  const ministry = VARIABLES.displayNameByKey(
-    'Ministry_Key',
-    queryValues.Ministry_Key
-  ) // TODO: cleaner implementation of this
+  const ministry = displayNameByKey('Ministry_Key', queryValues.Ministry_Key) // TODO: cleaner implementation of this
 
   const columns: ColumnWithClassNameAndFooter<ComparisonRawData>[] = [
     {
       id: 'Des_Grp',
       Header: 'Designated Group',
-      accessor: (d) =>
-        VARIABLES.displayNameByKey('Des_Grp', d['Des_Grp']) || '',
+      accessor: (d) => displayNameByKey('Des_Grp', d['Des_Grp']) || '',
     },
     {
       id: 'Employees_BCPS',

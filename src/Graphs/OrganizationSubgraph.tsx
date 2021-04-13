@@ -7,7 +7,7 @@ import { formatPercent, parseIntClean } from '../Helpers/formatter'
 import { horizontalLabel, labelValue } from './horizontalLabel'
 import { MinistryRawData } from '../@types/DataTypes'
 import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
-import { VARIABLES } from '../Variables/VariableManager'
+import { displayNameByKey } from '../Data/DataManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
@@ -43,7 +43,7 @@ const OrganizationSubGraph = ({
   const legendItems = [
     {
       key: 'Des_Grp',
-      label: VARIABLES.displayNameByKey('Des_Grp', data[0].Des_Grp) || '',
+      label: displayNameByKey('Des_Grp', data[0].Des_Grp) || '',
       color: color || 'black',
     },
   ]
@@ -55,10 +55,7 @@ const OrganizationSubGraph = ({
     [{ key: 'Value' }],
     (d: FixTypeLater, obj: FixTypeLater) => {
       if (parseIntClean(d.Value) === 0) hasSuppressedData = true
-      const categoryFullName = VARIABLES.displayNameByKey(
-        'Ministry_Key',
-        d.Ministry_Key
-      )
+      const categoryFullName = displayNameByKey('Ministry_Key', d.Ministry_Key)
       let categoryShortName = categoryFullName
       if (categoryShortName && categoryShortName.length > 37) {
         categoryShortName = d.Ministry_Key

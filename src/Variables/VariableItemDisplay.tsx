@@ -1,9 +1,8 @@
 import React, { useCallback, useEffect, useMemo } from 'react'
 import { ArrayParam, StringParam, useQueryParam } from 'use-query-params'
+import { Variable } from '../@types/Variable'
+import { VariableGroup } from '../@types/VariableGroup'
 import { useDataManager } from '../Data/DataManager'
-
-import { Variable } from './Variable'
-import { VariableGroup } from './VariableGroup'
 
 interface Props {
   useShortDisplay?: boolean
@@ -23,7 +22,7 @@ const VariableItemDisplayExclusive = ({
   const [queryVar, setQueryVar] = useQueryParam(variableGroup.key, StringParam)
 
   useEffect(() => {
-    if (!queryVar) setQueryVar(variableGroup.defaultSelected as string)
+    if (!queryVar) setQueryVar(variableGroup.default as string)
   }, [queryVar])
 
   useEffect(() => {
@@ -42,7 +41,7 @@ const VariableItemDisplayExclusive = ({
         if (!isLocked) setQueryVar(variable.key)
       }}
     >
-      {useShortDisplay ? variable.shortDisplay : variable.display}
+      {useShortDisplay ? variable.shortName : variable.name}
     </li>
   )
 }
@@ -57,7 +56,7 @@ const VariableItemDisplayNonExclusive = ({
   const [queryVars, setQueryVars] = useQueryParam(variableGroup.key, ArrayParam)
 
   useEffect(() => {
-    if (!queryVars) setQueryVars(variableGroup.defaultSelected as string[])
+    if (!queryVars) setQueryVars(variableGroup.default as string[])
   }, [queryVars])
 
   useEffect(() => {
@@ -90,7 +89,7 @@ const VariableItemDisplayNonExclusive = ({
       className={`${isActive ? ' active' : ''} ${isLocked ? ' locked' : ''}`}
       onClick={onClickCallbackNonExclusive}
     >
-      {useShortDisplay ? variable.shortDisplay : variable.display}
+      {useShortDisplay ? variable.shortName : variable.name}
     </li>
   )
 }
@@ -112,7 +111,7 @@ const VariableItemDisplay = (props: Props): JSX.Element => {
     return false
   }, [props.variable, props.variableGroup, lockedVars])
 
-  if (props.variableGroup.exclusive) {
+  if (props.variableGroup.isExclusive) {
     return (
       <VariableItemDisplayExclusive
         isLocked={isLocked}

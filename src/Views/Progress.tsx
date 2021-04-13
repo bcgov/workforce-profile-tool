@@ -6,7 +6,7 @@ import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
 import { filterData, sortData, useDataManager } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { ProgressRawData } from '../@types/DataTypes'
-import { VARIABLES } from '../Variables/VariableManager'
+import { displayNameByKey } from '../Data/DataManager'
 import Dictionary from '../@types/Dictionary'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
@@ -40,8 +40,7 @@ const Progress = (): JSX.Element => {
     {
       id: 'Des_Grp',
       Header: 'Designated Group',
-      accessor: (d) =>
-        VARIABLES.displayNameByKey('Des_Grp', d['Des_Grp']) || '',
+      accessor: (d) => displayNameByKey('Des_Grp', d['Des_Grp']) || '',
     },
   ]
 

@@ -7,12 +7,12 @@ import { getTooltip } from '../Data/tooltipHelper'
 import { horizontalLabel, labelValue } from './horizontalLabel'
 import { LeadershipRawData } from '../@types/DataTypes'
 import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
-import { VARIABLES } from '../Variables/VariableManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 
 import './Graphs.scss'
+import { displayNameByKey } from '../Data/DataManager'
 
 interface Props {
   data: LeadershipRawData[]
@@ -81,8 +81,7 @@ const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
         tickRotation: 0,
         legendPosition: 'middle',
         legendOffset: 32,
-        format: (d: FixTypeLater) =>
-          VARIABLES.displayNameByKey('Des_Grp', d) as string,
+        format: (d: FixTypeLater) => displayNameByKey('Des_Grp', d) as string,
       }}
       axisBottom={{
         tickSize: 5,
@@ -99,7 +98,7 @@ const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
       tooltip={(d: FixTypeLater): JSX.Element => {
         return (
           <div style={{ color: Color(d.color).darken(0.3).hex() }}>
-            {VARIABLES.displayNameByKey('Des_Grp', d.indexValue)},{' '}
+            {displayNameByKey('Des_Grp', d.indexValue)},{' '}
             {dataDefinitions.find((dd) => dd.key === d.id)?.label}:{' '}
             {d.data[d.id]}%
           </div>

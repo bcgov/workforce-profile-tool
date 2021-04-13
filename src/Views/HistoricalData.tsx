@@ -1,13 +1,10 @@
 import React from 'react'
-import { useDataManager } from '../Data/DataManager'
-import { VARIABLES } from '../Variables/VariableManager'
+import { VARIABLE_MAP, useDataManager } from '../Data/DataManager'
 
 const HistoricalData = (): JSX.Element => {
   const { year } = useDataManager()
 
-  if (
-    year === VARIABLES.variableGroupByKey('Year').variables.slice(-1).pop()?.key
-  ) {
+  if (year === VARIABLE_MAP['Year'].variables.slice(-1).pop()?.key) {
     return <></>
   }
 

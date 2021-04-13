@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { MinistryRawData } from '../@types/DataTypes'
-import { VARIABLES } from '../Variables/VariableManager'
+import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
 import Dictionary from '../@types/Dictionary'
 import OrganizationSubGraph from './OrganizationSubgraph'
 
@@ -34,8 +34,8 @@ const MinistryGraph = ({ data }: Props): JSX.Element => {
   const graphs = Object.keys(dataMap)
     .filter((key) => dataMap[key].length > 1)
     .map((k) => {
-      const title = VARIABLES.displayNameByKey('Des_Grp', k)
-      const shortTitle = VARIABLES.shortDisplayNameByKey('Des_Grp', k)
+      const title = displayNameByKey('Des_Grp', k)
+      const shortTitle = shortDisplayNameByKey('Des_Grp', k)
       const color = COLOR_MAP[k]
 
       return (

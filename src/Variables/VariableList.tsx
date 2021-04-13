@@ -1,15 +1,16 @@
 import React from 'react'
 
-import { VariableGroup } from './VariableGroup'
-import { VARIABLES } from './VariableManager'
 import VariableDisplay from './VariableDisplay'
 
 import './VariableList.scss'
+import { VARIABLE_MAP } from '../Data/DataManager'
 
 const VariableList = (): JSX.Element => {
-  const variables = VARIABLES.variableGroups.map((group: VariableGroup) => (
+  const variables = Object.values(VARIABLE_MAP).map((group) => (
     <VariableDisplay key={group.key} variableGroup={group} />
   ))
+
+  console.log('variables', variables)
 
   return (
     <div className="VariableList row">

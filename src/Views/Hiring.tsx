@@ -12,7 +12,7 @@ const Hiring = (): JSX.Element => {
   //   {
   //     id: 'Des_Grp',
   //     Header: 'Designated Group',
-  //     accessor: (r) => VARIABLES.displayNameByKey('Des_Grp', r.Des_Grp) || '',
+  //     accessor: (r) => displayNameByKey('Des_Grp', r.Des_Grp) || '',
   //   },
   //   {
   //     id: '2020_hired_ct',
