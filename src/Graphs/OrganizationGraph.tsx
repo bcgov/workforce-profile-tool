@@ -47,8 +47,8 @@ const MinistryGraph = ({ data }: Props): JSX.Element => {
             color={color}
             data={dataMap[k]}
             masterTitle={title}
-            title={title}
             shortTitle={shortTitle}
+            title={title}
             varKey={k}
           />
         </div>

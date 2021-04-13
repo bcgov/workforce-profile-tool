@@ -34,12 +34,7 @@ const Organization = (): JSX.Element => {
   const data = sortData(buildMinistryData(unfilteredData, queryValues))
 
   return (
-    <GenericView
-      data={unfilteredData}
-      error={error}
-      isLoading={isLoading}
-      title={'Comparison with Provincial Workforce'}
-    >
+    <GenericView data={unfilteredData} error={error} isLoading={isLoading}>
       <h1>Organizations</h1>
       <OrganizationGraph data={data} />
     </GenericView>

@@ -24,11 +24,11 @@ interface SubgraphProps {
 const MARGINS = { top: 0, right: 60, bottom: 50, left: 255 }
 
 const OrganizationSubGraph = ({
-  data,
-  varKey,
-  title,
-  masterTitle,
   color,
+  data,
+  masterTitle,
+  title,
+  varKey,
 }: SubgraphProps): JSX.Element => {
   if (!data) return <div>&nbsp;</div>
 
@@ -70,7 +70,6 @@ const OrganizationSubGraph = ({
   )
 
   const items = filteredData
-
     .map((d: FixTypeLater): number[] => {
       return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
     })
