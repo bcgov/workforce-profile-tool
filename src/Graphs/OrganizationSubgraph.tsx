@@ -61,7 +61,7 @@ const OrganizationSubGraph = ({
       )
       let categoryShortName = categoryFullName
       if (categoryShortName && categoryShortName.length > 37) {
-        categoryShortName = categoryShortName.replace(/[^A-Z]/g, '')
+        categoryShortName = d.Ministry_Key
       }
       obj.category = d.Ministry_Key
       obj.categoryFullName = categoryFullName
