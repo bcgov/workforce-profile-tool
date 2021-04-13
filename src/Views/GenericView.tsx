@@ -3,6 +3,7 @@ import React from 'react'
 import Dictionary from '../@types/Dictionary'
 import FixTypeLater from '../@types/FixTypeLater'
 import Error from './Error'
+import HistoricalData from './HistoricalData'
 import Loading from './Loading'
 import NoData from './NoData'
 import Title from './Title'
@@ -28,6 +29,7 @@ const GenericView = <T extends Dictionary<unknown>>({
       {(isLoading || !data) && <Loading />}
       {error && <Error />}
       {data && data.length === 0 && <NoData />}
+      <HistoricalData />
       {data && data.length > 0 && <div>{children}</div>}
     </div>
   )
