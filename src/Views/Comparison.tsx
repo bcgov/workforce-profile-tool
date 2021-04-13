@@ -2,7 +2,7 @@ import { useQuery } from 'react-query'
 import * as d3 from 'd3'
 import React, { useEffect } from 'react'
 
-import { ColumnWithClassName } from '../@types/ColumnWithClassName'
+import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
 import { ComparisonRawData } from '../@types/DataTypes'
 import { formatPercent } from '../Helpers/formatter'
 import { StringParam, useQueryParam } from 'use-query-params'
@@ -41,7 +41,7 @@ const Comparison = (): JSX.Element => {
     queryValues.Ministry_Key
   ) // TODO: cleaner implementation of this
 
-  const columns: ColumnWithClassName<ComparisonRawData>[] = [
+  const columns: ColumnWithClassNameAndFooter<ComparisonRawData>[] = [
     {
       id: 'Des_Grp',
       Header: 'Designated Group',

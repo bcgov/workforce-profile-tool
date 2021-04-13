@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ColumnWithClassName } from '../@types/ColumnWithClassName'
+import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
 import { formatNumber, formatPercent } from '../Helpers/formatter'
 import { OccupationRegionRawData } from '../@types/DataTypes'
 import DownloadDataLink from './DownloadDataLink'
@@ -22,21 +22,24 @@ const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
 
   const filteredData = data.filter((d) => d.Variable_Type === 'Occupation')
 
-  const columns: ColumnWithClassName<OccupationRegionRawData>[] = [
+  const columns: ColumnWithClassNameAndFooter<OccupationRegionRawData>[] = [
     {
       id: 'Occupation_Region_Group',
       Header: 'Occupation',
+      Footer: () => 'Total',
       accessor: (d) => d['Occupation_Region_Group'],
     },
     {
       id: 'DesGrp_Count_ORG',
       Header: shortTitle,
+      Footer: () => formatNumber(totalRow[0].DesGrp_Count_ORG),
       accessor: (d) => formatNumber(d['DesGrp_Count_ORG']),
       className: 'text-right',
     },
     {
       id: 'NonDesGrp_Count_ORG',
       Header: `Non-${shortTitle}`,
+      Footer: () => formatNumber(totalRow[0].NonDesGrp_Count_ORG),
       accessor: (d) => formatNumber(d['NonDesGrp_Count_ORG']),
       className: 'text-right',
     },
@@ -51,12 +54,14 @@ const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
           />
         </span>
       ),
+      Footer: () => formatNumber(totalRow[0].Total_Count_ORG),
       accessor: (d) => formatNumber(d['Total_Count_ORG']),
       className: 'text-right',
     },
     {
       id: 'DesGrp_Percent_ORG',
       Header: `Rate of ${shortTitle}`,
+      Footer: () => formatPercent(totalRow[0].DesGrp_Percent_ORG, 1, 100),
       accessor: (d) => formatPercent(d['DesGrp_Percent_ORG'], 1, 100),
       className: 'text-right',
     },
@@ -71,6 +76,8 @@ const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
           />
         </span>
       ),
+      Footer: () =>
+        formatPercent(totalRow[0].DesGrp_Percent_AvailableWorkforce, 1, 100),
       accessor: (d) =>
         formatPercent(d['DesGrp_Percent_AvailableWorkforce'], 1, 100),
       className: 'text-right',
@@ -87,6 +94,7 @@ const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
           />
         </span>
       ),
+      Footer: () => formatNumber(totalRow[0].DesGrp_Count_Expected, ''),
       accessor: (d) => formatNumber(d['DesGrp_Count_Expected'], ''),
       className: 'text-right',
     },
@@ -106,6 +114,7 @@ const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
           )}
         </span>
       ),
+      Footer: () => formatNumber(totalRow[0].DesGrp_Count_Shortfall, ''),
       accessor: (d) => formatNumber(d['DesGrp_Count_Shortfall'], ''),
       className: 'text-right',
     },
@@ -116,10 +125,14 @@ const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
   const allRows = filteredData.concat(totalRow)
 
   return (
-    <div className="OccupationSubtable">
+    <div className="OccupationTable">
       {/* <h3>Management</h3> */}
-      <GenericTable columns={columns} data={filteredData} hideDefinitions />
-      <GenericTable columns={columns} data={totalRow} hideDefinitions />
+      <GenericTable
+        columns={columns}
+        data={filteredData}
+        hideDefinitions
+        showFooter
+      />
       <DownloadDataLink
         columns={columns}
         rows={allRows}

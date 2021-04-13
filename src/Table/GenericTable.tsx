@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ColumnWithClassName } from '../@types/ColumnWithClassName'
+import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
 import Definitions from './Definitions'
 import Dictionary from '../@types/Dictionary'
 import DownloadDataLink from './DownloadDataLink'
@@ -10,10 +10,11 @@ import Table from './Table'
 import './Table.scss'
 
 interface Props<T extends Dictionary<unknown>> {
-  columns: ColumnWithClassName<T>[]
+  columns: ColumnWithClassNameAndFooter<T>[]
   data: T[] | undefined
   filename?: string
   hideDefinitions?: boolean
+  showFooter?: boolean
 }
 
 const GenericTable = <T extends Dictionary<unknown>>({
@@ -21,6 +22,7 @@ const GenericTable = <T extends Dictionary<unknown>>({
   data,
   filename,
   hideDefinitions,
+  showFooter,
 }: Props<T>): JSX.Element => {
   if (!data) return <Loading />
 
@@ -28,7 +30,7 @@ const GenericTable = <T extends Dictionary<unknown>>({
     <div className="Table row">
       <div className="col">
         <div>
-          <Table columns={columns} data={data} />
+          <Table columns={columns} data={data} showFooter={showFooter} />
           {filename && (
             <DownloadDataLink
               columns={columns}

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ColumnWithClassName } from '../@types/ColumnWithClassName'
+import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
 import { formatNumber, formatPercent } from '../Helpers/formatter'
 import { OccupationRegionRawData } from '../@types/DataTypes'
 import Definitions from './Definitions'
@@ -22,7 +22,7 @@ const RegionSubtable = ({ data, shortTitle }: Props): JSX.Element => {
     totalRow = data.filter((d) => d['Variable_Type'] === 'Total')
   }
 
-  const columns: ColumnWithClassName<OccupationRegionRawData>[] = [
+  const columns: ColumnWithClassNameAndFooter<OccupationRegionRawData>[] = [
     {
       id: 'Occupation_Region_Group',
       Header: 'Region',

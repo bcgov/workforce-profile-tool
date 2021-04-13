@@ -2,7 +2,7 @@ import { useQuery } from 'react-query'
 import * as d3 from 'd3'
 import React, { useEffect } from 'react'
 
-import { ColumnWithClassName } from '../@types/ColumnWithClassName'
+import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
 import { filterData, sortData, useDataManager } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { ProgressRawData } from '../@types/DataTypes'
@@ -36,7 +36,7 @@ const Progress = (): JSX.Element => {
   // TODO: If app is slow, can useMemo on this one
   const data = sortData(filterData(unfilteredData, queryValues))
 
-  const columns: ColumnWithClassName<ProgressRawData>[] = [
+  const columns: ColumnWithClassNameAndFooter<ProgressRawData>[] = [
     {
       id: 'Des_Grp',
       Header: 'Designated Group',

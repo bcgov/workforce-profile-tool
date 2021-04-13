@@ -9,20 +9,19 @@ interface Props {
   column: Column
 }
 
-const ColumnSortIndicator = (props: Props): JSX.Element => {
-  const { column } = props
+const ColumnSortIndicator = ({ column }: Props): JSX.Element => {
   return (
-    <span>
+    <div className="ml-1">
       {column.isSorted ? (
         column.isSortedDesc ? (
-          <>&nbsp;&#9660;{/* Unicode: black down-pointing triangle */}</>
+          <i className="fas fa-caret-down" />
         ) : (
-          <>&nbsp;&#9650;{/* Unicode: black up-pointing triangle */}</>
+          <i className="fas fa-caret-up" />
         )
       ) : (
-        ''
+        <i className="fas fa-sort" />
       )}
-    </span>
+    </div>
   )
 }
 
