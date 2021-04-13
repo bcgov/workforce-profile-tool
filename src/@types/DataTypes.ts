@@ -31,6 +31,10 @@ export type MinistryRawData = DesignatedGroupKeyedData &
     Value: string
   }
 
+export type MinistryKeyRawData = MinistryKeyedData & {
+  Ministry_Title: string
+}
+
 export type ComparisonRawData = MinistryKeyedData &
   DesignatedGroupKeyedData &
   EmployeeTypeKeyedData & {
