@@ -6,12 +6,15 @@ import Dictionary from '../@types/Dictionary'
 import OrganizationSubGraph from './OrganizationSubgraph'
 
 import './Graphs.scss'
+import { useDataManager } from '../Data/DataManager'
 
 interface Props {
   data: MinistryRawData[]
 }
 
 const MinistryGraph = ({ data }: Props): JSX.Element => {
+  const { queryValues } = useDataManager()
+
   if (!data) return <div>&nbsp;</div>
 
   // Split the data
@@ -28,27 +31,29 @@ const MinistryGraph = ({ data }: Props): JSX.Element => {
     WOM: '#E6B345',
   }
 
-  const graphs = Object.keys(dataMap).map((k) => {
-    const title = VARIABLES.displayNameByKey('Des_Grp', k)
-    const shortTitle = VARIABLES.shortDisplayNameByKey('Des_Grp', k)
-    const color = COLOR_MAP[k]
+  const graphs = Object.keys(dataMap)
+    .filter((key) => dataMap[key].length > 1)
+    .map((k) => {
+      const title = VARIABLES.displayNameByKey('Des_Grp', k)
+      const shortTitle = VARIABLES.shortDisplayNameByKey('Des_Grp', k)
+      const color = COLOR_MAP[k]
 
-    return (
-      <div key={k}>
-        <h2>
-          {title}, regular employees {/* TODO: tidy up */}
-        </h2>
-        <OrganizationSubGraph
-          color={color}
-          data={dataMap[k]}
-          masterTitle={title}
-          title={title}
-          shortTitle={shortTitle}
-          varKey={k}
-        />
-      </div>
-    )
-  })
+      return (
+        <div key={k}>
+          <h2>
+            {title}, regular employees {/* TODO: tidy up */}
+          </h2>
+          <OrganizationSubGraph
+            color={color}
+            data={dataMap[k]}
+            masterTitle={title}
+            title={title}
+            shortTitle={shortTitle}
+            varKey={k}
+          />
+        </div>
+      )
+    })
 
   return <div>{graphs}</div>
 }
