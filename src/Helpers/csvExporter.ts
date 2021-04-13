@@ -19,7 +19,7 @@ export const exportData = (
   columnPrefixes?: FixTypeLater
 ): FixTypeLater => {
   const columnRow = columns.map((c: FixTypeLater, index: FixTypeLater) => {
-    let name = c.name
+    let name = c.Header
     if (typeof name === 'object') {
       // Special case for columns with HTML in them. In that case, c.name will
       // be an object, since such a column will actually be a React element. Any
