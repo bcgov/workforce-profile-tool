@@ -4,7 +4,6 @@ import * as saveSVG from 'save-svg-as-png'
 import React, { useEffect } from 'react'
 import useDimensions from 'react-use-dimensions'
 
-// import { CHART_FONT } from '../Helpers/graphs'
 import FilterNotes from './FilterNotes'
 import FixTypeLater from '../@types/FixTypeLater'
 
@@ -13,11 +12,11 @@ import './Graphs.scss'
 interface Props {
   className: string
   graph: React.ReactNode
+  height?: number
   hideFilterNotes?: boolean
   legend: React.ReactNode
-  title: string
   setWidthCallback?: FixTypeLater
-  height?: number
+  title: string
 }
 
 const GraphFrame = (props: Props): JSX.Element => {
@@ -35,7 +34,7 @@ const GraphFrame = (props: Props): JSX.Element => {
     const LEGEND_WIDTH = 250
     const LEGEND_HEIGHT = 400
     const FO_NAMESPACE = 'http://www.w3.org/2000/svg'
-    const FONT_FAMILY = 'BC Sans'
+    const FONT_FAMILY = 'Myriad Pro'
 
     // First, get the actually-existing SVG and clone it
     let svg: Element = document.querySelector(
@@ -66,34 +65,30 @@ const GraphFrame = (props: Props): JSX.Element => {
     // where the first number is the x-distance and the second is the y-distance
     // the graph has been translated (effectively, the left and right margins of
     // the graph, respectively).
-    // const g = Array.from(svg.childre  //as Element
-    const gTags = Array.from(svg.children).filter((c) => {
-      return c.classList.contains('recharts-layer')
-    })
-
-    Array.from(gTags).forEach((gTag) => {
-      gTag.setAttribute('transform', `translate(0, ${TITLE_HEIGHT})`)
-      gTag.setAttribute('style', `font-family: '${FONT_FAMILY}'`)
+    const g = Array.from(svg.children).find((c) => {
+      return c.tagName === 'g'
     })
 
     // On IE Edge, the two items are actually not separated by a ',', so we need
     // to split on the space instead.
-    // const transform = g.getAttribute('transform') as string
+    const transform = g!.getAttribute('transform')
 
-    // const translateComponents =
-    //   transform.indexOf(',') > 0 ? transform.split(',') : transform.split(' ')
+    const translateComponents =
+      transform!.indexOf(',') > 0
+        ? transform!.split(',')
+        : transform!.split(' ')
 
     // Now translateComponents is something like ['translate(70', '20)']. We
     // can get the top margin by running parseInt on the second array item.
-    // const graphTopMargin = parseInt(translateComponents[1], 10)
+    const graphTopMargin = parseInt(translateComponents[1], 10)
 
     // Re-set the second array item by increasing the top margin by the height
     // of the title.
-    // translateComponents[1] = graphTopMargin + TITLE_HEIGHT + ')'
+    translateComponents[1] = graphTopMargin + TITLE_HEIGHT + ')'
 
     // Re-set the transform attribute by re-joining the translateComponents
     // array. Now we have something like 'translate(70, 70)'.
-    // g.setAttribute('transform', translateComponents.join(','))
+    g!.setAttribute('transform', translateComponents.join(','))
 
     // Build a virtual foreignObject element and set its parameters.
     const titleFO = document.createElementNS(FO_NAMESPACE, 'foreignObject')
