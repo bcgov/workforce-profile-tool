@@ -45,7 +45,10 @@ const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
       Header: (
         <span>
           Total &nbsp;
-          <Tooltip text={getTooltip('representation-total', year)} />
+          <Tooltip
+            key={Date.now()}
+            text={getTooltip('representation-total', year)}
+          />
         </span>
       ),
       accessor: (d) => formatNumber(d['Total_Count_ORG']),
@@ -63,6 +66,7 @@ const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
         <span>
           {shortTitle} as % of Available Workforce &nbsp;
           <Tooltip
+            key={Date.now()}
             text={getTooltip('representation-available-workforce', year)}
           />
         </span>
@@ -77,7 +81,10 @@ const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
         <span>
           Expected # {shortTitle}
           &nbsp;
-          <Tooltip text={getTooltip('representation-expected', year)} />
+          <Tooltip
+            key={Date.now()}
+            text={getTooltip('representation-expected', year)}
+          />
         </span>
       ),
       accessor: (d) => formatNumber(d['DesGrp_Count_Expected'], ''),
@@ -88,10 +95,13 @@ const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
       Header: (
         <span>
           Shortfall of {shortTitle}
-          {getTooltip('representation-expected', year) && (
+          {getTooltip('representation-shortfall', year) && (
             <>
               &nbsp;
-              <Tooltip text={getTooltip('representation-expected', year)} />
+              <Tooltip
+                key={Date.now()}
+                text={getTooltip('representation-shortfall', year)}
+              />
             </>
           )}
         </span>
