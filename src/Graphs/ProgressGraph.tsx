@@ -40,8 +40,6 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
       return obj
     })
 
-  console.log('dataKeys', dataKeys)
-
   const graph = (
     <ResponsiveBar
       data={filteredData}

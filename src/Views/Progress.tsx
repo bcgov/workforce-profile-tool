@@ -45,8 +45,6 @@ const Progress = (): JSX.Element => {
     },
   ]
 
-  console.log('data', data)
-
   const dataKeys =
     data && data.length > 0
       ? Object.keys(data[0]).filter((key) => key.endsWith('_pc'))

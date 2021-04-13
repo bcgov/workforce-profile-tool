@@ -75,8 +75,6 @@ const ComparisonGraph = ({
     })
   }, [maxItem, width])
 
-  console.log('filteredData ==>', filteredData)
-
   const graph = (
     <ResponsiveBar
       data={filteredData}
