@@ -3,12 +3,12 @@ import * as d3 from 'd3'
 import React from 'react'
 
 import { MinistryKeyRawData } from '../@types/DataTypes'
+import { Variable } from '../@types/Variable'
 import { VARIABLE_MAP, useDataManager } from '../Data/DataManager'
+import { VariableGroup } from '../@types/VariableGroup'
 import VariableItemDisplay from './VariableItemDisplay'
 
 import './VariableDisplay.scss'
-import { VariableGroup } from '../@types/VariableGroup'
-import { Variable } from '../@types/Variable'
 
 interface Props {
   variableGroup: VariableGroup
@@ -20,8 +20,6 @@ const VariableDisplay = ({
   variableGroup,
 }: Props): JSX.Element => {
   const { metadata, year } = useDataManager()
-
-  console.log('variableGroup', variableGroup)
 
   const dataKey = `WP${year}_MinistryKey`
   const url = metadata ? metadata[dataKey].url : ''
@@ -57,8 +55,6 @@ const VariableDisplay = ({
     VARIABLE_MAP['Ministry_Key'].variables = selectableVariables
     // TODO: This should probably be moved to the DataManager.
   }
-
-  console.log(selectableVariables)
 
   const options = selectableVariables.map((variable) => (
     <VariableItemDisplay

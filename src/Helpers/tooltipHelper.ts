@@ -1,5 +1,5 @@
 import Dictionary from '../@types/Dictionary'
-import TOOLTIPS_RAW from './tooltips.json'
+import TOOLTIPS_RAW from '../Data/tooltips.json'
 
 const tooltips: Dictionary<Dictionary<string>> = TOOLTIPS_RAW
 

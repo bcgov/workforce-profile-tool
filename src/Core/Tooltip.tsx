@@ -1,6 +1,6 @@
 /* globals $ */
 
-import React, { Component } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import FixTypeLater from '../@types/FixTypeLater'
 
@@ -8,30 +8,27 @@ interface Props {
   text: string | undefined
 }
 
-class Tooltip extends Component<Props> {
-  private tooltip: FixTypeLater
+const Tooltip = ({ text }: Props): JSX.Element => {
+  const tooltipRef = useRef<FixTypeLater>()
 
-  componentDidMount(): void {
-    const tooltip = $(this.tooltip) as FixTypeLater
+  useEffect(() => {
+    // Enable the Bootstrap tooltip using jQuery
+    const tooltip = $(tooltipRef.current) as FixTypeLater
     tooltip.tooltip()
-  }
+  }, [])
 
-  render(): JSX.Element {
-    return (
-      <span
-        className="Tooltip"
-        ref={(tooltip) => {
-          this.tooltip = tooltip
-        }}
-        data-toggle="tooltip"
-        title={`${this.props.text}`}
-        data-placement="bottom"
-        data-html="true"
-      >
-        <i className="fas fa-info-circle" />
-      </span>
-    )
-  }
+  return (
+    <span
+      className="Tooltip"
+      ref={tooltipRef}
+      data-toggle="tooltip"
+      title={text}
+      data-placement="bottom"
+      data-html="true"
+    >
+      <i className="fas fa-info-circle" />
+    </span>
+  )
 }
 
 export default Tooltip

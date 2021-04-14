@@ -4,7 +4,7 @@ import React, { useCallback, useState } from 'react'
 
 import { displayNameByKey } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
-import { getTooltip } from '../Data/tooltipHelper'
+import { getTooltip } from '../Helpers/tooltipHelper'
 import { horizontalLabel, labelValue } from './horizontalLabel'
 import { LeadershipRawData } from '../@types/DataTypes'
 import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'

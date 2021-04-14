@@ -5,10 +5,8 @@ interface Props {
   name: string
 }
 
-class Tab extends React.Component<Props> {
-  render(): JSX.Element {
-    return <div className="col-xs-12">{this.props.children}</div>
-  }
+const Tab = ({ children }: Props): JSX.Element => {
+  return <div className="col-xs-12">{children}</div>
 }
 
 export default Tab

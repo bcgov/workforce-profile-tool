@@ -4,7 +4,7 @@ import React, { useCallback, useState } from 'react'
 
 import { ComparisonRawData } from '../@types/DataTypes'
 import { formatPercent } from '../Helpers/formatter'
-import { getTooltip } from '../Data/tooltipHelper'
+import { getTooltip } from '../Helpers/tooltipHelper'
 import { horizontalLabel, labelValue } from './horizontalLabel'
 import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
 import FixTypeLater from '../@types/FixTypeLater'

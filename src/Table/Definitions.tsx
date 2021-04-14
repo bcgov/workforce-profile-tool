@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import './Definitions.scss'
 
@@ -16,18 +16,16 @@ export const DEFINITIONS = [
   },
 ]
 
-class Definitions extends Component {
-  render(): JSX.Element {
-    const definitionRows = DEFINITIONS.map((item) => {
-      return (
-        <React.Fragment key={item.term}>
-          <div className="term">{item.term}</div>
-          <div className="definition">{item.definition}</div>
-        </React.Fragment>
-      )
-    })
-    return <div className="Definitions">{definitionRows}</div>
-  }
+const Definitions = (): JSX.Element => {
+  const definitionRows = DEFINITIONS.map((item) => {
+    return (
+      <React.Fragment key={item.term}>
+        <div className="term">{item.term}</div>
+        <div className="definition">{item.definition}</div>
+      </React.Fragment>
+    )
+  })
+  return <div className="Definitions">{definitionRows}</div>
 }
 
 export default Definitions

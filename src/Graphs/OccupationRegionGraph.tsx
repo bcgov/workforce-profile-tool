@@ -26,7 +26,11 @@ const MARGINS = {
   bottom: 50,
 }
 
-const OccupationGraph = ({ data, title, organization }: Props): JSX.Element => {
+const OccupationRegionGraph = ({
+  data,
+  title,
+  organization,
+}: Props): JSX.Element => {
   const dataDefinitions = [
     { key: 'DesGrp_Count_Expected', label: 'Expected', color: '#70CCDB' },
     { key: 'DesGrp_Count_ORG', label: 'Actual', color: '#D2E2EE' },
@@ -125,4 +129,4 @@ const OccupationGraph = ({ data, title, organization }: Props): JSX.Element => {
   )
 }
 
-export default OccupationGraph
+export default OccupationRegionGraph

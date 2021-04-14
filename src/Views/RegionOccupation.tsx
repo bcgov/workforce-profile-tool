@@ -11,13 +11,22 @@ import {
 import GenericView from './GenericView'
 import Dictionary from '../@types/Dictionary'
 import { displayNameByKey } from '../Data/DataManager'
+import RegionOccupationSubtable from '../Table/RegionOccupationSubtable'
+import OccupationGraph from '../Graphs/OccupationRegionGraph'
 import { OccupationRegionRawData } from '../@types/DataTypes'
-import OccupationSubtable from '../Table/OccupationSubtable'
-import OccupationGraph from '../Graphs/OccupationGraph'
+
+export enum RegionOccupationEnum {
+  Region = 'Region',
+  Occupation = 'Occupation',
+}
+
+interface Props {
+  viewType: RegionOccupationEnum
+}
 
 // TODO: If the ministry_key is BCPS, lock employee type to REG; otherwise don't
 // lock variables
-const Occupation = (): JSX.Element => {
+const RegionOccupation = ({ viewType }: Props): JSX.Element => {
   const { setLockedVars, metadata, year, queryValues } = useDataManager()
 
   useEffect(() => {
@@ -46,6 +55,7 @@ const Occupation = (): JSX.Element => {
     }
   )
 
+  // Split the data
   const data = sortData(filterData(unfilteredData, queryValues))
 
   // Split the data
@@ -60,22 +70,26 @@ const Occupation = (): JSX.Element => {
     const shortTitle = shortDisplayNameByKey('Des_Grp', k)
     return (
       <div key={k} className="mb-5">
-        <h2>{title}</h2>
-        <OccupationSubtable data={dataMap[k]} shortTitle={shortTitle} />
+        <h2 className="mb-0">{title}</h2>
+        <RegionOccupationSubtable
+          data={dataMap[k]}
+          shortTitle={shortTitle}
+          viewType={viewType}
+        />
       </div>
     )
   })
 
   return (
     <GenericView
+      title={`Representation — ${viewType}`}
       data={unfilteredData}
-      error={error}
       isLoading={isLoading}
-      title={'Representation — Occupation'}
+      error={error}
     >
       <OccupationGraph
         data={data}
-        title={'Representation — Occupation'}
+        title={`Representation – ${viewType}`}
         organization={queryValues.Ministry_Key}
       />
       {tables}
@@ -83,4 +97,4 @@ const Occupation = (): JSX.Element => {
   )
 }
 
-export default Occupation
+export default RegionOccupation

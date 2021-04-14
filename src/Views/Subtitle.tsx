@@ -13,7 +13,10 @@ const Subtitle = (): JSX.Element => {
     'Employee_Type',
     queryValues.Employee_Type
   )
-  let subtitle = `${displayMinistry}, ${displayEmployeeType.toLowerCase()} employees`
+  let subtitle = ''
+  if (displayMinistry) {
+    subtitle += `${displayMinistry}, ${displayEmployeeType.toLowerCase()} employees`
+  }
   if (employeeCount) {
     subtitle += ` (n = ${employeeCount.toLocaleString()})`
   }

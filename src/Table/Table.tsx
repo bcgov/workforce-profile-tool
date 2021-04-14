@@ -8,8 +8,8 @@ import FixTypeLater from '../@types/FixTypeLater'
 import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
 
 interface Props<T extends Record<string, unknown>> {
-  data: T[]
   columns: ColumnWithClassNameAndFooter<T>[]
+  data: T[]
   showFooter?: boolean
 }
 

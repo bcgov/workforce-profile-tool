@@ -8,19 +8,6 @@ import VariableList from '../Variables/VariableList'
 
 import './App.scss'
 
-// const BASE_URL = process.env.REACT_APP_BASE_URL
-// const PROGRESS_FILE = 'WPXXXX_Ind_Progress.csv'
-// const LEADERSHIP_FILE = 'WPXXXX_Leadership.csv'
-// const COMPARISON_FILE = 'WPXXXX_Comparison.csv'
-// const EMP_COUNT_FILE = 'WPXXXX_EmpCounts.csv'
-// const OCC_REG_FILE = 'WPXXXX_Rep_Occ_Rgn.csv'
-
-// const refetchOptions = {
-//   enabled: false,
-//   refetchOnWindowFocus: false,
-//   refetchInterval: 0,
-// }
-
 const App = (): JSX.Element => {
   return (
     <div className="App container-fluid">

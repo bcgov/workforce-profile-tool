@@ -1,17 +1,17 @@
 import React from 'react'
+
+import { BarDatum, LabelFormatter } from '@nivo/bar'
+import { Margin } from '@nivo/core'
+import { parseFloatClean } from '../Helpers/formatter'
 import Dictionary from '../@types/Dictionary'
 
-import FixTypeLater from '../@types/FixTypeLater'
-import { parseFloatClean } from '../Helpers/formatter'
-
 export const horizontalLabel = (
-  margins: FixTypeLater,
+  margins: Margin,
   width: number,
   maxItem: number,
-  formatter: FixTypeLater
-): FixTypeLater => {
-  const labelBuilder = (d: FixTypeLater) => {
-    // console.log('d -->', d)
+  formatter: (d: string | number) => string
+): LabelFormatter => {
+  const labelBuilder = (d: string | number) => {
     const numD = parseFloatClean(d)
     return ((
       <tspan
@@ -28,8 +28,7 @@ export const horizontalLabel = (
   return labelBuilder
 }
 
-export const labelValue = (d: FixTypeLater) => {
-  const label = ((d.data as unknown) as Dictionary<FixTypeLater>)[`${d.id}_str`]
-  // console.log('d', d)
+export const labelValue = (d: BarDatum): string => {
+  const label = ((d.data as unknown) as Dictionary<string>)[`${d.id}_str`]
   return label
 }

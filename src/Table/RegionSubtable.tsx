@@ -7,6 +7,7 @@ import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
 import GenericTable from './GenericTable'
 import Tooltip from '../Core/Tooltip'
+import { useDataManager } from '../Data/DataManager'
 
 interface Props {
   data: OccupationRegionRawData[]
@@ -14,29 +15,30 @@ interface Props {
 }
 
 const RegionSubtable = ({ data, shortTitle }: Props): JSX.Element => {
-  let regionRows: OccupationRegionRawData[] = []
-  let totalRow: OccupationRegionRawData[] = []
+  const totalRow = data.filter((d) => d['Variable_Type'] === 'Total')
 
-  if (data) {
-    regionRows = data.filter((d) => d['Variable_Type'] === 'Region')
-    totalRow = data.filter((d) => d['Variable_Type'] === 'Total')
-  }
+  const { year = '' } = useDataManager()
+
+  const filteredData = data.filter((d) => d.Variable_Type === 'Region')
 
   const columns: ColumnWithClassNameAndFooter<OccupationRegionRawData>[] = [
     {
       id: 'Occupation_Region_Group',
       Header: 'Region',
+      Footer: () => 'Total',
       accessor: (d) => d['Occupation_Region_Group'],
     },
     {
       id: 'DesGrp_Count_ORG',
       Header: shortTitle,
+      Footer: () => formatNumber(totalRow[0].DesGrp_Count_ORG),
       accessor: (d) => formatNumber(d['DesGrp_Count_ORG']),
       className: 'text-right',
     },
     {
       id: 'NonDesGrp_Count_ORG',
       Header: `Non-${shortTitle}`,
+      Footer: () => formatNumber(totalRow[0].NonDesGrp_Count_ORG),
       accessor: (d) => formatNumber(d['NonDesGrp_Count_ORG']),
       className: 'text-right',
     },
@@ -50,12 +52,14 @@ const RegionSubtable = ({ data, shortTitle }: Props): JSX.Element => {
           />
         </span>
       ),
+      Footer: () => formatNumber(totalRow[0].Total_Count_ORG),
       accessor: (d) => formatNumber(d['Total_Count_ORG']),
       className: 'text-right',
     },
     {
       id: 'DesGrp_Percent_ORG',
       Header: `Rate of ${shortTitle}`,
+      Footer: () => formatPercent(totalRow[0].DesGrp_Percent_ORG, 1, 100),
       accessor: (d) => formatPercent(d['DesGrp_Percent_ORG'], 1, 100),
       className: 'text-right',
     },
@@ -69,6 +73,8 @@ const RegionSubtable = ({ data, shortTitle }: Props): JSX.Element => {
           />
         </span>
       ),
+      Footer: () =>
+        formatPercent(totalRow[0].DesGrp_Percent_AvailableWorkforce, 1, 100),
       accessor: (d) =>
         formatPercent(d['DesGrp_Percent_AvailableWorkforce'], 1, 100),
       className: 'text-right',
@@ -87,26 +93,30 @@ const RegionSubtable = ({ data, shortTitle }: Props): JSX.Element => {
           />
         </span>
       ),
+      Footer: () => formatNumber(totalRow[0].DesGrp_Count_Expected, ''),
       accessor: (d) => formatNumber(d['DesGrp_Count_Expected'], ''),
       className: 'text-right',
     },
     {
       id: 'DesGrp_Count_Shortfall',
       Header: `Shortfall of ${shortTitle}`,
+      Footer: () => formatNumber(totalRow[0].DesGrp_Count_Shortfall, ''),
       accessor: (d) => formatNumber(d['DesGrp_Count_Shortfall'], ''),
       className: 'text-right',
     },
   ]
 
+  const allRows = filteredData.concat(totalRow)
+
   return (
-    <div className="RegionSubtable">
-      <GenericTable columns={columns} data={regionRows} hideDefinitions />
-      <GenericTable columns={columns} data={totalRow} hideDefinitions />
-      <DownloadDataLink
+    <div className="RegionTable">
+      <GenericTable
         columns={columns}
-        rows={regionRows.concat(totalRow)}
-        filename={'region'}
+        data={filteredData}
+        hideDefinitions
+        showFooter
       />
+      <DownloadDataLink columns={columns} rows={allRows} filename={'region'} />
       <Definitions />
     </div>
   )
