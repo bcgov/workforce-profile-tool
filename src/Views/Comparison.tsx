@@ -11,28 +11,34 @@ import { displayNameByKey } from '../Data/DataManager'
 import ComparisonGraph from '../Graphs/ComparisonGraph'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
+import { useDataQuery } from '../Data/useDataQuery'
 
 const Comparison = (): JSX.Element => {
-  const { setLockedVars, metadata, year, queryValues } = useDataManager()
+  const { setLockedVars, year, queryValues } = useDataManager()
 
   useEffect(() => setLockedVars({}), [])
 
   const dataKey = `WP${year}_Comparison`
-  const url = metadata ? metadata[dataKey].url : ''
+
+  // const data = useDataQuery
+
+  // const url = metadata ? metadata[dataKey].url : ''
 
   // Load the raw data.
-  const { isLoading, error, data: unfilteredData } = useQuery(
-    dataKey,
-    async () => {
-      return (await d3.csv(url)) as ComparisonRawData[]
-    },
-    {
-      enabled: !!metadata,
-      keepPreviousData: true,
-    }
-  )
+  // const { isLoading, error, data: unfilteredData } = useQuery(
+  //   dataKey,
+  //   async () => {
+  //     return (await d3.csv(url)) as ComparisonRawData[]
+  //   },
+  //   {
+  //     enabled: !!metadata,
+  //     keepPreviousData: true,
+  //   }
+  // )
 
-  const data = sortData(filterData(unfilteredData, queryValues))
+  // const data = sortData(filterData(unfilteredData, queryValues))
+
+  const { data, isLoading, error } = useDataQuery<ComparisonRawData>(dataKey)
 
   const [ministryKey] = useQueryParam('Ministry_Key', StringParam)
   const ministry = displayNameByKey('Ministry_Key', queryValues.Ministry_Key)
@@ -65,7 +71,7 @@ const Comparison = (): JSX.Element => {
 
   return (
     <GenericView
-      data={unfilteredData}
+      data={data}
       error={error}
       isLoading={isLoading}
       title={'Comparison with Provincial Workforce'}

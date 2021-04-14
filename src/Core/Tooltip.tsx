@@ -9,6 +9,8 @@ interface Props {
 }
 
 const Tooltip = ({ text }: Props): JSX.Element => {
+  // TODO: Grab the tooltip key here
+
   const tooltipRef = useRef<FixTypeLater>()
 
   useEffect(() => {

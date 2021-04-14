@@ -1,41 +1,52 @@
-import { useQuery } from 'react-query'
-import * as d3 from 'd3'
 import React, { useEffect } from 'react'
 
-import {
-  buildMinistryData,
-  sortData,
-  useDataManager,
-} from '../Data/DataManager'
-import { ComparisonRawData } from '../@types/DataTypes'
+import { ComparisonRawData, MinistryRawData } from '../@types/DataTypes'
+import { useDataManager, variableGroupByKey } from '../Data/DataManager'
+import { useDataQuery } from '../Data/useDataQuery'
 import GenericView from './GenericView'
 import OrganizationGraph from '../Graphs/OrganizationGraph'
 
+export const buildMinistryData = (
+  comparisonData: ComparisonRawData[] | undefined
+): MinistryRawData[] => {
+  if (!comparisonData) return []
+
+  const data = comparisonData.map((d) => ({
+    Des_Grp: d.Des_Grp,
+    Ministry_Key: d.Ministry_Key,
+    Value: `${d.Employees_BCPS}`,
+  }))
+
+  const bcPops = comparisonData.filter((d) => d.Ministry_Key === 'BCPS')
+
+  variableGroupByKey('Des_Grp').variables.forEach((variable) => {
+    data.push({
+      Des_Grp: variable.key,
+      Ministry_Key: 'BC Population',
+      Value:
+        bcPops.find((d) => d.Des_Grp === variable.key)
+          ?.Employees_BC_Population || '',
+    })
+  })
+
+  return data
+}
+
 const Organization = (): JSX.Element => {
-  const { setLockedVars, metadata, year, queryValues } = useDataManager()
+  const { setLockedVars, year } = useDataManager()
 
   useEffect(() => setLockedVars({ Ministry_Key: ['BCPS'] }), [])
 
-  const dataKey = `WP${year}_Comparison`
-  const url = metadata ? metadata[dataKey].url : ''
+  const {
+    data: unprocessedData,
+    isLoading,
+    error,
+  } = useDataQuery<ComparisonRawData>(`WP${year}_Comparison`, true)
 
-  // Load the raw data.
-  const { isLoading, error, data: unfilteredData } = useQuery(
-    dataKey,
-    async () => {
-      return (await d3.csv(url)) as ComparisonRawData[]
-    },
-    {
-      enabled: !!metadata,
-      keepPreviousData: true,
-    }
-  )
-
-  const data = sortData(buildMinistryData(unfilteredData, queryValues))
+  const data = buildMinistryData(unprocessedData)
 
   return (
-    <GenericView data={unfilteredData} error={error} isLoading={isLoading}>
-      <h1>Organizations</h1>
+    <GenericView data={data} error={error} isLoading={isLoading}>
       <OrganizationGraph data={data} />
     </GenericView>
   )

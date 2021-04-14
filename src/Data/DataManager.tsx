@@ -99,22 +99,28 @@ const DataManagerContext = createContext<DataManagerContextType | undefined>(
 
 export const filterData = <T extends GenericRawData>(
   data: T[] | undefined,
-  queryValues: QueryValues
+  queryValues: QueryValues,
+  doNotFilterMinistries?: boolean
 ): T[] => {
-  return data
-    ? data
-        .filter((d) =>
-          d.Employee_Type ? d.Employee_Type === queryValues.Employee_Type : true
-        )
-        .filter((d) =>
-          d.Des_Grp && queryValues.Des_Grp
-            ? queryValues.Des_Grp.includes(d.Des_Grp)
-            : true
-        )
-        .filter((d) =>
-          d.Ministry_Key ? d.Ministry_Key === queryValues.Ministry_Key : true
-        )
-    : []
+  if (!data) return []
+  console.log('filterData --->', data)
+  let filteredData = data
+    .filter((d) =>
+      d.Employee_Type ? d.Employee_Type === queryValues.Employee_Type : true
+    )
+    .filter((d) =>
+      d.Des_Grp && queryValues.Des_Grp
+        ? queryValues.Des_Grp.includes(d.Des_Grp)
+        : true
+    )
+
+  if (!doNotFilterMinistries) {
+    filteredData = filteredData.filter((d) =>
+      d.Ministry_Key ? d.Ministry_Key === queryValues.Ministry_Key : true
+    )
+  }
+
+  return filteredData
 }
 
 export const sortData = <T extends GenericRawData>(
@@ -155,65 +161,6 @@ export const getHiringTotal = (
   )
 
   return data ? +data['2020_hired_ct'] : undefined
-}
-
-export const buildMinistryData = (
-  comparisonData: ComparisonRawData[] | undefined,
-  queryValues: QueryValues
-): MinistryRawData[] => {
-  // console.log('COMPARISON DATA', comparisonData)
-  if (!comparisonData) return []
-  const data = comparisonData
-    .filter((d) =>
-      d.Employee_Type ? d.Employee_Type === queryValues.Employee_Type : true
-    )
-    .filter((d) =>
-      d.Des_Grp && queryValues.Des_Grp
-        ? queryValues.Des_Grp.includes(d.Des_Grp)
-        : true
-    )
-    .map((d) => {
-      return {
-        Des_Grp: d.Des_Grp,
-        Ministry_Key: d.Ministry_Key,
-        Value: `${d.Employees_BCPS}`,
-      }
-    })
-
-  const bcPops = comparisonData.filter(
-    (d) => d.Ministry_Key === 'BCPS' && d.Employee_Type === 'REG'
-  )
-
-  data.push({
-    Des_Grp: 'IND',
-    Ministry_Key: 'BC Population',
-    Value: bcPops.find((d) => d.Des_Grp === 'IND')
-      ? bcPops.find((d) => d.Des_Grp === 'IND')!.Employees_BC_Population
-      : '',
-  })
-  data.push({
-    Des_Grp: 'WOM',
-    Ministry_Key: 'BC Population',
-    Value: bcPops.find((d) => d.Des_Grp === 'WOM')
-      ? bcPops.find((d) => d.Des_Grp === 'WOM')!.Employees_BC_Population
-      : '',
-  })
-  data.push({
-    Des_Grp: 'VM',
-    Ministry_Key: 'BC Population',
-    Value: bcPops.find((d) => d.Des_Grp === 'VM')
-      ? bcPops.find((d) => d.Des_Grp === 'VM')!.Employees_BC_Population
-      : '',
-  })
-  data.push({
-    Des_Grp: 'DIS',
-    Ministry_Key: 'BC Population',
-    Value: bcPops.find((d) => d.Des_Grp === 'DIS')
-      ? bcPops.find((d) => d.Des_Grp === 'DIS')!.Employees_BC_Population
-      : '',
-  })
-
-  return data
 }
 
 function useDataManager(): UseDataManagerType {

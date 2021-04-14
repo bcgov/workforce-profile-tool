@@ -7,13 +7,14 @@ import OrganizationSubGraph from './OrganizationSubgraph'
 
 import './Graphs.scss'
 import Subtitle from '../Views/Subtitle'
+import Title from '../Views/Title'
 
 interface Props {
-  data: MinistryRawData[]
+  data?: MinistryRawData[]
 }
 
 const MinistryGraph = ({ data }: Props): JSX.Element => {
-  if (!data) return <div>&nbsp;</div>
+  if (!data || data.length === 0) return <div>&nbsp;</div>
 
   // Split the data
   const dataMap: Dictionary<MinistryRawData[]> = {}
@@ -21,6 +22,8 @@ const MinistryGraph = ({ data }: Props): JSX.Element => {
     dataMap[d.Des_Grp] = dataMap[d.Des_Grp] || []
     dataMap[d.Des_Grp].push(d)
   })
+
+  console.log('dataMap', dataMap)
 
   const COLOR_MAP: Dictionary<string> = {
     IND: '#234075',
@@ -36,9 +39,11 @@ const MinistryGraph = ({ data }: Props): JSX.Element => {
       const shortTitle = shortDisplayNameByKey('Des_Grp', k)
       const color = COLOR_MAP[k]
 
+      console.log('title', title)
+
       return (
         <div key={k}>
-          <Subtitle />
+          <Title title={title} />
           <OrganizationSubGraph
             color={color}
             data={dataMap[k]}

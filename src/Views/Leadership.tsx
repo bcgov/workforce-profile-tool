@@ -1,18 +1,17 @@
-import { useQuery } from 'react-query'
-import * as d3 from 'd3'
 import React, { useEffect } from 'react'
 
 import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
-import { filterData, sortData, useDataManager } from '../Data/DataManager'
+import { displayNameByKey } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { LeadershipRawData } from '../@types/DataTypes'
-import { displayNameByKey } from '../Data/DataManager'
+import { useDataManager } from '../Data/DataManager'
+import { useDataQuery } from '../Data/useDataQuery'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
 import LeadershipGraph from '../Graphs/LeadershipGraph'
 
 const Leadership = (): JSX.Element => {
-  const { setLockedVars, metadata, year, queryValues } = useDataManager()
+  const { setLockedVars, year } = useDataManager()
 
   // When page loads, set the locked variables as appropriate.
   useEffect(() => {
@@ -24,21 +23,7 @@ const Leadership = (): JSX.Element => {
   }, [year])
 
   const dataKey = `WP${year}_Leadership`
-  const url = metadata ? metadata[dataKey].url : ''
-
-  // Load the raw data.
-  const { isLoading, error, data: unfilteredData } = useQuery(
-    dataKey,
-    async () => {
-      return (await d3.csv(url)) as LeadershipRawData[]
-    },
-    {
-      enabled: !!metadata,
-      keepPreviousData: true,
-    }
-  )
-
-  const data = sortData(filterData(unfilteredData, queryValues))
+  const { data, isLoading, error } = useDataQuery<LeadershipRawData>(dataKey)
 
   const columns: ColumnWithClassNameAndFooter<LeadershipRawData>[] = [
     {
@@ -64,7 +49,7 @@ const Leadership = (): JSX.Element => {
     <GenericView
       isLoading={isLoading}
       error={error}
-      data={unfilteredData}
+      data={data}
       title={'Leadership by Type'}
     >
       <LeadershipGraph
