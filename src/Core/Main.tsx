@@ -1,8 +1,8 @@
 import React from 'react'
 
-import RegionOccupation, {
-  RegionOccupationEnum,
-} from '../Views/RegionOccupation'
+import OccupationRegion, {
+  OccupationRegionEnum,
+} from '../Views/OccupationRegion'
 import Comparison from '../Views/Comparison'
 import FixTypeLater from '../@types/FixTypeLater'
 import Home from './Home'
@@ -75,12 +75,12 @@ const Main = (props: Props): JSX.Element => {
                 search={props.location.search}
               >
                 <Tab key={'by-occupation'} name="By Occupation">
-                  <RegionOccupation
-                    viewType={RegionOccupationEnum.Occupation}
+                  <OccupationRegion
+                    viewType={OccupationRegionEnum.Occupation}
                   />
                 </Tab>
                 <Tab key={'by-region'} name="By Region">
-                  <RegionOccupation viewType={RegionOccupationEnum.Region} />
+                  <OccupationRegion viewType={OccupationRegionEnum.Region} />
                 </Tab>
                 {/* <Tab key={'flow-report'} name="Flow Report">
                   <div className="alert alert-warning" role="alert">

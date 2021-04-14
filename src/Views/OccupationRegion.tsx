@@ -11,22 +11,22 @@ import {
 import GenericView from './GenericView'
 import Dictionary from '../@types/Dictionary'
 import { displayNameByKey } from '../Data/DataManager'
-import RegionOccupationSubtable from '../Table/RegionOccupationSubtable'
+import OccupationRegionSubtable from '../Table/OccupationRegionSubtable'
 import OccupationGraph from '../Graphs/OccupationRegionGraph'
 import { OccupationRegionRawData } from '../@types/DataTypes'
 
-export enum RegionOccupationEnum {
+export enum OccupationRegionEnum {
   Region = 'Region',
   Occupation = 'Occupation',
 }
 
 interface Props {
-  viewType: RegionOccupationEnum
+  viewType: OccupationRegionEnum
 }
 
 // TODO: If the ministry_key is BCPS, lock employee type to REG; otherwise don't
 // lock variables
-const RegionOccupation = ({ viewType }: Props): JSX.Element => {
+const OccupationRegion = ({ viewType }: Props): JSX.Element => {
   const { setLockedVars, metadata, year, queryValues } = useDataManager()
 
   useEffect(() => {
@@ -71,7 +71,7 @@ const RegionOccupation = ({ viewType }: Props): JSX.Element => {
     return (
       <div key={k} className="mb-5">
         <h2 className="mb-0">{title}</h2>
-        <RegionOccupationSubtable
+        <OccupationRegionSubtable
           data={dataMap[k]}
           shortTitle={shortTitle}
           viewType={viewType}
@@ -97,4 +97,4 @@ const RegionOccupation = ({ viewType }: Props): JSX.Element => {
   )
 }
 
-export default RegionOccupation
+export default OccupationRegion

@@ -4,10 +4,9 @@ import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
 import { MinistryRawData } from '../@types/DataTypes'
 import Dictionary from '../@types/Dictionary'
 import OrganizationSubGraph from './OrganizationSubgraph'
+import Title from '../Views/Title'
 
 import './Graphs.scss'
-import Subtitle from '../Views/Subtitle'
-import Title from '../Views/Title'
 
 interface Props {
   data?: MinistryRawData[]
@@ -23,8 +22,6 @@ const MinistryGraph = ({ data }: Props): JSX.Element => {
     dataMap[d.Des_Grp].push(d)
   })
 
-  console.log('dataMap', dataMap)
-
   const COLOR_MAP: Dictionary<string> = {
     IND: '#234075',
     DIS: '#70CCDB',
@@ -38,8 +35,6 @@ const MinistryGraph = ({ data }: Props): JSX.Element => {
       const title = displayNameByKey('Des_Grp', k)
       const shortTitle = shortDisplayNameByKey('Des_Grp', k)
       const color = COLOR_MAP[k]
-
-      console.log('title', title)
 
       return (
         <div key={k}>

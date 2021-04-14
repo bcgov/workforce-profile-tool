@@ -1,12 +1,9 @@
-import { useQuery } from 'react-query'
-import * as d3 from 'd3'
 import React, { useEffect } from 'react'
 
 import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
 import { ComparisonRawData } from '../@types/DataTypes'
 import { formatPercent } from '../Helpers/formatter'
-import { StringParam, useQueryParam } from 'use-query-params'
-import { filterData, sortData, useDataManager } from '../Data/DataManager'
+import { useDataManager } from '../Data/DataManager'
 import { displayNameByKey } from '../Data/DataManager'
 import ComparisonGraph from '../Graphs/ComparisonGraph'
 import GenericTable from '../Table/GenericTable'
@@ -19,28 +16,8 @@ const Comparison = (): JSX.Element => {
   useEffect(() => setLockedVars({}), [])
 
   const dataKey = `WP${year}_Comparison`
-
-  // const data = useDataQuery
-
-  // const url = metadata ? metadata[dataKey].url : ''
-
-  // Load the raw data.
-  // const { isLoading, error, data: unfilteredData } = useQuery(
-  //   dataKey,
-  //   async () => {
-  //     return (await d3.csv(url)) as ComparisonRawData[]
-  //   },
-  //   {
-  //     enabled: !!metadata,
-  //     keepPreviousData: true,
-  //   }
-  // )
-
-  // const data = sortData(filterData(unfilteredData, queryValues))
-
   const { data, isLoading, error } = useDataQuery<ComparisonRawData>(dataKey)
 
-  const [ministryKey] = useQueryParam('Ministry_Key', StringParam)
   const ministry = displayNameByKey('Ministry_Key', queryValues.Ministry_Key)
 
   const columns: ColumnWithClassNameAndFooter<ComparisonRawData>[] = [
@@ -78,7 +55,7 @@ const Comparison = (): JSX.Element => {
     >
       <ComparisonGraph
         data={data}
-        ministry={ministryKey}
+        ministry={queryValues.Ministry_Key}
         title={'Comparison with Provincial Workforce'}
         year={year || ''}
       />

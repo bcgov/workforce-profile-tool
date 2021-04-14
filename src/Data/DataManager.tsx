@@ -10,20 +10,18 @@ import { ArrayParam, StringParam, useQueryParams } from 'use-query-params'
 import * as d3 from 'd3'
 
 import {
-  ComparisonRawData,
   EmployeeCountRawData,
   GenericRawData,
-  MinistryRawData,
   ProgressRawData,
 } from '../@types/DataTypes'
+import { Metadata } from '../@types/Metadata'
+import { QueryValues } from '../@types/QueryValues'
+import { Variable } from '../@types/Variable'
+import { VariableGroup } from '../@types/VariableGroup'
 import Dictionary from '../@types/Dictionary'
 import FixTypeLater from '../@types/FixTypeLater'
-import { Metadata } from '../@types/Metadata'
 
 import variableJson from './variables.json'
-import { VariableGroup } from '../@types/VariableGroup'
-import { Variable } from '../@types/Variable'
-import { QueryValues } from '../@types/QueryValues'
 
 export const VARIABLE_MAP = variableJson as Dictionary<VariableGroup>
 
@@ -76,8 +74,10 @@ export const shortDisplayNameByKey = (
 
 type UseDataManagerType = {
   year?: string
-  metadata?: FixTypeLater
-  setMetadata?: FixTypeLater
+  metadata?: Dictionary<Metadata>
+  setMetadata?: React.Dispatch<
+    React.SetStateAction<Dictionary<Metadata> | undefined>
+  >
   hiringTotal?: number
   employeeCount?: number
   employeeCountData?: EmployeeCountRawData[]
@@ -87,8 +87,10 @@ type UseDataManagerType = {
 }
 
 type DataManagerContextType = {
-  metadata?: FixTypeLater
-  setMetadata?: FixTypeLater
+  metadata?: Dictionary<Metadata>
+  setMetadata?: React.Dispatch<
+    React.SetStateAction<Dictionary<Metadata> | undefined>
+  >
   lockedVars: Dictionary<string[]>
   setLockedVars: (vars: Dictionary<string[]>) => void
 }
@@ -103,7 +105,6 @@ export const filterData = <T extends GenericRawData>(
   doNotFilterMinistries?: boolean
 ): T[] => {
   if (!data) return []
-  console.log('filterData --->', data)
   let filteredData = data
     .filter((d) =>
       d.Employee_Type ? d.Employee_Type === queryValues.Employee_Type : true

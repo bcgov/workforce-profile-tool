@@ -4,7 +4,7 @@ import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
 import { formatNumber, formatPercent } from '../Helpers/formatter'
 import { getTooltip } from '../Helpers/tooltipHelper'
 import { OccupationRegionRawData } from '../@types/DataTypes'
-import { RegionOccupationEnum } from '../Views/RegionOccupation'
+import { OccupationRegionEnum } from '../Views/OccupationRegion'
 import { useDataManager } from '../Data/DataManager'
 import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
@@ -17,7 +17,7 @@ interface Props {
 }
 
 interface Props {
-  viewType: RegionOccupationEnum
+  viewType: OccupationRegionEnum
 }
 
 const RegionOccupationSubtable = ({

@@ -29,7 +29,7 @@ const GenericView = <T extends Dictionary<unknown>>({
       {title && <Title title={title} />}
       {(isLoading || !data) && <Loading />}
       {error && <Error />}
-      {data && data.length === 0 && <NoData />}
+      {!isLoading && data && data.length === 0 && <NoData />}
       {data && data.length > 0 && <div>{children}</div>}
     </div>
   )
