@@ -16,6 +16,7 @@ import { horizontalLabel, labelValue } from './horizontalLabel'
 interface Props {
   title: string
   data: OccupationRegionRawData[]
+  organization: string[] | string | null | undefined
 }
 
 const MARGINS = {
@@ -25,12 +26,14 @@ const MARGINS = {
   bottom: 50,
 }
 
-const OccupationGraph = ({ data, title }: Props): JSX.Element => {
+const OccupationGraph = ({ data, title, organization }: Props): JSX.Element => {
   const dataDefinitions = [
     { key: 'DesGrp_Count_Expected', label: 'Expected', color: '#70CCDB' },
     { key: 'DesGrp_Count_ORG', label: 'Actual', color: '#D2E2EE' },
     { key: 'DesGrp_Count_Shortfall', label: 'Shortfall', color: '#6c757d' },
   ]
+
+  console.log('organization', organization)
 
   const [width, setWidth] = useState(620)
 
@@ -88,7 +91,7 @@ const OccupationGraph = ({ data, title }: Props): JSX.Element => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: 'Count in BCPS',
+        legend: `Count in ${displayNameByKey('Ministry_Key', organization)}`,
         legendPosition: 'middle',
         legendOffset: 40,
         format: (d: FixTypeLater) =>

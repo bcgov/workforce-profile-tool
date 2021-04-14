@@ -21,16 +21,16 @@ import { OccupationRegionRawData } from '../@types/DataTypes'
 const Region = (): JSX.Element => {
   const { setLockedVars, metadata, year, queryValues } = useDataManager()
 
-  const [ministryQueryVars] = useQueryParam('Ministry_Key', ArrayParam)
-
   useEffect(() => {
     const employeeType = year === '2018' ? ['REG'] : ['ALL']
 
-    const varsToLock: Dictionary<string[]> = ministryQueryVars?.includes('BCPS')
+    const varsToLock: Dictionary<string[]> = queryValues.Ministry_Key?.includes(
+      'BCPS'
+    )
       ? {}
       : { Employee_Type: employeeType }
     setLockedVars(varsToLock)
-  }, [ministryQueryVars, year])
+  }, [queryValues.Ministry_Key, year])
 
   const dataKey = `WP${year}_Rep_Occ_Rgn`
   const url = metadata ? metadata[dataKey].url : ''
@@ -75,7 +75,11 @@ const Region = (): JSX.Element => {
       isLoading={isLoading}
       error={error}
     >
-      <OccupationGraph data={data} title={'Representation – Region'} />
+      <OccupationGraph
+        data={data}
+        title={'Representation – Region'}
+        organization={queryValues.Ministry_Key}
+      />
       {tables}
     </GenericView>
   )

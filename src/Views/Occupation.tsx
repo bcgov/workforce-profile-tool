@@ -21,16 +21,16 @@ import OccupationGraph from '../Graphs/OccupationGraph'
 const Occupation = (): JSX.Element => {
   const { setLockedVars, metadata, year, queryValues } = useDataManager()
 
-  const [ministryQueryVars] = useQueryParam('Ministry_Key', ArrayParam)
-
   useEffect(() => {
     const employeeType = year === '2018' ? ['REG'] : ['ALL']
 
-    const varsToLock: Dictionary<string[]> = ministryQueryVars?.includes('BCPS')
+    const varsToLock: Dictionary<string[]> = queryValues.Ministry_Key?.includes(
+      'BCPS'
+    )
       ? {}
       : { Employee_Type: employeeType }
     setLockedVars(varsToLock)
-  }, [ministryQueryVars, year])
+  }, [queryValues.Ministry_Key, year])
 
   const dataKey = `WP${year}_Rep_Occ_Rgn`
   const url = metadata ? metadata[dataKey].url : ''
@@ -74,7 +74,11 @@ const Occupation = (): JSX.Element => {
       isLoading={isLoading}
       title={'Representation — Occupation'}
     >
-      <OccupationGraph data={data} title={'Representation — Occupation'} />
+      <OccupationGraph
+        data={data}
+        title={'Representation — Occupation'}
+        organization={queryValues.Ministry_Key}
+      />
       {tables}
     </GenericView>
   )
