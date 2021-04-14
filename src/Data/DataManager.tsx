@@ -23,8 +23,13 @@ import { Metadata } from '../@types/Metadata'
 import variableJson from './variables.json'
 import { VariableGroup } from '../@types/VariableGroup'
 import { Variable } from '../@types/Variable'
+import { QueryValues } from '../@types/QueryValues'
 
 export const VARIABLE_MAP = variableJson as Dictionary<VariableGroup>
+
+export const variableGroupByKey = (variableGroupKey: string): VariableGroup => {
+  return VARIABLE_MAP[variableGroupKey]
+}
 
 export const indexOfVariable = (
   variableGroupKey: string,
@@ -46,11 +51,18 @@ export const variableByKey = (
 
 export const displayNameByKey = (
   variableGroupKey: string,
-  variableKey: string | null | undefined
+  variableKey: string[] | string | null | undefined
 ): string => {
   if (!variableKey) return ''
-  const variable = variableByKey(variableGroupKey, variableKey)
-  return variable ? variable.name : ''
+  if (Array.isArray(variableKey)) {
+    const name = variableKey.map(
+      (varKey) => variableByKey(variableGroupKey, varKey)!.name
+    )
+    return name.join(', ')
+  } else {
+    const variable = variableByKey(variableGroupKey, variableKey)
+    return variable ? variable.name : ''
+  }
 }
 
 export const shortDisplayNameByKey = (
@@ -62,7 +74,7 @@ export const shortDisplayNameByKey = (
   return variable && variable.shortName ? variable.shortName : ''
 }
 
-type DataManagerContextType = {
+type UseDataManagerType = {
   year?: string
   metadata?: FixTypeLater
   setMetadata?: FixTypeLater
@@ -71,7 +83,14 @@ type DataManagerContextType = {
   employeeCountData?: EmployeeCountRawData[]
   lockedVars: Dictionary<string[]>
   setLockedVars: (vars: Dictionary<string[]>) => void
-  queryValues?: FixTypeLater
+  queryValues: QueryValues
+}
+
+type DataManagerContextType = {
+  metadata?: FixTypeLater
+  setMetadata?: FixTypeLater
+  lockedVars: Dictionary<string[]>
+  setLockedVars: (vars: Dictionary<string[]>) => void
 }
 
 const DataManagerContext = createContext<DataManagerContextType | undefined>(
@@ -80,7 +99,7 @@ const DataManagerContext = createContext<DataManagerContextType | undefined>(
 
 export const filterData = <T extends GenericRawData>(
   data: T[] | undefined,
-  queryValues: FixTypeLater // TODO: really fix this!
+  queryValues: QueryValues
 ): T[] => {
   return data
     ? data
@@ -113,7 +132,7 @@ export const sortData = <T extends GenericRawData>(
 
 export const getEmployeeCount = (
   employeeCountData: EmployeeCountRawData[] | undefined,
-  queryValues: FixTypeLater
+  queryValues: QueryValues
 ): number | undefined => {
   if (!employeeCountData) return undefined
 
@@ -124,7 +143,7 @@ export const getEmployeeCount = (
 
 export const getHiringTotal = (
   progressData: ProgressRawData[] | undefined,
-  queryValues: FixTypeLater
+  queryValues: QueryValues
 ): number | undefined => {
   if (!progressData) return undefined
 
@@ -140,7 +159,7 @@ export const getHiringTotal = (
 
 export const buildMinistryData = (
   comparisonData: ComparisonRawData[] | undefined,
-  queryValues: FixTypeLater
+  queryValues: QueryValues
 ): MinistryRawData[] => {
   // console.log('COMPARISON DATA', comparisonData)
   if (!comparisonData) return []
@@ -197,26 +216,28 @@ export const buildMinistryData = (
   return data
 }
 
-function useDataManager(): DataManagerContextType {
+function useDataManager(): UseDataManagerType {
   const context = useContext(DataManagerContext)
   if (!context) {
     throw new Error(`useDataManager must be used within a DataManagerProvider`)
   }
 
-  const { metadata, employeeCountData, lockedVars, setLockedVars } = context
+  const { metadata, lockedVars, setLockedVars } = context
 
-  const [queryValues] = useQueryParams({
+  const [queryValuesTmp] = useQueryParams({
     Employee_Type: StringParam,
     Des_Grp: ArrayParam,
     Ministry_Key: StringParam,
     Year: StringParam,
   })
 
+  const queryValues = queryValuesTmp as QueryValues
+
   return {
     metadata,
     queryValues,
     year: queryValues.Year || '',
-    employeeCount: getEmployeeCount(employeeCountData, queryValues),
+    employeeCount: undefined, // TODO: Fix
     lockedVars,
     setLockedVars,
   }
