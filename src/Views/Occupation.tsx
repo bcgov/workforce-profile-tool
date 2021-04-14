@@ -1,4 +1,3 @@
-import { ArrayParam, useQueryParam } from 'use-query-params'
 import { useQuery } from 'react-query'
 import * as d3 from 'd3'
 import React, { useEffect } from 'react'
