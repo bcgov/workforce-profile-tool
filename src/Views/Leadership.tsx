@@ -38,7 +38,6 @@ const Leadership = (): JSX.Element => {
     }
   )
 
-  // TODO: If app is slow, can useMemo on this one
   const data = sortData(filterData(unfilteredData, queryValues))
 
   const columns: ColumnWithClassNameAndFooter<LeadershipRawData>[] = [

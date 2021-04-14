@@ -12,7 +12,6 @@ class Tooltip extends Component<Props> {
   private tooltip: FixTypeLater
 
   componentDidMount(): void {
-    // TODO: Fix so that new text props update the rendering
     const tooltip = $(this.tooltip) as FixTypeLater
     tooltip.tooltip()
   }

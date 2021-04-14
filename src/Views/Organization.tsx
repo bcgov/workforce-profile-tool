@@ -31,7 +31,6 @@ const Organization = (): JSX.Element => {
     }
   )
 
-  // TODO: If app is slow, can useMemo on this one
   const data = sortData(buildMinistryData(unfilteredData, queryValues))
 
   return (

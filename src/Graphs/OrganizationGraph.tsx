@@ -1,20 +1,17 @@
 import React from 'react'
 
-import { MinistryRawData } from '../@types/DataTypes'
 import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
+import { MinistryRawData } from '../@types/DataTypes'
 import Dictionary from '../@types/Dictionary'
 import OrganizationSubGraph from './OrganizationSubgraph'
 
 import './Graphs.scss'
-import { useDataManager } from '../Data/DataManager'
 
 interface Props {
   data: MinistryRawData[]
 }
 
 const MinistryGraph = ({ data }: Props): JSX.Element => {
-  const { queryValues } = useDataManager()
-
   if (!data) return <div>&nbsp;</div>
 
   // Split the data

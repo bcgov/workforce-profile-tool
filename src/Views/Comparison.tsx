@@ -32,11 +32,10 @@ const Comparison = (): JSX.Element => {
     }
   )
 
-  // TODO: If app is slow, can useMemo on this one
   const data = sortData(filterData(unfilteredData, queryValues))
 
   const [ministryKey] = useQueryParam('Ministry_Key', StringParam)
-  const ministry = displayNameByKey('Ministry_Key', queryValues.Ministry_Key) // TODO: cleaner implementation of this
+  const ministry = displayNameByKey('Ministry_Key', queryValues.Ministry_Key)
 
   const columns: ColumnWithClassNameAndFooter<ComparisonRawData>[] = [
     {

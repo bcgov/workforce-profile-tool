@@ -2,13 +2,13 @@ import React from 'react'
 
 import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
 import { formatNumber, formatPercent } from '../Helpers/formatter'
+import { getTooltip } from '../Data/tooltipHelper'
 import { OccupationRegionRawData } from '../@types/DataTypes'
+import { useDataManager } from '../Data/DataManager'
+import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
 import GenericTable from './GenericTable'
 import Tooltip from '../Core/Tooltip'
-import Definitions from './Definitions'
-import { useDataManager } from '../Data/DataManager'
-import { getTooltip } from '../Data/tooltipHelper'
 
 interface Props {
   data: OccupationRegionRawData[]
@@ -120,13 +120,10 @@ const OccupationSubtable = ({ data, shortTitle }: Props): JSX.Element => {
     },
   ]
 
-  // TODO: Add table footers to GenericTable
-
   const allRows = filteredData.concat(totalRow)
 
   return (
     <div className="OccupationTable">
-      {/* <h3>Management</h3> */}
       <GenericTable
         columns={columns}
         data={filteredData}

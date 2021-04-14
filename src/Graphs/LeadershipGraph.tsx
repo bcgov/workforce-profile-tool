@@ -2,6 +2,7 @@ import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
 import React, { useCallback, useState } from 'react'
 
+import { displayNameByKey } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { getTooltip } from '../Data/tooltipHelper'
 import { horizontalLabel, labelValue } from './horizontalLabel'
@@ -12,7 +13,6 @@ import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 
 import './Graphs.scss'
-import { displayNameByKey } from '../Data/DataManager'
 
 interface Props {
   data: LeadershipRawData[]
@@ -50,7 +50,7 @@ const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
       return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
     })
     .flat()
-    .reverse() // TODO: Don't call reverse(); use Nivo setting instead
+    .reverse()
 
   const maxItem = Math.max(...items)
 
