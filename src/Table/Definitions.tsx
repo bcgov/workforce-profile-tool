@@ -9,11 +9,6 @@ export const DEFINITIONS = [
     definition:
       'Value is 3 or greater, but is suppressed to prevent residual disclosure.',
   },
-  {
-    term: 'x',
-    definition:
-      'Data suppressed, but it can be revealed that the occupation is significantly under-represented without revealing the absolute number. For all other suppressed data, it cannot be revealed whether or not the occupation is significantly under-represented.',
-  },
 ]
 
 const Definitions = (): JSX.Element => {
