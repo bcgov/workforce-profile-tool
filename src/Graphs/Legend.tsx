@@ -1,12 +1,11 @@
 import React from 'react'
-import { RouteComponentProps, withRouter } from 'react-router'
 
 import { DataDefinition } from '../@types/DataDefinition'
 import Tooltip from '../Core/Tooltip'
 
 import './Legend.scss'
 
-interface Props extends RouteComponentProps {
+interface Props {
   items: DataDefinition[]
   notes?: React.ReactNode
 }
@@ -41,4 +40,4 @@ const Legend = ({ items, notes }: Props): JSX.Element => {
   )
 }
 
-export default withRouter(Legend)
+export default Legend

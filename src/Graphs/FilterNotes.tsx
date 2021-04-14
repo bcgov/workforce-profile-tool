@@ -11,6 +11,8 @@ import { QueryValues } from '../@types/QueryValues'
 const FilterNotes = (): JSX.Element => {
   const { queryValues } = useDataManager()
 
+  if (!queryValues) return <></>
+
   return (
     <div className="FilterNotes Shadow">
       <h1>Active Filters</h1>
@@ -20,8 +22,7 @@ const FilterNotes = (): JSX.Element => {
             <strong>{variableGroup.name}</strong>:{' '}
             {displayNameByKey(
               variableGroup.key,
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              queryValues![variableGroup.key as keyof QueryValues]
+              queryValues[variableGroup.key as keyof QueryValues]
             )}
           </p>
         )

@@ -6,6 +6,7 @@ import Dictionary from '../@types/Dictionary'
 import OrganizationSubGraph from './OrganizationSubgraph'
 
 import './Graphs.scss'
+import Subtitle from '../Views/Subtitle'
 
 interface Props {
   data: MinistryRawData[]
@@ -37,9 +38,7 @@ const MinistryGraph = ({ data }: Props): JSX.Element => {
 
       return (
         <div key={k}>
-          <h2>
-            {title}, regular employees {/* TODO: tidy up */}
-          </h2>
+          <Subtitle />
           <OrganizationSubGraph
             color={color}
             data={dataMap[k]}
