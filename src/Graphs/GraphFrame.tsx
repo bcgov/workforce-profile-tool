@@ -32,7 +32,7 @@ const GraphFrame = (props: Props): JSX.Element => {
     // Documentation for library: https://github.com/exupero/saveSvgAsPng
     const TITLE_HEIGHT = 50
     const LEGEND_WIDTH = 250
-    const LEGEND_HEIGHT = 400
+    const LEGEND_HEIGHT = 500
     const FO_NAMESPACE = 'http://www.w3.org/2000/svg'
     const FONT_FAMILY = 'Myriad Pro'
 
@@ -127,6 +127,7 @@ const GraphFrame = (props: Props): JSX.Element => {
       // Append the filters to the legend.
       filters = filters.cloneNode(true) as Element
       filters.setAttribute('style', `font-family: "${FONT_FAMILY}"`)
+      filters.setAttribute('y', '100')
       if (legendFO) {
         legendFO.appendChild(filters)
         svg.appendChild(legendFO)
