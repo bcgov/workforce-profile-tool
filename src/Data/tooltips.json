@@ -28,6 +28,6 @@
     "2020": "The Expected counts represent a benchmark target based on the available workforce in BC. This is calculated by taking the % Available Workforce and multiplying it by the Total number of employees, where available."
   },
   "representation-shortfall": {
-    "2020": "The Shortfall counts note where actual counts fall short of the Expected count. Shortfall values are only shown if considered notable, based on the following criteria:\r\n• The shortfall must be at least 30, or represent at least 20% of the Expected count• The Expected count is at least 4• The Shortfall count must be at least 2\r\nShortfalls are shown as 'x' when the occupation or region is notably under-represented, but the value must be suppressed."
+    "2020": "The Shortfall counts note where actual counts fall short of the Expected count. Shortfall values are only shown if considered notable, based on the following criteria:\r\n• The shortfall must be at least 30, or represent at least 20% of the Expected count• The Expected count is at least 4• The Shortfall count must be at least 2\r\n\r\nShortfalls are shown as 'x' when the occupation or region is notably under-represented, but the value must be suppressed."
   }
 }

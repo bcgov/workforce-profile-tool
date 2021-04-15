@@ -4,6 +4,8 @@ import React, { useEffect, useRef } from 'react'
 
 import FixTypeLater from '../@types/FixTypeLater'
 
+import './Tooltip.scss'
+
 interface Props {
   text: string | undefined
 }
