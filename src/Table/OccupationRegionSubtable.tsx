@@ -2,14 +2,12 @@ import React from 'react'
 
 import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
 import { formatNumber, formatPercent } from '../Helpers/formatter'
-import { getTooltip } from '../Helpers/tooltipHelper'
 import { OccupationRegionRawData } from '../@types/DataTypes'
 import { OccupationRegionEnum } from '../Views/OccupationRegion'
-import { useDataManager } from '../Data/DataManager'
 import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
 import GenericTable from './GenericTable'
-import Tooltip from '../Core/Tooltip'
+import TableTooltip from './TableTooltip'
 
 interface Props {
   data: OccupationRegionRawData[]
@@ -26,8 +24,6 @@ const RegionOccupationSubtable = ({
   viewType,
 }: Props): JSX.Element => {
   const totalRow = data.filter((d) => d['Variable_Type'] === 'Total')
-
-  const { year = '' } = useDataManager()
 
   const filteredData = data.filter((d) => d.Variable_Type === viewType)
 
@@ -54,15 +50,7 @@ const RegionOccupationSubtable = ({
     },
     {
       id: `Total_Count_ORG`,
-      Header: (
-        <span>
-          Total &nbsp;
-          <Tooltip
-            key={Date.now()}
-            text={getTooltip(`representation-total`, year)}
-          />
-        </span>
-      ),
+      Header: <TableTooltip title="Total" tooltipKey="representation-total" />,
       Footer: () => formatNumber(totalRow[0].Total_Count_ORG),
       accessor: (d) => formatNumber(d[`Total_Count_ORG`]),
       className: `text-right`,
@@ -77,13 +65,10 @@ const RegionOccupationSubtable = ({
     {
       id: `DesGrp_Percent_AvailableWorkforce`,
       Header: (
-        <span>
-          {shortTitle} as % of Available Workforce &nbsp;
-          <Tooltip
-            key={Date.now()}
-            text={getTooltip(`representation-available-workforce`, year)}
-          />
-        </span>
+        <TableTooltip
+          title={`${shortTitle} as % of Available Workforce`}
+          tooltipKey="representation-available-workforce"
+        />
       ),
       Footer: () =>
         formatPercent(totalRow[0].DesGrp_Percent_AvailableWorkforce, 1, 100),
@@ -94,14 +79,10 @@ const RegionOccupationSubtable = ({
     {
       id: `DesGrp_Count_Expected`,
       Header: (
-        <span>
-          Expected # {shortTitle}
-          &nbsp;
-          <Tooltip
-            key={Date.now()}
-            text={getTooltip(`representation-expected`, year)}
-          />
-        </span>
+        <TableTooltip
+          title={`Expected # ${shortTitle}`}
+          tooltipKey="representation-expected"
+        />
       ),
       Footer: () => formatNumber(totalRow[0].DesGrp_Count_Expected, ``),
       accessor: (d) => formatNumber(d[`DesGrp_Count_Expected`], ``),
@@ -110,18 +91,10 @@ const RegionOccupationSubtable = ({
     {
       id: `DesGrp_Count_Shortfall`,
       Header: (
-        <span>
-          Shortfall of {shortTitle}
-          {getTooltip(`representation-shortfall`, year) && (
-            <>
-              &nbsp;
-              <Tooltip
-                key={Date.now()}
-                text={getTooltip(`representation-shortfall`, year)}
-              />
-            </>
-          )}
-        </span>
+        <TableTooltip
+          title={`Shortfall of ${shortTitle}`}
+          tooltipKey="representation-shortfall"
+        />
       ),
       Footer: () => formatNumber(totalRow[0].DesGrp_Count_Shortfall, ``),
       accessor: (d) => formatNumber(d[`DesGrp_Count_Shortfall`], ``),

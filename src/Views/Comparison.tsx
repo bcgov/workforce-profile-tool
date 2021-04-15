@@ -9,6 +9,7 @@ import ComparisonGraph from '../Graphs/ComparisonGraph'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
 import { useDataQuery } from '../Data/useDataQuery'
+import TableTooltip from '../Table/TableTooltip'
 
 const Comparison = (): JSX.Element => {
   const { setLockedVars, year, queryValues } = useDataManager()
@@ -34,13 +35,23 @@ const Comparison = (): JSX.Element => {
     },
     {
       id: 'Available_Workforce_BCPS',
-      Header: 'Available Workforce, %',
+      Header: (
+        <TableTooltip
+          title="Available Workforce, %"
+          tooltipKey="comparison-available-workforce"
+        />
+      ),
       accessor: (d) => formatPercent(d['Available_Workforce_BCPS'], 1, 100),
       className: 'text-right',
     },
     {
       id: 'Employees_BC_Population',
-      Header: 'BC Population, %',
+      Header: (
+        <TableTooltip
+          title="BC Population, %"
+          tooltipKey="comparison-bc-population"
+        />
+      ),
       accessor: (d) => formatPercent(d['Employees_BC_Population'], 1, 100),
       className: 'text-right',
     },

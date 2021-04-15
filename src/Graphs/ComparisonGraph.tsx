@@ -3,6 +3,7 @@ import Color from 'color'
 import React, { useCallback, useState } from 'react'
 
 import { ComparisonRawData } from '../@types/DataTypes'
+import { displayNameByKey } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { getTooltip } from '../Helpers/tooltipHelper'
 import { horizontalLabel, labelValue } from './horizontalLabel'
@@ -10,7 +11,6 @@ import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
-import { displayNameByKey } from '../Data/DataManager'
 
 import './Graphs.scss'
 

@@ -2,16 +2,17 @@ import { ResponsiveBar } from '@nivo/bar'
 import React, { useCallback, useState } from 'react'
 import Color from 'color'
 
+import { displayNameByKey, useDataManager } from '../Data/DataManager'
 import { formatNumber } from '../Helpers/formatter'
+import { horizontalLabel, labelValue } from './horizontalLabel'
 import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
-import { displayNameByKey } from '../Data/DataManager'
+import { OccupationRegionRawData } from '../@types/DataTypes'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 
 import './Graphs.scss'
-import { OccupationRegionRawData } from '../@types/DataTypes'
-import { horizontalLabel, labelValue } from './horizontalLabel'
+import { getTooltip } from '../Helpers/tooltipHelper'
 
 interface Props {
   title: string
@@ -31,13 +32,23 @@ const OccupationRegionGraph = ({
   title,
   organization,
 }: Props): JSX.Element => {
-  const dataDefinitions = [
-    { key: 'DesGrp_Count_Expected', label: 'Expected', color: '#70CCDB' },
-    { key: 'DesGrp_Count_ORG', label: 'Actual', color: '#D2E2EE' },
-    { key: 'DesGrp_Count_Shortfall', label: 'Shortfall', color: '#6c757d' },
-  ]
+  const { year = '' } = useDataManager()
 
-  console.log('organization', organization)
+  const dataDefinitions = [
+    {
+      key: 'DesGrp_Count_Expected',
+      label: 'Expected',
+      color: '#70CCDB',
+      tooltip: getTooltip('representation-expected', year),
+    },
+    { key: 'DesGrp_Count_ORG', label: 'Actual', color: '#D2E2EE' },
+    {
+      key: 'DesGrp_Count_Shortfall',
+      label: 'Shortfall',
+      color: '#6c757d',
+      tooltip: getTooltip('representation-shortfall', year),
+    },
+  ]
 
   const [width, setWidth] = useState(620)
 

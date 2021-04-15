@@ -9,6 +9,7 @@ import { useDataQuery } from '../Data/useDataQuery'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
 import LeadershipGraph from '../Graphs/LeadershipGraph'
+import TableTooltip from '../Table/TableTooltip'
 
 const Leadership = (): JSX.Element => {
   const { setLockedVars, year } = useDataManager()
@@ -33,15 +34,26 @@ const Leadership = (): JSX.Element => {
       id: 'Des_Grp',
     },
     {
-      accessor: (r: LeadershipRawData) => formatPercent(r.Executive, 1, 100),
+      id: 'Executive',
+      accessor: (r) => formatPercent(r.Executive, 1, 100),
+      Header: (
+        <TableTooltip
+          title="Executive Leadership, %"
+          tooltipKey="leadership-executive-leadership"
+        />
+      ),
       className: 'text-right',
-      Header: 'Executive Leadership, %',
     },
     {
-      accessor: (r: LeadershipRawData) =>
-        formatPercent(r.Management_Band, 1, 100),
+      id: 'Management_Band',
+      accessor: (r) => formatPercent(r.Management_Band, 1, 100),
       className: 'text-right',
-      Header: 'Management Band Leadership, %',
+      Header: (
+        <TableTooltip
+          title="Management Band Leadership, %"
+          tooltipKey="leadership-management-band-leadership"
+        />
+      ),
     },
   ]
 
