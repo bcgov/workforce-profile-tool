@@ -60,6 +60,18 @@ const Home = (): JSX.Element => {
           when comparing across reports.
         </p>
         <p>
+          Note: Statistics Canada and BC Stats use different methods to identify
+          Persons with Disabilities. BC Stats currently uses a definition from
+          the UN Convention on the Rights of Persons with Disabilities, focusing
+          on those with long-term impairments that interact with barriers.
+          Statistics Canada uses a series of census and other survey questions
+          to identify Persons with Disabilities, which may encompass a wider
+          portion of the population. Please use caution when comparing the rates
+          of Persons with Disabilities in the BC Public Service (calculated by
+          BC Stats) against the available workforce and population of BC
+          (calculated by Statistics Canada).
+        </p>
+        <p>
           The release of Hiring and Flow data has temporarily been postponed;
           this information is expected to be released later in 2021.
         </p>
