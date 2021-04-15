@@ -12,15 +12,16 @@ export const horizontalLabel = (
   formatter: (d: string | number) => string
 ): LabelFormatter => {
   const labelBuilder = (d: string | number) => {
-    const numD = parseFloatClean(d)
+    const numD = parseFloatClean(d) || 0
+    const numWidth = isNaN(width) ? 1 : width
+    const numMaxItem = maxItem === 0 ? 0.001 : maxItem
+
+    const dx =
+      3 +
+      (numD * (numWidth - margins.right - margins.left - 25)) / 2 / numMaxItem
+
     return ((
-      <tspan
-        dy={0}
-        dx={`${
-          3 + (numD * (width - margins.right - margins.left - 25)) / 2 / maxItem
-        }`}
-        style={{ textAnchor: 'start' }}
-      >
+      <tspan dy={0} dx={dx} style={{ textAnchor: 'start' }}>
         {formatter(d)}
       </tspan>
     ) as unknown) as string

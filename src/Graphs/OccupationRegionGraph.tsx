@@ -13,6 +13,7 @@ import Legend from './Legend'
 
 import './Graphs.scss'
 import { getTooltip } from '../Helpers/tooltipHelper'
+import NoGraph from '../Views/NoGraph'
 
 interface Props {
   title: string
@@ -78,6 +79,13 @@ const OccupationRegionGraph = ({
     })
   }, [maxItem, width])
 
+  if (items.every((item: number) => item === 0)) {
+    // All items are zero. We can't chart this (Nivo breaks when every value it
+    // is asked to chart is zero, at least for now...)
+    // TODO: Maybe Nivo will handle this better someday.
+    return <NoGraph />
+  }
+
   const graph = (
     <ResponsiveBar
       data={filteredData}
@@ -109,8 +117,13 @@ const OccupationRegionGraph = ({
         legend: `Count in ${displayNameByKey('Ministry_Key', organization)}`,
         legendPosition: 'middle',
         legendOffset: 40,
-        format: (d: FixTypeLater) =>
-          `${(+d).toLocaleString(undefined, { maximumFractionDigits: 0 })}`,
+        tickValues: undefined,
+        format: (d) => {
+          if (isNaN(+d) || d === 0) return 0
+          return `${(+d).toLocaleString(undefined, {
+            maximumFractionDigits: 0,
+          })}`
+        },
       }}
       labelFormat={labelCallback()}
       label={labelValue}
