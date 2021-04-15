@@ -14,6 +14,7 @@ interface Props {
   graph: React.ReactNode
   height?: number
   hideFilterNotes?: boolean
+  isOrganizationFrame?: boolean
   legend: React.ReactNode
   setWidthCallback?: FixTypeLater
   title: string
@@ -160,7 +161,9 @@ const GraphFrame = (props: Props): JSX.Element => {
       </div>
       <div className="col-3">
         {props.legend}
-        {!props.hideFilterNotes && <FilterNotes />}
+        {!props.hideFilterNotes && (
+          <FilterNotes isOrganizationNotes={props.isOrganizationFrame} />
+        )}
         {!isIE && (
           <button
             className="btn btn-sm btn-primary SavePNG Shadow"

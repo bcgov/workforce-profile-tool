@@ -186,6 +186,7 @@ const OrganizationSubGraph = ({
       legend={legend}
       setWidthCallback={setWidth}
       height={600}
+      isOrganizationFrame
     />
   )
 }
