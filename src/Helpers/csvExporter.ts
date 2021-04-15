@@ -26,9 +26,8 @@ export const exportData = (
       // children of that React element with a type of 'string' represent
       // column text, so we can just filter on those and join them together to
       // get the proper column text.
-      name = name.props.children
-        .filter((c: FixTypeLater) => typeof c === 'string')
-        .join('')
+      console.log('name', name)
+      name = name.props.title
     }
     // If there are prefixes, attach them
     if (columnPrefixes) {
