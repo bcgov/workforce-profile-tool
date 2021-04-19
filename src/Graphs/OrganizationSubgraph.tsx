@@ -169,10 +169,25 @@ const OrganizationSubGraph = ({
       items={legendItems}
       notes={
         !hasSuppressedData ? null : (
-          <span>
-            <b>&lt;3</b> indicates that data has been suppressed because the
-            underlying value is less than 3.
-          </span>
+          <>
+            <div className="d-flex align-items-baseline">
+              <p className="m-0 text-center mr-2" style={{ minWidth: '25px' }}>
+                <b>&lt;3</b>
+              </p>
+              <p className="mt-0 mb-2">
+                Data suppressed because value is less than 3.
+              </p>
+            </div>
+            <div className="d-flex align-items-top">
+              <p className="m-0 text-center mr-2" style={{ minWidth: '25px' }}>
+                <b>S</b>
+              </p>
+              <p className="mt-0 mb-1">
+                Value is 3 or greater, but is suppressed to prevent residual
+                disclosure.
+              </p>
+            </div>
+          </>
         )
       }
     />
