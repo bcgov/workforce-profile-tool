@@ -4,10 +4,10 @@ import TOOLTIPS_RAW from '../Data/tooltips.json'
 const tooltips: Dictionary<Dictionary<string>> = TOOLTIPS_RAW
 
 export const getTooltip = (key: string, year: string): string | undefined => {
-  if (tooltips[key] && tooltips[key][year]) {
+  if (tooltips && tooltips[key] && tooltips[key][year]) {
     return tooltips[key][year]
-      .replaceAll('•', '<br />•')
-      .replaceAll('\r\n', '<br />')
+      .replace(/•/g, '<br />•')
+      .replace(/\r\n/g, '<br />')
   }
 
   return undefined
