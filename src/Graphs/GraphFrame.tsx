@@ -115,9 +115,16 @@ const GraphFrame = (props: Props): JSX.Element => {
       legendFO.setAttribute('x', `${originalSVGWidth}`)
 
       legend = legend.cloneNode(true) as Element
+      const tooltips = legend.getElementsByClassName('Tooltip')
+      Array.from(tooltips).forEach((tooltip) => {
+        tooltip.parentNode?.removeChild(tooltip)
+      })
+      console.log('tooltips', tooltips)
       legend.setAttribute('style', `font-family: "${FONT_FAMILY}"`)
       legendFO.appendChild(legend)
       // svg.appendChild(legendFO)
+
+      console.log('legend', legend)
     }
 
     // Add the active filters for context, if available.
