@@ -32,11 +32,8 @@ const OccupationRegion = ({ viewType }: Props): JSX.Element => {
   useEffect(() => {
     const employeeType = year === '2018' ? ['REG'] : ['ALL']
 
-    const varsToLock: Dictionary<string[]> = queryValues.Ministry_Key?.includes(
-      'BCPS'
-    )
-      ? {}
-      : { Employee_Type: employeeType }
+    const varsToLock: Dictionary<string[]> =
+      queryValues.Ministry_Key === 'BCPS' ? {} : { Employee_Type: employeeType }
     setLockedVars(varsToLock)
   }, [queryValues.Ministry_Key, year])
 
