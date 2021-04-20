@@ -2,8 +2,10 @@
 import React, {
   ReactNode,
   createContext,
+  useCallback,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from 'react'
 import { ArrayParam, StringParam, useQueryParams } from 'use-query-params'
@@ -70,6 +72,51 @@ export const shortDisplayNameByKey = (
   if (!variableKey) return ''
   const variable = variableByKey(variableGroupKey, variableKey)
   return variable && variable.shortName ? variable.shortName : ''
+}
+
+export const getLocalStorageValue = (key: string): string | string[] | null => {
+  const savedVarsString = window.localStorage.getItem(
+    'workforce-profiles-saved-vars'
+  )
+  if (savedVarsString) {
+    const savedVars = JSON.parse(savedVarsString)
+    console.log('savedVars', savedVars)
+    return savedVars[key]
+  }
+  return null
+}
+
+export const setLocalStorageValue = (
+  key: string,
+  value: string | string[] | null
+): void => {
+  const savedVarsString = window.localStorage.getItem(
+    'workforce-profiles-saved-vars'
+  )
+  if (savedVarsString) {
+    const savedVars = JSON.parse(savedVarsString)
+    savedVars[key] = value
+    window.localStorage.setItem(
+      'workforce-profiles-saved-vars',
+      JSON.stringify(savedVars)
+    )
+  }
+  return undefined
+}
+
+export const getAllLocalStorageValues = (): Dictionary<string | string[]> => {
+  const savedVarsString = window.localStorage.getItem(
+    'workforce-profiles-saved-vars'
+  )
+  if (savedVarsString) return JSON.parse(savedVarsString)
+  return {}
+}
+
+export const resetLocalStorage = (): void => {
+  window.localStorage.setItem(
+    'workforce-profiles-saved-vars',
+    JSON.stringify({})
+  )
 }
 
 type UseDataManagerType = {
@@ -172,7 +219,7 @@ function useDataManager(): UseDataManagerType {
 
   const { metadata, lockedVars, setLockedVars } = context
 
-  const [queryValuesTmp] = useQueryParams({
+  const [queryValuesTmp, setQueryValues] = useQueryParams({
     Employee_Type: StringParam,
     Des_Grp: ArrayParam,
     Ministry_Key: StringParam,
@@ -180,6 +227,63 @@ function useDataManager(): UseDataManagerType {
   })
 
   const queryValues = queryValuesTmp as QueryValues
+  const queryValuesCopy: Dictionary<FixTypeLater> = Object.assign(
+    {},
+    queryValues
+  )
+
+  const _setLockedVars = useCallback(
+    (varsToLock: Dictionary<string[]>) => {
+      console.log('SETTING LOCKED VARS')
+
+      // // For every query value, check if it is being locked. If it IS, then save
+      // // its value, but only if it's not already saved. If it's NOT, then load
+      // // its value, and clear the saved value.
+      // Object.keys(queryValues).forEach((queryValueKey) => {
+      //   if (varsToLock[queryValueKey]) {
+      //     console.log('LOCKING', queryValueKey)
+      //     if (!getLocalStorageValue(queryValueKey)) {
+      //       setLocalStorageValue(
+      //         queryValueKey,
+      //         queryValuesCopy[queryValueKey as keyof QueryValues]
+      //       )
+      //     }
+      //   } else {
+      //     const value = getLocalStorageValue(queryValueKey)
+      //     console.log('queryValueKey', queryValueKey, value)
+      //     if (value) {
+      //       console.log('in here')
+      //       queryValuesCopy[queryValueKey] = value
+      //     }
+      //     setLocalStorageValue(queryValueKey, null)
+      //   }
+      // })
+
+      // // Now, set the query values
+      // setQueryValues(queryValuesCopy)
+
+      if (Object.keys(varsToLock).length === 0) {
+        const previouslySavedVars = getAllLocalStorageValues()
+        setQueryValues(previouslySavedVars)
+        resetLocalStorage()
+      } else {
+        // Save the values that are about to get locked, but only if they do not
+        // already exist in the saved state
+        Object.keys(varsToLock).forEach((key) => {
+          console.log('key', key)
+          // Iff no value is set for this key...
+          if (!getLocalStorageValue(key)) {
+            console.log('in here')
+            // ...set it
+            setLocalStorageValue(key, queryValues[key as keyof QueryValues])
+          }
+        })
+      }
+
+      setLockedVars(varsToLock)
+    },
+    [queryValuesTmp, setQueryValues]
+  )
 
   return {
     metadata,
@@ -187,7 +291,7 @@ function useDataManager(): UseDataManagerType {
     year: queryValues.Year || '',
     employeeCount: undefined, // TODO: Fix
     lockedVars,
-    setLockedVars,
+    setLockedVars: _setLockedVars,
   }
 }
 

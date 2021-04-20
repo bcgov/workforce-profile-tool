@@ -1,5 +1,11 @@
-import React, { useCallback, useEffect, useMemo } from 'react'
-import { ArrayParam, StringParam, useQueryParam } from 'use-query-params'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
+import {
+  ArrayParam,
+  StringParam,
+  useQueryParam,
+  useQueryParams,
+} from 'use-query-params'
+import Dictionary from '../@types/Dictionary'
 
 import { Variable } from '../@types/Variable'
 import { VariableGroup } from '../@types/VariableGroup'
@@ -97,6 +103,34 @@ const VariableItemDisplayNonExclusive = ({
 
 const VariableItemDisplay = (props: Props): JSX.Element => {
   const { lockedVars } = useDataManager()
+  const { queryValues } = useDataManager()
+
+  // console.log('lockedVars', lockedVars)
+
+  const previousLockedVars = useRef<Dictionary<string[]>>({})
+
+  useEffect(() => {
+    // console.log('lockedVars', lockedVars)
+    previousLockedVars.current = lockedVars
+    // if (Object.keys(lockedVars).length === 0) {
+    //   // Load saved vars
+    //   const savedVarsString = window.localStorage.getItem(
+    //     'workforce-profiles-saved-vars'
+    //   )
+    //   lockedVars =
+    //     savedVarsString && savedVarsString.length > 0
+    //       ? JSON.parse(savedVarsString)
+    //       : {}
+    // } else {
+    //   // Save current vars
+    //   const currentVars = queryValues
+    //   console.log('currentVars', currentVars)
+    //   window.localStorage.setItem(
+    //     'workforce-profiles-saved-vars',
+    //     JSON.stringify(currentVars)
+    //   )
+    // }
+  }, [lockedVars])
 
   const isLocked = useMemo(() => {
     return (
