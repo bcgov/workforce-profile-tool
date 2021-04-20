@@ -1,39 +1,45 @@
-@import '../bootstrap/_colors';
+@import "../common";
 
 .Legend,
 .FilterNotes {
-    background-color: $gray-150;
-    h1 {
-        font-size: 0.8rem;
-        text-transform: uppercase;
+  background-color: $gray-100;
+  h1 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
+  padding: 1rem;
+  font-size: 0.9rem;
+  .LegendRows {
+    > div {
+      > div {
+        padding: 5px;
+      }
     }
-    padding: 1rem;
-    font-size: 0.9rem;
-    table {
-        td {
-            padding: 5px;
-            .swatch {
-                line-height: 1.8rem;
-                font-size: 1.8rem;
-                padding-top: 5px;
-            }
-            vertical-align: middle;
-        }
-    }
-    .Notes {
-        margin-top: 8px;
-        font-size: 0.8rem;
-        line-height: 120%;
-        color: $brand-color-dark-grey;
-    }
+  }
+  .swatch {
+    line-height: 0.6;
+    font-size: 1.8rem;
+    margin-top: -1px;
+    // padding-top: 5px;
+  }
+  vertical-align: middle;
+  .label {
+    line-height: 1.5;
+  }
+  .Notes {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    line-height: 120%;
+    color: $brand-color-dark-grey;
+  }
 }
 
 .FilterNotes {
-    margin-top: 15px;
-    p {
-        margin-bottom: 8px;
-        &:last-child {
-            margin-bottom: 0;
-        }
+  margin-top: 15px;
+  p {
+    margin-bottom: 8px;
+    &:last-child {
+      margin-bottom: 0;
     }
+  }
 }

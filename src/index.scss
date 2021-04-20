@@ -1,6 +1,7 @@
-@import 'bootstrap/_colors';
+@import "./common";
 
-body, html {
+body,
+html {
   min-height: 100%;
   color: $brand-color-blue;
 }
@@ -9,14 +10,19 @@ a {
   text-decoration: none !important;
 }
 
-p.lead {
+p {
   font-weight: 400;
   margin: 20px 0;
   a {
     color: $brand-color-gold;
-    &:hover {
-      color: darken($brand-color-gold, 10%);
-    }
+  }
+}
+
+a {
+  &:hover,
+  &:active,
+  &:focus {
+    color: darken($brand-color-gold, 10%) !important;
   }
 }
 

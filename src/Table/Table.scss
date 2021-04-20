@@ -1,184 +1,154 @@
-@import '../bootstrap/bootstrap.scss';
+@import "../common";
 
 %subtotal {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    background-color: $brand-color-fog;
-    font-weight: 600;
+  text-transform: uppercase;
+  // letter-spacing: 0.5px;
+  background-color: lighten($brand-color-teal, 10%);
+  color: $brand-color-blue;
+  font-weight: 600;
 }
 
-.ReactorTable {
-    @extend .table,
-    .table-striped;
-    border: solid 2px $brand-color-fog;
-    th,
-    td {
-        font-size: 0.8rem;
-        border-top: none;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        .sortable,
-        .sortable-asc,
-        .sortable-desc {
-            cursor: pointer;
-            &:after {
-                cursor: pointer;
-            }
-        }
+.Table table {
+  border: solid 2px $brand-color-fog;
+  th {
+    background-color: lighten($brand-color-fog, 5%);
+    &.text-right {
+      .d-flex {
+        justify-content: flex-end !important;
+      }
     }
-    tr:hover {
-        td {
-            background-color: lighten($brand-color-gold, 10%); // color: white;
-            font-weight: 600;
-        }
-    }
-    .hidden {
-        display: none;
-    }
+  }
+  th,
+  td {
+    font-size: 0.8rem;
+    border-top: none;
+    // padding-top: 5px;
+    // padding-bottom: 5px;
+    padding: 5px 10px;
     .sortable,
     .sortable-asc,
     .sortable-desc {
-        &:after {
-            padding-left: 5px;
-        }
+      cursor: pointer;
+      &:after {
+        cursor: pointer;
+      }
     }
-    .sortable::after {
-        font-family: "Font Awesome 5 Free";
-        content: "\f0dc";
+  }
+  tr:hover {
+    td {
+      background-color: lighten($brand-color-gold, 10%); // color: white;
+      // font-weight: 600;
     }
-    .sortable-asc::after {
-        font-family: "Font Awesome 5 Free";
-        content: "\f0dd";
+  }
+  .hidden {
+    display: none;
+  }
+  .sortable,
+  .sortable-asc,
+  .sortable-desc {
+    &:after {
+      padding-left: 5px;
     }
-    .sortable-desc::after {
-        font-family: "Font Awesome 5 Free";
-        content: "\f0de";
+  }
+  .sortable::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f0dc";
+  }
+  .sortable-asc::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f0dd";
+  }
+  .sortable-desc::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f0de";
+  }
+  tfoot {
+    td {
+      @extend %subtotal;
     }
-    tfoot {
-        td {
-            @extend %subtotal;
-        }
+  }
+  th.hide-sort {
+    .sortable {
+      display: none;
     }
-    th.hide-sort {
-        .sortable {
-            display: none;
-        }
-    }
-    th span.col-group-title {
-        display: inline-block;
-        width: 100%;
-        text-align: center !important;
-        // font-size: 0.9rem;
-        // letter-spacing: 1px;
-        font-weight: 700;
-        text-transform: uppercase;
-        margin-bottom: 0.5rem;
-    }
+  }
+  th span.col-group-title {
+    display: inline-block;
+    width: 100%;
+    text-align: center !important;
+    // font-size: 0.9rem;
+    // letter-spacing: 1px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
 }
 
 .OccupationTable,
 .RegionTable,
 .FlowReportTable {
+  position: relative;
+  h3 {
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: 600;
     position: relative;
-    h3 {
-        text-transform: uppercase;
-        font-size: 1.1rem;
-        font-weight: 600;
-        position: relative;
-        top: 2rem;
-        margin: 0;
-        left: 12px;
-        letter-spacing: 1px;
-    }
-    th {
-        font-weight: normal;
-    }
-    table.ReactorTable {
-        margin-top: 0;
-        margin-bottom: 0;
-        thead {
-            th,
-            th.text-right {
-                font-weight: 600;
-            }
-        }
-    }
+    top: 2rem;
+    margin: 0;
+    left: 12px;
+    letter-spacing: 1px;
+  }
 }
 
 .OccupationTable,
 .RegionTable {
-    td:nth-child(n+2) {
-        width: 10%;
+  td:nth-child(n + 2) {
+    width: 10%;
+  }
+  td:nth-child(5),
+  th:nth-child(5) {
+    border-right: 2px solid #dee2e6;
+  }
+  tfoot {
+    td:nth-child(5) {
+      @media screen {
+        border-right: 2px solid darken($brand-color-fog, 10%);
+      }
     }
-    td:nth-child(5),
-    th:nth-child(5) {
-       border-right: 2px solid #dee2e6;
+  }
+  .hide-header tfoot {
+    td:nth-child(5) {
+      @media screen {
+        border-right: 2px solid $brand-color-teal;
+      }
     }
-    tfoot {
-        td:nth-child(5) {
-            @media screen {
-                border-right: 2px solid darken($brand-color-fog, 10%);
-            }
-        }
-    }
-    .hide-header tfoot {
-        td:nth-child(5) {
-            @media screen {
-                border-right: 2px solid $brand-color-teal;
-            }
-        }
-    }
-    table.ReactorTable:last-child {
-        margin-top: 1rem;
-    }
-    table.ReactorTable.hide-header {
-        margin-bottom: 1rem;
-        tfoot {
-            td {
-                background-color: lighten($brand-color-teal, 10%);
-            }
-        }
-    }
-    table.ReactorTable.no-top {
-        margin-top: 0;
-    }
-}
-
-.ReactorTable.hide-header {
-    thead {
-        display: none;
-    }
-}
-
-.RegionTable table.ReactorTable {
-    margin-bottom: 1rem;
+  }
 }
 
 .FlowReportTable {
-    td:nth-child(n+2) {
-        width: 12%;
+  td:nth-child(n + 2) {
+    width: 12%;
+  }
+  td:nth-child(4),
+  th:nth-child(4) {
+    border-right: 2px solid #dee2e6;
+  }
+  table.ReactorTable.hiring,
+  table.ReactorTable.separations {
+    tr:nth-child(2n + 3) {
+      @extend %subtotal;
+      td:nth-child(4) {
+        border-right: 2px solid darken($brand-color-fog, 10%);
+      }
     }
-    td:nth-child(4),
-    th:nth-child(4) {
-        border-right: 2px solid #dee2e6;
+  }
+  table.ReactorTable.promotions {
+    tr:nth-child(3) {
+      @extend %subtotal;
+      td:nth-child(4) {
+        border-right: 2px solid darken($brand-color-fog, 10%);
+      }
     }
-    table.ReactorTable.hiring,
-    table.ReactorTable.separations {
-        tr:nth-child(2n + 3) {
-            @extend %subtotal;
-            td:nth-child(4) {
-                border-right: 2px solid darken($brand-color-fog, 10%);
-            }
-        }
-    }
-    table.ReactorTable.promotions {
-        tr:nth-child(3) {
-            @extend %subtotal;
-            td:nth-child(4) {
-                border-right: 2px solid darken($brand-color-fog, 10%);
-            }
-        }
-        margin-bottom: 1rem;
-    }
+    margin-bottom: 1rem;
+  }
 }

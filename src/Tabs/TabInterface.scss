@@ -1,4 +1,4 @@
-@import '../bootstrap/_colors';
+@import '../common';
 
 .TabInterface {
     .TabButtons {
@@ -7,7 +7,7 @@
     .TabButton {
         display: inline-block;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.5px;
         font-size: 0.9rem;
         font-weight: 500;
         a {
