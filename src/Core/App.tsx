@@ -13,11 +13,11 @@ const App = (): JSX.Element => {
     <div className="App container-fluid">
       <DataManagerProvider>
         <div className="row">
-          <div className="LeftColumn col-2">
+          <div className="LeftColumn col-12 col-sm-4 col-md-3 col-xl-2">
             <Header />
             <VariableList />
           </div>
-          <div className="col-10 MainWrapper">
+          <div className="col-12 col-sm-8 col-md-9 col-xl-10 MainWrapper">
             <Switch>
               <Route exact path={`/`} render={(props) => <Main {...props} />} />
               <Route
