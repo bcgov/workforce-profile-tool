@@ -234,7 +234,7 @@ function useDataManager(): UseDataManagerType {
 
   const _setLockedVars = useCallback(
     (varsToLock: Dictionary<string[]>) => {
-      console.log('SETTING LOCKED VARS')
+      console.log('SETTING LOCKED VARS', varsToLock)
 
       // // For every query value, check if it is being locked. If it IS, then save
       // // its value, but only if it's not already saved. If it's NOT, then load
