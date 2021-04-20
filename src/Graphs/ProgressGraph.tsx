@@ -62,8 +62,7 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
         // legend: 'Values',
         legendPosition: 'middle',
         legendOffset: 32,
-        format: (d: FixTypeLater) =>
-          displayNameByKey('Des_Grp', d) as string,
+        format: (d: FixTypeLater) => displayNameByKey('Des_Grp', d) as string,
       }}
       axisLeft={{
         tickSize: 5,

@@ -5,7 +5,6 @@ import React, {
   useCallback,
   useContext,
   useEffect,
-  useRef,
   useState,
 } from 'react'
 import { ArrayParam, StringParam, useQueryParams } from 'use-query-params'
@@ -227,10 +226,10 @@ function useDataManager(): UseDataManagerType {
   })
 
   const queryValues = queryValuesTmp as QueryValues
-  const queryValuesCopy: Dictionary<FixTypeLater> = Object.assign(
-    {},
-    queryValues
-  )
+  // const queryValuesCopy: Dictionary<FixTypeLater> = Object.assign(
+  //   {},
+  //   queryValues
+  // )
 
   const _setLockedVars = useCallback(
     (varsToLock: Dictionary<string[]>) => {

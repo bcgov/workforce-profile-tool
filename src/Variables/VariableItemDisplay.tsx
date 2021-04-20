@@ -1,10 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef } from 'react'
-import {
-  ArrayParam,
-  StringParam,
-  useQueryParam,
-  useQueryParams,
-} from 'use-query-params'
+import { ArrayParam, StringParam, useQueryParam } from 'use-query-params'
 import Dictionary from '../@types/Dictionary'
 
 import { Variable } from '../@types/Variable'
@@ -103,7 +98,6 @@ const VariableItemDisplayNonExclusive = ({
 
 const VariableItemDisplay = (props: Props): JSX.Element => {
   const { lockedVars } = useDataManager()
-  const { queryValues } = useDataManager()
 
   // console.log('lockedVars', lockedVars)
 
