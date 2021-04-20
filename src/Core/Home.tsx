@@ -60,6 +60,14 @@ const Home = (): JSX.Element => {
           when comparing across reports.
         </p>
         <p>
+          Note that while BC Stats collects employee information on LGBTQ2S+
+          identity, as well as on non-binary gender identities, the Workforce
+          Profiles do not presently include this information as no federal data
+          on BC Population or Available Workforce exists for comparison. At this
+          time, the tool includes both cis and trans women in the Women
+          category.
+        </p>
+        <p>
           Note: Statistics Canada and BC Stats use different methods to identify
           Persons with Disabilities. BC Stats currently uses a definition from
           the UN Convention on the Rights of Persons with Disabilities, focusing
