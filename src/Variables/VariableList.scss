@@ -11,4 +11,11 @@
   h2 {
     color: $white;
   }
+
+  &.collapse {
+    @include media-breakpoint-up(sm) {
+      display: block !important;
+    }
+  }
+
 }

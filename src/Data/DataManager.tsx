@@ -70,7 +70,11 @@ export const shortDisplayNameByKey = (
 ): string => {
   if (!variableKey) return ''
   const variable = variableByKey(variableGroupKey, variableKey)
-  return variable && variable.shortName ? variable.shortName : ''
+  return variable && variable.shortName
+    ? variable.shortName
+    : variable && variable.name
+    ? variable.name
+    : ''
 }
 
 export const getLocalStorageValue = (key: string): string | string[] | null => {
