@@ -174,7 +174,7 @@ const GraphFrame = (props: Props): JSX.Element => {
           <div className="col-6 col-md-12">
             {!isIE && (
               <button
-                className="btn btn-sm btn-primary SavePNG Shadow"
+                className="btn btn-sm btn-primary SavePNG Shadow mt-3"
                 onClick={saveSVGAsPNG}
               >
                 <i className="fas fa-download" />
