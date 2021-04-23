@@ -69,7 +69,10 @@ class TabInterface extends React.Component<Props, State> {
           ? `${this.props.baseURL}/${key}${search}`
           : `/${key}${search}`
         return (
-          <div key={child.props.name} className={`TabButton ${isActiveClass}`}>
+          <div
+            key={child.props.name}
+            className={`TabButton text-center ${isActiveClass}`}
+          >
             <Link to={linkTo} role={'button'} title={child.props.name}>
               {child.props.icon && (
                 <i className={'fa fa-lg ' + child.props.icon} />
@@ -98,7 +101,7 @@ class TabInterface extends React.Component<Props, State> {
     }
 
     return (
-      <div className="TabInterface">
+      <div className="TabInterface my-3">
         <div className="row TabButtons">{tabButtons}</div>
         {tabs}
       </div>

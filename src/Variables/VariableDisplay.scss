@@ -1,8 +1,6 @@
 @import "../common";
 
 .VariableDisplay {
-
-
   h3 {
     background-color: $brand-color-blue;
     border-bottom: solid 1px darken($brand-color-blue, 10%);
@@ -26,8 +24,14 @@
     text-shadow: 0px 1px darken($brand-color-blue, 30%);
   }
 
+  &.Ministry_Key ul {
+    columns: 2;
+    @include media-breakpoint-up(sm) {
+      columns: 1;
+    }
+  }
+
   ul {
-    
     margin-top: 0.5rem;
     margin-bottom: 2rem;
     list-style: none;
@@ -36,7 +40,10 @@
 
     li {
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
+      @include media-breakpoint-up(sm) {
+        font-size: 0.9rem;
+      }
       margin-left: 0;
       padding-left: 0;
       line-height: 120%;

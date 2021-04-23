@@ -10,11 +10,7 @@ const VariableList = (): JSX.Element => {
     <VariableDisplay key={group.key} variableGroup={group} />
   ))
 
-  return (
-    <div className="VariableList row">
-      <div className="col">{variables}</div>
-    </div>
-  )
+  return <div className="VariableList row">{variables}</div>
 }
 
 export default VariableList

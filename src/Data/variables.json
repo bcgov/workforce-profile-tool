@@ -38,6 +38,7 @@
   "Des_Grp": {
     "key": "Des_Grp",
     "name": "Designated Group",
+    "shortName": "Des. Grp.",
     "isExclusive": false,
     "default": ["IND", "DIS", "VM", "WOM"],
     "variables": [

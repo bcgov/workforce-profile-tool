@@ -15,7 +15,9 @@ h6 {
 
 .App {
   .LeftColumn {
-    min-height: 100vh;
+    @include media-breakpoint-up(sm) {
+      min-height: 100vh;
+    }
     background-color: darken($brand-color-blue, 5%);
   }
 }

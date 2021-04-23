@@ -66,8 +66,17 @@ const VariableDisplay = ({
   ))
 
   return (
-    <div className="VariableDisplay">
-      <h3 className="">{variableGroup.name}</h3>
+    <div
+      className={`VariableDisplay ${
+        variableGroup.key === 'Ministry_Key' ? 'col-12' : 'col-4'
+      } col-sm-12 ${variableGroup.key}`}
+    >
+      <h3>
+        <span className="d-inline d-sm-none">
+          {variableGroup.shortName || variableGroup.name}
+        </span>
+        <span className="d-none d-sm-inline">{variableGroup.name}</span>
+      </h3>
       <ul>{options}</ul>
     </div>
   )

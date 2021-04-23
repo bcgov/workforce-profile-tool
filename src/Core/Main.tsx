@@ -31,19 +31,18 @@ const Main = (props: Props): JSX.Element => {
   }
 
   return (
-    <div className="Main row">
-      <div className="col">
-        <TabInterface
-          activeTabKey={activeOuterTab}
-          matchURL={props.match.url}
-          search={props.location.search}
-        >
-          <Tab key={'home'} name="Home">
-            <Home />
-          </Tab>
-          <Tab key={'indicators-of-progress'} name="Indicators of Progress">
-            <Progress />
-            {/* <div className="Secondary">
+    <div className="Main">
+      <TabInterface
+        activeTabKey={activeOuterTab}
+        matchURL={props.match.url}
+        search={props.location.search}
+      >
+        <Tab key={'home'} name="Home">
+          <Home />
+        </Tab>
+        <Tab key={'indicators-of-progress'} name="Indicators of Progress">
+          <Progress />
+          {/* <div className="Secondary">
               <TabInterface
                 activeTabKey={activeInnerTab}
                 baseURL={`/${activeOuterTab}`}
@@ -57,32 +56,30 @@ const Main = (props: Props): JSX.Element => {
                 </Tab> 
               </TabInterface> 
             </div> */}
-          </Tab>
-          <Tab key={'comparison'} name="Comparison">
-            <Comparison />
-          </Tab>
-          <Tab key={'leadership'} name="Leadership">
-            <Leadership />
-          </Tab>
-          <Tab key={'organizations'} name="Organizations">
-            <Organization />
-          </Tab>
-          <Tab key={'representation'} name="Representation">
-            <div className="Secondary">
-              <TabInterface
-                activeTabKey={activeInnerTab}
-                baseURL={`/${activeOuterTab}`}
-                search={props.location.search}
-              >
-                <Tab key={'by-occupation'} name="By Occupation">
-                  <OccupationRegion
-                    viewType={OccupationRegionEnum.Occupation}
-                  />
-                </Tab>
-                <Tab key={'by-region'} name="By Region">
-                  <OccupationRegion viewType={OccupationRegionEnum.Region} />
-                </Tab>
-                {/* <Tab key={'flow-report'} name="Flow Report">
+        </Tab>
+        <Tab key={'comparison'} name="Comparison">
+          <Comparison />
+        </Tab>
+        <Tab key={'leadership'} name="Leadership">
+          <Leadership />
+        </Tab>
+        <Tab key={'organizations'} name="Organizations">
+          <Organization />
+        </Tab>
+        <Tab key={'representation'} name="Representation">
+          <div className="Secondary">
+            <TabInterface
+              activeTabKey={activeInnerTab}
+              baseURL={`/${activeOuterTab}`}
+              search={props.location.search}
+            >
+              <Tab key={'by-occupation'} name="By Occupation">
+                <OccupationRegion viewType={OccupationRegionEnum.Occupation} />
+              </Tab>
+              <Tab key={'by-region'} name="By Region">
+                <OccupationRegion viewType={OccupationRegionEnum.Region} />
+              </Tab>
+              {/* <Tab key={'flow-report'} name="Flow Report">
                   <div className="alert alert-warning" role="alert">
                     <h2>Data for 2018 not yet available</h2>
                     <p>
@@ -91,11 +88,10 @@ const Main = (props: Props): JSX.Element => {
                     </p>
                   </div>
                 </Tab> */}
-              </TabInterface>
-            </div>
-          </Tab>
-        </TabInterface>
-      </div>
+            </TabInterface>
+          </div>
+        </Tab>
+      </TabInterface>
     </div>
   )
 }
