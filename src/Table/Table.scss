@@ -8,6 +8,10 @@
   font-weight: 600;
 }
 
+.Table {
+  overflow-x: auto;
+}
+
 .Table table {
   border: solid 2px $brand-color-fog;
   th {

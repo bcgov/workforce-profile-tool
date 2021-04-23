@@ -2,7 +2,11 @@ import { ResponsiveBar } from '@nivo/bar'
 import React, { useCallback, useState } from 'react'
 import Color from 'color'
 
-import { displayNameByKey, useDataManager } from '../Data/DataManager'
+import {
+  displayNameByKey,
+  shortDisplayNameByKey,
+  useDataManager,
+} from '../Data/DataManager'
 import { formatNumber } from '../Helpers/formatter'
 import { horizontalLabel, labelValue } from './horizontalLabel'
 import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
@@ -52,6 +56,8 @@ const OccupationRegionGraph = ({
   ]
 
   const [width, setWidth] = useState(620)
+
+  MARGINS.left = width < 576 ? 80 : 160
 
   if (!data) return <div>&nbsp;</div>
 
@@ -108,7 +114,10 @@ const OccupationRegionGraph = ({
         // legend: 'Values',
         legendPosition: 'middle',
         legendOffset: 32,
-        format: (d: FixTypeLater) => displayNameByKey('Des_Grp', d) as string,
+        format: (d: FixTypeLater) =>
+          (width < 576
+            ? shortDisplayNameByKey('Des_Grp', d)
+            : displayNameByKey('Des_Grp', d)) as string,
       }}
       axisBottom={{
         tickSize: 5,

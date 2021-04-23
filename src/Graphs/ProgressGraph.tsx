@@ -1,12 +1,12 @@
 import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
-import React from 'react'
+import React, { useState } from 'react'
 
 import { labelValue } from './horizontalLabel'
 import { NIVO_BASE_PROPS } from '../Helpers/graphs'
 import { parseFloatClean } from '../Helpers/formatter'
 import { ProgressRawData } from '../@types/DataTypes'
-import { displayNameByKey } from '../Data/DataManager'
+import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
@@ -24,6 +24,8 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
     { key: '2018_pc', label: '2018', color: '#70CCDB' },
     { key: '2020_pc', label: '2020', color: '#D2E2EE' },
   ]
+
+  const [width, setWidth] = useState(620)
 
   if (!data) return <div>&nbsp;</div>
 
@@ -62,7 +64,10 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
         // legend: 'Values',
         legendPosition: 'middle',
         legendOffset: 32,
-        format: (d: FixTypeLater) => displayNameByKey('Des_Grp', d) as string,
+        format: (d: FixTypeLater) =>
+          (width < 576
+            ? shortDisplayNameByKey('Des_Grp', d)
+            : displayNameByKey('Des_Grp', d)) as string,
       }}
       axisLeft={{
         tickSize: 5,
@@ -108,6 +113,7 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
       title={title}
       graph={graph}
       legend={legend}
+      setWidthCallback={setWidth}
     />
   )
 }

@@ -2,7 +2,7 @@ import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
 import React, { useCallback, useState } from 'react'
 
-import { displayNameByKey } from '../Data/DataManager'
+import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { getTooltip } from '../Helpers/tooltipHelper'
 import { horizontalLabel, labelValue } from './horizontalLabel'
@@ -39,6 +39,8 @@ const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
   ]
 
   const [width, setWidth] = useState(620)
+
+  MARGINS.left = width < 576 ? 80 : 160
 
   if (!data) return <div>&nbsp;</div>
 
@@ -81,7 +83,10 @@ const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
         tickRotation: 0,
         legendPosition: 'middle',
         legendOffset: 32,
-        format: (d: FixTypeLater) => displayNameByKey('Des_Grp', d) as string,
+        format: (d: FixTypeLater) =>
+          (width < 576
+            ? shortDisplayNameByKey('Des_Grp', d)
+            : displayNameByKey('Des_Grp', d)) as string,
       }}
       axisBottom={{
         tickSize: 5,

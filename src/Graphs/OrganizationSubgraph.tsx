@@ -34,6 +34,8 @@ const OrganizationSubGraph = ({
 
   const [width, setWidth] = useState(620)
 
+  MARGINS.left = width < 576 ? 80 : 255
+
   const provincialRepresentation = parseFloat(
     data.find((d) => d.Ministry_Key === 'BC Population')!.Value
   )
@@ -57,11 +59,12 @@ const OrganizationSubGraph = ({
       if (parseIntClean(d.Value) === 0) hasSuppressedData = true
       const categoryFullName = displayNameByKey('Ministry_Key', d.Ministry_Key)
       let categoryShortName = categoryFullName
-      if (categoryShortName && categoryShortName.length > 37) {
+      if (categoryShortName && (categoryShortName.length > 37 || width < 576)) {
         categoryShortName = d.Ministry_Key
       }
       obj.category = d.Ministry_Key
       obj.categoryFullName = categoryFullName
+
       obj.categoryShortName = categoryShortName
     }
   )
