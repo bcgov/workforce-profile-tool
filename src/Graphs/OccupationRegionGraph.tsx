@@ -8,7 +8,7 @@ import {
   useDataManager,
 } from '../Data/DataManager'
 import { formatNumber } from '../Helpers/formatter'
-import { horizontalLabel, labelValue } from './horizontalLabel'
+import { horizontalLabel, labelValue } from './labels'
 import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
 import { OccupationRegionRawData } from '../@types/DataTypes'
 import FixTypeLater from '../@types/FixTypeLater'

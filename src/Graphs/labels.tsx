@@ -29,6 +29,29 @@ export const horizontalLabel = (
   return labelBuilder
 }
 
+export const verticalLabel = (
+  margins: Margin,
+  height: number,
+  maxItem: number,
+  formatter: (d: string | number) => string
+): LabelFormatter => {
+  const labelBuilder = (d: string | number) => {
+    const numD = parseFloatClean(d) || 0
+    const numWidth = isNaN(height) ? 1 : height
+    const numMaxItem = maxItem === 0 ? 0.001 : maxItem
+
+    const dy =
+      10 + (numD * (numWidth - margins.bottom - margins.top)) / 2 / numMaxItem
+
+    return ((
+      <tspan dx={0} dy={-dy} style={{ textAnchor: 'middle' }}>
+        {formatter(d)}
+      </tspan>
+    ) as unknown) as string
+  }
+  return labelBuilder
+}
+
 export const labelValue = (d: BarDatum): string => {
   const label = ((d.data as unknown) as Dictionary<string>)[`${d.id}_str`]
   return label

@@ -4,7 +4,7 @@ import Color from 'color'
 import React, { useCallback, useState } from 'react'
 
 import { formatPercent, parseIntClean } from '../Helpers/formatter'
-import { horizontalLabel, labelValue } from './horizontalLabel'
+import { horizontalLabel, labelValue } from './labels'
 import { MinistryRawData } from '../@types/DataTypes'
 import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
 import { displayNameByKey } from '../Data/DataManager'

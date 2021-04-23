@@ -1,10 +1,10 @@
 import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
-import { labelValue } from './horizontalLabel'
+import { horizontalLabel, labelValue, verticalLabel } from './labels'
 import { NIVO_BASE_PROPS } from '../Helpers/graphs'
-import { parseFloatClean } from '../Helpers/formatter'
+import { formatPercent, parseFloatClean } from '../Helpers/formatter'
 import { ProgressRawData } from '../@types/DataTypes'
 import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
 import FixTypeLater from '../@types/FixTypeLater'
@@ -41,6 +41,20 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
       })
       return obj
     })
+
+  const items = filteredData
+    .map((d: FixTypeLater): number[] => {
+      return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
+    })
+    .flat()
+
+  const maxItem = Math.max(...items)
+
+  const labelCallback = useCallback(() => {
+    return verticalLabel(MARGINS, 500, maxItem, (d: FixTypeLater) => {
+      return formatPercent(d, 1, 100)
+    })
+  }, [maxItem, width])
 
   const graph = (
     <ResponsiveBar
@@ -80,16 +94,7 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
           `${(+d).toLocaleString(undefined, { maximumFractionDigits: 0 })}%`,
       }}
       label={labelValue}
-      labelFormat={(d) =>
-        ((
-          <tspan y={-10}>
-            {d === 0 && '<3'}
-            {d > 0 && (
-              <>{d.toLocaleString(undefined, { minimumFractionDigits: 1 })}%</>
-            )}
-          </tspan>
-        ) as unknown) as string
-      }
+      labelFormat={labelCallback()}
       tooltip={(d: FixTypeLater): JSX.Element => {
         return (
           <div style={{ color: Color(d.color).darken(0.3).hex() }}>
