@@ -7,7 +7,7 @@ import { formatPercent, parseIntClean } from '../Helpers/formatter'
 import { horizontalLabel, labelValue } from './labels'
 import { MinistryRawData } from '../@types/DataTypes'
 import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
-import { displayNameByKey } from '../Data/DataManager'
+import { displayNameByKey, useDataManager } from '../Data/DataManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
@@ -15,7 +15,6 @@ import Legend from './Legend'
 interface SubgraphProps {
   color?: string
   data: MinistryRawData[]
-  masterTitle?: string
   shortTitle?: string
   title?: string
   varKey?: FixTypeLater
@@ -26,10 +25,11 @@ const MARGINS = { top: 0, right: 60, bottom: 50, left: 255 }
 const OrganizationSubGraph = ({
   color,
   data,
-  masterTitle,
   title,
   varKey,
 }: SubgraphProps): JSX.Element => {
+  const { queryValues } = useDataManager()
+
   if (!data) return <div>&nbsp;</div>
 
   const [width, setWidth] = useState(620)
@@ -49,6 +49,14 @@ const OrganizationSubGraph = ({
       color: color || 'black',
     },
   ]
+
+  const subtitle = `${displayNameByKey(
+    'Ministry_Key',
+    queryValues.Ministry_Key
+  )}, ${displayNameByKey(
+    'Employee_Type',
+    queryValues.Employee_Type
+  ).toLowerCase()} employees`
 
   const { dataKeys, filteredData } = processDataForGraph(
     data.filter((d: FixTypeLater) => {
@@ -199,7 +207,7 @@ const OrganizationSubGraph = ({
   return (
     <GraphFrame
       className={`Ministry-${varKey}`}
-      title={`${masterTitle} — ${title}`}
+      title={`${title} — ${subtitle}`}
       graph={graph}
       legend={legend}
       setWidthCallback={setWidth}
