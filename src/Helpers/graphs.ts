@@ -49,12 +49,12 @@ const labelTextColor: FixTypeLater = {
 
 export const NIVO_BASE_PROPS = {
   padding: 0.3,
-  animate: true,
+  // animate: true,
   motionStiffness: 90,
   motionDamping: 15,
   theme: NIVO_THEME,
-  labelSkipWidth: 0,
-  labelSkipHeight: 10,
+  labelSkipWidth: 0.1,
+  labelSkipHeight: 0.1,
   labelTextColor,
   axisTop: null,
   axisRight: null,
@@ -74,7 +74,7 @@ export const processDataForGraph = (
         additionalMapping(d, obj)
       }
       dataKeys.forEach((dataKey) => {
-        obj[dataKey] = parseFloatClean(d[dataKey])
+        obj[dataKey] = parseFloatClean(d[dataKey], 0.5)
         obj[`${dataKey}_str`] = d[dataKey]
       })
       return obj

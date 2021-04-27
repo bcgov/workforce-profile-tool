@@ -36,7 +36,7 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
     .map((d: FixTypeLater) => {
       const obj: FixTypeLater = { Des_Grp: d.Des_Grp }
       dataKeys.forEach((dataKey) => {
-        obj[dataKey] = parseFloatClean(d[dataKey])
+        obj[dataKey] = parseFloatClean(d[dataKey], 0.5)
         obj[`${dataKey}_str`] = d[dataKey]
       })
       return obj
