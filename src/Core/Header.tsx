@@ -21,10 +21,10 @@ const Header = ({ showList, toggleListCallback }: Props): JSX.Element => {
           </div>
           <div className="col-6 order-1 order-sm-2 col-sm-12">
             <Link to={'/'}>
-              <h1>Workforce Profiles</h1>
+              <h1 className="my-2">Workforce Profiles</h1>
             </Link>
             <button
-              className="btn btn-primary btn-sm mt-2 d-sm-none"
+              className="btn btn-primary btn-sm my-2 d-sm-none"
               onClick={toggleListCallback}
             >
               {showList ? 'Hide' : 'Show'} variables{' '}

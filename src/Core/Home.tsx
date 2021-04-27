@@ -25,10 +25,14 @@ const Home = (): JSX.Element => {
           .
         </p>
         <p>
-          Use the tabs at the top to navigate between sections. You can refine
-          the visualizations and tables on each tab by employing one or more
-          filters from the available list to the left. Note that not all filters
-          are available to use on every tab.
+          You can navigate between sections using the named tabs at the top of
+          this area. You can also refine the visualizations and tables on each
+          tab by employing one or more filters from the available list — on most
+          screens, these filters will be shown to the left (in blue). For mobile
+          devices, filters instead appear in a hidden menu above the page tabs;
+          click on the &ldquo;Show variables&rdquo; button to display them, or
+          the &ldquo;Hide variables&rdquo; button to minimize them again. Note
+          that not all filters are available to be used on every tab.
         </p>
         <p>
           <strong>Note</strong>: the Workforce Profile Dashboard is not
