@@ -53,8 +53,8 @@ export const NIVO_BASE_PROPS = {
   motionStiffness: 90,
   motionDamping: 15,
   theme: NIVO_THEME,
-  labelSkipWidth: 0.1,
-  labelSkipHeight: 0.1,
+  labelSkipWidth: 0,
+  labelSkipHeight: 0,
   labelTextColor,
   axisTop: null,
   axisRight: null,
@@ -74,7 +74,7 @@ export const processDataForGraph = (
         additionalMapping(d, obj)
       }
       dataKeys.forEach((dataKey) => {
-        obj[dataKey] = parseFloatClean(d[dataKey], 0.5)
+        obj[dataKey] = parseFloatClean(d[dataKey])
         obj[`${dataKey}_str`] = d[dataKey]
       })
       return obj
