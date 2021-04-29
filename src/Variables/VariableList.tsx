@@ -1,11 +1,6 @@
 import React from 'react'
-import { QueryValues } from '../@types/QueryValues'
 
-import {
-  VARIABLE_MAP,
-  shortDisplayNameByKey,
-  useDataManager,
-} from '../Data/DataManager'
+import { VARIABLE_MAP } from '../Data/DataManager'
 import VariableDisplay from './VariableDisplay'
 
 import './VariableList.scss'
