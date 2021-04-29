@@ -2,7 +2,7 @@ import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
 import React, { useCallback, useState } from 'react'
 
-import { horizontalLabel, labelValue, verticalLabel } from './labels'
+import { labelValue, verticalLabel } from './labels'
 import { NIVO_BASE_PROPS } from '../Helpers/graphs'
 import { formatPercent, parseFloatClean } from '../Helpers/formatter'
 import { ProgressRawData } from '../@types/DataTypes'
