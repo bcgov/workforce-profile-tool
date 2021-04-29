@@ -42,7 +42,6 @@ const MinistryGraph = ({ data }: Props): JSX.Element => {
           <OrganizationSubGraph
             color={color}
             data={dataMap[k]}
-            masterTitle={title}
             shortTitle={shortTitle}
             title={title}
             varKey={k}

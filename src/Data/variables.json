@@ -2,6 +2,7 @@
   "Year": {
     "key": "Year",
     "name": "Data Year",
+    "shortName": "Year",
     "isExclusive": true,
     "default": "2020",
     "variables": [
@@ -18,6 +19,7 @@
   "Employee_Type": {
     "key": "Employee_Type",
     "name": "Employee Type",
+    "shortName": "Employee Type",
     "isExclusive": true,
     "default": "ALL",
     "variables": [
@@ -38,6 +40,7 @@
   "Des_Grp": {
     "key": "Des_Grp",
     "name": "Designated Group",
+    "shortName": "Des. Grp.",
     "isExclusive": false,
     "default": ["IND", "DIS", "VM", "WOM"],
     "variables": [
@@ -66,6 +69,7 @@
   "Ministry_Key": {
     "key": "Ministry_Key",
     "name": "Organization",
+    "shortName": "Organization",
     "isExclusive": true,
     "default": "BCPS",
     "loadsDynamically": true,

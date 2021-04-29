@@ -1,12 +1,12 @@
 import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 
-import { labelValue } from './horizontalLabel'
+import { horizontalLabel, labelValue, verticalLabel } from './labels'
 import { NIVO_BASE_PROPS } from '../Helpers/graphs'
-import { parseFloatClean } from '../Helpers/formatter'
+import { formatPercent, parseFloatClean } from '../Helpers/formatter'
 import { ProgressRawData } from '../@types/DataTypes'
-import { displayNameByKey } from '../Data/DataManager'
+import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
@@ -25,6 +25,8 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
     { key: '2020_pc', label: '2020', color: '#D2E2EE' },
   ]
 
+  const [width, setWidth] = useState(620)
+
   if (!data) return <div>&nbsp;</div>
 
   const dataKeys = Object.keys(data[0]).filter((key) => key.endsWith('_pc'))
@@ -39,6 +41,20 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
       })
       return obj
     })
+
+  const items = filteredData
+    .map((d: FixTypeLater): number[] => {
+      return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
+    })
+    .flat()
+
+  const maxItem = Math.max(...items)
+
+  const labelCallback = useCallback(() => {
+    return verticalLabel(MARGINS, 500, maxItem, (d: FixTypeLater) => {
+      return formatPercent(d, 1, 100)
+    })
+  }, [maxItem, width])
 
   const graph = (
     <ResponsiveBar
@@ -62,7 +78,10 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
         // legend: 'Values',
         legendPosition: 'middle',
         legendOffset: 32,
-        format: (d: FixTypeLater) => displayNameByKey('Des_Grp', d) as string,
+        format: (d: FixTypeLater) =>
+          (width < 576
+            ? shortDisplayNameByKey('Des_Grp', d)
+            : displayNameByKey('Des_Grp', d)) as string,
       }}
       axisLeft={{
         tickSize: 5,
@@ -75,16 +94,7 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
           `${(+d).toLocaleString(undefined, { maximumFractionDigits: 0 })}%`,
       }}
       label={labelValue}
-      labelFormat={(d) =>
-        ((
-          <tspan y={-10}>
-            {d === 0 && '<3'}
-            {d > 0 && (
-              <>{d.toLocaleString(undefined, { minimumFractionDigits: 1 })}%</>
-            )}
-          </tspan>
-        ) as unknown) as string
-      }
+      labelFormat={labelCallback()}
       tooltip={(d: FixTypeLater): JSX.Element => {
         return (
           <div style={{ color: Color(d.color).darken(0.3).hex() }}>
@@ -108,6 +118,7 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
       title={title}
       graph={graph}
       legend={legend}
+      setWidthCallback={setWidth}
     />
   )
 }

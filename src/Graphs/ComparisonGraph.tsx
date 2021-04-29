@@ -3,10 +3,10 @@ import Color from 'color'
 import React, { useCallback, useState } from 'react'
 
 import { ComparisonRawData } from '../@types/DataTypes'
-import { displayNameByKey } from '../Data/DataManager'
+import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { getTooltip } from '../Helpers/tooltipHelper'
-import { horizontalLabel, labelValue } from './horizontalLabel'
+import { horizontalLabel, labelValue } from './labels'
 import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
@@ -56,6 +56,8 @@ const ComparisonGraph = ({
 
   const [width, setWidth] = useState(620)
 
+  MARGINS.left = width < 576 ? 80 : 160
+
   if (!data) return <div>&nbsp;</div>
 
   const { dataKeys, filteredData } = processDataForGraph(data, dataDefinitions)
@@ -96,7 +98,10 @@ const ComparisonGraph = ({
         tickRotation: 0,
         legendPosition: 'middle',
         legendOffset: 32,
-        format: (d: FixTypeLater) => displayNameByKey('Des_Grp', d) as string,
+        format: (d: FixTypeLater) =>
+          (width < 576
+            ? shortDisplayNameByKey('Des_Grp', d)
+            : displayNameByKey('Des_Grp', d)) as string,
       }}
       axisBottom={{
         tickSize: 5,

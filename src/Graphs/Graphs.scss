@@ -1,39 +1,10 @@
-.ps-AbstractPlot {
-  .y-axis-label {
-    font-size: 0.9rem;
-  }
-  .y-axis .tick text {
-    font-size: 0.8rem;
-  }
-  .x-axis .tick text {
-    font-size: 0.8rem;
-  }
-  .dataLabel {
-    font-size: 0.8rem;
-  }
-  .xLineLabel {
-    font-size: 0.9rem;
-  }
-}
+@import "../common";
 
-button.SavePNG {
-  margin-top: 15px;
-}
-
-.bulletBarLabel {
-  display: none;
-}
-
-.FlowReport {
-  .x-axis {
-    path.domain {
-      display: none;
+svg {
+  font-size: 0.8rem !important;
+  @include media-breakpoint-down(md) {
+    text {
+      font-size: 0.7rem !important;
     }
-    .tick line {
-      display: none;
-    }
-  }
-  button {
-    margin-bottom: 30px;
   }
 }

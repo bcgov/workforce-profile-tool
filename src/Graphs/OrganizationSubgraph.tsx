@@ -4,10 +4,10 @@ import Color from 'color'
 import React, { useCallback, useState } from 'react'
 
 import { formatPercent, parseIntClean } from '../Helpers/formatter'
-import { horizontalLabel, labelValue } from './horizontalLabel'
+import { horizontalLabel, labelValue } from './labels'
 import { MinistryRawData } from '../@types/DataTypes'
 import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
-import { displayNameByKey } from '../Data/DataManager'
+import { displayNameByKey, useDataManager } from '../Data/DataManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
@@ -15,7 +15,6 @@ import Legend from './Legend'
 interface SubgraphProps {
   color?: string
   data: MinistryRawData[]
-  masterTitle?: string
   shortTitle?: string
   title?: string
   varKey?: FixTypeLater
@@ -26,13 +25,16 @@ const MARGINS = { top: 0, right: 60, bottom: 50, left: 255 }
 const OrganizationSubGraph = ({
   color,
   data,
-  masterTitle,
   title,
   varKey,
 }: SubgraphProps): JSX.Element => {
+  const { queryValues } = useDataManager()
+
   if (!data) return <div>&nbsp;</div>
 
   const [width, setWidth] = useState(620)
+
+  MARGINS.left = width < 576 ? 80 : 255
 
   const provincialRepresentation = parseFloat(
     data.find((d) => d.Ministry_Key === 'BC Population')!.Value
@@ -48,6 +50,14 @@ const OrganizationSubGraph = ({
     },
   ]
 
+  const subtitle = `${displayNameByKey(
+    'Ministry_Key',
+    queryValues.Ministry_Key
+  )}, ${displayNameByKey(
+    'Employee_Type',
+    queryValues.Employee_Type
+  ).toLowerCase()} employees`
+
   const { dataKeys, filteredData } = processDataForGraph(
     data.filter((d: FixTypeLater) => {
       return d.Ministry_Key !== 'BC Population'
@@ -57,11 +67,12 @@ const OrganizationSubGraph = ({
       if (parseIntClean(d.Value) === 0) hasSuppressedData = true
       const categoryFullName = displayNameByKey('Ministry_Key', d.Ministry_Key)
       let categoryShortName = categoryFullName
-      if (categoryShortName && categoryShortName.length > 37) {
+      if (categoryShortName && (categoryShortName.length > 37 || width < 576)) {
         categoryShortName = d.Ministry_Key
       }
       obj.category = d.Ministry_Key
       obj.categoryFullName = categoryFullName
+
       obj.categoryShortName = categoryShortName
     }
   )
@@ -196,7 +207,7 @@ const OrganizationSubGraph = ({
   return (
     <GraphFrame
       className={`Ministry-${varKey}`}
-      title={`${masterTitle} — ${title}`}
+      title={`${title} — ${subtitle}`}
       graph={graph}
       legend={legend}
       setWidthCallback={setWidth}

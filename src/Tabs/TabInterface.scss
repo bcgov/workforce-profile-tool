@@ -1,56 +1,64 @@
-@import '../common';
+@import "../common";
 
 .TabInterface {
-    .TabButtons {
-        margin: 15px 0 15px;
+  .TabButtons {
+    margin: 0px 0px;
+  }
+  .TabButton {
+    // border: solid black 1px;
+    margin-right: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+    @include media-breakpoint-down(md) {
+      font-size: 0.8rem;
+      padding: 0px 5px !important;
+      margin-right: 10px;
     }
-    .TabButton {
-        display: inline-block;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+    a {
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      i {
+        margin-right: 0.5rem;
+      }
+      &:hover {
         font-weight: 500;
-        a {
-            cursor: pointer;
-            display: block;
-            padding: 10px 15px;
-            width: 100%;
-            i {
-                margin-right: 0.5rem;
-            }
-            &:hover {
-                font-weight: 500;
-                color: $brand-color-gold;
-            }
-        }
+        color: $brand-color-gold;
+      }
     }
-    .TabButton.active {
-        a {
-            font-weight: 700;
-        }
+  }
+  .TabButton.active {
+    a {
+      font-weight: 700;
     }
-    .TabButton:first-child {
-        margin-left: -15px;
-    }
+  }
+  .Tab {
+    margin-top: 30px;
+  }
 }
 
 .Secondary {
-    .TabInterface {
-        .TabButtons {
-            margin: 0 -15px 0 -45px;
-            padding-left: 45px;
-            padding-right: 15px;
-            border: solid 1px $brand-color-blue;
-            border-left: 0;
-            border-right: 0;
-        }
-        .TabButton {
-            a {
-                padding: 5px 15px 3px;
-            }
-        }
+  margin-top: -45px;
+  .TabInterface {
+    
+    .TabButtons {
+      border: solid 1px $brand-color-blue;
+      border-left: 0;
+      border-right: 0;
     }
-    .Tab {
-        margin-top: 30px;
+    .TabButton {
+      margin-top: 15px;
+      a {
+        // padding: 5px 15px 3px;
+      }
     }
+  }
+  .Tab {
+    margin-top: 30px;
+  }
 }
+
+

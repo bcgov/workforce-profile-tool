@@ -49,7 +49,7 @@ const labelTextColor: FixTypeLater = {
 
 export const NIVO_BASE_PROPS = {
   padding: 0.3,
-  animate: true,
+  // animate: true,
   motionStiffness: 90,
   motionDamping: 15,
   theme: NIVO_THEME,

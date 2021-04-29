@@ -25,10 +25,14 @@ const Home = (): JSX.Element => {
           .
         </p>
         <p>
-          Use the tabs at the top to navigate between sections. You can refine
-          the visualizations and tables on each tab by employing one or more
-          filters from the available list to the left. Note that not all filters
-          are available to use on every tab.
+          You can navigate between sections using the named tabs at the top of
+          this area. You can also refine the visualizations and tables on each
+          tab by employing one or more filters from the available list — on most
+          screens, these filters will be shown to the left (in blue). For mobile
+          devices, filters instead appear in a hidden menu above the page tabs;
+          click on the &ldquo;Show variables&rdquo; button to display them, or
+          the &ldquo;Hide variables&rdquo; button to minimize them again. Note
+          that not all filters are available to be used on every tab.
         </p>
         <p>
           <strong>Note</strong>: the Workforce Profile Dashboard is not
@@ -58,6 +62,14 @@ const Home = (): JSX.Element => {
           historical reports. BC Stats does retain all previous Workforce
           Profiles reports, but for historical purposes only; caution is advised
           when comparing across reports.
+        </p>
+        <p>
+          Note that while BC Stats collects employee information on LGBTQ2S+
+          identity, as well as on non-binary gender identities, the Workforce
+          Profiles do not presently include this information as no federal data
+          on BC Population or Available Workforce exists for comparison. At this
+          time, the tool includes both cis and trans women in the Women
+          category.
         </p>
         <p>
           Note: Statistics Canada and BC Stats use different methods to identify

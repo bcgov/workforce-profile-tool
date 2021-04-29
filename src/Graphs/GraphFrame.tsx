@@ -13,7 +13,6 @@ interface Props {
   className: string
   graph: React.ReactNode
   height?: number
-  hideFilterNotes?: boolean
   isOrganizationFrame?: boolean
   legend: React.ReactNode
   setWidthCallback?: FixTypeLater
@@ -160,26 +159,30 @@ const GraphFrame = (props: Props): JSX.Element => {
       }`}
     >
       <div
-        className="col-9"
+        className="col-md-9 col-12"
         style={{ height: `${props.height || 500}px` }}
         ref={ref}
       >
         {props.graph}
       </div>
-      <div className="col-3">
-        {props.legend}
-        {!props.hideFilterNotes && (
-          <FilterNotes isOrganizationNotes={props.isOrganizationFrame} />
-        )}
-        {!isIE && (
-          <button
-            className="btn btn-sm btn-primary SavePNG Shadow"
-            onClick={saveSVGAsPNG}
-          >
-            <i className="fas fa-download" />
-            Save as PNG
-          </button>
-        )}
+      <div className="col-md-3 col-12 mb-4 mb-md-0">
+        <div className="row">
+          <div className="col-6 col-md-12 mt-3 mt-md-0">{props.legend}</div>
+          <div className="col-6 col-md-12">
+            <FilterNotes isOrganizationNotes={props.isOrganizationFrame} />
+          </div>
+          <div className="col-6 col-md-12">
+            {!isIE && (
+              <button
+                className="btn btn-sm btn-primary SavePNG Shadow mt-3"
+                onClick={saveSVGAsPNG}
+              >
+                <i className="fas fa-download" />
+                Save as PNG
+              </button>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   )
