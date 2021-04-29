@@ -1,6 +1,7 @@
 @import "../common";
 
 svg {
+  font-size: 0.8rem !important;
   @include media-breakpoint-down(md) {
     text {
       font-size: 0.7rem !important;
