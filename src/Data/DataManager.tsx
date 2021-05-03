@@ -9,6 +9,7 @@ import React, {
 } from 'react'
 import { ArrayParam, StringParam, useQueryParams } from 'use-query-params'
 import * as d3 from 'd3'
+import env from '@beam-australia/react-env'
 
 import {
   EmployeeCountRawData,
@@ -23,6 +24,10 @@ import Dictionary from '../@types/Dictionary'
 import FixTypeLater from '../@types/FixTypeLater'
 
 import variableJson from './variables.json'
+
+const DATA_URL = env('PACKAGE_METADATA_URL')
+
+console.log('DATA_URL', DATA_URL)
 
 export const VARIABLE_MAP = variableJson as Dictionary<VariableGroup>
 
@@ -297,7 +302,7 @@ function DataManagerProvider({
     const loadMetadata = async () => {
       const data: FixTypeLater = await d3.json(
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        process.env.REACT_APP_PACKAGE_METADATA_URL!
+        DATA_URL
       )
       const newMetadata: Metadata[] = data.result.resources.map(
         (resource: Dictionary<string>) => ({
