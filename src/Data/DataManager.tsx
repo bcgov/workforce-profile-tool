@@ -101,14 +101,15 @@ export const setLocalStorageValue = (
   const savedVarsString = window.localStorage.getItem(
     'workforce-profiles-saved-vars'
   )
+  let savedVars: Record<string, string | string[] | null> = {}
   if (savedVarsString) {
-    const savedVars = JSON.parse(savedVarsString)
-    savedVars[key] = value
-    window.localStorage.setItem(
-      'workforce-profiles-saved-vars',
-      JSON.stringify(savedVars)
-    )
+    savedVars = JSON.parse(savedVarsString)
   }
+  savedVars[key] = value
+  window.localStorage.setItem(
+    'workforce-profiles-saved-vars',
+    JSON.stringify(savedVars)
+  )
   return undefined
 }
 

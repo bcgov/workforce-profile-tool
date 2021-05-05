@@ -28,6 +28,7 @@ class DownloadButton extends Component<Props> {
     } else {
       const a = window.document.createElement('a')
       a.href = window.URL.createObjectURL(blob)
+      a.type = 'text/csv'
       a.download = `${this.props.filename}.csv`
       document.body.appendChild(a)
       a.click() // IE: "Access is denied"; see: https://connect.microsoft.com/IE/feedback/details/797361/ie-10-treats-blob-url-as-cross-origin-and-denies-access
