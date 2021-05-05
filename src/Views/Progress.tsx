@@ -9,7 +9,7 @@ import Dictionary from '../@types/Dictionary'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
 import ProgressGraph from '../Graphs/ProgressGraph'
-import { useDataQuery } from '../Data/useDataQuery'
+import { YEAR_PLACEHOLDER, useDataQuery } from '../Data/useDataQuery'
 
 const Progress = (): JSX.Element => {
   const { setLockedVars, year } = useDataManager()
@@ -17,8 +17,11 @@ const Progress = (): JSX.Element => {
   // When page loads, set the locked variables as appropriate.
   useEffect(() => setLockedVars({}), [])
 
-  const dataKey = `WP${year}_Ind_Progress`
-  const { data, isLoading, error } = useDataQuery<ProgressRawData>(dataKey)
+  const dataKey = `WP${YEAR_PLACEHOLDER}_Ind_Progress`
+  const { data, isLoading, error } = useDataQuery<ProgressRawData>(
+    dataKey,
+    year
+  )
 
   const columns: ColumnWithClassNameAndFooter<ProgressRawData>[] = [
     {

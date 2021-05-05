@@ -14,6 +14,7 @@ import { displayNameByKey } from '../Data/DataManager'
 import OccupationRegionSubtable from '../Table/OccupationRegionSubtable'
 import OccupationGraph from '../Graphs/OccupationRegionGraph'
 import { OccupationRegionRawData } from '../@types/DataTypes'
+import { YEAR_PLACEHOLDER } from '../Data/useDataQuery'
 
 export enum OccupationRegionEnum {
   Region = 'Region',
@@ -47,7 +48,7 @@ const OccupationRegion = ({ viewType }: Props): JSX.Element => {
       return (await d3.csv(url)) as OccupationRegionRawData[]
     },
     {
-      enabled: !!metadata,
+      enabled: !!(metadata && year),
       keepPreviousData: true,
     }
   )

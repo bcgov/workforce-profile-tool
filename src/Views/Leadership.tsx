@@ -5,7 +5,7 @@ import { displayNameByKey } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { LeadershipRawData } from '../@types/DataTypes'
 import { useDataManager } from '../Data/DataManager'
-import { useDataQuery } from '../Data/useDataQuery'
+import { YEAR_PLACEHOLDER, useDataQuery } from '../Data/useDataQuery'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
 import LeadershipGraph from '../Graphs/LeadershipGraph'
@@ -23,8 +23,11 @@ const Leadership = (): JSX.Element => {
     }
   }, [year])
 
-  const dataKey = `WP${year}_Leadership`
-  const { data, isLoading, error } = useDataQuery<LeadershipRawData>(dataKey)
+  const dataKey = `WP${YEAR_PLACEHOLDER}_Leadership`
+  const { data, isLoading, error } = useDataQuery<LeadershipRawData>(
+    dataKey,
+    year
+  )
 
   const columns: ColumnWithClassNameAndFooter<LeadershipRawData>[] = [
     {
