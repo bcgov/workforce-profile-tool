@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import React from 'react'
 
 import './Header.scss'
@@ -10,17 +10,19 @@ interface Props {
 }
 
 const Header = ({ showList, toggleListCallback }: Props): JSX.Element => {
+  const location = useLocation()
+
   return (
     <div className="Header row">
       <div className="col mb-0 mb-sm-4">
         <div className="row align-items-center">
           <div className="col-6 order-2 order-sm-1 col-sm-12">
-            <Link to={'/'}>
+            <Link to={`/${location.search}`}>
               <img src={logo} style={{ maxWidth: '100%' }} />
             </Link>
           </div>
           <div className="col-6 order-1 order-sm-2 col-sm-12">
-            <Link to={'/'}>
+            <Link to={`/${location.search}`}>
               <h1 className="my-2">Workforce Profiles</h1>
             </Link>
             <button

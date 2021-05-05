@@ -22,7 +22,7 @@ const VariableDisplay = ({
   const { metadata, year } = useDataManager()
 
   const dataKey = `WP${year}_MinistryKey`
-  const url = metadata && year ? metadata[dataKey].url : ''
+  const url = metadata && metadata[dataKey] && year ? metadata[dataKey].url : ''
 
   const { data: unfilteredData } = useQuery(
     dataKey,
