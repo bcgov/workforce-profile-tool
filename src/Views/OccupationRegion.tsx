@@ -14,7 +14,6 @@ import { displayNameByKey } from '../Data/DataManager'
 import OccupationRegionSubtable from '../Table/OccupationRegionSubtable'
 import OccupationGraph from '../Graphs/OccupationRegionGraph'
 import { OccupationRegionRawData } from '../@types/DataTypes'
-import { YEAR_PLACEHOLDER } from '../Data/useDataQuery'
 
 export enum OccupationRegionEnum {
   Region = 'Region',

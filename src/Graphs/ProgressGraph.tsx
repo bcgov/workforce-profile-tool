@@ -114,6 +114,7 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
 
   return (
     <GraphFrame
+      items={items}
       className="Progress"
       title={title}
       graph={graph}

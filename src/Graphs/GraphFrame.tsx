@@ -8,8 +8,10 @@ import FilterNotes from './FilterNotes'
 import FixTypeLater from '../@types/FixTypeLater'
 
 import './Graphs.scss'
+import NoGraph from '../Views/NoGraph'
 
 interface Props {
+  items: number[]
   className: string
   graph: React.ReactNode
   height?: number
@@ -147,6 +149,13 @@ const GraphFrame = (props: Props): JSX.Element => {
 
   if (!props.className) {
     console.warn('GraphFrame should be provided a className attribute')
+  }
+
+  if (props.items.every((item: number) => item === 0)) {
+    // All items are zero. We can't chart this (Nivo breaks when every value it
+    // is asked to chart is zero, at least for now...)
+    // TODO: Maybe Nivo will handle this better someday.
+    return <NoGraph />
   }
 
   const isIE =

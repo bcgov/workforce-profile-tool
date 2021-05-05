@@ -206,6 +206,7 @@ const OrganizationSubGraph = ({
 
   return (
     <GraphFrame
+      items={items}
       className={`Ministry-${varKey}`}
       title={`${title} — ${subtitle}`}
       graph={graph}

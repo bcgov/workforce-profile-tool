@@ -117,6 +117,7 @@ const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
 
   return (
     <GraphFrame
+      items={items}
       className="Leadership"
       title={title}
       graph={graph}
