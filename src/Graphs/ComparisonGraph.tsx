@@ -132,6 +132,7 @@ const ComparisonGraph = ({
 
   return (
     <GraphFrame
+      items={items}
       className="Comparison"
       title={title}
       graph={graph}

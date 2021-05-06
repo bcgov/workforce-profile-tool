@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { ArrayParam, StringParam, useQueryParam } from 'use-query-params'
-import Dictionary from '../@types/Dictionary'
 
 import { Variable } from '../@types/Variable'
 import { VariableGroup } from '../@types/VariableGroup'
@@ -23,12 +22,24 @@ const VariableItemDisplayExclusive = ({
 }: Props): JSX.Element => {
   const [queryVar, setQueryVar] = useQueryParam(variableGroup.key, StringParam)
 
+  // console.log('variableGroup.key', variableGroup.key, 'queryVar', queryVar)
+
   useEffect(() => {
-    if (!queryVar) setQueryVar(variableGroup.default as string)
+    console.log(
+      '==> variableGroup.key',
+      variableGroup.key,
+      'queryVar',
+      queryVar
+    )
+    if (!queryVar) {
+      console.log(' --> in here', variableGroup.default)
+      setQueryVar(variableGroup.default as string)
+    }
   }, [queryVar])
 
   useEffect(() => {
     if (isActiveOverride) {
+      console.log(' --> also in here', variable.key)
       setQueryVar(variable.key)
     }
   }, [isActiveOverride])
@@ -58,14 +69,16 @@ const VariableItemDisplayNonExclusive = ({
   const [queryVars, setQueryVars] = useQueryParam(variableGroup.key, ArrayParam)
 
   useEffect(() => {
-    if (!queryVars) setQueryVars(variableGroup.default as string[])
-  }, [queryVars])
+    if (!queryVars) {
+      setQueryVars(variableGroup.default as string[])
+    }
+  }, [queryVars, setQueryVars])
 
   useEffect(() => {
     if (isActiveOverride) {
       setQueryVars([variable.key])
     }
-  }, [isActiveOverride])
+  }, [isActiveOverride, setQueryVars])
 
   const isActive = queryVars?.includes(variable.key) || false
 
@@ -98,33 +111,6 @@ const VariableItemDisplayNonExclusive = ({
 
 const VariableItemDisplay = (props: Props): JSX.Element => {
   const { lockedVars } = useDataManager()
-
-  // console.log('lockedVars', lockedVars)
-
-  const previousLockedVars = useRef<Dictionary<string[]>>({})
-
-  useEffect(() => {
-    // console.log('lockedVars', lockedVars)
-    previousLockedVars.current = lockedVars
-    // if (Object.keys(lockedVars).length === 0) {
-    //   // Load saved vars
-    //   const savedVarsString = window.localStorage.getItem(
-    //     'workforce-profiles-saved-vars'
-    //   )
-    //   lockedVars =
-    //     savedVarsString && savedVarsString.length > 0
-    //       ? JSON.parse(savedVarsString)
-    //       : {}
-    // } else {
-    //   // Save current vars
-    //   const currentVars = queryValues
-    //   console.log('currentVars', currentVars)
-    //   window.localStorage.setItem(
-    //     'workforce-profiles-saved-vars',
-    //     JSON.stringify(currentVars)
-    //   )
-    // }
-  }, [lockedVars])
 
   const isLocked = useMemo(() => {
     return (

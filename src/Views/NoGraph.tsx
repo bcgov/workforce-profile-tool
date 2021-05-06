@@ -2,7 +2,7 @@ import React from 'react'
 
 const NoGraph = (): JSX.Element => {
   return (
-    <div className="alert alert-warning" role="alert">
+    <div className="alert alert-warning Shadow" role="alert">
       <h2>No chart available</h2>
       <p>
         The data represented by the combination of filters you have selected

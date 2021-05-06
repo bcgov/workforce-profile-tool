@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 import { ComparisonRawData, MinistryRawData } from '../@types/DataTypes'
 import { useDataManager, variableGroupByKey } from '../Data/DataManager'
-import { useDataQuery } from '../Data/useDataQuery'
+import { YEAR_PLACEHOLDER, useDataQuery } from '../Data/useDataQuery'
 import GenericView from './GenericView'
 import OrganizationGraph from '../Graphs/OrganizationGraph'
 
@@ -41,7 +41,11 @@ const Organization = (): JSX.Element => {
     data: unprocessedData,
     isLoading,
     error,
-  } = useDataQuery<ComparisonRawData>(`WP${year}_Comparison`, true)
+  } = useDataQuery<ComparisonRawData>(
+    `WP${YEAR_PLACEHOLDER}_Comparison`,
+    year,
+    true
+  )
 
   const data = buildMinistryData(unprocessedData)
 

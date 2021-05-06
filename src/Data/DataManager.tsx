@@ -101,14 +101,15 @@ export const setLocalStorageValue = (
   const savedVarsString = window.localStorage.getItem(
     'workforce-profiles-saved-vars'
   )
+  let savedVars: Record<string, string | string[] | null> = {}
   if (savedVarsString) {
-    const savedVars = JSON.parse(savedVarsString)
-    savedVars[key] = value
-    window.localStorage.setItem(
-      'workforce-profiles-saved-vars',
-      JSON.stringify(savedVars)
-    )
+    savedVars = JSON.parse(savedVarsString)
   }
+  savedVars[key] = value
+  window.localStorage.setItem(
+    'workforce-profiles-saved-vars',
+    JSON.stringify(savedVars)
+  )
   return undefined
 }
 
@@ -235,10 +236,6 @@ function useDataManager(): UseDataManagerType {
   })
 
   const queryValues = queryValuesTmp as QueryValues
-  // const queryValuesCopy: Dictionary<FixTypeLater> = Object.assign(
-  //   {},
-  //   queryValues
-  // )
 
   const _setLockedVars = useCallback(
     (varsToLock: Dictionary<string[]>) => {
@@ -258,7 +255,6 @@ function useDataManager(): UseDataManagerType {
         } else {
           const value = getLocalStorageValue(queryValueKey)
           if (value) {
-            console.log('in here')
             queryValuesCopy[
               queryValueKey as keyof QueryValues
             ] = value as string & string[]
@@ -319,15 +315,6 @@ function DataManagerProvider({
       )
       console.log('Metadata loaded.', keyedMetadata)
       setMetadata(keyedMetadata)
-
-      // VARIABLE_MAP['Ministry_Key'].variables = []
-
-      // const newVariableMap: Dictionary<VariableGroup> = Object.assign(
-      //   {},
-      //   variableMap
-      // )
-      // newVariableMap['Ministry_Key'].variables = []
-      // setVariableMap(newVariableMap)
     }
 
     // Load the metadata just once on load.

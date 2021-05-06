@@ -38,7 +38,7 @@ const OccupationRegion = ({ viewType }: Props): JSX.Element => {
   }, [queryValues.Ministry_Key, year])
 
   const dataKey = `WP${year}_Rep_Occ_Rgn`
-  const url = metadata ? metadata[dataKey].url : ''
+  const url = metadata && metadata[dataKey] && year ? metadata[dataKey].url : ''
 
   // Load the raw data.
   const { isLoading, error, data: unfilteredData } = useQuery(
@@ -47,7 +47,7 @@ const OccupationRegion = ({ viewType }: Props): JSX.Element => {
       return (await d3.csv(url)) as OccupationRegionRawData[]
     },
     {
-      enabled: !!metadata,
+      enabled: !!(metadata && year),
       keepPreviousData: true,
     }
   )

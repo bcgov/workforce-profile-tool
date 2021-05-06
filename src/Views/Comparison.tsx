@@ -8,7 +8,7 @@ import { displayNameByKey } from '../Data/DataManager'
 import ComparisonGraph from '../Graphs/ComparisonGraph'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
-import { useDataQuery } from '../Data/useDataQuery'
+import { YEAR_PLACEHOLDER, useDataQuery } from '../Data/useDataQuery'
 import TableTooltip from '../Table/TableTooltip'
 
 const Comparison = (): JSX.Element => {
@@ -16,8 +16,11 @@ const Comparison = (): JSX.Element => {
 
   useEffect(() => setLockedVars({}), [])
 
-  const dataKey = `WP${year}_Comparison`
-  const { data, isLoading, error } = useDataQuery<ComparisonRawData>(dataKey)
+  const dataKey = `WP${YEAR_PLACEHOLDER}_Comparison`
+  const { data, isLoading, error } = useDataQuery<ComparisonRawData>(
+    dataKey,
+    year
+  )
 
   const ministry = displayNameByKey('Ministry_Key', queryValues.Ministry_Key)
 
