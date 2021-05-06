@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { ArrayParam, StringParam, useQueryParam } from 'use-query-params'
-import Dictionary from '../@types/Dictionary'
 
 import { Variable } from '../@types/Variable'
 import { VariableGroup } from '../@types/VariableGroup'
