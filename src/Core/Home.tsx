@@ -1,6 +1,8 @@
 import React from 'react'
 
 const Home = (): JSX.Element => {
+  const buildVersion = process.env.REACT_APP_GIT_SHA
+
   return (
     <div className="row">
       <div className="col col-sm-11 col-md-10 col-lg-9 col-xl-8">
@@ -96,6 +98,11 @@ const Home = (): JSX.Element => {
           if you experience any technical difficulties or have any questions
           about the content of this app.
         </p>
+        {buildVersion && (
+          <p style={{ color: '#eeeeee', fontSize: '0.8rem' }}>
+            Build version: {buildVersion}
+          </p>
+        )}
       </div>
     </div>
   )
