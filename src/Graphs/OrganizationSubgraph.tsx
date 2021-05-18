@@ -1,16 +1,21 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 
 import { formatPercent, parseIntClean } from '../Helpers/formatter'
-import { horizontalLabel, labelValue } from './labels'
+import { labelValue } from './labels'
 import { MinistryRawData } from '../@types/DataTypes'
-import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
+import {
+  DEFAULT_GRAPH_WIDTH,
+  NIVO_BASE_PROPS,
+  processDataForGraph,
+} from '../Helpers/graphs'
 import { displayNameByKey, useDataManager } from '../Data/DataManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
+import useGraph from '../Helpers/useGraph'
 
 interface SubgraphProps {
   color?: string
@@ -32,7 +37,7 @@ const OrganizationSubGraph = ({
 
   if (!data) return <div>&nbsp;</div>
 
-  const [width, setWidth] = useState(620)
+  const [width, setWidth] = useState(DEFAULT_GRAPH_WIDTH)
 
   MARGINS.left = width < 576 ? 80 : 255
 
@@ -77,23 +82,18 @@ const OrganizationSubGraph = ({
     }
   )
 
-  const items = filteredData
-    .map((d: FixTypeLater): number[] => {
-      return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
-    })
-    .flat()
-
-  const maxItem = Math.max(...items, provincialRepresentation + 3)
-
-  const labelCallback = useCallback(() => {
-    return horizontalLabel(MARGINS, width, maxItem, (d: FixTypeLater) => {
-      return formatPercent(d, 1, 100)
-    })
-  }, [maxItem, width])
-
   filteredData.sort((b: FixTypeLater, a: FixTypeLater) =>
     a.Value < b.Value ? 1 : a.Value > b.Value ? -1 : 0
   )
+
+  const { maxItem, labelCallback, items } = useGraph({
+    data: filteredData,
+    dataKeys,
+    maxItemComparator: provincialRepresentation + 3,
+    width,
+    formatter: (d: FixTypeLater) => formatPercent(d, 1, 100),
+    margins: MARGINS,
+  })
 
   const graph = (
     <ResponsiveBar

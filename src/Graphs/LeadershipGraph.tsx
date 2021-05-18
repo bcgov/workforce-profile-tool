@@ -1,18 +1,23 @@
 import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 
 import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { getTooltip } from '../Helpers/tooltipHelper'
-import { horizontalLabel, labelValue } from './labels'
+import { labelValue } from './labels'
 import { LeadershipRawData } from '../@types/DataTypes'
-import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
+import {
+  DEFAULT_GRAPH_WIDTH,
+  NIVO_BASE_PROPS,
+  processDataForGraph,
+} from '../Helpers/graphs'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 
 import './Graphs.scss'
+import useGraph from '../Helpers/useGraph'
 
 interface Props {
   data: LeadershipRawData[]
@@ -38,7 +43,7 @@ const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
     },
   ]
 
-  const [width, setWidth] = useState(620)
+  const [width, setWidth] = useState(DEFAULT_GRAPH_WIDTH)
 
   MARGINS.left = width < 576 ? 80 : 160
 
@@ -47,20 +52,28 @@ const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
   const { dataKeys, filteredData } = processDataForGraph(data, dataDefinitions)
   filteredData.reverse()
 
-  const items = filteredData
-    .map((d: FixTypeLater): number[] => {
-      return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
-    })
-    .flat()
-    .reverse()
+  // const items = filteredData
+  //   .map((d: FixTypeLater): number[] => {
+  //     return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
+  //   })
+  //   .flat()
+  //   .reverse()
 
-  const maxItem = Math.max(...items)
+  // const maxItem = Math.max(...items)
 
-  const labelCallback = useCallback(() => {
-    return horizontalLabel(MARGINS, width, maxItem, (d: FixTypeLater) => {
-      return formatPercent(d, 1, 100)
-    })
-  }, [maxItem, width])
+  // const labelCallback = useCallback(() => {
+  //   return horizontalLabel(MARGINS, width, maxItem, (d: FixTypeLater) => {
+  //     return formatPercent(d, 1, 100)
+  //   })
+  // }, [maxItem, width])
+
+  const { labelCallback, items } = useGraph({
+    data: filteredData,
+    dataKeys,
+    width,
+    formatter: (d: FixTypeLater) => formatPercent(d, 1, 100),
+    margins: MARGINS,
+  })
 
   const graph = (
     <ResponsiveBar

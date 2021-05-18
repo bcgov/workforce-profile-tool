@@ -120,12 +120,8 @@ const GraphFrame = (props: Props): JSX.Element => {
       Array.from(tooltips).forEach((tooltip) => {
         tooltip.parentNode?.removeChild(tooltip)
       })
-      console.log('tooltips', tooltips)
       legend.setAttribute('style', `font-family: "${FONT_FAMILY}"`)
       legendFO.appendChild(legend)
-      // svg.appendChild(legendFO)
-
-      console.log('legend', legend)
     }
 
     // Add the active filters for context, if available.

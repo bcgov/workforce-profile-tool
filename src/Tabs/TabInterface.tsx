@@ -4,16 +4,15 @@ import FixTypeLater from '../@types/FixTypeLater'
 import './TabInterface.scss'
 
 interface Props {
-  activeTabKey: number
+  activeTabKey: string
   children: React.ReactNode
   hideTextWhenSmall?: boolean
   search: string
   baseURL?: string
-  matchURL?: string
 }
 
 interface State {
-  activeTabKey: number
+  activeTabKey?: string
 }
 
 class TabInterface extends React.Component<Props, State> {
@@ -21,13 +20,13 @@ class TabInterface extends React.Component<Props, State> {
     super(props)
 
     this.state = {
-      activeTabKey: 0,
+      activeTabKey: undefined,
     }
 
     this.setActiveTab = this.setActiveTab.bind(this)
   }
 
-  setActiveTab(activeTab: number): void {
+  setActiveTab(activeTab: string): void {
     this.setState({ activeTabKey: activeTab }, () => {
       // Fire a global event for any components that need to know when they are
       // visible (e.g. MapViz). Awkward code a result of fixing for IE.

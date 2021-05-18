@@ -1,10 +1,10 @@
+import { useLocation, useParams } from 'react-router'
 import React from 'react'
 
 import OccupationRegion, {
   OccupationRegionEnum,
 } from '../Views/OccupationRegion'
 import Comparison from '../Views/Comparison'
-import FixTypeLater from '../@types/FixTypeLater'
 import Home from './Home'
 import Leadership from '../Views/Leadership'
 import Organization from '../Views/Organization'
@@ -14,29 +14,26 @@ import TabInterface from '../Tabs/TabInterface'
 
 import './Main.scss'
 
-interface Props {
-  data?: FixTypeLater
-  location?: FixTypeLater
-  match?: FixTypeLater
-  variableLockCallback?: FixTypeLater
+interface MainParamProps {
+  lowLevelNav?: string
+  highLevelNav?: string
 }
 
-const Main = (props: Props): JSX.Element => {
-  const activeOuterTab = props.match.params.highLevelNav || 'home'
+const Main = (): JSX.Element => {
+  const location = useLocation()
+  const { lowLevelNav, highLevelNav } = useParams<MainParamProps>()
+
+  const activeOuterTab = highLevelNav || 'home'
   let activeInnerTab
-  if (activeOuterTab === 'representation' && !props.match.params.lowLevelNav) {
+  if (activeOuterTab === 'representation' && !lowLevelNav) {
     activeInnerTab = 'by-occupation'
   } else {
-    activeInnerTab = props.match.params.lowLevelNav || 'representation-by-group'
+    activeInnerTab = lowLevelNav || 'representation-by-group'
   }
 
   return (
     <div className="Main">
-      <TabInterface
-        activeTabKey={activeOuterTab}
-        matchURL={props.match.url}
-        search={props.location.search}
-      >
+      <TabInterface activeTabKey={activeOuterTab} search={location.search}>
         <Tab key={'home'} name="Home">
           <Home />
         </Tab>
@@ -46,7 +43,7 @@ const Main = (props: Props): JSX.Element => {
               <TabInterface
                 activeTabKey={activeInnerTab}
                 baseURL={`/${activeOuterTab}`}
-                search={props.location.search}
+                search={location.search}
               >
                 <Tab key={'representation-by-group'} name="By Designated Group">
                   <Progress />
@@ -71,7 +68,7 @@ const Main = (props: Props): JSX.Element => {
             <TabInterface
               activeTabKey={activeInnerTab}
               baseURL={`/${activeOuterTab}`}
-              search={props.location.search}
+              search={location.search}
             >
               <Tab key={'by-occupation'} name="By Occupation">
                 <OccupationRegion viewType={OccupationRegionEnum.Occupation} />

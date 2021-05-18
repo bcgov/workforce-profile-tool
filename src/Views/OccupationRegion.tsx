@@ -24,8 +24,6 @@ interface Props {
   viewType: OccupationRegionEnum
 }
 
-// TODO: If the ministry_key is BCPS, lock employee type to REG; otherwise don't
-// lock variables
 const OccupationRegion = ({ viewType }: Props): JSX.Element => {
   const { setLockedVars, metadata, year, queryValues } = useDataManager()
 

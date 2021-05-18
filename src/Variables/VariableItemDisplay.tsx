@@ -22,24 +22,14 @@ const VariableItemDisplayExclusive = ({
 }: Props): JSX.Element => {
   const [queryVar, setQueryVar] = useQueryParam(variableGroup.key, StringParam)
 
-  // console.log('variableGroup.key', variableGroup.key, 'queryVar', queryVar)
-
   useEffect(() => {
-    console.log(
-      '==> variableGroup.key',
-      variableGroup.key,
-      'queryVar',
-      queryVar
-    )
     if (!queryVar) {
-      console.log(' --> in here', variableGroup.default)
       setQueryVar(variableGroup.default as string)
     }
   }, [queryVar])
 
   useEffect(() => {
     if (isActiveOverride) {
-      console.log(' --> also in here', variable.key)
       setQueryVar(variable.key)
     }
   }, [isActiveOverride])

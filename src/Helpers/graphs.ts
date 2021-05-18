@@ -81,3 +81,5 @@ export const processDataForGraph = (
     })
   return { dataKeys, filteredData }
 }
+
+export const DEFAULT_GRAPH_WIDTH = 620

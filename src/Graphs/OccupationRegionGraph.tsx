@@ -9,7 +9,11 @@ import {
 } from '../Data/DataManager'
 import { formatNumber } from '../Helpers/formatter'
 import { horizontalLabel, labelValue } from './labels'
-import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
+import {
+  DEFAULT_GRAPH_WIDTH,
+  NIVO_BASE_PROPS,
+  processDataForGraph,
+} from '../Helpers/graphs'
 import { OccupationRegionRawData } from '../@types/DataTypes'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
@@ -54,7 +58,7 @@ const OccupationRegionGraph = ({
     },
   ]
 
-  const [width, setWidth] = useState(620)
+  const [width, setWidth] = useState(DEFAULT_GRAPH_WIDTH)
 
   MARGINS.left = width < 576 ? 80 : 160
 

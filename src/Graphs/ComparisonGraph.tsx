@@ -7,7 +7,11 @@ import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { getTooltip } from '../Helpers/tooltipHelper'
 import { horizontalLabel, labelValue } from './labels'
-import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
+import {
+  DEFAULT_GRAPH_WIDTH,
+  NIVO_BASE_PROPS,
+  processDataForGraph,
+} from '../Helpers/graphs'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
@@ -54,7 +58,7 @@ const ComparisonGraph = ({
     },
   ]
 
-  const [width, setWidth] = useState(620)
+  const [width, setWidth] = useState(DEFAULT_GRAPH_WIDTH)
 
   MARGINS.left = width < 576 ? 80 : 160
 

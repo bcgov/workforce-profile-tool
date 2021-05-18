@@ -3,7 +3,7 @@ import Color from 'color'
 import React, { useCallback, useState } from 'react'
 
 import { labelValue, verticalLabel } from './labels'
-import { NIVO_BASE_PROPS } from '../Helpers/graphs'
+import { DEFAULT_GRAPH_WIDTH, NIVO_BASE_PROPS } from '../Helpers/graphs'
 import { formatPercent, parseFloatClean } from '../Helpers/formatter'
 import { ProgressRawData } from '../@types/DataTypes'
 import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
@@ -25,7 +25,7 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
     { key: '2020_pc', label: '2020', color: '#D2E2EE' },
   ]
 
-  const [width, setWidth] = useState(620)
+  const [width, setWidth] = useState(DEFAULT_GRAPH_WIDTH)
 
   if (!data) return <div>&nbsp;</div>
 

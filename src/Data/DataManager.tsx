@@ -27,8 +27,6 @@ import variableJson from './variables.json'
 
 const DATA_URL = env('PACKAGE_METADATA_URL')
 
-console.log('DATA_URL', DATA_URL)
-
 export const VARIABLE_MAP = variableJson as Dictionary<VariableGroup>
 
 export const variableGroupByKey = (variableGroupKey: string): VariableGroup => {
@@ -88,7 +86,6 @@ export const getLocalStorageValue = (key: string): string | string[] | null => {
   )
   if (savedVarsString) {
     const savedVars = JSON.parse(savedVarsString)
-    console.log('savedVars', savedVars)
     return savedVars[key]
   }
   return null
