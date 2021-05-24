@@ -17,6 +17,7 @@ import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 
 import './Graphs.scss'
+import useGraph from '../Helpers/useGraph'
 
 interface Props {
   data: ComparisonRawData[]
@@ -67,19 +68,13 @@ const ComparisonGraph = ({
   const { dataKeys, filteredData } = processDataForGraph(data, dataDefinitions)
   filteredData.reverse()
 
-  const items = filteredData
-    .map((d: FixTypeLater): number[] => {
-      return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
-    })
-    .flat()
-
-  const maxItem = Math.max(...items)
-
-  const labelCallback = useCallback(() => {
-    return horizontalLabel(MARGINS, width, maxItem, (d: FixTypeLater) => {
-      return formatPercent(d, 1, 100)
-    })
-  }, [maxItem, width])
+  const { labelCallback, items } = useGraph({
+    data: filteredData,
+    dataKeys,
+    width,
+    formatter: (d: FixTypeLater) => formatPercent(d, 1, 100),
+    margins: MARGINS,
+  })
 
   const graph = (
     <ResponsiveBar
