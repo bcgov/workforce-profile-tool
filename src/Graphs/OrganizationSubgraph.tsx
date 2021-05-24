@@ -16,6 +16,7 @@ import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 import useGraph from '../Helpers/useGraph'
+import { BASE_AXIS_LEFT_PROPS } from './useAxisLeft'
 
 interface SubgraphProps {
   color?: string
@@ -99,17 +100,9 @@ const OrganizationSubGraph = ({
     <ResponsiveBar
       data={filteredData}
       keys={['Value']}
-      indexBy={'categoryShortName'}
       margin={MARGINS}
-      valueScale={{ type: 'linear' }}
-      indexScale={{ type: 'band', round: true }}
       colors={color}
-      groupMode={'grouped'}
-      enableGridX={true}
-      enableGridY={false}
       maxValue={maxItem}
-      borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
-      layout={'horizontal'}
       layers={[
         'grid',
         'axes',
@@ -143,15 +136,10 @@ const OrganizationSubGraph = ({
           )
         },
       ]}
-      axisLeft={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        // legend: 'Values',
-        legendPosition: 'middle',
-        legendOffset: 32,
-        format: (d: FixTypeLater) => d,
-      }}
+      axisLeft={Object.assign(
+        { format: (d: FixTypeLater) => d },
+        BASE_AXIS_LEFT_PROPS
+      )}
       axisBottom={{
         tickSize: 5,
         tickPadding: 5,
@@ -172,6 +160,8 @@ const OrganizationSubGraph = ({
         )
       }}
       {...NIVO_BASE_PROPS}
+      // Override NIVO_BASE_PROPS; these MUST come after the line above
+      indexBy={'categoryShortName'}
     />
   )
 

@@ -75,7 +75,7 @@ const OccupationRegionGraph = ({
   )
   filteredData.reverse()
 
-  const { labelCallback, items } = useGraph({
+  const { labelCallback, items, axisLeft } = useGraph({
     data: filteredData,
     dataKeys,
     width,
@@ -87,29 +87,9 @@ const OccupationRegionGraph = ({
     <ResponsiveBar
       data={filteredData}
       keys={dataKeys}
-      indexBy="Des_Grp"
       margin={MARGINS}
-      valueScale={{ type: 'linear' }}
-      indexScale={{ type: 'band', round: true }}
       colors={['#70CCDB', '#D2E2EE', '#6c757d']}
-      layout={'horizontal'}
-      groupMode={'grouped'}
-      borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
-      enableGridX={true}
-      enableGridY={false}
-      innerPadding={2}
-      axisLeft={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        // legend: 'Values',
-        legendPosition: 'middle',
-        legendOffset: 32,
-        format: (d: FixTypeLater) =>
-          (width < 576
-            ? shortDisplayNameByKey('Des_Grp', d)
-            : displayNameByKey('Des_Grp', d)) as string,
-      }}
+      axisLeft={axisLeft}
       axisBottom={{
         tickSize: 5,
         tickPadding: 5,

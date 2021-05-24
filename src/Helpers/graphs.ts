@@ -1,3 +1,4 @@
+import { BarProps, BarSvgProps } from '@nivo/bar'
 import FixTypeLater from '../@types/FixTypeLater'
 import { parseFloatClean } from './formatter'
 
@@ -47,17 +48,25 @@ const labelTextColor: FixTypeLater = {
   modifiers: [['darker', 1.6]],
 }
 
-export const NIVO_BASE_PROPS = {
-  padding: 0.3,
-  // animate: true,
-  motionStiffness: 90,
-  motionDamping: 15,
-  theme: NIVO_THEME,
-  labelSkipWidth: 0,
-  labelSkipHeight: 0,
-  labelTextColor,
-  axisTop: null,
+export const NIVO_BASE_PROPS: Partial<BarSvgProps> = {
   axisRight: null,
+  axisTop: null,
+  borderColor: { from: 'color', modifiers: [['darker', 1.6]] },
+  groupMode: 'grouped',
+  indexBy: 'Des_Grp',
+  indexScale: { type: 'band', round: true },
+  innerPadding: 2,
+  labelSkipHeight: 0,
+  labelSkipWidth: 0,
+  labelTextColor,
+  layout: 'horizontal',
+  motionDamping: 15,
+  motionStiffness: 90,
+  padding: 0.3,
+  theme: NIVO_THEME,
+  valueScale: { type: 'linear' },
+  enableGridX: true,
+  enableGridY: false,
 }
 
 export const processDataForGraph = (

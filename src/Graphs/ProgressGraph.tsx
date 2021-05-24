@@ -56,17 +56,11 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
     <ResponsiveBar
       data={filteredData}
       keys={dataKeys}
-      indexBy="Des_Grp"
       margin={MARGINS}
-      valueScale={{ type: 'linear' }}
-      indexScale={{ type: 'band', round: true }}
       colors={dataKeys.map(
         (dataKey) =>
           dataDefinitions.find((dd) => dd.key === dataKey)?.color || ''
       )}
-      groupMode={'grouped'}
-      innerPadding={2}
-      borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
       axisBottom={{
         tickSize: 5,
         tickPadding: 5,
@@ -101,6 +95,10 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
         )
       }}
       {...NIVO_BASE_PROPS}
+      // Override NIVO_BASE_PROPS; these MUST come after the line above
+      layout={'vertical'}
+      enableGridX={false}
+      enableGridY={true}
     />
   )
 

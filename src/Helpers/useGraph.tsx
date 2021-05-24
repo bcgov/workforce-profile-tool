@@ -1,21 +1,19 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 
-import { horizontalLabel, labelValue, verticalLabel } from '../Graphs/labels'
+import { horizontalLabel, verticalLabel } from '../Graphs/labels'
 import FixTypeLater from '../@types/FixTypeLater'
-import { ResponsiveBar } from '@nivo/bar'
-import { NIVO_BASE_PROPS } from './graphs'
-import Color from 'color'
+import { useAxisLeft } from '../Graphs/useAxisLeft'
 
 export interface UseGraphReturnType {
   maxItem: number
   items: number[]
   labelCallback: FixTypeLater
-  // graph: JSX.Element
+  axisLeft: FixTypeLater
 }
 
-export interface UseGraphProps {
-  data: FixTypeLater[]
-  dataKeys: FixTypeLater[]
+export interface UseGraphProps<T> {
+  data: T[]
+  dataKeys: string[]
   maxItemComparator?: number
   width: number
   formatter: FixTypeLater
@@ -25,19 +23,17 @@ export interface UseGraphProps {
   labelIsVertical?: boolean
 }
 
-const useGraph = ({
+const useGraph = <T,>({
   data,
   dataKeys,
   maxItemComparator,
   width,
   formatter,
   margins,
-  color,
-  additionalLayers,
   labelIsVertical,
-}: UseGraphProps): UseGraphReturnType => {
+}: UseGraphProps<T>): UseGraphReturnType => {
   const items = data
-    .map((d: FixTypeLater): number[] => {
+    .map((d): number[] => {
       return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
     })
     .flat()
@@ -51,7 +47,9 @@ const useGraph = ({
     })
   }, [maxItem, width])
 
-  return { maxItem, items, labelCallback }
+  const axisLeft = useAxisLeft({ width })
+
+  return { maxItem, items, labelCallback, axisLeft }
 }
 
 export default useGraph
