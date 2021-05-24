@@ -1,5 +1,5 @@
 import { ResponsiveBar } from '@nivo/bar'
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import Color from 'color'
 
 import {
@@ -8,19 +8,20 @@ import {
   useDataManager,
 } from '../Data/DataManager'
 import { formatNumber } from '../Helpers/formatter'
-import { horizontalLabel, labelValue } from './labels'
+import { labelValue } from './labels'
 import {
   DEFAULT_GRAPH_WIDTH,
   NIVO_BASE_PROPS,
   processDataForGraph,
 } from '../Helpers/graphs'
+import { getTooltip } from '../Helpers/tooltipHelper'
 import { OccupationRegionRawData } from '../@types/DataTypes'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
+import useGraph from '../Helpers/useGraph'
 
 import './Graphs.scss'
-import { getTooltip } from '../Helpers/tooltipHelper'
 
 interface Props {
   title: string
@@ -74,19 +75,13 @@ const OccupationRegionGraph = ({
   )
   filteredData.reverse()
 
-  const items = filteredData
-    .map((d: FixTypeLater): number[] => {
-      return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
-    })
-    .flat()
-
-  const maxItem = Math.max(...items)
-
-  const labelCallback = useCallback(() => {
-    return horizontalLabel(MARGINS, width, maxItem, (d: FixTypeLater) => {
-      return formatNumber(d, '')
-    })
-  }, [maxItem, width])
+  const { labelCallback, items } = useGraph({
+    data: filteredData,
+    dataKeys,
+    width,
+    formatter: (d: FixTypeLater) => formatNumber(d, ''),
+    margins: MARGINS,
+  })
 
   const graph = (
     <ResponsiveBar

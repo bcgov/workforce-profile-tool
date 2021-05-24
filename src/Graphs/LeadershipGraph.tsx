@@ -52,21 +52,6 @@ const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
   const { dataKeys, filteredData } = processDataForGraph(data, dataDefinitions)
   filteredData.reverse()
 
-  // const items = filteredData
-  //   .map((d: FixTypeLater): number[] => {
-  //     return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
-  //   })
-  //   .flat()
-  //   .reverse()
-
-  // const maxItem = Math.max(...items)
-
-  // const labelCallback = useCallback(() => {
-  //   return horizontalLabel(MARGINS, width, maxItem, (d: FixTypeLater) => {
-  //     return formatPercent(d, 1, 100)
-  //   })
-  // }, [maxItem, width])
-
   const { labelCallback, items } = useGraph({
     data: filteredData,
     dataKeys,

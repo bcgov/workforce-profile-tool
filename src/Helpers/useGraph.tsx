@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 
-import { horizontalLabel, labelValue } from '../Graphs/labels'
+import { horizontalLabel, labelValue, verticalLabel } from '../Graphs/labels'
 import FixTypeLater from '../@types/FixTypeLater'
 import { ResponsiveBar } from '@nivo/bar'
 import { NIVO_BASE_PROPS } from './graphs'
@@ -22,6 +22,7 @@ export interface UseGraphProps {
   margins: FixTypeLater
   color?: string
   additionalLayers?: FixTypeLater
+  labelIsVertical?: boolean
 }
 
 const useGraph = ({
@@ -33,6 +34,7 @@ const useGraph = ({
   margins,
   color,
   additionalLayers,
+  labelIsVertical,
 }: UseGraphProps): UseGraphReturnType => {
   const items = data
     .map((d: FixTypeLater): number[] => {
@@ -43,7 +45,8 @@ const useGraph = ({
   const maxItem = Math.max(...items, maxItemComparator || 0)
 
   const labelCallback = useCallback(() => {
-    return horizontalLabel(margins, width, maxItem, (d: FixTypeLater) => {
+    const labelFormatter = labelIsVertical ? verticalLabel : horizontalLabel
+    return labelFormatter(margins, width, maxItem, (d: FixTypeLater) => {
       return formatter(d)
     })
   }, [maxItem, width])

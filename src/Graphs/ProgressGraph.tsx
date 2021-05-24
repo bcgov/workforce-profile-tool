@@ -10,6 +10,7 @@ import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
+import useGraph from '../Helpers/useGraph'
 
 interface Props {
   title: string
@@ -42,19 +43,14 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
       return obj
     })
 
-  const items = filteredData
-    .map((d: FixTypeLater): number[] => {
-      return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
-    })
-    .flat()
-
-  const maxItem = Math.max(...items)
-
-  const labelCallback = useCallback(() => {
-    return verticalLabel(MARGINS, 500, maxItem, (d: FixTypeLater) => {
-      return formatPercent(d, 1, 100)
-    })
-  }, [maxItem, width])
+  const { labelCallback, items } = useGraph({
+    data: filteredData,
+    dataKeys,
+    width: 500,
+    formatter: (d: FixTypeLater) => formatPercent(d, 1, 100),
+    margins: MARGINS,
+    labelIsVertical: true,
+  })
 
   const graph = (
     <ResponsiveBar
