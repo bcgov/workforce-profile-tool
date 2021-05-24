@@ -1,26 +1,25 @@
 import React, { useEffect } from 'react'
 
 import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
-import { useDataManager } from '../Data/DataManager'
+import { displayNameByKey } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { ProgressRawData } from '../@types/DataTypes'
-import { displayNameByKey } from '../Data/DataManager'
+import { useDataManager } from '../Data/DataManager'
+import { useDataQuery } from '../Data/useDataQuery'
 import Dictionary from '../@types/Dictionary'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
 import ProgressGraph from '../Graphs/ProgressGraph'
-import { YEAR_PLACEHOLDER, useDataQuery } from '../Data/useDataQuery'
+import { DataKeyEnum } from '../@types/DataKeyEnum'
 
 const Progress = (): JSX.Element => {
-  const { setLockedVars, year } = useDataManager()
+  const { setLockedVars } = useDataManager()
 
   // When page loads, set the locked variables as appropriate.
   useEffect(() => setLockedVars({}), [])
 
-  const dataKey = `WP${YEAR_PLACEHOLDER}_Ind_Progress`
   const { data, isLoading, error } = useDataQuery<ProgressRawData>(
-    dataKey,
-    year
+    DataKeyEnum.Progress
   )
 
   const columns: ColumnWithClassNameAndFooter<ProgressRawData>[] = [

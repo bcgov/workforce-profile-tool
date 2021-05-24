@@ -1,11 +1,16 @@
-import { useCallback } from 'react'
-import { horizontalLabel } from '../Graphs/labels'
+import React, { useCallback } from 'react'
+
+import { horizontalLabel, labelValue } from '../Graphs/labels'
 import FixTypeLater from '../@types/FixTypeLater'
+import { ResponsiveBar } from '@nivo/bar'
+import { NIVO_BASE_PROPS } from './graphs'
+import Color from 'color'
 
 export interface UseGraphReturnType {
   maxItem: number
   items: number[]
   labelCallback: FixTypeLater
+  // graph: JSX.Element
 }
 
 export interface UseGraphProps {
@@ -15,6 +20,8 @@ export interface UseGraphProps {
   width: number
   formatter: FixTypeLater
   margins: FixTypeLater
+  color?: string
+  additionalLayers?: FixTypeLater
 }
 
 const useGraph = ({
@@ -24,6 +31,8 @@ const useGraph = ({
   width,
   formatter,
   margins,
+  color,
+  additionalLayers,
 }: UseGraphProps): UseGraphReturnType => {
   const items = data
     .map((d: FixTypeLater): number[] => {

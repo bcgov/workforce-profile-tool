@@ -2,24 +2,23 @@ import React, { useEffect } from 'react'
 
 import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
 import { ComparisonRawData } from '../@types/DataTypes'
+import { DataKeyEnum } from '../@types/DataKeyEnum'
+import { displayNameByKey } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { useDataManager } from '../Data/DataManager'
-import { displayNameByKey } from '../Data/DataManager'
+import { useDataQuery } from '../Data/useDataQuery'
 import ComparisonGraph from '../Graphs/ComparisonGraph'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
-import { YEAR_PLACEHOLDER, useDataQuery } from '../Data/useDataQuery'
 import TableTooltip from '../Table/TableTooltip'
 
 const Comparison = (): JSX.Element => {
-  const { setLockedVars, year, queryValues } = useDataManager()
+  const { setLockedVars, queryValues, year } = useDataManager()
 
   useEffect(() => setLockedVars({}), [])
 
-  const dataKey = `WP${YEAR_PLACEHOLDER}_Comparison`
   const { data, isLoading, error } = useDataQuery<ComparisonRawData>(
-    dataKey,
-    year
+    DataKeyEnum.Comparison
   )
 
   const ministry = displayNameByKey('Ministry_Key', queryValues.Ministry_Key)

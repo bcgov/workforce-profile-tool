@@ -1,9 +1,8 @@
-import * as d3 from 'd3'
 import { useQuery } from 'react-query'
+import * as d3 from 'd3'
 
 import { filterData, sortData, useDataManager } from './DataManager'
-
-export const YEAR_PLACEHOLDER = 'YYYY'
+import { YEAR_PLACEHOLDER } from '../@types/DataKeyEnum'
 
 export type UseDataQueryResult<T> = {
   data: T[]
@@ -13,10 +12,9 @@ export type UseDataQueryResult<T> = {
 
 export const useDataQuery = <T>(
   dataKey: string,
-  year: string | undefined,
   doNotFilterMinistries?: boolean
 ): UseDataQueryResult<T> => {
-  const { metadata, queryValues } = useDataManager()
+  const { metadata, queryValues, year } = useDataManager()
 
   const key = dataKey.replace(YEAR_PLACEHOLDER, year || '')
 
