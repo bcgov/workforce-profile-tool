@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
+import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { displayNameByKey } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { ProgressRawData } from '../@types/DataTypes'
@@ -22,7 +22,7 @@ const Progress = (): JSX.Element => {
     DataKeyEnum.Progress
   )
 
-  const columns: ColumnWithClassNameAndFooter<ProgressRawData>[] = [
+  const columns: ColumnWithClassName<ProgressRawData>[] = [
     {
       id: 'Des_Grp',
       Header: 'Designated Group',

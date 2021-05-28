@@ -1,25 +1,24 @@
-import FixTypeLater from '../@types/FixTypeLater'
+import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { DEFINITIONS } from '../Table/Definitions'
 
-const _toCSVString = (rows: FixTypeLater[]) => {
+const _toCSVString = (rows: string[][]): string => {
   let content = ''
 
-  rows.forEach(function (row) {
+  rows.forEach((row) => {
     content += row.join(',') + '\n'
   })
 
   return content
 }
 
-export const exportData = (
-  columns: FixTypeLater,
-  rows: FixTypeLater,
-  title: FixTypeLater,
+export const exportData = <T extends Record<string, unknown>>(
+  columns: ColumnWithClassName<T>[],
+  rows: T[],
   includeDefinitions = true,
-  columnPrefixes?: FixTypeLater
-): FixTypeLater => {
-  const columnRow = columns.map((c: FixTypeLater, index: FixTypeLater) => {
-    let name = c.Header
+  columnPrefixes?: Record<string, string>
+): string => {
+  const columnRow = columns.map((c, index) => {
+    let name = c.Header as JSX.Element | string
     if (typeof name === 'object') {
       // Special case for columns with HTML in them. In that case, c.name will
       // be an object, since such a column will actually be a React element. Any
@@ -36,19 +35,11 @@ export const exportData = (
     return `"${name}"`
   })
 
-  const mappedRows = rows.map((r: FixTypeLater) =>
-    columns.map((c: FixTypeLater) =>
-      c.displayAccessor ? `"${c.displayAccessor(r)}"` : `"${c.accessor(r)}"`
-    )
+  const mappedRows = rows.map((r) =>
+    columns.map((c) => `"${(c.accessor as (datum: T) => string)(r)}"`)
   )
 
-  let allRows
-
-  if (title) {
-    allRows = [title].concat([columnRow])
-  } else {
-    allRows = [columnRow]
-  }
+  let allRows = [columnRow]
 
   allRows = allRows.concat(mappedRows)
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
+import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { DataKeyEnum } from '../@types/DataKeyEnum'
 import { displayNameByKey } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
@@ -28,7 +28,7 @@ const Leadership = (): JSX.Element => {
     DataKeyEnum.Leadership
   )
 
-  const columns: ColumnWithClassNameAndFooter<LeadershipRawData>[] = [
+  const columns: ColumnWithClassName<LeadershipRawData>[] = [
     {
       accessor: (r) => displayNameByKey('Des_Grp', r.Des_Grp),
       Header: 'Designated Group',

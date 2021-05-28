@@ -17,7 +17,6 @@ class DownloadButton extends Component<Props> {
     const csvString = exportData(
       this.props.columns,
       this.props.rows,
-      null,
       this.props.includeDefinitions,
       this.props.columnPrefixes
     )

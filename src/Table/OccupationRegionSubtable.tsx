@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
+import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { formatNumber, formatPercent } from '../Helpers/formatter'
 import { OccupationRegionRawData } from '../@types/DataTypes'
 import { OccupationRegionEnum } from '../Views/OccupationRegion'
@@ -27,7 +27,7 @@ const RegionOccupationSubtable = ({
 
   const filteredData = data.filter((d) => d.Variable_Type === viewType)
 
-  const columns: ColumnWithClassNameAndFooter<OccupationRegionRawData>[] = [
+  const columns: ColumnWithClassName<OccupationRegionRawData>[] = [
     {
       id: `${viewType}_Region_Group`,
       Header: `${viewType}`,

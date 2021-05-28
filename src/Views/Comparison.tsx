@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
+import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { ComparisonRawData } from '../@types/DataTypes'
 import { DataKeyEnum } from '../@types/DataKeyEnum'
 import { displayNameByKey } from '../Data/DataManager'
@@ -23,7 +23,7 @@ const Comparison = (): JSX.Element => {
 
   const ministry = displayNameByKey('Ministry_Key', queryValues.Ministry_Key)
 
-  const columns: ColumnWithClassNameAndFooter<ComparisonRawData>[] = [
+  const columns: ColumnWithClassName<ComparisonRawData>[] = [
     {
       id: 'Des_Grp',
       Header: 'Designated Group',

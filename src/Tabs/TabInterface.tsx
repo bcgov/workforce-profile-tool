@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import FixTypeLater from '../@types/FixTypeLater'
+
 import './TabInterface.scss'
 
 interface Props {
   activeTabKey: string
-  children: React.ReactNode
+  baseURL?: string
+  children: JSX.Element[]
   hideTextWhenSmall?: boolean
   search: string
-  baseURL?: string
 }
 
 interface State {
@@ -60,7 +60,7 @@ class TabInterface extends React.Component<Props, State> {
     let tabs: React.ReactNode[] = []
 
     if (this.props.children && this.props.children instanceof Array) {
-      tabButtons = this.props.children.map((child: FixTypeLater) => {
+      tabButtons = this.props.children.map((child) => {
         const key = child.key
         const search = this.props.search
         const isActiveClass = key === this.state.activeTabKey ? ' active' : ''
@@ -85,7 +85,7 @@ class TabInterface extends React.Component<Props, State> {
       })
 
       // The actual tabs
-      tabs = this.props.children.map((child: FixTypeLater) => {
+      tabs = this.props.children.map((child) => {
         const key = child.key
         const showTab = key === this.state.activeTabKey
         const element = showTab ? (
