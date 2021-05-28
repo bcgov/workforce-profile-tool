@@ -5,12 +5,12 @@ import Tooltip from '../Core/Tooltip'
 
 import './Legend.scss'
 
-interface Props {
-  items: DataDefinition[]
+interface Props<T> {
+  items: DataDefinition<T>[]
   notes?: React.ReactNode
 }
 
-const Legend = ({ items, notes }: Props): JSX.Element => {
+const Legend = <T,>({ items, notes }: Props<T>): JSX.Element => {
   const rows = items.map((item) => {
     return (
       <div key={item.color} className={'d-flex align-items-top'}>

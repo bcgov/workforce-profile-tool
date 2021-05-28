@@ -9,7 +9,7 @@ export const horizontalLabel = (
   margins: Margin,
   width: number,
   maxItem: number,
-  formatter: (d: string | number) => string
+  formatter: (d: string) => string
 ): LabelFormatter => {
   const labelBuilder = (d: string | number) => {
     const numD = parseFloatClean(d) || 0
@@ -22,7 +22,7 @@ export const horizontalLabel = (
 
     return ((
       <tspan dy={0} dx={dx} style={{ textAnchor: 'start' }}>
-        {formatter(d)}
+        {formatter(`${d}`)}
       </tspan>
     ) as unknown) as string
   }
@@ -33,7 +33,7 @@ export const verticalLabel = (
   margins: Margin,
   height: number,
   maxItem: number,
-  formatter: (d: string | number) => string
+  formatter: (d: string) => string
 ): LabelFormatter => {
   const labelBuilder = (d: string | number) => {
     const numD = parseFloatClean(d) || 0
@@ -45,7 +45,7 @@ export const verticalLabel = (
 
     return ((
       <tspan dx={0} dy={-dy} style={{ textAnchor: 'middle' }}>
-        {formatter(d)}
+        {formatter(`${d}`)}
       </tspan>
     ) as unknown) as string
   }

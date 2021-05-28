@@ -1,6 +1,9 @@
-import { BarProps, BarSvgProps } from '@nivo/bar'
-import FixTypeLater from '../@types/FixTypeLater'
+import { BarSvgProps } from '@nivo/bar'
+
 import { parseFloatClean } from './formatter'
+import FixTypeLater from '../@types/FixTypeLater'
+import { DataDefinition } from '../@types/DataDefinition'
+import { DesignatedGroupKeyedData } from '../@types/DataTypes'
 
 export const BAR_H_GAP_SIZE = 3 // Horizontal space between bars within a group
 export const BAR_H_CATEGORY_GAP_SIZE = 30 // Horizontal space between bar groups
@@ -69,21 +72,21 @@ export const NIVO_BASE_PROPS: Partial<BarSvgProps> = {
   enableGridY: false,
 }
 
-export const processDataForGraph = (
-  data: FixTypeLater[],
-  dataDefinitions: FixTypeLater[],
+export const processDataForGraph = <T extends DesignatedGroupKeyedData>(
+  data: T[],
+  dataDefinitions: DataDefinition<T>[],
   additionalMapping?: FixTypeLater
-): FixTypeLater => {
+): { dataKeys: (keyof T)[]; filteredData: T[] } => {
   const dataKeys = dataDefinitions.map((d) => d.key)
   const filteredData = data
     .filter((d) => d['Des_Grp'] !== 'AS_TOTAL')
-    .map((d: FixTypeLater) => {
+    .map((d) => {
       const obj: FixTypeLater = { Des_Grp: d.Des_Grp }
       if (additionalMapping) {
         additionalMapping(d, obj)
       }
       dataKeys.forEach((dataKey) => {
-        obj[dataKey] = parseFloatClean(d[dataKey])
+        obj[dataKey] = parseFloatClean((d[dataKey] as unknown) as number)
         obj[`${dataKey}_str`] = d[dataKey]
       })
       return obj
@@ -91,4 +94,15 @@ export const processDataForGraph = (
   return { dataKeys, filteredData }
 }
 
-export const DEFAULT_GRAPH_WIDTH = 620
+export const GRAPH_DEFAULT_WIDTH = 620
+export const GRAPH_WIDTH_BREAKPOINT = 576
+export const GRAPH_Y_AXIS_NARROW_WIDTH = 80
+
+export const yAxisWidthForSize = (
+  graphWidth: number,
+  baseYAxisWidth: number
+): number => {
+  return graphWidth < GRAPH_WIDTH_BREAKPOINT
+    ? GRAPH_Y_AXIS_NARROW_WIDTH
+    : baseYAxisWidth
+}

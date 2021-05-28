@@ -1,12 +1,15 @@
+import { AxisProps } from '@nivo/axes'
 import { useCallback, useMemo } from 'react'
+
 import FixTypeLater from '../@types/FixTypeLater'
 import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
+import { GRAPH_WIDTH_BREAKPOINT } from '../Helpers/graphs'
 
 interface Props {
   width: number
 }
 
-export const BASE_AXIS_LEFT_PROPS: FixTypeLater = {
+export const BASE_AXIS_LEFT_PROPS: AxisProps = {
   tickSize: 5,
   tickPadding: 5,
   tickRotation: 0,
@@ -17,7 +20,7 @@ export const BASE_AXIS_LEFT_PROPS: FixTypeLater = {
 export const useAxisLeft = ({ width }: Props): FixTypeLater => {
   const formatter = useCallback(
     (d: FixTypeLater) =>
-      (width < 576
+      (width < GRAPH_WIDTH_BREAKPOINT
         ? shortDisplayNameByKey('Des_Grp', d)
         : displayNameByKey('Des_Grp', d)) as string,
     [width]

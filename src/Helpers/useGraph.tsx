@@ -1,40 +1,52 @@
+import { AxisProps, TickFormatter } from '@nivo/axes'
+import { Margin } from '@nivo/core'
 import { useCallback } from 'react'
 
+import { DataDefinition } from '../@types/DataDefinition'
 import { horizontalLabel, verticalLabel } from '../Graphs/labels'
-import FixTypeLater from '../@types/FixTypeLater'
+import { LabelFormatter, TooltipProp } from '@nivo/bar'
+import { useAxisBottom } from '../Graphs/useAxisBottom'
 import { useAxisLeft } from '../Graphs/useAxisLeft'
+import { useTooltip } from '../Graphs/useTooltip'
 
 export interface UseGraphReturnType {
-  maxItem: number
+  axisBottom: AxisProps
+  axisLeft: AxisProps
   items: number[]
-  labelCallback: FixTypeLater
-  axisLeft: FixTypeLater
+  labelCallback: () => LabelFormatter
+  maxItem: number
+  tooltip: TooltipProp
 }
 
 export interface UseGraphProps<T> {
+  bottomAxisFormat?: TickFormatter
+  bottomAxisText: string
+  color?: string
   data: T[]
-  dataKeys: string[]
+  dataDefinitions: DataDefinition<T>[]
+  dataKeys: (keyof T)[]
+  formatter: (s: string) => string
+  labelIsVertical?: boolean
+  margins: Margin
   maxItemComparator?: number
   width: number
-  formatter: FixTypeLater
-  margins: FixTypeLater
-  color?: string
-  additionalLayers?: FixTypeLater
-  labelIsVertical?: boolean
 }
 
 const useGraph = <T,>({
+  bottomAxisFormat,
+  bottomAxisText,
   data,
+  dataDefinitions,
   dataKeys,
+  formatter,
+  labelIsVertical,
+  margins,
   maxItemComparator,
   width,
-  formatter,
-  margins,
-  labelIsVertical,
 }: UseGraphProps<T>): UseGraphReturnType => {
   const items = data
-    .map((d): number[] => {
-      return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
+    .map((datum): number[] => {
+      return dataKeys.map((e): number => +datum[e])
     })
     .flat()
 
@@ -42,14 +54,19 @@ const useGraph = <T,>({
 
   const labelCallback = useCallback(() => {
     const labelFormatter = labelIsVertical ? verticalLabel : horizontalLabel
-    return labelFormatter(margins, width, maxItem, (d: FixTypeLater) => {
-      return formatter(d)
-    })
+    return labelFormatter(margins, width, maxItem, formatter)
   }, [maxItem, width])
 
   const axisLeft = useAxisLeft({ width })
 
-  return { maxItem, items, labelCallback, axisLeft }
+  const axisBottom = useAxisBottom({
+    legendText: bottomAxisText,
+    format: bottomAxisFormat,
+  })
+
+  const tooltip = useTooltip({ dataDefinitions, formatter })
+
+  return { maxItem, items, labelCallback, axisLeft, axisBottom, tooltip }
 }
 
 export default useGraph

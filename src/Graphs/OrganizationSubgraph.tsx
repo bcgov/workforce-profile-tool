@@ -3,20 +3,22 @@ import { ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
 import React, { useState } from 'react'
 
-import { formatPercent, parseIntClean } from '../Helpers/formatter'
-import { labelValue } from './labels'
-import { MinistryRawData } from '../@types/DataTypes'
+import { BASE_AXIS_LEFT_PROPS } from './useAxisLeft'
+import { DataDefinition } from '../@types/DataDefinition'
 import {
-  DEFAULT_GRAPH_WIDTH,
+  GRAPH_DEFAULT_WIDTH,
+  GRAPH_WIDTH_BREAKPOINT,
   NIVO_BASE_PROPS,
   processDataForGraph,
 } from '../Helpers/graphs'
 import { displayNameByKey, useDataManager } from '../Data/DataManager'
+import { formatPercent, parseIntClean } from '../Helpers/formatter'
+import { labelValue } from './labels'
+import { MinistryRawData } from '../@types/DataTypes'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 import useGraph from '../Helpers/useGraph'
-import { BASE_AXIS_LEFT_PROPS } from './useAxisLeft'
 
 interface SubgraphProps {
   color?: string
@@ -38,9 +40,9 @@ const OrganizationSubGraph = ({
 
   if (!data) return <div>&nbsp;</div>
 
-  const [width, setWidth] = useState(DEFAULT_GRAPH_WIDTH)
+  const [width, setWidth] = useState(GRAPH_DEFAULT_WIDTH)
 
-  MARGINS.left = width < 576 ? 80 : 255
+  MARGINS.left = width < GRAPH_WIDTH_BREAKPOINT ? 80 : 255
 
   const provincialRepresentation = parseFloat(
     data.find((d) => d.Ministry_Key === 'BC Population')!.Value
@@ -48,7 +50,7 @@ const OrganizationSubGraph = ({
 
   let hasSuppressedData = false
 
-  const legendItems = [
+  const legendItems: DataDefinition<FixTypeLater>[] = [
     {
       key: 'Des_Grp',
       label: displayNameByKey('Des_Grp', data[0].Des_Grp) || '',
@@ -65,15 +67,16 @@ const OrganizationSubGraph = ({
   ).toLowerCase()} employees`
 
   const { dataKeys, filteredData } = processDataForGraph(
-    data.filter((d: FixTypeLater) => {
-      return d.Ministry_Key !== 'BC Population'
-    }),
-    [{ key: 'Value' }],
+    data.filter((d) => d.Ministry_Key !== 'BC Population'),
+    [{ key: 'Value' }] as FixTypeLater[],
     (d: FixTypeLater, obj: FixTypeLater) => {
       if (parseIntClean(d.Value) === 0) hasSuppressedData = true
       const categoryFullName = displayNameByKey('Ministry_Key', d.Ministry_Key)
       let categoryShortName = categoryFullName
-      if (categoryShortName && (categoryShortName.length > 37 || width < 576)) {
+      if (
+        categoryShortName &&
+        (categoryShortName.length > 37 || width < GRAPH_WIDTH_BREAKPOINT)
+      ) {
         categoryShortName = d.Ministry_Key
       }
       obj.category = d.Ministry_Key
@@ -92,17 +95,31 @@ const OrganizationSubGraph = ({
     dataKeys,
     maxItemComparator: provincialRepresentation + 3,
     width,
-    formatter: (d: FixTypeLater) => formatPercent(d, 1, 100),
+    formatter: (d) => formatPercent(d, 1, 100),
     margins: MARGINS,
+    bottomAxisText: '% representation',
+    dataDefinitions: legendItems,
   })
 
   const graph = (
     <ResponsiveBar
+      axisBottom={{
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: 0,
+        legend: '% representation',
+        legendPosition: 'middle',
+        legendOffset: 40,
+        format: (d: FixTypeLater) =>
+          `${(+d).toLocaleString(undefined, { maximumFractionDigits: 0 })}%`,
+      }}
+      axisLeft={Object.assign(
+        { format: (d: FixTypeLater) => d },
+        BASE_AXIS_LEFT_PROPS
+      )}
+      colors={color}
       data={filteredData}
       keys={['Value']}
-      margin={MARGINS}
-      colors={color}
-      maxValue={maxItem}
       layers={[
         'grid',
         'axes',
@@ -136,20 +153,8 @@ const OrganizationSubGraph = ({
           )
         },
       ]}
-      axisLeft={Object.assign(
-        { format: (d: FixTypeLater) => d },
-        BASE_AXIS_LEFT_PROPS
-      )}
-      axisBottom={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: '% representation',
-        legendPosition: 'middle',
-        legendOffset: 40,
-        format: (d: FixTypeLater) =>
-          `${(+d).toLocaleString(undefined, { maximumFractionDigits: 0 })}%`,
-      }}
+      margin={MARGINS}
+      maxValue={maxItem}
       label={labelValue}
       labelFormat={labelCallback()}
       tooltip={(d: FixTypeLater): JSX.Element => {
@@ -196,14 +201,14 @@ const OrganizationSubGraph = ({
 
   return (
     <GraphFrame
-      items={items}
       className={`Ministry-${varKey}`}
-      title={`${title} — ${subtitle}`}
       graph={graph}
-      legend={legend}
-      setWidthCallback={setWidth}
       height={600}
       isOrganizationFrame
+      items={items}
+      legend={legend}
+      setWidthCallback={setWidth}
+      title={`${title} — ${subtitle}`}
     />
   )
 }
