@@ -5,19 +5,19 @@ import React, { useEffect } from 'react'
 import useDimensions from 'react-use-dimensions'
 
 import FilterNotes from './FilterNotes'
-import FixTypeLater from '../@types/FixTypeLater'
-
-import './Graphs.scss'
+import IntentionalAny from '../@types/IntentionalAny'
 import NoGraph from '../Views/NoGraph'
 
+import './Graphs.scss'
+
 interface Props {
-  items: number[]
   className: string
   graph: React.ReactNode
   height?: number
   isOrganizationFrame?: boolean
+  items: number[]
   legend: React.ReactNode
-  setWidthCallback?: FixTypeLater
+  setWidthCallback?: (width: number) => void
   title: string
 }
 
@@ -155,7 +155,7 @@ const GraphFrame = (props: Props): JSX.Element => {
   }
 
   const isIE =
-    /*  @cc_on!@ */ false || !!(document as FixTypeLater).documentMode
+    /*  @cc_on!@ */ false || !!(document as IntentionalAny).documentMode
 
   return (
     <div

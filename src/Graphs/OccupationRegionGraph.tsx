@@ -81,7 +81,10 @@ const OccupationRegionGraph = ({
     data: filteredData,
     dataDefinitions,
     dataKeys,
-    formatter: (d) => formatNumber(d, ''),
+    formatter: (d) => {
+      console.log('d', d)
+      return formatNumber(d, '')
+    },
     margins: MARGINS,
     width,
   })
