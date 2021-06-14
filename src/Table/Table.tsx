@@ -1,14 +1,13 @@
 /* eslint react/jsx-key: "off" */ // Turn off the jsx-key warning.
 
-import { usePagination, useSortBy, useTable } from 'react-table'
+import { Column, usePagination, useSortBy, useTable } from 'react-table'
 import React from 'react'
 
+import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import ColumnSort from './ColumnSort'
-import FixTypeLater from '../@types/FixTypeLater'
-import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
 
 interface Props<T extends Record<string, unknown>> {
-  columns: ColumnWithClassNameAndFooter<T>[]
+  columns: Column[]
   data: T[]
   showFooter?: boolean
 }
@@ -21,13 +20,13 @@ const Table = <T extends Record<string, unknown>>({
   const tableInstance = useTable({ columns, data }, useSortBy, usePagination)
 
   const {
+    footerGroups,
     getTableBodyProps,
     getTableProps,
     headerGroups,
-    footerGroups,
     page,
     prepareRow,
-  }: FixTypeLater = tableInstance
+  } = tableInstance
 
   return (
     <>
@@ -37,12 +36,12 @@ const Table = <T extends Record<string, unknown>>({
         {...getTableProps()}
       >
         <thead>
-          {headerGroups.map((headerGroup: FixTypeLater) => (
+          {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column: FixTypeLater) => (
+              {headerGroup.headers.map((column) => (
                 <th
                   {...column.getHeaderProps({
-                    className: column.className,
+                    className: (column as ColumnWithClassName<T>).className,
                   })}
                 >
                   <div {...column.getSortByToggleProps()}>
@@ -57,15 +56,16 @@ const Table = <T extends Record<string, unknown>>({
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {page.map((row: FixTypeLater) => {
+          {page.map((row) => {
             prepareRow(row)
             return (
               <tr {...row.getRowProps()}>
-                {row.cells.map((cell: FixTypeLater) => {
+                {row.cells.map((cell) => {
                   return (
                     <td
                       {...cell.getCellProps({
-                        className: cell.column.className,
+                        className: (cell.column as ColumnWithClassName<T>)
+                          .className,
                       })}
                     >
                       {cell.render('Cell')}
@@ -78,12 +78,12 @@ const Table = <T extends Record<string, unknown>>({
         </tbody>
         {showFooter && (
           <tfoot>
-            {footerGroups.map((footerGroup: FixTypeLater) => (
+            {footerGroups.map((footerGroup) => (
               <tr {...footerGroup.getFooterGroupProps()}>
-                {footerGroup.headers.map((column: FixTypeLater) => (
+                {footerGroup.headers.map((column) => (
                   <td
                     {...column.getHeaderProps({
-                      className: column.className,
+                      className: (column as ColumnWithClassName<T>).className,
                     })}
                     {...column.getFooterProps()}
                   >

@@ -1,19 +1,14 @@
-import { useQuery } from 'react-query'
-import * as d3 from 'd3'
 import React, { useEffect } from 'react'
 
-import {
-  filterData,
-  shortDisplayNameByKey,
-  sortData,
-  useDataManager,
-} from '../Data/DataManager'
-import GenericView from './GenericView'
-import Dictionary from '../@types/Dictionary'
+import { DataKeyEnum } from '../@types/DataKeyEnum'
 import { displayNameByKey } from '../Data/DataManager'
-import OccupationRegionSubtable from '../Table/OccupationRegionSubtable'
-import OccupationGraph from '../Graphs/OccupationRegionGraph'
 import { OccupationRegionRawData } from '../@types/DataTypes'
+import { shortDisplayNameByKey, useDataManager } from '../Data/DataManager'
+import { useDataQuery } from '../Data/useDataQuery'
+import Dictionary from '../@types/Dictionary'
+import GenericView from './GenericView'
+import OccupationGraph from '../Graphs/OccupationRegionGraph'
+import OccupationRegionSubtable from '../Table/OccupationRegionSubtable'
 
 export enum OccupationRegionEnum {
   Region = 'Region',
@@ -24,10 +19,8 @@ interface Props {
   viewType: OccupationRegionEnum
 }
 
-// TODO: If the ministry_key is BCPS, lock employee type to REG; otherwise don't
-// lock variables
 const OccupationRegion = ({ viewType }: Props): JSX.Element => {
-  const { setLockedVars, metadata, year, queryValues } = useDataManager()
+  const { setLockedVars, year, queryValues } = useDataManager()
 
   useEffect(() => {
     const employeeType = year === '2018' ? ['REG'] : ['ALL']
@@ -37,23 +30,9 @@ const OccupationRegion = ({ viewType }: Props): JSX.Element => {
     setLockedVars(varsToLock)
   }, [queryValues.Ministry_Key, year])
 
-  const dataKey = `WP${year}_Rep_Occ_Rgn`
-  const url = metadata && metadata[dataKey] && year ? metadata[dataKey].url : ''
-
-  // Load the raw data.
-  const { isLoading, error, data: unfilteredData } = useQuery(
-    dataKey,
-    async () => {
-      return (await d3.csv(url)) as OccupationRegionRawData[]
-    },
-    {
-      enabled: !!(metadata && year),
-      keepPreviousData: true,
-    }
+  const { isLoading, error, data } = useDataQuery<OccupationRegionRawData>(
+    DataKeyEnum.OccupationRegion
   )
-
-  // Split the data
-  const data = sortData(filterData(unfilteredData, queryValues))
 
   // Split the data
   const dataMap: Dictionary<OccupationRegionRawData[]> = {}
@@ -80,7 +59,7 @@ const OccupationRegion = ({ viewType }: Props): JSX.Element => {
   return (
     <GenericView
       title={`Representation — ${viewType}`}
-      data={unfilteredData}
+      data={data}
       isLoading={isLoading}
       error={error}
     >

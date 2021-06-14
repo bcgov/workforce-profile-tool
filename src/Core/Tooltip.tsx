@@ -2,33 +2,37 @@
 
 import React, { useEffect, useRef } from 'react'
 
-import FixTypeLater from '../@types/FixTypeLater'
-
 import './Tooltip.scss'
 
 interface Props {
+  /** The text of the tooltip. */
   text: string | undefined
 }
 
-const Tooltip = ({ text }: Props): JSX.Element => {
-  // TODO: Grab the tooltip key here
+interface TooltipShim {
+  tooltip: () => void
+}
 
-  const tooltipRef = useRef<FixTypeLater>()
+/** A Bootstrap tooltip for showing additional information upon hover. */
+const Tooltip = ({ text }: Props): JSX.Element => {
+  const tooltipRef = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
-    // Enable the Bootstrap tooltip using jQuery
-    const tooltip = $(tooltipRef.current) as FixTypeLater
-    tooltip.tooltip()
+    // Enable the Bootstrap tooltip using jQuery.
+    if (tooltipRef.current) {
+      const tooltip = ($(tooltipRef.current) as unknown) as TooltipShim
+      tooltip.tooltip()
+    }
   }, [])
 
   return (
     <span
       className="Tooltip"
-      ref={tooltipRef}
-      data-toggle="tooltip"
-      title={text}
-      data-placement="bottom"
       data-html="true"
+      data-placement="bottom"
+      data-toggle="tooltip"
+      ref={tooltipRef}
+      title={text}
     >
       <i className="fas fa-info-circle" />
     </span>

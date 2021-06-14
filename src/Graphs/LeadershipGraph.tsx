@@ -1,18 +1,23 @@
 import { ResponsiveBar } from '@nivo/bar'
-import Color from 'color'
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 
-import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
+import {
+  GRAPH_DEFAULT_WIDTH,
+  GRAPH_WIDTH_BREAKPOINT,
+  GRAPH_Y_AXIS_NARROW_WIDTH,
+  NIVO_BASE_PROPS,
+  processDataForGraph,
+} from '../Helpers/graphs'
 import { formatPercent } from '../Helpers/formatter'
 import { getTooltip } from '../Helpers/tooltipHelper'
-import { horizontalLabel, labelValue } from './labels'
+import { labelValue } from './labels'
 import { LeadershipRawData } from '../@types/DataTypes'
-import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
-import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
+import useGraph from '../Helpers/useGraph'
 
 import './Graphs.scss'
+import { DataDefinition } from '../@types/DataDefinition'
 
 interface Props {
   data: LeadershipRawData[]
@@ -20,10 +25,11 @@ interface Props {
   year: string
 }
 
-const MARGINS = { left: 160, right: 50, top: 0, bottom: 50 }
+const LEFT_MARGIN = 160
+const MARGINS = { left: LEFT_MARGIN, right: 50, top: 0, bottom: 50 }
 
 const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
-  const dataDefinitions = [
+  const dataDefinitions: DataDefinition<LeadershipRawData>[] = [
     {
       key: 'Executive',
       label: 'Executive Leadership',
@@ -38,77 +44,37 @@ const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
     },
   ]
 
-  const [width, setWidth] = useState(620)
+  const [width, setWidth] = useState(GRAPH_DEFAULT_WIDTH)
 
-  MARGINS.left = width < 576 ? 80 : 160
+  MARGINS.left =
+    width < GRAPH_WIDTH_BREAKPOINT ? GRAPH_Y_AXIS_NARROW_WIDTH : LEFT_MARGIN
 
   if (!data) return <div>&nbsp;</div>
 
   const { dataKeys, filteredData } = processDataForGraph(data, dataDefinitions)
   filteredData.reverse()
 
-  const items = filteredData
-    .map((d: FixTypeLater): number[] => {
-      return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
-    })
-    .flat()
-    .reverse()
-
-  const maxItem = Math.max(...items)
-
-  const labelCallback = useCallback(() => {
-    return horizontalLabel(MARGINS, width, maxItem, (d: FixTypeLater) => {
-      return formatPercent(d, 1, 100)
-    })
-  }, [maxItem, width])
+  const { labelCallback, items, axisLeft, axisBottom, tooltip } = useGraph({
+    bottomAxisText: '% in leadership positions',
+    data: filteredData,
+    dataDefinitions,
+    dataKeys,
+    formatter: (d) => formatPercent(d, 1, 100),
+    margins: MARGINS,
+    width,
+  })
 
   const graph = (
     <ResponsiveBar
+      axisBottom={axisBottom}
+      axisLeft={axisLeft}
+      colors={['#70CCDB', '#D2E2EE']}
       data={filteredData}
       keys={dataKeys}
-      indexBy="Des_Grp"
-      margin={MARGINS}
-      valueScale={{ type: 'linear' }}
-      indexScale={{ type: 'band', round: true }}
-      colors={['#70CCDB', '#D2E2EE']}
-      layout={'horizontal'}
-      groupMode={'grouped'}
-      borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
-      enableGridX={true}
-      enableGridY={false}
-      innerPadding={2}
-      axisLeft={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legendPosition: 'middle',
-        legendOffset: 32,
-        format: (d: FixTypeLater) =>
-          (width < 576
-            ? shortDisplayNameByKey('Des_Grp', d)
-            : displayNameByKey('Des_Grp', d)) as string,
-      }}
-      axisBottom={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: '% in leadership positions',
-        legendPosition: 'middle',
-        legendOffset: 40,
-        format: (d: FixTypeLater) =>
-          `${(+d).toLocaleString(undefined, { maximumFractionDigits: 0 })}%`,
-      }}
       label={labelValue}
       labelFormat={labelCallback()}
-      tooltip={(d: FixTypeLater): JSX.Element => {
-        return (
-          <div style={{ color: Color(d.color).darken(0.3).hex() }}>
-            {displayNameByKey('Des_Grp', d.indexValue)},{' '}
-            {dataDefinitions.find((dd) => dd.key === d.id)?.label}:{' '}
-            {d.data[d.id]}%
-          </div>
-        )
-      }}
+      margin={MARGINS}
+      tooltip={tooltip}
       {...NIVO_BASE_PROPS}
     />
   )
@@ -117,12 +83,12 @@ const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
 
   return (
     <GraphFrame
-      items={items}
       className="Leadership"
-      title={title}
       graph={graph}
+      items={items}
       legend={legend}
       setWidthCallback={setWidth}
+      title={title}
     />
   )
 }

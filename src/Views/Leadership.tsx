@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 
-import { ColumnWithClassNameAndFooter } from '../@types/ColumnWithClassName'
+import { ColumnWithClassName } from '../@types/ColumnWithClassName'
+import { DataKeyEnum } from '../@types/DataKeyEnum'
 import { displayNameByKey } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { LeadershipRawData } from '../@types/DataTypes'
 import { useDataManager } from '../Data/DataManager'
-import { YEAR_PLACEHOLDER, useDataQuery } from '../Data/useDataQuery'
+import { useDataQuery } from '../Data/useDataQuery'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
 import LeadershipGraph from '../Graphs/LeadershipGraph'
@@ -23,16 +24,13 @@ const Leadership = (): JSX.Element => {
     }
   }, [year])
 
-  const dataKey = `WP${YEAR_PLACEHOLDER}_Leadership`
   const { data, isLoading, error } = useDataQuery<LeadershipRawData>(
-    dataKey,
-    year
+    DataKeyEnum.Leadership
   )
 
-  const columns: ColumnWithClassNameAndFooter<LeadershipRawData>[] = [
+  const columns: ColumnWithClassName<LeadershipRawData>[] = [
     {
-      accessor: (r: LeadershipRawData) =>
-        displayNameByKey('Des_Grp', r.Des_Grp),
+      accessor: (r) => displayNameByKey('Des_Grp', r.Des_Grp),
       Header: 'Designated Group',
       id: 'Des_Grp',
     },

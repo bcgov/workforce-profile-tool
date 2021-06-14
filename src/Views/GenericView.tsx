@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Dictionary from '../@types/Dictionary'
-import FixTypeLater from '../@types/FixTypeLater'
 import Error from './Error'
 import HistoricalData from './HistoricalData'
 import Loading from './Loading'
@@ -11,7 +10,7 @@ import Title from './Title'
 interface Props<T extends Dictionary<unknown>> {
   children: React.ReactNode
   data: T[] | undefined
-  error?: FixTypeLater
+  error?: unknown
   isLoading?: boolean
   title?: string
 }

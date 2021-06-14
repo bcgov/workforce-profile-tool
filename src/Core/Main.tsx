@@ -1,12 +1,12 @@
+import { useLocation, useParams } from 'react-router'
 import React from 'react'
 
+import Comparison from '../Views/Comparison'
+import Home from './Home'
+import Leadership from '../Views/Leadership'
 import OccupationRegion, {
   OccupationRegionEnum,
 } from '../Views/OccupationRegion'
-import Comparison from '../Views/Comparison'
-import FixTypeLater from '../@types/FixTypeLater'
-import Home from './Home'
-import Leadership from '../Views/Leadership'
 import Organization from '../Views/Organization'
 import Progress from '../Views/Progress'
 import Tab from '../Tabs/Tab'
@@ -14,29 +14,33 @@ import TabInterface from '../Tabs/TabInterface'
 
 import './Main.scss'
 
-interface Props {
-  data?: FixTypeLater
-  location?: FixTypeLater
-  match?: FixTypeLater
-  variableLockCallback?: FixTypeLater
+interface MainParamProps {
+  /** The key for the low-level navigation (i.e. sub-tab), if necessary. */
+  lowLevelNav?: string
+  /** The key for the high-level navigation tab. */
+  highLevelNav?: string
 }
 
-const Main = (props: Props): JSX.Element => {
-  const activeOuterTab = props.match.params.highLevelNav || 'home'
+const Main = (): JSX.Element => {
+  const location = useLocation()
+  const { lowLevelNav, highLevelNav } = useParams<MainParamProps>()
+
+  // Set the default tabs: "Home" when highLevelNav is not present, a
+  const activeOuterTab = highLevelNav || 'home'
   let activeInnerTab
-  if (activeOuterTab === 'representation' && !props.match.params.lowLevelNav) {
+  if (activeOuterTab === 'representation' && !lowLevelNav) {
+    // If the high level tab is "representation" and there's no low-level tab
+    // set, the low-level tab defaults to the "by-occupation" inner tab.
     activeInnerTab = 'by-occupation'
   } else {
-    activeInnerTab = props.match.params.lowLevelNav || 'representation-by-group'
+    // Otherwise, set to whatever might be passed in, or '' in the exceptional
+    // case.
+    activeInnerTab = lowLevelNav || ''
   }
 
   return (
     <div className="Main">
-      <TabInterface
-        activeTabKey={activeOuterTab}
-        matchURL={props.match.url}
-        search={props.location.search}
-      >
+      <TabInterface activeTabKey={activeOuterTab} search={location.search}>
         <Tab key={'home'} name="Home">
           <Home />
         </Tab>
@@ -46,7 +50,7 @@ const Main = (props: Props): JSX.Element => {
               <TabInterface
                 activeTabKey={activeInnerTab}
                 baseURL={`/${activeOuterTab}`}
-                search={props.location.search}
+                search={location.search}
               >
                 <Tab key={'representation-by-group'} name="By Designated Group">
                   <Progress />
@@ -71,7 +75,7 @@ const Main = (props: Props): JSX.Element => {
             <TabInterface
               activeTabKey={activeInnerTab}
               baseURL={`/${activeOuterTab}`}
-              search={props.location.search}
+              search={location.search}
             >
               <Tab key={'by-occupation'} name="By Occupation">
                 <OccupationRegion viewType={OccupationRegionEnum.Occupation} />

@@ -11,6 +11,7 @@ export const DEFINITIONS = [
   },
 ]
 
+/** The definitions to show underneath a table. */
 const Definitions = (): JSX.Element => {
   const definitionRows = DEFINITIONS.map((item) => {
     return (

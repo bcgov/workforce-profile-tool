@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 
 import { ComparisonRawData, MinistryRawData } from '../@types/DataTypes'
+import { DataKeyEnum } from '../@types/DataKeyEnum'
 import { useDataManager, variableGroupByKey } from '../Data/DataManager'
-import { YEAR_PLACEHOLDER, useDataQuery } from '../Data/useDataQuery'
+import { useDataQuery } from '../Data/useDataQuery'
 import GenericView from './GenericView'
 import OrganizationGraph from '../Graphs/OrganizationGraph'
 
@@ -33,7 +34,7 @@ export const buildMinistryData = (
 }
 
 const Organization = (): JSX.Element => {
-  const { setLockedVars, year } = useDataManager()
+  const { setLockedVars } = useDataManager()
 
   useEffect(() => setLockedVars({ Ministry_Key: ['BCPS'] }), [])
 
@@ -41,11 +42,7 @@ const Organization = (): JSX.Element => {
     data: unprocessedData,
     isLoading,
     error,
-  } = useDataQuery<ComparisonRawData>(
-    `WP${YEAR_PLACEHOLDER}_Comparison`,
-    year,
-    true
-  )
+  } = useDataQuery<ComparisonRawData>(DataKeyEnum.Comparison, true)
 
   const data = buildMinistryData(unprocessedData)
 

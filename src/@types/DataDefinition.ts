@@ -1,6 +1,6 @@
-export type DataDefinition = {
+export type DataDefinition<T> = {
   label: string
   color: string
   tooltip?: string
-  key: string
+  key: keyof T
 }

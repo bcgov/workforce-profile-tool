@@ -1,18 +1,19 @@
-type MinistryKeyedData = {
+export type MinistryKeyedData = {
   Ministry_Key: string
 }
 
-type DesignatedGroupKeyedData = {
+export type DesignatedGroupKeyedData = {
   Des_Grp: string
 }
 
-type EmployeeTypeKeyedData = {
+export type EmployeeTypeKeyedData = {
   Employee_Type: string
 }
 
 export type ProgressRawData = MinistryKeyedData &
   EmployeeTypeKeyedData &
   DesignatedGroupKeyedData & {
+    '2015_pc': string
     '2018_pc': string
     '2020_pc': string
     '2020_hired_ct': string

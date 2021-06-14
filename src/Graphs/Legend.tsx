@@ -5,12 +5,15 @@ import Tooltip from '../Core/Tooltip'
 
 import './Legend.scss'
 
-interface Props {
-  items: DataDefinition[]
+interface Props<T> {
+  /** The chart columns that need legend entries. */
+  items: DataDefinition<T>[]
+  /** Any additional notes to display in the legend. */
   notes?: React.ReactNode
 }
 
-const Legend = ({ items, notes }: Props): JSX.Element => {
+/** The legend on the side of the chart. */
+const Legend = <T,>({ items, notes }: Props<T>): JSX.Element => {
   const rows = items.map((item) => {
     return (
       <div key={item.color} className={'d-flex align-items-top'}>

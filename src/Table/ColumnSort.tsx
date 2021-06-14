@@ -1,14 +1,18 @@
 import React from 'react'
 
 export interface Column {
+  /** Is the column sorted at all? */
   isSorted?: boolean
+  /** Is the column sorted in descending order? */
   isSortedDesc?: boolean
 }
 
 interface Props {
+  /** Whether this column is sorted, and whether it is sorted descendingly. */
   column: Column
 }
 
+/** A column sort indicator for use on a table header. */
 const ColumnSortIndicator = ({ column }: Props): JSX.Element => {
   return (
     <div className="ml-1">
