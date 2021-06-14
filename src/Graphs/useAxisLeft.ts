@@ -5,6 +5,7 @@ import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
 import { GRAPH_WIDTH_BREAKPOINT } from '../Helpers/graphs'
 
 interface Props {
+  /** The width of the chart in pixels. */
   width: number
 }
 
@@ -16,7 +17,9 @@ export const BASE_AXIS_LEFT_PROPS: AxisProps = {
   legendOffset: 32,
 }
 
+/** Hook to provide the props for a left axis on a Nivo chart. */
 export const useAxisLeft = ({ width }: Props): AxisProps => {
+  // The formatter depends on the width of the graph.
   const formatter = useCallback(
     (d) =>
       (width < GRAPH_WIDTH_BREAKPOINT

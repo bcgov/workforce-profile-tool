@@ -1,22 +1,22 @@
-@import '../common';
+@import "../common";
 
 .Definitions {
-    list-style-type: none;
-    margin: 0;
-    margin-top: 30px;
-    padding: 0;
-    display: flex;
-    flex-flow: row;
-    flex-wrap: wrap;
-    color: $brand-color-dark-grey;
-    font-size: 0.9rem;
-    div.term {
-        flex: 0 0 60px;
-        font-weight: 600;
-        text-align: right;
-        padding-right: 30px;
-    }
-    div.definition {
-        flex: 0 0 calc(100% - 90px);
-    }
+  list-style-type: none;
+  margin: 0;
+  margin-top: 30px;
+  padding: 0;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  color: $brand-color-dark-grey;
+  font-size: 0.9rem;
+  div.term {
+    flex: 0 0 60px;
+    font-weight: 600;
+    text-align: right;
+    padding-right: 30px;
+  }
+  div.definition {
+    flex: 0 0 calc(100% - 90px);
+  }
 }

@@ -1,6 +1,11 @@
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { DEFINITIONS } from '../Table/Definitions'
 
+/** Helper function that converts an array of string arrays (i.e. rows and
+ * columns) into a single string which can be saved as a CSV.
+ * @param rows An array of string arrays. The inner string array contains the
+ * row values, in order, e.g. ["1993", "0.3", "0.5"]. The outer array contains
+ * all the individual row arrays. */
 const _toCSVString = (rows: string[][]): string => {
   let content = ''
 
@@ -11,14 +16,22 @@ const _toCSVString = (rows: string[][]): string => {
   return content
 }
 
+/** Function to generate a string suitable for saving as a CSV from the supplied
+ * rows.
+ *
+ * @param columns The table column definitions.
+ * @param rows The data rows.
+ * @param includeDefinitions Whether to include definitions of the suppressed
+ * data (appended at the bottom of the CSV).
+ */
 export const exportData = <T extends Record<string, unknown>>(
   columns: ColumnWithClassName<T>[],
   rows: T[],
-  includeDefinitions = true,
-  columnPrefixes?: Record<string, string>
+  includeDefinitions = true
 ): string => {
-  const columnRow = columns.map((c, index) => {
+  const columnRow = columns.map((c) => {
     let name = c.Header as JSX.Element | string
+
     if (typeof name === 'object') {
       // Special case for columns with HTML in them. In that case, c.name will
       // be an object, since such a column will actually be a React element. Any
@@ -27,11 +40,7 @@ export const exportData = <T extends Record<string, unknown>>(
       // get the proper column text.
       name = name.props.title
     }
-    // If there are prefixes, attach them
-    if (columnPrefixes) {
-      const prefix = columnPrefixes[index] || ''
-      name = prefix + name
-    }
+
     return `"${name}"`
   })
 

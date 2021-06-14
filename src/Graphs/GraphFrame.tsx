@@ -11,16 +11,36 @@ import NoGraph from '../Views/NoGraph'
 import './Graphs.scss'
 
 interface Props {
+  /** The class name for the graph. */
   className: string
+  /** The graph itself. This would typically be a Nivo bar chart, but could be
+   * anything else.
+   */
   graph: React.ReactNode
+  /** The height of the graph (optional). */
   height?: number
+  /** Whether this frame is for an Organization graph. If so, the active filters
+   * will be shown differently.
+   */
   isOrganizationFrame?: boolean
+  /** The numeric values of every datum to graph. If they're all zero, Nivo
+   * breaks and we have to display a message to the user.
+   */
   items: number[]
+  /** The legend for the graph. Most likely a Legend component. */
   legend: React.ReactNode
+  /** The callback to call when the width changes. */
   setWidthCallback?: (width: number) => void
+  /** The title for the graph. */
   title: string
 }
 
+/** A frame for a graph to ensure consistent apperance across the app. Takes in
+ * the graph and legend as React nodes. Will also show an indicator of the
+ * active filters, as well as a button to save the graph to PNG. Will also
+ * call the supplied callback function when the width of the graph frame changes
+ * (useful for updating the graph items).
+ */
 const GraphFrame = (props: Props): JSX.Element => {
   const [ref, { width }] = useDimensions()
 

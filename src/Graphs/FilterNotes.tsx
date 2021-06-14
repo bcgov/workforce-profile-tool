@@ -9,9 +9,14 @@ import { VariableGroup } from '../@types/VariableGroup'
 import { QueryValues } from '../@types/QueryValues'
 
 interface Props {
+  /** Are these notes for an organization? If so we override the active filters
+   * to show only Year and Employee Type, not Organization. */
   isOrganizationNotes?: boolean
 }
 
+/** Show the active filters (Year, Employee Type, Ministry) next to the graph.
+ * If the graph is the Organization graph, only show Year and Employee Type.
+ */
 const FilterNotes = ({ isOrganizationNotes }: Props): JSX.Element => {
   const { queryValues } = useDataManager()
 

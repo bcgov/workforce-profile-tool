@@ -1,12 +1,12 @@
 import { useLocation, useParams } from 'react-router'
 import React from 'react'
 
-import OccupationRegion, {
-  OccupationRegionEnum,
-} from '../Views/OccupationRegion'
 import Comparison from '../Views/Comparison'
 import Home from './Home'
 import Leadership from '../Views/Leadership'
+import OccupationRegion, {
+  OccupationRegionEnum,
+} from '../Views/OccupationRegion'
 import Organization from '../Views/Organization'
 import Progress from '../Views/Progress'
 import Tab from '../Tabs/Tab'
@@ -15,7 +15,9 @@ import TabInterface from '../Tabs/TabInterface'
 import './Main.scss'
 
 interface MainParamProps {
+  /** The key for the low-level navigation (i.e. sub-tab), if necessary. */
   lowLevelNav?: string
+  /** The key for the high-level navigation tab. */
   highLevelNav?: string
 }
 
@@ -23,12 +25,17 @@ const Main = (): JSX.Element => {
   const location = useLocation()
   const { lowLevelNav, highLevelNav } = useParams<MainParamProps>()
 
+  // Set the default tabs: "Home" when highLevelNav is not present, a
   const activeOuterTab = highLevelNav || 'home'
   let activeInnerTab
   if (activeOuterTab === 'representation' && !lowLevelNav) {
+    // If the high level tab is "representation" and there's no low-level tab
+    // set, the low-level tab defaults to the "by-occupation" inner tab.
     activeInnerTab = 'by-occupation'
   } else {
-    activeInnerTab = lowLevelNav || 'representation-by-group'
+    // Otherwise, set to whatever might be passed in, or '' in the exceptional
+    // case.
+    activeInnerTab = lowLevelNav || ''
   }
 
   return (

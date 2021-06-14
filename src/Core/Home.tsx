@@ -1,5 +1,10 @@
 import React from 'react'
 
+/**
+ * The home page of the app.
+ *
+ * @returns the component for the home page.
+ */
 const Home = (): JSX.Element => {
   const buildVersion = process.env.REACT_APP_GIT_SHA
 

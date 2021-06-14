@@ -8,7 +8,6 @@ interface Props<T extends Record<string, unknown>> {
   columns: ColumnWithClassName<T>[]
   rows: T[]
   includeDefinitions?: boolean
-  columnPrefixes?: Record<string, string>
   filename: string
 }
 
@@ -20,8 +19,7 @@ class DownloadButton<T extends Record<string, unknown>> extends Component<
     const csvString = exportData(
       this.props.columns,
       this.props.rows,
-      this.props.includeDefinitions,
-      this.props.columnPrefixes
+      this.props.includeDefinitions
     )
     const blob = new window.Blob([csvString])
     if ((window as IntentionalAny).navigator.msSaveOrOpenBlob) {

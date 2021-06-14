@@ -1,5 +1,5 @@
-// If you change this, also change in DataKeyEnum below, which cannot have
-// computed members (so no string interpolation has been used).
+// If you change YEAR_PLACEHOLDER, also change in DataKeyEnum below, which
+// cannot have computed members (so no string interpolation has been used).
 export const YEAR_PLACEHOLDER = 'YYYY'
 
 export enum DataKeyEnum {

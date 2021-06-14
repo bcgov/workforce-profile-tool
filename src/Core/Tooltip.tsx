@@ -5,6 +5,7 @@ import React, { useEffect, useRef } from 'react'
 import './Tooltip.scss'
 
 interface Props {
+  /** The text of the tooltip. */
   text: string | undefined
 }
 
@@ -12,11 +13,12 @@ interface TooltipShim {
   tooltip: () => void
 }
 
+/** A Bootstrap tooltip for showing additional information upon hover. */
 const Tooltip = ({ text }: Props): JSX.Element => {
   const tooltipRef = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
-    // Enable the Bootstrap tooltip using jQuery
+    // Enable the Bootstrap tooltip using jQuery.
     if (tooltipRef.current) {
       const tooltip = ($(tooltipRef.current) as unknown) as TooltipShim
       tooltip.tooltip()

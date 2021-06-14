@@ -5,10 +5,13 @@ import './Header.scss'
 import logo from './bc-stats-logo.png'
 
 interface Props {
+  /** The state of the show/hide variable list button (small screens only). */
   showList: boolean
+  /** The callback for when the show/hide variable list button is clicked. */
   toggleListCallback: () => void
 }
 
+/** The header in the upper-left / top of the app (depending on screen size). */
 const Header = ({ showList, toggleListCallback }: Props): JSX.Element => {
   const location = useLocation()
 
@@ -31,8 +34,9 @@ const Header = ({ showList, toggleListCallback }: Props): JSX.Element => {
             >
               {showList ? 'Hide' : 'Show'} variables{' '}
               <i
-                className={`fas fa-caret-${showList ? 'down' : 'right'} ml-2`}
-                style={{ marginRight: '0px' }}
+                className={`fas fa-caret-${
+                  showList ? 'down' : 'right'
+                } ml-2 mr-0`}
               ></i>
             </button>
           </div>

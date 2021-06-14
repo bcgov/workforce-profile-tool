@@ -1,5 +1,18 @@
 import { displayNameByKey } from '../Data/DataManager'
 
+/**
+ * Takes a number-like value from the Workforce Profiles data set (which could
+ * be an actual number, or 'NA', 'S', '<3', or 'x' for data that is unavailable
+ * or suppressed) and either returns the corresponding suppression value or the
+ * integer representation of the number.
+ *
+ * @param number The string that represents a number-like value.
+ * @param zeroValue The value to return if the number is either zero or empty
+ *     string.
+ * @returns A string representing the `number`, formatted as a percent, if
+ *     `number` is actually numeric; or `''` (if number is undefined), `NA`,
+ *     `S`, `<3`, or `x` if `number` is one of those values.
+ */
 export const formatNumber = (
   number: string | number,
   zeroValue: number | string = 0
@@ -14,6 +27,19 @@ export const formatNumber = (
   return parseInt(`${number}`, 10).toLocaleString()
 }
 
+/**
+ * Takes a number-like value from the Workforce Profiles data set (which could
+ * be an actual number, or 'NA', 'S', '<3', or 'x' for data that is unavailable
+ * or suppressed) and either returns the corresponding suppression value or the
+ * number itself, formatted as a percent.
+ *
+ * @param number The string that represents a number-like value.
+ * @param decimals Optional. The number of decimals to retain. Default is 0.
+ * @param divisor Optional. The divisor for `number`. Default is 1.
+ * @returns A string representing the `number`, formatted as a percent, if
+ *     `number` is actually numeric; or `''` (if number is undefined), `NA`,
+ *     `S`, `<3`, or `x` if `number` is one of those values.
+ */
 export const formatPercent = (
   number: string | number,
   decimals = 0,
