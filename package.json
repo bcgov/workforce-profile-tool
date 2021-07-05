@@ -4,6 +4,7 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
+    "@bcgov/bootstrap-theme": "https://github.com/bcgov/bootstrap-theme/releases/download/v1.1.1/bcgov-bootstrap-theme-1.1.1.tgz",
     "@beam-australia/react-env": "^3.0.8",
     "@nivo/bar": "^0.67.0",
     "@nivo/core": "^0.67.0",
@@ -38,7 +39,6 @@
     "use-query-params": "^1.1.9"
   },
   "devDependencies": {
-    "@bcgov/bootstrap-theme": "https://github.com/bcgov/bootstrap-theme/releases/download/v1.1.1/bcgov-bootstrap-theme-1.1.1.tgz",
     "cypress": "^7.2.0",
     "eslint": "^7.19.0",
     "eslint-config-prettier": "^7.2.0",
