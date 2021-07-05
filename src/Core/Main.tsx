@@ -9,6 +9,7 @@ import OccupationRegion, {
 } from '../Views/OccupationRegion'
 import Organization from '../Views/Organization'
 import Progress from '../Views/Progress'
+import Hiring from '../Views/Hiring'
 import Tab from '../Tabs/Tab'
 import TabInterface from '../Tabs/TabInterface'
 
@@ -28,7 +29,9 @@ const Main = (): JSX.Element => {
   // Set the default tabs: "Home" when highLevelNav is not present, a
   const activeOuterTab = highLevelNav || 'home'
   let activeInnerTab
-  if (activeOuterTab === 'representation' && !lowLevelNav) {
+  if (activeOuterTab === 'indicators-of-progress' && !lowLevelNav) {
+    activeInnerTab = 'representation-by-group'
+  } else if (activeOuterTab === 'representation' && !lowLevelNav) {
     // If the high level tab is "representation" and there's no low-level tab
     // set, the low-level tab defaults to the "by-occupation" inner tab.
     activeInnerTab = 'by-occupation'
@@ -45,21 +48,21 @@ const Main = (): JSX.Element => {
           <Home />
         </Tab>
         <Tab key={'indicators-of-progress'} name="Indicators of Progress">
-          <Progress />
-          {/* <div className="Secondary">
-              <TabInterface
-                activeTabKey={activeInnerTab}
-                baseURL={`/${activeOuterTab}`}
-                search={location.search}
-              >
-                <Tab key={'representation-by-group'} name="By Designated Group">
-                  <Progress />
-                </Tab>
-                 <Tab key={'hiring'} name="Hiring">
-                  <Hiring />
-                </Tab> 
-              </TabInterface> 
-            </div> */}
+          {/* <Progress /> */}
+          <div className="Secondary">
+            <TabInterface
+              activeTabKey={activeInnerTab}
+              baseURL={`/${activeOuterTab}`}
+              search={location.search}
+            >
+              <Tab key={'representation-by-group'} name="By Designated Group">
+                <Progress />
+              </Tab>
+              <Tab key={'hiring'} name="Hiring">
+                <Hiring />
+              </Tab>
+            </TabInterface>
+          </div>
         </Tab>
         <Tab key={'comparison'} name="Comparison">
           <Comparison />

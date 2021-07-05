@@ -1,7 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { DataKeyEnum } from '../@types/DataKeyEnum'
+import { HiringRawData } from '../@types/DataTypes'
+import { useDataManager } from '../Data/DataManager'
+import { useDataQuery } from '../Data/useDataQuery'
 
 const Hiring = (): JSX.Element => {
-  return <>Intentionally left blank</>
+  const { setLockedVars } = useDataManager()
+
+  // When page loads, set the locked variables as appropriate.
+  useEffect(() => setLockedVars({ Year: ['2020'] }), [])
+
+  const { data, isLoading, error } = useDataQuery<HiringRawData>(
+    DataKeyEnum.Hiring
+  )
+
+  console.log('data', data, 'isLoading', isLoading, 'error', error)
+
+  return (
+    <>
+      <h2>Hiring</h2>
+      <p>Intentionally left blank</p>
+    </>
+  )
   // const { progressData: data, hiringTotal, setLockedVars } = useDataManager()
 
   // useEffect(() => setLockedVars({}), [])

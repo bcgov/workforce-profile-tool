@@ -2,7 +2,7 @@ import { useQuery } from 'react-query'
 import * as d3 from 'd3'
 
 import { filterData, sortData, useDataManager } from './DataManager'
-import { YEAR_PLACEHOLDER } from '../@types/DataKeyEnum'
+import { DataKeyEnum, YEAR_PLACEHOLDER } from '../@types/DataKeyEnum'
 
 export interface UseDataQueryResult<T> {
   /** An array of data (of type T), or undefined if the data either is not yet
@@ -53,7 +53,18 @@ export const useDataQuery = <T>(
 
   const key = dataKey.replace(YEAR_PLACEHOLDER, year || '')
 
-  const url = metadata && year ? metadata[key].url : ''
+  // TODO: Restore next line when we can load these dynamically.
+  // const url = metadata && year ? metadata[key].url : ''
+
+  // TODO: Start of temporary code.
+  const isLocalKeyTmp =
+    dataKey === DataKeyEnum.Hiring || key === DataKeyEnum.Flow
+  const url = isLocalKeyTmp
+    ? `/data/${year}/${key}.csv`
+    : metadata && year
+    ? metadata[key].url
+    : ''
+  // TODO: End of temporary code.
 
   // Load the raw data.
   const { data: unfilteredData, error, isLoading } = useQuery(

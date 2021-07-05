@@ -7,4 +7,6 @@ export enum DataKeyEnum {
   Leadership = `WPYYYY_Leadership`,
   OccupationRegion = `WPYYYY_Rep_Occ_Rgn`,
   Progress = `WPYYYY_Ind_Progress`,
+  Hiring = `WPYYYY_Hiring`,
+  Flow = `WPYYYY_Flow`,
 }

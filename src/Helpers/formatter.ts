@@ -17,7 +17,6 @@ export const formatNumber = (
   number: string | number,
   zeroValue: number | string = 0
 ): string => {
-  console.log(number)
   if (number === undefined || number === 'undefined') return ''
   if (number === 'NA') return 'NA'
   if (number === 'S') return 'S'

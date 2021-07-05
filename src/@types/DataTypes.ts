@@ -27,6 +27,15 @@ export type LeadershipRawData = DesignatedGroupKeyedData & {
   ALL_BCPS: string
 }
 
+export type HiringRawData = MinistryKeyedData &
+  EmployeeTypeKeyedData &
+  DesignatedGroupKeyedData & {
+    Variable_Type: string
+    Display_Type: string
+    DesGrp_Count_ORG: string
+    Total_Count_ORG: string
+  }
+
 export type MinistryRawData = DesignatedGroupKeyedData &
   MinistryKeyedData & {
     Value: string
