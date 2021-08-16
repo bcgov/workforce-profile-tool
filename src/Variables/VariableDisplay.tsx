@@ -9,6 +9,7 @@ import { VariableGroup } from '../@types/VariableGroup'
 import VariableItemDisplay from './VariableItemDisplay'
 
 import './VariableDisplay.scss'
+import IntentionalAny from '../@types/IntentionalAny'
 
 interface Props {
   variableGroup: VariableGroup
@@ -22,12 +23,21 @@ const VariableDisplay = ({
   const { metadata, year } = useDataManager()
 
   const dataKey = `WP${year}_MinistryKey`
-  const url = metadata && metadata[dataKey] && year ? metadata[dataKey].url : ''
+  const url =
+    metadata && metadata[dataKey] && year ? metadata[dataKey].csvURL : ''
 
+  // TODO: Factor out and use useDataQuery
   const { data: unfilteredData } = useQuery(
     dataKey,
     async () => {
-      return (await d3.csv(url)) as MinistryKeyRawData[]
+      if (url.endsWith('csv')) {
+        // Handle CSV data.
+        return ((await d3.csv(url)) as unknown) as MinistryKeyRawData[]
+      } else {
+        // Handle JSON data.
+        return ((await d3.json(url)) as IntentionalAny).result
+          .records as MinistryKeyRawData[]
+      }
     },
     {
       enabled: !!(metadata && year),

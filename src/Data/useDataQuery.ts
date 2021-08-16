@@ -3,6 +3,10 @@ import * as d3 from 'd3'
 
 import { filterData, sortData, useDataManager } from './DataManager'
 import { DataKeyEnum, YEAR_PLACEHOLDER } from '../@types/DataKeyEnum'
+import IntentionalAny from '../@types/IntentionalAny'
+
+// TODO: Extract this
+export const BASE_DATA_URL = `https://catalogue.data.gov.bc.ca/api/3/action/datastore_search?resource_id=`
 
 export interface UseDataQueryResult<T> {
   /** An array of data (of type T), or undefined if the data either is not yet
@@ -62,7 +66,7 @@ export const useDataQuery = <T>(
   const url = isLocalKeyTmp
     ? `/data/${year}/${key}.csv`
     : metadata && year
-    ? metadata[key].url
+    ? BASE_DATA_URL.concat(metadata[key].id)
     : ''
   // TODO: End of temporary code.
 
@@ -70,7 +74,14 @@ export const useDataQuery = <T>(
   const { data: unfilteredData, error, isLoading } = useQuery(
     key,
     async () => {
-      return ((await d3.csv(url)) as unknown) as T[]
+      console.log('url', url)
+      if (url.endsWith('csv')) {
+        // Handle CSV data.
+        return ((await d3.csv(url)) as unknown) as T[]
+      } else {
+        // Handle JSON data.
+        return ((await d3.json(url)) as IntentionalAny).result.records as T[]
+      }
     },
     {
       // Only enable the query if metadata and year are available.
