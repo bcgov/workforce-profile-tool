@@ -7,12 +7,14 @@ import OrganizationSubGraph from './OrganizationSubgraph'
 import Title from '../Views/Title'
 
 import './Graphs.scss'
+import { DataDictionaryEntry } from '../Data/useDataQuery'
 
 interface Props {
   data?: MinistryRawData[]
+  dataDictionary: DataDictionaryEntry[]
 }
 
-const MinistryGraph = ({ data }: Props): JSX.Element => {
+const MinistryGraph = ({ data, dataDictionary }: Props): JSX.Element => {
   if (!data || data.length === 0) return <div>&nbsp;</div>
 
   // Split the data
@@ -42,6 +44,7 @@ const MinistryGraph = ({ data }: Props): JSX.Element => {
           <OrganizationSubGraph
             color={color}
             data={dataMap[k]}
+            dataDictionary={dataDictionary}
             shortTitle={shortTitle}
             title={title}
             varKey={k}

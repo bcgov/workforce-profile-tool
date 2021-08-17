@@ -9,12 +9,15 @@ import Loading from '../Views/Loading'
 import Table from './Table'
 
 import './Table.scss'
+import { DataDictionaryEntry } from '../Data/useDataQuery'
 
 interface Props<T extends Dictionary<unknown>> {
   /** The table columns to use. */
   columns: ColumnWithClassName<T>[]
   /** The WFP data to show in a table. */
   data: T[] | undefined
+  /** The data dictionary describing entries that need a tooltip. */
+  dataDictionary: DataDictionaryEntry[]
   /** The filename to use when generating a CSV. If undefined, no CSV export
    * button will be shown.
    */
@@ -32,6 +35,7 @@ interface Props<T extends Dictionary<unknown>> {
 const GenericTable = <T extends Dictionary<unknown>>({
   columns,
   data,
+  dataDictionary,
   filename,
   hideDefinitions,
   showFooter,
@@ -45,6 +49,7 @@ const GenericTable = <T extends Dictionary<unknown>>({
           <Table
             columns={columns as Column[]}
             data={data}
+            dataDictionary={dataDictionary}
             showFooter={showFooter}
           />
           {filename && (

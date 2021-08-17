@@ -4,17 +4,21 @@ import { Column, usePagination, useSortBy, useTable } from 'react-table'
 import React from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
+import { DataDictionaryEntry } from '../Data/useDataQuery'
 import ColumnSort from './ColumnSort'
+import TableTooltip from './TableTooltip'
 
 interface Props<T extends Record<string, unknown>> {
   columns: Column[]
   data: T[]
+  dataDictionary: DataDictionaryEntry[]
   showFooter?: boolean
 }
 
 const Table = <T extends Record<string, unknown>>({
   columns,
   data,
+  dataDictionary,
   showFooter,
 }: Props<T>): JSX.Element => {
   const tableInstance = useTable({ columns, data }, useSortBy, usePagination)
@@ -38,20 +42,29 @@ const Table = <T extends Record<string, unknown>>({
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th
-                  {...column.getHeaderProps({
-                    className: (column as ColumnWithClassName<T>).className,
-                  })}
-                >
-                  <div {...column.getSortByToggleProps()}>
-                    <div className="d-flex align-items-end">
-                      <div>{column.render('Header')}</div>
-                      <ColumnSort column={column} />
+              {headerGroup.headers.map((column) => {
+                console.log('column', column)
+                return (
+                  <th
+                    {...column.getHeaderProps({
+                      className: (column as ColumnWithClassName<T>).className,
+                    })}
+                  >
+                    <div {...column.getSortByToggleProps()}>
+                      <div className="d-flex align-items-end">
+                        <div>
+                          {column.render('Header')}
+                          <TableTooltip
+                            tooltipKey={column.id}
+                            dataDictionary={dataDictionary}
+                          />
+                        </div>
+                        <ColumnSort column={column} />
+                      </div>
                     </div>
-                  </div>
-                </th>
-              ))}
+                  </th>
+                )
+              })}
             </tr>
           ))}
         </thead>

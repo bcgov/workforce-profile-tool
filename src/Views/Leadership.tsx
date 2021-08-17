@@ -10,7 +10,6 @@ import { useDataQuery } from '../Data/useDataQuery'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
 import LeadershipGraph from '../Graphs/LeadershipGraph'
-import TableTooltip from '../Table/TableTooltip'
 
 const Leadership = (): JSX.Element => {
   const { setLockedVars, year } = useDataManager()
@@ -24,9 +23,12 @@ const Leadership = (): JSX.Element => {
     }
   }, [year])
 
-  const { data, isLoading, error } = useDataQuery<LeadershipRawData>(
-    DataKeyEnum.Leadership
-  )
+  const {
+    data,
+    dataDictionary,
+    isLoading,
+    error,
+  } = useDataQuery<LeadershipRawData>(DataKeyEnum.Leadership)
 
   const columns: ColumnWithClassName<LeadershipRawData>[] = [
     {
@@ -37,24 +39,14 @@ const Leadership = (): JSX.Element => {
     {
       id: 'Executive',
       accessor: (r) => formatPercent(r.Executive, 1, 100),
-      Header: (
-        <TableTooltip
-          title="Executive Leadership, %"
-          tooltipKey="leadership-executive-leadership"
-        />
-      ),
+      Header: 'Executive Leadership, %',
       className: 'text-right',
     },
     {
       id: 'Management_Band',
       accessor: (r) => formatPercent(r.Management_Band, 1, 100),
       className: 'text-right',
-      Header: (
-        <TableTooltip
-          title="Management Band Leadership, %"
-          tooltipKey="leadership-management-band-leadership"
-        />
-      ),
+      Header: 'Management Band Leadership, %',
     },
   ]
 
@@ -67,10 +59,15 @@ const Leadership = (): JSX.Element => {
     >
       <LeadershipGraph
         data={data}
+        dataDictionary={dataDictionary}
         title={'Leadership by Type'}
-        year={year || ''}
       />
-      <GenericTable data={data} columns={columns} filename="leadership" />
+      <GenericTable
+        data={data}
+        dataDictionary={dataDictionary}
+        columns={columns}
+        filename="leadership"
+      />
     </GenericView>
   )
 }

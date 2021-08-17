@@ -15,15 +15,17 @@ import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 import useGraph from '../Helpers/useGraph'
+import { DataDictionaryEntry } from '../Data/useDataQuery'
 
 interface Props {
   data: ProgressRawData[]
+  dataDictionary: DataDictionaryEntry[]
   title: string
 }
 
 const MARGINS = { top: 50, right: 30, bottom: 50, left: 70 }
 
-const ProgressGraph = ({ data, title }: Props): JSX.Element => {
+const ProgressGraph = ({ data, dataDictionary, title }: Props): JSX.Element => {
   const dataDefinitions: DataDefinition<ProgressRawData>[] = [
     { key: '2015_pc', label: '2015', color: '#6c757d' },
     { key: '2018_pc', label: '2018', color: '#70CCDB' },
@@ -102,7 +104,10 @@ const ProgressGraph = ({ data, title }: Props): JSX.Element => {
   )
 
   const legend = (
-    <Legend items={dataDefinitions.filter((dd) => dataKeys.includes(dd.key))} />
+    <Legend
+      items={dataDefinitions.filter((dd) => dataKeys.includes(dd.key))}
+      dataDictionary={dataDictionary}
+    />
   )
 
   return (

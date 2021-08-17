@@ -18,9 +18,12 @@ const Progress = (): JSX.Element => {
   // When page loads, set the locked variables as appropriate.
   useEffect(() => setLockedVars({}), [])
 
-  const { data, isLoading, error } = useDataQuery<ProgressRawData>(
-    DataKeyEnum.Progress
-  )
+  const {
+    data,
+    dataDictionary,
+    isLoading,
+    error,
+  } = useDataQuery<ProgressRawData>(DataKeyEnum.Progress)
 
   const columns: ColumnWithClassName<ProgressRawData>[] = [
     {
@@ -54,9 +57,15 @@ const Progress = (): JSX.Element => {
     >
       <ProgressGraph
         data={data}
+        dataDictionary={dataDictionary}
         title={'Indicators of Progress — By Designated Group'}
       />
-      <GenericTable columns={columns} data={data} filename="progress" />
+      <GenericTable
+        columns={columns}
+        data={data}
+        dataDictionary={dataDictionary}
+        filename="progress"
+      />
     </GenericView>
   )
 }

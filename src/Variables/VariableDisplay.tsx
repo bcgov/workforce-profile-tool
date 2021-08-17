@@ -9,7 +9,6 @@ import { VariableGroup } from '../@types/VariableGroup'
 import VariableItemDisplay from './VariableItemDisplay'
 
 import './VariableDisplay.scss'
-import IntentionalAny from '../@types/IntentionalAny'
 
 interface Props {
   variableGroup: VariableGroup
@@ -30,14 +29,8 @@ const VariableDisplay = ({
   const { data: unfilteredData } = useQuery(
     dataKey,
     async () => {
-      if (url.endsWith('csv')) {
-        // Handle CSV data.
-        return ((await d3.csv(url)) as unknown) as MinistryKeyRawData[]
-      } else {
-        // Handle JSON data.
-        return ((await d3.json(url)) as IntentionalAny).result
-          .records as MinistryKeyRawData[]
-      }
+      // Handle CSV data.
+      return ((await d3.csv(url)) as unknown) as MinistryKeyRawData[]
     },
     {
       enabled: !!(metadata && year),

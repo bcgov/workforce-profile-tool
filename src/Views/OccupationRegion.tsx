@@ -30,9 +30,12 @@ const OccupationRegion = ({ viewType }: Props): JSX.Element => {
     setLockedVars(varsToLock)
   }, [queryValues.Ministry_Key, year])
 
-  const { isLoading, error, data } = useDataQuery<OccupationRegionRawData>(
-    DataKeyEnum.OccupationRegion
-  )
+  const {
+    isLoading,
+    error,
+    data,
+    dataDictionary,
+  } = useDataQuery<OccupationRegionRawData>(DataKeyEnum.OccupationRegion)
 
   // Split the data
   const dataMap: Dictionary<OccupationRegionRawData[]> = {}
@@ -49,6 +52,7 @@ const OccupationRegion = ({ viewType }: Props): JSX.Element => {
         <h2 className="mb-0">{title}</h2>
         <OccupationRegionSubtable
           data={dataMap[k]}
+          dataDictionary={dataDictionary}
           shortTitle={shortTitle}
           viewType={viewType}
         />
@@ -65,6 +69,7 @@ const OccupationRegion = ({ viewType }: Props): JSX.Element => {
     >
       <OccupationGraph
         data={data}
+        dataDictionary={dataDictionary}
         title={`Representation – ${viewType}`}
         organization={queryValues.Ministry_Key}
       />
