@@ -2,7 +2,7 @@
   "name": "wes-workforce-profiles",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "",
   "dependencies": {
     "@bcgov/bootstrap-theme": "https://github.com/bcgov/bootstrap-theme/releases/download/v1.1.1/bcgov-bootstrap-theme-1.1.1.tgz",
     "@beam-australia/react-env": "^3.0.8",

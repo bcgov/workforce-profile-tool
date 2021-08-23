@@ -81,7 +81,7 @@ export const useDataQuery = <T>(
 
   // TODO: Start of temporary code.
   const isLocalKeyTmp =
-    dataKey === DataKeyEnum.Hiring || key === DataKeyEnum.Flow
+    dataKey === DataKeyEnum.Hiring || dataKey === DataKeyEnum.Flow
   const url = isLocalKeyTmp
     ? `/data/${year}/${key}.csv`
     : metadata && year
@@ -102,7 +102,9 @@ export const useDataQuery = <T>(
     key,
     async () => {
       // Handle CSV data.
+      console.log('url', url)
       const data = ((await d3.csv(url)) as unknown) as T[]
+      console.log('data', data)
       const dataDictionary = metadataUrl
         ? ((await d3.json(metadataUrl)) as IntentionalAny).result.fields
         : [] // If there's no metadataUrl, just return empty array

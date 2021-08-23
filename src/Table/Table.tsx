@@ -21,7 +21,11 @@ const Table = <T extends Record<string, unknown>>({
   dataDictionary,
   showFooter,
 }: Props<T>): JSX.Element => {
-  const tableInstance = useTable({ columns, data }, useSortBy, usePagination)
+  const tableInstance = useTable(
+    { columns, data, initialState: { pageSize: 1000 } },
+    useSortBy,
+    usePagination
+  )
 
   const {
     footerGroups,
@@ -43,7 +47,6 @@ const Table = <T extends Record<string, unknown>>({
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => {
-                console.log('column', column)
                 return (
                   <th
                     {...column.getHeaderProps({

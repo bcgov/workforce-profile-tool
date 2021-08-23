@@ -73,6 +73,18 @@ export type OccupationRegionRawData = MinistryKeyedData &
     DesGrp_Count_Shortfall: string
   }
 
+export type FlowRawData = MinistryKeyedData &
+  DesignatedGroupKeyedData &
+  EmployeeTypeKeyedData & {
+    Variable_Type: string
+    Display_Type: string
+    DesGrp_Count_ORG: string
+    NonDesGrp_Count_ORG: string
+    Total_Count_ORG: string
+    DesGrp_Percent_ORG: string
+    NonDesGrp_Percent_ORG: string
+  }
+
 export type GenericRawData = {
   Ministry_Key?: string
   Des_Grp?: string
