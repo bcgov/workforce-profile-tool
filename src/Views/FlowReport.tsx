@@ -6,10 +6,10 @@ import { formatNumber } from '../Helpers/formatter'
 import { FlowRawData } from '../@types/DataTypes'
 import { useDataManager } from '../Data/DataManager'
 import { useDataQuery } from '../Data/useDataQuery'
-import Dictionary from '../@types/Dictionary'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
 import { DataKeyEnum } from '../@types/DataKeyEnum'
+import FlowReportGraph from '../Graphs/FlowReportGraph'
 
 const FlowReport = (): JSX.Element => {
   const { setLockedVars } = useDataManager()
@@ -68,6 +68,7 @@ const FlowReport = (): JSX.Element => {
         dataDictionary={dataDictionary}
         title={'Flow Report'}
       /> */}
+      <FlowReportGraph data={data} />
       <GenericTable
         columns={columns}
         data={data}
