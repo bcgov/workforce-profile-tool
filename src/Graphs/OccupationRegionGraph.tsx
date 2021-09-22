@@ -80,7 +80,7 @@ const OccupationRegionGraph = ({
     dataDefinitions,
     dataKeys,
     formatter: (d) => {
-      console.log('d', d)
+      // console.log('d', d)
       return formatNumber(d, '')
     },
     margins: MARGINS,
