@@ -15,7 +15,8 @@ const FlowReport = (): JSX.Element => {
   const { setLockedVars } = useDataManager()
 
   // When page loads, set the locked variables as appropriate.
-  useEffect(() => setLockedVars({}), [])
+  useEffect(() => setLockedVars({ Des_Grp: ['IND'] }), [])
+  // useEffect(() => setLockedVars({}), [])
 
   const { data, dataDictionary, isLoading, error } = useDataQuery<FlowRawData>(
     DataKeyEnum.Flow
@@ -43,16 +44,19 @@ const FlowReport = (): JSX.Element => {
       id: 'DesGrp_Count_ORG',
       Header: 'Des. Grp. (Org)',
       accessor: (d) => formatNumber(d['DesGrp_Count_ORG']) || '',
+      className: 'text-right',
     },
     {
       id: 'NonDesGrp_Count_ORG',
       Header: 'Non-Des. Grp. (Org)',
       accessor: (d) => formatNumber(d['NonDesGrp_Count_ORG']) || '',
+      className: 'text-right',
     },
     {
       id: 'Total_Count_ORG',
       Header: 'Total (Org)',
       accessor: (d) => formatNumber(d['Total_Count_ORG']) || '',
+      className: 'text-right',
     },
   ]
 
@@ -63,12 +67,11 @@ const FlowReport = (): JSX.Element => {
       data={data}
       title="Flow Report"
     >
-      {/* <FlowReportGraph
+      <FlowReportGraph
         data={data}
         dataDictionary={dataDictionary}
         title={'Flow Report'}
-      /> */}
-      <FlowReportGraph data={data} />
+      />
       <GenericTable
         columns={columns}
         data={data}

@@ -1,158 +1,169 @@
-import React from 'react'
-import { ResponsiveSankey } from '@nivo/sankey'
-import FixTypeLater from '../@types/FixTypeLater'
+import { ResponsiveBar } from '@nivo/bar'
+import React, { useState } from 'react'
 
-interface Props {
-  data: FixTypeLater
+import { DataDefinition } from '../@types/DataDefinition'
+import { DataDictionaryEntry } from '../Data/useDataQuery'
+import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
+import { FlowRawData } from '../@types/DataTypes'
+import {
+  formatNumber,
+  formatPercent,
+  parseFloatClean,
+} from '../Helpers/formatter'
+import {
+  GRAPH_DEFAULT_WIDTH,
+  GRAPH_WIDTH_BREAKPOINT,
+  GRAPH_Y_AXIS_NARROW_WIDTH,
+  NIVO_BASE_PROPS,
+  processDataForGraph,
+} from '../Helpers/graphs'
+import { labelValue } from './labels'
+import FixTypeLater from '../@types/FixTypeLater'
+import GraphFrame from './GraphFrame'
+import Legend from './Legend'
+import useGraph from '../Helpers/useGraph'
+import Color from 'color'
+
+const COLOR_MAP = {
+  Hiring: {
+    DesGrp_Count_ORG: '#70CCDB',
+    NonDesGrp_Count_ORG: '#D2E2EE',
+  },
+  Separations: {
+    DesGrp_Count_ORG: 'rgb(234, 107, 86)',
+    NonDesGrp_Count_ORG: 'rgb(255, 157, 136)',
+  },
+  Promotions: {
+    DesGrp_Count_ORG: 'rgb(230, 179, 69)',
+    NonDesGrp_Count_ORG: 'rgb(255, 229, 119)',
+  },
 }
 
-const FlowReportGraph = ({ data }: Props): JSX.Element => {
-  console.log('---data---', data)
+interface Props {
+  data: FlowRawData[]
+  dataDictionary: DataDictionaryEntry[]
+  title: string
+}
 
-  const nodes = [
+const LEFT_MARGIN = 300
+const MARGINS = { left: LEFT_MARGIN, right: 50, top: 0, bottom: 50 }
+
+const FlowReportGraph = ({
+  data,
+  dataDictionary,
+  title,
+}: Props): JSX.Element => {
+  const dataDefinitions: DataDefinition<FlowRawData>[] = [
+    { key: 'DesGrp_Count_ORG', label: 'Designated Group', color: '#666' },
     {
-      id: 'Hiring - DesGrp',
-      color: 'rgba(110, 140, 170, 0.9)',
-    },
-    {
-      id: 'Hiring - NonDesGrp',
-      color: 'rgba(100, 100, 100, 0.9)',
-    },
-    {
-      id: 'Hiring',
-      color: 'rgba(100, 200, 100, 0.9)',
-    },
-    {
-      id: 'Promotions - DesGrp',
-      color: 'rgba(170, 140, 110, 0.9)',
-    },
-    {
-      id: 'Promotions - NonDesGrp',
-      color: 'rgba(100, 100, 100, 0.9)',
-    },
-    {
-      id: 'Promotions',
-      color: 'rgba(200, 100, 200, 0.9)',
-    },
-    {
-      id: 'Org Size Adjustment',
-      color: 'rgba(255, 255, 255, 1.0)',
-    },
-    {
-      id: 'Org',
-      color: 'rgba(200, 100, 100, 0.9)',
-    },
-    {
-      id: 'Separations',
-      color: 'rgba(100, 100, 100, 0.9)',
-    },
-    {
-      id: 'Separations - DesGrp',
-      color: 'rgba(250, 150, 50, 0.9)',
-    },
-    {
-      id: 'Separations - NonDesGrp',
-      color: 'rgba(100, 100, 100, 0.9)',
+      key: 'NonDesGrp_Count_ORG',
+      label: 'Non-Designated Group',
+      color: '#ccc',
     },
   ]
 
-  const links = [
-    {
-      source: 'Hiring - DesGrp',
-      target: 'Hiring',
-      value: 567,
-    },
-    {
-      source: 'Hiring - NonDesGrp',
-      target: 'Hiring',
-      value: 7841,
-    },
-    { source: 'Hiring', target: 'Org', value: '10975' },
-    {
-      source: 'Promotions - DesGrp',
-      target: 'Promotions',
-      value: 532,
-    },
-    {
-      source: 'Promotions - NonDesGrp',
-      target: 'Promotions',
-      value: 9874,
-    },
-    {
-      source: 'Promotions',
-      target: 'Org',
-      value: 10895,
-    },
-    // {
-    //   source: 'Org Size Adjustment',
-    //   target: 'Org',
-    //   value: 30000,
-    // },
-    { source: 'Org', target: 'Separations', value: 8794 },
-    {
-      source: 'Separations',
-      target: 'Separations - DesGrp',
-      value: 410,
-    },
-    {
-      source: 'Separations',
-      target: 'Separations - NonDesGrp',
-      value: 5201,
-    },
-  ]
+  const [width, setWidth] = useState(GRAPH_DEFAULT_WIDTH)
+
+  MARGINS.left =
+    width < GRAPH_WIDTH_BREAKPOINT ? GRAPH_Y_AXIS_NARROW_WIDTH : LEFT_MARGIN
+
+  if (!data) return <div>&nbsp;</div>
+
+  // const reshapedData = data
+
+  const { dataKeys, filteredData } = processDataForGraph(
+    data,
+    dataDefinitions,
+    (d: FixTypeLater, obj: FixTypeLater) => {
+      obj.VariableType = d.Variable_Type
+      obj.DisplayType = d.Display_Type
+      obj.Category = `${d.Display_Type}`
+    }
+  )
+  filteredData.reverse()
+
+  const { labelCallback, items } = useGraph({
+    bottomAxisText: 'Count',
+    data: filteredData,
+    dataDefinitions,
+    dataKeys,
+    formatter: (d) => formatNumber(d),
+    margins: MARGINS,
+    width,
+  })
+
+  // const graph = (
+  //   <ResponsiveBar
+  //     axisBottom={axisBottom}
+  //     axisLeft={axisLeft}
+  //     colors={['#6c757d', '#70CCDB', '#D2E2EE']}
+  //     data={filteredData}
+  //     keys={dataKeys}
+  //     label={labelValue}
+  //     labelFormat={labelCallback()}
+  //     margin={MARGINS}
+  //     tooltip={tooltip}
+  //     // Override NIVO_BASE_PROPS; these MUST come after the line above
+  //     indexBy={'Category'}
+  //     enableGridX={false}
+  //     enableGridY={true}
+  //   />
+  const graph = (
+    <ResponsiveBar
+      axisBottom={{
+        format: (d) => formatNumber(+d),
+        legend: 'Count',
+        legendOffset: 40,
+        legendPosition: 'middle',
+        tickPadding: 5,
+        tickRotation: 0,
+        tickSize: 5,
+      }}
+      axisLeft={{
+        legendOffset: 32,
+        legendPosition: 'middle',
+        tickPadding: 5,
+        tickRotation: 0,
+        tickSize: 5,
+      }}
+      colors={(bar) => {
+        return (COLOR_MAP as FixTypeLater)[bar.data.VariableType][bar.id]
+      }}
+      data={filteredData}
+      keys={dataKeys}
+      label={labelValue}
+      labelFormat={labelCallback()}
+      margin={MARGINS}
+      tooltip={(d: FixTypeLater): JSX.Element => {
+        return (
+          <div style={{ color: Color(d.color).darken(0.3).hex() }}>
+            {d.indexValue},{' '}
+            {dataDefinitions.find((dd) => dd.key === d.id)?.label}:{' '}
+            {formatNumber(d.data[d.id])}
+          </div>
+        )
+      }}
+      {...NIVO_BASE_PROPS}
+      indexBy={'Category'}
+    />
+  )
+
+  const legend = (
+    <Legend
+      items={dataDefinitions.filter((dd) => dataKeys.includes(dd.key))}
+      dataDictionary={dataDictionary}
+    />
+  )
 
   return (
-    <div style={{ height: '600px' }}>
-      <ResponsiveSankey
-        align="justify"
-        colors={(node) => node.color}
-        data={{ nodes, links }}
-        enableLabels={true}
-        enableLinkGradient={false}
-        isInteractive={true}
-        labelOrientation="vertical"
-        labelPadding={16}
-        labelPosition="outside"
-        labelTextColor={{ from: 'color', modifiers: [['darker', 1]] }}
-        linkBlendMode={'normal'}
-        linkHoverOthersOpacity={0.1}
-        linkOpacity={0.5}
-        margin={{ top: 40, right: 160, bottom: 40, left: 50 }}
-        nodeBorderColor={{ from: 'color', modifiers: [['darker', 0.8]] }}
-        nodeBorderWidth={0}
-        nodeInnerPadding={3}
-        nodeOpacity={1}
-        nodeSpacing={24}
-        nodeThickness={18}
-        legends={[
-          {
-            anchor: 'bottom-right',
-            direction: 'column',
-            translateX: 130,
-            itemWidth: 100,
-            itemHeight: 14,
-            itemDirection: 'right-to-left',
-            itemsSpacing: 2,
-            itemTextColor: '#999',
-            symbolSize: 14,
-            effects: [
-              {
-                on: 'hover',
-                style: {
-                  itemTextColor: '#000',
-                },
-              },
-            ],
-          },
-        ]}
-        nodeTooltip={(node) => <span>Custom tooltip for node: {node.id}</span>}
-        linkTooltip={(node) => (
-          <span>
-            Custom tooltip for link: {node.source.label} to {node.target.label}
-          </span>
-        )}
-      />
-    </div>
+    <GraphFrame
+      className="FlowReport"
+      graph={graph}
+      items={items}
+      legend={legend}
+      setWidthCallback={setWidth}
+      title={title}
+    />
   )
 }
 
