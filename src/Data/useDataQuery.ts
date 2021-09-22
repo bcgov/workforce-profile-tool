@@ -102,9 +102,9 @@ export const useDataQuery = <T>(
     key,
     async () => {
       // Handle CSV data.
-      console.log('url', url)
+      // console.log('url', url)
       const data = ((await d3.csv(url)) as unknown) as T[]
-      console.log('data', data)
+      // console.log('data', data)
       const dataDictionary = metadataUrl
         ? ((await d3.json(metadataUrl)) as IntentionalAny).result.fields
         : [] // If there's no metadataUrl, just return empty array
@@ -120,7 +120,7 @@ export const useDataQuery = <T>(
     }
   )
 
-  console.log('results', results)
+  // console.log('results', results)
 
   const filteredAndSortedData = sortData(
     filterData(results?.data, queryValues, doNotFilterMinistries)
