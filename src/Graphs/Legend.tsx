@@ -3,6 +3,7 @@ import React from 'react'
 import { DataDefinition } from '../@types/DataDefinition'
 import Tooltip from '../Core/Tooltip'
 import { DataDictionaryEntry } from '../Data/useDataQuery'
+import { getTooltip } from '../Helpers/tooltipHelper'
 
 import './Legend.scss'
 
@@ -22,7 +23,8 @@ const Legend = <T,>({
   notes,
 }: Props<T>): JSX.Element => {
   const rows = items.map((item) => {
-    const tooltip = dataDictionary.find((d) => d.columnKey === item.key)?.note
+    //const tooltip = dataDictionary.find((d) => d.columnKey === item.key)?.note
+    const tooltip = getTooltip(`${item.key}`, dataDictionary)
     return (
       <div key={item.color} className={'d-flex align-items-top'}>
         <div className="swatch">
