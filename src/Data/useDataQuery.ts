@@ -83,7 +83,7 @@ export const useDataQuery = <T>(
   const isLocalKeyTmp =
     dataKey === DataKeyEnum.Hiring || dataKey === DataKeyEnum.Flow
   const url = isLocalKeyTmp
-    ? `/data/${year}/${key}.csv`
+    ? `${process.env.PUBLIC_URL}/data/${year}/${key}.csv`
     : metadata && year
     ? metadata[key].csvURL
     : ''
