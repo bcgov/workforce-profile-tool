@@ -1,17 +1,13 @@
 import React, { useEffect } from 'react'
 
-import { ColumnWithClassName } from '../@types/ColumnWithClassName'
+import { DataKeyEnum } from '../@types/DataKeyEnum'
 import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
-import { formatNumber } from '../Helpers/formatter'
 import { FlowRawData } from '../@types/DataTypes'
 import { useDataManager } from '../Data/DataManager'
 import { useDataQuery } from '../Data/useDataQuery'
-import GenericTable from '../Table/GenericTable'
-import GenericView from './GenericView'
-import { DataKeyEnum } from '../@types/DataKeyEnum'
 import Dictionary from '../@types/Dictionary'
 import FlowReportSubtable from '../Table/FlowReportSubtable'
-// import FlowReportGraph from '../Graphs/FlowReportGraph'
+import GenericView from './GenericView'
 
 const FlowReport = (): JSX.Element => {
   const { setLockedVars } = useDataManager()

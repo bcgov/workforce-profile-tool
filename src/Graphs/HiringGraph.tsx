@@ -2,25 +2,20 @@ import { ResponsiveBar } from '@nivo/bar'
 import React, { useState } from 'react'
 
 import { DataDefinition } from '../@types/DataDefinition'
+import { DataDictionaryEntry } from '../Data/useDataQuery'
+import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
+import { formatNumber } from '../Helpers/formatter'
 import {
   GRAPH_DEFAULT_WIDTH,
   GRAPH_WIDTH_BREAKPOINT,
   NIVO_BASE_PROPS,
   processDataForGraph,
 } from '../Helpers/graphs'
-import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
-import {
-  formatNumber,
-  formatPercent,
-  parseFloatClean,
-} from '../Helpers/formatter'
+import { HiringRawData } from '../@types/DataTypes'
 import { labelValue } from './labels'
-import { HiringRawData, ProgressRawData } from '../@types/DataTypes'
-import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 import useGraph from '../Helpers/useGraph'
-import { DataDictionaryEntry } from '../Data/useDataQuery'
 
 interface Props {
   data: HiringRawData[]

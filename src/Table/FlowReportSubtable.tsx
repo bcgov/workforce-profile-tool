@@ -2,11 +2,7 @@ import React from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { DataDictionaryEntry } from '../Data/useDataQuery'
-import {
-  formatNumber,
-  formatPercent,
-  parseFloatClean,
-} from '../Helpers/formatter'
+import { formatNumber, formatPercent } from '../Helpers/formatter'
 import { FlowRawData } from '../@types/DataTypes'
 import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
