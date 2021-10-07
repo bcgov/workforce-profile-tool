@@ -1,17 +1,16 @@
 import React from 'react'
 
-import {
-  ColumnWithClassName,
-  ColumnWithClassNameandFooter,
-} from '../@types/ColumnWithClassName'
+import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { DataDictionaryEntry } from '../Data/useDataQuery'
-import { formatNumber, formatPercent } from '../Helpers/formatter'
-import { OccupationRegionEnum } from '../Views/OccupationRegion'
-import { FlowRawData, OccupationRegionRawData } from '../@types/DataTypes'
+import {
+  formatNumber,
+  formatPercent,
+  parseFloatClean,
+} from '../Helpers/formatter'
+import { FlowRawData } from '../@types/DataTypes'
 import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
 import GenericTable from './GenericTable'
-import { displayNameByKey } from '../Data/DataManager'
 
 interface Props {
   data: FlowRawData[]
@@ -45,6 +44,20 @@ const FlowReportSubtable = ({
       id: `NonDesGrp_Count_ORG`,
       Header: `Non-${shortTitle}`,
       accessor: (d) => formatNumber(d[`NonDesGrp_Count_ORG`]),
+      className: `text-right`,
+    },
+    {
+      id: `RateOfDesGrp`,
+      Header: `Rate of ${shortTitle}`,
+      accessor: (d) => {
+        const desGrp = parseFloat(d[`DesGrp_Count_ORG`])
+        const nonDesGrp = parseFloat(d[`NonDesGrp_Count_ORG`])
+        if (isNaN(desGrp) || isNaN(nonDesGrp)) {
+          return ''
+        } else {
+          return formatPercent(desGrp / (desGrp + nonDesGrp), 1)
+        }
+      },
       className: `text-right`,
     },
     {
