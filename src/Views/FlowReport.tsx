@@ -13,7 +13,7 @@ const FlowReport = (): JSX.Element => {
   const { setLockedVars } = useDataManager()
 
   // When page loads, set the locked variables as appropriate.
-  useEffect(() => setLockedVars({}), [])
+  useEffect(() => setLockedVars({ Year: ['2020'], Ministry_Key: ['BCPS'] }), [])
 
   const { data, dataDictionary, isLoading, error } = useDataQuery<FlowRawData>(
     DataKeyEnum.Flow
