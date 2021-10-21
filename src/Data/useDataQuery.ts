@@ -76,26 +76,12 @@ export const useDataQuery = <T>(
 
   const key = dataKey.replace(YEAR_PLACEHOLDER, year || '')
 
-  // TODO: Restore next line when we can load these dynamically.
-  // const url = metadata && year ? metadata[key].url : ''
-
-  // TODO: Start of temporary code.
-  const isLocalKeyTmp =
-    dataKey === DataKeyEnum.Hiring || dataKey === DataKeyEnum.Flow
-  const url = isLocalKeyTmp
-    ? `${process.env.PUBLIC_URL}/data/${year}/${key}.csv`
-    : metadata && year
-    ? metadata[key].csvURL
-    : ''
-  // TODO: End of temporary code.
+  const url = metadata && year ? metadata[key].csvURL : ''
 
   // TODO: Also change this next line once local data loading is no longer
   // necessary.
-  const metadataUrl = isLocalKeyTmp
-    ? undefined
-    : metadata && year
-    ? METADATA_URL.concat(metadata[key].id)
-    : undefined
+  const metadataUrl =
+    metadata && year ? METADATA_URL.concat(metadata[key].id) : undefined
 
   // Load the raw data.
   const { data: results, error, isLoading } = useQuery(
