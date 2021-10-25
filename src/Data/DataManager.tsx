@@ -1,4 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+
+import { ArrayParam, StringParam, useQueryParams } from 'use-query-params'
+import * as d3 from 'd3'
+import env from '@beam-australia/react-env'
 import React, {
   ReactNode,
   createContext,
@@ -7,9 +11,6 @@ import React, {
   useEffect,
   useState,
 } from 'react'
-import { ArrayParam, StringParam, useQueryParams } from 'use-query-params'
-import * as d3 from 'd3'
-import env from '@beam-australia/react-env'
 
 import {
   EmployeeCountRawData,
@@ -26,8 +27,6 @@ import FixTypeLater from '../@types/FixTypeLater'
 import variableJson from './variables.json'
 
 const DATA_URL = env('PACKAGE_METADATA_URL')
-
-console.log('DATA_URL', DATA_URL)
 
 export const VARIABLE_MAP = variableJson as Dictionary<VariableGroup>
 
@@ -88,7 +87,6 @@ export const getLocalStorageValue = (key: string): string | string[] | null => {
   )
   if (savedVarsString) {
     const savedVars = JSON.parse(savedVarsString)
-    console.log('savedVars', savedVars)
     return savedVars[key]
   }
   return null
@@ -320,6 +318,9 @@ function DataManagerProvider({
     // Load the metadata just once on load.
     loadMetadata()
   }, [])
+
+  // The first time the metadata is loaded, send out the employeeCount query.
+  // TODO.
 
   const value = {
     lockedVars,

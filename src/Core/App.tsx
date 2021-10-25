@@ -1,4 +1,4 @@
-import { Route, Switch, withRouter } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import React, { useCallback, useState } from 'react'
 
 import { DataManagerProvider } from '../Data/DataManager'
@@ -28,16 +28,12 @@ const App = (): JSX.Element => {
           </div>
           <div className="col-12 col-sm-8 col-md-9 col-xl-10 MainWrapper">
             <Switch>
-              <Route exact path={`/`} render={(props) => <Main {...props} />} />
-              <Route
-                exact
-                path={`/:highLevelNav`}
-                render={(props) => <Main {...props} />}
-              />
+              <Route exact path={`/`} render={() => <Main />} />
+              <Route exact path={`/:highLevelNav`} render={() => <Main />} />
               <Route
                 exact
                 path={`/:highLevelNav/:lowLevelNav`}
-                render={(props) => <Main {...props} />}
+                render={() => <Main />}
               />
             </Switch>
           </div>
@@ -47,4 +43,4 @@ const App = (): JSX.Element => {
   )
 }
 
-export default withRouter(App)
+export default App

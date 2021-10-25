@@ -1,57 +1,54 @@
-import FixTypeLater from '../@types/FixTypeLater'
+import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { DEFINITIONS } from '../Table/Definitions'
 
-const _toCSVString = (rows: FixTypeLater[]) => {
+/** Helper function that converts an array of string arrays (i.e. rows and
+ * columns) into a single string which can be saved as a CSV.
+ * @param rows An array of string arrays. The inner string array contains the
+ * row values, in order, e.g. ["1993", "0.3", "0.5"]. The outer array contains
+ * all the individual row arrays. */
+const _toCSVString = (rows: string[][]): string => {
   let content = ''
 
-  rows.forEach(function (row) {
+  rows.forEach((row) => {
     content += row.join(',') + '\n'
   })
 
   return content
 }
 
-export const exportData = (
-  columns: FixTypeLater,
-  rows: FixTypeLater,
-  title: FixTypeLater,
-  includeDefinitions = true,
-  columnPrefixes?: FixTypeLater
-): FixTypeLater => {
-  const columnRow = columns.map((c: FixTypeLater, index: FixTypeLater) => {
-    let name = c.Header
+/** Function to generate a string suitable for saving as a CSV from the supplied
+ * rows.
+ *
+ * @param columns The table column definitions.
+ * @param rows The data rows.
+ * @param includeDefinitions Whether to include definitions of the suppressed
+ * data (appended at the bottom of the CSV).
+ */
+export const exportData = <T extends Record<string, unknown>>(
+  columns: ColumnWithClassName<T>[],
+  rows: T[],
+  includeDefinitions = true
+): string => {
+  const columnRow = columns.map((c) => {
+    let name = c.Header as JSX.Element | string
+
     if (typeof name === 'object') {
       // Special case for columns with HTML in them. In that case, c.name will
       // be an object, since such a column will actually be a React element. Any
       // children of that React element with a type of 'string' represent
       // column text, so we can just filter on those and join them together to
       // get the proper column text.
-      console.log('name', name)
       name = name.props.title
     }
-    // If there are prefixes, attach them
-    if (columnPrefixes) {
-      const prefix = columnPrefixes[index] || ''
-      name = prefix + name
-    }
+
     return `"${name}"`
   })
 
-  const mappedRows = rows.map((r: FixTypeLater) => {
-    return columns.map((c: FixTypeLater) => {
-      return c.displayAccessor
-        ? `"${c.displayAccessor(r)}"`
-        : `"${c.accessor(r)}"`
-    })
-  })
+  const mappedRows = rows.map((r) =>
+    columns.map((c) => `"${(c.accessor as (datum: T) => string)(r)}"`)
+  )
 
-  let allRows
-
-  if (title) {
-    allRows = [title].concat([columnRow])
-  } else {
-    allRows = [columnRow]
-  }
+  let allRows = [columnRow]
 
   allRows = allRows.concat(mappedRows)
 
@@ -62,8 +59,6 @@ export const exportData = (
     ])
     allRows = allRows.concat(definitions)
   }
-
-  // console.log('allrows', allRows)
 
   return _toCSVString(allRows)
 }

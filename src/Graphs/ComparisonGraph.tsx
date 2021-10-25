@@ -1,18 +1,24 @@
 import { ResponsiveBar } from '@nivo/bar'
-import Color from 'color'
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 
 import { ComparisonRawData } from '../@types/DataTypes'
-import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
+import { displayNameByKey } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
 import { getTooltip } from '../Helpers/tooltipHelper'
-import { horizontalLabel, labelValue } from './labels'
-import { NIVO_BASE_PROPS, processDataForGraph } from '../Helpers/graphs'
+import { labelValue } from './labels'
+import {
+  GRAPH_DEFAULT_WIDTH,
+  NIVO_BASE_PROPS,
+  processDataForGraph,
+  yAxisWidthForSize,
+} from '../Helpers/graphs'
 import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
+import useGraph from '../Helpers/useGraph'
 
 import './Graphs.scss'
+import { DataDefinition } from '../@types/DataDefinition'
 
 interface Props {
   data: ComparisonRawData[]
@@ -21,12 +27,8 @@ interface Props {
   year: string
 }
 
-const MARGINS = {
-  left: 160,
-  right: 50,
-  top: 0,
-  bottom: 50,
-}
+const LEFT_MARGIN = 160
+const MARGINS = { left: LEFT_MARGIN, right: 50, top: 0, bottom: 50 }
 
 const ComparisonGraph = ({
   data,
@@ -34,7 +36,7 @@ const ComparisonGraph = ({
   title,
   year,
 }: Props): JSX.Element => {
-  const dataDefinitions = [
+  const dataDefinitions: DataDefinition<ComparisonRawData>[] = [
     {
       key: 'Employees_BCPS',
       label: `${displayNameByKey('Ministry_Key', ministry)}`,
@@ -54,76 +56,36 @@ const ComparisonGraph = ({
     },
   ]
 
-  const [width, setWidth] = useState(620)
+  const [width, setWidth] = useState(GRAPH_DEFAULT_WIDTH)
 
-  MARGINS.left = width < 576 ? 80 : 160
+  MARGINS.left = yAxisWidthForSize(width, LEFT_MARGIN)
 
   if (!data) return <div>&nbsp;</div>
 
   const { dataKeys, filteredData } = processDataForGraph(data, dataDefinitions)
   filteredData.reverse()
 
-  const items = filteredData
-    .map((d: FixTypeLater): number[] => {
-      return dataKeys.map((e: string): number => +(d as FixTypeLater)[e])
-    })
-    .flat()
-
-  const maxItem = Math.max(...items)
-
-  const labelCallback = useCallback(() => {
-    return horizontalLabel(MARGINS, width, maxItem, (d: FixTypeLater) => {
-      return formatPercent(d, 1, 100)
-    })
-  }, [maxItem, width])
+  const { labelCallback, items, axisLeft, axisBottom, tooltip } = useGraph({
+    bottomAxisText: '% representation',
+    data: filteredData,
+    dataDefinitions,
+    dataKeys,
+    formatter: (d: FixTypeLater) => formatPercent(d, 1, 100),
+    margins: MARGINS,
+    width,
+  })
 
   const graph = (
     <ResponsiveBar
+      axisBottom={axisBottom}
+      axisLeft={axisLeft}
+      colors={['#6c757d', '#70CCDB', '#D2E2EE']}
       data={filteredData}
       keys={dataKeys}
-      indexBy="Des_Grp"
-      margin={MARGINS}
-      valueScale={{ type: 'linear' }}
-      indexScale={{ type: 'band', round: true }}
-      colors={['#6c757d', '#70CCDB', '#D2E2EE']}
-      layout={'horizontal'}
-      groupMode={'grouped'}
-      borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
-      enableGridX={true}
-      enableGridY={false}
-      innerPadding={2}
-      axisLeft={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legendPosition: 'middle',
-        legendOffset: 32,
-        format: (d: FixTypeLater) =>
-          (width < 576
-            ? shortDisplayNameByKey('Des_Grp', d)
-            : displayNameByKey('Des_Grp', d)) as string,
-      }}
-      axisBottom={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: '% representation',
-        legendPosition: 'middle',
-        legendOffset: 40,
-        format: (d: FixTypeLater) =>
-          `${(+d).toLocaleString(undefined, { maximumFractionDigits: 0 })}%`,
-      }}
       label={labelValue}
       labelFormat={labelCallback()}
-      tooltip={(d: FixTypeLater): JSX.Element => {
-        return (
-          <div style={{ color: Color(d.color).darken(0.3).hex() }}>
-            {displayNameByKey('Des_Grp', d.indexValue)},{' '}
-            {dataDefinitions.find((dd) => dd.key === d.id)?.label}:{' '}
-            {d.data[d.id]}%
-          </div>
-        )
-      }}
+      margin={MARGINS}
+      tooltip={tooltip}
       {...NIVO_BASE_PROPS}
     />
   )
@@ -132,12 +94,12 @@ const ComparisonGraph = ({
 
   return (
     <GraphFrame
-      items={items}
       className="Comparison"
-      title={title}
       graph={graph}
+      items={items}
       legend={legend}
       setWidthCallback={setWidth}
+      title={title}
     />
   )
 }

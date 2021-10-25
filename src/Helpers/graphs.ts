@@ -1,5 +1,9 @@
-import FixTypeLater from '../@types/FixTypeLater'
+import { BarSvgProps } from '@nivo/bar'
+
+import { DataDefinition } from '../@types/DataDefinition'
+import { DesignatedGroupKeyedData } from '../@types/DataTypes'
 import { parseFloatClean } from './formatter'
+import FixTypeLater from '../@types/FixTypeLater'
 
 export const BAR_H_GAP_SIZE = 3 // Horizontal space between bars within a group
 export const BAR_H_CATEGORY_GAP_SIZE = 30 // Horizontal space between bar groups
@@ -9,6 +13,7 @@ export const BAR_V_CATEGORY_GAP_SIZE = 15 // Vertical space between bar groups
 
 export const CHART_FONT = `BCSans, "myriad-pro", "Myriad Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`
 
+// Basic parameters for the chart theme for Nivo.
 export const NIVO_THEME = {
   axis: {
     legend: {
@@ -47,37 +52,78 @@ const labelTextColor: FixTypeLater = {
   modifiers: [['darker', 1.6]],
 }
 
-export const NIVO_BASE_PROPS = {
-  padding: 0.3,
-  // animate: true,
-  motionStiffness: 90,
-  motionDamping: 15,
-  theme: NIVO_THEME,
-  labelSkipWidth: 0,
-  labelSkipHeight: 0,
-  labelTextColor,
-  axisTop: null,
+export const NIVO_BASE_PROPS: Partial<BarSvgProps> = {
   axisRight: null,
+  axisTop: null,
+  borderColor: { from: 'color', modifiers: [['darker', 1.6]] },
+  groupMode: 'grouped',
+  indexBy: 'Des_Grp',
+  indexScale: { type: 'band', round: true },
+  innerPadding: 2,
+  labelSkipHeight: 0,
+  labelSkipWidth: 0,
+  labelTextColor,
+  layout: 'horizontal',
+  motionDamping: 15,
+  motionStiffness: 90,
+  padding: 0.3,
+  theme: NIVO_THEME,
+  valueScale: { type: 'linear' },
+  enableGridX: true,
+  enableGridY: false,
 }
 
-export const processDataForGraph = (
-  data: FixTypeLater[],
-  dataDefinitions: FixTypeLater[],
-  additionalMapping?: FixTypeLater
-): FixTypeLater => {
+/** Helper function to process WFP data for display on the graph. For each row
+ * of WFP data, the function will map and copy the data values (leaving the
+ * original data intact). For each row, `Des_Grp` will always be copied, as will
+ * the values for each column specified in the `dataDefinitions` param; note
+ * that all these values should be numeric (and they are in existing WFP data).
+ * Extra manipulation of the data during the mapping process can be performed by
+ * passing in an `additionalMapping` function.
+ * @param data The WFP data to graph.
+ * @param dataDefinitions The metadata for the data columns to graph.
+ * @param additionalMapping Whether to perform additional mapping on the data
+ * before graphing it.
+ */
+export const processDataForGraph = <T extends DesignatedGroupKeyedData>(
+  data: T[],
+  dataDefinitions: DataDefinition<T>[],
+  additionalMapping?: (d: T, obj: unknown) => void
+): { dataKeys: (keyof T)[]; filteredData: T[] } => {
   const dataKeys = dataDefinitions.map((d) => d.key)
   const filteredData = data
     .filter((d) => d['Des_Grp'] !== 'AS_TOTAL')
-    .map((d: FixTypeLater) => {
+    .map((d) => {
       const obj: FixTypeLater = { Des_Grp: d.Des_Grp }
       if (additionalMapping) {
         additionalMapping(d, obj)
       }
       dataKeys.forEach((dataKey) => {
-        obj[dataKey] = parseFloatClean(d[dataKey])
+        obj[dataKey] = parseFloatClean((d[dataKey] as unknown) as number)
         obj[`${dataKey}_str`] = d[dataKey]
       })
       return obj
     })
   return { dataKeys, filteredData }
+}
+
+// Default graph widths and breakpoints.
+export const GRAPH_DEFAULT_WIDTH = 620
+export const GRAPH_WIDTH_BREAKPOINT = 576
+export const GRAPH_Y_AXIS_NARROW_WIDTH = 80
+
+/** Helper function to determine the width of the Y-axis based on the width of
+ * the graph. Tests against the breakpoint and returns a narrower width when the
+ * user screen size is less than the breakpoint.
+ * @param graphWidth The current width of the graph.
+ * @param baseYAxisWidth The width of the graph when on a larger screen; will
+ * typically vary based on the width of the Y-axis labels.
+ */
+export const yAxisWidthForSize = (
+  graphWidth: number,
+  baseYAxisWidth: number
+): number => {
+  return graphWidth < GRAPH_WIDTH_BREAKPOINT
+    ? GRAPH_Y_AXIS_NARROW_WIDTH
+    : baseYAxisWidth
 }
