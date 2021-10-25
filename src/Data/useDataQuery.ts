@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query'
 import * as d3 from 'd3'
 
-import { DataKeyEnum, YEAR_PLACEHOLDER } from '../@types/DataKeyEnum'
 import { filterData, sortData, useDataManager } from './DataManager'
+import { YEAR_PLACEHOLDER } from '../@types/DataKeyEnum'
 import IntentionalAny from '../@types/IntentionalAny'
 
 // TODO: Extract this.
