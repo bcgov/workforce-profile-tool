@@ -1,20 +1,21 @@
 import { useLocation, useParams } from 'react-router'
 import React from 'react'
 
+import { useDataManager } from '../Data/DataManager'
 import Comparison from '../Views/Comparison'
 import Home from './Home'
 import Leadership from '../Views/Leadership'
 import OccupationRegion, {
   OccupationRegionEnum,
 } from '../Views/OccupationRegion'
+import FlowReport from '../Views/FlowReport'
+import Hiring from '../Views/Hiring'
 import Organization from '../Views/Organization'
 import Progress from '../Views/Progress'
-import Hiring from '../Views/Hiring'
 import Tab from '../Tabs/Tab'
 import TabInterface from '../Tabs/TabInterface'
 
 import './Main.scss'
-import FlowReport from '../Views/FlowReport'
 
 interface MainParamProps {
   /** The key for the low-level navigation (i.e. sub-tab), if necessary. */
@@ -26,6 +27,7 @@ interface MainParamProps {
 const Main = (): JSX.Element => {
   const location = useLocation()
   const { lowLevelNav, highLevelNav } = useParams<MainParamProps>()
+  const { year } = useDataManager()
 
   // Set the default tabs: "Home" when highLevelNav is not present, a
   const activeOuterTab = highLevelNav || 'home'
@@ -59,9 +61,13 @@ const Main = (): JSX.Element => {
               <Tab key={'representation-by-group'} name="By Designated Group">
                 <Progress />
               </Tab>
-              <Tab key={'hiring'} name="Hiring">
-                <Hiring />
-              </Tab>
+              {year && +year > 2018 ? (
+                <Tab key={'hiring'} name="Hiring">
+                  <Hiring />
+                </Tab>
+              ) : (
+                <></>
+              )}
             </TabInterface>
           </div>
         </Tab>
@@ -87,9 +93,13 @@ const Main = (): JSX.Element => {
               <Tab key={'by-region'} name="By Region">
                 <OccupationRegion viewType={OccupationRegionEnum.Region} />
               </Tab>
-              <Tab key={'flow-report'} name="Flow Report">
-                <FlowReport />
-              </Tab>
+              {year && +year > 2018 ? (
+                <Tab key={'flow-report'} name="Flow Report">
+                  <FlowReport />
+                </Tab>
+              ) : (
+                <></>
+              )}
             </TabInterface>
           </div>
         </Tab>
