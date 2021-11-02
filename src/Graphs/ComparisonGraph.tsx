@@ -1,10 +1,11 @@
 import { ResponsiveBar } from '@nivo/bar'
 import React, { useState } from 'react'
 
+import { DataDefinition } from '../@types/DataDefinition'
+import { DataDictionaryEntry } from '../Data/useDataQuery'
 import { ComparisonRawData } from '../@types/DataTypes'
 import { displayNameByKey } from '../Data/DataManager'
 import { formatPercent } from '../Helpers/formatter'
-import { getTooltip } from '../Helpers/tooltipHelper'
 import { labelValue } from './labels'
 import {
   GRAPH_DEFAULT_WIDTH,
@@ -18,13 +19,12 @@ import Legend from './Legend'
 import useGraph from '../Helpers/useGraph'
 
 import './Graphs.scss'
-import { DataDefinition } from '../@types/DataDefinition'
 
 interface Props {
   data: ComparisonRawData[]
+  dataDictionary: DataDictionaryEntry[]
   ministry?: string | null
   title: string
-  year: string
 }
 
 const LEFT_MARGIN = 160
@@ -32,9 +32,9 @@ const MARGINS = { left: LEFT_MARGIN, right: 50, top: 0, bottom: 50 }
 
 const ComparisonGraph = ({
   data,
+  dataDictionary,
   ministry,
   title,
-  year,
 }: Props): JSX.Element => {
   const dataDefinitions: DataDefinition<ComparisonRawData>[] = [
     {
@@ -46,13 +46,13 @@ const ComparisonGraph = ({
       key: 'Available_Workforce_BCPS',
       label: 'Available Workforce',
       color: '#70CCDB',
-      tooltip: getTooltip('comparison-available-workforce', year),
+      // tooltip: getTooltip('comparison-available-workforce', year),
     },
     {
       key: 'Employees_BC_Population',
       label: 'BC Population',
       color: '#D2E2EE',
-      tooltip: getTooltip('comparison-bc-population', year),
+      // tooltip: getTooltip('comparison-bc-population', year),
     },
   ]
 
@@ -90,7 +90,9 @@ const ComparisonGraph = ({
     />
   )
 
-  const legend = <Legend items={dataDefinitions} />
+  const legend = (
+    <Legend items={dataDefinitions} dataDictionary={dataDictionary} />
+  )
 
   return (
     <GraphFrame

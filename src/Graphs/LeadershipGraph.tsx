@@ -1,6 +1,8 @@
 import { ResponsiveBar } from '@nivo/bar'
 import React, { useState } from 'react'
 
+import { DataDefinition } from '../@types/DataDefinition'
+import { DataDictionaryEntry } from '../Data/useDataQuery'
 import {
   GRAPH_DEFAULT_WIDTH,
   GRAPH_WIDTH_BREAKPOINT,
@@ -9,7 +11,6 @@ import {
   processDataForGraph,
 } from '../Helpers/graphs'
 import { formatPercent } from '../Helpers/formatter'
-import { getTooltip } from '../Helpers/tooltipHelper'
 import { labelValue } from './labels'
 import { LeadershipRawData } from '../@types/DataTypes'
 import GraphFrame from './GraphFrame'
@@ -17,30 +18,31 @@ import Legend from './Legend'
 import useGraph from '../Helpers/useGraph'
 
 import './Graphs.scss'
-import { DataDefinition } from '../@types/DataDefinition'
 
 interface Props {
   data: LeadershipRawData[]
+  dataDictionary: DataDictionaryEntry[]
   title: string
-  year: string
 }
 
 const LEFT_MARGIN = 160
 const MARGINS = { left: LEFT_MARGIN, right: 50, top: 0, bottom: 50 }
 
-const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
+const LeadershipGraph = ({
+  data,
+  dataDictionary,
+  title,
+}: Props): JSX.Element => {
   const dataDefinitions: DataDefinition<LeadershipRawData>[] = [
     {
       key: 'Executive',
       label: 'Executive Leadership',
       color: '#70CCDB',
-      tooltip: getTooltip('leadership-executive-leadership', year),
     },
     {
       key: 'Management_Band',
       label: 'Management Band Leadership',
       color: '#D2E2EE',
-      tooltip: getTooltip('leadership-management-band-leadership', year),
     },
   ]
 
@@ -79,7 +81,9 @@ const LeadershipGraph = ({ data, title, year }: Props): JSX.Element => {
     />
   )
 
-  const legend = <Legend items={dataDefinitions} />
+  const legend = (
+    <Legend items={dataDefinitions} dataDictionary={dataDictionary} />
+  )
 
   return (
     <GraphFrame

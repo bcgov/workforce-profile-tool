@@ -40,6 +40,7 @@ const Organization = (): JSX.Element => {
 
   const {
     data: unprocessedData,
+    dataDictionary,
     isLoading,
     error,
   } = useDataQuery<ComparisonRawData>(DataKeyEnum.Comparison, true)
@@ -48,7 +49,7 @@ const Organization = (): JSX.Element => {
 
   return (
     <GenericView data={data} error={error} isLoading={isLoading}>
-      <OrganizationGraph data={data} />
+      <OrganizationGraph data={data} dataDictionary={dataDictionary} />
     </GenericView>
   )
 }

@@ -1,24 +1,27 @@
-import Dictionary from '../@types/Dictionary'
-import TOOLTIPS_RAW from '../Data/tooltips.json'
-
-// The raw tooltips. One day we will likely want to load this from a remote
-// source.
-const tooltips: Dictionary<Dictionary<string>> = TOOLTIPS_RAW
+import { DataDictionaryEntry } from '../Data/useDataQuery'
 
 /**
  * A helper function to get tooltip text based on a data key and a year. Will
  * additionally add a line break (`<br />`) after text bullets (`•`), and
- * replace CRLFs (`\r\n`) with a line break as well.
+ * replace CRLFs (`\r\n`) with a line break as well. It will also replace the
+ * string "\r\n" (i.e. a literal backslash-r-backslash-n) with its line break.
  * @param key The tooltip key in the tooltips JSON file.
- * @param year The year sub-key in the tooltips JSON file.
+ * @param dataDictionary The dictionary to look in.
  * @returns The tooltip, processed as described above, if a tooltip was found
  * for the `key` and `year`, or undefined if no tooltip was found.
  */
-export const getTooltip = (key: string, year: string): string | undefined => {
-  if (tooltips && tooltips[key] && tooltips[key][year]) {
-    return tooltips[key][year]
-      .replace(/•/g, '<br />•')
-      .replace(/\r\n/g, '<br />')
+export const getTooltip = (
+  key: string,
+  dataDictionary: DataDictionaryEntry[]
+): string | undefined => {
+  if (dataDictionary) {
+    const tooltip = dataDictionary.find((d) => d.columnKey === key)
+    if (tooltip) {
+      return tooltip.note
+        .replace(/•/g, '<br />•')
+        .replace(/\r\n/g, '<br />')
+        .replace(/(?:\\[rn])+/g, '<br />')
+    }
   }
 
   return undefined

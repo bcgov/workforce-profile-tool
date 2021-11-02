@@ -22,12 +22,15 @@ const VariableDisplay = ({
   const { metadata, year } = useDataManager()
 
   const dataKey = `WP${year}_MinistryKey`
-  const url = metadata && metadata[dataKey] && year ? metadata[dataKey].url : ''
+  const url =
+    metadata && metadata[dataKey] && year ? metadata[dataKey].csvURL : ''
 
+  // TODO: Factor out and use useDataQuery
   const { data: unfilteredData } = useQuery(
     dataKey,
     async () => {
-      return (await d3.csv(url)) as MinistryKeyRawData[]
+      // Handle CSV data.
+      return ((await d3.csv(url)) as unknown) as MinistryKeyRawData[]
     },
     {
       enabled: !!(metadata && year),

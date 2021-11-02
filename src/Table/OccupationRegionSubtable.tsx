@@ -1,16 +1,17 @@
 import React from 'react'
 
 import { ColumnWithClassNameandFooter } from '../@types/ColumnWithClassName'
+import { DataDictionaryEntry } from '../Data/useDataQuery'
 import { formatNumber, formatPercent } from '../Helpers/formatter'
-import { OccupationRegionRawData } from '../@types/DataTypes'
 import { OccupationRegionEnum } from '../Views/OccupationRegion'
+import { OccupationRegionRawData } from '../@types/DataTypes'
 import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
 import GenericTable from './GenericTable'
-import TableTooltip from './TableTooltip'
 
 interface Props {
   data: OccupationRegionRawData[]
+  dataDictionary: DataDictionaryEntry[]
   shortTitle?: string
 }
 
@@ -20,6 +21,7 @@ interface Props {
 
 const RegionOccupationSubtable = ({
   data,
+  dataDictionary,
   shortTitle,
   viewType,
 }: Props): JSX.Element => {
@@ -50,7 +52,7 @@ const RegionOccupationSubtable = ({
     },
     {
       id: `Total_Count_ORG`,
-      Header: <TableTooltip title="Total" tooltipKey="representation-total" />,
+      Header: 'Total',
       Footer: () => formatNumber(totalRow[0].Total_Count_ORG),
       accessor: (d) => formatNumber(d[`Total_Count_ORG`]),
       className: `text-right`,
@@ -64,12 +66,7 @@ const RegionOccupationSubtable = ({
     },
     {
       id: `DesGrp_Percent_AvailableWorkforce`,
-      Header: (
-        <TableTooltip
-          title={`${shortTitle} as % of Available Workforce`}
-          tooltipKey="representation-available-workforce"
-        />
-      ),
+      Header: `${shortTitle} as % of Available Workforce`,
       Footer: () =>
         formatPercent(totalRow[0].DesGrp_Percent_AvailableWorkforce, 1, 100),
       accessor: (d) =>
@@ -78,24 +75,14 @@ const RegionOccupationSubtable = ({
     },
     {
       id: `DesGrp_Count_Expected`,
-      Header: (
-        <TableTooltip
-          title={`Expected # ${shortTitle}`}
-          tooltipKey="representation-expected"
-        />
-      ),
+      Header: `Expected # ${shortTitle}`,
       Footer: () => formatNumber(totalRow[0].DesGrp_Count_Expected, ``),
       accessor: (d) => formatNumber(d[`DesGrp_Count_Expected`], ``),
       className: `text-right`,
     },
     {
       id: `DesGrp_Count_Shortfall`,
-      Header: (
-        <TableTooltip
-          title={`Shortfall of ${shortTitle}`}
-          tooltipKey="representation-shortfall"
-        />
-      ),
+      Header: `Shortfall of ${shortTitle}`,
       Footer: () => formatNumber(totalRow[0].DesGrp_Count_Shortfall, ``),
       accessor: (d) => formatNumber(d[`DesGrp_Count_Shortfall`], ``),
       className: `text-right`,
@@ -109,6 +96,7 @@ const RegionOccupationSubtable = ({
       <GenericTable
         columns={columns}
         data={filteredData}
+        dataDictionary={dataDictionary}
         hideDefinitions
         showFooter
       />

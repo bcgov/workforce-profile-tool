@@ -10,16 +10,18 @@ import { useDataQuery } from '../Data/useDataQuery'
 import ComparisonGraph from '../Graphs/ComparisonGraph'
 import GenericTable from '../Table/GenericTable'
 import GenericView from './GenericView'
-import TableTooltip from '../Table/TableTooltip'
 
 const Comparison = (): JSX.Element => {
-  const { setLockedVars, queryValues, year } = useDataManager()
+  const { setLockedVars, queryValues } = useDataManager()
 
   useEffect(() => setLockedVars({}), [])
 
-  const { data, isLoading, error } = useDataQuery<ComparisonRawData>(
-    DataKeyEnum.Comparison
-  )
+  const {
+    data,
+    dataDictionary,
+    isLoading,
+    error,
+  } = useDataQuery<ComparisonRawData>(DataKeyEnum.Comparison)
 
   const ministry = displayNameByKey('Ministry_Key', queryValues.Ministry_Key)
 
@@ -37,23 +39,13 @@ const Comparison = (): JSX.Element => {
     },
     {
       id: 'Available_Workforce_BCPS',
-      Header: (
-        <TableTooltip
-          title="Available Workforce, %"
-          tooltipKey="comparison-available-workforce"
-        />
-      ),
+      Header: 'Available Workforce, %',
       accessor: (d) => formatPercent(d['Available_Workforce_BCPS'], 1, 100),
       className: 'text-right',
     },
     {
       id: 'Employees_BC_Population',
-      Header: (
-        <TableTooltip
-          title="BC Population, %"
-          tooltipKey="comparison-bc-population"
-        />
-      ),
+      Header: 'BC Population, %',
       accessor: (d) => formatPercent(d['Employees_BC_Population'], 1, 100),
       className: 'text-right',
     },
@@ -68,11 +60,16 @@ const Comparison = (): JSX.Element => {
     >
       <ComparisonGraph
         data={data}
+        dataDictionary={dataDictionary}
         ministry={queryValues.Ministry_Key}
         title={'Comparison with Provincial Workforce'}
-        year={year || ''}
       />
-      <GenericTable data={data} columns={columns} filename={'comparison'} />
+      <GenericTable
+        data={data}
+        dataDictionary={dataDictionary}
+        columns={columns}
+        filename={'comparison'}
+      />
     </GenericView>
   )
 }

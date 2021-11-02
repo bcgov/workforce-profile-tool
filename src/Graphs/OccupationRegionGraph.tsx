@@ -1,15 +1,16 @@
 import { ResponsiveBar } from '@nivo/bar'
 import React, { useState } from 'react'
 
+import { DataDefinition } from '../@types/DataDefinition'
+import { DataDictionaryEntry } from '../Data/useDataQuery'
 import {
   GRAPH_DEFAULT_WIDTH,
   NIVO_BASE_PROPS,
   processDataForGraph,
   yAxisWidthForSize,
 } from '../Helpers/graphs'
-import { displayNameByKey, useDataManager } from '../Data/DataManager'
+import { displayNameByKey } from '../Data/DataManager'
 import { formatNumber } from '../Helpers/formatter'
-import { getTooltip } from '../Helpers/tooltipHelper'
 import { labelValue } from './labels'
 import { OccupationRegionRawData } from '../@types/DataTypes'
 import GraphFrame from './GraphFrame'
@@ -17,10 +18,10 @@ import Legend from './Legend'
 import useGraph from '../Helpers/useGraph'
 
 import './Graphs.scss'
-import { DataDefinition } from '../@types/DataDefinition'
 
 interface Props {
   data: OccupationRegionRawData[]
+  dataDictionary: DataDictionaryEntry[]
   organization: string[] | string | null | undefined
   title: string
 }
@@ -30,24 +31,21 @@ const MARGINS = { left: LEFT_MARGIN, right: 55, top: 0, bottom: 50 }
 
 const OccupationRegionGraph = ({
   data,
+  dataDictionary,
   title,
   organization,
 }: Props): JSX.Element => {
-  const { year = '' } = useDataManager()
-
   const dataDefinitions: DataDefinition<OccupationRegionRawData>[] = [
     {
       key: 'DesGrp_Count_Expected',
       label: 'Expected',
       color: '#70CCDB',
-      tooltip: getTooltip('representation-expected', year),
     },
     { key: 'DesGrp_Count_ORG', label: 'Actual', color: '#D2E2EE' },
     {
       key: 'DesGrp_Count_Shortfall',
       label: 'Shortfall',
       color: '#6c757d',
-      tooltip: getTooltip('representation-shortfall', year),
     },
   ]
 
@@ -82,7 +80,7 @@ const OccupationRegionGraph = ({
     dataDefinitions,
     dataKeys,
     formatter: (d) => {
-      console.log('d', d)
+      // console.log('d', d)
       return formatNumber(d, '')
     },
     margins: MARGINS,
@@ -104,7 +102,9 @@ const OccupationRegionGraph = ({
     />
   )
 
-  const legend = <Legend items={dataDefinitions} />
+  const legend = (
+    <Legend items={dataDefinitions} dataDictionary={dataDictionary} />
+  )
 
   return (
     <GraphFrame

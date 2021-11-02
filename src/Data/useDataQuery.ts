@@ -3,11 +3,34 @@ import * as d3 from 'd3'
 
 import { filterData, sortData, useDataManager } from './DataManager'
 import { YEAR_PLACEHOLDER } from '../@types/DataKeyEnum'
+import IntentionalAny from '../@types/IntentionalAny'
+
+// TODO: Extract this.
+// We put `limit=0` because we're only interested in the metadata for the file,
+// i.e. the `fields` data.
+export const METADATA_URL = `https://catalogue.data.gov.bc.ca/api/3/action/datastore_search?limit=0&resource_id=`
+
+export interface RawDataDictionaryEntry {
+  info?: {
+    notes: string
+    type_override: string
+    label: string
+  }
+  type: string
+  id: string
+}
+
+export interface DataDictionaryEntry {
+  columnKey: string
+  note: string
+}
 
 export interface UseDataQueryResult<T> {
   /** An array of data (of type T), or undefined if the data either is not yet
    * loaded or if there is an error. */
   data: T[]
+  /** An array of data information, if available. */
+  dataDictionary: DataDictionaryEntry[]
   /** The error, if one occurs. */
   error: unknown
   /** Whether the data is currently loading; wait on this to be `true` before
@@ -53,13 +76,28 @@ export const useDataQuery = <T>(
 
   const key = dataKey.replace(YEAR_PLACEHOLDER, year || '')
 
-  const url = metadata && year ? metadata[key].url : ''
+  const url = metadata && year ? metadata[key].csvURL : ''
+
+  // TODO: Also change this next line once local data loading is no longer
+  // necessary.
+  const metadataUrl =
+    metadata && year ? METADATA_URL.concat(metadata[key].id) : undefined
 
   // Load the raw data.
-  const { data: unfilteredData, error, isLoading } = useQuery(
+  const { data: results, error, isLoading } = useQuery(
     key,
     async () => {
-      return ((await d3.csv(url)) as unknown) as T[]
+      // Handle CSV data.
+      // console.log('url', url)
+      const data = ((await d3.csv(url)) as unknown) as T[]
+      // console.log('data', data)
+      const dataDictionary = metadataUrl
+        ? ((await d3.json(metadataUrl)) as IntentionalAny).result.fields
+        : [] // If there's no metadataUrl, just return empty array
+      return {
+        data,
+        dataDictionary,
+      }
     },
     {
       // Only enable the query if metadata and year are available.
@@ -68,9 +106,31 @@ export const useDataQuery = <T>(
     }
   )
 
-  const data = sortData(
-    filterData(unfilteredData, queryValues, doNotFilterMinistries)
+  // console.log('results', results)
+
+  const filteredAndSortedData = sortData(
+    filterData(results?.data, queryValues, doNotFilterMinistries)
   )
 
-  return { data, error, isLoading: isLoading || unfilteredData === undefined }
+  const filteredDataDictionary = results?.dataDictionary
+    .filter(
+      (d: RawDataDictionaryEntry) =>
+        d.info && d.info.notes && d.info.notes.length > 0
+    )
+    .map(
+      (d: RawDataDictionaryEntry): DataDictionaryEntry => {
+        return {
+          columnKey: d.id,
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          note: d.info!.notes,
+        }
+      }
+    )
+
+  return {
+    data: filteredAndSortedData,
+    dataDictionary: filteredDataDictionary,
+    error,
+    isLoading: isLoading || results === undefined,
+  }
 }

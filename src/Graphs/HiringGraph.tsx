@@ -2,61 +2,46 @@ import { ResponsiveBar } from '@nivo/bar'
 import React, { useState } from 'react'
 
 import { DataDefinition } from '../@types/DataDefinition'
+import { DataDictionaryEntry } from '../Data/useDataQuery'
+import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
+import { formatNumber } from '../Helpers/formatter'
 import {
   GRAPH_DEFAULT_WIDTH,
   GRAPH_WIDTH_BREAKPOINT,
   NIVO_BASE_PROPS,
+  processDataForGraph,
 } from '../Helpers/graphs'
-import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
-import { formatPercent, parseFloatClean } from '../Helpers/formatter'
+import { HiringRawData } from '../@types/DataTypes'
 import { labelValue } from './labels'
-import { ProgressRawData } from '../@types/DataTypes'
-import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 import useGraph from '../Helpers/useGraph'
-import { DataDictionaryEntry } from '../Data/useDataQuery'
 
 interface Props {
-  data: ProgressRawData[]
+  data: HiringRawData[]
   dataDictionary: DataDictionaryEntry[]
   title: string
 }
 
-const MARGINS = { top: 50, right: 30, bottom: 50, left: 70 }
+const MARGINS = { top: 50, right: 30, bottom: 50, left: 80 }
 
-const ProgressGraph = ({ data, dataDictionary, title }: Props): JSX.Element => {
-  const dataDefinitions: DataDefinition<ProgressRawData>[] = [
-    { key: '2015_pc', label: '2015', color: '#6c757d' },
-    { key: '2018_pc', label: '2018', color: '#70CCDB' },
-    { key: '2020_pc', label: '2020', color: '#D2E2EE' },
+const HiringGraph = ({ data, dataDictionary, title }: Props): JSX.Element => {
+  const dataDefinitions: DataDefinition<HiringRawData>[] = [
+    { key: 'DesGrp_Count_ORG', label: 'Hired', color: '#70CCDB' },
   ]
 
   const [width, setWidth] = useState(GRAPH_DEFAULT_WIDTH)
 
   if (!data) return <div>&nbsp;</div>
 
-  const dataKeys = (Object.keys(
-    data[0]
-  ) as (keyof ProgressRawData)[]).filter((key) => key.endsWith('_pc'))
-
-  const filteredData = data
-    .filter((d) => d['Des_Grp'] !== 'AS_TOTAL')
-    .map((d) => {
-      const obj: FixTypeLater = { Des_Grp: d.Des_Grp }
-      dataKeys.forEach((dataKey) => {
-        obj[dataKey] = parseFloatClean(d[dataKey])
-        obj[`${dataKey}_str`] = d[dataKey]
-      })
-      return obj
-    })
+  const { dataKeys, filteredData } = processDataForGraph(data, dataDefinitions)
 
   const { labelCallback, items, tooltip } = useGraph({
     bottomAxisText: '% representation',
     data: filteredData,
     dataDefinitions,
     dataKeys,
-    formatter: (d) => formatPercent(d, 1, 100),
+    formatter: (d) => formatNumber(d),
     labelIsVertical: true,
     margins: MARGINS,
     width: 500,
@@ -76,10 +61,9 @@ const ProgressGraph = ({ data, dataDictionary, title }: Props): JSX.Element => {
         tickSize: 5,
       }}
       axisLeft={{
-        format: (d) =>
-          `${(+d).toLocaleString(undefined, { maximumFractionDigits: 0 })}%`,
-        legend: '% representation',
-        legendOffset: -50,
+        format: (d) => formatNumber(+d),
+        legend: 'Count',
+        legendOffset: -60,
         legendPosition: 'middle',
         tickPadding: 5,
         tickRotation: 0,
@@ -122,4 +106,4 @@ const ProgressGraph = ({ data, dataDictionary, title }: Props): JSX.Element => {
   )
 }
 
-export default ProgressGraph
+export default HiringGraph

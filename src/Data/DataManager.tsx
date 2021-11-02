@@ -300,13 +300,14 @@ function DataManagerProvider({
       )
       const newMetadata: Metadata[] = data.result.resources.map(
         (resource: Dictionary<string>) => ({
-          key: resource.name,
-          url: resource.url,
+          id: resource.id,
+          name: resource.name,
+          csvURL: resource.url,
         })
       )
       const keyedMetadata = newMetadata.reduce(
         (obj: Dictionary<Metadata>, currentValue) => {
-          obj[currentValue.key] = currentValue
+          obj[currentValue.name] = currentValue
           return obj
         },
         {}

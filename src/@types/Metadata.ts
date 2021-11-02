@@ -1,4 +1,5 @@
 export type Metadata = {
-  key: string
-  url: string
+  id: string
+  name: string
+  csvURL: string
 }
