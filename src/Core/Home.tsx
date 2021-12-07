@@ -47,10 +47,9 @@ const Home = (): JSX.Element => {
           at the BCPS level.
         </p>
         <p>
-          <strong>Note</strong>: the Workforce Profile Dashboard is not
-          compatible with older web browsers such as Internet Explorer 11.
-          Please use an up-to-date browser when accessing the Dashboard for best
-          results.
+          <strong>Note</strong>: The dashboard is not compatible with older web
+          browsers such as Internet Explorer 11. Please use an up-to-date
+          browser for best results.
         </p>
         <h2>Caveats</h2>
         <p>
