@@ -1,5 +1,4 @@
 import { useLocation, useParams } from 'react-router'
-import React from 'react'
 
 import { useDataManager } from '../Data/DataManager'
 import Comparison from '../Views/Comparison'

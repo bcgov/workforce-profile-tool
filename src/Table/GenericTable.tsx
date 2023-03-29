@@ -1,7 +1,7 @@
 import { Column } from 'react-table'
-import React from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
+import { DataDictionaryEntry } from '../Data/useDataQuery'
 import Definitions from './Definitions'
 import Dictionary from '../@types/Dictionary'
 import DownloadDataLink from './DownloadDataLink'
@@ -9,7 +9,6 @@ import Loading from '../Views/Loading'
 import Table from './Table'
 
 import './Table.scss'
-import { DataDictionaryEntry } from '../Data/useDataQuery'
 
 interface Props<T extends Dictionary<unknown>> {
   /** The table columns to use. */

@@ -1,5 +1,5 @@
 import { Route, Switch } from 'react-router-dom'
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { DataManagerProvider } from '../Data/DataManager'
 import Header from './Header'

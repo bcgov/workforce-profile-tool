@@ -1,6 +1,6 @@
 /* globals $ */
 
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 import './Tooltip.scss'
 
@@ -20,7 +20,7 @@ const Tooltip = ({ text }: Props): JSX.Element => {
   useEffect(() => {
     // Enable the Bootstrap tooltip using jQuery.
     if (tooltipRef.current) {
-      const tooltip = ($(tooltipRef.current) as unknown) as TooltipShim
+      const tooltip = $(tooltipRef.current) as unknown as TooltipShim
       tooltip.tooltip()
     }
   }, [])

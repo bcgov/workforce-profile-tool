@@ -1,9 +1,7 @@
-import React from 'react'
-
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { DataDictionaryEntry } from '../Data/useDataQuery'
-import { formatNumber, formatPercent } from '../Helpers/formatter'
 import { FlowRawData } from '../@types/DataTypes'
+import { formatNumber, formatPercent } from '../Helpers/formatter'
 import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
 import GenericTable from './GenericTable'

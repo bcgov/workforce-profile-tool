@@ -1,6 +1,5 @@
 import { useQuery } from 'react-query'
 import * as d3 from 'd3'
-import React from 'react'
 
 import { MinistryKeyRawData } from '../@types/DataTypes'
 import { Variable } from '../@types/Variable'
@@ -30,7 +29,7 @@ const VariableDisplay = ({
     dataKey,
     async () => {
       // Handle CSV data.
-      return ((await d3.csv(url)) as unknown) as MinistryKeyRawData[]
+      return (await d3.csv(url)) as unknown as MinistryKeyRawData[]
     },
     {
       enabled: !!(metadata && year),
@@ -42,15 +41,13 @@ const VariableDisplay = ({
 
   if (variableGroup.key === 'Ministry_Key' && unfilteredData) {
     selectableVariables =
-      unfilteredData?.map(
-        (d): Variable => {
-          return {
-            key: d.Ministry_Key,
-            name: d.Ministry_Title,
-            shortName: d.Ministry_Key,
-          }
+      unfilteredData?.map((d): Variable => {
+        return {
+          key: d.Ministry_Key,
+          name: d.Ministry_Title,
+          shortName: d.Ministry_Key,
         }
-      ) || []
+      }) || []
     const indexOfBCPS = selectableVariables.findIndex((v) => v.key === 'BCPS')
     const bcpsElement = selectableVariables.splice(indexOfBCPS, 1).pop()
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

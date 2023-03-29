@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { DataDictionaryEntry } from '../Data/useDataQuery'
 import { getTooltip } from '../Helpers/tooltipHelper'
 import Tooltip from '../Core/Tooltip'

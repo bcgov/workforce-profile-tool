@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { BarDatum, LabelFormatter } from '@nivo/bar'
 import { Margin } from '@nivo/core'
 import { parseFloatClean } from '../Helpers/formatter'
@@ -32,11 +30,11 @@ export const horizontalLabel = (
 
     // Kind of hacky to return a <tspan> as a string, but something in the
     // TypeScript definitions complains otherwise.
-    return ((
+    return (
       <tspan dy={0} dx={dx} style={{ textAnchor: 'start' }}>
         {formatter(`${d}`)}
       </tspan>
-    ) as unknown) as string
+    ) as unknown as string
   }
   return labelBuilder
 }
@@ -63,11 +61,11 @@ export const verticalLabel = (
     const dy =
       10 + (numD * (numWidth - margins.bottom - margins.top)) / 2 / numMaxItem
 
-    return ((
+    return (
       <tspan dx={0} dy={-dy} style={{ textAnchor: 'middle' }}>
         {formatter(`${d}`)}
       </tspan>
-    ) as unknown) as string
+    ) as unknown as string
   }
   return labelBuilder
 }
@@ -81,6 +79,6 @@ export const verticalLabel = (
  * @param d A Nivo BarDatum
  */
 export const labelValue = (d: BarDatum): string => {
-  const label = ((d.data as unknown) as Dictionary<string>)[`${d.id}_str`]
+  const label = (d.data as unknown as Dictionary<string>)[`${d.id}_str`]
   return label
 }

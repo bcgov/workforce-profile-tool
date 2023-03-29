@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { ComparisonRawData, MinistryRawData } from '../@types/DataTypes'
 import { DataKeyEnum } from '../@types/DataKeyEnum'

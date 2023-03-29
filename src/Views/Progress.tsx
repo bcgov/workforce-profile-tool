@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { displayNameByKey } from '../Data/DataManager'
@@ -18,12 +18,8 @@ const Progress = (): JSX.Element => {
   // When page loads, set the locked variables as appropriate.
   useEffect(() => setLockedVars({}), [])
 
-  const {
-    data,
-    dataDictionary,
-    isLoading,
-    error,
-  } = useDataQuery<ProgressRawData>(DataKeyEnum.Progress)
+  const { data, dataDictionary, isLoading, error } =
+    useDataQuery<ProgressRawData>(DataKeyEnum.Progress)
 
   const columns: ColumnWithClassName<ProgressRawData>[] = [
     {

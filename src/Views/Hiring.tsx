@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { displayNameByKey } from '../Data/DataManager'
@@ -17,12 +17,8 @@ const Hiring = (): JSX.Element => {
   // When page loads, set the locked variables as appropriate.
   useEffect(() => setLockedVars({ Year: ['2020'] }), [])
 
-  const {
-    data,
-    dataDictionary,
-    isLoading,
-    error,
-  } = useDataQuery<HiringRawData>(DataKeyEnum.Hiring)
+  const { data, dataDictionary, isLoading, error } =
+    useDataQuery<HiringRawData>(DataKeyEnum.Hiring)
 
   console.log('data', data, 'isLoading', isLoading, 'error', error)
 

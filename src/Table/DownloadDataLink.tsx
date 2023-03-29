@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { exportData } from '../Helpers/csvExporter'
-import IntentionalAny from '../@types/IntentionalAny'
 
 interface Props<T extends Record<string, unknown>> {
   columns: ColumnWithClassName<T>[]

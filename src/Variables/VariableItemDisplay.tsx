@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { ArrayParam, StringParam, useQueryParam } from 'use-query-params'
 
 import { Variable } from '../@types/Variable'
@@ -22,17 +22,13 @@ const VariableItemDisplayExclusive = ({
 }: Props): JSX.Element => {
   const [queryVar, setQueryVar] = useQueryParam(variableGroup.key, StringParam)
 
-  useEffect(() => {
-    if (!queryVar) {
-      setQueryVar(variableGroup.default as string)
-    }
-  }, [queryVar])
+  if (!queryVar) {
+    setQueryVar(variableGroup.default as string)
+  }
 
-  useEffect(() => {
-    if (isActiveOverride) {
-      setQueryVar(variable.key)
-    }
-  }, [isActiveOverride])
+  if (isActiveOverride) {
+    setQueryVar(variable.key)
+  }
 
   const isActive = queryVar === variable.key
 
@@ -58,17 +54,13 @@ const VariableItemDisplayNonExclusive = ({
 }: Props): JSX.Element => {
   const [queryVars, setQueryVars] = useQueryParam(variableGroup.key, ArrayParam)
 
-  useEffect(() => {
-    if (!queryVars) {
-      setQueryVars(variableGroup.default as string[])
-    }
-  }, [queryVars, setQueryVars])
+  if (!queryVars) {
+    setQueryVars(variableGroup.default as string[])
+  }
 
-  useEffect(() => {
-    if (isActiveOverride) {
-      setQueryVars([variable.key])
-    }
-  }, [isActiveOverride, setQueryVars])
+  if (isActiveOverride) {
+    setQueryVars([variable.key])
+  }
 
   const isActive = queryVars?.includes(variable.key) || false
 
@@ -86,7 +78,7 @@ const VariableItemDisplayNonExclusive = ({
         setQueryVars(newVars)
       }
     }
-  }, [queryVars, setQueryVars, isLocked])
+  }, [queryVars, setQueryVars, isLocked, isActive, variable.key])
 
   return (
     <li

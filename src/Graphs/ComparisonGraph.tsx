@@ -1,5 +1,5 @@
 import { ResponsiveBar } from '@nivo/bar'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { DataDefinition } from '../@types/DataDefinition'
 import { DataDictionaryEntry } from '../Data/useDataQuery'
@@ -59,8 +59,6 @@ const ComparisonGraph = ({
   const [width, setWidth] = useState(GRAPH_DEFAULT_WIDTH)
 
   MARGINS.left = yAxisWidthForSize(width, LEFT_MARGIN)
-
-
 
   const { dataKeys, filteredData } = processDataForGraph(data, dataDefinitions)
   filteredData.reverse()

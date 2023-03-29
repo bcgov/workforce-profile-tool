@@ -1,5 +1,4 @@
 import { Link, useLocation } from 'react-router-dom'
-import React from 'react'
 
 import './Header.scss'
 import logo from './bc-stats-logo.png'
@@ -21,7 +20,11 @@ const Header = ({ showList, toggleListCallback }: Props): JSX.Element => {
         <div className="row align-items-center">
           <div className="col-6 order-2 order-sm-1 col-sm-12">
             <Link to={`/${location.search}`}>
-              <img src={logo} style={{ maxWidth: '100%' }} />
+              <img
+                src={logo}
+                style={{ maxWidth: '100%' }}
+                alt="BC Stats logo"
+              />
             </Link>
           </div>
           <div className="col-6 order-1 order-sm-2 col-sm-12">

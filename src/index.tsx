@@ -1,14 +1,13 @@
 import { HashRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import React from 'react'
-import ReactDOM from 'react-dom'
+import { QueryParamProvider } from 'use-query-params'
 import { ReactRouter5Adapter } from 'use-query-params/adapters/react-router-5'
+import ReactDOM from 'react-dom'
 
 import * as serviceWorker from './serviceWorker'
 import App from './Core/App'
 
 import './index.scss'
-import { QueryParamProvider } from 'use-query-params'
 
 const queryConfig = {
   defaultOptions: {

@@ -1,5 +1,3 @@
-import React from 'react'
-
 /**
  * The home page of the app.
  *

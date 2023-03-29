@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Dictionary from '../@types/Dictionary'
 import Error from './Error'
 import HistoricalData from './HistoricalData'

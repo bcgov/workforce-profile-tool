@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { DataKeyEnum } from '../@types/DataKeyEnum'
 import { displayNameByKey } from '../Data/DataManager'
@@ -30,12 +30,8 @@ const OccupationRegion = ({ viewType }: Props): JSX.Element => {
     setLockedVars(varsToLock)
   }, [queryValues.Ministry_Key, year])
 
-  const {
-    isLoading,
-    error,
-    data,
-    dataDictionary,
-  } = useDataQuery<OccupationRegionRawData>(DataKeyEnum.OccupationRegion)
+  const { isLoading, error, data, dataDictionary } =
+    useDataQuery<OccupationRegionRawData>(DataKeyEnum.OccupationRegion)
 
   // Split the data
   const dataMap: Dictionary<OccupationRegionRawData[]> = {}

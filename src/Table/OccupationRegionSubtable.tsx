@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { ColumnWithClassNameandFooter } from '../@types/ColumnWithClassName'
 import { DataDictionaryEntry } from '../Data/useDataQuery'
 import { formatNumber, formatPercent } from '../Helpers/formatter'

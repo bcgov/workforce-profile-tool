@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { ComparisonRawData } from '../@types/DataTypes'
@@ -16,12 +16,8 @@ const Comparison = (): JSX.Element => {
 
   useEffect(() => setLockedVars({}), [])
 
-  const {
-    data,
-    dataDictionary,
-    isLoading,
-    error,
-  } = useDataQuery<ComparisonRawData>(DataKeyEnum.Comparison)
+  const { data, dataDictionary, isLoading, error } =
+    useDataQuery<ComparisonRawData>(DataKeyEnum.Comparison)
 
   const ministry = displayNameByKey('Ministry_Key', queryValues.Ministry_Key)
 

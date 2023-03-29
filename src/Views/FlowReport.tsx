@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { DataKeyEnum } from '../@types/DataKeyEnum'
 import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
