@@ -41,8 +41,6 @@ const OrganizationSubGraph = ({
 }: SubgraphProps): JSX.Element => {
   const { queryValues } = useDataManager()
 
-  if (!data) return <div>&nbsp;</div>
-
   const [width, setWidth] = useState(GRAPH_DEFAULT_WIDTH)
 
   MARGINS.left = width < GRAPH_WIDTH_BREAKPOINT ? 80 : 255
@@ -103,6 +101,8 @@ const OrganizationSubGraph = ({
     bottomAxisText: '% representation',
     dataDefinitions: legendItems,
   })
+
+  if (!data) return <div>&nbsp;</div>
 
   const graph = (
     <ResponsiveBar

@@ -34,8 +34,6 @@ const ProgressGraph = ({ data, dataDictionary, title }: Props): JSX.Element => {
 
   const [width, setWidth] = useState(GRAPH_DEFAULT_WIDTH)
 
-  if (!data) return <div>&nbsp;</div>
-
   const dataKeys = (Object.keys(
     data[0]
   ) as (keyof ProgressRawData)[]).filter((key) => key.endsWith('_pc'))
@@ -61,6 +59,8 @@ const ProgressGraph = ({ data, dataDictionary, title }: Props): JSX.Element => {
     margins: MARGINS,
     width: 500,
   })
+
+  if (!data) return <div>&nbsp;</div>
 
   const graph = (
     <ResponsiveBar

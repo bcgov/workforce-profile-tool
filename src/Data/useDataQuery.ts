@@ -4,6 +4,7 @@ import * as d3 from 'd3'
 import { filterData, sortData, useDataManager } from './DataManager'
 import { YEAR_PLACEHOLDER } from '../@types/DataKeyEnum'
 import IntentionalAny from '../@types/IntentionalAny'
+import { GenericRawData } from '../@types/DataTypes'
 
 // TODO: Extract this.
 // We put `limit=0` because we're only interested in the metadata for the file,
@@ -68,7 +69,7 @@ export interface UseDataQueryResult<T> {
  * @returns The result of the query; see `UseDataQueryResult`.
  *
  */
-export const useDataQuery = <T>(
+export const useDataQuery = <T extends GenericRawData>(
   dataKey: string,
   doNotFilterMinistries?: boolean
 ): UseDataQueryResult<T> => {
@@ -84,12 +85,16 @@ export const useDataQuery = <T>(
     metadata && year ? METADATA_URL.concat(metadata[key].id) : undefined
 
   // Load the raw data.
-  const { data: results, error, isLoading } = useQuery(
+  const {
+    data: results,
+    error,
+    isLoading,
+  } = useQuery(
     key,
     async () => {
       // Handle CSV data.
       // console.log('url', url)
-      const data = ((await d3.csv(url)) as unknown) as T[]
+      const data = (await d3.csv(url)) as unknown as T[]
       // console.log('data', data)
       const dataDictionary = metadataUrl
         ? ((await d3.json(metadataUrl)) as IntentionalAny).result.fields
@@ -117,15 +122,13 @@ export const useDataQuery = <T>(
       (d: RawDataDictionaryEntry) =>
         d.info && d.info.notes && d.info.notes.length > 0
     )
-    .map(
-      (d: RawDataDictionaryEntry): DataDictionaryEntry => {
-        return {
-          columnKey: d.id,
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          note: d.info!.notes,
-        }
+    .map((d: RawDataDictionaryEntry): DataDictionaryEntry => {
+      return {
+        columnKey: d.id,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        note: d.info!.notes,
       }
-    )
+    })
 
   return {
     data: filteredAndSortedData,

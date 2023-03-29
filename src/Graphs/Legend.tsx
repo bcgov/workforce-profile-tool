@@ -24,7 +24,7 @@ const Legend = <T,>({
 }: Props<T>): JSX.Element => {
   const rows = items.map((item) => {
     //const tooltip = dataDictionary.find((d) => d.columnKey === item.key)?.note
-    const tooltip = getTooltip(`${item.key}`, dataDictionary)
+    const tooltip = getTooltip(`${String(item.key)}`, dataDictionary)
     return (
       <div key={item.color} className={'d-flex align-items-top'}>
         <div className="swatch">

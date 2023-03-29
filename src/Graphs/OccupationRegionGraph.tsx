@@ -18,6 +18,7 @@ import Legend from './Legend'
 import useGraph from '../Helpers/useGraph'
 
 import './Graphs.scss'
+import FixTypeLater from '../@types/FixTypeLater'
 
 interface Props {
   data: OccupationRegionRawData[]
@@ -53,8 +54,6 @@ const OccupationRegionGraph = ({
 
   MARGINS.left = yAxisWidthForSize(width, LEFT_MARGIN)
 
-  if (!data) return <div>&nbsp;</div>
-
   const semiFilteredData = data.filter(
     (d: OccupationRegionRawData) => d.Variable_Type === 'Total'
   )
@@ -66,7 +65,7 @@ const OccupationRegionGraph = ({
   filteredData.reverse()
 
   const { labelCallback, items, axisLeft, axisBottom, tooltip } = useGraph({
-    bottomAxisFormat: (d) => {
+    bottomAxisFormat: (d: FixTypeLater) => {
       if (isNaN(+d) || d === 0) return 0
       return `${(+d).toLocaleString(undefined, {
         maximumFractionDigits: 0,
@@ -86,6 +85,8 @@ const OccupationRegionGraph = ({
     margins: MARGINS,
     width,
   })
+
+  if (!data) return <div>&nbsp;</div>
 
   const graph = (
     <ResponsiveBar

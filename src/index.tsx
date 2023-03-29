@@ -1,7 +1,8 @@
-import { HashRouter, Route } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { ReactRouter5Adapter } from 'use-query-params/adapters/react-router-5'
 
 import * as serviceWorker from './serviceWorker'
 import App from './Core/App'
@@ -22,7 +23,7 @@ export const queryClient = new QueryClient(queryConfig)
 
 ReactDOM.render(
   <HashRouter>
-    <QueryParamProvider ReactRouterRoute={Route}>
+    <QueryParamProvider adapter={ReactRouter5Adapter}>
       <QueryClientProvider client={queryClient}>
         <App />
       </QueryClientProvider>

@@ -60,7 +60,7 @@ const ComparisonGraph = ({
 
   MARGINS.left = yAxisWidthForSize(width, LEFT_MARGIN)
 
-  if (!data) return <div>&nbsp;</div>
+
 
   const { dataKeys, filteredData } = processDataForGraph(data, dataDefinitions)
   filteredData.reverse()
@@ -74,6 +74,8 @@ const ComparisonGraph = ({
     margins: MARGINS,
     width,
   })
+
+  if (!data) return <div>&nbsp;</div>
 
   const graph = (
     <ResponsiveBar
