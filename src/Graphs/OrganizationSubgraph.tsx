@@ -20,6 +20,7 @@ import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 import useGraph from '../Helpers/useGraph'
 import { DataDictionaryEntry } from '../Data/useDataQuery'
+import { definitionsForYear } from '../Table/Definitions'
 
 interface SubgraphProps {
   color?: string
@@ -39,13 +40,11 @@ const OrganizationSubGraph = ({
   title,
   varKey,
 }: SubgraphProps): JSX.Element => {
-  const { queryValues } = useDataManager()
+  const { queryValues, year } = useDataManager()
 
   const [width, setWidth] = useState(GRAPH_DEFAULT_WIDTH)
 
   MARGINS.left = width < GRAPH_WIDTH_BREAKPOINT ? 80 : 255
-
-  console.log('---> data', data)
 
   const provincialRepresentation = parseFloat(
     data.find((d) => d.Ministry_Key === 'BC Population')!.Value
@@ -182,23 +181,17 @@ const OrganizationSubGraph = ({
       notes={
         !hasSuppressedData ? null : (
           <>
-            <div className="d-flex align-items-baseline">
-              <p className="m-0 text-center mr-2" style={{ minWidth: '25px' }}>
-                <b>&lt;3</b>
-              </p>
-              <p className="mt-0 mb-2">
-                Data suppressed because value is less than 3.
-              </p>
-            </div>
-            <div className="d-flex align-items-top">
-              <p className="m-0 text-center mr-2" style={{ minWidth: '25px' }}>
-                <b>S</b>
-              </p>
-              <p className="mt-0 mb-1">
-                Value is 3 or greater, but is suppressed to prevent residual
-                disclosure.
-              </p>
-            </div>
+            {definitionsForYear(year).map((item) => (
+              <div key={item.term} className="d-flex align-items-baseline">
+                <p
+                  className="m-0 text-center mr-2"
+                  style={{ minWidth: '25px' }}
+                >
+                  <b>{item.term}</b>
+                </p>
+                <p className="mt-0 mb-2">{item.definition}</p>
+              </div>
+            ))}
           </>
         )
       }

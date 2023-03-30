@@ -7,15 +7,15 @@ import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
 import GenericTable from './GenericTable'
 import FixTypeLater from '../@types/FixTypeLater'
+import { DataKeyEnum } from '../@types/DataKeyEnum'
 
 interface Props {
   data: OccupationRegionRawData[]
   dataDictionary: DataDictionaryEntry[]
   shortTitle?: string
-}
-
-interface Props {
   viewType: OccupationRegionEnum
+  year: string | undefined
+  designatedGroupKey?: string
 }
 
 const RegionOccupationSubtable = ({
@@ -23,6 +23,8 @@ const RegionOccupationSubtable = ({
   dataDictionary,
   shortTitle,
   viewType,
+  year,
+  designatedGroupKey,
 }: Props): JSX.Element => {
   const totalRow = data.filter((d) => d['Variable_Type'] === 'Total')
 
@@ -94,6 +96,8 @@ const RegionOccupationSubtable = ({
 
   const allRows = filteredData.concat(totalRow)
 
+  console.log('designatedGroupKey', designatedGroupKey, 'year', year)
+
   return (
     <div className={`${viewType}Table`}>
       <GenericTable
@@ -104,7 +108,19 @@ const RegionOccupationSubtable = ({
         showFooter
       />
       <DownloadDataLink columns={columns} rows={allRows} filename={viewType} />
-      <Definitions />
+      <Definitions
+        additionalDefinitions={
+          year === '2022' && designatedGroupKey && designatedGroupKey === 'WOM'
+            ? [
+                {
+                  term: 'Note',
+                  definition:
+                    'Some ministries have had their Women counts adjusted slightly to prevent additional residual disclosure. These adjustments are very minimal and do not affect total counts.',
+                },
+              ]
+            : []
+        }
+      />
     </div>
   )
 }

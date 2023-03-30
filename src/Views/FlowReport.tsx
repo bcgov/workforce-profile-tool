@@ -47,6 +47,15 @@ const FlowReport = (): JSX.Element => {
       error={error}
       data={data}
       title="Flow Report"
+      additionalNotes={
+        <div className="alert alert-info Shadow" role="alert">
+          <h2>2022 data to come</h2>
+          <p>
+            We are still working on generating Flow Report data for 2022. This
+            page will be updated with the 2022 data when it is available.
+          </p>
+        </div>
+      }
     >
       <hr />
       {tables}
