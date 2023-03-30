@@ -1,0 +1,58 @@
+apiVersion: template.openshift.io/v1
+objects:
+- apiVersion: build.openshift.io/v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewBuild
+    labels:
+      build: ${NAME}
+    name: ${NAME}
+    namespace: ${TOOLS_NAMESPACE}
+  spec:
+    failedBuildsHistoryLimit: 5
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: ${NAME}:${IMAGE_TAG}
+    postCommit: {}
+    resources: {}
+    runPolicy: Serial
+    source:
+      binary: {}
+      type: Binary
+    strategy:
+      sourceStrategy:
+        from:
+          kind: ImageStreamTag
+          name: nginx:1.16-el8
+          namespace: openshift
+      type: Source
+    successfulBuildsHistoryLimit: 5
+    triggers:
+    - type: ConfigChange
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewBuild
+    generation: 1
+    labels:
+      build: ${NAME}
+    name: ${NAME}
+    namespace: ${TOOLS_NAMESPACE}
+  spec:
+    lookupPolicy:
+      local: false
+kind: Template
+parameters:
+- name: TOOLS_NAMESPACE
+  required: true
+  description: The namespace in which to build the image
+- name: NAME
+  required: true
+  description: The name of the build
+- name: IMAGE_TAG
+  required: true
+  description: The output image stream tag
