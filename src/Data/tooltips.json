@@ -1,33 +1,41 @@
 {
   "comparison-available-workforce": {
     "2018": "The representation of the target group in the BC Workforce according to Statistics Canada's 2011 National Household Survey The \"Available Workforce\" is adjusted in accordance with the occupational distribution of jobs within the Organization, and the geographic area from which recruitment is carried out, in order to reflect the \"available\" workforce to the Organization.",
-    "2020": "The Available Workforce shows the representation of designated groups in the BC Workforce. It has been adjusted to represent the types of jobs employed by the BC Public Service within each ministry, region, or occupational group, as applicable. Source: Statistics Canada, 2016 Census and the 2017 Canadian Survey on Disability."
+    "2020": "The Available Workforce shows the representation of designated groups in the BC Workforce. It has been adjusted to represent the types of jobs employed by the BC Public Service within each ministry, region, or occupational group, as applicable. Source: Statistics Canada, 2016 Census and the 2017 Canadian Survey on Disability.",
+    "2022": "The Available Workforce shows the representation of designated groups in the BC Workforce. It has been adjusted to represent the types of jobs employed by the BC Public Service within each ministry, region, or occupational group, as applicable. Source: Statistics Canada, 2016 Census and the 2017 Canadian Survey on Disability."
   },
   "comparison-bc-population": {
     "2018": "Statistics Canada, 2011 National Household Survey",
-    "2020": "Source: Statistics Canada, 2016 Census and the 2017 Canadian Survey on Disability."
+    "2020": "Source: Statistics Canada, 2016 Census and the 2017 Canadian Survey on Disability.",
+    "2022": "Source: Statistics Canada, 2016 Census and the 2017 Canadian Survey on Disability."
   },
   "leadership-executive-leadership": {
     "2018": "Executive Leadership includes all positions classified as Assistant Deputy Minister and Deputy Minister.",
-    "2020": "Executive Leadership includes all positions classified as Deputy Minister, Associated Deputy Minister, Assistant Deputy Minister, and Executive Lead."
+    "2020": "Executive Leadership includes all positions classified as Deputy Minister, Associated Deputy Minister, Assistant Deputy Minister, and Executive Lead.",
+    "2022": "Executive Leadership includes all positions classified as Deputy Minister, Associated Deputy Minister, Assistant Deputy Minister, and Executive Lead."
   },
   "leadership-management-band-leadership": {
     "2018": "Management Band Leadership includes all positions classified as Band 1 through 6, and those classified as Applied Leadership, Business Leadership, and Strategic Leadership. Order in Council (OIC) appointments within these classifications is also included.",
-    "2020": "Management Band Leadership includes all excluded positions classified as Bands 1 through 6, or equivalent."
+    "2020": "Management Band Leadership includes all excluded positions classified as Bands 1 through 6, or equivalent.",
+    "2022": "Management Band Leadership includes all excluded positions classified as Bands 1 through 6, or equivalent."
   },
   "representation-total": {
     "2018": "Total includes all members of the population, including non-respondents and employees for whom there is no relevant demographic data available.",
-    "2020": "Total includes employees in the designated group, the non-designated group, and any for whom there is no relevant demographic data available."
+    "2020": "Total includes employees in the designated group, the non-designated group, and any for whom there is no relevant demographic data available.",
+    "2022": "Total includes employees in the designated group, the non-designated group, and any for whom there is no relevant demographic data available."
   },
   "representation-available-workforce": {
     "2018": "The representation of visible minorities in the BC Workforce according to Statistics Canada's 2011 National Household Survey. The \"Available Workforce\" is adjusted in accordance with the occupational distribution of jobs within the Public Service, and the geographic area from which recruitment is carried out, in order to reflect the \"available\" workforce to the Public Service.",
-    "2020": "The % Available Workforce shows the representation of designated groups in the BC Workforce. It has been adjusted to represent the types of jobs employed by the BC Public Service within each ministry, region, or occupational group, as applicable. Source: Statistics Canada, 2016 Census and the 2017 Canadian Survey on Disability."
+    "2020": "The % Available Workforce shows the representation of designated groups in the BC Workforce. It has been adjusted to represent the types of jobs employed by the BC Public Service within each ministry, region, or occupational group, as applicable. Source: Statistics Canada, 2016 Census and the 2017 Canadian Survey on Disability.",
+    "2022": "The % Available Workforce shows the representation of designated groups in the BC Workforce. It has been adjusted to represent the types of jobs employed by the BC Public Service within each ministry, region, or occupational group, as applicable. Source: Statistics Canada, 2016 Census and the 2017 Canadian Survey on Disability."
   },
   "representation-expected": {
     "2018": "Shortfall numbers are only shown when the shortfall is equal to or greater than 30 employees or 20% of the expected number, where:\r\nExpected Number = (Available Workforce Representation x Total in Occupation), and\r\nShortfall = Expected Number - Visible Minority.\r\nShortfall must be at least 2 to be considered a \"significantly under-represented\" occupation.",
-    "2020": "The Expected counts represent a benchmark target based on the available workforce in BC. This is calculated by taking the % Available Workforce and multiplying it by the Total number of employees, where available."
+    "2020": "The Expected counts represent a benchmark target based on the available workforce in BC. This is calculated by taking the % Available Workforce and multiplying it by the Total number of employees, where available.",
+    "2022": "The Expected counts represent a benchmark target based on the available workforce in BC. This is calculated by taking the % Available Workforce and multiplying it by the Total number of employees, where available."
   },
   "representation-shortfall": {
-    "2020": "The Shortfall counts note where actual counts fall short of the Expected count. Shortfall values are only shown if considered notable, based on the following criteria:\r\n• The shortfall must be at least 30, or represent at least 20% of the Expected count• The Expected count is at least 4• The Shortfall count must be at least 2\r\n\r\nShortfalls are shown as 'x' when the occupation or region is notably under-represented, but the value must be suppressed."
+    "2020": "The Shortfall counts note where actual counts fall short of the Expected count. Shortfall values are only shown if considered notable, based on the following criteria:\r\n• The shortfall must be at least 30, or represent at least 20% of the Expected count• The Expected count is at least 4• The Shortfall count must be at least 2\r\n\r\nShortfalls are shown as 'x' when the occupation or region is notably under-represented, but the value must be suppressed.",
+    "2022": "The Shortfall counts note where actual counts fall short of the Expected count. Shortfall values are only shown if considered notable, based on the following criteria:\r\n• The shortfall must be at least 30, or represent at least 20% of the Expected count• The Expected count is at least 4• The Shortfall count must be at least 2\r\n\r\nShortfalls are shown as 'x' when the occupation or region is notably under-represented, but the value must be suppressed."
   }
 }

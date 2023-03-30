@@ -77,12 +77,22 @@ export const useDataQuery = <T extends GenericRawData>(
 
   const key = dataKey.replace(YEAR_PLACEHOLDER, year || '')
 
-  const url = metadata && year ? metadata[key].csvURL : ''
+  let url = ''
+
+  if (year === '2022') {
+    url = `/data/${year}/${key}.csv`
+  } else {
+    url = metadata && year ? metadata[key].csvURL : ''
+  }
+
+  console.log('url', url)
 
   // TODO: Also change this next line once local data loading is no longer
   // necessary.
   const metadataUrl =
-    metadata && year ? METADATA_URL.concat(metadata[key].id) : undefined
+    metadata && year && year !== '2022'
+      ? METADATA_URL.concat(metadata[key].id)
+      : undefined
 
   // Load the raw data.
   const {

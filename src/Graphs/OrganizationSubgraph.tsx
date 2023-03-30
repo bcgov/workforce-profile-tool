@@ -45,6 +45,8 @@ const OrganizationSubGraph = ({
 
   MARGINS.left = width < GRAPH_WIDTH_BREAKPOINT ? 80 : 255
 
+  console.log('---> data', data)
+
   const provincialRepresentation = parseFloat(
     data.find((d) => d.Ministry_Key === 'BC Population')!.Value
   )

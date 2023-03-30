@@ -11,6 +11,7 @@ interface Props<T extends Dictionary<unknown>> {
   error?: unknown
   isLoading?: boolean
   title?: string
+  additionalNotes?: React.ReactNode
 }
 
 const GenericView = <T extends Dictionary<unknown>>({
@@ -19,10 +20,12 @@ const GenericView = <T extends Dictionary<unknown>>({
   error,
   isLoading,
   title,
+  additionalNotes,
 }: Props<T>): JSX.Element => {
   return (
     <div>
       <>
+        {additionalNotes}
         <HistoricalData />
         {title && <Title title={title} />}
         {(isLoading || !data) && <Loading />}
