@@ -22,7 +22,7 @@ success() { echo "${BOLD_GREEN}$1${NO_COLOR}"; }
 # MAIN SHELL SCRIPT
 #
 #
-info "Build + deploy script for NJSA frontend"
+info "Build + deploy script for WFP frontend"
 info "---------------------------------------"
 echo ""
 
