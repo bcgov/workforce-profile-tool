@@ -24,7 +24,7 @@ const VariableDisplay = ({
   const url =
     metadata && metadata[dataKey] && year && year !== '2022'
       ? metadata[dataKey].csvURL
-      : `/data/${year}/${dataKey}.csv`
+      : `./data/${year}/${dataKey}.csv`
 
   // TODO: Factor out and use useDataQuery
   const { data: unfilteredData } = useQuery(
@@ -69,9 +69,8 @@ const VariableDisplay = ({
 
   return (
     <div
-      className={`VariableDisplay ${
-        variableGroup.key === 'Ministry_Key' ? 'col-12' : 'col-4'
-      } col-sm-12 ${variableGroup.key}`}
+      className={`VariableDisplay ${variableGroup.key === 'Ministry_Key' ? 'col-12' : 'col-4'
+        } col-sm-12 ${variableGroup.key}`}
     >
       <h3>
         <span className="d-inline d-sm-none">

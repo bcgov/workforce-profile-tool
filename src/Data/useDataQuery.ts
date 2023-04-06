@@ -84,7 +84,7 @@ export const useDataQuery = <T extends GenericRawData>(
   let url = ''
 
   if (year === '2022') {
-    url = `/data/${year}/${key}.csv`
+    url = `./data/${year}/${key}.csv`
   } else {
     url = metadata && year ? metadata[key].csvURL : ''
   }
