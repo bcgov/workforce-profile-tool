@@ -47,6 +47,8 @@ const Organization = (): JSX.Element => {
 
   const data = buildMinistryData(unprocessedData)
 
+  console.log('DATA', data)
+
   return (
     <GenericView data={data} error={error} isLoading={isLoading}>
       <OrganizationGraph data={data} dataDictionary={dataDictionary} />

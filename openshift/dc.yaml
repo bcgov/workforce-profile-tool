@@ -1,0 +1,143 @@
+kind: Template
+apiVersion: template.openshift.io/v1
+objects:
+  - apiVersion: v1
+    kind: Service
+    spec:
+      ports:
+        - name: 8080-tcp
+          port: 8080
+          protocol: TCP
+          targetPort: 8080
+        - name: 8443-tcp
+          port: 8443
+          protocol: TCP
+          targetPort: 8443
+      selector:
+        deployment: ${NAME}
+      sessionAffinity: None
+      type: ClusterIP
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+      labels:
+        app: ${NAME}
+        app.kubernetes.io/component: ${NAME}
+        app.kubernetes.io/instance: ${NAME}
+      name: ${NAME}
+      namespace: ${DEPLOY_NAMESPACE}
+  - apiVersion: apps/v1
+    kind: Deployment
+    spec:
+      progressDeadlineSeconds: 600
+      replicas: 1
+      revisionHistoryLimit: 10
+      selector:
+        matchLabels:
+          deployment: ${NAME}
+      strategy:
+        rollingUpdate:
+          maxSurge: 25%
+          maxUnavailable: 25%
+        type: RollingUpdate
+      template:
+        metadata:
+          annotations:
+            openshift.io/generated-by: OpenShiftNewApp
+          creationTimestamp: null
+          labels:
+            deployment: ${NAME}
+        spec:
+          containers:
+            - image: >-
+                image-registry.openshift-image-registry.svc:5000/${IMAGE_NAMESPACE}/${IMAGE_NAME}:${IMAGE_TAG}
+              imagePullPolicy: IfNotPresent
+              name: ${NAME}
+              ports:
+                - containerPort: 8080
+                  protocol: TCP
+                - containerPort: 8443
+                  protocol: TCP
+              volumeMounts:
+              - name: config-volume
+                mountPath: /opt/app-root/src/config
+              resources: {}
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+          volumes:
+          - name: config-volume
+            configMap:
+              defaultMode: 420
+              name: ${NAME}-config
+          dnsPolicy: ClusterFirst
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+    metadata:
+      annotations:
+        deployment.kubernetes.io/revision: '2'
+        image.openshift.io/triggers: >-
+          [{"from":{"kind":"ImageStreamTag","name":"${IMAGE_NAME}:${IMAGE_TAG}","namespace":"${IMAGE_NAMESPACE}"},"fieldPath":"spec.template.spec.containers[?(@.name==\"${IMAGE_NAME}\")].image"}]
+        openshift.io/generated-by: OpenShiftNewApp
+      generation: 2
+      labels:
+        app: ${NAME}
+        app.kubernetes.io/component: ${NAME}
+        app.kubernetes.io/instance: ${NAME}
+      name: ${NAME}
+      namespace: ${DEPLOY_NAMESPACE}
+  - apiVersion: route.openshift.io/v1
+    kind: Route
+    spec:
+      host: ${NAME}-${DEPLOY_NAMESPACE}.${BASE_OPENSHIFT_URL}
+      tls:
+        termination: edge
+        insecureEdgeTerminationPolicy: Redirect
+      port:
+        targetPort: 8080-tcp
+      to:
+        kind: Service
+        name: ${NAME}
+        weight: 100
+      wildcardPolicy: None
+    metadata:
+      annotations:
+        openshift.io/host.generated: 'true'
+      labels:
+        app: ${NAME}
+        app.kubernetes.io/component: ${NAME}
+        app.kubernetes.io/instance: ${NAME}
+      name: ${NAME}
+      namespace: ${DEPLOY_NAMESPACE}
+  - apiVersion: v1
+    data:
+      __ENV.js: >-
+        window.__ENV = {
+          NODE_ENV: 'production',
+        }
+    kind: ConfigMap
+    metadata:
+      labels:
+        app: ${NAME}
+      name: ${NAME}-config
+      namespace: ${DEPLOY_NAMESPACE}
+parameters:
+- name: IMAGE_NAMESPACE
+  required: true
+  description: The namespace holding the image to deploy from
+- name: IMAGE_TAG
+  required: true
+  description: The output image stream tag
+- name: IMAGE_NAME
+  required: true
+  description: The name of the image (likely the same as the NAME param)
+- name: DEPLOY_NAMESPACE
+  required: true
+  description: The namespace in which to deploy
+- name: NAME
+  required: true
+  description: The name of the deployment, e.g. wfp
+- name: BASE_OPENSHIFT_URL
+  required: true
+  description: The base URL for Openshift
