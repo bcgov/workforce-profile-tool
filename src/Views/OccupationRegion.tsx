@@ -51,6 +51,8 @@ const OccupationRegion = ({ viewType }: Props): JSX.Element => {
           dataDictionary={dataDictionary}
           shortTitle={shortTitle}
           viewType={viewType}
+          year={year}
+          designatedGroupKey={k}
         />
       </div>
     )

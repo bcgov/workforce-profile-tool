@@ -30,13 +30,14 @@ const ProgressGraph = ({ data, dataDictionary, title }: Props): JSX.Element => {
     { key: '2015_pc', label: '2015', color: '#6c757d' },
     { key: '2018_pc', label: '2018', color: '#70CCDB' },
     { key: '2020_pc', label: '2020', color: '#D2E2EE' },
+    { key: '2022_pc', label: '2022', color: '#6c757d' },
   ]
 
   const [width, setWidth] = useState(GRAPH_DEFAULT_WIDTH)
 
-  const dataKeys = (Object.keys(
-    data[0]
-  ) as (keyof ProgressRawData)[]).filter((key) => key.endsWith('_pc'))
+  const dataKeys = (Object.keys(data[0]) as (keyof ProgressRawData)[]).filter(
+    (key) => key.endsWith('_pc')
+  )
 
   const filteredData = data
     .filter((d) => d['Des_Grp'] !== 'AS_TOTAL')

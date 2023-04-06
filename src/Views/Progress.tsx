@@ -13,7 +13,7 @@ import ProgressGraph from '../Graphs/ProgressGraph'
 import { DataKeyEnum } from '../@types/DataKeyEnum'
 
 const Progress = (): JSX.Element => {
-  const { setLockedVars } = useDataManager()
+  const { setLockedVars, year } = useDataManager()
 
   // When page loads, set the locked variables as appropriate.
   useEffect(() => setLockedVars({}), [])
@@ -61,6 +61,17 @@ const Progress = (): JSX.Element => {
         data={data}
         dataDictionary={dataDictionary}
         filename="progress"
+        additionalDefinitions={
+          year === '2022'
+            ? [
+                {
+                  term: 'NA',
+                  definition:
+                    'The 2020 comparator is not provided as the BC Stats definition of Persons with Disabilities changed between 2020 and 2022.',
+                },
+              ]
+            : []
+        }
       />
     </GenericView>
   )

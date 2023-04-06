@@ -40,9 +40,10 @@ const Home = (): JSX.Element => {
           are available on every tab.
         </p>
         <p>
-          <strong>New (Nov 2021)</strong>: Hiring and Flow data have been added
-          for the most recent reporting year (2020). Flow data is only available
-          at the BCPS level.
+          <strong>Hiring and Flow data</strong>: This data is released soon
+          after the most recent reporting year is published; these tabs will
+          update once it is available. Flow data is only available at the BCPS
+          level.
         </p>
         <p>
           <strong>Note</strong>: The dashboard is not compatible with older web
@@ -50,6 +51,11 @@ const Home = (): JSX.Element => {
           browser for best results.
         </p>
         <h2>Caveats</h2>
+        <p>
+          Suppression: Beginning in 2022, all suppressed values are indicated by
+          &ldquo;S&rdquo; &mdash; unlike in previous years, where suppression
+          due to small counts versus residual disclosure was differentiated.
+        </p>
         <p>
           Report Frequency: The dashboard is updated approximately every two
           years, as it relies on demographic information from recent corporate
@@ -79,12 +85,13 @@ const Home = (): JSX.Element => {
         </p>
         <p>
           Persons with Disabilities: BC Stats and Statistics Canada use
-          different methods to identify Persons with Disabilities. The BC Stats
-          method is more focused in scope, while the Statistics Canada method
-          likely captures a broader portion of the population. Caution is needed
-          when comparing the representation of Persons with Disabilities in the
-          BC Public Service (calculated by BC Stats) against the available
-          workforce and population of BC (calculated by Statistics Canada).
+          different methods to identify Persons with Disabilities; the BC Stats
+          method is also updated over time. Caution is needed when comparing the
+          representation of Persons with Disabilities in the BC Public Service
+          (calculated by BC Stats) against the available workforce and
+          population of BC (calculated by Statistics Canada). Caution is also
+          needed when comparing representation across years within the BC Public
+          Service due to the changes in definition.
         </p>
         <p>
           2SLGBTQ+ and Non-Binary Representation: Information on 2SLGBTQ+ and

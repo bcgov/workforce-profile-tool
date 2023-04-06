@@ -9,11 +9,7 @@ interface Props {
 
 const TableTooltip = ({ dataDictionary, tooltipKey }: Props): JSX.Element => {
   const tooltipText = getTooltip(tooltipKey, dataDictionary)
-  const tooltip = tooltipText ? (
-    <Tooltip key={Date.now()} text={tooltipText} />
-  ) : (
-    <></>
-  )
+  const tooltip = tooltipText ? <Tooltip text={tooltipText} /> : <></>
 
   return <span>&nbsp;{tooltip}</span>
 }

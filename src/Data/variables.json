@@ -4,7 +4,7 @@
     "name": "Data Year",
     "shortName": "Year",
     "isExclusive": true,
-    "default": "2020",
+    "default": "2022",
     "variables": [
       {
         "key": "2018",
@@ -13,6 +13,10 @@
       {
         "key": "2020",
         "name": "2020"
+      },
+      {
+        "key": "2022",
+        "name": "2022"
       }
     ]
   },
