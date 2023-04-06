@@ -1,14 +1,12 @@
 $enable-rounded: false;
 
-@import "~@bcgov/bootstrap-theme/dist/scss/bootstrap-theme";
+@import '~@bcgov/bootstrap-theme/dist/scss/bootstrap-theme';
 
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
 
-
-
-$brand-color-blue:  #234075;
-$brand-color-gold:  #E6B345;
-$brand-color-teal:  #70CCDB;
-$brand-color-fog:   #D2E2EE;
+$brand-color-blue: #234075;
+$brand-color-gold: #e6b345;
+$brand-color-teal: #70ccdb;
+$brand-color-fog: #d2e2ee;
 $brand-color-dark-grey: #6c757d;

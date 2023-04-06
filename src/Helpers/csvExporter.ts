@@ -1,5 +1,6 @@
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
-import { DEFINITIONS } from '../Table/Definitions'
+import { useDataManager } from '../Data/DataManager'
+import { definitionsForYear } from '../Table/Definitions'
 
 /** Helper function that converts an array of string arrays (i.e. rows and
  * columns) into a single string which can be saved as a CSV.
@@ -24,11 +25,13 @@ const _toCSVString = (rows: string[][]): string => {
  * @param includeDefinitions Whether to include definitions of the suppressed
  * data (appended at the bottom of the CSV).
  */
-export const exportData = <T extends Record<string, unknown>>(
+export const useExportData = <T extends Record<string, unknown>>(
   columns: ColumnWithClassName<T>[],
   rows: T[],
   includeDefinitions = true
 ): string => {
+  const { year } = useDataManager()
+
   const columnRow = columns.map((c) => {
     let name = c.Header as JSX.Element | string
 
@@ -53,7 +56,7 @@ export const exportData = <T extends Record<string, unknown>>(
   allRows = allRows.concat(mappedRows)
 
   if (includeDefinitions) {
-    const definitions = DEFINITIONS.map((item) => [
+    const definitions = definitionsForYear(year).map((item) => [
       item.term,
       `"${item.definition}"`,
     ])

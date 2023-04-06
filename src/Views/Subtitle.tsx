@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { displayNameByKey, useDataManager } from '../Data/DataManager'
 
 const Subtitle = (): JSX.Element => {

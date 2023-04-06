@@ -1,5 +1,3 @@
-import React from 'react'
-
 const NoGraph = (): JSX.Element => {
   return (
     <div className="alert alert-warning Shadow" role="alert">

@@ -2,8 +2,11 @@ import { useQuery } from 'react-query'
 import * as d3 from 'd3'
 
 import { filterData, sortData, useDataManager } from './DataManager'
+import { GenericRawData } from '../@types/DataTypes'
 import { YEAR_PLACEHOLDER } from '../@types/DataKeyEnum'
 import IntentionalAny from '../@types/IntentionalAny'
+
+import TOOLTIPS from './tooltips.json'
 
 // TODO: Extract this.
 // We put `limit=0` because we're only interested in the metadata for the file,
@@ -19,6 +22,8 @@ export interface RawDataDictionaryEntry {
   type: string
   id: string
 }
+
+type RawTooltipDataDictionaryEntry = Record<string, string>
 
 export interface DataDictionaryEntry {
   columnKey: string
@@ -68,7 +73,7 @@ export interface UseDataQueryResult<T> {
  * @returns The result of the query; see `UseDataQueryResult`.
  *
  */
-export const useDataQuery = <T>(
+export const useDataQuery = <T extends GenericRawData>(
   dataKey: string,
   doNotFilterMinistries?: boolean
 ): UseDataQueryResult<T> => {
@@ -76,24 +81,40 @@ export const useDataQuery = <T>(
 
   const key = dataKey.replace(YEAR_PLACEHOLDER, year || '')
 
-  const url = metadata && year ? metadata[key].csvURL : ''
+  let url = ''
 
-  // TODO: Also change this next line once local data loading is no longer
-  // necessary.
-  const metadataUrl =
-    metadata && year ? METADATA_URL.concat(metadata[key].id) : undefined
+  if (year === '2022') {
+    url = `/data/${year}/${key}.csv`
+  } else {
+    url = metadata && year ? metadata[key].csvURL : ''
+  }
+
+  console.log('url', url)
+
+  // Restore when Data Catalogue loading is viable again.
+  // const metadataUrl =
+  //   metadata && year && year !== '2022'
+  //     ? METADATA_URL.concat(metadata[key].id)
+  //     : undefined
 
   // Load the raw data.
-  const { data: results, error, isLoading } = useQuery(
+  const {
+    data: results,
+    error,
+    isLoading,
+  } = useQuery(
     key,
     async () => {
       // Handle CSV data.
-      // console.log('url', url)
-      const data = ((await d3.csv(url)) as unknown) as T[]
-      // console.log('data', data)
-      const dataDictionary = metadataUrl
-        ? ((await d3.json(metadataUrl)) as IntentionalAny).result.fields
-        : [] // If there's no metadataUrl, just return empty array
+      const data = (await d3.csv(url)) as unknown as T[]
+
+      // Restore when Data Catalogue loading is viable again.
+      // const dataDictionary = metadataUrl
+      //   ? ((await d3.json(metadataUrl)) as IntentionalAny).result.fields
+      //   : [] // If there's no metadataUrl, just return empty array
+
+      const dataDictionary = TOOLTIPS
+
       return {
         data,
         dataDictionary,
@@ -106,26 +127,43 @@ export const useDataQuery = <T>(
     }
   )
 
-  // console.log('results', results)
-
   const filteredAndSortedData = sortData(
     filterData(results?.data, queryValues, doNotFilterMinistries)
   )
 
-  const filteredDataDictionary = results?.dataDictionary
-    .filter(
-      (d: RawDataDictionaryEntry) =>
-        d.info && d.info.notes && d.info.notes.length > 0
-    )
-    .map(
-      (d: RawDataDictionaryEntry): DataDictionaryEntry => {
-        return {
-          columnKey: d.id,
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          note: d.info!.notes,
+  // Restore when Data Catalogue loading is viable again.
+  // const filteredDataDictionary = results?.dataDictionary
+  //   .filter(
+  //     (d: RawDataDictionaryEntry) =>
+  //       d.info && d.info.notes && d.info.notes.length > 0
+  //   )
+  //   .map((d: RawDataDictionaryEntry): DataDictionaryEntry => {
+  //     return {
+  //       columnKey: d.id,
+  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  //       note: d.info!.notes,
+  //     }
+  //   })
+  const dataDictionary: Record<string, RawTooltipDataDictionaryEntry> =
+    results?.dataDictionary || {}
+  const filteredDataDictionary: DataDictionaryEntry[] = Object.keys(
+    dataDictionary
+  )
+    .map((columnKey) => {
+      if (year) {
+        const note = dataDictionary[columnKey][year]
+        if (note) {
+          return {
+            columnKey,
+            note,
+          }
         }
       }
-    )
+      return undefined
+    })
+    .filter((d): d is DataDictionaryEntry => d !== undefined)
+
+  console.log('filteredDataDictionary', filteredDataDictionary)
 
   return {
     data: filteredAndSortedData,

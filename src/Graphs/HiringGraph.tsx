@@ -32,8 +32,6 @@ const HiringGraph = ({ data, dataDictionary, title }: Props): JSX.Element => {
 
   const [width, setWidth] = useState(GRAPH_DEFAULT_WIDTH)
 
-  if (!data) return <div>&nbsp;</div>
-
   const { dataKeys, filteredData } = processDataForGraph(data, dataDefinitions)
 
   const { labelCallback, items, tooltip } = useGraph({
@@ -46,6 +44,8 @@ const HiringGraph = ({ data, dataDictionary, title }: Props): JSX.Element => {
     margins: MARGINS,
     width: 500,
   })
+
+  if (!data) return <div>&nbsp;</div>
 
   const graph = (
     <ResponsiveBar

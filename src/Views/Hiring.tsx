@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { displayNameByKey } from '../Data/DataManager'
@@ -17,12 +17,8 @@ const Hiring = (): JSX.Element => {
   // When page loads, set the locked variables as appropriate.
   useEffect(() => setLockedVars({ Year: ['2020'] }), [])
 
-  const {
-    data,
-    dataDictionary,
-    isLoading,
-    error,
-  } = useDataQuery<HiringRawData>(DataKeyEnum.Hiring)
+  const { data, dataDictionary, isLoading, error } =
+    useDataQuery<HiringRawData>(DataKeyEnum.Hiring)
 
   console.log('data', data, 'isLoading', isLoading, 'error', error)
 
@@ -39,7 +35,7 @@ const Hiring = (): JSX.Element => {
       className: 'text-right',
     },
     {
-      id: 'Total_Count_ORG',
+      id: 'Hiring_PC_Total',
       Header: '% of total',
       accessor: (d) => formatPercent(d.DesGrp_Count_ORG, 1, +d.Total_Count_ORG),
       className: 'text-right',
@@ -52,6 +48,15 @@ const Hiring = (): JSX.Element => {
       error={error}
       data={data}
       title="Indicators of Progress — By Designated Group"
+      additionalNotes={
+        <div className="alert alert-info Shadow" role="alert">
+          <h2>2022 data to come</h2>
+          <p>
+            We are still working on generating Hiring data for 2022. This page
+            will be updated with the 2022 data when it is available.
+          </p>
+        </div>
+      }
     >
       <HiringGraph
         data={data}

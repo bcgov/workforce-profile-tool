@@ -253,9 +253,8 @@ function useDataManager(): UseDataManagerType {
         } else {
           const value = getLocalStorageValue(queryValueKey)
           if (value) {
-            queryValuesCopy[
-              queryValueKey as keyof QueryValues
-            ] = value as string & string[]
+            queryValuesCopy[queryValueKey as keyof QueryValues] =
+              value as string & string[]
           }
           setLocalStorageValue(queryValueKey, null)
         }

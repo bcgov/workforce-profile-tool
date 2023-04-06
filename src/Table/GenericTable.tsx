@@ -1,15 +1,14 @@
 import { Column } from 'react-table'
-import React from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
-import Definitions from './Definitions'
+import { DataDictionaryEntry } from '../Data/useDataQuery'
+import Definitions, { Definition } from './Definitions'
 import Dictionary from '../@types/Dictionary'
 import DownloadDataLink from './DownloadDataLink'
 import Loading from '../Views/Loading'
 import Table from './Table'
 
 import './Table.scss'
-import { DataDictionaryEntry } from '../Data/useDataQuery'
 
 interface Props<T extends Dictionary<unknown>> {
   /** The table columns to use. */
@@ -26,6 +25,8 @@ interface Props<T extends Dictionary<unknown>> {
   hideDefinitions?: boolean
   /** Should a footer be shown for this table? */
   showFooter?: boolean
+  /** Are there any additional definitions for this table? */
+  additionalDefinitions?: Definition[]
 }
 
 /** A generic table for use throughout the app. Optionally includes a button to
@@ -39,6 +40,7 @@ const GenericTable = <T extends Dictionary<unknown>>({
   filename,
   hideDefinitions,
   showFooter,
+  additionalDefinitions,
 }: Props<T>): JSX.Element => {
   if (!data) return <Loading />
 
@@ -59,7 +61,9 @@ const GenericTable = <T extends Dictionary<unknown>>({
               filename={filename}
             />
           )}
-          {!hideDefinitions && <Definitions />}
+          {!hideDefinitions && (
+            <Definitions additionalDefinitions={additionalDefinitions} />
+          )}
         </div>
       </div>
     </div>

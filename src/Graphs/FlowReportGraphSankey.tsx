@@ -1,4 +1,3 @@
-import React from 'react'
 import { ResponsiveSankey } from '@nivo/sankey'
 import FixTypeLater from '../@types/FixTypeLater'
 

@@ -1,15 +1,10 @@
 import { ResponsiveBar } from '@nivo/bar'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { DataDefinition } from '../@types/DataDefinition'
 import { DataDictionaryEntry } from '../Data/useDataQuery'
-import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
 import { FlowRawData } from '../@types/DataTypes'
-import {
-  formatNumber,
-  formatPercent,
-  parseFloatClean,
-} from '../Helpers/formatter'
+import { formatNumber } from '../Helpers/formatter'
 import {
   GRAPH_DEFAULT_WIDTH,
   GRAPH_WIDTH_BREAKPOINT,
@@ -67,8 +62,6 @@ const FlowReportGraph = ({
   MARGINS.left =
     width < GRAPH_WIDTH_BREAKPOINT ? GRAPH_Y_AXIS_NARROW_WIDTH : LEFT_MARGIN
 
-  if (!data) return <div>&nbsp;</div>
-
   // const reshapedData = data
 
   const { dataKeys, filteredData } = processDataForGraph(
@@ -91,6 +84,8 @@ const FlowReportGraph = ({
     margins: MARGINS,
     width,
   })
+
+  if (!data) return <div>&nbsp;</div>
 
   // const graph = (
   //   <ResponsiveBar

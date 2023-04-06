@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Subtitle from './Subtitle'
 
 interface Props {

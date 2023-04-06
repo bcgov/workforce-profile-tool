@@ -3,6 +3,7 @@ import Color from 'color'
 import React, { useCallback } from 'react'
 
 import { DataDefinition } from '../@types/DataDefinition'
+import FixTypeLater from '../@types/FixTypeLater'
 import { displayNameByKey } from '../Data/DataManager'
 
 interface Props<T> {
@@ -21,7 +22,7 @@ export const useTooltip = <T,>({
   formatter,
 }: Props<T>): TooltipProp => {
   const baseProps = useCallback(
-    (d): JSX.Element => {
+    (d: FixTypeLater): JSX.Element => {
       return (
         <div style={{ color: Color(d.color).darken(0.3).hex() }}>
           {displayNameByKey('Des_Grp', d.indexValue)},{' '}

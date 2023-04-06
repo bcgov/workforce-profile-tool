@@ -1,4 +1,3 @@
-import React from 'react'
 import { VARIABLE_MAP, useDataManager } from '../Data/DataManager'
 
 const HistoricalData = (): JSX.Element => {

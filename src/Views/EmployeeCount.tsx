@@ -1,4 +1,3 @@
-import React from 'react'
 import { useDataManager } from '../Data/DataManager'
 
 const EmployeeCount = (): JSX.Element => {

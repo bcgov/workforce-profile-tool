@@ -1,4 +1,4 @@
-@import "../common";
+@import '../common';
 
 .TabInterface {
   .TabButtons {
@@ -43,7 +43,6 @@
 .Secondary {
   margin-top: -45px;
   .TabInterface {
-    
     .TabButtons {
       border: solid 1px $brand-color-blue;
       border-left: 0;
@@ -51,14 +50,9 @@
     }
     .TabButton {
       margin-top: 15px;
-      a {
-        // padding: 5px 15px 3px;
-      }
     }
   }
   .Tab {
     margin-top: 30px;
   }
 }
-
-

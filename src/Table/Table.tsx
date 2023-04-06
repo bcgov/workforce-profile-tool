@@ -1,7 +1,6 @@
 /* eslint react/jsx-key: "off" */ // Turn off the jsx-key warning.
 
 import { Column, usePagination, useSortBy, useTable } from 'react-table'
-import React from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { DataDictionaryEntry } from '../Data/useDataQuery'

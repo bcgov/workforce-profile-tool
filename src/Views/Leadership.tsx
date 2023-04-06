@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { DataKeyEnum } from '../@types/DataKeyEnum'
@@ -23,12 +23,8 @@ const Leadership = (): JSX.Element => {
     }
   }, [year])
 
-  const {
-    data,
-    dataDictionary,
-    isLoading,
-    error,
-  } = useDataQuery<LeadershipRawData>(DataKeyEnum.Leadership)
+  const { data, dataDictionary, isLoading, error } =
+    useDataQuery<LeadershipRawData>(DataKeyEnum.Leadership)
 
   const columns: ColumnWithClassName<LeadershipRawData>[] = [
     {

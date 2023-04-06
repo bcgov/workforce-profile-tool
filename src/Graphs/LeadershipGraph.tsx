@@ -51,8 +51,6 @@ const LeadershipGraph = ({
   MARGINS.left =
     width < GRAPH_WIDTH_BREAKPOINT ? GRAPH_Y_AXIS_NARROW_WIDTH : LEFT_MARGIN
 
-  if (!data) return <div>&nbsp;</div>
-
   const { dataKeys, filteredData } = processDataForGraph(data, dataDefinitions)
   filteredData.reverse()
 
@@ -65,6 +63,8 @@ const LeadershipGraph = ({
     margins: MARGINS,
     width,
   })
+
+  if (!data) return <div>&nbsp;</div>
 
   const graph = (
     <ResponsiveBar

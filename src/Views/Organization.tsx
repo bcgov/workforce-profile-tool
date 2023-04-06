@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { ComparisonRawData, MinistryRawData } from '../@types/DataTypes'
 import { DataKeyEnum } from '../@types/DataKeyEnum'
@@ -46,6 +46,8 @@ const Organization = (): JSX.Element => {
   } = useDataQuery<ComparisonRawData>(DataKeyEnum.Comparison, true)
 
   const data = buildMinistryData(unprocessedData)
+
+  console.log('DATA', data)
 
   return (
     <GenericView data={data} error={error} isLoading={isLoading}>

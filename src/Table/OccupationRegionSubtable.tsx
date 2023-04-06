@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { ColumnWithClassNameandFooter } from '../@types/ColumnWithClassName'
 import { DataDictionaryEntry } from '../Data/useDataQuery'
 import { formatNumber, formatPercent } from '../Helpers/formatter'
@@ -8,15 +6,16 @@ import { OccupationRegionRawData } from '../@types/DataTypes'
 import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
 import GenericTable from './GenericTable'
+import FixTypeLater from '../@types/FixTypeLater'
+import { DataKeyEnum } from '../@types/DataKeyEnum'
 
 interface Props {
   data: OccupationRegionRawData[]
   dataDictionary: DataDictionaryEntry[]
   shortTitle?: string
-}
-
-interface Props {
   viewType: OccupationRegionEnum
+  year: string | undefined
+  designatedGroupKey?: string
 }
 
 const RegionOccupationSubtable = ({
@@ -24,6 +23,8 @@ const RegionOccupationSubtable = ({
   dataDictionary,
   shortTitle,
   viewType,
+  year,
+  designatedGroupKey,
 }: Props): JSX.Element => {
   const totalRow = data.filter((d) => d['Variable_Type'] === 'Total')
 
@@ -33,34 +34,36 @@ const RegionOccupationSubtable = ({
     {
       id: `${viewType}_Region_Group`,
       Header: `${viewType}`,
-      Footer: () => `Total`,
+      Footer: () => `Total` as FixTypeLater,
       accessor: (d) => d[`Occupation_Region_Group`],
     },
     {
       id: `DesGrp_Count_ORG`,
       Header: shortTitle,
-      Footer: () => formatNumber(totalRow[0].DesGrp_Count_ORG),
+      Footer: () => formatNumber(totalRow[0].DesGrp_Count_ORG) as FixTypeLater,
       accessor: (d) => formatNumber(d[`DesGrp_Count_ORG`]),
       className: `text-right`,
     },
     {
       id: `NonDesGrp_Count_ORG`,
       Header: `Non-${shortTitle}`,
-      Footer: () => formatNumber(totalRow[0].NonDesGrp_Count_ORG),
+      Footer: () =>
+        formatNumber(totalRow[0].NonDesGrp_Count_ORG) as FixTypeLater,
       accessor: (d) => formatNumber(d[`NonDesGrp_Count_ORG`]),
       className: `text-right`,
     },
     {
       id: `Total_Count_ORG`,
       Header: 'Total',
-      Footer: () => formatNumber(totalRow[0].Total_Count_ORG),
+      Footer: () => formatNumber(totalRow[0].Total_Count_ORG) as FixTypeLater,
       accessor: (d) => formatNumber(d[`Total_Count_ORG`]),
       className: `text-right`,
     },
     {
       id: `DesGrp_Percent_ORG`,
       Header: `Rate of ${shortTitle}`,
-      Footer: () => formatPercent(totalRow[0].DesGrp_Percent_ORG, 1, 100),
+      Footer: () =>
+        formatPercent(totalRow[0].DesGrp_Percent_ORG, 1, 100) as FixTypeLater,
       accessor: (d) => formatPercent(d[`DesGrp_Percent_ORG`], 1, 100),
       className: `text-right`,
     },
@@ -76,20 +79,24 @@ const RegionOccupationSubtable = ({
     {
       id: `DesGrp_Count_Expected`,
       Header: `Expected # ${shortTitle}`,
-      Footer: () => formatNumber(totalRow[0].DesGrp_Count_Expected, ``),
+      Footer: () =>
+        formatNumber(totalRow[0].DesGrp_Count_Expected, ``) as FixTypeLater,
       accessor: (d) => formatNumber(d[`DesGrp_Count_Expected`], ``),
       className: `text-right`,
     },
     {
       id: `DesGrp_Count_Shortfall`,
       Header: `Shortfall of ${shortTitle}`,
-      Footer: () => formatNumber(totalRow[0].DesGrp_Count_Shortfall, ``),
+      Footer: () =>
+        formatNumber(totalRow[0].DesGrp_Count_Shortfall, ``) as FixTypeLater,
       accessor: (d) => formatNumber(d[`DesGrp_Count_Shortfall`], ``),
       className: `text-right`,
     },
   ]
 
   const allRows = filteredData.concat(totalRow)
+
+  console.log('designatedGroupKey', designatedGroupKey, 'year', year)
 
   return (
     <div className={`${viewType}Table`}>
@@ -101,7 +108,19 @@ const RegionOccupationSubtable = ({
         showFooter
       />
       <DownloadDataLink columns={columns} rows={allRows} filename={viewType} />
-      <Definitions />
+      <Definitions
+        additionalDefinitions={
+          year === '2022' && designatedGroupKey && designatedGroupKey === 'WOM'
+            ? [
+                {
+                  term: 'Note',
+                  definition:
+                    'Some ministries have had their Women counts adjusted slightly to prevent additional residual disclosure. These adjustments are very minimal and do not affect total counts.',
+                },
+              ]
+            : []
+        }
+      />
     </div>
   )
 }

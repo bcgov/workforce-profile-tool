@@ -1,5 +1,3 @@
-import React from 'react'
-
 export interface Column {
   /** Is the column sorted at all? */
   isSorted?: boolean

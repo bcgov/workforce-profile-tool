@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [15.x]
+        node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -28,6 +28,7 @@ jobs:
     - run: yarn install
     - run: |
         REACT_APP_GIT_SHA=${GITHUB_SHA::6}
+        CI='' 
         yarn build
     - name: Publish build artifact
       uses: actions/upload-artifact@v2

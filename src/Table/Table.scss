@@ -1,4 +1,4 @@
-@import "../common";
+@import '../common';
 
 %subtotal {
   text-transform: uppercase;
@@ -55,16 +55,16 @@
     }
   }
   .sortable::after {
-    font-family: "Font Awesome 5 Free";
-    content: "\f0dc";
+    font-family: 'Font Awesome 5 Free';
+    content: '\f0dc';
   }
   .sortable-asc::after {
-    font-family: "Font Awesome 5 Free";
-    content: "\f0dd";
+    font-family: 'Font Awesome 5 Free';
+    content: '\f0dd';
   }
   .sortable-desc::after {
-    font-family: "Font Awesome 5 Free";
-    content: "\f0de";
+    font-family: 'Font Awesome 5 Free';
+    content: '\f0de';
   }
   tfoot {
     td {

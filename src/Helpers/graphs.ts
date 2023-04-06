@@ -99,8 +99,8 @@ export const processDataForGraph = <T extends DesignatedGroupKeyedData>(
         additionalMapping(d, obj)
       }
       dataKeys.forEach((dataKey) => {
-        obj[dataKey] = parseFloatClean((d[dataKey] as unknown) as number)
-        obj[`${dataKey}_str`] = d[dataKey]
+        obj[dataKey] = parseFloatClean(d[dataKey] as unknown as number)
+        obj[`${String(dataKey)}_str`] = d[dataKey]
       })
       return obj
     })

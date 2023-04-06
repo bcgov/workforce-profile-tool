@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { VARIABLE_MAP } from '../Data/DataManager'
 import VariableDisplay from './VariableDisplay'
 

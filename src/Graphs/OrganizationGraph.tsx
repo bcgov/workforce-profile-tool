@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
 import { MinistryRawData } from '../@types/DataTypes'
 import Dictionary from '../@types/Dictionary'

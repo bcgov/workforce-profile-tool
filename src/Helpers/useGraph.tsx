@@ -1,34 +1,33 @@
-import { AxisProps, TickFormatter } from '@nivo/axes'
 import { Margin } from '@nivo/core'
 import { useCallback } from 'react'
 
 import { DataDefinition } from '../@types/DataDefinition'
+import FixTypeLater from '../@types/FixTypeLater'
 import { horizontalLabel, verticalLabel } from '../Graphs/labels'
-import { LabelFormatter, TooltipProp } from '@nivo/bar'
 import { useAxisBottom } from '../Graphs/useAxisBottom'
 import { useAxisLeft } from '../Graphs/useAxisLeft'
 import { useTooltip } from '../Graphs/useTooltip'
 
-export interface UseGraphReturnType {
-  /** A bottom axis for a Nivo chart. */
-  axisBottom: AxisProps
-  /** A left axis for a Nivo chart. */
-  axisLeft: AxisProps
-  /** All numeric values for all rows and all supplied columns. Can be useful
-   * when examining the extent of the data.
-   */
-  items: number[]
-  /** The callback to use for the label next to the bar on a chart. */
-  labelCallback: () => LabelFormatter
-  /** The maximum numeric value across all rows and supplied columns. */
-  maxItem: number
-  /** A tooltip for a Nivo chart (shown when hovering on a bar). */
-  tooltip: TooltipProp
-}
+// export interface UseGraphReturnType {
+//   /** A bottom axis for a Nivo chart. */
+//   axisBottom: AxisProps
+//   /** A left axis for a Nivo chart. */
+//   axisLeft: AxisProps
+//   /** All numeric values for all rows and all supplied columns. Can be useful
+//    * when examining the extent of the data.
+//    */
+//   items: number[]
+//   /** The callback to use for the label next to the bar on a chart. */
+//   labelCallback: () => LabelFormatter
+//   /** The maximum numeric value across all rows and supplied columns. */
+//   maxItem: number
+//   /** A tooltip for a Nivo chart (shown when hovering on a bar). */
+//   tooltip: TooltipProp
+// }
 
 export interface UseGraphProps<T> {
   /** The formatter to use for labels on the bottom axis. */
-  bottomAxisFormat?: TickFormatter
+  bottomAxisFormat?: FixTypeLater // TODO: Can we do better?
   /** The label (legend) for the bottom axis. */
   bottomAxisText: string
   /** The data (typically WFP data) to graph. */
@@ -65,7 +64,7 @@ const useGraph = <T,>({
   margins,
   maxItemComparator,
   width,
-}: UseGraphProps<T>): UseGraphReturnType => {
+}: UseGraphProps<T>) => {
   // The raw data values for all the columns in the data used for the chart.
   // Finding the maximum value is required for figuring out where to place the
   // labels on the ends of horizontal bars.
