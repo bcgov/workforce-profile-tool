@@ -22,9 +22,7 @@ const VariableDisplay = ({
 
   const dataKey = `WP${year}_MinistryKey`
   const url =
-    metadata && metadata[dataKey] && year && year !== '2022'
-      ? metadata[dataKey].csvURL
-      : `/data/${year}/${dataKey}.csv`
+    metadata && metadata[dataKey] && year ? metadata[dataKey].csvURL : ''
 
   // TODO: Factor out and use useDataQuery
   const { data: unfilteredData } = useQuery(
