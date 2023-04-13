@@ -2,6 +2,7 @@ import { BarDatum, LabelFormatter } from '@nivo/bar'
 import { Margin } from '@nivo/core'
 import { parseFloatClean } from '../Helpers/formatter'
 import Dictionary from '../@types/Dictionary'
+import FixTypeLater from '../@types/FixTypeLater'
 
 /** A helper to add exterior labels (just past the end of the bar) on a Nivo bar
  * chart with horizontal bars. They must be calculated using this function
@@ -78,7 +79,7 @@ export const verticalLabel = (
  *
  * @param d A Nivo BarDatum
  */
-export const labelValue = (d: BarDatum): string => {
+export const labelValue = (d: FixTypeLater): string => {
   const label = (d.data as unknown as Dictionary<string>)[`${d.id}_str`]
-  return label
+  return label || ''
 }

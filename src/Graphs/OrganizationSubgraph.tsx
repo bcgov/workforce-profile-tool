@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { ResponsiveBar } from '@nivo/bar'
+import { BarLayer, ComputedDatum, ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
 import React, { useState } from 'react'
 
@@ -9,6 +9,7 @@ import {
   GRAPH_DEFAULT_WIDTH,
   GRAPH_WIDTH_BREAKPOINT,
   NIVO_BASE_PROPS,
+  layersWithLabels,
   processDataForGraph,
 } from '../Helpers/graphs'
 import { displayNameByKey, useDataManager } from '../Data/DataManager'
@@ -105,6 +106,43 @@ const OrganizationSubGraph = ({
 
   if (!data) return <div>&nbsp;</div>
 
+  const layers: BarLayer<any>[] = ['grid', 'axes', 'bars', 'markers', 'legends']
+
+  layers.push((d: FixTypeLater) => {
+    return (
+      <>
+        <line
+          x1={d.xScale(provincialRepresentation)}
+          x2={d.xScale(provincialRepresentation)}
+          y1={0}
+          y2={d.height}
+          width={3}
+          stroke={'#666'}
+        />
+        <text
+          x={d.xScale(provincialRepresentation) + 5}
+          y={d.height - 10}
+          textAnchor={'start'}
+          fill={'#666'}
+        >
+          BC Pop:{' '}
+          {provincialRepresentation.toLocaleString(undefined, {
+            minimumFractionDigits: 1,
+          })}
+          %
+        </text>
+      </>
+    )
+  })
+
+  layers.push(
+    layersWithLabels<typeof filteredData[0]>(
+      'horizontal',
+      (d) => formatPercent(d.formattedValue, 1, 100),
+      true
+    )[0]
+  )
+
   const graph = (
     <ResponsiveBar
       axisBottom={{
@@ -124,39 +162,7 @@ const OrganizationSubGraph = ({
       colors={color}
       data={filteredData}
       keys={['Value']}
-      layers={[
-        'grid',
-        'axes',
-        'bars',
-        'markers',
-        'legends',
-        (d) => {
-          return (
-            <>
-              <line
-                x1={d.xScale(provincialRepresentation)}
-                x2={d.xScale(provincialRepresentation)}
-                y1={0}
-                y2={d.height}
-                width={3}
-                stroke={'#666'}
-              />
-              <text
-                x={d.xScale(provincialRepresentation) + 5}
-                y={d.height - 10}
-                textAnchor={'start'}
-                fill={'#666'}
-              >
-                BC Pop:{' '}
-                {provincialRepresentation.toLocaleString(undefined, {
-                  minimumFractionDigits: 1,
-                })}
-                %
-              </text>
-            </>
-          )
-        },
-      ]}
+      layers={layers}
       margin={MARGINS}
       maxValue={maxItem}
       label={labelValue}

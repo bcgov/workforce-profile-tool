@@ -1,4 +1,4 @@
-import { TooltipProp } from '@nivo/bar'
+// import { TooltipProp } from '@nivo/bar'
 import Color from 'color'
 import React, { useCallback } from 'react'
 
@@ -20,11 +20,14 @@ interface Props<T> {
 export const useTooltip = <T,>({
   dataDefinitions,
   formatter,
-}: Props<T>): TooltipProp => {
+}: Props<T>): FixTypeLater => {
   const baseProps = useCallback(
     (d: FixTypeLater): JSX.Element => {
       return (
-        <div style={{ color: Color(d.color).darken(0.3).hex() }}>
+        <div
+          className="Tooltipero"
+          style={{ color: Color(d.color).darken(0.3).hex() }}
+        >
           {displayNameByKey('Des_Grp', d.indexValue)},{' '}
           {dataDefinitions.find((dd) => dd.key === d.id)?.label}:{' '}
           {formatter(d.data[d.id])}

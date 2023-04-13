@@ -8,6 +8,7 @@ import {
   GRAPH_WIDTH_BREAKPOINT,
   GRAPH_Y_AXIS_NARROW_WIDTH,
   NIVO_BASE_PROPS,
+  layersWithLabels,
   processDataForGraph,
 } from '../Helpers/graphs'
 import { formatPercent } from '../Helpers/formatter'
@@ -78,6 +79,9 @@ const LeadershipGraph = ({
       margin={MARGINS}
       tooltip={tooltip}
       {...NIVO_BASE_PROPS}
+      layers={layersWithLabels<typeof filteredData[0]>('horizontal', (d) =>
+        formatPercent(labelValue(d), 1, 100)
+      )}
     />
   )
 

@@ -10,6 +10,7 @@ import { labelValue } from './labels'
 import {
   GRAPH_DEFAULT_WIDTH,
   NIVO_BASE_PROPS,
+  layersWithLabels,
   processDataForGraph,
   yAxisWidthForSize,
 } from '../Helpers/graphs'
@@ -87,6 +88,9 @@ const ComparisonGraph = ({
       margin={MARGINS}
       tooltip={tooltip}
       {...NIVO_BASE_PROPS}
+      layers={layersWithLabels<typeof filteredData[0]>('horizontal', (d) =>
+        formatPercent(labelValue(d), 1, 100)
+      )}
     />
   )
 

@@ -9,6 +9,7 @@ import {
   GRAPH_DEFAULT_WIDTH,
   GRAPH_WIDTH_BREAKPOINT,
   NIVO_BASE_PROPS,
+  layersWithLabels,
   processDataForGraph,
 } from '../Helpers/graphs'
 import { HiringRawData } from '../@types/DataTypes'
@@ -84,6 +85,9 @@ const HiringGraph = ({ data, dataDictionary, title }: Props): JSX.Element => {
       layout={'vertical'}
       enableGridX={false}
       enableGridY={true}
+      layers={layersWithLabels<typeof filteredData[0]>('vertical', (d) =>
+        formatNumber(labelValue(d), '')
+      )}
     />
   )
 

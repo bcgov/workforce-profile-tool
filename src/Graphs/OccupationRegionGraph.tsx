@@ -6,6 +6,7 @@ import { DataDictionaryEntry } from '../Data/useDataQuery'
 import {
   GRAPH_DEFAULT_WIDTH,
   NIVO_BASE_PROPS,
+  layersWithLabels,
   processDataForGraph,
   yAxisWidthForSize,
 } from '../Helpers/graphs'
@@ -100,6 +101,9 @@ const OccupationRegionGraph = ({
       margin={MARGINS}
       tooltip={tooltip}
       {...NIVO_BASE_PROPS}
+      layers={layersWithLabels<typeof filteredData[0]>('horizontal', (d) =>
+        formatNumber(d.formattedValue, '')
+      )}
     />
   )
 
