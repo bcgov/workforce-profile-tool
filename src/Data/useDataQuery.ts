@@ -4,7 +4,6 @@ import * as d3 from 'd3'
 import { filterData, sortData, useDataManager } from './DataManager'
 import { GenericRawData } from '../@types/DataTypes'
 import { YEAR_PLACEHOLDER } from '../@types/DataKeyEnum'
-import IntentionalAny from '../@types/IntentionalAny'
 
 import TOOLTIPS from './tooltips.json'
 
@@ -81,13 +80,7 @@ export const useDataQuery = <T extends GenericRawData>(
 
   const key = dataKey.replace(YEAR_PLACEHOLDER, year || '')
 
-  let url = ''
-
-  if (year === '2022') {
-    url = `/data/${year}/${key}.csv`
-  } else {
-    url = metadata && year ? metadata[key].csvURL : ''
-  }
+  const url = metadata && metadata[key] && year ? metadata[key].csvURL : ''
 
   console.log('url', url)
 
