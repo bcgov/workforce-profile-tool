@@ -21,8 +21,7 @@ const VariableDisplay = ({
   const { metadata, year } = useDataManager()
 
   const dataKey = `WP${year}_MinistryKey`
-  const url =
-    metadata && metadata[dataKey] && year ? metadata[dataKey].csvURL : ''
+  const url = metadata && metadata[dataKey] && year ? metadata[dataKey].csvURL : ''
 
   // TODO: Factor out and use useDataQuery
   const { data: unfilteredData } = useQuery(
@@ -67,9 +66,8 @@ const VariableDisplay = ({
 
   return (
     <div
-      className={`VariableDisplay ${
-        variableGroup.key === 'Ministry_Key' ? 'col-12' : 'col-4'
-      } col-sm-12 ${variableGroup.key}`}
+      className={`VariableDisplay ${variableGroup.key === 'Ministry_Key' ? 'col-12' : 'col-4'
+        } col-sm-12 ${variableGroup.key}`}
     >
       <h3>
         <span className="d-inline d-sm-none">
