@@ -22,6 +22,7 @@ import Legend from './Legend'
 import useGraph from '../Helpers/useGraph'
 import { DataDictionaryEntry } from '../Data/useDataQuery'
 import { definitionsForYear } from '../Table/Definitions'
+import IntentionalAny from '../@types/IntentionalAny'
 
 interface SubgraphProps {
   color?: string
@@ -115,13 +116,13 @@ const OrganizationSubGraph = ({
           x1={d.xScale(provincialRepresentation)}
           x2={d.xScale(provincialRepresentation)}
           y1={0}
-          y2={d.height}
+          y2={d.height - 40}
           width={3}
           stroke={'#666'}
         />
         <text
           x={d.xScale(provincialRepresentation) + 5}
-          y={d.height - 10}
+          y={d.height - 45}
           textAnchor={'start'}
           fill={'#666'}
         >
@@ -138,7 +139,9 @@ const OrganizationSubGraph = ({
   layers.push(
     layersWithLabels<typeof filteredData[0]>(
       'horizontal',
-      (d) => formatPercent(d.formattedValue, 1, 100),
+      (d) => {
+        return formatPercent(labelValue(d), 1, 100)
+      },
       true
     )[0]
   )
@@ -169,7 +172,10 @@ const OrganizationSubGraph = ({
       labelFormat={labelCallback()}
       tooltip={(d: FixTypeLater): JSX.Element => {
         return (
-          <div style={{ color: Color(d.color).darken(0.3).hex() }}>
+          <div
+            className="ChartTooltip"
+            style={{ color: Color(d.color).darken(0.3).hex() }}
+          >
             {d.data.categoryFullName}: {d.data[d.id]}%
           </div>
         )
