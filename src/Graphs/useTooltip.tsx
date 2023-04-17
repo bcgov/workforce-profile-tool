@@ -1,4 +1,3 @@
-// import { TooltipProp } from '@nivo/bar'
 import Color from 'color'
 import React, { useCallback } from 'react'
 
@@ -17,15 +16,12 @@ interface Props<T> {
 
 /** Hook to provide a tooltip on a Nivo chart (i.e. when the bar on the chart is
  * hovered over). */
-export const useTooltip = <T,>({
-  dataDefinitions,
-  formatter,
-}: Props<T>): FixTypeLater => {
+export const useTooltip = <T,>({ dataDefinitions, formatter }: Props<T>) => {
   const baseProps = useCallback(
     (d: FixTypeLater): JSX.Element => {
       return (
         <div
-          className="Tooltipero"
+          className="ChartTooltip"
           style={{ color: Color(d.color).darken(0.3).hex() }}
         >
           {displayNameByKey('Des_Grp', d.indexValue)},{' '}

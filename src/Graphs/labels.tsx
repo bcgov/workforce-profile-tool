@@ -1,4 +1,4 @@
-import { BarDatum, LabelFormatter } from '@nivo/bar'
+import { BarDatum, ComputedDatum, LabelFormatter } from '@nivo/bar'
 import { Margin } from '@nivo/core'
 import { parseFloatClean } from '../Helpers/formatter'
 import Dictionary from '../@types/Dictionary'
@@ -79,7 +79,7 @@ export const verticalLabel = (
  *
  * @param d A Nivo BarDatum
  */
-export const labelValue = (d: FixTypeLater): string => {
+export const labelValue = <T,>(d: ComputedDatum<T>): string => {
   const label = (d.data as unknown as Dictionary<string>)[`${d.id}_str`]
   return label || ''
 }

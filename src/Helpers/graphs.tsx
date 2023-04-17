@@ -1,17 +1,11 @@
-import {
-  BarLayer,
-  BarSvgProps,
-  ComputedBarDatum,
-  ComputedBarDatumWithValue,
-  ComputedDatum,
-} from '@nivo/bar'
+import { BarLayer, BarSvgProps, ComputedDatum } from '@nivo/bar'
 import Color from 'color'
 
 import { DataDefinition } from '../@types/DataDefinition'
 import { DesignatedGroupKeyedData } from '../@types/DataTypes'
-import { formatPercent, parseFloatClean } from './formatter'
+import { parseFloatClean } from './formatter'
 import FixTypeLater from '../@types/FixTypeLater'
-import { formatNumber } from './formatter'
+import IntentionalAny from '../@types/IntentionalAny'
 
 export const BAR_H_GAP_SIZE = 3 // Horizontal space between bars within a group
 export const BAR_H_CATEGORY_GAP_SIZE = 30 // Horizontal space between bar groups
@@ -60,7 +54,7 @@ const labelTextColor: FixTypeLater = {
   modifiers: [['darker', 1.6]],
 }
 
-export const NIVO_BASE_PROPS: Partial<BarSvgProps<FixTypeLater>> = {
+export const NIVO_BASE_PROPS: Partial<BarSvgProps<IntentionalAny>> = {
   axisRight: null,
   axisTop: null,
   borderColor: { from: 'color', modifiers: [['darker', 1.6]] },
@@ -72,11 +66,6 @@ export const NIVO_BASE_PROPS: Partial<BarSvgProps<FixTypeLater>> = {
   labelSkipWidth: 1000,
   labelTextColor,
   layout: 'horizontal',
-  // motionConfig: {
-  //   damping: 15,
-  //   frequency: 0.9,
-  //   friction: 0.9,
-  // },
   padding: 0.3,
   theme: NIVO_THEME,
   valueScale: { type: 'linear' },
@@ -139,6 +128,20 @@ export const yAxisWidthForSize = (
     : baseYAxisWidth
 }
 
+/**
+ * Helper function to add a layer showing bar value labels just past the end of
+ * the bar.
+ * @param orientation 'vertical' (for columns) or 'horizontal' (for bars)
+ * @param formatter The formatting function to apply to the data values.
+ * @param labelLayerOnly If true, the returned array contains only the label
+ * layer itself.
+ * @returns An array of layers to add to a Nivo chart, with the bar label layer
+ * as the last element. By default, the returned arary will include all the
+ * layers making up a typical Nivo chart (`grid`, `axes`, `bars`, `markers`,
+ * `legends`, `annotations`), plus the label layer as the last element in the
+ * array. If `labelLayerOnly` is true, however, the array will have only one
+ * element, the bar label layer itself.
+ */
 export const layersWithLabels = <T,>(
   orientation: 'vertical' | 'horizontal',
   formatter: (data: ComputedDatum<T>) => string,
