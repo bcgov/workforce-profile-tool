@@ -14,18 +14,19 @@ import { displayNameByKey } from '../Data/DataManager'
 import { formatNumber } from '../Helpers/formatter'
 import { labelValue } from './labels'
 import { OccupationRegionRawData } from '../@types/DataTypes'
+import FixTypeLater from '../@types/FixTypeLater'
 import GraphFrame from './GraphFrame'
 import Legend from './Legend'
 import useGraph from '../Helpers/useGraph'
 
 import './Graphs.scss'
-import FixTypeLater from '../@types/FixTypeLater'
 
 interface Props {
   data: OccupationRegionRawData[]
   dataDictionary: DataDictionaryEntry[]
   organization: string[] | string | null | undefined
   title: string
+  viewType: 'Occupation' | 'Region'
 }
 
 const LEFT_MARGIN = 160
@@ -34,8 +35,9 @@ const MARGINS = { left: LEFT_MARGIN, right: 55, top: 0, bottom: 50 }
 const OccupationRegionGraph = ({
   data,
   dataDictionary,
-  title,
   organization,
+  title,
+  viewType,
 }: Props): JSX.Element => {
   const dataDefinitions: DataDefinition<OccupationRegionRawData>[] = [
     {
@@ -113,7 +115,7 @@ const OccupationRegionGraph = ({
 
   return (
     <GraphFrame
-      className="Occupation"
+      className={viewType}
       graph={graph}
       items={items}
       legend={legend}
