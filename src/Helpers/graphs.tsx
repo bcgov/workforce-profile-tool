@@ -63,7 +63,7 @@ export const NIVO_BASE_PROPS: Partial<BarSvgProps<IntentionalAny>> = {
   indexScale: { type: 'band', round: true },
   innerPadding: 2,
   labelSkipHeight: 0,
-  labelSkipWidth: 1000,
+  labelSkipWidth: 9999,
   labelTextColor,
   layout: 'horizontal',
   padding: 0.3,
