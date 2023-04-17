@@ -102,7 +102,7 @@ const OccupationRegionGraph = ({
       tooltip={tooltip}
       {...NIVO_BASE_PROPS}
       layers={layersWithLabels<typeof filteredData[0]>('horizontal', (d) =>
-        formatNumber(d.formattedValue, '')
+        formatNumber(labelValue(d), '')
       )}
     />
   )
