@@ -6,6 +6,7 @@ import {
   GRAPH_DEFAULT_WIDTH,
   GRAPH_WIDTH_BREAKPOINT,
   NIVO_BASE_PROPS,
+  layersWithLabels,
 } from '../Helpers/graphs'
 import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
 import { formatPercent, parseFloatClean } from '../Helpers/formatter'
@@ -101,6 +102,9 @@ const ProgressGraph = ({ data, dataDictionary, title }: Props): JSX.Element => {
       layout={'vertical'}
       enableGridX={false}
       enableGridY={true}
+      layers={layersWithLabels<typeof filteredData[0]>('vertical', (d) =>
+        formatPercent(labelValue(d), 1, 100)
+      )}
     />
   )
 

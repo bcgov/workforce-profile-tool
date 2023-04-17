@@ -11,47 +11,47 @@ const FlowReportGraph = ({ data }: Props): JSX.Element => {
   const nodes = [
     {
       id: 'Hiring - DesGrp',
-      color: 'rgba(110, 140, 170, 0.9)',
+      nodeColor: 'rgba(110, 140, 170, 0.9)',
     },
     {
       id: 'Hiring - NonDesGrp',
-      color: 'rgba(100, 100, 100, 0.9)',
+      nodeColor: 'rgba(100, 100, 100, 0.9)',
     },
     {
       id: 'Hiring',
-      color: 'rgba(100, 200, 100, 0.9)',
+      nodeColor: 'rgba(100, 200, 100, 0.9)',
     },
     {
       id: 'Promotions - DesGrp',
-      color: 'rgba(170, 140, 110, 0.9)',
+      nodeColor: 'rgba(170, 140, 110, 0.9)',
     },
     {
       id: 'Promotions - NonDesGrp',
-      color: 'rgba(100, 100, 100, 0.9)',
+      nodeColor: 'rgba(100, 100, 100, 0.9)',
     },
     {
       id: 'Promotions',
-      color: 'rgba(200, 100, 200, 0.9)',
+      nodeColor: 'rgba(200, 100, 200, 0.9)',
     },
     {
       id: 'Org Size Adjustment',
-      color: 'rgba(255, 255, 255, 1.0)',
+      nodeColor: 'rgba(255, 255, 255, 1.0)',
     },
     {
       id: 'Org',
-      color: 'rgba(200, 100, 100, 0.9)',
+      nodeColor: 'rgba(200, 100, 100, 0.9)',
     },
     {
       id: 'Separations',
-      color: 'rgba(100, 100, 100, 0.9)',
+      nodeColor: 'rgba(100, 100, 100, 0.9)',
     },
     {
       id: 'Separations - DesGrp',
-      color: 'rgba(250, 150, 50, 0.9)',
+      nodeColor: 'rgba(250, 150, 50, 0.9)',
     },
     {
       id: 'Separations - NonDesGrp',
-      color: 'rgba(100, 100, 100, 0.9)',
+      nodeColor: 'rgba(100, 100, 100, 0.9)',
     },
   ]
 
@@ -66,7 +66,7 @@ const FlowReportGraph = ({ data }: Props): JSX.Element => {
       target: 'Hiring',
       value: 7841,
     },
-    { source: 'Hiring', target: 'Org', value: '10975' },
+    { source: 'Hiring', target: 'Org', value: 10975 },
     {
       source: 'Promotions - DesGrp',
       target: 'Promotions',
@@ -104,7 +104,7 @@ const FlowReportGraph = ({ data }: Props): JSX.Element => {
     <div style={{ height: '600px' }}>
       <ResponsiveSankey
         align="justify"
-        colors={(node) => node.color}
+        colors={(node) => node.nodeColor}
         data={{ nodes, links }}
         enableLabels={true}
         enableLinkGradient={false}
@@ -144,10 +144,13 @@ const FlowReportGraph = ({ data }: Props): JSX.Element => {
             ],
           },
         ]}
-        nodeTooltip={(node) => <span>Custom tooltip for node: {node.id}</span>}
-        linkTooltip={(node) => (
+        nodeTooltip={(node) => (
+          <span>Custom tooltip for node: {node.node.id}</span>
+        )}
+        linkTooltip={(link) => (
           <span>
-            Custom tooltip for link: {node.source.label} to {node.target.label}
+            Custom tooltip for link: {link.link.source.label} to{' '}
+            {link.link.target.label}
           </span>
         )}
       />

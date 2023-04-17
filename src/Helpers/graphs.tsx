@@ -1,9 +1,11 @@
-import { BarSvgProps } from '@nivo/bar'
+import { BarLayer, BarSvgProps, ComputedDatum } from '@nivo/bar'
+import Color from 'color'
 
 import { DataDefinition } from '../@types/DataDefinition'
 import { DesignatedGroupKeyedData } from '../@types/DataTypes'
 import { parseFloatClean } from './formatter'
 import FixTypeLater from '../@types/FixTypeLater'
+import IntentionalAny from '../@types/IntentionalAny'
 
 export const BAR_H_GAP_SIZE = 3 // Horizontal space between bars within a group
 export const BAR_H_CATEGORY_GAP_SIZE = 30 // Horizontal space between bar groups
@@ -52,7 +54,7 @@ const labelTextColor: FixTypeLater = {
   modifiers: [['darker', 1.6]],
 }
 
-export const NIVO_BASE_PROPS: Partial<BarSvgProps> = {
+export const NIVO_BASE_PROPS: Partial<BarSvgProps<IntentionalAny>> = {
   axisRight: null,
   axisTop: null,
   borderColor: { from: 'color', modifiers: [['darker', 1.6]] },
@@ -61,11 +63,9 @@ export const NIVO_BASE_PROPS: Partial<BarSvgProps> = {
   indexScale: { type: 'band', round: true },
   innerPadding: 2,
   labelSkipHeight: 0,
-  labelSkipWidth: 0,
+  labelSkipWidth: 1000,
   labelTextColor,
   layout: 'horizontal',
-  motionDamping: 15,
-  motionStiffness: 90,
   padding: 0.3,
   theme: NIVO_THEME,
   valueScale: { type: 'linear' },
@@ -126,4 +126,61 @@ export const yAxisWidthForSize = (
   return graphWidth < GRAPH_WIDTH_BREAKPOINT
     ? GRAPH_Y_AXIS_NARROW_WIDTH
     : baseYAxisWidth
+}
+
+/**
+ * Helper function to add a layer showing bar value labels just past the end of
+ * the bar.
+ * @param orientation 'vertical' (for columns) or 'horizontal' (for bars)
+ * @param formatter The formatting function to apply to the data values.
+ * @param labelLayerOnly If true, the returned array contains only the label
+ * layer itself.
+ * @returns An array of layers to add to a Nivo chart, with the bar label layer
+ * as the last element. By default, the returned arary will include all the
+ * layers making up a typical Nivo chart (`grid`, `axes`, `bars`, `markers`,
+ * `legends`, `annotations`), plus the label layer as the last element in the
+ * array. If `labelLayerOnly` is true, however, the array will have only one
+ * element, the bar label layer itself.
+ */
+export const layersWithLabels = <T,>(
+  orientation: 'vertical' | 'horizontal',
+  formatter: (data: ComputedDatum<T>) => string,
+  labelLayerOnly: boolean = false
+): BarLayer<T>[] => {
+  const labelLayer: BarLayer<T> = ({ bars }) => {
+    return (
+      <g>
+        {bars.map((bar) => {
+          const { width, y, data, x, height } = bar
+          const translateX =
+            orientation === 'vertical' ? x + width / 2 : width + 5
+          const translateY =
+            orientation === 'vertical' ? y - 10 : y + height / 2
+          return (
+            <text
+              transform={`translate(${translateX}, ${translateY})`}
+              textAnchor={orientation === 'vertical' ? 'middle' : 'start'}
+              dominantBaseline="central"
+              fill={Color(bar.color).darken(0.3).hex()}
+              fontSize="15px"
+            >
+              {formatter(data)}
+            </text>
+          )
+        })}
+      </g>
+    )
+  }
+
+  if (labelLayerOnly) return [labelLayer]
+
+  return [
+    'grid',
+    'axes',
+    'bars',
+    'markers',
+    'legends',
+    'annotations',
+    labelLayer,
+  ]
 }

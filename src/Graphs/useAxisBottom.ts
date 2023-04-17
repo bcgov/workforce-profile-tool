@@ -1,9 +1,10 @@
-import { AxisProps, TickFormatter } from '@nivo/axes'
+import { AxisProps } from '@nivo/axes'
 import { useMemo } from 'react'
+import FixTypeLater from '../@types/FixTypeLater'
 
 interface Props {
   /** The formatter function for the axis ticks. */
-  format?: TickFormatter
+  format?: FixTypeLater
   /** The axis label. */
   legendText: string
 }
