@@ -100,7 +100,7 @@ const HiringGraph = ({ data, dataDictionary, title }: Props): JSX.Element => {
 
   return (
     <GraphFrame
-      className="Progress"
+      className="Hiring"
       graph={graph}
       items={items}
       legend={legend}
