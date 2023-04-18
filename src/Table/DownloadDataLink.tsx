@@ -1,20 +1,28 @@
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { useExportData } from '../Helpers/csvExporter'
+import { Definition } from './Definitions'
 
 interface Props<T extends Record<string, unknown>> {
+  additionalDefinitions?: Definition[]
   columns: ColumnWithClassName<T>[]
-  rows: T[]
-  includeDefinitions?: boolean
   filename: string
+  includeDefinitions?: boolean
+  rows: T[]
 }
 
 const DownloadButton = <T extends Record<string, unknown>>({
+  additionalDefinitions,
   columns,
-  rows,
-  includeDefinitions,
   filename,
+  includeDefinitions,
+  rows,
 }: Props<T>): JSX.Element => {
-  const csvString = useExportData(columns, rows, includeDefinitions)
+  const csvString = useExportData(
+    columns,
+    rows,
+    includeDefinitions,
+    additionalDefinitions
+  )
 
   const download = (): void => {
     // Help from https://github.com/mholt/PapaParse/issues/175#issuecomment-75597039

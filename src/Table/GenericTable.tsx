@@ -59,6 +59,7 @@ const GenericTable = <T extends Dictionary<unknown>>({
               columns={columns}
               rows={data}
               filename={filename}
+              additionalDefinitions={additionalDefinitions}
             />
           )}
           {!hideDefinitions && (
