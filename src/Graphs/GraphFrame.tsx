@@ -56,7 +56,18 @@ const GraphFrame = (props: Props): JSX.Element => {
     const LEGEND_WIDTH = 250
     const LEGEND_HEIGHT = 500
     const FO_NAMESPACE = 'http://www.w3.org/2000/svg'
-    const FONT_FAMILY = 'Myriad Pro'
+    const FONT_FAMILY = 'BC Sans'
+    const FONT_BASE_PATH = './fonts/'
+    const FONT_INFO = [
+      {
+        filename: 'BCSans-Bold',
+        fontWeight: 'bold',
+      },
+      {
+        filename: 'BCSans-Regular',
+        fontWeight: 'regular',
+      },
+    ]
 
     // First, get the actually-existing SVG and clone it
     let svg: Element = document.querySelector(
@@ -160,7 +171,23 @@ const GraphFrame = (props: Props): JSX.Element => {
     }
 
     // Now we can save our cloned SVG as a PNG.
-    saveSVG.saveSvgAsPng(svg, `${props.className}.png`, { scale: 2 })
+    saveSVG.saveSvgAsPng(svg, `${props.className}.png`, {
+      scale: 2,
+      fonts: FONT_INFO.map((fontInfo) => {
+        const fontUrl = `${FONT_BASE_PATH}${fontInfo.filename}.woff`
+        return {
+          url: fontUrl,
+          text: `
+          @font-face {
+            font-family: ${FONT_FAMILY};
+            font-style: normal;
+            font-weight: ${fontInfo.fontWeight};
+            font-display: swap;
+            src: url(${fontUrl}) format('woff');
+          }`,
+        }
+      }),
+    })
   }
 
   if (!props.className) {

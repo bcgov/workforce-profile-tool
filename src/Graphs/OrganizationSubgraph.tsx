@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { BarLayer, ComputedDatum, ResponsiveBar } from '@nivo/bar'
+import { BarLayer, ResponsiveBar } from '@nivo/bar'
 import Color from 'color'
 import React, { useState } from 'react'
 
 import { BASE_AXIS_LEFT_PROPS } from './useAxisLeft'
 import { DataDefinition } from '../@types/DataDefinition'
 import {
+  CHART_FONT,
   GRAPH_DEFAULT_WIDTH,
   GRAPH_WIDTH_BREAKPOINT,
   NIVO_BASE_PROPS,
@@ -22,7 +23,6 @@ import Legend from './Legend'
 import useGraph from '../Helpers/useGraph'
 import { DataDictionaryEntry } from '../Data/useDataQuery'
 import { definitionsForYear } from '../Table/Definitions'
-import IntentionalAny from '../@types/IntentionalAny'
 
 interface SubgraphProps {
   color?: string
@@ -125,6 +125,7 @@ const OrganizationSubGraph = ({
           y={d.height - 45}
           textAnchor={'start'}
           fill={'#666'}
+          fontFamily={CHART_FONT}
         >
           BC Pop:{' '}
           {provincialRepresentation.toLocaleString(undefined, {
