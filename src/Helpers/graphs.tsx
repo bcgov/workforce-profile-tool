@@ -13,7 +13,7 @@ export const BAR_H_CATEGORY_GAP_SIZE = 30 // Horizontal space between bar groups
 export const BAR_V_GAP_SIZE = 2 // Vertical space between bars within a group
 export const BAR_V_CATEGORY_GAP_SIZE = 15 // Vertical space between bar groups
 
-export const CHART_FONT = `BCSans, "myriad-pro", "Myriad Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`
+export const CHART_FONT = `"BC Sans", BCSans, "myriad-pro", "Myriad Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`
 
 // Basic parameters for the chart theme for Nivo.
 export const NIVO_THEME = {
@@ -63,7 +63,7 @@ export const NIVO_BASE_PROPS: Partial<BarSvgProps<IntentionalAny>> = {
   indexScale: { type: 'band', round: true },
   innerPadding: 2,
   labelSkipHeight: 0,
-  labelSkipWidth: 1000,
+  labelSkipWidth: 9999,
   labelTextColor,
   layout: 'horizontal',
   padding: 0.3,
@@ -163,6 +163,7 @@ export const layersWithLabels = <T,>(
               dominantBaseline="central"
               fill={Color(bar.color).darken(0.3).hex()}
               fontSize="15px"
+              fontFamily={CHART_FONT}
             >
               {formatter(data)}
             </text>

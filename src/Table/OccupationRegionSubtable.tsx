@@ -96,7 +96,16 @@ const RegionOccupationSubtable = ({
 
   const allRows = filteredData.concat(totalRow)
 
-  console.log('designatedGroupKey', designatedGroupKey, 'year', year)
+  const additionalDefinitions =
+    year === '2022' && designatedGroupKey && designatedGroupKey === 'WOM'
+      ? [
+          {
+            term: 'Note',
+            definition:
+              'Some ministries have had their Women counts adjusted slightly to prevent additional residual disclosure. These adjustments are very minimal and do not affect total counts.',
+          },
+        ]
+      : []
 
   return (
     <div className={`${viewType}Table`}>
@@ -107,20 +116,13 @@ const RegionOccupationSubtable = ({
         hideDefinitions
         showFooter
       />
-      <DownloadDataLink columns={columns} rows={allRows} filename={viewType} />
-      <Definitions
-        additionalDefinitions={
-          year === '2022' && designatedGroupKey && designatedGroupKey === 'WOM'
-            ? [
-                {
-                  term: 'Note',
-                  definition:
-                    'Some ministries have had their Women counts adjusted slightly to prevent additional residual disclosure. These adjustments are very minimal and do not affect total counts.',
-                },
-              ]
-            : []
-        }
+      <DownloadDataLink
+        columns={columns}
+        rows={allRows}
+        filename={viewType}
+        additionalDefinitions={additionalDefinitions}
       />
+      <Definitions additionalDefinitions={additionalDefinitions} />
     </div>
   )
 }

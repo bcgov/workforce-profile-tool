@@ -44,6 +44,17 @@ const Progress = (): JSX.Element => {
     })
   })
 
+  const additionalDefinitions =
+    year === '2022'
+      ? [
+          {
+            term: 'NA',
+            definition:
+              'The 2020 comparator is not provided as the BC Stats definition of Persons with Disabilities changed between 2020 and 2022.',
+          },
+        ]
+      : []
+
   return (
     <GenericView
       isLoading={isLoading}
@@ -61,17 +72,7 @@ const Progress = (): JSX.Element => {
         data={data}
         dataDictionary={dataDictionary}
         filename="progress"
-        additionalDefinitions={
-          year === '2022'
-            ? [
-                {
-                  term: 'NA',
-                  definition:
-                    'The 2020 comparator is not provided as the BC Stats definition of Persons with Disabilities changed between 2020 and 2022.',
-                },
-              ]
-            : []
-        }
+        additionalDefinitions={additionalDefinitions}
       />
     </GenericView>
   )

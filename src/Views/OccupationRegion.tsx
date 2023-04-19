@@ -70,6 +70,7 @@ const OccupationRegion = ({ viewType }: Props): JSX.Element => {
         dataDictionary={dataDictionary}
         title={`Representation – ${viewType}`}
         organization={queryValues.Ministry_Key}
+        viewType={viewType}
       />
       {tables}
     </GenericView>
