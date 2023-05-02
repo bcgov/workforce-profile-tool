@@ -12,10 +12,10 @@ import { DataKeyEnum } from '../@types/DataKeyEnum'
 import HiringGraph from '../Graphs/HiringGraph'
 
 const Hiring = (): JSX.Element => {
-  const { setLockedVars } = useDataManager()
+  const { setDisabledVars } = useDataManager()
 
   // When page loads, set the locked variables as appropriate.
-  useEffect(() => setLockedVars({ Year: ['2020'] }), [])
+  useEffect(() => setDisabledVars({ Year: ['2018'] }), [])
 
   const { data, dataDictionary, isLoading, error } =
     useDataQuery<HiringRawData>(DataKeyEnum.Hiring)
@@ -48,15 +48,15 @@ const Hiring = (): JSX.Element => {
       error={error}
       data={data}
       title="Indicators of Progress — By Designated Group"
-      additionalNotes={
-        <div className="alert alert-info Shadow" role="alert">
-          <h2>2022 data to come</h2>
-          <p>
-            We are still working on generating Hiring data for 2022. This page
-            will be updated with the 2022 data when it is available.
-          </p>
-        </div>
-      }
+    /*additionalNotes={
+      <div className="alert alert-info Shadow" role="alert">
+        <h2>2022 data to come</h2>
+        <p>
+          We are still working on generating Hiring data for 2022. This page
+          will be updated with the 2022 data when it is available.
+        </p>
+      </div>
+    }*/
     >
       <HiringGraph
         data={data}
@@ -69,7 +69,7 @@ const Hiring = (): JSX.Element => {
         dataDictionary={dataDictionary}
         filename="hiring"
       />
-    </GenericView>
+    </GenericView >
   )
 }
 

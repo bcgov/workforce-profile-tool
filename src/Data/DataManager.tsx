@@ -77,8 +77,8 @@ export const shortDisplayNameByKey = (
   return variable && variable.shortName
     ? variable.shortName
     : variable && variable.name
-    ? variable.name
-    : ''
+      ? variable.name
+      : ''
 }
 
 export const getLocalStorageValue = (key: string): string | string[] | null => {
@@ -137,6 +137,8 @@ type UseDataManagerType = {
   employeeCountData?: EmployeeCountRawData[]
   lockedVars: Dictionary<string[]>
   setLockedVars: (vars: Dictionary<string[]>) => void
+  disabledVars: Dictionary<string[]>
+  setDisabledVars: (vars: Dictionary<string[]>) => void
   queryValues: QueryValues
 }
 
@@ -147,6 +149,8 @@ type DataManagerContextType = {
   >
   lockedVars: Dictionary<string[]>
   setLockedVars: (vars: Dictionary<string[]>) => void
+  disabledVars: Dictionary<string[]>
+  setDisabledVars: (vars: Dictionary<string[]>) => void
 }
 
 const DataManagerContext = createContext<DataManagerContextType | undefined>(
@@ -183,11 +187,11 @@ export const sortData = <T extends GenericRawData>(
 ): T[] => {
   return data
     ? data.sort((a, b) =>
-        a.Des_Grp && b.Des_Grp
-          ? indexOfVariable('Des_Grp', a.Des_Grp) -
-            indexOfVariable('Des_Grp', b.Des_Grp)
-          : 0
-      )
+      a.Des_Grp && b.Des_Grp
+        ? indexOfVariable('Des_Grp', a.Des_Grp) -
+        indexOfVariable('Des_Grp', b.Des_Grp)
+        : 0
+    )
     : []
 }
 
@@ -224,7 +228,7 @@ function useDataManager(): UseDataManagerType {
     throw new Error(`useDataManager must be used within a DataManagerProvider`)
   }
 
-  const { metadata, lockedVars, setLockedVars } = context
+  const { metadata, lockedVars, setLockedVars, disabledVars, setDisabledVars } = context
 
   const [queryValuesTmp, setQueryValues] = useQueryParams({
     Employee_Type: StringParam,
@@ -268,6 +272,39 @@ function useDataManager(): UseDataManagerType {
     [queryValues, setQueryValues]
   )
 
+  const _setDisabledVars = useCallback(
+    (varsToDisable: Dictionary<string[]>) => {
+      const queryValuesCopy = Object.assign({}, queryValues)
+
+      // For every query value, check if it is being disabled. If it IS, then save
+      // its value, but only if it's not already saved. If it's NOT, then load
+      // its value, and clear the saved value.
+      Object.keys(queryValues).forEach((queryValueKey) => {
+        if (varsToDisable[queryValueKey]) {
+          if (!getLocalStorageValue(queryValueKey)) {
+            setLocalStorageValue(
+              queryValueKey,
+              queryValuesCopy[queryValueKey as keyof QueryValues]
+            )
+          }
+        } else {
+          const value = getLocalStorageValue(queryValueKey)
+          if (value) {
+            queryValuesCopy[queryValueKey as keyof QueryValues] =
+              value as string & string[]
+          }
+          setLocalStorageValue(queryValueKey, null)
+        }
+      })
+
+      // Now, set the query values
+      setQueryValues(queryValuesCopy)
+
+      setDisabledVars(varsToDisable)
+    },
+    [queryValues, setQueryValues]
+  )
+
   return {
     metadata,
     queryValues,
@@ -275,6 +312,8 @@ function useDataManager(): UseDataManagerType {
     employeeCount: undefined, // TODO: Fix
     lockedVars,
     setLockedVars: _setLockedVars,
+    disabledVars,
+    setDisabledVars: _setDisabledVars,
   }
 }
 
@@ -287,6 +326,7 @@ function DataManagerProvider({
   children,
 }: DataManagerProviderProps): FixTypeLater {
   const [lockedVars, setLockedVars] = useState<Dictionary<string[]>>({})
+  const [disabledVars, setDisabledVars] = useState<Dictionary<string[]>>({})
   const [metadata, setMetadata] = useState<Dictionary<Metadata>>()
   // const [variableMap, setVariableMap] = useState<Dictionary<VariableGroup>>(VARIABLE_MAP)
 
@@ -327,6 +367,8 @@ function DataManagerProvider({
     setLockedVars,
     metadata,
     setMetadata,
+    disabledVars,
+    setDisabledVars,
   }
 
   return (
