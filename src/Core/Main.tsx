@@ -60,13 +60,9 @@ const Main = (): JSX.Element => {
               <Tab key={'representation-by-group'} name="By Designated Group">
                 <Progress />
               </Tab>
-              {year && +year > 2018 ? (
-                <Tab key={'hiring'} name="Hiring">
-                  <Hiring />
-                </Tab>
-              ) : (
-                <></>
-              )}
+              <Tab key={'hiring'} name="Hiring">
+                <Hiring />
+              </Tab>
             </TabInterface>
           </div>
         </Tab>
@@ -92,13 +88,9 @@ const Main = (): JSX.Element => {
               <Tab key={'by-region'} name="By Region">
                 <OccupationRegion viewType={OccupationRegionEnum.Region} />
               </Tab>
-              {year && +year > 2018 ? (
-                <Tab key={'flow-report'} name="Flow Report">
-                  <FlowReport />
-                </Tab>
-              ) : (
-                <></>
-              )}
+              <Tab key={'flow-report'} name="Flow Report">
+                <FlowReport />
+              </Tab>
             </TabInterface>
           </div>
         </Tab>
