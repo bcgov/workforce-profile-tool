@@ -10,10 +10,11 @@ import FlowReportSubtable from '../Table/FlowReportSubtable'
 import GenericView from './GenericView'
 
 const FlowReport = (): JSX.Element => {
-  const { setLockedVars } = useDataManager()
+  const { setLockedVars, year } = useDataManager()
 
   // When page loads, set the locked variables as appropriate.
-  useEffect(() => setLockedVars({ Year: ['2020'], Ministry_Key: ['BCPS'] }), [])
+  //useEffect(() => setLockedVars({ Year: ['2020'], Ministry_Key: ['BCPS'] }), [])
+  useEffect(() => setLockedVars({ Ministry_Key: ['BCPS'] }), [])
 
   const { data, dataDictionary, isLoading, error } = useDataQuery<FlowRawData>(
     DataKeyEnum.Flow
@@ -42,24 +43,24 @@ const FlowReport = (): JSX.Element => {
   })
 
   return (
-    <GenericView
-      isLoading={isLoading}
-      error={error}
-      data={data}
-      title="Flow Report"
-      additionalNotes={
-        <div className="alert alert-info Shadow" role="alert">
-          <h2>2022 data to come</h2>
-          <p>
-            We are still working on generating Flow Report data for 2022. This
-            page will be updated with the 2022 data when it is available.
-          </p>
-        </div>
-      }
-    >
-      <hr />
-      {tables}
-    </GenericView>
+    year !== '2018' ? (
+      <>
+        <GenericView
+          isLoading={isLoading}
+          error={error}
+          data={data}
+          title="Flow Report"
+        >
+          <hr />
+          {tables}
+        </GenericView>
+      </>
+    ) : (
+      <div className="alert alert-warning Shadow" role="alert">
+        <h2>Data Unavailable</h2>
+        <p>Data is unavailable for {year}.</p>
+      </div>
+    )
   )
 }
 
