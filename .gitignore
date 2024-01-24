@@ -1,16 +1,17 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+/frontend/node_modules
 
 # testing
 /coverage
 
 # production
 /build
+/frontend/build
 
 # data
-/public/data/**/*
+/frontend/public/data/**/*
 
 # secrets
 deploy_vars.sh
@@ -30,6 +31,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-src/**/*.css
+frontend/src/**/*.css
 *.zip
-public/data/**/*.csv
+frontend/public/data/**/*.csv
