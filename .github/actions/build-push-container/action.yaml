@@ -48,7 +48,7 @@ runs:
       uses: redhat-actions/buildah-build@v2
       with:
         image: ${{ inputs.image_name }}
-        tags: ${{ inputs.image_tags }}
+        tags: ${{ env.image_tags }}
         dockerfiles: |
           ./Dockerfile
 
