@@ -12,6 +12,15 @@ inputs:
   image_tags:
     description: Tags for the Image
     required: false
+  image_registry:
+    description: Image Repository
+    required: true
+  image_registry_user: 
+    description: Image Registry User
+    required: true
+  image_registry_password:
+    description: Image Registry User Password
+    required: true
 
 runs:
   using: composite
@@ -29,9 +38,9 @@ runs:
     - name: Login to Container Registry
       uses: docker/login-action@v3
       with:
-        registry: "${{ secrets.IMAGE_REGISTRY }}"
-        username: ${{ secrets.IMAGE_REGISTRY_USER }}
-        password: ${{ secrets.IMAGE_REGISTRY_PASSWORD }} 
+        registry: ${{ inputs.image_registry }}
+        username: ${{ inputs.image_registry_username }}
+        password: ${{ inputs.image_registry_password }} 
 
     # https://github.com/redhat-actions/buildah-build#readme
     - name: Build from Dockerfile
@@ -50,8 +59,8 @@ runs:
       with:
         image: ${{ steps.build-image.outputs.image }}
         tags: ${{ steps.build-image.outputs.tags }}
-        registry: ${{ secrets.IMAGE_REGISTRY }}
-        username: ${{ secrets.IMAGE_REGISTRY_USER }}
-        password: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}
+        registry: ${{ inputs.image_registry }}
+        username: ${{ inputs.image_registry_username }}
+        password: ${{ inputs.image_registry_password }} 
 
     # The path the image was pushed to is now stored in ${{ steps.push-image.outputs.registry-path }}
