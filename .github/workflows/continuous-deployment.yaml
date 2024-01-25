@@ -23,3 +23,6 @@ jobs:
         with:
           context: .
           image_name: ${{ env.APP_NAME }}
+          image_registry: ${{ secrets.IMAGE_REGISTRY }}
+          image_registry_user: ${{ secrets.IMAGE_REGISTRY_USER }}
+          image_registry_password: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}

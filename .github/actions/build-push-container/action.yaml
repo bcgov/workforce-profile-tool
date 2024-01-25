@@ -39,7 +39,7 @@ runs:
       uses: docker/login-action@v3
       with:
         registry: ${{ inputs.image_registry }}
-        username: ${{ inputs.image_registry_username }}
+        username: ${{ inputs.image_registry_user }}
         password: ${{ inputs.image_registry_password }} 
 
     # https://github.com/redhat-actions/buildah-build#readme
@@ -60,7 +60,7 @@ runs:
         image: ${{ steps.build-image.outputs.image }}
         tags: ${{ steps.build-image.outputs.tags }}
         registry: ${{ inputs.image_registry }}
-        username: ${{ inputs.image_registry_username }}
+        username: ${{ inputs.image_registry_user }}
         password: ${{ inputs.image_registry_password }} 
 
     # The path the image was pushed to is now stored in ${{ steps.push-image.outputs.registry-path }}
