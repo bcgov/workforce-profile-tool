@@ -1,0 +1,22 @@
+name: Continuous Deployment
+
+env:
+  APP_NAME: wfp
+
+on:
+  # https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build & Push
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build & Push
+        uses: ./.github/actions/build-push-container
+        with:
+          context: .
+          image_name: ${{ env.APP_NAME }}
