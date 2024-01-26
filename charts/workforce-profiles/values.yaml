@@ -1,0 +1,53 @@
+# Default values for wfp
+
+image:
+  # repository is the image repositry
+  repository: artifacts.developer.gov.bc.ca/wfac-gen-docker-local
+  # pullPolicy specifies when the image should be pulled from the repository
+  pullPolicy: IfNotPresent
+  # tag specifies the tag associated with an image to pull
+  tag: latest
+
+# imagePullSecrets specifies docker-registry secret names as an array
+imagePullSecrets: []
+
+# nameOverride is a string to override name
+nameOverride: ~
+
+# fullnameOverride is a string to fully override fullname
+fullnameOverride: ~
+
+failurePolicy: Retry
+
+autoscaling:
+  enabled: false
+
+serviceAccount:
+  enabled: false
+
+networkPolicy:
+  enabled: false
+
+service:
+  type: ClusterIP
+  port: 8080
+  portName: http
+
+route:
+  enabled: true
+  host: fac62a-{{ .Values.env }}.apps.silver.devops.gov.bc.ca
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  wildcardPolicy: None
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 150m
+    memory: 128Mi
+
+config:
+  enabled: true
