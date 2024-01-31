@@ -35,7 +35,7 @@ service:
 
 route:
   enabled: true
-  host: fac62a-{{ .Values.env }}.apps.silver.devops.gov.bc.ca
+  host: wfp-{{ Values.namespace }}
   tls:
     insecureEdgeTerminationPolicy: Redirect
     termination: edge
