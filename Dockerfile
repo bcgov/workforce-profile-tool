@@ -12,6 +12,8 @@ COPY frontend .
 RUN chown node:node .
 RUN yarn install --frozen-lockfile --production && yarn cache clean
 
-RUN yarn global add serve
+#RUN yarn global add serve
 USER node
-CMD ["serve","-p","8080","-s","."]
+EXPOSE 3000
+#CMD ["serve","-p","80","-s","."]
+CMD ["yarn", "start"]
