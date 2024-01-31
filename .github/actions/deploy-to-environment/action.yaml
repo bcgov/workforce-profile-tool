@@ -43,7 +43,7 @@ runs:
       run: >-
         helm upgrade --install --atomic ${{ inputs.job_name }} ${{ inputs.app_name }}
         --namespace ${{ inputs.namespace_prefix }}-${{ inputs.environment }}
-        --set env=${{ inputs.environment }} }
+        --set env=${{ inputs.environment }}
         --values ./charts/workforce-profiles/values.${{ inputs.environment }}.yaml
         --timeout 10m
         --wait
