@@ -41,11 +41,11 @@ runs:
     - name: Helm Deploy
       shell: bash
       run: >-
-        helm upgrade --install --atomic ${{ inputs.job_name }} ${{ inputs.app_name }} \
-        --namespace ${{ inputs.namespace_prefix }}-${{ inputs.environment }} \ 
-        --set env="${{ inputs.environment }}" \
-        --values ./charts/wfp/values.${{ inputs.environment }}.yaml \
-        --timeout 10m \
+        helm upgrade --install --atomic ${{ inputs.job_name }} ${{ inputs.app_name }}
+        --namespace ${{ inputs.namespace_prefix }}-${{ inputs.environment }}
+        --set env=${{ inputs.environment }}
+        --values ./charts/wfp/values.${{ inputs.environment }}.yaml
+        --timeout 10m
         --wait
 
     - name: Wait on Deployment
