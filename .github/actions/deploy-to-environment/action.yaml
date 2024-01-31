@@ -43,7 +43,7 @@ runs:
       run: >-
         helm upgrade --install --atomic ${{ inputs.job_name }} ${{ inputs.app_name }}
         --namespace ${{ inputs.namespace_prefix }}-${{ inputs.environment }}
-        --repo https://github.com/bcgov/workforce-profile-tool
+        --repo https://github.com/bcgov/workforce-profile-tool/charts
         --set env=${{ inputs.environment }}
         --values ./charts/wfp/values.${{ inputs.environment }}.yaml
         --timeout 10m
