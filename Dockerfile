@@ -14,4 +14,4 @@ RUN yarn install --frozen-lockfile --production && yarn cache clean
 
 RUN yarn global add serve
 USER node
-CMD ["serve","-p","80","-s","."]
+CMD ["serve","-p","8080","-s","."]
