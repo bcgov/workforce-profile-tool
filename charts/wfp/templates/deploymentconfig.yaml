@@ -2,34 +2,34 @@
 apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
-  name: {{ include "wfp.name" . }}
+  name: {{include "wfp.name" .}}
   labels:
-    {{- include "wfp.labels" . | nindent 4 }}
+    {{include "wfp.labels" . | nindent 4}}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{.Values.replicaCount}}
   revisionHistoryLimit: 10
   selector:
-    {{- include "wfp.selectorLabels" . | nindent 4 }}
+    {{include "wfp.selectorLabels" . | nindent 4}}
   strategy:
     resources:
-      {{- toYaml .Values.resources | nindent 6 }}
+      {{- toYaml .Values.resources | nindent 6}}
     rollingParams:
       timeoutSeconds: 600
     type: Rolling
   template:
     metadata:
-      labels: {{ include "wfp.selectorLabels" . | nindent 8 }}
+      labels: {{include "wfp.selectorLabels" . | nindent 8}}
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets: {{ toYaml . | nindent 8 }}
-      {{- end }}
+    {{- with .Values.imagePullSecrets}}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8}}
+    {{- end }}
       containers:
         - name: app
           image: "{{ .Values.image.repository }}/{{ .Chart.Name }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          imagePullSecrets: {{ .Values.imagePullSecrets }}
+          imagePullPolicy: {{.Values.image.pullPolicy}}
           ports:
-            - containerPort: {{ .Values.service.port }}
+            - containerPort: {{.Values.service.port}}
               protocol: TCP
         #   livenessProbe:
         #     failureThreshold: 3
@@ -47,7 +47,7 @@ spec:
         #       scheme: HTTP
         #     initialDelaySeconds: 10
         #     timeoutSeconds: 1
-          resources: {{ toYaml .Values.resources | nindent 12 }}
+          resources: {{toYaml .Values.resources | nindent 12}}
           env:
             - name: NODE_ENV
               value: production
