@@ -22,6 +22,9 @@ inputs:
   openshift_token:
     description: Openshift Service Account Token
     required: true
+  image_pull_secret:
+    description: Secret to pull image
+    required: true
 
 runs:
   using: composite
@@ -44,6 +47,7 @@ runs:
         helm upgrade --install --atomic ${{ inputs.job_name }} ./charts/${{ inputs.app_name }}
         --namespace ${{ inputs.namespace_prefix }}-${{ inputs.environment }}
         --set route.host=${{ inputs.app_name }}-${{ inputs.namespace_prefix }}-${{ inputs.environment }}.apps.silver.devops.gov.bc.ca
+        --set imagePullSecrets=[ { name: ${{ inputs.image_pull_secret }} } ]
         --values ./charts/wfp/values.${{ inputs.environment }}.yaml
         --timeout 10m
         --wait

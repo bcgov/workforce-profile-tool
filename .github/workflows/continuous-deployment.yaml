@@ -48,3 +48,4 @@ jobs:
           namespace_prefix: ${{ secrets.NAMESPACE_PREFIX }}
           openshift_server: ${{ secrets.OPENSHIFT_SERVER }}
           openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
+          image_pull_secret: ${{ secrets.IMAGE_PULL_SECRET }}
