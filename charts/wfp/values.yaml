@@ -1,3 +1,4 @@
+---
 # Default values for wfp
 
 image:
@@ -10,7 +11,7 @@ image:
 
 # imagePullSecrets specifies docker-registry secret names as an array
 imagePullSecrets:
-  - name: "{{ Values.namespace }}-artifactory-pull"
+  - name: artifactory-pull
 
 # nameOverride is a string to override name
 nameOverride: ~
