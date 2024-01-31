@@ -9,7 +9,8 @@ image:
   tag: latest
 
 # imagePullSecrets specifies docker-registry secret names as an array
-imagePullSecrets: []
+imagePullSecrets:
+  - name: "{{ Values.namespace }}-artifactory-pull"
 
 # nameOverride is a string to override name
 nameOverride: ~
