@@ -1,6 +1,9 @@
 ---
 # Default values for wfp
 
+# replicaCount defines the number of pod replicas running in the deployment
+replicaCount: 1
+
 image:
   # repository is the image repositry
   repository: artifacts.developer.gov.bc.ca/wfac-gen-docker-local
@@ -32,7 +35,7 @@ networkPolicy:
 
 service:
   type: ClusterIP
-  port: 8080
+  port: 3000
   portName: http
 
 route:
