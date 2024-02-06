@@ -13,7 +13,7 @@ RUN mkdir -p ${APP_ROOT}
 WORKDIR ${APP_ROOT}
 
 # Build
-COPY frontend .
+COPY frontend ${APP_ROOT}
 #RUN chown -R 101:0 ${APP_ROOT}
 #RUN chown node:node .
 RUN yarn install --frozen-lockfile --production && yarn cache clean
@@ -23,7 +23,6 @@ FROM ${PROD_IMAGE}
 
 ARG APP_ROOT
 
-WORKDIR ${APP_ROOT}
 COPY --from=builder ${APP_ROOT}/build/ /usr/share/nginx/html
 #RUN chown nginx:nginx /usr/share/nginx/html/*
 #USER nginx
