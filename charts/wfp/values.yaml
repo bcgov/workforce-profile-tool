@@ -35,7 +35,7 @@ networkPolicy:
 
 service:
   type: ClusterIP
-  port: 3000
+  port: 8080
   portName: http
 
 route:
@@ -52,7 +52,7 @@ resources:
     memory: 32Mi
   limits:
     cpu: 150m
-    memory: 512Mi
+    memory: 128Mi
 
 config:
   enabled: true

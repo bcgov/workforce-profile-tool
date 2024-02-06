@@ -49,8 +49,10 @@ runs:
       with:
         image: ${{ inputs.image_name }}
         tags: ${{ env.image_tags }}
-        dockerfiles: |
+        containerfiles: |
           ./Dockerfile
+        context: ${{ inputs.context }}
+        layers: true
 
     # https://github.com/redhat-actions/push-to-registry#readme
     - name: Push to registry
@@ -62,5 +64,6 @@ runs:
         registry: ${{ inputs.image_registry }}
         username: ${{ inputs.image_registry_user }}
         password: ${{ inputs.image_registry_password }} 
+        
 
     # The path the image was pushed to is now stored in ${{ steps.push-image.outputs.registry-path }}
