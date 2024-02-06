@@ -28,11 +28,26 @@ runs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Determine image tags
-      shell: bash
-      if: inputs.image_tags == ''
-      run: |
-        echo "image_tags=latest ${GITHUB_SHA::12}" | tee -a $GITHUB_ENV
+    # - name: Determine image tags
+    #   shell: bash
+    #   if: inputs.image_tags == ''
+    #   run: |
+    #     echo "image_tags=latest ${GITHUB_SHA::12}" | tee -a $GITHUB_ENV
+
+    # https://github.com/docker/metadata-action#readme
+    - name: Prepare Container Metadata tags
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: |
+          ${{ inputs.image_name }}
+        flavor: |
+          latest=true
+        tags: |
+          type=sha
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=semver,pattern={{major}}
 
     # https://github.com/docker/login-action#readme
     - name: Login to Container Registry
@@ -49,7 +64,8 @@ runs:
       with:
         context: ${{ inputs.context }}
         push: true
-        tags: ${{ env.image_tags }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
 
 
     # # https://github.com/redhat-actions/buildah-build#readme
