@@ -42,7 +42,7 @@
   },
   "scripts": {
     "predeploy": "yarn build",
-    "start": "react-scripts start",
+    "start": "react-scripts --max_old_space_size=50 start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
