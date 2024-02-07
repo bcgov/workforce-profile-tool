@@ -40,7 +40,7 @@ runs:
       uses: docker/metadata-action@v5
       with:
         images: |
-          ${{ inputs.image_name }}
+          ${{ inputs.image_registry }}/${{ inputs.image_name }}
         flavor: |
           latest=true
         tags: |
