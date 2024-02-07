@@ -51,4 +51,4 @@ runs:
     - name: Wait on Deployment
       shell: bash
       run: |
-        oc rollout --namespace ${{ inputs.namespace_prefix }}-${{ inputs.environment }} status dc/${{ inputs.app_name }} --watch=true
+        oc rollout --namespace ${{ inputs.namespace_prefix }}-${{ inputs.environment }} status deployment/${{ inputs.app_name }} --watch=true
