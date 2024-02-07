@@ -16,7 +16,7 @@ WORKDIR ${APP_ROOT}
 COPY frontend ${APP_ROOT}
 #RUN chown -R 101:0 ${APP_ROOT}
 #RUN chown node:node .
-RUN yarn install --frozen-lockfile --production && yarn cache clean
+RUN yarn install --frozen-lockfile --production
 RUN yarn build
 
 # Use Nginx as the production server
