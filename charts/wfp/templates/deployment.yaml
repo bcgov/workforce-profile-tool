@@ -1,13 +1,16 @@
 ---
-apiVersion: apps.openshift.io/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{include "wfp.name" .}}
+  labels: {{include "wfp.selectorLabels" . | nindent 4}}
 spec:
   replicas: {{.Values.replicaCount}}
   revisionHistoryLimit: 10
   selector:
-    {{include "wfp.selectorLabels" . | nindent 4}}
+    matchLabels:
+      deployment: {{include "wfp.name" .}}
+      {{include "wfp.selectorLabels" . | nindent 4}}
   strategy:
     resources:
       {{- toYaml .Values.resources | nindent 6}}
@@ -22,13 +25,21 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8}}
     {{- end }}
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{include "wfp.name" .}}-config
+            defaultMode: 420
       containers:
-        - name: app
+        - name: {{include "wfp.name" .}}
           image: "{{ .Values.image.repository }}/{{ .Chart.Name }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{.Values.image.pullPolicy}}
           ports:
             - containerPort: {{.Values.service.port}}
               protocol: TCP
+          volumeMounts:
+            - name: config-volume
+              mountPath: /opt/app-root/src/config
         #   livenessProbe:
         #     failureThreshold: 3
         #     httpGet:
