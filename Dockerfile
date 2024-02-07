@@ -1,7 +1,7 @@
 # Use node alpine as build image
 ARG BUILD_IMAGE=docker.io/node:16-alpine
-ARG PROD_IMAGE=nginx:alpine
-#ARG PROD_IMAGE=nginxinc/nginx-unprivileged:alpine
+#ARG PROD_IMAGE=nginx:alpine
+ARG PROD_IMAGE=nginxinc/nginx-unprivileged:alpine
 ARG APP_ROOT=/opt/app-root/src
 
 FROM ${BUILD_IMAGE} as builder
