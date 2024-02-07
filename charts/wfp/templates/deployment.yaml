@@ -16,7 +16,7 @@ spec:
       {{- toYaml .Values.resources | nindent 6}}
     rollingParams:
       timeoutSeconds: 600
-    type: Rolling
+    type: RollingUpdate
   template:
     metadata:
       labels: {{include "wfp.selectorLabels" . | nindent 8}}
