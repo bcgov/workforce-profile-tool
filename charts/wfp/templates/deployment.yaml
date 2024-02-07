@@ -40,7 +40,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: config-volume
-              mountPath: /opt/app-root/src/config
+              mountPath: /usr/share/nginx/html/config
         #   livenessProbe:
         #     failureThreshold: 3
         #     httpGet:
