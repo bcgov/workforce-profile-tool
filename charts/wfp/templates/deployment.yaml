@@ -3,27 +3,28 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{include "wfp.name" .}}
-  labels: {{include "wfp.selectorLabels" . | nindent 4}}
+  labels: 
+{{include "wfp.labels" . | nindent 4}}
 spec:
   replicas: {{.Values.replicaCount}}
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      deployment: {{include "wfp.name" .}}
-      {{include "wfp.selectorLabels" . | nindent 4}}
+{{include "wfp.selectorLabels" . | nindent 6}}
   strategy:
     resources:
-      {{- toYaml .Values.resources | nindent 6}}
+{{- toYaml .Values.resources | nindent 6}}
     rollingParams:
       timeoutSeconds: 600
     type: RollingUpdate
   template:
     metadata:
-      labels: {{include "wfp.selectorLabels" . | nindent 8}}
+      labels: 
+{{include "wfp.selectorLabels" . | nindent 8}}
     spec:
     {{- with .Values.imagePullSecrets}}
       imagePullSecrets:
-        {{- toYaml . | nindent 8}}
+{{- toYaml . | nindent 8}}
     {{- end }}
       volumes:
         - name: config-volume
