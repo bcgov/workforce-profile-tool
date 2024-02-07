@@ -1,0 +1,34 @@
+{{- if .Values.networkPolicy.enabled }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{include "wfp.name" .}}-aps-gateway-allow-traffic
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: {{include "wfp.name" .}}
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              environment: test
+              name: 264e6f
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              environment: prod
+              name: 264e6f
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              environment: test
+              name: b8840c
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              environment: prod
+              name: b8840c
+  policyTypes:
+    - Ingress
+{{- end}}
