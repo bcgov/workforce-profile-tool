@@ -7,18 +7,28 @@ env:
 on:
   # https://docs.github.com/en/actions/reference/events-that-trigger-workflows
   workflow_dispatch:
-  #push:
-  #  branches:
-  #    - dev
+  push:
+    branches:
+    - dev
+  #     - master
+  # pull_request:
+  #   branches:
+  #     - dev
+  #     - master
+  
 
 jobs:
+  codeql:
+    uses: ./.github/workflows/codeql-analysis.yml
+
   build:
     name: Build & Push
+    needs: codeql
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Build & Push
         uses: ./.github/actions/build-push-container
         with:
@@ -37,7 +47,7 @@ jobs:
     timeout-minutes: 12
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Deploy to Dev
         uses: ./.github/actions/deploy-to-environment
         with:
@@ -48,6 +58,8 @@ jobs:
           namespace_prefix: ${{ secrets.NAMESPACE_PREFIX }}
           openshift_server: ${{ secrets.OPENSHIFT_SERVER }}
           openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
+
+  
 
   deploy-test:
     name: Deploy to Test
@@ -60,7 +72,7 @@ jobs:
     timeout-minutes: 12
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Deploy to Test
         uses: ./.github/actions/deploy-to-environment
         with:
@@ -84,7 +96,7 @@ jobs:
     timeout-minutes: 12
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Deploy to Prod
         uses: ./.github/actions/deploy-to-environment
         with:
