@@ -1,0 +1,58 @@
+---
+# Default values for wfp
+
+# replicaCount defines the number of pod replicas running in the deployment
+replicaCount: 1
+
+image:
+  # repository is the image repositry
+  repository: artifacts.developer.gov.bc.ca/wfac-gen-docker-local
+  # pullPolicy specifies when the image should be pulled from the repository
+  pullPolicy: IfNotPresent
+  # tag specifies the tag associated with an image to pull
+  tag: latest
+
+# imagePullSecrets specifies docker-registry secret names as an array
+imagePullSecrets:
+  - name: artifactory-pull
+
+# nameOverride is a string to override name
+nameOverride: ~
+
+# fullnameOverride is a string to fully override fullname
+fullnameOverride: ~
+
+failurePolicy: Retry
+
+autoscaling:
+  enabled: false
+
+serviceAccount:
+  enabled: false
+
+networkPolicy:
+  enabled: true
+
+service:
+  type: ClusterIP
+  port: 8080
+  portName: http
+
+route:
+  enabled: true
+  host: wfp-{{ Values.namespace }}
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  wildcardPolicy: None
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 150m
+    memory: 128Mi
+
+config:
+  enabled: true

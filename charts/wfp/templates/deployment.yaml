@@ -1,0 +1,71 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{include "wfp.name" .}}
+  labels: 
+{{include "wfp.labels" . | nindent 4}}
+spec:
+  replicas: {{.Values.replicaCount}}
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+{{include "wfp.selectorLabels" . | nindent 6}}
+  strategy:
+    resources:
+{{- toYaml .Values.resources | nindent 6}}
+    rollingParams:
+      timeoutSeconds: 600
+    type: RollingUpdate
+  template:
+    metadata:
+      labels: 
+{{include "wfp.selectorLabels" . | nindent 8}}
+    spec:
+    {{- with .Values.imagePullSecrets}}
+      imagePullSecrets:
+{{- toYaml . | nindent 8}}
+    {{- end }}
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{include "wfp.name" .}}-config
+            defaultMode: 420
+      containers:
+        - name: {{include "wfp.name" .}}
+          image: "{{ .Values.image.repository }}/{{ .Chart.Name }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{.Values.image.pullPolicy}}
+          ports:
+            - containerPort: {{.Values.service.port}}
+              protocol: TCP
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/share/nginx/html/config
+        #   livenessProbe:
+        #     failureThreshold: 3
+        #     httpGet:
+        #       path: {{ .Values.route.path }}
+        #       port: {{ .Values.service.port }}
+        #       scheme: HTTP
+        #     initialDelaySeconds: 10
+        #     timeoutSeconds: 1
+        #   readinessProbe:
+        #     failureThreshold: 3
+        #     httpGet:
+        #       path: {{ .Values.route.path }}
+        #       port: {{ .Values.service.port }}
+        #       scheme: HTTP
+        #     initialDelaySeconds: 10
+        #     timeoutSeconds: 1
+          resources: {{toYaml .Values.resources | nindent 12}}
+          env:
+            - name: NODE_ENV
+              value: production
+          envFrom:
+            - configMapRef:
+                name: {{ include "wfp.configname" . }}-config
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+    - type: ConfigChange

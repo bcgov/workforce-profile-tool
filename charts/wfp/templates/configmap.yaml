@@ -1,0 +1,14 @@
+{{- if .Values.config.enabled }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    labels:
+      app: {{ include "wfp.configname" .}}
+    name: {{ include "wfp.configname" .}}
+data:
+   __ENV.js: >-
+     window.__ENV = {
+        NODE_ENV: 'production',
+     }
+{{- end}}
