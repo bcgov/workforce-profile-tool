@@ -27,7 +27,7 @@ runs:
   using: composite
   steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     # https://github.com/redhat-actions/oc-login
     - name: Login to OpenShift Cluster
