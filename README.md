@@ -22,3 +22,15 @@ LICENSE                    - License
 ## Documentation
 
 * [Application Readme](frontend/README.md)
+
+## Cypress
+
+### Installation
+
+In the frontend directory, run `yarn install`.
+
+### Usage
+
+In the frontend directory, run `yarn run cy:open`.
+
+Cypress is configured to point to a docker container running on port 8080. This can be changed in `cypress.config.ts`.
