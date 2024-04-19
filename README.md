@@ -4,7 +4,7 @@ The [Workforce Profiles](https://www2.gov.bc.ca/gov/content/data/statistics/gove
 
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-![img](https://img.shields.io/badge/Lifecycle-Stable-blue) ![Master Branch Deployment](https://github.com/bcgov/workforce-profile-tool/actions/workflows/continuous-deployment.yaml/badge.svg?branch=master)
+![img](https://img.shields.io/badge/Lifecycle-Stable-blue) ![Master Branch Deployment](https://github.com/bcgov/workforce-profile-tool/actions/workflows/on-push.yaml/badge.svg?branch=master)
 
 ## Directory Structure
 
