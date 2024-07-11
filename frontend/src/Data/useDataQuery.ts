@@ -10,7 +10,7 @@ import TOOLTIPS from './tooltips.json'
 // TODO: Extract this.
 // We put `limit=0` because we're only interested in the metadata for the file,
 // i.e. the `fields` data.
-export const METADATA_URL = `https://toyger.data.gov.bc.ca/api/3/action/datastore_search?limit=0&resource_id=`
+export const METADATA_URL = `https://catalogue.data.gov.bc.ca/api/3/action/datastore_search?limit=0&resource_id=`
 
 export interface RawDataDictionaryEntry {
   info?: {
