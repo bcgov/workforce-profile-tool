@@ -2,5 +2,5 @@
 
 window.__ENV = {
   REACT_APP_PACKAGE_METADATA_URL:
-    'https://catalogue.data.gov.bc.ca/api/action/package_show?id=bc-public-service-workforce-profiles',
+    'https://toyger.data.gov.bc.ca/api/action/package_show?id=bc-public-service-workforce-profiles',
 }
