@@ -41,7 +41,7 @@ runs:
     - name: Add SHORT_SHA env property with commit short sha
       id: shavar
       shell: bash
-      run: echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      run: echo "short_sha=sha-$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
     - name: Helm Deploy
       shell: bash
