@@ -38,12 +38,18 @@ runs:
         insecure_skip_tls_verify: true
         namespace: ${{ inputs.namespace_prefix }}-${{ inputs.environment }}
 
+    - name: Add SHORT_SHA env property with commit short sha
+      id: sha
+      shell: bash
+      run: echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
     - name: Helm Deploy
       shell: bash
       run: >-
         helm upgrade --install --atomic ${{ inputs.job_name }} ./charts/${{ inputs.app_name }}
         --namespace ${{ inputs.namespace_prefix }}-${{ inputs.environment }}
         --set route.host=${{ inputs.app_name }}-${{ inputs.namespace_prefix }}-${{ inputs.environment }}.apps.silver.devops.gov.bc.ca
+        --set image.tag=${{ steps.sha.output.short_sha }}
         --values ./charts/wfp/values.${{ inputs.environment }}.yaml
         --timeout 10m
         --wait
