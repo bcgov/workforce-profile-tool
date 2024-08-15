@@ -21,7 +21,15 @@ const VariableDisplay = ({
   const { metadata, year } = useDataManager()
 
   const dataKey = `WP${year}_MinistryKey`
-  const url = metadata && metadata[dataKey] && year ? metadata[dataKey].csvURL : ''
+  // Uncomment this to load local data
+  // Comment this out to load data from the Data Catalogue
+  const url =
+    metadata && metadata[dataKey] && year && year !== '2022'
+      ? metadata[dataKey].csvURL
+      : `/data/${year}/${dataKey}.csv`
+  // Comment this out to load local data
+  // Uncommment this to load data from the Data Catalogue
+  //const url = metadata && metadata[dataKey] && year ? metadata[dataKey].csvURL : ''
 
   // TODO: Factor out and use useDataQuery
   const { data: unfilteredData } = useQuery(
