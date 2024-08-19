@@ -42,7 +42,7 @@ const RegionOccupationSubtable = ({
       Header: shortTitle,
       Footer: () => formatNumber(totalRow[0].DesGrp_Count_ORG) as FixTypeLater,
       accessor: (d) => formatNumber(d[`DesGrp_Count_ORG`]),
-      className: `text-right`,
+      className: `text-end`,
     },
     {
       id: `NonDesGrp_Count_ORG`,
@@ -50,14 +50,14 @@ const RegionOccupationSubtable = ({
       Footer: () =>
         formatNumber(totalRow[0].NonDesGrp_Count_ORG) as FixTypeLater,
       accessor: (d) => formatNumber(d[`NonDesGrp_Count_ORG`]),
-      className: `text-right`,
+      className: `text-end`,
     },
     {
       id: `Total_Count_ORG`,
       Header: 'Total',
       Footer: () => formatNumber(totalRow[0].Total_Count_ORG) as FixTypeLater,
       accessor: (d) => formatNumber(d[`Total_Count_ORG`]),
-      className: `text-right`,
+      className: `text-end`,
     },
     {
       id: `DesGrp_Percent_ORG`,
@@ -65,7 +65,7 @@ const RegionOccupationSubtable = ({
       Footer: () =>
         formatPercent(totalRow[0].DesGrp_Percent_ORG, 1, 100) as FixTypeLater,
       accessor: (d) => formatPercent(d[`DesGrp_Percent_ORG`], 1, 100),
-      className: `text-right`,
+      className: `text-end`,
     },
     {
       id: `DesGrp_Percent_AvailableWorkforce`,
@@ -74,7 +74,7 @@ const RegionOccupationSubtable = ({
         formatPercent(totalRow[0].DesGrp_Percent_AvailableWorkforce, 1, 100),
       accessor: (d) =>
         formatPercent(d[`DesGrp_Percent_AvailableWorkforce`], 1, 100),
-      className: `text-right`,
+      className: `text-end`,
     },
     {
       id: `DesGrp_Count_Expected`,
@@ -82,7 +82,7 @@ const RegionOccupationSubtable = ({
       Footer: () =>
         formatNumber(totalRow[0].DesGrp_Count_Expected, ``) as FixTypeLater,
       accessor: (d) => formatNumber(d[`DesGrp_Count_Expected`], ``),
-      className: `text-right`,
+      className: `text-end`,
     },
     {
       id: `DesGrp_Count_Shortfall`,
@@ -90,7 +90,7 @@ const RegionOccupationSubtable = ({
       Footer: () =>
         formatNumber(totalRow[0].DesGrp_Count_Shortfall, ``) as FixTypeLater,
       accessor: (d) => formatNumber(d[`DesGrp_Count_Shortfall`], ``),
-      className: `text-right`,
+      className: `text-end`,
     },
   ]
 
@@ -99,12 +99,12 @@ const RegionOccupationSubtable = ({
   const additionalDefinitions =
     year === '2022' && designatedGroupKey && designatedGroupKey === 'WOM'
       ? [
-          {
-            term: 'Note',
-            definition:
-              'Some ministries have had their Women counts adjusted slightly to prevent additional residual disclosure. These adjustments are very minimal and do not affect total counts.',
-          },
-        ]
+        {
+          term: 'Note',
+          definition:
+            'Some ministries have had their Women counts adjusted slightly to prevent additional residual disclosure. These adjustments are very minimal and do not affect total counts.',
+        },
+      ]
       : []
 
   return (

@@ -32,19 +32,19 @@ const FlowReportSubtable = ({
       id: `DesGrp_Count_ORG`,
       Header: shortTitle,
       accessor: (d) => formatNumber(d[`DesGrp_Count_ORG`]),
-      className: `text-right`,
+      className: `text-end`,
     },
     {
       id: `NonDesGrp_Count_ORG`,
       Header: `Non-${shortTitle}`,
       accessor: (d) => formatNumber(d[`NonDesGrp_Count_ORG`]),
-      className: `text-right`,
+      className: `text-end`,
     },
     {
       id: `Total_Count_ORG`,
       Header: 'Total',
       accessor: (d) => formatNumber(d[`Total_Count_ORG`]),
-      className: `text-right`,
+      className: `text-end`,
     },
     {
       id: `RateOfDesGrp`,
@@ -58,7 +58,7 @@ const FlowReportSubtable = ({
           return formatPercent(desGrp / (desGrp + nonDesGrp), 1)
         }
       },
-      className: `text-right`,
+      className: `text-end`,
     },
   ]
 
