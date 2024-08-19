@@ -4,37 +4,45 @@
   .TabButtons {
     margin: 0px 0px;
   }
+
   .TabButton {
     // border: solid black 1px;
     margin-right: 20px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-size: 0.9rem;
+
     @include media-breakpoint-down(md) {
       font-size: 0.8rem;
       padding: 0px 5px !important;
       margin-right: 10px;
     }
+
     font-weight: 500;
     margin-bottom: 15px;
+
     a {
       cursor: pointer;
       display: block;
       width: 100%;
+
       i {
         margin-right: 0.5rem;
       }
+
       &:hover {
         font-weight: 500;
         color: $brand-color-gold;
       }
     }
   }
+
   .TabButton.active {
     a {
       font-weight: 700;
     }
   }
+
   .Tab {
     margin-top: 30px;
   }
@@ -42,16 +50,19 @@
 
 .Secondary {
   margin-top: -45px;
+
   .TabInterface {
     .TabButtons {
       border: solid 1px $brand-color-blue;
       border-left: 0;
       border-right: 0;
     }
+
     .TabButton {
       margin-top: 15px;
     }
   }
+
   .Tab {
     margin-top: 30px;
   }
