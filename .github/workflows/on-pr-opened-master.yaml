@@ -1,4 +1,4 @@
-name: Push
+name: Pull Request Opened - Master
 
 env:
   APP_NAME: wfp
@@ -7,7 +7,7 @@ env:
 on:
   # https://docs.github.com/en/actions/reference/events-that-trigger-workflows
   workflow_dispatch:
-  push:
+  pull_request:
     branches:
     - master
 
