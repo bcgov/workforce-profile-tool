@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { useCallback, useState } from 'react'
 
 import { DataManagerProvider } from '../Data/DataManager'
@@ -27,15 +27,14 @@ const App = (): JSX.Element => {
             <VariableList showList={showList} />
           </div>
           <div className="col-12 col-sm-8 col-md-9 col-xl-10 MainWrapper">
-            <Switch>
-              <Route exact path={`/`} render={() => <Main />} />
-              <Route exact path={`/:highLevelNav`} render={() => <Main />} />
+            <Routes>
+              <Route path={`/`} element={<Main />} />
+              <Route path={`/:highLevelNav`} element={<Main />} />
               <Route
-                exact
                 path={`/:highLevelNav/:lowLevelNav`}
-                render={() => <Main />}
+                element={<Main />}
               />
-            </Switch>
+            </Routes>
           </div>
         </div>
       </DataManagerProvider>

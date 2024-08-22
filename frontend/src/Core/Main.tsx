@@ -1,4 +1,5 @@
-import { useLocation, useParams } from 'react-router'
+import { useLocation } from 'react-router'
+import { useParams } from 'react-router-dom'
 
 import { useDataManager } from '../Data/DataManager'
 import Comparison from '../Views/Comparison'
@@ -25,7 +26,7 @@ interface MainParamProps {
 
 const Main = (): JSX.Element => {
   const location = useLocation()
-  const { lowLevelNav, highLevelNav } = useParams<MainParamProps>()
+  const { lowLevelNav, highLevelNav } = useParams() as MainParamProps
   const { year } = useDataManager()
 
   // Set the default tabs: "Home" when highLevelNav is not present, a
