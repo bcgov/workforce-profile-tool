@@ -82,15 +82,15 @@ export const useDataQuery = <T extends GenericRawData>(
 
   // Uncomment this to load local data
   // Comment this out to load data from the Data Catalogue
-  let url = ''
+  /*let url = ''
   if (year === '2022') {
     url = `/data/${year}/${key}.csv`
   } else {
     url = metadata && year ? metadata[key].csvURL : ''
-  }
+  }*/
   // Comment this out to load local data
   // Uncommment this to load data from the Data Catalogue
-  //const url = metadata && metadata[key] && year ? metadata[key].csvURL : ''
+  const url = metadata && metadata[key] && year ? metadata[key].csvURL : ''
 
   console.log('url', url)
 

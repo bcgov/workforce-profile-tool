@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 
 import './TabInterface.scss'
 
@@ -72,7 +72,7 @@ class TabInterface extends React.Component<Props, State> {
             key={child.props.name}
             className={`TabButton text-center ${isActiveClass} col-auto px-0`}
           >
-            <Link to={linkTo} role={'button'} title={child.props.name}>
+            <Link href={linkTo} role={'button'} title={child.props.name}>
               {child.props.icon && (
                 <i className={'fa fa-lg ' + child.props.icon} />
               )}

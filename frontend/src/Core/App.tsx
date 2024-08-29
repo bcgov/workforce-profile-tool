@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+/*import { Route, Routes } from 'react-router-dom'
 import { useCallback, useState } from 'react'
 
 import { DataManagerProvider } from '../Data/DataManager'
@@ -42,4 +42,4 @@ const App = (): JSX.Element => {
   )
 }
 
-export default App
+export default App*/

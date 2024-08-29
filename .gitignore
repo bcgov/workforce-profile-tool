@@ -34,3 +34,6 @@ yarn-error.log*
 frontend/src/**/*.css
 *.zip
 frontend/public/data/**/*.csv
+
+.next
+next-env.d.ts

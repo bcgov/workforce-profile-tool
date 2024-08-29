@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom'
+import Link from 'next/link'
 
 import './Header.scss'
 import logo from './bc-stats-logo.png'
@@ -12,23 +12,22 @@ interface Props {
 
 /** The header in the upper-left / top of the app (depending on screen size). */
 const Header = ({ showList, toggleListCallback }: Props): JSX.Element => {
-  const location = useLocation()
 
   return (
     <div className="Header row">
       <div className="col mb-0 mb-sm-4">
         <div className="row align-items-center">
           <div className="col-6 order-2 order-sm-1 col-sm-12">
-            <Link to={`/${location.search}`}>
+            <Link href="/">
               <img
-                src={logo}
+                src={logo.src}
                 style={{ maxWidth: '100%' }}
                 alt="BC Stats logo"
               />
             </Link>
           </div>
           <div className="col-6 order-1 order-sm-2 col-sm-12">
-            <Link to={`/${location.search}`}>
+            <Link href="/">
               <h1 className="my-2">Workforce Profiles</h1>
             </Link>
             <button
@@ -37,9 +36,8 @@ const Header = ({ showList, toggleListCallback }: Props): JSX.Element => {
             >
               {showList ? 'Hide' : 'Show'} variables{' '}
               <i
-                className={`fas fa-caret-${
-                  showList ? 'down' : 'right'
-                } ml-2 mr-0`}
+                className={`fas fa-caret-${showList ? 'down' : 'right'
+                  } ml-2 mr-0`}
               ></i>
             </button>
           </div>

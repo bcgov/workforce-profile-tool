@@ -1,5 +1,4 @@
-import { useLocation } from 'react-router'
-import { useParams } from 'react-router-dom'
+import { useRouter } from 'next/router'
 
 import { useDataManager } from '../Data/DataManager'
 import Comparison from '../Views/Comparison'
@@ -25,8 +24,8 @@ interface MainParamProps {
 }
 
 const Main = (): JSX.Element => {
-  const location = useLocation()
-  const { lowLevelNav, highLevelNav } = useParams() as MainParamProps
+  const router = useRouter()
+  const { lowLevelNav, highLevelNav } = router.query as MainParamProps
   const { year } = useDataManager()
 
   // Set the default tabs: "Home" when highLevelNav is not present, a
@@ -46,7 +45,7 @@ const Main = (): JSX.Element => {
 
   return (
     <div className="Main">
-      <TabInterface activeTabKey={activeOuterTab} search={location.search}>
+      <TabInterface activeTabKey={activeOuterTab} search={router.asPath}>
         <Tab key={'home'} name="Home">
           <Home />
         </Tab>
@@ -56,7 +55,7 @@ const Main = (): JSX.Element => {
             <TabInterface
               activeTabKey={activeInnerTab}
               baseURL={`/${activeOuterTab}`}
-              search={location.search}
+              search={router.asPath}
             >
               <Tab key={'representation-by-group'} name="By Designated Group">
                 <Progress />
@@ -81,7 +80,7 @@ const Main = (): JSX.Element => {
             <TabInterface
               activeTabKey={activeInnerTab}
               baseURL={`/${activeOuterTab}`}
-              search={location.search}
+              search={router.asPath}
             >
               <Tab key={'by-occupation'} name="By Occupation">
                 <OccupationRegion viewType={OccupationRegionEnum.Occupation} />

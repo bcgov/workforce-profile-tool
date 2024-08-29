@@ -4,7 +4,7 @@
  * @returns the component for the home page.
  */
 const Home = (): JSX.Element => {
-  const buildVersion = process.env.REACT_APP_GIT_SHA
+  const buildVersion = process.env.NEXT_PUBLIC_GIT_SHA
 
   return (
     <div className="row">
