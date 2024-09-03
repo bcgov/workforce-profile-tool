@@ -94,9 +94,8 @@ const Home = (): JSX.Element => {
           Service due to the changes in definition.
         </p>
         <p>
-          2SLGBTQ+ and Non-Binary Representation: Information on 2SLGBTQ+ and
-          non-binary representation are not currently included in the Workforce
-          Profiles, as no federal data exists for comparisons.{' '}
+          2SLGBTQ+ (Two-Spirit, Lesbian, Gay, Bisexual, Trans, Queer, and/or other.
+          It incudes both sexual orientation and gender identity and expression.{' '}
         </p>
 
         <h2>Contact</h2>
