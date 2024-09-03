@@ -14,8 +14,8 @@ const Home = (): JSX.Element => {
           The Workforce Profiles Report allows users to explore statistics on
           the representation of designated equity groups across the BC Public
           Service (BCPS) workforce, including representation of Women,
-          Indigenous Peoples, Persons with Disabilities and members of Visible
-          Minorities.
+          Indigenous Peoples, Persons with Disabilities, 2SLGBTQ+ and
+          members of Visible Minorities.
         </p>
         <p>
           This online dashboard replaces the paper reports produced prior to
