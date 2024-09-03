@@ -46,7 +46,13 @@
     "name": "Designated Group",
     "shortName": "Des. Grp.",
     "isExclusive": false,
-    "default": ["IND", "DIS", "VM", "WOM"],
+    "default": [
+      "IND",
+      "DIS",
+      "VM",
+      "WOM",
+      "2SLGBTQ+"
+    ],
     "variables": [
       {
         "key": "IND",
@@ -67,6 +73,11 @@
         "key": "WOM",
         "shortName": "Women",
         "name": "Women"
+      },
+      {
+        "key": "2SLGBTQ+",
+        "shortName": "2SLGBTQ+",
+        "name": "Two-Spirit, Lesbian, Gay, Bisexual, Trans, Queer, and/or other"
       }
     ]
   },
