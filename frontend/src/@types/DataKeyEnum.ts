@@ -3,10 +3,10 @@
 export const YEAR_PLACEHOLDER = 'YYYY'
 
 export enum DataKeyEnum {
-  Comparison = `WPYYYY_Comparison`,
-  Leadership = `WPYYYY_Leadership`,
-  OccupationRegion = `WPYYYY_Rep_Occ_Rgn`,
-  Progress = `WPYYYY_Ind_Progress`,
-  Hiring = `WPYYYY_Hiring`,
-  Flow = `WPYYYY_Flow`,
+  Comparison = `wpYYYY_comparison`,
+  Leadership = `wpYYYY_leadership`,
+  OccupationRegion = `wpYYYY_rep_occ_rgn`,
+  Progress = `wpYYYY_ind_progress`,
+  Hiring = `wpYYYY_hiring`,
+  Flow = `wpYYYY_flow`,
 }
