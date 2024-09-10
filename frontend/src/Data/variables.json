@@ -51,7 +51,7 @@
       "DIS",
       "VM",
       "WOM",
-      "2SLGBTQ+"
+      "2SLGBTQ"
     ],
     "variables": [
       {
@@ -75,7 +75,7 @@
         "name": "Women"
       },
       {
-        "key": "2SLGBTQ+",
+        "key": "2SLGBTQ",
         "shortName": "2SLGBTQ+",
         "name": "2SLGBTQ+"
       }
