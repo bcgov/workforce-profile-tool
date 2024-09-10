@@ -21,7 +21,7 @@ const Home = (): JSX.Element => {
           This online dashboard replaces the paper reports produced prior to
           2018. For access to historical reports, please visit the{' '}
           <a
-            href="https://www2.gov.bc.ca/gov/content/data/statistics/government/employee-research/workforce-profiles"
+            href="https://www2.gov.bc.ca/gov/content?id=1606E44C9A404B9BAD937994D22DCBE6"
             target="_blank"
             rel="noopener noreferrer"
           >
