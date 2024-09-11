@@ -7,6 +7,7 @@ import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
 import GenericTable from './GenericTable'
 import FixTypeLater from '../@types/FixTypeLater'
+import { useDataManager } from '../Data/DataManager'
 import { DataKeyEnum } from '../@types/DataKeyEnum'
 
 interface Props {
@@ -99,13 +100,15 @@ const RegionOccupationSubtable = ({
   const additionalDefinitions =
     year === '2022' && designatedGroupKey && designatedGroupKey === 'WOM'
       ? [
-          {
-            term: 'Note',
-            definition:
-              'Some ministries have had their Women counts adjusted slightly to prevent additional residual disclosure. These adjustments are very minimal and do not affect total counts.',
-          },
-        ]
+        {
+          term: 'Note',
+          definition:
+            'Some ministries have had their Women counts adjusted slightly to prevent additional residual disclosure. These adjustments are very minimal and do not affect total counts.',
+        },
+      ]
       : []
+
+  const { queryValues } = useDataManager()
 
   return (
     <div className={`${viewType}Table`}>
@@ -119,7 +122,9 @@ const RegionOccupationSubtable = ({
       <DownloadDataLink
         columns={columns}
         rows={allRows}
-        filename={viewType}
+        // filename includes filters
+        // YYYY-Organization-EmployeeType-DesignatedGroup
+        filename={`${queryValues.Year}-${queryValues.Ministry_Key}-${queryValues.Employee_Type}-${queryValues.Des_Grp.join('_')}-${viewType}`}
         additionalDefinitions={additionalDefinitions}
       />
       <Definitions additionalDefinitions={additionalDefinitions} />

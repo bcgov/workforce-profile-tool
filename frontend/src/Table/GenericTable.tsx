@@ -2,6 +2,7 @@ import { Column } from 'react-table'
 
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { DataDictionaryEntry } from '../Data/useDataQuery'
+import { useDataManager } from '../Data/DataManager'
 import Definitions, { Definition } from './Definitions'
 import Dictionary from '../@types/Dictionary'
 import DownloadDataLink from './DownloadDataLink'
@@ -42,6 +43,8 @@ const GenericTable = <T extends Dictionary<unknown>>({
   showFooter,
   additionalDefinitions,
 }: Props<T>): JSX.Element => {
+  const { queryValues } = useDataManager()
+
   if (!data) return <Loading />
 
   return (
@@ -58,7 +61,9 @@ const GenericTable = <T extends Dictionary<unknown>>({
             <DownloadDataLink
               columns={columns}
               rows={data}
-              filename={filename}
+              // filename includes filters
+              // YYYY-Organization-EmployeeType-DesignatedGroup
+              filename={`${queryValues.Year}-${queryValues.Ministry_Key}-${queryValues.Employee_Type}-${queryValues.Des_Grp.join('_')}-${filename}`}
               additionalDefinitions={additionalDefinitions}
             />
           )}

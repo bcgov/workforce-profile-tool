@@ -2,6 +2,7 @@ import { ColumnWithClassName } from '../@types/ColumnWithClassName'
 import { DataDictionaryEntry } from '../Data/useDataQuery'
 import { FlowRawData } from '../@types/DataTypes'
 import { formatNumber, formatPercent } from '../Helpers/formatter'
+import { useDataManager } from '../Data/DataManager'
 import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
 import GenericTable from './GenericTable'
@@ -62,6 +63,8 @@ const FlowReportSubtable = ({
     },
   ]
 
+  const { queryValues } = useDataManager()
+
   return (
     <div>
       <GenericTable
@@ -73,7 +76,10 @@ const FlowReportSubtable = ({
       <DownloadDataLink
         columns={columns}
         rows={data}
-        filename={`flow-${shortTitle?.toLowerCase()}`}
+        // filename includes filters
+        // YYYY-Organization-EmployeeType
+        // Designated Group doesn't affect the flow report charts, so it's not included in the filename.
+        filename={`${queryValues.Year}-${queryValues.Ministry_Key}-${queryValues.Employee_Type}-FLOW-${shortTitle}`}
       />
       <Definitions />
     </div>
