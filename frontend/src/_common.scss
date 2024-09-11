@@ -1,9 +1,10 @@
 $enable-rounded: false;
 
-@import '~@bcgov/bootstrap-theme/dist/scss/bootstrap-theme';
+@import '~@bcgov/bootstrap-v5-theme/scss/bootstrap-theme.scss';
 
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
 
 $brand-color-blue: #234075;
 $brand-color-gold: #e6b345;

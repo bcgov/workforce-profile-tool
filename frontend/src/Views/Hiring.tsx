@@ -29,13 +29,13 @@ const Hiring = (): JSX.Element => {
       id: 'DesGrp_Count_ORG',
       Header: 'Hired',
       accessor: (d) => formatNumber(d.DesGrp_Count_ORG),
-      className: 'text-right',
+      className: 'text-end',
     },
     {
       id: 'Hiring_PC_Total',
       Header: '% of total',
       accessor: (d) => formatPercent(d.DesGrp_Count_ORG, 1, +d.Total_Count_ORG),
-      className: 'text-right',
+      className: 'text-end',
     },
   ]
 

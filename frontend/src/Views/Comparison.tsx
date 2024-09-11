@@ -31,19 +31,19 @@ const Comparison = (): JSX.Element => {
       id: 'Employees_BCPS',
       Header: `${ministry}, %`,
       accessor: (d) => formatPercent(d['Employees_BCPS'], 1, 100),
-      className: 'text-right',
+      className: 'text-end',
     },
     {
       id: 'Available_Workforce_BCPS',
       Header: 'Available Workforce, %',
       accessor: (d) => formatPercent(d['Available_Workforce_BCPS'], 1, 100),
-      className: 'text-right',
+      className: 'text-end',
     },
     {
       id: 'Employees_BC_Population',
       Header: 'BC Population, %',
       accessor: (d) => formatPercent(d['Employees_BC_Population'], 1, 100),
-      className: 'text-right',
+      className: 'text-end',
     },
   ]
 

@@ -1,10 +1,10 @@
 {
   "name": "wes-workforce-profiles",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "homepage": ".",
   "dependencies": {
-    "@bcgov/bootstrap-theme": "https://github.com/bcgov/bootstrap-theme/releases/download/v1.1.1/bcgov-bootstrap-theme-1.1.1.tgz",
+    "@bcgov/bootstrap-v5-theme": "1.0.1",
     "@beam-australia/react-env": "^3.0.8",
     "@nivo/bar": "0.80.0",
     "@nivo/core": "0.80.0",
@@ -17,7 +17,7 @@
     "@types/react-dom": "^18.0.11",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-table": "^7.7.14",
-    "bootstrap": "4.6",
+    "bootstrap": "5.3.3",
     "color": "4.2.3",
     "d3": "7.8.3",
     "query-string": "8.1.0",

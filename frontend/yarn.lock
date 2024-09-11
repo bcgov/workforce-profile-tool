@@ -1074,9 +1074,10 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@bcgov/bootstrap-theme@https://github.com/bcgov/bootstrap-theme/releases/download/v1.1.1/bcgov-bootstrap-theme-1.1.1.tgz":
-  version "1.1.1"
-  resolved "https://github.com/bcgov/bootstrap-theme/releases/download/v1.1.1/bcgov-bootstrap-theme-1.1.1.tgz#340aca7b61ff5048914a355c75db6a6fc71504a9"
+"@bcgov/bootstrap-v5-theme@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@bcgov/bootstrap-v5-theme/-/bootstrap-v5-theme-1.0.1.tgz#c7173ecaaeb2b135e2356eafe2751c2c4f9e378f"
+  integrity sha512-Z0P4e7ddf3dq+EEe9oCn7wWklfVrLr35HIXTUcxlQKCX8FrpshSKBCGje0HpgiVS9A32iVY+oraQG1i1cXuXCw==
 
 "@bcoe/v8-coverage@^0.2.3":
   version "0.2.3"
@@ -3338,10 +3339,10 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==
 
-bootstrap@4.6:
-  version "4.6.2"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.6.2.tgz#8e0cd61611728a5bf65a3a2b8d6ff6c77d5d7479"
-  integrity sha512-51Bbp/Uxr9aTuy6ca/8FbFloBUJZLHwnhTcnjIeRn2suQWsWzcuJhGjKDB5eppVte/8oCdOL3VuwxvZDUggwGQ==
+bootstrap@5.3.3:
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.3.3.tgz#de35e1a765c897ac940021900fcbb831602bac38"
+  integrity sha512-8HLCdWgyoMguSO9o+aH+iuZ+aht+mzW0u3HIMzVu7Srrpv7EBBxTnrFlSCskwdY1+EOFQSm7uMJhNQHkdPcmjg==
 
 brace-expansion@^1.1.7:
   version "1.1.11"

@@ -40,19 +40,19 @@ const Progress = (): JSX.Element => {
       Header: `${dataKey.split('_')[0]}, %`,
       accessor: (d) =>
         formatPercent((d as Dictionary<string>)[dataKey], 1, 100),
-      className: 'text-right',
+      className: 'text-end',
     })
   })
 
   const additionalDefinitions =
     year === '2022'
       ? [
-          {
-            term: 'NA',
-            definition:
-              'The 2020 comparator is not provided as the BC Stats definition of Persons with Disabilities changed between 2020 and 2022.',
-          },
-        ]
+        {
+          term: 'NA',
+          definition:
+            'The 2020 comparator is not provided as the BC Stats definition of Persons with Disabilities changed between 2020 and 2022.',
+        },
+      ]
       : []
 
   return (
