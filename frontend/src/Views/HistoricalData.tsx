@@ -12,8 +12,8 @@ const HistoricalData = (): JSX.Element => {
   return (
     <div className="alert alert-warning Shadow" role="alert">
       <h2>Historical data</h2>
-      <p>You are currently viewing data from {year}. Caution is advised when comparing the current report to historical reports.
-        For more information refer to the <Link to={`/${location.search}`}>Home Page</Link>, or contact us at <a href="mailto:work.environment.survey@gov.bc.ca">BC Stats</a>.
+      <p>You are currently viewing data from {year}. Caution is advised when comparing the current report to older reports.
+        For more information refer to the <Link to={`/${location.search}`}>Home Page</Link>, or contact us at <a href="https://dpdd.atlassian.net/servicedesk/customer/portal/12/group/70">BC Stats</a>.
       </p>
     </div>
   )
