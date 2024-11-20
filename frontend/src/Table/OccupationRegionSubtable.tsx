@@ -124,7 +124,7 @@ const RegionOccupationSubtable = ({
         rows={allRows}
         // filename includes filters
         // YYYY-Organization-EmployeeType-DesignatedGroup
-        filename={`${queryValues.Year}-${queryValues.Ministry_Key}-${queryValues.Employee_Type}-${queryValues.Des_Grp.join('_')}-${viewType}`}
+        filename={`${queryValues.Year}-${queryValues.Ministry_Key}-${queryValues.Employee_Type}-${queryValues.Des_Grp.join('_').replace('2SLGBTQ', '2SLGBTQ+')}-${viewType}`}
         additionalDefinitions={additionalDefinitions}
       />
       <Definitions additionalDefinitions={additionalDefinitions} />

@@ -177,7 +177,7 @@ const GraphFrame = (props: Props): JSX.Element => {
     // filename includes filters
     // YYYY-Organization-EmployeeType-DesignatedGroup
     //filename={`${queryValues.Year}-${queryValues.Ministry_Key}-${queryValues.Employee_Type}-${queryValues.Des_Grp.join('_')}-${filename}`}
-    const filename = `${queryValues.Year}-${queryValues.Ministry_Key}-${queryValues.Employee_Type}-${queryValues.Des_Grp.join('_')}-${props.className}.png`
+    const filename = `${queryValues.Year}-${queryValues.Ministry_Key}-${queryValues.Employee_Type}-${queryValues.Des_Grp.join('_').replace('2SLGBTQ', '2SLGBTQ+')}-${props.className.replace('2SLGBTQ', '2SLGBTQ+')}.png`
     saveSVG.saveSvgAsPng(svg, filename, {
       scale: 2,
       fonts: FONT_INFO.map((fontInfo) => {

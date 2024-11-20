@@ -63,7 +63,7 @@ const GenericTable = <T extends Dictionary<unknown>>({
               rows={data}
               // filename includes filters
               // YYYY-Organization-EmployeeType-DesignatedGroup
-              filename={`${queryValues.Year}-${queryValues.Ministry_Key}-${queryValues.Employee_Type}-${queryValues.Des_Grp.join('_')}-${filename}`}
+              filename={`${queryValues.Year}-${queryValues.Ministry_Key}-${queryValues.Employee_Type}-${queryValues.Des_Grp.join('_').replace('2SLGBTQ', '2SLGBTQ+')}-${filename}`}
               additionalDefinitions={additionalDefinitions}
             />
           )}
