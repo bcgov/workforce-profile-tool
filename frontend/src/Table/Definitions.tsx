@@ -22,7 +22,7 @@ const DEFINITIONS: Definition[] = [
       'Value is 3 or greater, but is suppressed to prevent residual disclosure.',
   },
   {
-    years: [2022],
+    years: [2022, 2024],
     term: 'S',
     definition:
       'Data suppressed because value is less than 3, or to prevent residual disclosure.',

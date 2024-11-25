@@ -98,7 +98,7 @@ const RegionOccupationSubtable = ({
   const allRows = filteredData.concat(totalRow)
 
   const additionalDefinitions =
-    year === '2022' && designatedGroupKey && designatedGroupKey === 'WOM'
+    (year === '2022' || year === '2024') && designatedGroupKey && designatedGroupKey === 'WOM'
       ? [
         {
           term: 'Note',
