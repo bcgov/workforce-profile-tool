@@ -123,8 +123,8 @@ const RegionOccupationSubtable = ({
         columns={columns}
         rows={allRows}
         // filename includes filters
-        // YYYY-Organization-EmployeeType-DesignatedGroup
-        filename={`${queryValues.Year}-${queryValues.Ministry_Key}-${queryValues.Employee_Type}-${queryValues.Des_Grp.join('_').replace('2SLGBTQ', '2SLGBTQ+')}-${viewType}`}
+        // YYYY_Organization_EmployeeType_DesignatedGroup
+        filename={`${queryValues.Year}_${queryValues.Ministry_Key}_${queryValues.Employee_Type}_${queryValues.Des_Grp.join('_').replace('2SLGBTQ', '2SLGBTQ+')}_${viewType}`}
         additionalDefinitions={additionalDefinitions}
       />
       <Definitions additionalDefinitions={additionalDefinitions} />

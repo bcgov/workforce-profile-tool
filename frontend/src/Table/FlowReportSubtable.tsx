@@ -77,9 +77,9 @@ const FlowReportSubtable = ({
         columns={columns}
         rows={data}
         // filename includes filters
-        // YYYY-Organization-EmployeeType
+        // YYYY_Organization_EmployeeType
         // Designated Group doesn't affect the flow report charts, so it's not included in the filename.
-        filename={`${queryValues.Year}-${queryValues.Ministry_Key}-${queryValues.Employee_Type}-FLOW-${shortTitle}`}
+        filename={`${queryValues.Year}_${queryValues.Ministry_Key}_${queryValues.Employee_Type}_FLOW_${shortTitle}`}
       />
       <Definitions />
     </div>

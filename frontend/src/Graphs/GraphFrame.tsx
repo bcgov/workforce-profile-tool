@@ -173,11 +173,9 @@ const GraphFrame = (props: Props): JSX.Element => {
     }
 
     // Now we can save our cloned SVG as a PNG.
-    //saveSVG.saveSvgAsPng(svg, `${props.className}.png`, {
     // filename includes filters
-    // YYYY-Organization-EmployeeType-DesignatedGroup
-    //filename={`${queryValues.Year}-${queryValues.Ministry_Key}-${queryValues.Employee_Type}-${queryValues.Des_Grp.join('_')}-${filename}`}
-    const filename = `${queryValues.Year}-${queryValues.Ministry_Key}-${queryValues.Employee_Type}-${queryValues.Des_Grp.join('_').replace('2SLGBTQ', '2SLGBTQ+')}-${props.className.replace('2SLGBTQ', '2SLGBTQ+')}.png`
+    // YYYY_Organization_EmployeeType_DesignatedGroup
+    const filename = `${queryValues.Year}_${queryValues.Ministry_Key}_${queryValues.Employee_Type}_${queryValues.Des_Grp.join('_').replace('2SLGBTQ', '2SLGBTQ+')}_${props.className.replace('2SLGBTQ', '2SLGBTQ+')}.png`
     saveSVG.saveSvgAsPng(svg, filename, {
       scale: 2,
       fonts: FONT_INFO.map((fontInfo) => {

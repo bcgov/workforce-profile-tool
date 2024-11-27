@@ -62,8 +62,8 @@ const GenericTable = <T extends Dictionary<unknown>>({
               columns={columns}
               rows={data}
               // filename includes filters
-              // YYYY-Organization-EmployeeType-DesignatedGroup
-              filename={`${queryValues.Year}-${queryValues.Ministry_Key}-${queryValues.Employee_Type}-${queryValues.Des_Grp.join('_').replace('2SLGBTQ', '2SLGBTQ+')}-${filename}`}
+              // YYYY_Organization_EmployeeType_DesignatedGroup
+              filename={`${queryValues.Year}_${queryValues.Ministry_Key}_${queryValues.Employee_Type}_${queryValues.Des_Grp.join('_').replace('2SLGBTQ', '2SLGBTQ+')}_${filename}`}
               additionalDefinitions={additionalDefinitions}
             />
           )}
