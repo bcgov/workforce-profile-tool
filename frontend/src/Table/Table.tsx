@@ -73,8 +73,15 @@ const Table = <T extends Record<string, unknown>>({
         <tbody {...getTableBodyProps()}>
           {page.map((row) => {
             prepareRow(row)
+
+            const isTotalRow = row.cells.some((cell) =>
+              String(cell.value).toLowerCase().includes('total')
+            )
+
             return (
-              <tr {...row.getRowProps()}>
+              <tr {...row.getRowProps()}
+                style={isTotalRow ? { fontWeight: 'bold' } : {}}
+              >
                 {row.cells.map((cell) => {
                   return (
                     <td
