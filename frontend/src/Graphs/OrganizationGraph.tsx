@@ -27,6 +27,7 @@ const MinistryGraph = ({ data, dataDictionary }: Props): JSX.Element => {
     DIS: '#70CCDB',
     VM: '#D2E2EE',
     WOM: '#E6B345',
+    '2SLGBTQ': '#FF5733',
   }
 
   const graphs = Object.keys(dataMap)
