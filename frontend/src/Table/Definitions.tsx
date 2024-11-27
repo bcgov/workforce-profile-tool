@@ -27,6 +27,12 @@ const DEFINITIONS: Definition[] = [
     definition:
       'Data suppressed because value is less than 3, or to prevent residual disclosure.',
   },
+  {
+    years: [2024],
+    term: 'NA',
+    definition:
+      'No comparable data available',
+  },
 ]
 
 export const definitionsForYear = (year: string | undefined) => {
