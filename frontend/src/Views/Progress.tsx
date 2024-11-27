@@ -37,7 +37,7 @@ const Progress = (): JSX.Element => {
   dataKeys.forEach((dataKey) => {
     columns.push({
       id: dataKey,
-      Header: `${dataKey.split('_')[0]}, %`,
+      Header: `${dataKey.split('_')[0]} %`,
       accessor: (d) =>
         formatPercent((d as Dictionary<string>)[dataKey], 1, 100),
       className: 'text-end',
