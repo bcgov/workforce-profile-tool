@@ -1,14 +1,33 @@
 import { Route, Switch } from 'react-router-dom'
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useEffect, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 
 import { DataManagerProvider } from '../Data/DataManager'
 import Header from './Header'
 import Main from './Main'
 import VariableList from '../Variables/VariableList'
+import { loadSnowplow } from '../Helpers/loadSnowplow'
 
 import './App.scss'
 
 const App = (): JSX.Element => {
+  const location = useLocation()
+  const snowplowInitialized = useRef(false);
+
+  useEffect(() => {
+    if (!snowplowInitialized.current) {
+      loadSnowplow();
+      snowplowInitialized.current = true;
+    }
+  }, []);
+
+  useEffect(() => {
+    //console.log('App.tsx: location changed to', location)
+    if (window.snowplow) {
+      window.snowplow('trackPageView');
+    }
+  }, [location]);
+
   const [showList, setShowList] = useState<boolean>(false)
 
   const toggleListCallback = useCallback(() => {
