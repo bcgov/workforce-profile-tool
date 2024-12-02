@@ -9,8 +9,14 @@ interface Props {
   text: string | undefined
 }
 
-interface TooltipShim {
+/*interface TooltipShim {
   tooltip: () => void
+}*/
+
+declare global {
+  interface JQuery {
+    tooltip(options?: any): JQuery;
+  }
 }
 
 /** A Bootstrap tooltip for showing additional information upon hover. */
@@ -20,10 +26,22 @@ const Tooltip = ({ text }: Props): JSX.Element => {
   useEffect(() => {
     // Enable the Bootstrap tooltip using jQuery.
     if (tooltipRef.current) {
-      const tooltip = $(tooltipRef.current) as unknown as TooltipShim
-      tooltip.tooltip()
+      //const tooltip = $(tooltipRef.current) as unknown as TooltipShim
+      const $tooltip = $(tooltipRef.current);
+      $tooltip.tooltip({
+        container: 'body',
+        html: true,
+      });
     }
-  }, [])
+
+    return () => {
+      if (tooltipRef.current) {
+        const $tooltip = $(tooltipRef.current);
+        $tooltip.tooltip('dispose');
+      }
+    };
+
+  }, [text])
 
   return (
     <span
