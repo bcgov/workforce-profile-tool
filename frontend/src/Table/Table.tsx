@@ -57,6 +57,7 @@ const Table = <T extends Record<string, unknown>>({
                         <div>
                           {column.render('Header')}
                           <TableTooltip
+                            key={`${column.id}-${JSON.stringify(dataDictionary)}`}
                             tooltipKey={column.id}
                             dataDictionary={dataDictionary}
                           />
