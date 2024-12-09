@@ -17,7 +17,7 @@ const Home = (): JSX.Element => {
             href="https://laws-lois.justice.gc.ca/eng/acts/e-5.401/"
             target="_blank"
             rel="noopener noreferrer">
-            Employment Equitiy Act
+            Employment Equity Act
           </a>{' '}
           and/or in the BC Public Service's{' '}
           <a
