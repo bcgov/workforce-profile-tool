@@ -47,8 +47,14 @@
     "2024": "Total includes employees in the designated group, the non-designated group, and any for whom there is no relevant demographic data available."
   },
   "Hiring_PC_Total": {
-    "2020": "The Percent of Total shows the rate of hires for the designated group as a fraction of all hires (including those not in any designated group).",
-    "2022": "The Percent of Total shows the rate of hires for the designated group as a fraction of all hires (including those not in any designated group).",
-    "2024": "The Percent of Total shows the rate of hires for the designated group as a fraction of all hires (including those not in any designated group)."
+    "2020": "The Percent of Total shows the rate of hires for the designated group as a fraction of all hires, including employees in the non-designated group and those for whom no relevant demographic data is available.",
+    "2022": "The Percent of Total shows the rate of hires for the designated group as a fraction of all hires, including employees in the non-designated group and those for whom no relevant demographic data is available.",
+    "2024": "The Percent of Total shows the rate of hires for the designated group as a fraction of all hires, including employees in the non-designated group and those for whom no relevant demographic data is available."
+  },
+  "Flow_Rate": {
+    "2018": "The Percent of Total shows the rate for the designated group as a fraction of all those in that move type, including those in the non-designated group but excluding those for whom no relevant demographic data is available.",
+    "2020": "The Percent of Total shows the rate for the designated group as a fraction of all those in that move type, including those in the non-designated group but excluding those for whom no relevant demographic data is available.",
+    "2022": "The Percent of Total shows the rate for the designated group as a fraction of all those in that move type, including those in the non-designated group but excluding those for whom no relevant demographic data is available.",
+    "2024": "The Percent of Total shows the rate for the designated group as a fraction of all those in that move type, including those in the non-designated group but excluding those for whom no relevant demographic data is available."
   }
 }
