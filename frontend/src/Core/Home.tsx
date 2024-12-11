@@ -42,6 +42,31 @@ const Home = (): JSX.Element => {
           <br />
           The dashboard is not compatible with older web browsers such as Internet Explorer 11.
           Please use an up-to-date browser for best results.
+          <br />
+          Use the “<b>Save as PNG</b>” and "<b>Save as CSV</b>” buttons to save chart and table data.
+          <br />
+          You can{' '}
+          <a
+            href="https://catalogue.data.gov.bc.ca/dataset/55dacce5-8b63-471c-9feb-2d64ad88a567"
+            target="_blank"
+            rel="noopener noreferrer">
+            view the data used in the dashboard
+          </a>{' '} in the Data BC Catalogue or view reports from
+          2011, 2013 and 2015 on the{' '}
+          <a
+            href="https://www2.gov.bc.ca/gov/content?id=1606E44C9A404B9BAD937994D22DCBE6"
+            target="_blank"
+            rel="noopener noreferrer">
+            Workforce Profiles Webpage.
+          </a>
+          <br />
+          You can also watch a{' '}
+          <a
+            href="https://www.youtube.com/watch?v=rg2ZVJFyIxA"
+            target="_blank"
+            rel="noopener noreferrer">
+            video tutorial on how to navigate the dashboard.
+          </a>
         </p>
         <h2>Methodology, Definitions, and Caveats</h2>
         <h3>Methodology</h3>
