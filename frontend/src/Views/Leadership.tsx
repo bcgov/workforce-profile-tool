@@ -35,14 +35,14 @@ const Leadership = (): JSX.Element => {
     {
       id: 'Executive',
       accessor: (r) => formatPercent(r.Executive, 1, 100),
-      Header: 'Executive Leadership, %',
-      className: 'text-right',
+      Header: 'Executive Leadership %',
+      className: 'text-end',
     },
     {
       id: 'Management_Band',
       accessor: (r) => formatPercent(r.Management_Band, 1, 100),
-      className: 'text-right',
-      Header: 'Management Band Leadership, %',
+      className: 'text-end',
+      Header: 'Management Band Leadership %',
     },
   ]
 

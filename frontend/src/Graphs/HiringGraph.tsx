@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { DataDefinition } from '../@types/DataDefinition'
 import { DataDictionaryEntry } from '../Data/useDataQuery'
 import { displayNameByKey, shortDisplayNameByKey } from '../Data/DataManager'
-import { formatNumber } from '../Helpers/formatter'
+import { formatPercent } from '../Helpers/formatter'
 import {
   GRAPH_DEFAULT_WIDTH,
   GRAPH_WIDTH_BREAKPOINT,
@@ -33,14 +33,24 @@ const HiringGraph = ({ data, dataDictionary, title }: Props): JSX.Element => {
 
   const [width, setWidth] = useState(GRAPH_DEFAULT_WIDTH)
 
-  const { dataKeys, filteredData } = processDataForGraph(data, dataDefinitions)
+  const newData = data.map((d) => {
+    const newD = { ...d }
+    newD.DesGrp_Count_ORG = formatPercent(
+      d.DesGrp_Count_ORG,
+      1,
+      +d.Total_Count_ORG
+    )
+    return newD
+  })
+
+  var { dataKeys, filteredData } = processDataForGraph(newData, dataDefinitions)
 
   const { labelCallback, items, tooltip } = useGraph({
     bottomAxisText: '% representation',
     data: filteredData,
     dataDefinitions,
     dataKeys,
-    formatter: (d) => formatNumber(d),
+    formatter: (d) => formatPercent(d, 1, 100),
     labelIsVertical: true,
     margins: MARGINS,
     width: 500,
@@ -62,9 +72,9 @@ const HiringGraph = ({ data, dataDictionary, title }: Props): JSX.Element => {
         tickSize: 5,
       }}
       axisLeft={{
-        format: (d) => formatNumber(+d),
-        legend: 'Count',
-        legendOffset: -60,
+        format: (d) => `${(+d).toLocaleString(undefined, { maximumFractionDigits: 0 })}%`,
+        legend: '% representation',
+        legendOffset: -50,
         legendPosition: 'middle',
         tickPadding: 5,
         tickRotation: 0,
@@ -86,7 +96,7 @@ const HiringGraph = ({ data, dataDictionary, title }: Props): JSX.Element => {
       enableGridX={false}
       enableGridY={true}
       layers={layersWithLabels<typeof filteredData[0]>('vertical', (d) =>
-        formatNumber(labelValue(d), '')
+        labelValue(d)
       )}
     />
   )

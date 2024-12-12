@@ -213,7 +213,7 @@ const OrganizationSubGraph = ({
 
   return (
     <GraphFrame
-      className={`Ministry-${varKey}`}
+      className={`Ministry_${varKey}`}
       graph={graph}
       height={600}
       isOrganizationFrame

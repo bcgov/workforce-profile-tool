@@ -70,7 +70,7 @@ class TabInterface extends React.Component<Props, State> {
         return (
           <div
             key={child.props.name}
-            className={`TabButton text-center ${isActiveClass}`}
+            className={`TabButton text-center ${isActiveClass} col-auto px-0`}
           >
             <Link to={linkTo} role={'button'} title={child.props.name}>
               {child.props.icon && (

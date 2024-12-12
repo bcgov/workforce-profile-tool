@@ -2,7 +2,8 @@
 
 svg {
   font-size: 0.8rem !important;
-  @include media-breakpoint-down(md) {
+
+  @include media-breakpoint-down(lg) {
     text {
       font-size: 0.7rem !important;
     }

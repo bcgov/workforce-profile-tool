@@ -4,7 +4,7 @@
     "name": "Data Year",
     "shortName": "Year",
     "isExclusive": true,
-    "default": "2022",
+    "default": "2024",
     "variables": [
       {
         "key": "2018",
@@ -17,6 +17,10 @@
       {
         "key": "2022",
         "name": "2022"
+      },
+      {
+        "key": "2024",
+        "name": "2024"
       }
     ]
   },
@@ -46,7 +50,13 @@
     "name": "Designated Group",
     "shortName": "Des. Grp.",
     "isExclusive": false,
-    "default": ["IND", "DIS", "VM", "WOM"],
+    "default": [
+      "IND",
+      "DIS",
+      "VM",
+      "WOM",
+      "2SLGBTQPlus"
+    ],
     "variables": [
       {
         "key": "IND",
@@ -67,6 +77,11 @@
         "key": "WOM",
         "shortName": "Women",
         "name": "Women"
+      },
+      {
+        "key": "2SLGBTQPlus",
+        "shortName": "2SLGBTQ+",
+        "name": "2SLGBTQ+"
       }
     ]
   },
