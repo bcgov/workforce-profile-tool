@@ -164,6 +164,7 @@ export const layersWithLabels = <T,>(
               fill={Color(bar.color).darken(0.3).hex()}
               fontSize="15px"
               fontFamily={CHART_FONT}
+              key={data.id + ' ' + data.index + data.value}
             >
               {formatter(data)}
             </text>

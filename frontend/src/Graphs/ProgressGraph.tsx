@@ -32,6 +32,7 @@ const ProgressGraph = ({ data, dataDictionary, title }: Props): JSX.Element => {
     { key: '2018_pc', label: '2018', color: '#70CCDB' },
     { key: '2020_pc', label: '2020', color: '#D2E2EE' },
     { key: '2022_pc', label: '2022', color: '#6c757d' },
+    { key: '2024_pc', label: '2024', color: '#70CCDB' }
   ]
 
   const [width, setWidth] = useState(GRAPH_DEFAULT_WIDTH)

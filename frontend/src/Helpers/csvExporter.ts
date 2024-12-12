@@ -1,5 +1,5 @@
 import { ColumnWithClassName } from '../@types/ColumnWithClassName'
-import { useDataManager } from '../Data/DataManager'
+import { useDataManager, displayNameByKey } from '../Data/DataManager'
 import { Definition, definitionsForYear } from '../Table/Definitions'
 
 /** Helper function that converts an array of string arrays (i.e. rows and
@@ -31,7 +31,7 @@ export const useExportData = <T extends Record<string, unknown>>(
   includeDefinitions = true,
   additionalDefinitions?: Definition[]
 ): string => {
-  const { year } = useDataManager()
+  const { queryValues } = useDataManager()
 
   const columnRow = columns.map((c) => {
     let name = c.Header as JSX.Element | string
@@ -57,12 +57,17 @@ export const useExportData = <T extends Record<string, unknown>>(
   allRows = allRows.concat(mappedRows)
 
   if (includeDefinitions) {
-    const definitions = definitionsForYear(year)
+    const definitions = definitionsForYear(queryValues.Year)
       .concat(additionalDefinitions || [])
       .map((item) => [item.term, `"${item.definition}"`])
 
     allRows = allRows.concat(definitions)
   }
+  const filters = [["Active Filters"], ["Year", queryValues.Year]
+    , ["Designated Group", queryValues.Des_Grp.map((k) => displayNameByKey('Des_Grp', k)).join('; ')]
+    , ["Employee Type", displayNameByKey('Employee_Type', queryValues.Employee_Type)]
+    , ["Organization", displayNameByKey('Ministry_Key', queryValues.Ministry_Key)]]
+  allRows = [...allRows, ...filters]
 
   return _toCSVString(allRows)
 }
