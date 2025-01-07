@@ -4,8 +4,8 @@ ARG BUILD_IMAGE=docker.io/node:16-alpine
 ARG PROD_IMAGE=nginxinc/nginx-unprivileged:alpine
 ARG APP_ROOT=/opt/app-root/src
 
-FROM ${BUILD_IMAGE} as builder
-ENV NODE_ENV production
+FROM ${BUILD_IMAGE} AS builder
+ENV NODE_ENV=production
 ARG APP_ROOT
 
 # Set working directory in build container

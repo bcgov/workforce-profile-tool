@@ -17,6 +17,7 @@ export type ProgressRawData = MinistryKeyedData &
     '2018_pc': string
     '2020_pc': string
     '2022_pc': string
+    '2024_pc': string
     '2020_hired_ct': string
   }
 

@@ -4,6 +4,7 @@ import * as saveSVG from 'save-svg-as-png'
 import React, { useEffect } from 'react'
 import useDimensions from 'react-use-dimensions'
 
+import { useDataManager } from '../Data/DataManager'
 import FilterNotes from './FilterNotes'
 import IntentionalAny from '../@types/IntentionalAny'
 import NoGraph from '../Views/NoGraph'
@@ -43,6 +44,7 @@ interface Props {
  */
 const GraphFrame = (props: Props): JSX.Element => {
   const [ref, { width }] = useDimensions()
+  const { queryValues } = useDataManager()
 
   useEffect(() => {
     if (props.setWidthCallback) {
@@ -171,7 +173,10 @@ const GraphFrame = (props: Props): JSX.Element => {
     }
 
     // Now we can save our cloned SVG as a PNG.
-    saveSVG.saveSvgAsPng(svg, `${props.className}.png`, {
+    // filename includes filters
+    // YYYY_Organization_EmployeeType_DesignatedGroup
+    const filename = `${queryValues.Year}_${queryValues.Ministry_Key}_${queryValues.Employee_Type}_${queryValues.Des_Grp.join('_').replace('2SLGBTQPlus', '2SLGBTQ+')}_${props.className.replace('2SLGBTQPlus', '2SLGBTQ+')}.png`
+    saveSVG.saveSvgAsPng(svg, filename, {
       scale: 2,
       fonts: FONT_INFO.map((fontInfo) => {
         const fontUrl = `${FONT_BASE_PATH}${fontInfo.filename}.woff`
@@ -206,9 +211,8 @@ const GraphFrame = (props: Props): JSX.Element => {
 
   return (
     <div
-      className={`GraphFrame row${
-        props.className ? ` ${props.className}` : ''
-      }`}
+      className={`GraphFrame row${props.className ? ` ${props.className}` : ''
+        }`}
     >
       <div
         className="col-md-9 col-12"

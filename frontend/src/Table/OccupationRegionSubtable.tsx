@@ -7,6 +7,7 @@ import Definitions from './Definitions'
 import DownloadDataLink from './DownloadDataLink'
 import GenericTable from './GenericTable'
 import FixTypeLater from '../@types/FixTypeLater'
+import { useDataManager } from '../Data/DataManager'
 import { DataKeyEnum } from '../@types/DataKeyEnum'
 
 interface Props {
@@ -42,7 +43,7 @@ const RegionOccupationSubtable = ({
       Header: shortTitle,
       Footer: () => formatNumber(totalRow[0].DesGrp_Count_ORG) as FixTypeLater,
       accessor: (d) => formatNumber(d[`DesGrp_Count_ORG`]),
-      className: `text-right`,
+      className: `text-end`,
     },
     {
       id: `NonDesGrp_Count_ORG`,
@@ -50,14 +51,14 @@ const RegionOccupationSubtable = ({
       Footer: () =>
         formatNumber(totalRow[0].NonDesGrp_Count_ORG) as FixTypeLater,
       accessor: (d) => formatNumber(d[`NonDesGrp_Count_ORG`]),
-      className: `text-right`,
+      className: `text-end`,
     },
     {
       id: `Total_Count_ORG`,
       Header: 'Total',
       Footer: () => formatNumber(totalRow[0].Total_Count_ORG) as FixTypeLater,
       accessor: (d) => formatNumber(d[`Total_Count_ORG`]),
-      className: `text-right`,
+      className: `text-end`,
     },
     {
       id: `DesGrp_Percent_ORG`,
@@ -65,7 +66,7 @@ const RegionOccupationSubtable = ({
       Footer: () =>
         formatPercent(totalRow[0].DesGrp_Percent_ORG, 1, 100) as FixTypeLater,
       accessor: (d) => formatPercent(d[`DesGrp_Percent_ORG`], 1, 100),
-      className: `text-right`,
+      className: `text-end`,
     },
     {
       id: `DesGrp_Percent_AvailableWorkforce`,
@@ -74,7 +75,7 @@ const RegionOccupationSubtable = ({
         formatPercent(totalRow[0].DesGrp_Percent_AvailableWorkforce, 1, 100),
       accessor: (d) =>
         formatPercent(d[`DesGrp_Percent_AvailableWorkforce`], 1, 100),
-      className: `text-right`,
+      className: `text-end`,
     },
     {
       id: `DesGrp_Count_Expected`,
@@ -82,7 +83,7 @@ const RegionOccupationSubtable = ({
       Footer: () =>
         formatNumber(totalRow[0].DesGrp_Count_Expected, ``) as FixTypeLater,
       accessor: (d) => formatNumber(d[`DesGrp_Count_Expected`], ``),
-      className: `text-right`,
+      className: `text-end`,
     },
     {
       id: `DesGrp_Count_Shortfall`,
@@ -90,22 +91,24 @@ const RegionOccupationSubtable = ({
       Footer: () =>
         formatNumber(totalRow[0].DesGrp_Count_Shortfall, ``) as FixTypeLater,
       accessor: (d) => formatNumber(d[`DesGrp_Count_Shortfall`], ``),
-      className: `text-right`,
+      className: `text-end`,
     },
   ]
 
   const allRows = filteredData.concat(totalRow)
 
   const additionalDefinitions =
-    year === '2022' && designatedGroupKey && designatedGroupKey === 'WOM'
+    (year === '2022' || year === '2024') && designatedGroupKey && designatedGroupKey === 'WOM'
       ? [
-          {
-            term: 'Note',
-            definition:
-              'Some ministries have had their Women counts adjusted slightly to prevent additional residual disclosure. These adjustments are very minimal and do not affect total counts.',
-          },
-        ]
+        {
+          term: 'Note',
+          definition:
+            'Some ministries have had their Women counts adjusted slightly to prevent additional residual disclosure. These adjustments are very minimal and do not affect total counts.',
+        },
+      ]
       : []
+
+  const { queryValues } = useDataManager()
 
   return (
     <div className={`${viewType}Table`}>
@@ -119,7 +122,9 @@ const RegionOccupationSubtable = ({
       <DownloadDataLink
         columns={columns}
         rows={allRows}
-        filename={viewType}
+        // filename includes filters
+        // YYYY_Organization_EmployeeType_DesignatedGroup
+        filename={`${queryValues.Year}_${queryValues.Ministry_Key}_${queryValues.Employee_Type}_${queryValues.Des_Grp.join('_').replace('2SLGBTQPlus', '2SLGBTQ+')}_${viewType}`}
         additionalDefinitions={additionalDefinitions}
       />
       <Definitions additionalDefinitions={additionalDefinitions} />
