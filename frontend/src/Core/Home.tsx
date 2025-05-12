@@ -142,7 +142,7 @@ const Home = (): JSX.Element => {
         </p>
         <p>
           <strong><em>Visible Minority:</em></strong> Includes employees who stated they are
-          racialzed in employee surveys (e.g., Arab, Black, Chinese, Filipino, Japanese, Korean,
+          racialized in employee surveys (e.g., Arab, Black, Chinese, Filipino, Japanese, Korean,
           Latin American, South Asian, Southeast Asian, West Asian). The term "Visible Minority"
           is taken from the Employment Equity Act and will be updated in future reporting.
         </p>
