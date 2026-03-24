@@ -54,7 +54,7 @@ const Home = (): JSX.Element => {
           </a>{' '} in the Data BC Catalogue or view reports from
           2011, 2013 and 2015 on the{' '}
           <a
-            href="https://www2.gov.bc.ca/gov/content?id=1606E44C9A404B9BAD937994D22DCBE6"
+            href="https://www2.gov.bc.ca/gov/content?id=D03CC41EE3AA4A11BDC915A59515F2A7"
             target="_blank"
             rel="noopener noreferrer">
             Workforce Profiles Webpage.
